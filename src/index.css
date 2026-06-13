@@ -1,0 +1,91 @@
+/* Helvetica World (headings/numbers) and Helvetica Now (body) are commercial fonts.
+   They will render if installed on the user's machine or served via a webfont host.
+   Safe fallbacks are provided for other environments. */
+
+:root {
+  --color-bg-navy: #060b1d; /* Deep slate navy for hero header */
+  --color-bg-light: #ffffff; /* White background for page content */
+  --color-text-dark: #0f172a; /* Slate-dark for text headings */
+  --color-text-light: #f8fafc; /* Slate-light for dark sections text */
+  --color-text-muted: #64748b; /* Muted gray for description text */
+  --color-text-muted-light: #94a3b8; /* Muted light gray for navy sections */
+  --color-border-dark: #1e293b; /* Dark border */
+  --color-border-light: #e2e8f0; /* Light border */
+  --color-primary: #0284c7; /* Primary Sky/Teal Blue for links/buttons */
+  --color-primary-hover: #0369a1; /* Primary hover state */
+  --color-gold: #d4af37; /* Legacy gold if needed */
+  --color-gold-highlight: #ba944c; /* Highlight text gold/sand */
+
+  /* Helvetica World → headings and all numeric/stat content */
+  --font-heading: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
+
+  /* Helvetica Now → body copy, labels, captions, UI text */
+  --font-sans: 'Helvetica Now', 'HelveticaNow', 'Helvetica Now Text', Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-dark);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 60px 0;
+  background-color: var(--color-bg-light);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-text-dark);
+}
+
+.placeholder-text {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+
