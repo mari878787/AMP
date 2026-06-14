@@ -36,7 +36,7 @@ export default function HeroSection() {
         .hero-section {
           position: relative;
           width: 100%;
-          height: 125vh;
+          height: 100vh;
           min-height: 850px;
           display: flex;
           flex-direction: column;

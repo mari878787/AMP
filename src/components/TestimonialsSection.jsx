@@ -291,7 +291,7 @@ export default function TestimonialsSection() {
           transition: background 0.25s, width 0.25s, border-radius 0.25s;
         }
         .tcs-dot.active {
-          background: #027796;
+          background: #ba944c;
           width: 28px;
           border-radius: 4px;
         }

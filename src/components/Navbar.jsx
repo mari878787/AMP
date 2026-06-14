@@ -11,22 +11,83 @@ export default function Navbar({ projectTitle }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [navTheme, setNavTheme] = useState('dark');
 
   useEffect(() => {
+    let active = true;
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      if (!active) return;
+      
+      const scrollPos = window.scrollY;
+      setScrolled(scrollPos > 20);
+      
+      if (scrollPos < 50) {
+        setNavTheme('dark');
+        return;
       }
+      
+      requestAnimationFrame(() => {
+        if (!active) return;
+        
+        // Find elements under the navbar level (e.g. y = 30px)
+        const elements = document.elementsFromPoint(window.innerWidth / 2, 30);
+        if (!elements || elements.length === 0) return;
+        
+        // Find the element behind/under the navbar
+        const el = elements.find(item => !item.closest('.navbar-new') && !item.closest('.mobile-menu'));
+        if (!el) return;
+        
+        const section = el.closest('section, footer, main, .project-sub-nav, .project-hero-section');
+        if (!section) return;
+        
+        const className = section.className || '';
+        const id = section.id || '';
+        
+        // Explicit checks for known dark/light sections
+        if (
+          className.includes('hero') ||
+          className.includes('footer') ||
+          id.includes('hero') ||
+          id.includes('footer') ||
+          className.includes('project-hero-section')
+        ) {
+          setNavTheme('dark');
+          return;
+        }
+        
+        const style = window.getComputedStyle(section);
+        const bgColor = style.backgroundColor;
+        
+        if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
+          const match = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+          if (match) {
+            const r = parseInt(match[1]);
+            const g = parseInt(match[2]);
+            const b = parseInt(match[3]);
+            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            setNavTheme(brightness < 140 ? 'dark' : 'light');
+          } else {
+            setNavTheme('light');
+          }
+        } else {
+          setNavTheme('light');
+        }
+      });
     };
+
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return () => {
+      active = false;
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   return (
-    <header className={`navbar-new ${scrolled ? 'is-scrolled' : ''}`}>
+    <header className={`navbar-new ${scrolled ? 'is-scrolled' : ''} theme-${navTheme}`}>
       <div className="container nav-container-new">
         
         {/* Brand Logo on the Left */}
@@ -142,16 +203,58 @@ export default function Navbar({ projectTitle }) {
           width: 100%;
           z-index: 100;
           background: transparent;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-          transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                      backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                      border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        .navbar-new.is-scrolled {
-          background-color: rgba(6, 11, 29, 0.88);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+        /* Default theme colors (transparent state) */
+        .navbar-new.theme-dark {
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+        .navbar-new.theme-dark .nav-link-new {
+          color: #ffffff;
+        }
+        .navbar-new.theme-dark .nav-search-icon,
+        .navbar-new.theme-dark .mobile-toggle {
+          color: #ffffff;
+        }
+        .navbar-new.theme-dark .nav-title-divider {
+          color: rgba(255, 255, 255, 0.25);
+        }
+        
+        .navbar-new.theme-light {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        .navbar-new.theme-light .nav-link-new {
+          color: #1e293b;
+        }
+        .navbar-new.theme-light .nav-search-icon,
+        .navbar-new.theme-light .mobile-toggle {
+          color: #1e293b;
+        }
+        .navbar-new.theme-light .nav-title-divider {
+          color: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Apple Glass - Scrolled Dark Theme */
+        .navbar-new.is-scrolled.theme-dark {
+          background-color: rgba(6, 11, 29, 0.65);
+          backdrop-filter: blur(30px) saturate(190%);
+          -webkit-backdrop-filter: blur(30px) saturate(190%);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Apple Glass - Scrolled Light Theme */
+        .navbar-new.is-scrolled.theme-light {
+          background-color: rgba(255, 255, 255, 0.72);
+          backdrop-filter: blur(30px) saturate(190%);
+          -webkit-backdrop-filter: blur(30px) saturate(190%);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
         }
         
         .nav-container-new {
@@ -233,15 +336,51 @@ export default function Navbar({ projectTitle }) {
           top: 60px;
           right: 24px;
           width: 580px;
-          background: rgba(255, 255, 255, 0.35);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-          border: 1px solid rgba(255, 255, 255, 0.4);
-          border-radius: 0 0 8px 8px;
-          box-shadow: 0 20px 80px rgba(0, 0, 0, 0.12);
+          border-radius: 0 0 12px 12px;
           padding: 24px 28px;
           animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           transform-origin: top center;
+          transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .theme-dark .mega-menu-dropdown {
+          background: rgba(6, 11, 29, 0.82);
+          backdrop-filter: blur(32px);
+          -webkit-backdrop-filter: blur(32px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+        }
+
+        .theme-light .mega-menu-dropdown {
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(32px);
+          -webkit-backdrop-filter: blur(32px);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 20px 80px rgba(0, 0, 0, 0.08);
+        }
+
+        .theme-dark .mega-col-title {
+          color: rgba(255, 255, 255, 0.55);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .theme-dark .sig-proj-title,
+        .theme-dark .all-proj-list a {
+          color: #ffffff;
+        }
+        .theme-dark .sig-proj-loc {
+          color: #cbd5e1;
+        }
+
+        .theme-light .mega-col-title {
+          color: rgba(0, 0, 0, 0.4);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .theme-light .sig-proj-title,
+        .theme-light .all-proj-list a {
+          color: #1e293b;
+        }
+        .theme-light .sig-proj-loc {
+          color: #64748b;
         }
 
         @keyframes slideDown {

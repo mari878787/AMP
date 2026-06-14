@@ -246,21 +246,30 @@ export default function ProjectsSection() {
         }
 
         .tab-btn {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 13px;
           font-weight: 500;
-          letter-spacing: 0.03em;
-          color: #027796;
-          background: transparent;
-          border: 1.5px solid #027796;
+          letter-spacing: 0.05em;
+          color: #ba944c;
+          background: rgba(186, 148, 76, 0.04);
+          border: 1px solid rgba(186, 148, 76, 0.25);
           border-radius: 50px;
-          padding: 5px 20px;
+          padding: 6px 22px;
           cursor: pointer;
-          transition: background 0.22s ease, color 0.22s ease;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .tab-btn:hover, .tab-btn.active {
-          background: #027796;
-          color: #fff;
+        .tab-btn:hover {
+          background: rgba(186, 148, 76, 0.08);
+          border-color: rgba(186, 148, 76, 0.5);
+          transform: translateY(-1px);
+        }
+        .tab-btn.active {
+          background: rgba(186, 148, 76, 0.9);
+          border-color: #ba944c;
+          color: #ffffff;
+          box-shadow: 0 6px 20px rgba(186, 148, 76, 0.2);
         }
 
         /* ── Arrow buttons ── */
@@ -274,24 +283,31 @@ export default function ProjectsSection() {
           width: 42px;
           height: 42px;
           border-radius: 50%;
-          border: 1.5px solid #027796;
-          background: transparent;
-          color: #027796;
+          border: 1px solid rgba(186, 148, 76, 0.25);
+          background: rgba(255, 255, 255, 0.6);
+          color: #ba944c;
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.18s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .arrow-btn:hover:not(.disabled) {
-          background: #027796;
-          color: #fff;
-          transform: scale(1.08);
+          background: rgba(186, 148, 76, 0.08);
+          border-color: #ba944c;
+          color: #ba944c;
+          transform: translateY(-2px) scale(1.05);
+          box-shadow: 0 6px 20px rgba(186, 148, 76, 0.12);
         }
         .arrow-btn.disabled {
-          border-color: #d1d5db;
-          color: #d1d5db;
+          border-color: rgba(6, 11, 29, 0.08);
+          background: rgba(255, 255, 255, 0.3);
+          color: rgba(6, 11, 29, 0.2);
           cursor: not-allowed;
+          backdrop-filter: blur(4px);
         }
 
         .projects-subtitle {
@@ -392,22 +408,23 @@ export default function ProjectsSection() {
           margin-top: 4px;
         }
         .project-card-title {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 14px;
-          font-weight: 400;
-          color: #027796;
+          font-weight: 600;
+          color: #0f172a;
           line-height: 1.4;
           max-width: 85%;
+          letter-spacing: 0.02em;
         }
         .project-card-link {
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          color: #64748b;
+          color: #ba944c;
           transition: color 0.2s ease, transform 0.2s ease;
         }
-        .project-card-link:hover { color: #027796; transform: translateX(3px); }
+        .project-card-link:hover { color: #ba944c; transform: translateX(3px) scale(1.1); }
 
         /* ── Bottom row ── */
         .slider-bottom-row {
@@ -436,30 +453,37 @@ export default function ProjectsSection() {
           padding: 0;
         }
         .dot.active {
-          background: #027796;
+          background: #ba944c;
           width: 24px;
           border-radius: 4px;
         }
 
         /* ── View All CTA ── */
         .btn-view-all {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
-          font-size: 14px;
+          font-family: var(--font-sans);
+          font-size: 13px;
           font-weight: 500;
-          letter-spacing: 0.04em;
-          color: #027796;
-          border: 1.5px solid #027796;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #ba944c;
+          background: rgba(186, 148, 76, 0.05);
+          border: 1px solid rgba(186, 148, 76, 0.25);
           border-radius: 50px;
-          padding: 11px 32px;
+          padding: 10px 30px;
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .btn-view-all:hover {
-          background: #027796;
+          background: rgba(186, 148, 76, 0.9);
+          border-color: #ba944c;
           color: #fff;
           transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(186, 148, 76, 0.25);
         }
 
         /* ── Responsive ── */

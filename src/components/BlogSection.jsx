@@ -142,25 +142,31 @@ export default function BlogSection() {
           width: 42px;
           height: 42px;
           border-radius: 50%;
-          border: 1.5px solid #9ca3af;
-          background: transparent;
-          color: #374151;
+          border: 1px solid rgba(186, 148, 76, 0.25);
+          background: rgba(255, 255, 255, 0.6);
+          color: #ba944c;
+          backdrop-filter: blur(12px) saturate(180%);
+          -webkit-backdrop-filter: blur(12px) saturate(180%);
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.18s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .blog-arrow:hover:not(:disabled) {
-          border-color: #027796;
-          color: #027796;
-          background: rgba(2,119,150,0.05);
-          transform: scale(1.06);
+          background: rgba(186, 148, 76, 0.08);
+          border-color: #ba944c;
+          color: #ba944c;
+          transform: translateY(-2px) scale(1.05);
+          box-shadow: 0 6px 20px rgba(186, 148, 76, 0.12);
         }
         .blog-arrow.dimmed {
-          border-color: #e2e8f0;
-          color: #cbd5e1;
+          border-color: rgba(6, 11, 29, 0.08);
+          background: rgba(255, 255, 255, 0.3);
+          color: rgba(6, 11, 29, 0.2);
           cursor: not-allowed;
+          backdrop-filter: blur(4px);
         }
 
         /* ── Grid ── */

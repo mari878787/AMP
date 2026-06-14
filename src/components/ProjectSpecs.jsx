@@ -287,24 +287,26 @@ export default function ProjectSpecs({
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
+          width: 42px;
+          height: 42px;
           border-radius: 50%;
-          border: 1.5px solid rgba(186, 148, 76, 0.35);
-          background: #ffffff;
+          border: 1px solid rgba(186, 148, 76, 0.35);
+          background: rgba(255, 255, 255, 0.65);
           color: #ba944c;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           cursor: pointer;
-          box-shadow: 0 3px 16px rgba(186, 148, 76, 0.12), 0 1px 4px rgba(0, 0, 0, 0.04);
-          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(186, 148, 76, 0.12), 0 1px 4px rgba(0, 0, 0, 0.04);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           animation: sp-bounce 2s infinite ease-in-out;
         }
 
         .sp-list-scroll-btn:hover {
           border-color: #ba944c;
-          background: rgba(186, 148, 76, 0.08);
+          background: rgba(186, 148, 76, 0.12);
           transform: scale(1.1);
           animation: none;
-          box-shadow: 0 4px 20px rgba(186, 148, 76, 0.18);
+          box-shadow: 0 6px 25px rgba(186, 148, 76, 0.18);
         }
 
         @keyframes sp-bounce {
@@ -612,20 +614,25 @@ export default function ProjectSpecs({
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 34px;
-          height: 34px;
-          border: 1px solid rgba(186, 148, 76, 0.2);
+          width: 36px;
+          height: 36px;
+          border: 1px solid rgba(186, 148, 76, 0.25);
           border-radius: 50%;
-          background: #ffffff;
+          background: rgba(255, 255, 255, 0.6);
           color: #ba944c;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           cursor: pointer;
-          transition: all 0.3s ease;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .sp-arr:hover:not(.off) {
           border-color: #ba944c;
+          background: rgba(186, 148, 76, 0.08);
           color: #ba944c;
-          transform: scale(1.06);
+          transform: translateY(-1px) scale(1.05);
+          box-shadow: 0 4px 15px rgba(186, 148, 76, 0.12);
         }
 
         .sp-arr.off {

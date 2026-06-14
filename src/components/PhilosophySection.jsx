@@ -105,19 +105,29 @@ export default function PhilosophySection() {
         
         .btn-about {
           display: inline-block;
-          background-color: #027796; /* Exact dark teal from screenshot */
-          color: #ffffff;
-          padding: 12px 32px;
-          border-radius: 50px; /* Capsule pill button */
           font-family: var(--font-sans);
-          font-size: 14px;
-          font-weight: 600;
-          transition: background-color 0.25s ease, transform 0.2s ease;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #ba944c;
+          background: rgba(186, 148, 76, 0.05);
+          border: 1px solid rgba(186, 148, 76, 0.25);
+          padding: 10px 30px;
+          border-radius: 50px;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          text-align: center;
         }
         
         .btn-about:hover {
-          background-color: #015f78;
-          transform: translateY(-1px);
+          background: rgba(186, 148, 76, 0.9);
+          border-color: #ba944c;
+          color: #ffffff;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(186, 148, 76, 0.25);
         }
         
         /* Stats Grid Details */
