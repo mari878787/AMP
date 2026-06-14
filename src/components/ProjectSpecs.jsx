@@ -419,6 +419,20 @@ export default function ProjectSpecs({
           display: flex;
           flex-direction: column;
           min-height: 0;
+          background: rgba(255, 255, 255, 0.42);
+          backdrop-filter: blur(35px) saturate(180%);
+          -webkit-backdrop-filter: blur(35px) saturate(180%);
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          border-top: 1.5px solid rgba(255, 255, 255, 0.7);
+          border-left: 1.5px solid rgba(255, 255, 255, 0.7);
+          border-radius: 20px;
+          margin: 24px;
+          box-shadow: 
+            inset 0 1px 2px rgba(255, 255, 255, 0.65),
+            inset 0 -1px 2px rgba(0, 0, 0, 0.02),
+            0 20px 50px rgba(186, 148, 76, 0.06),
+            0 4px 12px rgba(186, 148, 76, 0.02);
+          overflow: hidden;
         }
 
         .sp-detail-inner {
@@ -445,8 +459,8 @@ export default function ProjectSpecs({
           justify-content: center;
           padding: 20px 24px;
           position: relative;
-          border-right: 1px solid rgba(186, 148, 76, 0.06);
-          background: linear-gradient(135deg, rgba(186, 148, 76, 0.02) 0%, rgba(252, 237, 211, 0.04) 50%, transparent 100%);
+          border-right: 1px solid rgba(255, 255, 255, 0.35);
+          background: rgba(255, 255, 255, 0.1);
         }
 
         .sp-detail-visual-ring {
@@ -567,9 +581,9 @@ export default function ProjectSpecs({
           align-items: center;
           justify-content: space-between;
           padding: 12px 36px;
-          border-bottom: 1px solid rgba(186, 148, 76, 0.08);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.35);
           flex-shrink: 0;
-          background: linear-gradient(90deg, rgba(186, 148, 76, 0.015), rgba(186, 148, 76, 0.025), rgba(186, 148, 76, 0.015));
+          background: rgba(255, 255, 255, 0.15);
         }
 
         .sp-prog {
@@ -715,13 +729,17 @@ export default function ProjectSpecs({
             font-size: 11px;
           }
 
+          .sp-detail {
+            margin: 16px;
+          }
+
           .sp-detail-inner {
             grid-template-columns: 1fr;
           }
 
           .sp-detail-visual {
             border-right: none;
-            border-bottom: 1px solid rgba(6, 11, 29, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.35);
             min-height: 220px;
           }
 
