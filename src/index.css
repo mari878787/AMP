@@ -1,26 +1,44 @@
-/* Helvetica World (headings/numbers) and Helvetica Now (body) are commercial fonts.
-   They will render if installed on the user's machine or served via a webfont host.
-   Safe fallbacks are provided for other environments. */
+/* ─────────────────────────────────────────────────
+   AMP — Global Design System
+   Helvetica World (headings) / Helvetica Now (body)
+   Commercial fonts — fallback chain provided.
+   ───────────────────────────────────────────────── */
 
 :root {
-  --color-bg-navy: #060b1d; /* Deep slate navy for hero header */
-  --color-bg-light: #ffffff; /* White background for page content */
-  --color-text-dark: #0f172a; /* Slate-dark for text headings */
-  --color-text-light: #f8fafc; /* Slate-light for dark sections text */
-  --color-text-muted: #64748b; /* Muted gray for description text */
-  --color-text-muted-light: #94a3b8; /* Muted light gray for navy sections */
-  --color-border-dark: #1e293b; /* Dark border */
-  --color-border-light: #e2e8f0; /* Light border */
-  --color-primary: #0284c7; /* Primary Sky/Teal Blue for links/buttons */
-  --color-primary-hover: #0369a1; /* Primary hover state */
-  --color-gold: #d4af37; /* Legacy gold if needed */
-  --color-gold-highlight: #ba944c; /* Highlight text gold/sand */
+  /* ── Colour Palette ── */
+  --color-bg-navy: #133825;
+  --color-bg-light: #faf8f0;
+  --color-bg-cream: #faf8f0;
+  --color-text-dark: #133825;
+  --color-text-light: #faf8f0;
+  --color-text-muted: #1e3a2b;
+  --color-text-muted-light: #2c543e;
+  --color-border-dark: #133825;
+  --color-border-light: rgba(19, 56, 37, 0.12);
+  --color-primary: #133825;
+  --color-primary-hover: #1e4a34;
+  --color-sage: #d2efdd;
+  --color-sage-light: #e2f7ea;
+  --color-gold: #133825;
+  --color-gold-highlight: #1e4a34;
+  --color-gold-accent: #133825;
 
-  /* Helvetica World → headings and all numeric/stat content */
-  --font-heading: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
+  /* ── Typography ── */
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
 
-  /* Helvetica Now → body copy, labels, captions, UI text */
-  --font-sans: 'Helvetica Now', 'HelveticaNow', 'Helvetica Now Text', Helvetica, Arial, sans-serif;
+  /* ── Spacing Scale (8px base) ── */
+  --space-1: 0.5rem;   /*  8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 2.5rem;   /* 40px */
+  --space-6: 3rem;     /* 48px */
+  --space-7: 4rem;     /* 64px */
+  --space-8: 5rem;     /* 80px */
+
+  /* ── Motion ── */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -31,6 +49,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 body {
@@ -42,6 +61,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.preloader-active {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ── Heading Hierarchy ── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--color-text-dark);
@@ -49,12 +74,31 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.01em;
 }
 
+h1 {
+  font-size: 3.25rem;  /* 52px */
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  font-size: 2.625rem;     /* 42px */
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.5rem;   /* 24px */
+  line-height: 1.3;
+}
+
+/* ── Links ── */
 a {
   color: inherit;
   text-decoration: none;
   transition: all 0.25s ease;
 }
 
+/* ── Buttons ── */
 button {
   font-family: inherit;
   cursor: pointer;
@@ -63,6 +107,24 @@ button {
   outline: none;
 }
 
+/* ── Selection Highlight ── */
+::selection {
+  background: rgba(19, 56, 37, 0.25);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(19, 56, 37, 0.25);
+  color: inherit;
+}
+
+/* ── Focus Outline (accessibility) ── */
+:focus-visible {
+  outline: 2px solid var(--color-gold-accent);
+  outline-offset: 2px;
+}
+
+/* ── Layout ── */
 .container {
   max-width: 1240px;
   margin: 0 auto;
@@ -70,13 +132,13 @@ button {
 }
 
 .section {
-  padding: 60px 0;
+  padding: var(--space-8) 0;
   background-color: var(--color-bg-light);
 }
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 400;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -88,4 +150,116 @@ button {
   font-style: italic;
 }
 
+.highlight-italic, .ov-highlight-italic {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--color-primary);
+}
 
+/* ── Uniform Section Tags ── */
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+/* ── Luxury Button Detailing ── */
+.btn-luxury-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 6px 6px 6px 20px;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-luxury-pill .btn-circle-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-sage);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 12px;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-luxury-pill:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(19, 56, 37, 0.15);
+}
+
+.btn-luxury-pill:hover .btn-circle-arrow {
+  transform: translateX(3px);
+  background: #ffffff;
+  color: var(--color-primary-hover);
+}
+
+.btn-luxury-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  color: var(--color-primary);
+  padding: 6px 6px 6px 20px;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-luxury-outline .btn-circle-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 12px;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-luxury-outline:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(19, 56, 37, 0.12);
+}
+
+.btn-luxury-outline:hover .btn-circle-arrow {
+  transform: translateX(3px);
+  background: var(--color-sage);
+  color: var(--color-primary);
+}

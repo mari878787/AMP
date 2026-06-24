@@ -3,7 +3,7 @@ import { Menu, X, Search } from 'lucide-react';
 
 const ChevronDown = () => (
   <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: '6px', display: 'inline-block', verticalAlign: 'middle' }}>
-    <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -17,32 +17,32 @@ export default function Navbar({ projectTitle }) {
     let active = true;
     const handleScroll = () => {
       if (!active) return;
-      
+
       const scrollPos = window.scrollY;
       setScrolled(scrollPos > 20);
-      
+
       if (scrollPos < 50) {
         setNavTheme('dark');
         return;
       }
-      
+
       requestAnimationFrame(() => {
         if (!active) return;
-        
+
         // Find elements under the navbar level (e.g. y = 30px)
         const elements = document.elementsFromPoint(window.innerWidth / 2, 30);
         if (!elements || elements.length === 0) return;
-        
+
         // Find the element behind/under the navbar
         const el = elements.find(item => !item.closest('.navbar-new') && !item.closest('.mobile-menu'));
         if (!el) return;
-        
+
         const section = el.closest('section, footer, main, .project-sub-nav, .project-hero-section');
         if (!section) return;
-        
+
         const className = section.className || '';
         const id = section.id || '';
-        
+
         // Explicit checks for known dark/light sections
         if (
           className.includes('hero') ||
@@ -54,10 +54,10 @@ export default function Navbar({ projectTitle }) {
           setNavTheme('dark');
           return;
         }
-        
+
         const style = window.getComputedStyle(section);
         const bgColor = style.backgroundColor;
-        
+
         if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
           const match = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
           if (match) {
@@ -78,7 +78,7 @@ export default function Navbar({ projectTitle }) {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
     handleScroll();
-    
+
     return () => {
       active = false;
       window.removeEventListener('scroll', handleScroll);
@@ -87,9 +87,13 @@ export default function Navbar({ projectTitle }) {
   }, []);
 
   return (
-    <header className={`navbar-new ${scrolled ? 'is-scrolled' : ''} theme-${navTheme}`}>
+    <header
+      className={`navbar-new ${scrolled ? 'is-scrolled' : ''} theme-${navTheme}`}
+      role="navigation"
+      aria-label="Main navigation"
+    >
       <div className="container nav-container-new">
-        
+
         {/* Brand Logo on the Left */}
         <a href="/" className="logo-container-new">
           <img src="/images/logo.png" alt="Aadhithya Logo" className="nav-logo-new" />
@@ -100,12 +104,12 @@ export default function Navbar({ projectTitle }) {
             </div>
           )}
         </a>
-        
+
         {/* Navigation Menus on the Right */}
         <div className="nav-links-group hidden-mobile">
-          
+
           {/* Projects Link with Mega Menu trigger */}
-          <div 
+          <div
             className="nav-item-mega-dropdown"
             onMouseEnter={() => setMegaMenuOpen(true)}
             onMouseLeave={() => setMegaMenuOpen(false)}
@@ -113,78 +117,83 @@ export default function Navbar({ projectTitle }) {
             <span className="nav-link-new uppercase">
               PROJECTS <ChevronDown />
             </span>
-            
+
             {/* Mega Menu Dropdown */}
             {megaMenuOpen && (
-              <div className="mega-menu-dropdown">
+              <div className="mega-menu-dropdown" role="menu">
                 <div className="mega-menu-grid">
-                  
+
                   {/* Column 1: Residential */}
                   <div className="mega-menu-col col-signature">
                     <h5 className="mega-col-title">RESIDENTIAL</h5>
                     <div className="signature-grid">
                       <div className="signature-item">
-                        <a href="#projects" className="sig-proj-title">Modern Luxury Villa</a>
+                        <a href="#projects" className="sig-proj-title" role="menuitem">Modern Luxury Villa</a>
                         <span className="sig-proj-loc">ADYAR, CHENNAI</span>
                       </div>
                       <div className="signature-item">
-                        <a href="#projects" className="sig-proj-title">Family House</a>
+                        <a href="#projects" className="sig-proj-title" role="menuitem">Family House</a>
                         <span className="sig-proj-loc">ECR, CHENNAI</span>
                       </div>
                       <div className="signature-item">
-                        <a href="/crystal-moonlight-villa" className="sig-proj-title">Crystal Moonlight Villa</a>
+                        <a href="/crystal-moonlight-villa" className="sig-proj-title" role="menuitem">Crystal Moonlight Villa</a>
                         <span className="sig-proj-loc">MEDAVAKKAM, CHENNAI</span>
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Column 2: Plotted Developments */}
                   <div className="mega-menu-col col-plotted">
                     <h5 className="mega-col-title">PLOTTED DEVELOPMENTS</h5>
                     <div className="plotted-list">
                       <div className="signature-item">
-                        <a href="#projects" className="sig-proj-title">Eco-Tech Style</a>
+                        <a href="#projects" className="sig-proj-title" role="menuitem">Eco-Tech Style</a>
                         <span className="sig-proj-loc">OMR, CHENNAI</span>
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Column 3: Categories */}
                   <div className="mega-menu-col col-all">
                     <h5 className="mega-col-title">CATEGORIES</h5>
                     <ul className="all-proj-list">
-                      <li><a href="#projects">Residential</a></li>
-                      <li><a href="#projects">Plotted</a></li>
+                      <li><a href="#projects" role="menuitem">Residential</a></li>
+                      <li><a href="#projects" role="menuitem">Plotted</a></li>
                     </ul>
                   </div>
-                  
+
                 </div>
               </div>
             )}
           </div>
-          
+
           {/* About Link */}
           <a href="#about" className="nav-link-new uppercase">ABOUT</a>
-          
+
           {/* Blog Link */}
           <a href="#blog" className="nav-link-new uppercase">BLOG</a>
-          
+
           {/* Search Icon */}
-          <div className="nav-search-icon">
+          <div className="nav-search-icon" role="button" aria-label="Search" tabIndex={0}>
             <Search size={17} strokeWidth={2} />
           </div>
-          
+
         </div>
 
         {/* Mobile Toggle Button */}
-        <button className="mobile-toggle show-mobile" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <button
+          className="mobile-toggle show-mobile"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-expanded={mobileMenuOpen}
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+        >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="mobile-menu">
+        <div className="mobile-menu" role="dialog" aria-label="Mobile navigation">
           <a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a>
           <a href="#about" onClick={() => setMobileMenuOpen(false)}>About Us</a>
           <a href="#blog" onClick={() => setMobileMenuOpen(false)}>Blog</a>
@@ -203,16 +212,16 @@ export default function Navbar({ projectTitle }) {
           width: 100%;
           z-index: 100;
           background: transparent;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                      backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                      border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                      box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          border-bottom: 0.8px solid rgba(255, 255, 255, 0.08);
+          transition: background-color 0.4s var(--ease-luxury), 
+                      backdrop-filter 0.4s var(--ease-luxury), 
+                      border-color 0.4s var(--ease-luxury), 
+                      box-shadow 0.4s var(--ease-luxury);
         }
         
         /* Default theme colors (transparent state) */
         .navbar-new.theme-dark {
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 0.8px solid rgba(255, 255, 255, 0.08);
         }
         .navbar-new.theme-dark .nav-link-new {
           color: #ffffff;
@@ -226,7 +235,7 @@ export default function Navbar({ projectTitle }) {
         }
         
         .navbar-new.theme-light {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+          border-bottom: 0.8px solid rgba(0, 0, 0, 0.06);
         }
         .navbar-new.theme-light .nav-link-new {
           color: #1e293b;
@@ -242,18 +251,18 @@ export default function Navbar({ projectTitle }) {
         /* Apple Glass - Scrolled Dark Theme */
         .navbar-new.is-scrolled.theme-dark {
           background-color: rgba(6, 11, 29, 0.65);
-          backdrop-filter: blur(30px) saturate(190%);
-          -webkit-backdrop-filter: blur(30px) saturate(190%);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(20px) saturate(160%);
+          -webkit-backdrop-filter: blur(20px) saturate(160%);
+          border-bottom: 0.8px solid rgba(255, 255, 255, 0.1);
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
         }
         
         /* Apple Glass - Scrolled Light Theme */
         .navbar-new.is-scrolled.theme-light {
           background-color: rgba(255, 255, 255, 0.72);
-          backdrop-filter: blur(30px) saturate(190%);
-          -webkit-backdrop-filter: blur(30px) saturate(190%);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+          backdrop-filter: blur(20px) saturate(160%);
+          -webkit-backdrop-filter: blur(20px) saturate(160%);
+          border-bottom: 0.8px solid rgba(0, 0, 0, 0.06);
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
         }
         
@@ -309,13 +318,40 @@ export default function Navbar({ projectTitle }) {
           letter-spacing: 0.08em;
           display: inline-flex;
           align-items: center;
-          transition: color 0.25s ease;
+          transition: color 0.3s ease;
           padding: 25px 0;
           cursor: pointer;
+          position: relative;
+        }
+
+        /* Underline micro-animation on hover */
+        .navbar-new .nav-link-new::after {
+          content: '';
+          position: absolute;
+          bottom: 18px;
+          left: 0;
+          width: 0;
+          height: 1.5px;
+          transition: width 0.35s var(--ease-luxury);
+        }
+        .theme-dark .nav-link-new::after {
+          background: var(--color-sage);
+        }
+        .theme-light .nav-link-new::after {
+          background: var(--color-primary);
+        }
+        .nav-link-new:hover::after,
+        .nav-item-mega-dropdown:hover .nav-link-new::after {
+          width: 100%;
         }
         
-        .nav-link-new:hover, .nav-item-mega-dropdown:hover .nav-link-new {
-          color: #ba944c;
+        .theme-dark .nav-link-new:hover, 
+        .theme-dark .nav-item-mega-dropdown:hover .nav-link-new {
+          color: var(--color-sage);
+        }
+        .theme-light .nav-link-new:hover, 
+        .theme-light .nav-item-mega-dropdown:hover .nav-link-new {
+          color: var(--color-primary);
         }
         
         .nav-search-icon {
@@ -323,10 +359,11 @@ export default function Navbar({ projectTitle }) {
           display: flex;
           align-items: center;
           cursor: pointer;
-          transition: color 0.25s ease;
+          transition: color 0.3s ease, transform 0.3s ease;
         }
         .nav-search-icon:hover {
-          color: #ba944c;
+          color: var(--color-gold-accent);
+          transform: scale(1.08);
         }
 
 
@@ -338,30 +375,30 @@ export default function Navbar({ projectTitle }) {
           width: 580px;
           border-radius: 0 0 12px 12px;
           padding: 24px 28px;
-          animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          animation: slideDown 0.35s var(--ease-luxury);
           transform-origin: top center;
           transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
 
         .theme-dark .mega-menu-dropdown {
           background: rgba(6, 11, 29, 0.82);
-          backdrop-filter: blur(32px);
-          -webkit-backdrop-filter: blur(32px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px) saturate(160%);
+          -webkit-backdrop-filter: blur(20px) saturate(160%);
+          border: 0.8px solid rgba(255, 255, 255, 0.1);
           box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
         }
 
         .theme-light .mega-menu-dropdown {
           background: rgba(255, 255, 255, 0.85);
-          backdrop-filter: blur(32px);
-          -webkit-backdrop-filter: blur(32px);
-          border: 1px solid rgba(0, 0, 0, 0.08);
+          backdrop-filter: blur(20px) saturate(160%);
+          -webkit-backdrop-filter: blur(20px) saturate(160%);
+          border: 0.8px solid rgba(0, 0, 0, 0.06);
           box-shadow: 0 20px 80px rgba(0, 0, 0, 0.08);
         }
 
         .theme-dark .mega-col-title {
           color: rgba(255, 255, 255, 0.55);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 0.8px solid rgba(255, 255, 255, 0.1);
         }
         .theme-dark .sig-proj-title,
         .theme-dark .all-proj-list a {
@@ -373,7 +410,7 @@ export default function Navbar({ projectTitle }) {
 
         .theme-light .mega-col-title {
           color: rgba(0, 0, 0, 0.4);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+          border-bottom: 0.8px solid rgba(0, 0, 0, 0.06);
         }
         .theme-light .sig-proj-title,
         .theme-light .all-proj-list a {
@@ -411,7 +448,7 @@ export default function Navbar({ projectTitle }) {
           font-weight: 700;
           letter-spacing: 0.1em;
           color: #ffffff;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          border-bottom: 0.8px solid rgba(255, 255, 255, 0.15);
           padding-bottom: 8px;
           margin-bottom: 12px;
         }
@@ -432,10 +469,15 @@ export default function Navbar({ projectTitle }) {
           font-size: 17px;
           font-weight: 400;
           color: #ffffff;
-          transition: color 0.2s ease;
+          transition: color 0.25s ease, padding-left 0.25s ease;
         }
-        .sig-proj-title:hover {
-          color: #ba944c;
+        .theme-dark .sig-proj-title:hover {
+          color: var(--color-sage);
+          padding-left: 4px;
+        }
+        .theme-light .sig-proj-title:hover {
+          color: var(--color-primary);
+          padding-left: 4px;
         }
 
         .sig-proj-loc {
@@ -466,10 +508,15 @@ export default function Navbar({ projectTitle }) {
           font-size: 17px;
           font-weight: 400;
           color: #ffffff;
-          transition: color 0.2s;
+          transition: color 0.25s ease, padding-left 0.25s ease;
         }
-        .all-proj-list a:hover {
-          color: #ba944c;
+        .theme-dark .all-proj-list a:hover {
+          color: var(--color-sage);
+          padding-left: 4px;
+        }
+        .theme-light .all-proj-list a:hover {
+          color: var(--color-primary);
+          padding-left: 4px;
         }
         
         /* Mobile Toggle */
@@ -478,6 +525,7 @@ export default function Navbar({ projectTitle }) {
           background: transparent;
           color: #ffffff;
           cursor: pointer;
+          transition: color 0.3s ease;
         }
         
         .mobile-menu {
@@ -486,7 +534,7 @@ export default function Navbar({ projectTitle }) {
           left: 0;
           width: 100vw;
           height: 100vh;
-          background: #060b1d;
+          background: var(--color-bg-navy);
           z-index: 99;
           display: flex;
           flex-direction: column;
@@ -500,6 +548,10 @@ export default function Navbar({ projectTitle }) {
           font-weight: 600;
           color: #f8fafc;
           font-family: var(--font-heading);
+          transition: color 0.3s ease;
+        }
+        .mobile-menu a:hover {
+          color: var(--color-gold-accent);
         }
         
         .mobile-search {
@@ -508,10 +560,14 @@ export default function Navbar({ projectTitle }) {
           gap: 10px;
           font-size: 20px;
           color: #94a3b8;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 0.8px solid rgba(255, 255, 255, 0.1);
           padding: 10px 24px;
           border-radius: 30px;
           margin-top: 10px;
+          transition: border-color 0.3s ease;
+        }
+        .mobile-search:hover {
+          border-color: rgba(19, 56, 37, 0.4);
         }
 
         .nav-project-title-wrapper {
@@ -519,7 +575,7 @@ export default function Navbar({ projectTitle }) {
           align-items: center;
           opacity: 0;
           transform: translateX(-15px);
-          transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+          transition: opacity 0.4s var(--ease-luxury), transform 0.4s var(--ease-luxury);
           pointer-events: none;
         }
 
@@ -539,7 +595,7 @@ export default function Navbar({ projectTitle }) {
           font-family: var(--font-heading);
           font-size: 13px;
           font-weight: 500;
-          color: #ba944c;
+          color: var(--color-gold-accent);
           letter-spacing: 0.1em;
           text-transform: uppercase;
         }
@@ -557,7 +613,7 @@ export default function Navbar({ projectTitle }) {
           .hidden-mobile { display: none; }
           .show-mobile { display: flex; }
           .navbar-new {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 0.8px solid rgba(255, 255, 255, 0.1);
           }
           .nav-container-new {
             height: 72px;

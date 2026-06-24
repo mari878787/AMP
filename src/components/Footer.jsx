@@ -17,7 +17,7 @@ export default function Footer() {
             
             <h3 className="footer-tagline">
               Building spaces.<br />
-              <span className="footer-tagline-gold">Enriching lives.</span>
+              Enriching <span className="highlight-italic">lives.</span>
             </h3>
             
             <p className="footer-desc">
@@ -71,6 +71,7 @@ export default function Footer() {
                 type="email"
                 placeholder="Enter your email address"
                 className="subscribe-input"
+                aria-label="Email address for newsletter"
               />
             </div>
             
@@ -136,24 +137,24 @@ export default function Footer() {
       
       <style>{`
         .footer-section {
-          background-color: #ffffff;
-          padding: 80px 0 0px;
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          background-color: var(--color-bg-light);
+          padding: var(--space-8) 0 0px;
+          font-family: var(--font-sans);
           color: #475569;
           overflow: hidden;
-          border-top: 1px solid #f1f5f9;
+          border-top: 1.5px solid var(--color-gold-accent);
         }
 
         .footer-upper {
           display: grid;
           grid-template-columns: 2.2fr 1fr 1fr 1fr 2fr;
-          gap: 48px;
+          gap: var(--space-6);
         }
 
         .footer-col-brand {
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: var(--space-3);
         }
 
         .footer-logo-wrap {
@@ -170,45 +171,43 @@ export default function Footer() {
         }
 
         .footer-brand-name {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
+          font-family: var(--font-heading);
           font-size: 13px;
           font-weight: 700;
           letter-spacing: 0.28em;
-          color: #0f172a;
+          color: var(--color-text-dark);
           margin-top: 4px;
         }
 
         .footer-tagline {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
+          font-family: var(--font-heading);
           font-size: 28px;
           font-weight: 400;
           line-height: 1.25;
-          color: #0f172a;
+          color: var(--color-text-dark);
           letter-spacing: -0.01em;
         }
 
-        .footer-tagline-gold {
-          color: #ba944c;
-        }
+
 
         .footer-desc {
           font-size: 13.5px;
           line-height: 1.6;
-          color: #64748b;
+          color: var(--color-text-muted);
         }
 
         .footer-col {
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: var(--space-3);
         }
 
         .footer-col-title {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
+          font-family: var(--font-heading);
           font-size: 11.5px;
           font-weight: 700;
           letter-spacing: 0.08em;
-          color: #0f172a;
+          color: var(--color-text-dark);
           margin-bottom: 4px;
         }
 
@@ -224,23 +223,24 @@ export default function Footer() {
         .footer-links a {
           font-size: 13px;
           color: #475569;
-          transition: color 0.2s ease;
+          transition: color 0.25s ease, padding-left 0.25s ease;
         }
 
         .footer-links a:hover {
-          color: #027796;
+          color: var(--color-gold-accent);
+          padding-left: 4px;
         }
 
         .footer-col-subscribe {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: var(--space-2);
         }
 
         .subscribe-desc {
           font-size: 13px;
           line-height: 1.5;
-          color: #64748b;
+          color: var(--color-text-muted);
         }
 
         .subscribe-form {
@@ -250,30 +250,30 @@ export default function Footer() {
         .subscribe-input {
           width: 100%;
           padding: 12px 16px;
-          background: #ffffff;
-          border: 1px solid #e2e8f0;
+          background: var(--color-bg-light);
+          border: 0.8px solid var(--color-border-light);
           border-radius: 6px;
           font-family: inherit;
           font-size: 13px;
-          color: #0f172a;
+          color: var(--color-text-dark);
           outline: none;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .subscribe-input:focus {
-          border-color: #027796;
-          box-shadow: 0 2px 10px rgba(2, 119, 150, 0.1);
+          border-color: var(--color-gold-accent);
+          box-shadow: 0 2px 12px rgba(19, 56, 37, 0.12);
         }
 
         .subscribe-input::placeholder {
-          color: #94a3b8;
+          color: var(--color-text-muted-light);
         }
 
         .footer-socials {
           display: flex;
           gap: 10px;
-          margin-top: 8px;
+          margin-top: var(--space-1);
           align-items: center;
         }
 
@@ -281,28 +281,29 @@ export default function Footer() {
           width: 34px;
           height: 34px;
           border-radius: 50%;
-          border: 1px solid #e2e8f0;
+          border: 0.8px solid var(--color-border-light);
           display: flex;
           align-items: center;
           justify-content: center;
           color: #475569;
-          background: #ffffff;
-          transition: all 0.2s ease;
+          background: var(--color-bg-light);
+          transition: all 0.3s var(--ease-luxury);
         }
 
         .social-icon-btn:hover {
           color: #ffffff;
-          background: #027796;
-          border-color: #027796;
-          transform: translateY(-2px);
+          background: var(--color-gold-accent);
+          border-color: var(--color-gold-accent);
+          transform: translateY(-2px) scale(1.05);
+          box-shadow: 0 4px 12px rgba(19, 56, 37, 0.2);
         }
 
         .follow-us-label {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
+          font-family: var(--font-heading);
           font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.08em;
-          color: #0f172a;
+          color: var(--color-text-dark);
           margin-top: 4px;
         }
 
@@ -331,22 +332,26 @@ export default function Footer() {
         .footer-contact-info {
           display: grid;
           grid-template-columns: 1.1fr 1fr;
-          gap: 32px;
+          gap: var(--space-4);
           padding-bottom: 60px;
         }
 
         .contact-col-touch {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: var(--space-2);
         }
 
         .contact-value {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
+          font-family: var(--font-heading);
           font-size: 18px;
           font-weight: 400;
           color: #475569;
           line-height: 1.2;
+          transition: color 0.25s ease;
+        }
+        .contact-value:hover {
+          color: var(--color-gold-accent);
         }
 
         .font-email {
@@ -369,7 +374,7 @@ export default function Footer() {
         @media (max-width: 1024px) {
           .footer-upper {
             grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
+            gap: var(--space-5);
           }
           .footer-col-brand {
             grid-column: span 2;
@@ -380,7 +385,7 @@ export default function Footer() {
           }
           .footer-lower {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: var(--space-5);
             align-items: flex-start;
           }
           .footer-blueprint-container {
@@ -395,11 +400,11 @@ export default function Footer() {
 
         @media (max-width: 640px) {
           .footer-section {
-            padding: 48px 0 0px;
+            padding: var(--space-6) 0 0px;
           }
           .footer-upper {
             grid-template-columns: 1fr;
-            gap: 32px;
+            gap: var(--space-4);
           }
           .footer-col-brand, .footer-col-subscribe {
             grid-column: span 1;
@@ -409,7 +414,7 @@ export default function Footer() {
           }
           .footer-contact-info {
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: var(--space-3);
           }
           .contact-col-address {
             align-items: flex-start;
@@ -420,21 +425,21 @@ export default function Footer() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          border-top: 1px solid #f1f5f9;
-          padding: 24px 0;
-          margin-top: 40px;
+          border-top: 0.8px solid #f1f5f9;
+          padding: var(--space-3) 0;
+          margin-top: var(--space-5);
         }
         .copyright-text, .copyright-design {
           font-size: 12.5px;
-          color: #94a3b8;
+          color: var(--color-text-muted-light);
         }
         .credits-link {
-          color: #94a3b8;
+          color: var(--color-text-muted-light);
           text-decoration: underline;
-          transition: color 0.2s ease;
+          transition: color 0.25s ease;
         }
         .credits-link:hover {
-          color: #027796;
+          color: var(--color-gold-accent);
         }
         @media (max-width: 640px) {
           .footer-copyright-row {
@@ -442,7 +447,7 @@ export default function Footer() {
             gap: 12px;
             text-align: center;
             padding: 20px 0;
-            margin-top: 24px;
+            margin-top: var(--space-3);
           }
         }
       `}</style>

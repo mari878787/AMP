@@ -150,7 +150,7 @@ export default function CursorTracker() {
           left: 0;
           width: 6px;
           height: 6px;
-          background-color: #ba944c; /* Brand Gold */
+          background-color: var(--color-primary); /* Forest Green */
           border-radius: 50%;
           will-change: transform;
           z-index: 10002;
@@ -163,7 +163,7 @@ export default function CursorTracker() {
           left: 0;
           width: 30px;
           height: 30px;
-          border: 1px solid rgba(186, 148, 76, 0.45); /* Muted Gold Ring */
+          border: 1px solid rgba(19, 56, 37, 0.45); /* Muted Forest Green Ring */
           border-radius: 50%;
           will-change: transform;
           z-index: 10001;
@@ -182,8 +182,8 @@ export default function CursorTracker() {
           /* Recenter 48px ring: offset becomes -24px, so we adjust margin */
           margin-top: -9px;
           margin-left: -9px;
-          background-color: rgba(186, 148, 76, 0.08);
-          border-color: #ba944c;
+          background-color: rgba(19, 56, 37, 0.08);
+          border-color: var(--color-primary);
           backdrop-filter: blur(1px);
         }
 
@@ -194,8 +194,8 @@ export default function CursorTracker() {
         /* ── Click / Active State ── */
         .custom-cursor-container.is-active .custom-cursor-ring {
           transform: scale(0.8);
-          background-color: rgba(186, 148, 76, 0.18);
-          border-color: #ba944c;
+          background-color: rgba(19, 56, 37, 0.18);
+          border-color: var(--color-primary);
         }
       `}</style>
     </div>

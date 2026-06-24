@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Preloader from '../components/Preloader';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
@@ -10,12 +10,16 @@ import BlogSection from '../components/BlogSection';
 import Footer from '../components/Footer';
 
 export default function Home() {
+  const [preloaderComplete, setPreloaderComplete] = useState(false);
+
   return (
     <div className="home-page">
-      <Preloader />
+      {!preloaderComplete && (
+        <Preloader onComplete={() => setPreloaderComplete(true)} />
+      )}
       <Navbar />
       <main>
-        <HeroSection />
+        <HeroSection startZoom={preloaderComplete} />
         <PhilosophySection />
         <ProjectsSection />
         <HeritageSection />

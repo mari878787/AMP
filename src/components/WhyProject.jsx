@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollReveal from './ScrollReveal';
 
 export default function WhyProject({
   projectName = "Crystal Moonlight",
@@ -23,16 +24,16 @@ export default function WhyProject({
       <div className="why-project-grid">
         
         {/* Left Column: Collage Image */}
-        <div className="why-project-media">
+        <ScrollReveal className="why-project-media" animation="fadeLeft" as="div">
           <img
             src={imageSrc}
             alt={`${projectName} Gated Entrance`}
             className="why-project-img"
           />
-        </div>
+        </ScrollReveal>
 
         {/* Right Column: Content */}
-        <div className="why-project-content">
+        <ScrollReveal className="why-project-content" animation="fadeUp" delay={0.15} as="div">
           <div className="why-project-content-wrapper">
             <h2 className="why-project-title">
               WHY {firstWord}<br />{remainingWords}
@@ -44,7 +45,8 @@ export default function WhyProject({
               DOWNLOAD BROCHURE
             </a>
           </div>
-        </div>
+        </ScrollReveal>
+
 
       </div>
 
@@ -57,6 +59,7 @@ export default function WhyProject({
           color: #060b1d;
           position: relative;
           z-index: 5;
+          overflow: hidden;
         }
 
         .why-project-grid {
@@ -81,7 +84,7 @@ export default function WhyProject({
 
         .why-project-img {
           width: 100%;
-          max-width: 650px;
+          // max-width: 300px;
           height: auto;
           display: block;
           mix-blend-mode: multiply;
@@ -200,6 +203,7 @@ export default function WhyProject({
             margin: 8px auto;
           }
         }
+
       `}</style>
     </section>
   );

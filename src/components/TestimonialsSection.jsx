@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import ScrollReveal from './ScrollReveal';
 
 const TESTIMONIALS = [
   {
@@ -28,6 +29,7 @@ const extended = [TESTIMONIALS[TOTAL - 1], ...TESTIMONIALS, TESTIMONIALS[0]];
 export default function TestimonialsSection() {
   const [idx, setIdx] = useState(1);   // 1 = first real card
   const [anim, setAnim] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const timer = useRef(null);
   const dragRef = useRef(null);
   const trackRef = useRef(null);
@@ -58,6 +60,14 @@ export default function TestimonialsSection() {
   const goPrev = useCallback(() => { setAnim(true); setIdx(i => i - 1); }, []);
   const goTo = useCallback((d) => { setAnim(true); setIdx(d + 1); }, []);
 
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      goNext();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [goNext, isHovered]);
+
   /* Drag / swipe */
   const onMouseDown = (e) => { dragRef.current = e.clientX; };
   const onMouseUp = (e) => {
@@ -75,25 +85,33 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="tcs-section" id="testimonials">
+    <section 
+      className="tcs-section" 
+      id="testimonials"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
 
       {/* ── Header ── */}
-      <div className="tcs-header">
-        <h2 className="tcs-title">Client Testimonials</h2>
+      <ScrollReveal className="tcs-header" animation="fadeUp">
+        <h2 className="tcs-title" style={{ color: '#faf8f0' }}>Stories built <span className="highlight-italic" style={{ color: '#faf8f0' }}>on trust</span></h2>
         <p className="tcs-subtitle">
           Discover homes and investment opportunities tailored to you.<br />
           With our trusted expertise and local knowledge.
         </p>
-      </div>
+      </ScrollReveal>
 
       {/* ── Viewport ── */}
-      <div
+      <ScrollReveal
         className="tcs-viewport"
+        animation="fadeUp"
+        delay={0.15}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
         onMouseLeave={() => { dragRef.current = null; }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
+        as="div"
       >
         <div
           ref={trackRef}
@@ -116,7 +134,7 @@ export default function TestimonialsSection() {
                 <div className="tcs-photo-col">
                   <img
                     src={t.photo}
-                    alt={isActive ? t.name : ''}
+                    alt={isActive ? `${t.name} — client testimonial` : ''}
                     className="tcs-photo"
                     draggable="false"
                   />
@@ -132,10 +150,10 @@ export default function TestimonialsSection() {
             );
           })}
         </div>
-      </div>
+      </ScrollReveal>
 
       {/* ── Dots ── */}
-      <div className="tcs-dots" role="tablist">
+      <div className="tcs-dots" role="tablist" aria-label="Testimonial navigation">
         {TESTIMONIALS.map((_, i) => (
           <button
             key={i}
@@ -156,30 +174,30 @@ export default function TestimonialsSection() {
           /* left offset so the active card is centred */
           --card-offset: calc(50% - var(--card-w) / 2);
 
-          background: #ffffff;
-          padding: 60px 0;
+          background: #133825;
+          padding: var(--space-8) 0;
           overflow: hidden;
         }
 
         /* ── Header ── */
         .tcs-header {
           text-align: center;
-          margin-bottom: 32px;
+          margin-bottom: var(--space-4);
           padding: 0 24px;
         }
         .tcs-title {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
-          font-size: 32px;
+          font-family: var(--font-heading);
+          font-size: 42px;
           font-weight: 400;
-          color: #0f172a;
+          color: var(--color-text-dark);
           margin-bottom: 14px;
           line-height: 1.25;
           letter-spacing: -0.01em;
         }
         .tcs-subtitle {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 14px;
-          color: #94a3b8;
+          color: rgba(250, 248, 240, 0.7);
           line-height: 1.7;
         }
 
@@ -203,8 +221,9 @@ export default function TestimonialsSection() {
         /* ── Card ── */
         .tcs-card {
           flex: 0 0 var(--card-w);
-          background: #f8fafc;
-          border-radius: 12px;
+          background: #1b4d34;
+          border: 1px solid rgba(250, 248, 240, 0.15);
+          border-radius: 16px;
           display: flex;
           flex-direction: row;
           overflow: hidden;
@@ -212,14 +231,16 @@ export default function TestimonialsSection() {
           min-height: 300px;
           opacity: 0.35;
           transform: scale(0.97);
-          transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease;
+          transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
           cursor: pointer;
+          border-bottom: 3px solid transparent;
         }
         .tcs-card.active {
           opacity: 1;
           transform: scale(1);
           box-shadow: 0 8px 48px rgba(0,0,0,0.10);
           cursor: default;
+          border-bottom-color: var(--color-gold-accent);
         }
 
         /* ── Photo column ── */
@@ -250,26 +271,26 @@ export default function TestimonialsSection() {
           font-family: Georgia, serif;
           font-size: 56px;
           line-height: 0.85;
-          color: #94a3b8;
-          opacity: 0.6;
+          color: var(--color-gold-accent);
+          opacity: 0.7;
           height: 30px;
           overflow: hidden;
         }
         .tcs-quote {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 15.5px;
           font-weight: 400;
           font-style: normal;
-          color: #334155;
+          color: #faf8f0;
           line-height: 1.75;
           margin: 0;
           max-width: 520px;
         }
         .tcs-name {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 13px;
           font-weight: 700;
-          color: #0f172a;
+          color: #faf8f0;
           letter-spacing: 0.01em;
           margin-top: 4px;
         }
@@ -288,10 +309,10 @@ export default function TestimonialsSection() {
           border: none;
           cursor: pointer;
           padding: 0;
-          transition: background 0.25s, width 0.25s, border-radius 0.25s;
+          transition: all 0.3s ease;
         }
         .tcs-dot.active {
-          background: #ba944c;
+          background: var(--color-gold-accent);
           width: 28px;
           border-radius: 4px;
         }

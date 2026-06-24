@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollReveal from './ScrollReveal';
 
 const features = [
   {
@@ -26,28 +27,37 @@ export default function HeritageSection() {
       />
 
       {/* Building – absolutely positioned to the true right edge of the section */}
-      <img
+      <ScrollReveal
+        as="img"
         src="/images/home/build-stand.png"
         alt="Premium building construction"
         className="standards-building"
+        animation="fadeRight"
+        duration={0.9}
       />
 
       {/* Content inside container – left half only */}
       <div className="container standards-inner">
         <div className="standards-content">
-          <span className="standards-tag">Our Standards</span>
+          <ScrollReveal animation="fadeUp">
+            <span className="section-tag">Our Standards</span>
 
-          <h2 className="standards-heading">
-            Committed To Quality,<br />
-            Safety, And Reliability
-          </h2>
+            <h2 className="standards-heading">
+              We turn untouched land into thriving addresses of <span className="highlight-italic">pride and permanence.</span>
+            </h2>
+          </ScrollReveal>
 
           <div className="standards-features">
-            {features.map((f) => (
-              <div key={f.id} className="feature-item">
+            {features.map((f, idx) => (
+              <ScrollReveal
+                key={f.id}
+                animation="fadeUp"
+                delay={0.15 + idx * 0.12}
+                className="feature-item"
+              >
                 <p className="feature-title">{f.title}</p>
                 <p className="feature-desc">{f.desc}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -104,23 +114,15 @@ export default function HeritageSection() {
           flex-direction: column;
         }
 
-        .standards-tag {
-          display: block;
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
-          font-size: 13px;
-          font-weight: 400;
-          letter-spacing: 0.03em;
-          color: #6b5438;
-          margin-bottom: 12px;
-        }
+
 
         .standards-heading {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
-          font-size: 32px;
+          font-family: var(--font-heading);
+          font-size: 42px;
           font-weight: 400;
           line-height: 1.25;
           letter-spacing: -0.01em;
-          color: #1a1208;
+          color: var(--color-primary);
           margin-bottom: 48px;
         }
 
@@ -139,18 +141,18 @@ export default function HeritageSection() {
         }
 
         .feature-title {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 14.5px;
           font-weight: 600;
-          color: #1a1208;
+          color: var(--color-primary);
           letter-spacing: 0.01em;
         }
 
         .feature-desc {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 13.5px;
           font-weight: 400;
-          color: #5c4830;
+          color: var(--color-text-muted);
           line-height: 1.65;
           max-width: 340px;
         }

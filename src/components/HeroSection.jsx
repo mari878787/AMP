@@ -1,22 +1,14 @@
 import React from 'react';
 
-export default function HeroSection() {
+export default function HeroSection({ startZoom }) {
   return (
-    <section className="hero-section">
-      {/* 4-Split Curtain Panels */}
-      <div className="hero-split-mask" aria-hidden="true">
-        <div className="split-panel panel-1"></div>
-        <div className="split-panel panel-2"></div>
-        <div className="split-panel panel-3"></div>
-        <div className="split-panel panel-4"></div>
-      </div>
-
+    <section className="hero-section" id="hero">
       {/* Background Image Container */}
       <div className="hero-background">
         <img
           src="/images/home/hero.png"
-          alt="Minimalist Luxury Villa"
-          className="hero-bg-image"
+          alt="Minimalist luxury villa designed by Aadhithya Mohan"
+          className={`hero-bg-image ${startZoom ? 'animate-zoom' : ''}`}
         />
         <div className="hero-overlay"></div>
       </div>
@@ -24,12 +16,16 @@ export default function HeroSection() {
       {/* Overlaid Content */}
       <div className="container hero-content">
         <h1 className="hero-title">
-          Your Dream <span className="highlight-text">Home</span>,<br />
-          Your Needs Met
+          Own the freedom <br />
+          to build <span className="highlight-italic" style={{ color: 'var(--color-sage)' }}>your legacy</span>
         </h1>
         <p className="hero-subtitle">
           A Style Defined By Minimalism, Open Spaces, And Natural Light.
         </p>
+        <a href="#projects" className="btn-luxury-pill" style={{ marginTop: '40px' }}>
+          <span>Explore Projects</span>
+          <span className="btn-circle-arrow">→</span>
+        </a>
       </div>
 
       <style>{`
@@ -43,43 +39,10 @@ export default function HeroSection() {
           justify-content: flex-start;
           align-items: center;
           overflow: hidden;
-          padding-top: 180px; /* Space below capsule header */
+          padding-top: 180px;
           background-color: #060b1d;
         }
         
-        /* ── 4-Split Reveal Mask ── */
-        .hero-split-mask {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          z-index: 40;
-          pointer-events: none;
-        }
-        
-        .split-panel {
-          flex: 1;
-          height: 100%;
-          background-color: #060b1d; /* Matches hero navy background */
-          animation: slideAway 1.2s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-        }
-        
-        .panel-1 {
-          transform-origin: top;
-          animation-delay: 2.4s;
-        }
-        .panel-2 {
-          transform-origin: bottom;
-          animation-delay: 2.52s;
-        }
-        .panel-3 {
-          transform-origin: top;
-          animation-delay: 2.64s;
-        }
-        .panel-4 {
-          transform-origin: bottom;
-          animation-delay: 2.76s;
-        }
-
         .hero-background {
           position: absolute;
           top: 0;
@@ -93,7 +56,19 @@ export default function HeroSection() {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center bottom; /* Anchor house at bottom, sky at top */
+          object-position: center bottom;
+          transform: scale(1);
+          will-change: transform;
+        }
+        
+        .hero-bg-image.animate-zoom {
+          animation: slowZoom 25s ease-in-out infinite alternate;
+        }
+
+        /* Subtle parallax-like slow zoom on hero background */
+        @keyframes slowZoom {
+          from { transform: scale(1); }
+          to   { transform: scale(1.06); }
         }
         
         .hero-overlay {
@@ -104,9 +79,9 @@ export default function HeroSection() {
           height: 100%;
           background: linear-gradient(
             to bottom, 
-            rgba(6, 11, 29, 0.45) 0%, 
-            rgba(6, 11, 29, 0.15) 50%, 
-            rgba(6, 11, 29, 0.45) 100%
+            rgba(6, 11, 29, 0.40) 0%, 
+            rgba(6, 11, 29, 0.10) 50%, 
+            rgba(6, 11, 29, 0.40) 100%
           );
           z-index: 2;
           opacity: 0;
@@ -125,25 +100,27 @@ export default function HeroSection() {
         }
         
         .hero-title {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
-          font-size: 44px;
+          font-family: var(--font-heading);
+          font-size: 52px;
           font-weight: 400;
-          line-height: 1.25;
-          letter-spacing: 0.01em;
+          line-height: 1.15;
+          letter-spacing: 0.02em;
           color: #ffffff;
           margin-bottom: 24px;
-          text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
           opacity: 0;
-          animation: fadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 3.4s;
+          animation: fadeUp 1.4s var(--ease-luxury) forwards;
+          animation-delay: 4.2s;
         }
         
-        .hero-title .highlight-text {
-          color: #e2b865; /* Elegant warm gold highlight from mockup */
+        .hero-title .highlight-italic {
+          font-family: var(--font-heading);
+          font-style: italic;
+          font-weight: 700;
         }
         
         .hero-subtitle {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 16px;
           font-weight: 400;
           color: rgba(255, 255, 255, 0.80);
@@ -151,18 +128,27 @@ export default function HeroSection() {
           line-height: 1.6;
           text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
           opacity: 0;
-          animation: fadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 3.7s;
+          animation: fadeUp 1.4s var(--ease-luxury) forwards;
+          animation-delay: 4.5s;
+        }
+
+        /* ── Hero CTA Button ── */
+        .hero-content .btn-luxury-pill {
+          opacity: 0;
+          animation: fadeUp 1.4s var(--ease-luxury) forwards;
+          animation-delay: 4.8s;
+          background: rgba(19, 56, 37, 0.25);
+          border: 1px solid rgba(19, 56, 37, 0.5);
+          backdrop-filter: blur(16px) saturate(160%);
+          -webkit-backdrop-filter: blur(16px) saturate(160%);
+        }
+        .hero-content .btn-luxury-pill:hover {
+          background: var(--color-primary);
+          border-color: var(--color-primary);
+          color: #ffffff;
         }
 
         /* ── Opening Animations ── */
-        @keyframes slideAway {
-          to {
-            transform: scaleY(0);
-          }
-        }
-
-
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
@@ -184,7 +170,7 @@ export default function HeroSection() {
             padding-top: 150px;
           }
           .hero-title {
-            font-size: 52px;
+            font-size: 44px;
           }
           .hero-subtitle {
             font-size: 16px;
@@ -196,11 +182,15 @@ export default function HeroSection() {
             padding-top: 130px;
           }
           .hero-title {
-            font-size: 40px;
+            font-size: 36px;
             line-height: 1.2;
           }
           .hero-subtitle {
             font-size: 14px;
+          }
+          .hero-cta {
+            padding: 12px 28px;
+            font-size: 12px;
           }
         }
       `}</style>

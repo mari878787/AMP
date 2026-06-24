@@ -1,36 +1,39 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 
 const ALL_PROJECTS = [
   {
     id: 1,
     category: 'Residential',
-    title: 'House for a family with two children',
+    title: 'Modern Family Villa',
     location: 'ECR, Chennai',
-    area: '4,200 sq.ft',
+    area: '4,200 Sq.Ft.',
     image: '/images/home/project-image-1.png',
+    link: '#',
   },
   {
     id: 2,
     category: 'Plotted',
-    title: 'Eco-tech style with natural finishing material',
+    title: 'Eco-tech Plotted Estate',
     location: 'OMR, Chennai',
-    area: '3,800 sq.ft',
+    area: '3,800 Sq.Ft.',
     image: '/images/home/project-image-2.png',
+    link: '#',
   },
   {
     id: 3,
     category: 'Residential',
-    title: 'Modern luxury villa with panoramic views',
+    title: 'Luxury Panorama Villa',
     location: 'Adyar, Chennai',
-    area: '5,500 sq.ft',
+    area: '5,500 Sq.Ft.',
     image: '/images/villa_exterior_1779810861723.png',
+    link: '#',
   },
   {
     id: 4,
     category: 'Residential',
     title: 'Crystal Moonlight Villa',
     location: 'Medavakkam, Chennai',
-    area: '5,500 sq.ft',
+    area: '2,400 - 4,100 Sq.Ft.',
     image: '/images/project_crystal_1779810838661.png',
     link: '/crystal-moonlight-villa',
   },
@@ -68,8 +71,21 @@ export default function ProjectsSection() {
     setCurrent(0);
   };
 
-  const prev = useCallback(() => setCurrent(c => Math.max(0, c - 1)), []);
-  const next = useCallback(() => setCurrent(c => Math.min(maxIndex, c + 1)), [maxIndex]);
+  const prev = useCallback(() => {
+    setCurrent(c => (c === 0 ? maxIndex : c - 1));
+  }, [maxIndex]);
+
+  const next = useCallback(() => {
+    setCurrent(c => (c >= maxIndex ? 0 : c + 1));
+  }, [maxIndex]);
+
+  useEffect(() => {
+    if (maxIndex <= 0) return;
+    const interval = setInterval(() => {
+      setCurrent(c => (c >= maxIndex ? 0 : c + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [maxIndex, current]);
 
   /* ── drag / swipe ── */
   const onMouseDown = (e) => { dragStart.current = e.clientX; dragging.current = false; };
@@ -99,37 +115,45 @@ export default function ProjectsSection() {
         {/* ── Header ── */}
         <div className="projects-header">
           <div className="projects-title-row">
-            <h2 className="projects-title">Our Projects</h2>
-            <div className="projects-tabs">
-              {['Residential', 'Plotted'].map(tab => (
-                <button
-                  key={tab}
-                  className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
-                  onClick={() => handleTab(tab)}
-                >
-                  {tab}
-                </button>
-              ))}
+            <div className="projects-header-left">
+              <span className="section-tag">Featured Projects</span>
+              <h2 className="projects-main-title">
+                Architecture <span className="highlight-italic">beyond time</span>
+              </h2>
             </div>
+            
+            <div className="projects-header-right">
+              <div className="projects-tabs">
+                {['All', 'Residential', 'Plotted'].map(tab => (
+                  <button
+                    key={tab}
+                    className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                    onClick={() => handleTab(tab)}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
 
-            {/* Arrow controls – right-aligned */}
-            <div className="slider-arrows">
-              <button
-                className={`arrow-btn ${current === 0 ? 'disabled' : ''}`}
-                onClick={prev}
-                aria-label="Previous projects"
-                disabled={current === 0}
-              >
-                <ArrowLeft />
-              </button>
-              <button
-                className={`arrow-btn ${current >= maxIndex ? 'disabled' : ''}`}
-                onClick={next}
-                aria-label="Next projects"
-                disabled={current >= maxIndex}
-              >
-                <ArrowRight />
-              </button>
+              {/* Arrow controls – right-aligned */}
+              <div className="slider-arrows">
+                <button
+                  className={`arrow-btn ${maxIndex === 0 ? 'disabled' : ''}`}
+                  onClick={prev}
+                  aria-label="Previous projects"
+                  disabled={maxIndex === 0}
+                >
+                  <ArrowLeft />
+                </button>
+                <button
+                  className={`arrow-btn ${maxIndex === 0 ? 'disabled' : ''}`}
+                  onClick={next}
+                  aria-label="Next projects"
+                  disabled={maxIndex === 0}
+                >
+                  <ArrowRight />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -153,7 +177,12 @@ export default function ProjectsSection() {
             style={{ transform: `translateX(calc(-${current} * (50% + 16px)))` }}
           >
             {filtered.map((project) => (
-              <div key={project.id} className="project-card">
+              <a
+                key={project.id}
+                href={project.link || "#contact"}
+                className="project-card"
+                onClick={e => dragging.current && e.preventDefault()}
+              >
                 <div className="project-img-wrap">
                   <img
                     src={project.image}
@@ -164,25 +193,12 @@ export default function ProjectsSection() {
                   <div className="project-overlay">
                     <span className="project-category-badge">{project.category}</span>
                     <div className="project-overlay-details">
+                      <span className="overlay-title">{project.title}</span>
                       <span className="overlay-location">{project.location}</span>
-                      <span className="overlay-area">{project.area}</span>
                     </div>
                   </div>
                 </div>
-                <div className="project-card-footer">
-                  <p className="project-card-title">{project.title}</p>
-                  <a
-                    href={project.link || "#contact"}
-                    className="project-card-link"
-                    aria-label={`View ${project.title}`}
-                    onClick={e => dragging.current && e.preventDefault()}
-                  >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -201,11 +217,9 @@ export default function ProjectsSection() {
             ))}
           </div>
 
-          <a href="#all-projects" className="btn-view-all">
-            View All Projects
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
+          <a href="#all-projects" className="btn-luxury-outline">
+            <span>View All Projects</span>
+            <span className="btn-circle-arrow">→</span>
           </a>
         </div>
       </div>
@@ -213,63 +227,74 @@ export default function ProjectsSection() {
       <style>{`
         /* ── Section ── */
         .projects-section {
-          background-color: #ffffff;
-          padding: 60px 0;
+          background-color: var(--color-bg-light);
+          padding: 80px 0;
           overflow: hidden;
         }
 
         /* ── Header ── */
-        .projects-header { margin-bottom: 32px; }
+        .projects-header { 
+          margin-bottom: 40px; 
+        }
 
         .projects-title-row {
           display: flex;
-          align-items: center;
-          gap: 18px;
-          margin-bottom: 14px;
+          align-items: flex-end;
+          justify-content: space-between;
+          margin-bottom: 24px;
           flex-wrap: wrap;
+          gap: 24px;
         }
 
-        .projects-title {
-          font-family: 'Helvetica World', 'HelveticaWorld', Helvetica, Arial, sans-serif;
-          font-size: 32px;
+        .projects-header-left {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .projects-main-title {
+          font-family: var(--font-heading);
+          font-size: 42px;
           font-weight: 400;
-          letter-spacing: -0.01em;
-          color: #0f172a;
           line-height: 1.25;
-          margin-right: 4px;
+          color: var(--color-text-dark);
+          margin: 0;
+          letter-spacing: -0.01em;
+        }
+
+        .projects-header-right {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          flex-wrap: wrap;
         }
 
         .projects-tabs {
           display: flex;
-          gap: 10px;
-          flex: 1;
+          gap: 12px;
         }
 
         .tab-btn {
           font-family: var(--font-sans);
-          font-size: 13px;
-          font-weight: 500;
+          font-size: 12px;
+          font-weight: 600;
           letter-spacing: 0.05em;
-          color: #ba944c;
-          background: rgba(186, 148, 76, 0.04);
-          border: 1px solid rgba(186, 148, 76, 0.25);
-          border-radius: 50px;
-          padding: 6px 22px;
+          text-transform: uppercase;
+          color: var(--color-primary);
+          background: rgba(19, 56, 37, 0.05);
+          border: 1px solid rgba(19, 56, 37, 0.15);
+          border-radius: 100px;
+          padding: 8px 24px;
           cursor: pointer;
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.3s ease;
         }
         .tab-btn:hover {
-          background: rgba(186, 148, 76, 0.08);
-          border-color: rgba(186, 148, 76, 0.5);
-          transform: translateY(-1px);
+          background: rgba(19, 56, 37, 0.1);
         }
         .tab-btn.active {
-          background: rgba(186, 148, 76, 0.9);
-          border-color: #ba944c;
+          background: var(--color-primary);
+          border-color: var(--color-primary);
           color: #ffffff;
-          box-shadow: 0 6px 20px rgba(186, 148, 76, 0.2);
+          box-shadow: 0 6px 20px rgba(19, 56, 37, 0.15);
         }
 
         /* ── Arrow buttons ── */
@@ -283,9 +308,9 @@ export default function ProjectsSection() {
           width: 42px;
           height: 42px;
           border-radius: 50%;
-          border: 1px solid rgba(186, 148, 76, 0.25);
+          border: 1px solid rgba(19, 56, 37, 0.15);
           background: rgba(255, 255, 255, 0.6);
-          color: #ba944c;
+          color: var(--color-primary);
           backdrop-filter: blur(20px) saturate(180%);
           -webkit-backdrop-filter: blur(20px) saturate(180%);
           display: flex;
@@ -296,11 +321,11 @@ export default function ProjectsSection() {
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .arrow-btn:hover:not(.disabled) {
-          background: rgba(186, 148, 76, 0.08);
-          border-color: #ba944c;
-          color: #ba944c;
+          background: rgba(19, 56, 37, 0.08);
+          border-color: var(--color-primary);
+          color: var(--color-primary);
           transform: translateY(-2px) scale(1.05);
-          box-shadow: 0 6px 20px rgba(186, 148, 76, 0.12);
+          box-shadow: 0 6px 20px rgba(19, 56, 37, 0.12);
         }
         .arrow-btn.disabled {
           border-color: rgba(6, 11, 29, 0.08);
@@ -311,9 +336,9 @@ export default function ProjectsSection() {
         }
 
         .projects-subtitle {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 14px;
-          color: #64748b;
+          color: var(--color-text-muted);
           line-height: 1.6;
           max-width: 680px;
         }
@@ -337,8 +362,8 @@ export default function ProjectsSection() {
         .project-card {
           flex: 0 0 calc(50% - 16px);
           min-width: 0;
-          display: flex;
-          flex-direction: column;
+          display: block;
+          text-decoration: none;
         }
 
         .project-img-wrap {
@@ -361,19 +386,18 @@ export default function ProjectsSection() {
         .project-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, rgba(6,11,29,0) 25%, rgba(6,11,29,0.65) 100%);
-          opacity: 0;
-          transition: opacity 0.35s ease;
+          background: linear-gradient(to bottom, rgba(6, 11, 29, 0) 45%, rgba(6, 11, 29, 0.9) 100%);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 18px 20px;
+          padding: 24px;
+          z-index: 2;
+          transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .project-card:hover .project-overlay { opacity: 1; }
 
         .project-category-badge {
           align-self: flex-start;
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+          font-family: var(--font-sans);
           font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.08em;
@@ -384,47 +408,56 @@ export default function ProjectsSection() {
           padding: 4px 12px;
           border-radius: 50px;
           border: 1px solid rgba(255,255,255,0.25);
+          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .project-overlay-details {
           display: flex;
           justify-content: space-between;
           align-items: flex-end;
+          width: 100%;
+          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .overlay-location, .overlay-area {
-          font-family: 'Helvetica Now', 'HelveticaNow', Helvetica, Arial, sans-serif;
+
+        .overlay-title {
+          font-family: var(--font-heading);
+          font-size: 24px;
+          font-weight: 500;
+          color: #ffffff;
+          letter-spacing: 0.02em;
+          line-height: 1.2;
+          max-width: 70%;
+        }
+
+        .overlay-location {
+          font-family: var(--font-sans);
           font-size: 13px;
-          color: rgba(255,255,255,0.85);
+          color: rgba(255, 255, 255, 0.85);
+          font-weight: 500;
           letter-spacing: 0.02em;
         }
 
-        /* ── Card Footer ── */
-        .project-card-footer {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 16px 0 4px;
-          border-bottom: 1px solid #f0f0f0;
-          margin-top: 4px;
+        /* Hover transitions on devices that support hover */
+        @media (hover: hover) {
+          .project-overlay {
+            opacity: 0;
+          }
+          .project-category-badge {
+            transform: translateY(-10px);
+          }
+          .project-overlay-details {
+            transform: translateY(10px);
+          }
+          .project-card:hover .project-overlay {
+            opacity: 1;
+          }
+          .project-card:hover .project-category-badge {
+            transform: translateY(0);
+          }
+          .project-card:hover .project-overlay-details {
+            transform: translateY(0);
+          }
         }
-        .project-card-title {
-          font-family: var(--font-sans);
-          font-size: 14px;
-          font-weight: 600;
-          color: #0f172a;
-          line-height: 1.4;
-          max-width: 85%;
-          letter-spacing: 0.02em;
-        }
-        .project-card-link {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          color: #ba944c;
-          transition: color 0.2s ease, transform 0.2s ease;
-        }
-        .project-card-link:hover { color: #ba944c; transform: translateX(3px) scale(1.1); }
 
         /* ── Bottom row ── */
         .slider-bottom-row {
@@ -446,55 +479,27 @@ export default function ProjectsSection() {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: #d1d5db;
+          background: rgba(19, 56, 37, 0.15);
           border: none;
           cursor: pointer;
-          transition: background 0.25s ease, transform 0.25s ease, width 0.25s ease;
+          transition: all 0.3s ease;
           padding: 0;
         }
         .dot.active {
-          background: #ba944c;
+          background: var(--color-primary);
           width: 24px;
           border-radius: 4px;
         }
 
-        /* ── View All CTA ── */
-        .btn-view-all {
-          font-family: var(--font-sans);
-          font-size: 13px;
-          font-weight: 500;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: #ba944c;
-          background: rgba(186, 148, 76, 0.05);
-          border: 1px solid rgba(186, 148, 76, 0.25);
-          border-radius: 50px;
-          padding: 10px 30px;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-view-all:hover {
-          background: rgba(186, 148, 76, 0.9);
-          border-color: #ba944c;
-          color: #fff;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(186, 148, 76, 0.25);
-        }
-
         /* ── Responsive ── */
         @media (max-width: 768px) {
-          .projects-title { font-size: 26px; }
           .project-card { flex: 0 0 calc(85% - 16px); }
           .slider-track { gap: 20px; }
           .slider-arrows { display: none; }
+          .overlay-title { font-size: 18px; }
+          .overlay-location { font-size: 11px; }
         }
         @media (max-width: 480px) {
-          .projects-title { font-size: 22px; }
           .projects-section { padding: 60px 0; }
           .project-card { flex: 0 0 90%; }
         }

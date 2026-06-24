@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import ScrollReveal from './ScrollReveal';
 
 export default function PhilosophySection() {
+  const statsRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const stats = [
     {
       title: "Years Of Experience",
@@ -27,30 +45,38 @@ export default function PhilosophySection() {
   return (
     <section className="section about-section" id="about">
       <div className="container">
-        
+
         {/* Top Grid: Headings and Intro Paragraph */}
         <div className="about-top-grid">
-          <div className="about-left-col">
-            <span className="about-tag">About Us</span>
-            <h2 className="about-title">
-              We design and build your vision into reality.
+          <ScrollReveal className="about-left-col" animation="fadeUp">
+            <span className="section-tag">About Us</span>
+            <h2 className="about-title" style={{ maxWidth: '620px' }}>
+              We turn land into opportunity, guided by <span className="highlight-italic">trust, clarity, and lasting value.</span>
             </h2>
-          </div>
-          
-          <div className="about-right-col">
+          </ScrollReveal>
+
+          <ScrollReveal className="about-right-col" animation="fadeUp" delay={0.15}>
             <p className="about-desc">
               Adhithya Mohan has been shaping Chennai landscape with excellence and dedication. With years of experience in residential, Plotted and commercial construction, where seamless architecture meets modern sophistication, crafted for those who seek more than a home. they seek a legacy.
             </p>
-            <a href="#contact" className="btn-about">
-              Know More
+            <a href="#contact" className="btn-luxury-outline">
+              <span>Know More</span>
+              <span className="btn-circle-arrow">→</span>
             </a>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Bottom Grid: Statistics Columns */}
-        <div className="about-stats-grid">
+        <div
+          ref={statsRef}
+          className={`about-stats-grid ${isVisible ? 'is-visible' : ''}`}
+        >
           {stats.map((stat, idx) => (
-            <div key={idx} className="stat-column">
+            <div
+              key={idx}
+              className="stat-column"
+              style={{ animationDelay: `${idx * 0.12}s` }}
+            >
               <span className="stat-title">{stat.title}</span>
               <span className="stat-value">{stat.value}</span>
               <p className="stat-desc">{stat.desc}</p>
@@ -62,32 +88,24 @@ export default function PhilosophySection() {
 
       <style>{`
         .about-section {
-          background-color: #ffffff;
-          padding: 60px 0;
+          background-color: var(--color-bg-light);
+          padding: var(--space-8) 0;
           color: var(--color-text-dark);
         }
         
         .about-top-grid {
           display: grid;
           grid-template-columns: 1.2fr 1fr;
-          gap: 80px;
-          margin-bottom: 48px;
+          gap: var(--space-8);
+          margin-bottom: var(--space-6);
           align-items: flex-start;
         }
         
-        .about-tag {
-          display: block;
-          font-family: var(--font-sans);
-          font-size: 15px;
-          font-weight: 500;
-          color: var(--color-text-muted);
-          margin-bottom: 16px;
-          letter-spacing: 0.02em;
-        }
+
         
         .about-title {
           font-family: var(--font-heading);
-          font-size: 32px;
+          font-size: 42px;
           font-weight: 400;
           line-height: 1.25;
           color: var(--color-text-dark);
@@ -110,24 +128,24 @@ export default function PhilosophySection() {
           font-weight: 500;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: #ba944c;
-          background: rgba(186, 148, 76, 0.05);
-          border: 1px solid rgba(186, 148, 76, 0.25);
+          color: var(--color-primary);
+          background: rgba(19, 56, 37, 0.05);
+          border: 1px solid rgba(19, 56, 37, 0.2);
           padding: 10px 30px;
           border-radius: 50px;
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.35s var(--ease-luxury);
           text-align: center;
         }
         
         .btn-about:hover {
-          background: rgba(186, 148, 76, 0.9);
-          border-color: #ba944c;
+          background: var(--color-primary);
+          border-color: var(--color-primary);
           color: #ffffff;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(186, 148, 76, 0.25);
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 8px 24px rgba(19, 56, 37, 0.25);
         }
         
         /* Stats Grid Details */
@@ -135,34 +153,52 @@ export default function PhilosophySection() {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 0;
-          padding-top: 40px;
-          border-top: 1px solid #f1f5f9;
+          padding-top: var(--space-5);
+          border-top: 1px solid rgba(19, 56, 37, 0.15);
+        }
+
+        /* Staggered entrance animation */
+        .about-stats-grid .stat-column {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        .about-stats-grid.is-visible .stat-column {
+          animation: statFadeIn 0.6s var(--ease-luxury) forwards;
+        }
+
+        @keyframes statFadeIn {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
         
         .stat-column {
           display: flex;
           flex-direction: column;
-          padding-right: 40px;
+          padding-right: var(--space-5);
         }
         
         .stat-column:not(:first-child) {
-          border-left: 1px solid #eae8e8; /* Thin divider line from screenshot */
-          padding-left: 40px;
+          border-left: 1px solid rgba(19, 56, 37, 0.15);
+          padding-left: var(--space-5);
         }
         
         .stat-title {
           font-family: var(--font-sans);
-          font-size: 13px;
-          font-weight: 500;
-          color: var(--color-text-muted);
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--color-text-muted-light);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
           margin-bottom: 12px;
         }
         
         .stat-value {
           font-family: var(--font-heading);
-          font-size: 40px;
+          font-size: 48px;
           font-weight: 500;
-          color: var(--color-text-dark);
+          color: var(--color-primary);
           line-height: 1.1;
           margin-bottom: 16px;
           letter-spacing: -0.03em;
@@ -178,7 +214,7 @@ export default function PhilosophySection() {
         @media (max-width: 1024px) {
           .about-top-grid {
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: var(--space-5);
           }
           .about-title {
             font-size: 26px;
