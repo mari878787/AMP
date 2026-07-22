@@ -1,0 +1,632 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   AMP — Global Design System
+   Boska (Typography) & Helvetica Neue Ultra Light
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@font-face {
+  font-family: 'Soria';
+  src: url('/fonts/soria_regular_macroman/soria-font-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ProximaNovaRegular';
+  src: url('/fonts/ProximaNovaRegular/ProximaNovaRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* â”€â”€ Colour Palette â”€â”€ */
+  --color-white: #ffffff;
+  --color-bg-navy: #000000;
+  --color-bg-light: #f5f5f5;
+  --color-bg-cream: #ffffff;
+
+  --color-text-dark: #000000;
+  --color-text-light: #ffffff;
+  --color-text-muted: #222121;
+  --color-text-muted-light: #999999;
+
+  --color-border-dark: #222222;
+  --color-border-light: rgba(0, 0, 0, 0.12);
+
+  --color-primary: #000000;
+  --color-primary-hover: #333333;
+
+  --color-sage: #868686;
+  --color-sage-light: #f5f5f5;
+
+  --color-gold: #cccccc;
+  --color-gold-highlight: #e0e0e0;
+  --color-gold-accent: #aaaaaa;
+
+  /* â”€â”€ Typography â”€â”€ */
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-sans: 'Afacad Flux', sans-serif;
+
+  /* â”€â”€ Spacing Scale (8px base) â”€â”€ */
+  --space-1: 0.5rem;
+  /*  8px */
+  --space-2: 1rem;
+  /* 16px */
+  --space-3: 1.5rem;
+  /* 24px */
+  --space-4: 2rem;
+  /* 32px */
+  --space-5: 2.5rem;
+  /* 40px */
+  --space-6: 3rem;
+  /* 48px */
+  --space-7: 4rem;
+  /* 64px */
+  --space-8: 5rem;
+  /* 80px */
+
+  /* â”€â”€ Motion â”€â”€ */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* â”€â”€ Layout Boundaries â”€â”€ */
+  --container-width: 1240px;
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --container-width: 1440px;
+  }
+}
+
+@media (min-width: 2200px) {
+  :root {
+    --container-width: 1880px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-white);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 64px;
+}
+
+body.preloader-active {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* â”€â”€ Typography Elements â”€â”€ */
+span,
+button,
+a {
+  letter-spacing: 0.1em;
+  font-weight: normal;
+}
+
+blockquote {
+  font-weight: normal;
+}
+
+/* â”€â”€ Heading Hierarchy — Ultra Light Luxury â”€â”€ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-dark);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(38px, 6.5vw, 48px);
+  line-height: 1.2;
+  letter-spacing: 0.24em;
+}
+
+h2 {
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.3;
+  letter-spacing: 0.2em;
+}
+
+h3 {
+  font-size: clamp(18px, 2.5vw, 20px);
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+}
+
+h4 {
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: 0.22em;
+}
+
+h5 {
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.2em;
+}
+
+h6 {
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+}
+
+/* â”€â”€ Links â”€â”€ */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+/* â”€â”€ Buttons â”€â”€ */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* â”€â”€ Selection Highlight â”€â”€ */
+::selection {
+  background: rgba(19, 56, 37, 0.25);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(19, 56, 37, 0.25);
+  color: inherit;
+}
+
+/* â”€â”€ Focus Outline (accessibility) â”€â”€ */
+:focus-visible {
+  outline: 2px solid var(--color-gold-accent);
+  outline-offset: 2px;
+}
+
+/* â”€â”€ Layout â”€â”€ */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* â”€â”€ Master Filter Tabs (ALL | RESIDENTIAL | PLOTTED style) â”€â”€ */
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.filter-tab-btn {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-muted-light);
+  background: none;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0 20px;
+  cursor: pointer;
+  transition: color 0.25s ease, font-weight 0.25s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.filter-tab-btn:first-child {
+  padding-left: 0;
+}
+
+.filter-tab-btn:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.filter-tab-btn:hover {
+  color: var(--color-text-muted);
+}
+
+.filter-tab-btn.active {
+  color: var(--color-primary);
+  font-weight: 400;
+}
+
+/* â”€â”€ Section Title — inherits h2 scale â”€â”€ */
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--color-text-dark);
+  letter-spacing: 0.2em;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+}
+
+/* â”€â”€ Display Title — large hero heading â”€â”€ */
+.display-title {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 6.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--color-text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin: 0 0 24px 0;
+}
+
+@media (max-width: 900px) {
+  .section-title {
+    letter-spacing: 0.22em;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-title {
+    letter-spacing: 0.18em;
+  }
+}
+
+/* â”€â”€ Body Text System â”€â”€ */
+p,
+.body-text {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* â”€â”€ Label / Micro Text â”€â”€ */
+.label-text {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted-light);
+}
+
+.placeholder-text {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* â”€â”€ Uniform Section Tags â”€â”€ */
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--color-text-muted-light);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 16px;
+}
+
+/* â”€â”€ Slider Arrows — master class â”€â”€ */
+.slider-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.slider-arrow:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.slider-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Dark background variant */
+.slider-arrow--light {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+}
+
+.slider-arrow--light:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-white);
+}
+
+/* â”€â”€ Slider Dots — master class â”€â”€ */
+.slider-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.slider-dot.active {
+  width: 20px;
+  border-radius: 3px;
+  background: var(--color-primary);
+}
+
+
+
+/* â”€â”€ Luxury Buttons (Pure CSS Glassmorphism) â”€â”€ */
+.btn-luxury-pill,
+.btn-luxury-outline,
+.btn-luxury-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 100px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+/* Light Theme Button & Dark Theme Button (Both are dark glassmorphic black version now) */
+.btn-luxury-pill,
+.btn-luxury-outline {
+  font-size: 11px;
+  font-weight: 400;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 16px 42px;
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-luxury-pill:hover,
+.btn-luxury-outline:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Tab/Filters button (if used in other places) */
+.btn-luxury-tab {
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.btn-luxury-tab:hover,
+.btn-luxury-tab.active {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Circle arrow (if an icon is explicitly passed) */
+.btn-circle-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+  transition: transform 0.3s ease;
+}
+
+.btn-luxury-pill .btn-circle-arrow {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-luxury-pill:hover .btn-circle-arrow,
+.btn-luxury-outline:hover .btn-circle-arrow {
+  transform: translateX(3px);
+}
+
+/* â”€â”€ Projects Tab Switcher (Liquid Glass) â”€â”€ */
+.projects-tabs-switcher {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  width: max-content !important;
+  border-radius: 100px !important;
+  border: 1px solid rgba(220, 220, 222, 0.8) !important;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02) !important;
+}
+
+.projects-tabs-switcher::before {
+  display: none !important;
+}
+
+.projects-tabs-switcher-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background: transparent;
+  border-radius: 100px;
+  box-sizing: border-box;
+  isolation: isolate;
+}
+
+.projects-tab-option {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: #666;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.projects-tab-option:hover {
+  color: #111;
+}
+
+.projects-tab-option.active {
+  color: #111;
+}
+
+/* Sliding active pill indicator for categories */
+.projects-tab-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(220, 220, 222, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+/* Precise widths & translations matching text sizes */
+.projects-tab-indicator.tab-all {
+  width: 72px;
+  transform: translateX(0);
+}
+
+.projects-tab-indicator.tab-residential {
+  width: 116px;
+  transform: translateX(70px);
+}
+
+.projects-tab-indicator.tab-plotted {
+  width: 85px;
+  transform: translateX(200px);
+}
+
+/* Gallery Tabs Specific Widths */
+.projects-tab-indicator.tab-gallery-exteriors {
+  width: 114px;
+  transform: translateX(0);
+}
+
+.projects-tab-indicator.tab-gallery-interiors {
+  width: 105px;
+  transform: translateX(110px);
+}
+
+.projects-tab-indicator.tab-gallery-videos {
+  width: 85px;
+  transform: translateX(220px);
+}
+
+/* Layout Tabs Specific Widths */
+.projects-tab-indicator.tab-layout-masterPlan {
+  width: 128px;
+  transform: translateX(0);
+}
+
+.projects-tab-indicator.tab-layout-floorPlan {
+  width: 118px;
+  transform: translateX(128px);
+}
+
+.projects-tab-indicator.tab-layout-elevations {
+  width: 118px;
+  transform: translateX(246px);
+}
+
+
+
+@media (max-width: 768px) {
+  .desktop-only-br {
+    display: none !important;
+  }
+}
+
+/* â”€â”€ Lenis Smooth Scroll Styles â”€â”€ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* â”€â”€ Native Brand Logo Cursor â”€â”€ */
+@media (hover: hover) {
+  html, body, * {
+    cursor: url('/images/logo-curser-v4.png') 10 5, auto !important;
+  }
+  
+  a, button, select, input, textarea, .slider-arrow, .filter-tab-btn, [role="button"] {
+    cursor: url('/images/logo-curser-v4.png') 10 5, pointer !important;
+  }
+}

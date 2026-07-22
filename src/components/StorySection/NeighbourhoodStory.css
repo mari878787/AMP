@@ -1,0 +1,427 @@
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Location Advantage — Luxury Two-Column Carousel
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.loc-advantage {
+  position: relative;
+  width: 100%;
+  padding: 80px 0;
+  /* Compact padding for screen fit */
+  background: url("/images/bg/BR-1.png") right bottom / cover no-repeat;
+  color: var(--color-primary);
+  overflow-x: hidden;
+  /* Prevent horizontal scroll bar */
+  overflow-y: visible;
+  /* Ensure content is never clipped vertically */
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(180, 133, 100, 0.12);
+  border-bottom: 1px solid rgba(180, 133, 100, 0.12);
+}
+
+/* â”€â”€ Corner Bird Decor â”€â”€ */
+.loc-advantage__bird {
+  position: absolute;
+  top: 30px;
+  right: -10px;
+  width: 130px;
+  height: auto;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.8s var(--ease-luxury);
+}
+
+.loc-advantage:hover .loc-advantage__bird {
+  transform: translateY(-5px) rotate(1deg);
+}
+
+/* â”€â”€ Container & Grid â”€â”€ */
+.loc-advantage__container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.loc-advantage__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: stretch;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* â”€â”€ Column 1: Static Intro Content â”€â”€ */
+.loc-advantage__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.loc-advantage__tag {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #b48564;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+
+
+.loc-advantage__title-italic {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: #b48564;
+}
+
+.loc-advantage__desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 480px;
+}
+
+.loc-advantage__image-wrapper {
+  width: 100%;
+  flex-grow: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(180, 133, 100, 0.08);
+  border: 1px solid rgba(180, 133, 100, 0.15);
+  background-color: var(--color-white);
+  transition: transform 0.6s var(--ease-luxury), box-shadow 0.6s var(--ease-luxury);
+}
+
+.loc-advantage__image-wrapper:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(180, 133, 100, 0.12);
+}
+
+.loc-advantage__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-luxury);
+}
+
+.loc-advantage__image-wrapper:hover .loc-advantage__image {
+  transform: scale(1.03);
+}
+
+@keyframes imageReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* â”€â”€ Column 2: Interactive Carousel Section â”€â”€ */
+.loc-advantage__carousel-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.loc-advantage__slideable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+.loc-advantage__slideable-title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-primary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+.loc-advantage__arrows {
+  display: flex;
+  gap: 8px;
+}
+
+
+
+/* Viewport for carousel slider */
+.loc-advantage__viewport {
+  overflow: hidden;
+  width: calc(100% + 80px);
+  margin: -40px;
+  padding: 40px;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+/* Slideable Card Track: CSS transitions coordinates for sliding */
+.loc-advantage__slideable-track {
+  display: flex;
+  width: 100%;
+  gap: 80px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.loc-advantage__slide-card {
+  flex-shrink: 0;
+  width: 100%;
+  /* Spans 100% of viewport width */
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1.5px solid rgba(238, 237, 237, 0.85);
+  border-radius: 4px;
+  padding: 24px 32px;
+  box-sizing: border-box;
+}
+
+.loc-advantage__slide-card-title {
+  color: var(--color-primary);
+  letter-spacing: 0.03em;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(180, 133, 100, 0.1);
+  padding-bottom: 8px;
+}
+
+.loc-advantage__timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* Tighter gap between timeline nodes for screen fit */
+}
+
+/* Vertical line track: centered mathematically under the dot column */
+.loc-advantage__line-track {
+  position: absolute;
+  left: 100px;
+  /* 80px distance + (40px dot column / 2) = 100px */
+  top: 16px;
+  bottom: 16px;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(180, 133, 100, 0.15), #b48564 30%, #b48564 70%, rgba(180, 133, 100, 0.15));
+}
+
+/* Individual Timeline Item */
+.loc-advantage__item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s var(--ease-luxury);
+}
+
+.loc-advantage__item:hover {
+  transform: translateX(4px);
+}
+
+/* Node Box containing Distance and Dot using Grid */
+.loc-advantage__node-box {
+  display: grid;
+  grid-template-columns: 80px 40px;
+  align-items: center;
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.loc-advantage__dist {
+  font-family: var(--font-heading);
+  font-size: 17.5px;
+  /* Slightly more compact font size */
+  font-weight: 400;
+  color: #b48564;
+  text-align: right;
+  padding-right: 16px;
+  white-space: nowrap;
+}
+
+.loc-advantage__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #b48564;
+  justify-self: center;
+  /* Center precisely in the 40px column */
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 0 4px var(--color-white), 0 0 0 6px rgba(180, 133, 100, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.loc-advantage__dot-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(180, 133, 100, 0.4);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.loc-advantage__item:hover .loc-advantage__dot {
+  transform: scale(1.3);
+  background-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-white), 0 0 0 7px rgba(0, 0, 0, 0.15);
+}
+
+.loc-advantage__item:hover .loc-advantage__dot-pulse {
+  opacity: 1;
+  transform: scale(1.4);
+  animation: locPulse 1.6s infinite ease-out;
+}
+
+/* Details Side */
+.loc-advantage__details {
+  padding-left: 12px;
+  /* Elegant gap from the dot column edge */
+  display: flex;
+  flex-direction: column;
+}
+
+.loc-advantage__name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-primary);
+  margin-bottom: 1px;
+  transition: color 0.3s ease;
+}
+
+.loc-advantage__item:hover .loc-advantage__name {
+  color: #b48564;
+}
+
+.loc-advantage__subname {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Bottom carousel dots indicator */
+.loc-advantage__carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+
+
+/* Footer & CTA */
+.loc-advantage__footer {
+  margin-top: 20px;
+  /* Reduced margin to prevent button cutoff */
+  display: flex;
+  justify-content: center;
+}
+
+/* Keyframes */
+@keyframes locPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Responsive Design
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+@media (max-width: 1024px) {
+  .loc-advantage {
+    padding: 50px 0;
+  }
+
+  .loc-advantage__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .loc-advantage__intro {
+    align-items: center;
+    text-align: center;
+  }
+
+  .loc-advantage__carousel-section {
+    height: auto;
+  }
+
+  .loc-advantage__image-wrapper {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16/10;
+  }
+
+  .loc-advantage__bird {
+    width: 100px;
+    top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loc-advantage {
+    padding: 40px 0;
+  }
+
+  .loc-advantage__title {
+  }
+
+  .loc-advantage__slide-card {
+    padding: 20px 16px;
+  }
+
+  .loc-advantage__line-track {
+    left: 83px;
+  }
+
+  .loc-advantage__node-box {
+    grid-template-columns: 65px 36px;
+    width: 101px;
+  }
+
+  .loc-advantage__dist {
+    font-size: 15px;
+    padding-right: 12px;
+  }
+
+  .loc-advantage__details {
+    padding-left: 8px;
+  }
+
+  .loc-advantage__name {
+    font-size: 13px;
+  }
+}
