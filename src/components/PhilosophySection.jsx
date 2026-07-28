@@ -63,7 +63,7 @@ export default function PhilosophySection() {
 
       <style>{`
         .about-section {
-          background-color: #fff;
+          background-color: var(--color-white);
           position: relative;
           z-index: 2;
           width: 100%;

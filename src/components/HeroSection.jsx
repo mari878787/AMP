@@ -112,9 +112,10 @@ export default function HeroSection({ startZoom }) {
           height: 100%;
           background: linear-gradient(
             to bottom, 
-            rgba(0, 0, 0, 0.10) 0%, 
-            rgba(0, 0, 0, 0.05) 50%, 
-            rgba(0, 0, 0, 0.40) 100%
+            rgba(0, 0, 0, 0.75) 0%, 
+            rgba(0, 0, 0, 0.0) 25%, 
+            rgba(0, 0, 0, 0.3) 70%, 
+            rgba(0, 0, 0, 0.75) 100%
           );
           z-index: 2;
           opacity: 0;
@@ -127,14 +128,14 @@ export default function HeroSection({ startZoom }) {
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
-          align-items: flex-start; /* Moved to left */
+          align-items: center; 
           width: 100%;
           padding: 0 40px; /* Padding from edge */
           margin-bottom: 20px;
         }
         
         .hero-text-block {
-          text-align: left; /* Left align text */
+          text-align: center; 
           margin-bottom: 18px;
         }
 
@@ -144,9 +145,8 @@ export default function HeroSection({ startZoom }) {
         
         .hero-title {
           line-height: 1.25;
-          letter-spacing: 0.24em;
           color: rgba(255, 255, 255, 0.95);
-          margin-bottom: 16px;
+          margin-bottom: 8px;
           text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
           opacity: 0;
           animation: fadeUp 1.4s var(--ease-luxury) forwards;
@@ -163,6 +163,7 @@ export default function HeroSection({ startZoom }) {
           opacity: 0;
           animation: fadeUp 1.4s var(--ease-luxury) forwards;
           animation-delay: 2.5s;
+          margin-bottom: 8px;
         }
 
         .btn-discover {

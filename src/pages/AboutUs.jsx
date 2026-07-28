@@ -1,5 +1,9 @@
+// About Us Page
 import React, { useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
+import AboutLegacyExpand from '../components/AboutLegacyExpand';
 
 const AboutUs = () => {
   useEffect(() => {
@@ -8,51 +12,15 @@ const AboutUs = () => {
 
   return (
     <div className="about-us-page">
-      {/* 1. Theme-Aligned Hero Section */}
-      <section className="project-hero-section">
-        <div className="project-hero-overlay"></div>
-        <img 
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
-          alt="Luxury Architecture" 
-          className="project-hero-image"
-          style={{ transform: 'scale(1.05)' }}
-        />
-        <div className="project-hero-content">
-          <span className="project-tag-reveal">ESTABLISHED 2016</span>
-          <h1 className="display-title project-hero-title">
-            About Us
-          </h1>
-          <p className="project-hero-subtitle">CURATING LIFESTYLES, BUILDING LEGACIES</p>
-        </div>
-      </section>
-
-      {/* 2. Magazine-Style Overlap Section */}
-      <section className="luxury-overlap-section">
-        <div className="overlap-image-wrapper">
-          <img 
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=80" 
-            alt="Architectural Masterpiece" 
-            className="overlap-bg-image"
-          />
-        </div>
-        
-        <div className="container relative-container">
-          <div className="overlap-content-box">
-            <ScrollReveal animation="fadeUp">
-              <span className="section-tag">OUR STORY</span>
-              <h2 className="section-title">9+ Years of a Remarkable Journey</h2>
-              <div className="overlap-divider"></div>
-              
-              <p className="luxury-body-text lead-text">
-                At Aadhithya Mohan Properties LLP, we believe every family deserves a place they can proudly call home. 
-              </p>
-              <p className="luxury-body-text">
-                With over 9+ years of a remarkable journey, we have maintained a strong focus on premium housing, land development, and residential projects. We create communities that are not only architecturally stunning but also built to appreciate in value and enrich lives. Whether you’re building, remodeling, buying, or selling, we bring seamless project execution under one roof.
-              </p>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      <Navbar darkText={true} />
+      {/* 1. Hero Section: GSAP Scroll-Driven Image Expansion */}
+      <AboutLegacyExpand 
+        legacyYears="10"
+        legacyTitle="years of"
+        legacySubtitle="INCREDIBLE LEGACY"
+        description="Aadhithya Mohan Properties was founded in 2016 by a first-generation entrepreneur Mr. PNC Menon, the founder of the Group. The entity is a multinational, multiproduct group with developments and investments in the UAE, India, and UK."
+        image="/images/maia/5.png"
+      />
 
       {/* 3. Massive Scale Typography (Stats) - No Cards */}
       <section className="massive-stats-section">
@@ -404,6 +372,7 @@ const AboutUs = () => {
           }
         }
       `}} />
+      <Footer />
     </div>
   );
 };

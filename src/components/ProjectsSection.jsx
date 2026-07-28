@@ -12,6 +12,7 @@ const ALL_PROJECTS = [
     area: '4,200 Sq.Ft.',
     image: '/images/maia/1.png',
     link: '#',
+    centerInfo: '3 BHK & 4 BHK'
   },
   {
     id: 2,
@@ -21,24 +22,27 @@ const ALL_PROJECTS = [
     area: '3,800 Sq.Ft.',
     image: '/images/maia/2.png',
     link: '#',
+    centerInfo: '3 BHK & 4 BHK'
   },
   {
     id: 3,
     category: 'Villa',
-    title: 'MÃ©lange',
+    title: 'Mélange',
     location: 'Saligramam, Chennai',
     area: '5,500 Sq.Ft.',
     image: '/images/maia/3.png',
     link: '#',
+    centerInfo: '4 BHK & 5 BHK'
   },
   {
     id: 4,
-    category: 'Plotted',
+    category: 'Plots',
     title: 'Reserve 16',
     location: 'ECR, Pattipulam',
     area: '2,400 - 4,100 Sq.Ft.',
     image: '/images/maia/4.png',
     link: '/crystal-moonlight-villa',
+    centerInfo: 'Villa Plots'
   },
 ];
 
@@ -177,7 +181,7 @@ export default function ProjectsSection() {
 
           <ScrollReveal className="projects-header-right" animation="fadeUp" delay={0.35}>
             <div className="filter-tabs">
-              {['All', 'Villa', 'Apartment', 'Plotted'].map(tab => (
+              {['All', 'Villa', 'Apartment', 'Plots'].map(tab => (
                 <button
                   key={tab}
                   className={`filter-tab-btn ${activeTab === tab ? 'active' : ''}`}
@@ -255,6 +259,7 @@ export default function ProjectsSection() {
                       <div className="project-overlay">
                         <div className="project-overlay-details">
                           <span className="overlay-title">{project.title}</span>
+                          <span className="overlay-center-info">{project.centerInfo}</span>
                           <span className="overlay-location">{project.location}</span>
                         </div>
                       </div>
@@ -287,9 +292,9 @@ export default function ProjectsSection() {
       <style>{`
         /* â”€â”€ Section â”€â”€ */
         .projects-section {
-          --card-active-w: 70vw;
+          --card-active-w: 75vw;
           --card-w: 55vw;
-          --gap: 2vw;
+          --gap: 8vw;
           --card-offset: calc(50vw - var(--card-active-w) / 2);
 
           background-color: var(--color-bg-light);
@@ -381,39 +386,49 @@ export default function ProjectsSection() {
         }
 
         .project-overlay-details {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+          align-items: center;
           width: 100%;
+          gap: 16px;
           transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .overlay-title {
-          font-family: var(--font-heading);
+          font-family: var(--font-sans);
           font-weight: 300;
-          font-size: 24px;
+          font-size: 22px;
           color: var(--color-white);
           line-height: 1.2;
-          max-width: 70%;
           text-transform: uppercase;
           letter-spacing: 0.15em;
+          text-align: left;
+        }
+
+        .overlay-center-info {
+          color: #fff;
+          font-family: var(--font-sans);
+          font-size: 13px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          text-align: center;
         }
 
         .overlay-location {
           color: rgba(255, 255, 255, 0.85);
           font-family: var(--font-sans);
-          font-size: 12px;
+          font-size: 13px;
           letter-spacing: 0.08em;
+          text-align: right;
         }
 
         /* â”€â”€ Header â”€â”€ */
         .projects-header {
-          margin-bottom: 40px; 
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 24px;
+          gap: 5px;
         }
 
         .projects-header-left {

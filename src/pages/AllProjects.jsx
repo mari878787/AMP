@@ -11,9 +11,9 @@ const PROJECTS_DATA = [
   { id: 2, title: 'Crystal Moonlight Villa', location: 'MEDAVAKKAM, CHENNAI', category: 'Villa', status: 'Ongoing', area: '2,400 - 4,100 Sq.Ft.', image: '/images/project_crystal_1779810838661.png', link: '/crystal-moonlight-villa' },
   { id: 3, title: 'Skyline Residences', location: 'OMR, CHENNAI', category: 'Apartment', status: 'Ongoing', area: '1,200 - 1,800 Sq.Ft.', image: '/images/home/project-image-2.png', link: '#' },
   { id: 4, title: 'Ocean View Apartments', location: 'ECR, CHENNAI', category: 'Apartment', status: 'Completed', area: '2,000 Sq.Ft.', image: '/images/villa_exterior_1779810861723.png', link: '#' },
-  { id: 5, title: 'Green Earth Plots', location: 'TAMBARAM, CHENNAI', category: 'Plotted', status: 'Ongoing', area: '1,200 - 2,400 Sq.Ft.', image: '/images/project/CML/master-plan.png', link: '#' },
-  { id: 6, title: 'Sunrise Valley', location: 'GUDUVANCHERY, CHENNAI', category: 'Plotted', status: 'Ongoing', area: '600 - 1,500 Sq.Ft.', image: '/images/home/project-image-1.png', link: '#' },
-  { id: 7, title: 'Eco-tech Plotted Estate', location: 'OMR, CHENNAI', category: 'Plotted', status: 'Completed', area: '3,800 Sq.Ft.', image: '/images/home/project-image-2.png', link: '#' },
+  { id: 5, title: 'Green Earth Plots', location: 'TAMBARAM, CHENNAI', category: 'Plots', status: 'Ongoing', area: '1,200 - 2,400 Sq.Ft.', image: '/images/project/CML/master-plan.png', link: '#' },
+  { id: 6, title: 'Sunrise Valley', location: 'GUDUVANCHERY, CHENNAI', category: 'Plots', status: 'Ongoing', area: '600 - 1,500 Sq.Ft.', image: '/images/home/project-image-1.png', link: '#' },
+  { id: 7, title: 'Eco-tech Plotted Estate', location: 'OMR, CHENNAI', category: 'Plots', status: 'Completed', area: '3,800 Sq.Ft.', image: '/images/home/project-image-2.png', link: '#' },
   { id: 8, title: 'Luxury Panorama Villa', location: 'ADYAR, CHENNAI', category: 'Villa', status: 'Ongoing', area: '5,500 Sq.Ft.', image: '/images/villa_exterior_1779810861723.png', link: '#' },
 ];
 
@@ -27,7 +27,7 @@ export default function AllProjects() {
     // Parse query params for category
     const params = new URLSearchParams(location.search);
     const categoryParam = params.get('category');
-    if (categoryParam && ['Villa', 'Apartment', 'Plotted'].includes(categoryParam)) {
+    if (categoryParam && ['Villa', 'Apartment', 'Plots'].includes(categoryParam)) {
       setActiveCategory(categoryParam);
     }
   }, [location]);
@@ -72,11 +72,11 @@ export default function AllProjects() {
           </ScrollReveal>
 
           {/* Pill Filters */}
-          <ScrollReveal animation="fadeUp" style={{ marginBottom: '30px', display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <ScrollReveal animation="fadeUp" style={{ marginBottom: '30px', display: 'flex', gap: '40px', justifyContent: 'center', flexWrap: 'wrap' }}>
 
             {/* Category Filter */}
             <div className="filter-tabs">
-              {['All', 'Villa', 'Apartment', 'Plotted'].map(cat => (
+              {['All', 'Villa', 'Apartment', 'Plots'].map(cat => (
                 <button
                   key={cat}
                   className={`filter-tab-btn ${activeCategory === cat ? 'active' : ''}`}

@@ -13,7 +13,8 @@ import WhyProject from '../components/WhyProject';
 import ProjectSpecs from '../components/ProjectSpecs';
 import ScrollReveal from '../components/ScrollReveal';
 import NeighbourhoodStory from '../components/StorySection/NeighbourhoodStory';
-
+import ProjectDetailsGrid from '../components/ProjectDetailsGrid';
+import ProjectPricingSection from '../components/ProjectPricingSection';
 const VIDEO_SLIDES = [
   {
     title: "Gated Community Walkthrough",
@@ -34,7 +35,6 @@ const VIDEO_SLIDES = [
     url: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
   }
 ];
-
 const SPECIFICATIONS = [
   {
     id: 'structure',
@@ -130,7 +130,6 @@ const SPECIFICATIONS = [
     image: '/images/project/spec-structure.png'
   }
 ];
-
 export default function NewProject() {
   const [activeTab, setActiveTab] = useState('overview');
   const [activeSubSection, setActiveSubSection] = useState('highlights');
@@ -151,7 +150,6 @@ export default function NewProject() {
   const [layoutCategory, setLayoutCategory] = useState('masterPlan'); // 'masterPlan', 'floorPlan', 'elevations'
   const [floorPlanConfig, setFloorPlanConfig] = useState('3bhk'); // '3bhk', '4bhk'
   const [activePlanId, setActivePlanId] = useState('planA');
-
   const layoutsData = {
     masterPlan: {
       image: '/images/project/CML/master-plan.png',
@@ -171,29 +169,25 @@ export default function NewProject() {
       description: 'Elevations and 3D unit views.'
     }
   };
-
   const currentConfigPlans = layoutsData.floorPlan[floorPlanConfig] || [];
   const activePlanDetails = currentConfigPlans.find(p => p.id === activePlanId) || currentConfigPlans[0];
-
   const handlePrevPlan = () => {
     if (currentConfigPlans.length <= 1) return;
     const currIdx = currentConfigPlans.findIndex(p => p.id === activePlanId);
     const prevIdx = (currIdx - 1 + currentConfigPlans.length) % currentConfigPlans.length;
     setActivePlanId(currentConfigPlans[prevIdx].id);
   };
-
   const handleNextPlan = () => {
     if (currentConfigPlans.length <= 1) return;
     const currIdx = currentConfigPlans.findIndex(p => p.id === activePlanId);
     const nextIdx = (currIdx + 1) % currentConfigPlans.length;
     setActivePlanId(currentConfigPlans[nextIdx].id);
   };
-
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [floorplanLightbox, setFloorplanLightbox] = useState(null);
   const [lightboxIdx, setLightboxIdx] = useState(0);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activePillar, setActivePillar] = useState(0);
-
   const pillars = [
     {
       index: "01",
@@ -220,13 +214,12 @@ export default function NewProject() {
       image: "/images/project/CML/Interiors/cml-interior-01.jpg"
     }
   ];
-
   const [statusMonthIdx, setStatusMonthIdx] = useState(0);
   const [activeVideoUrl, setActiveVideoUrl] = useState('https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1');
   const [activeVideoIdx, setActiveVideoIdx] = useState(0);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [hideMainHeader, setHideMainHeader] = useState(false);
-  
+
   useEffect(() => {
     const handleOpenModal = (e) => {
       e.preventDefault();
@@ -235,7 +228,6 @@ export default function NewProject() {
     window.addEventListener('open-inquiry-modal', handleOpenModal);
     return () => window.removeEventListener('open-inquiry-modal', handleOpenModal);
   }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       // Hide the main site header once scrolled past the hero fold (100vh)
@@ -245,7 +237,6 @@ export default function NewProject() {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const [quoteForm, setQuoteForm] = useState({ name: '', email: '', phone: '', note: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [activeLandmarkIdx, setActiveLandmarkIdx] = useState(0);
@@ -256,7 +247,6 @@ export default function NewProject() {
   const amenitiesListRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [amenityIdx, setAmenityIdx] = useState(0);
-
   const amenities = [
     { image: "/images/project/CML/amenities/1.png", icon: <Home size={22} />, title: "Gated Community Entry", desc: "Premium and secure entry for residents." },
     { image: "/images/project/CML/amenities/2.png", icon: <Zap size={22} />, title: "Street Lighting", desc: "Well-illuminated internal roads." },
@@ -279,14 +269,12 @@ export default function NewProject() {
     { image: "/images/project/CML/amenities/18.png", icon: <Video size={22} />, title: "CCTV Surveillance", desc: "24/7 smart CCTV surveillance." },
     { image: "/images/project/CML/amenities/19.png", icon: <Baby size={22} />, title: "CrÃ¨che", desc: "Safe supervised childcare." }
   ];
-
   useEffect(() => {
     const interval = setInterval(() => {
       setAmenityIdx((prev) => (prev + 1) % amenities.length);
     }, 4500);
     return () => clearInterval(interval);
   }, [amenities.length]);
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -295,7 +283,6 @@ export default function NewProject() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   // Sliding indicator for sub-nav
   useEffect(() => {
     const updateIndicator = () => {
@@ -308,14 +295,12 @@ export default function NewProject() {
       }
       const containerRect = container.getBoundingClientRect();
       const activeRect = activeLink.getBoundingClientRect();
-
       // Calculate position relative to container, adding scrollLeft to account for horizontal scrolling on mobile
       setIndicatorStyle({
         left: activeRect.left - containerRect.left + container.scrollLeft,
         width: activeRect.width,
         opacity: 1,
       });
-
       // Auto-scroll the active tab into view on mobile screens
       if (window.innerWidth < 900) {
         activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -324,13 +309,11 @@ export default function NewProject() {
     // Small delay to let DOM update
     const timer = setTimeout(updateIndicator, 50);
     window.addEventListener('resize', updateIndicator);
-
     // Also update on scroll of the sub-nav itself (for mobile horizontal scroll)
     const container = navContainerRef.current;
     if (container) {
       container.addEventListener('scroll', updateIndicator);
     }
-
     return () => {
       clearTimeout(timer);
       window.removeEventListener('resize', updateIndicator);
@@ -339,19 +322,16 @@ export default function NewProject() {
       }
     };
   }, [activeTab]);
-
   const [galleryAnim, setGalleryAnim] = useState({ exteriors: true, interiors: true, videos: true });
   const galleryTimer = useRef({ exteriors: null, interiors: null, videos: null });
-
   useEffect(() => {
     ['exteriors', 'interiors', 'videos'].forEach((section) => {
       if (!galleryImages[section]) return;
       const total = galleryImages[section].length;
       if (total <= 1) return;
       const idx = galleryIndices[section];
-      
-      clearTimeout(galleryTimer.current[section]);
 
+      clearTimeout(galleryTimer.current[section]);
       if (idx === total + 1) {
         galleryTimer.current[section] = setTimeout(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: false }));
@@ -365,7 +345,6 @@ export default function NewProject() {
       }
     });
   }, [galleryIndices]);
-
   useEffect(() => {
     ['exteriors', 'interiors', 'videos'].forEach((section) => {
       if (!galleryAnim[section]) {
@@ -376,7 +355,6 @@ export default function NewProject() {
       }
     });
   }, [galleryAnim]);
-
   const prevGallerySlide = (section) => {
     if (galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
@@ -385,7 +363,6 @@ export default function NewProject() {
       [section]: prev[section] - 1
     }));
   };
-
   const nextGallerySlide = (section) => {
     if (galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
@@ -394,22 +371,22 @@ export default function NewProject() {
       [section]: prev[section] + 1
     }));
   };
-
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   // Scroll Spy removed - now using Tabbed Interface (block layout)
   const handleScrollToSection = (sectionId) => {
     setActiveTab(sectionId);
     // Allow React to render the new section, then scroll to it
     setTimeout(() => {
       const container = document.querySelector('.project-sections-container');
-      if (container) {
+      const subNav = document.querySelector('.project-sub-nav');
+      if (container && subNav) {
         const rect = container.getBoundingClientRect();
-        // Calculate absolute position minus header offsets (~140px for main nav + sub nav)
-        const scrollTop = window.pageYOffset + rect.top - 140;
+        const subNavHeight = subNav.getBoundingClientRect().height;
+        // Scroll exactly to top of the sections container minus the sticky sub-navigation height
+        const scrollTop = window.pageYOffset + rect.top - subNavHeight;
         window.scrollTo({
           top: scrollTop,
           behavior: 'smooth'
@@ -417,14 +394,11 @@ export default function NewProject() {
       }
     }, 10);
   };
-
   const handleSubSectionNavigate = (subSectionId) => {
     setActiveSubSection(subSectionId);
     handleScrollToSection('why-project');
   };
-
   // amenities array moved to top of component
-
   const landmarks = [
     { title: "Medavakkam Junction", dist: "3 mins" },
     { title: "OMR IT Corridor (Sholinganallur)", dist: "10 mins" },
@@ -433,7 +407,6 @@ export default function NewProject() {
     { title: "Chennai International Airport", dist: "25 mins" },
     { title: "Elcot SEZ OMR", dist: "12 mins" }
   ];
-
   const galleryImages = {
     videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
     interiors: Array.from({ length: 33 }, (_, i) => ({
@@ -448,7 +421,6 @@ export default function NewProject() {
       { src: '/images/home/project-image-2.png', title: 'Evening FaÃ§ade View' }
     ]
   };
-
   useEffect(() => {
     const interval = setInterval(() => {
       setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
@@ -459,27 +431,23 @@ export default function NewProject() {
     }, 5000);
     return () => clearInterval(interval);
   }, [galleryTab, galleryImages]);
-
   const handleOpenLightbox = (section, idx) => {
     setLightboxIdx(idx);
     setLightboxSection(section);
     setLightboxImage(galleryImages[section][idx]);
   };
-
   const handleLightboxPrev = () => {
     const list = galleryImages[lightboxSection];
     const prevIdx = (lightboxIdx - 1 + list.length) % list.length;
     setLightboxIdx(prevIdx);
     setLightboxImage(list[prevIdx]);
   };
-
   const handleLightboxNext = () => {
     const list = galleryImages[lightboxSection];
     const nextIdx = (lightboxIdx + 1) % list.length;
     setLightboxIdx(nextIdx);
     setLightboxImage(list[nextIdx]);
   };
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setFormSubmitted(true);
@@ -489,55 +457,49 @@ export default function NewProject() {
       setQuoteForm({ name: '', email: '', phone: '', note: '' });
     }, 2500);
   };
-
   return (
     <div className={`project-detail-page ${hideMainHeader ? 'hide-main-header' : ''}`}>
       <main>
         <div className="hero-nav-wrapper" style={{ display: 'grid', position: 'relative', zIndex: 100 }}>
           <Navbar projectTitle="Crystal Moonlight Villa" />
-
           {/* Project Hero Section */}
           <section className="project-hero-section">
-          <div className="project-split-mask" aria-hidden="true">
-            <div className="split-panel panel-1"></div>
-            <div className="split-panel panel-2"></div>
-            <div className="split-panel panel-3"></div>
-            <div className="split-panel panel-4"></div>
-          </div>
-
-          <div className="project-hero-background">
-            <img
-              src="/images/home/hero.png"
-              alt="Crystal Moonlight Villa"
-              className="project-hero-bg-image"
-            />
-            <div className="project-hero-light-leak" aria-hidden="true"></div>
-            <div className="project-hero-overlay"></div>
-          </div>
-
-          <div className="project-hero-content">
-            <div className="project-hero-text-col">
-              {/* <span className="project-tag-reveal">PREMIUM GATED VILLAS</span> */}
-              <h1 className="project-hero-title">
-                Crystal Moonlight Villa
-              </h1>
-              <p className="project-hero-subtitle">MEDAVAKKAM, CHENNAI</p>
+            <div className="project-split-mask" aria-hidden="true">
+              <div className="split-panel panel-1"></div>
+              <div className="split-panel panel-2"></div>
+              <div className="split-panel panel-3"></div>
+              <div className="split-panel panel-4"></div>
             </div>
-
-            <div className="project-hero-btn-col">
-              <Button
-                theme="dark"
-                className="hero-cta-btn"
-                onClick={() => setIsQuoteOpen(true)}
-                icon="â†“"
-              >
-                Download Brochure
-              </Button>
+            <div className="project-hero-background">
+              <img
+                src="/images/home/hero.png"
+                alt="Crystal Moonlight Villa"
+                className="project-hero-bg-image"
+              />
+              <div className="project-hero-light-leak" aria-hidden="true"></div>
+              <div className="project-hero-overlay"></div>
             </div>
-          </div>
-        </section>
+            <div className="project-hero-content">
+              <div className="project-hero-text-col">
+                {/* <span className="project-tag-reveal">PREMIUM GATED VILLAS</span> */}
+                <h1 className="project-hero-title">
+                  Crystal Moonlight Villa
+                </h1>
+                <p className="project-hero-subtitle">MEDAVAKKAM, CHENNAI</p>
+              </div>
+              <div className="project-hero-btn-col">
+                <Button
+                  theme="dark"
+                  className="hero-cta-btn"
+                  onClick={() => setIsQuoteOpen(true)}
+                  icon="â†“"
+                >
+                  Download Brochure
+                </Button>
+              </div>
+            </div>
+          </section>
         </div>
-
         {/* Project Sticky Sub-navigation with Tab Dropdowns */}
         <nav className="project-sub-nav">
           <div className="container sub-nav-container">
@@ -549,58 +511,51 @@ export default function NewProject() {
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,
-                  opacity: indicatorStyle.opacity }}
+                  opacity: indicatorStyle.opacity
+                }}
               />
-
               <button
                 onClick={() => handleScrollToSection('overview')}
                 className={`sub-nav-link ${activeTab === 'overview' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Overview</span>
               </button>
-
               <button
                 onClick={() => handleScrollToSection('why-project')}
                 className={`sub-nav-link ${activeTab === 'why-project' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Why Project</span>
               </button>
-
-
-
               <button
                 onClick={() => handleScrollToSection('gallery')}
                 className={`sub-nav-link ${activeTab === 'gallery' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Gallery</span>
               </button>
-
               <button
                 onClick={() => handleScrollToSection('specifications')}
                 className={`sub-nav-link ${activeTab === 'specifications' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Specifications</span>
               </button>
-
               <button
                 onClick={() => handleScrollToSection('amenities')}
                 className={`sub-nav-link ${activeTab === 'amenities' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Amenities</span>
               </button>
-
               <button
                 onClick={() => handleScrollToSection('floorplans')}
                 className={`sub-nav-link ${activeTab === 'floorplans' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Floor Plans</span>
               </button>
-              {/* <button
+              <button
                 onClick={() => handleScrollToSection('pricing')}
                 className={`sub-nav-link ${activeTab === 'pricing' ? 'active' : ''}`}
               >
-                <span className="sub-nav-text">Size & Price</span>
-              </button> */}
+                <span className="sub-nav-text">Price</span>
+              </button>
               <button
                 onClick={() => handleScrollToSection('status')}
                 className={`sub-nav-link ${activeTab === 'status' ? 'active' : ''}`}
@@ -608,7 +563,6 @@ export default function NewProject() {
                 <span className="sub-nav-text">Status</span>
               </button>
             </div>
-
             {/* Fixed Right Directory Trigger for Mobile */}
             <div className="sub-nav-dropdown-wrapper sub-nav-mobile-trigger-wrapper show-only-on-mobile">
               <button
@@ -632,7 +586,6 @@ export default function NewProject() {
                 >
                   Why Project
                 </button>
-
                 <button
                   className={`dropdown-item ${activeTab === 'gallery' ? 'active' : ''}`}
                   onClick={() => handleScrollToSection('gallery')}
@@ -657,12 +610,12 @@ export default function NewProject() {
                 >
                   Floor Plans
                 </button>
-                {/* <button
+                <button
                   className={`dropdown-item ${activeTab === 'pricing' ? 'active' : ''}`}
                   onClick={() => handleScrollToSection('pricing')}
                 >
-                  Size & Price
-                </button> */}
+                  Price
+                </button>
                 <button
                   className={`dropdown-item ${activeTab === 'status' ? 'active' : ''}`}
                   onClick={() => handleScrollToSection('status')}
@@ -673,152 +626,51 @@ export default function NewProject() {
             </div>
           </div>
         </nav>
-
         {/* Project Sections Container */}
         <div className="project-sections-container">
-
           {/* Overview Section - Minimalist Editorial Design */}
           {activeTab === 'overview' && (
             <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', background: 'url("/images/bg/TL-1.png") left top / contain no-repeat', /*minHeight: 'calc(100vh - 140px)',*/ display: 'flex', alignItems: 'center' }}>
               <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-
                 {/* Top Left Label */}
                 <div style={{ display: 'flex', marginBottom: '0px' }}>
                   <span style={{ textTransform: 'uppercase', color: 'var(--color-text-dark)', fontWeight: '400' }}>
                     ABOUT PROJECT
                   </span>
                 </div>
-
                 {/* Main Content Grid */}
                 <div className="overview-editorial-grid">
-
                   {/* Left Column: Watermark Text */}
                   <div style={{ position: 'relative' }}>
                     <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '160px', lineHeight: '1', background: 'linear-gradient(180deg, #D6C8B8 0%, #D6C8B8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0, letterSpacing: '-0.02em', fontWeight: '400', transform: 'translateY(24px)' }}>
                       CML
                     </h2>
                   </div>
-
                   {/* Right Column: Editorial Paragraphs */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', paddingBottom: '20px' }}>
                     <p style={{ color: 'var(--color-text-dark)', margin: 0, fontWeight: '400' }}>
                       Crystal Moonlight by Aadhithya Mohan Properties represents the pinnacle of premium residential developments in Medavakkam, Chennai. The brand is built around the idea that homes are not just structures, but powerful statements that define presence.
                     </p>
-
                     <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
                       The goal of the project was to design an emotionally engaging community experience that reflects this philosophy. The key challenge was to balance expressive visual design with usability — creating a thriving living environment while maintaining a deep connection to nature and serenity.
                     </p>
-
                     <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
                       Through the use of modern luxury architecture, meticulous material selection, and statement-driven craftsmanship, our aim is to highlight each villa's unique footprint and support a lifestyle upgrade for generations to come.
                     </p>
                   </div>
-
                 </div>
               </div>
             </section>
           )}
-
           {/* Project Details Section - Inspired by Luxury Data Grid */}
           {activeTab === 'overview' && (
-            <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0 0 80px 0', background: 'var(--color-bg-cream)' }}>
-
-              <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-                <div style={{ height: '1px', background: 'rgba(0, 0, 0, 0.08)', width: '100%', marginBottom: '80px' }}></div>
-                <div style={{ width: '100%' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '30px', maxWidth: '1200px', margin: '0 auto' }}>
-
-                    {/* Left Stats Group */}
-                    <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-                      {/* Stat 1 */}
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                        <ScrollReveal animation="slideUp" delay={0.1} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                          <span className="info-grid-tag">
-                            PROPERTY TYPE
-                          </span>
-                          <span className="info-grid-val">
-                            PREMIUM
-                          </span>
-                          <span className="info-grid-desc">
-                            VILLAS
-                          </span>
-                        </ScrollReveal>
-                      </div>
-
-                      {/* Stat 2 */}
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                        <ScrollReveal animation="slideUp" delay={0.2} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                          <span className="info-grid-tag">
-                            CONFIGURATIONS
-                          </span>
-                          <span className="info-grid-val">
-                            3 & 4
-                          </span>
-                          <span className="info-grid-desc">
-                            BHK
-                          </span>
-                        </ScrollReveal>
-                      </div>
-                    </div>
-
-                    {/* Center Logo Group */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto', padding: '0 40px', borderLeft: '1px solid rgba(0, 0, 0, 0.05)', borderRight: '1px solid rgba(0, 0, 0, 0.05)', minWidth: '250px' }}>
-                      <ScrollReveal animation="scaleIn" delay={0.3} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <span className="info-grid-tag" style={{ marginBottom: '8px' }}>PROJECT</span>
-                            <span className="info-grid-val-large">CRYSTAL MOONLIGHT</span>
-                          </div>
-                        </div>
-                        <span className="info-grid-desc">
-                          MEDAVAKKAM, CHENNAI
-                        </span>
-                      </ScrollReveal>
-                    </div>
-
-                    {/* Right Stats Group */}
-                    <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-                      {/* Stat 3 */}
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                        <ScrollReveal animation="slideUp" delay={0.4} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                          <span className="info-grid-tag">
-                            COMMUNITY
-                          </span>
-                          <span className="info-grid-val">
-                            47
-                          </span>
-                          <span className="info-grid-desc">
-                            VILLAS
-                          </span>
-                        </ScrollReveal>
-                      </div>
-
-                      {/* Stat 4 */}
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                        <ScrollReveal animation="slideUp" delay={0.5} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                          <span className="info-grid-tag">
-                            STATUS
-                          </span>
-                          <span className="info-grid-val">
-                            ONGOING
-                          </span>
-                          <span className="info-grid-desc">
-                            PROJECT
-                          </span>
-                        </ScrollReveal>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
+            <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0', background: 'var(--color-white)' }}>
+              <ProjectDetailsGrid />
             </section>
           )}
-
           {/* Master Plan Image Section */}
           {activeTab === 'overview' && (
             <section className="project-section-wrapper scroll-section" style={{ padding: '0', background: 'var(--color-bg-cream)' }}>
-
               {/* Full Width Image */}
               <ScrollReveal animation="fadeUp" delay={0.1}>
                 <div style={{ width: '100%' }}>
@@ -827,27 +679,21 @@ export default function NewProject() {
               </ScrollReveal>
             </section>
           )}
-
-
           {/* Project Overview Section */}
           {activeTab === 'why-project' && (
             <section id="why-project" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0 0', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / contain no-repeat' }}>
-
               <div className="container">
-
-                {/* â”€â”€ Left-Aligned Header â”€â”€ */}
-                <ScrollReveal className="section-header" animation="fadeUp" style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  {/* <span className="section-tag">Why CML</span> */}
+                {/* ── Left-Aligned Header ── */}
+                <ScrollReveal className="section-header" animation="fadeUp" style={{ marginBottom: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <h2 className="section-title">
-                    Bespoke living beyond time
+                    Crystal Moonlight Villa
                   </h2>
-                  {/* <p className="section-subtitle" style={{ marginTop: '8px' }}>
-                  Explore the highlights and location advantage of Crystal Moonlight Villa.
-                </p> */}
+                  <p className="section-subtitle" style={{ fontSize: '13px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
+                    Bespoke living <span>beyond time</span>
+                  </p>
                 </ScrollReveal>
-
-                {/* â”€â”€ Left-Aligned Tab Pills â”€â”€ */}
-                {/* â”€â”€ Highlights Block Two-Column Grid â”€â”€ */}
+                {/* ── Left-Aligned Tab Pills ── */}
+                {/* ── Highlights Block Two-Column Grid ── */}
                 <div className="overview-main-grid-redesign" style={{ marginBottom: '100px' }}>
                   {/* Left Side Content (Visuals) */}
                   <div className="overview-left-visual">
@@ -857,24 +703,17 @@ export default function NewProject() {
                       </div>
                     </ScrollReveal>
                   </div>
-
                   {/* Right Side Content (Text & CTAs) */}
                   <div className="overview-right-text">
                     <ScrollReveal animation="fadeLeft">
                       <div className="pillars-container">
-                        <span className="highlights-badge-tag" style={{ color: 'var(--color-text-muted-light)', fontSize: '12px', fontWeight: '300', textTransform: 'uppercase', marginBottom: '10px', display: 'block' }}>
-                          Villa | Ongoing
-                        </span>
-                        <h3 className="overview-text-title" style={{ marginBottom: '24px' }}>
-                          Crystal Moonlight Villa
-                        </h3>
-                        
+
                         <div className="pillars-accordion">
                           {pillars.map((pillar, index) => {
                             const isOpen = index === activePillar;
                             return (
-                              <div 
-                                key={pillar.index} 
+                              <div
+                                key={pillar.index}
                                 className={`pillar-item ${isOpen ? 'active' : ''}`}
                                 onClick={() => setActivePillar(index)}
                               >
@@ -883,7 +722,7 @@ export default function NewProject() {
                                   <h4 className="pillar-title">{pillar.title}</h4>
                                   <span className="pillar-toggle-icon">{isOpen ? '−' : '+'}</span>
                                 </div>
-                                <div 
+                                <div
                                   className="pillar-body"
                                   style={{
                                     maxHeight: isOpen ? '220px' : '0px',
@@ -904,52 +743,50 @@ export default function NewProject() {
                   </div>
                 </div>
               </div> {/* Close container */}
-
-              {/* â”€â”€ Neighbourhood Story Experience â”€â”€ */}
-              <NeighbourhoodStory onEnquire={() => setIsQuoteOpen(true)} />
-
+              {/* ── Neighbourhood Story Experience ── */}
+              <NeighbourhoodStory
+                onEnquire={() => setIsQuoteOpen(true)}
+                projectCoords={[12.915566, 80.183492]}
+                projectName="Crystal Moonlight Villa"
+              />
             </section>
           )}
-
-
-
           {/* Master Gallery Section */}
           {activeTab === 'gallery' && (
             <>
-            <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '60px', paddingBottom: '60px', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / cover no-repeat' }}>
-              <div className="container">
-                <ScrollReveal className="section-header" animation="fadeUp" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '32px' }}>
-                  <h2 className="section-title">
-                    A showcase of our exquisite design.
-                  </h2>
-                </ScrollReveal>
-                {/* Gallery Navigation Tabs */}
-                <div className="nested-tabs-container" style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center' }}>
-                  <div className="filter-tabs">
-                    {['exteriors', 'interiors', 'videos'].map(tab => (
-                      <button
-                        key={tab}
-                        className={`filter-tab-btn ${galleryTab === tab ? 'active' : ''}`}
-                        onClick={() => setGalleryTab(tab)}
-                      >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                      </button>
-                    ))}
+              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '60px', paddingBottom: '60px', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / cover no-repeat' }}>
+                <div className="container">
+                  <ScrollReveal className="section-header" animation="fadeUp" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                    <h2 className="section-title">
+                      Visual <span>Spotlight</span>
+                    </h2>
+                  </ScrollReveal>
+                  {/* Gallery Navigation Tabs */}
+                  <div className="nested-tabs-container" style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div className="filter-tabs">
+                      {['exteriors', 'interiors', 'videos'].map(tab => (
+                        <button
+                          key={tab}
+                          className={`filter-tab-btn ${galleryTab === tab ? 'active' : ''}`}
+                          onClick={() => setGalleryTab(tab)}
+                        >
+                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </div> {/* Close container here for full-bleed viewport */}
-
-                      {/* Spotlight Active-Card Gallery Carousel */}
-              <div className="gallery-spotlight-viewport">
-                  <div 
+                </div> {/* Close container here for full-bleed viewport */}
+                {/* Spotlight Active-Card Gallery Carousel */}
+                <div className="gallery-spotlight-viewport">
+                  <div
                     className="gallery-spotlight-track"
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 'var(--gallery-gap, 2vw)',
+                      gap: 'var(--gallery-gap, 8vw)',
                       width: 'max-content',
                       transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                      transform: `translateX(calc(var(--gallery-card-offset, 15vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 2vw))))`
+                      transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
                     }}
                   >
                     {(() => {
@@ -958,26 +795,24 @@ export default function NewProject() {
                       const extended = total > 1
                         ? [items[total - 1], ...items, items[0]]
                         : items;
-
                       return extended.map((img, idx) => {
                         const isActive = idx === galleryIndices[galleryTab];
                         const realIdx = total > 1
                           ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
                           : 0;
-
                         return (
                           <div
                             key={idx}
                             className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
                             style={{
                               flexShrink: 0,
-                              flexBasis: isActive ? 'var(--gallery-card-active-w, 70vw)' : 'var(--gallery-card-w, 55vw)',
-                              width: isActive ? 'var(--gallery-card-active-w, 70vw)' : 'var(--gallery-card-w, 55vw)',
+                              flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                              width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
                               transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
                               cursor: 'pointer',
                               overflow: 'hidden',
                               position: 'relative',
-                              aspectRatio: '16/9',
+                              aspectRatio: '16/10',
                               boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
                             }}
                             onClick={() => {
@@ -994,9 +829,9 @@ export default function NewProject() {
                               }
                             }}
                           >
-                            <img 
-                              src={img.src} 
-                              alt={img.title} 
+                            <img
+                              src={img.src}
+                              alt={img.title}
                               style={{
                                 width: '100%',
                                 height: '100%',
@@ -1004,7 +839,7 @@ export default function NewProject() {
                                 display: 'block'
                               }}
                             />
-                            
+
                             {galleryTab === 'videos' && (
                               <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
                                 <div className="play-button-pulsing">
@@ -1012,7 +847,6 @@ export default function NewProject() {
                                 </div>
                               </div>
                             )}
-
                             <div className="gallery-deck-hover-overlay">
                               {galleryTab !== 'videos' && (
                                 <>
@@ -1026,18 +860,17 @@ export default function NewProject() {
                       });
                     })()}
                   </div>
-
                   {/* Navigation Arrows positioned on left/right previews */}
-                  <button 
-                    className="gallery-spotlight-arrow prev" 
-                    onClick={() => prevGallerySlide(galleryTab)} 
+                  <button
+                    className="gallery-spotlight-arrow prev"
+                    onClick={() => prevGallerySlide(galleryTab)}
                     aria-label="Previous image"
                   >
                     <ChevronLeft size={24} />
                   </button>
-                  <button 
-                    className="gallery-spotlight-arrow next" 
-                    onClick={() => nextGallerySlide(galleryTab)} 
+                  <button
+                    className="gallery-spotlight-arrow next"
+                    onClick={() => nextGallerySlide(galleryTab)}
                     aria-label="Next image"
                   >
                     <ChevronRight size={24} />
@@ -1046,7 +879,6 @@ export default function NewProject() {
               </section>
             </>
           )}
-
           {/* Specifications Section */}
           {activeTab === 'specifications' && (
             <ProjectSpecs
@@ -1056,7 +888,6 @@ export default function NewProject() {
               subtitle="PROJECT DETAILS"
             />
           )}
-
           {/* Premium Amenities Section */}
           {activeTab === 'amenities' && (
             <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0', backgroundColor: 'var(--color-bg-navy)', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center', background: 'url("/images/bg/TR-1.png") right top / contain no-repeat' }}>
@@ -1064,29 +895,25 @@ export default function NewProject() {
                 <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   {/* <span className="section-tag" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--color-bg-light)', border: '1px solid rgba(255,255,255,0.1)' }}>Amenities</span> */}
                   <h2 className="section-title" style={{ color: 'var(--color-text-dark)', marginBottom: '0px' }}>
-                    Luxury Community Amenities
+                    Luxury Community <span>Amenities</span>
                   </h2>
-                  <p className="section-subtitle" style={{ color: 'var(--color-text-muted-light)', marginBottom: '24px' }}>
-                    Designed for comfort, security, and an enriched community life
-                  </p>
                 </ScrollReveal>
-
                 <div className="amenities-split-layout" style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '32px', width: '100%', padding: '20px 0', alignItems: 'stretch' }}>
-                  
+
                   {/* Left Column: Directory */}
                   <div className="amenities-directory" style={{ width: isMobile ? '100%' : '50%', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', padding: '0 12px' }}>
                       <span style={{ textTransform: 'uppercase', color: 'var(--color-gold)' }}>Directory</span>
                       <span style={{ color: 'var(--color-text-muted-light)' }}>{amenities.length} Amenities</span>
                     </div>
-                    
-                    <div 
+
+                    <div
                       ref={amenitiesListRef}
                       className="amenities-grid-container"
-                      style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
-                        gap: '10px',
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                        gap: '5px',
                         width: '100%'
                       }}
                     >
@@ -1095,19 +922,19 @@ export default function NewProject() {
                           key={idx}
                           onClick={() => setAmenityIdx(idx)}
                           style={{
-                            display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 4px',
+                            display: 'flex', alignItems: 'center', gap: '12px', padding: '8px 4px',
                             background: 'transparent',
                             border: 'none',
-                            borderBottom: amenityIdx === idx ? '2px solid var(--color-primary, #1d3557)' : '1px solid rgba(0,0,0,0.06)',
+                            borderBottom: amenityIdx === idx ? '2px solid var(--color-highlight, #1d3557)' : '1px solid rgba(0,0,0,0.06)',
                             borderRadius: '0px', cursor: 'pointer', transition: 'all 0.3s ease',
-                            color:  '#000000' ,
+                            color: '#000000',
                             boxShadow: 'none',
                             textAlign: 'left', flexShrink: 0
                           }}
                         >
-                          <div style={{ 
-                            width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            background: amenityIdx === idx ? 'var(--color-bg-navy)' : 'rgba(0,0,0,0.04)',
+                          <div style={{
+                            width: '26px', height: '26px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '5px',
+                            background: amenityIdx === idx ? 'var(--color-highlight)' : 'rgba(0,0,0,0.04)',
                             color: amenityIdx === idx ? 'var(--color-white)' : 'var(--color-text-muted-light)', transition: 'all 0.3s ease',
                             flexShrink: 0
                           }}>
@@ -1118,12 +945,11 @@ export default function NewProject() {
                       ))}
                     </div>
                   </div>
-
                   {/* Right Column: Visualizer */}
                   <div className="amenities-visualizer" style={{ width: isMobile ? '100%' : '50%', minHeight: isMobile ? '400px' : 'auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 30px 60px rgba(0,0,0,0.1)' }}>
                     {amenities.map((item, idx) => (
-                      <div 
-                        key={idx} 
+                      <div
+                        key={idx}
                         style={{
                           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
                           opacity: amenityIdx === idx ? 1 : 0,
@@ -1133,11 +959,11 @@ export default function NewProject() {
                         }}
                       >
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-                        <div style={{ 
-                          position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '20px 24px' : '30px 40px', 
-                          background: 'linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, transparent 100%)', 
-                          backdropFilter: 'blur(16px) saturate(150%)', WebkitBackdropFilter: 'blur(16px) saturate(150%)', 
-                          borderTop: '1px solid rgba(255, 255, 255, 0.4)', zIndex: 2 
+                        <div style={{
+                          position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '20px 24px' : '30px 40px',
+                          background: 'linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, transparent 100%)',
+                          backdropFilter: 'blur(16px) saturate(150%)', WebkitBackdropFilter: 'blur(16px) saturate(150%)',
+                          borderTop: '1px solid rgba(255, 255, 255, 0.4)', zIndex: 2
                         }}>
                           <h3 style={{ color: '#000000', marginBottom: '12px', fontWeight: '400' }}>{item.title}</h3>
                           <p style={{ color: 'rgba(0,0,0,0.7)', margin: 0 }}>{item.desc}</p>
@@ -1145,22 +971,18 @@ export default function NewProject() {
                       </div>
                     ))}
                   </div>
-
                 </div>
               </div>
             </section>
           )}
-
           {/* Master Floor Plans Section */}
           {activeTab === 'floorplans' && (
             <section id="floorplans" className="project-floorplans-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center', padding: '40px 0', background: 'url("/images/bg/TR-1.png") right top / cover no-repeat' }}>
               <div className="container" style={{ width: '100%' }}>
                 <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   {/* <span className="section-tag">Floor Plans</span> */}
-                  <h2 className="section-title">Architectural Layouts</h2>
-                  <p className="section-subtitle" style={{ color: 'var(--color-text-dark)', marginBottom: '40px' }}>Bespoke layouts engineered for luxury space optimization</p>
+                  <h2 className="section-title">Architectural <span>Layouts</span></h2>
                 </ScrollReveal>
-
                 {/* Top-Level Category Switcher */}
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
                   <div className="filter-tabs">
@@ -1178,13 +1000,11 @@ export default function NewProject() {
                     })}
                   </div>
                 </div>
-
                 {layoutCategory === 'masterPlan' && (
                   <div className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img src={layoutsData.masterPlan.image} alt="Master Plan" style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }} />
                   </div>
                 )}
-
                 {layoutCategory === 'elevations' && (
                   <div className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ textAlign: 'center', padding: '60px', background: 'rgba(255,255,255,0.5)', borderRadius: '16px', width: '100%', border: '1px solid rgba(0,0,0,0.05)' }}>
@@ -1193,22 +1013,21 @@ export default function NewProject() {
                     </div>
                   </div>
                 )}
-
                 {layoutCategory === 'floorPlan' && (
                   <div className="floorplan-slide-viewport" style={{ position: 'relative', width: '100%', padding: '20px 40px' }}>
-                    
+
                     {/* Left/Right Arrow Buttons on the outer sides */}
                     {currentConfigPlans.length > 1 && (
                       <>
-                        <button 
-                          className="floorplan-slide-arrow prev" 
+                        <button
+                          className="floorplan-slide-arrow prev"
                           onClick={handlePrevPlan}
                           aria-label="Previous floor plan"
                         >
                           <ChevronLeft size={28} />
                         </button>
-                        <button 
-                          className="floorplan-slide-arrow next" 
+                        <button
+                          className="floorplan-slide-arrow next"
                           onClick={handleNextPlan}
                           aria-label="Next floor plan"
                         >
@@ -1216,10 +1035,9 @@ export default function NewProject() {
                         </button>
                       </>
                     )}
-
                     {/* Tabs row: 3 BHK and 4 BHK using standard filter-tabs style */}
-                    <div style={{ display: 'flex', marginBottom: '40px', borderBottom: '1px solid rgba(0,0,0,0.08)', paddingBottom: '12px', width: '100%' }}>
-                      <div className="filter-tabs">
+                    <div style={{ display: 'flex', marginBottom: '40px', borderBottom: '1px solid rgba(0,0,0,0.08)', width: '100%' }}>
+                      <div className="filter-tabs" style={{ display: 'flex', gap: '0' }}>
                         {['3bhk', '4bhk'].map(conf => {
                           const confLabel = conf === '3bhk' ? '3 BHK' : '4 BHK';
                           const isActive = floorPlanConfig === conf;
@@ -1231,24 +1049,49 @@ export default function NewProject() {
                                 setActivePlanId(layoutsData.floorPlan[conf][0].id);
                               }}
                               className={`filter-tab-btn ${isActive ? 'active' : ''}`}
+                              style={{
+                                padding: '0 24px',
+                                paddingLeft: conf === '3bhk' ? '0' : '24px',
+                                background: 'transparent',
+                                border: 'none',
+                                borderRight: conf === '3bhk' ? '1px solid rgba(0, 0, 0, 0.15)' : 'none',
+                                cursor: 'pointer',
+                                outline: 'none',
+                                boxShadow: 'none'
+                              }}
                             >
-                              {confLabel}
+                              <span
+                                style={{
+                                  position: 'relative',
+                                  display: 'inline-block',
+                                  paddingBottom: '12px',
+                                  borderBottom: isActive ? '2px solid var(--color-highlight)' : '2px solid transparent',
+                                  marginBottom: '-1px',
+                                  fontWeight: isActive ? '500' : '400',
+                                  color: isActive ? '#000000' : 'var(--color-text-muted-light)',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.12em',
+                                  fontFamily: 'var(--font-sans)',
+                                  fontSize: '14px',
+                                  transition: 'all 0.3s ease'
+                                }}
+                              >
+                                {confLabel}
+                              </span>
                             </button>
                           );
                         })}
                       </div>
                     </div>
-
                     {/* Main Slide Layout */}
                     <div className="floorplan-slide-content-grid" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '4fr 6fr', gap: '60px', alignItems: 'center' }}>
-                      
+
                       {/* Left Column: Details */}
                       <div className="floorplan-slide-details-col" style={{ textAlign: 'left' }}>
-                        <h3 className="floorplan-slide-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '32px', fontWeight: '400', color: 'var(--color-text-dark)', marginBottom: '32px' }}>
+                        <h3 className="floorplan-slide-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '32px', fontWeight: '400', color: 'var(--color-highlight)', marginBottom: '32px' }}>
                           {activePlanDetails.name}
                         </h3>
-
-                        <div className="floorplan-slide-specs-list" style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
+                        <div className="floorplan-slide-specs-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '40px' }}>
                           <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
                             <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Configuration</span>
                             <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.type}</span>
@@ -1266,9 +1109,8 @@ export default function NewProject() {
                             <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.facing}</span>
                           </div>
                         </div>
-
-                        <Button 
-                          theme="light" 
+                        <Button
+                          theme="light"
                           onClick={() => setIsQuoteOpen(true)}
                           icon="â†“"
                           style={{ minWidth: '220px', boxSizing: 'border-box' }}
@@ -1276,19 +1118,22 @@ export default function NewProject() {
                           Download Floorplan PDF
                         </Button>
                       </div>
-
                       {/* Right Column: Visualizer */}
                       <div className="floorplan-slide-visual-col" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {activePlanDetails.image ? (
                           <div className="floorplan-slide-img-wrap" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <img 
-                              src={activePlanDetails.image} 
-                              alt={activePlanDetails.name} 
-                              style={{ 
-                                maxWidth: '100%', 
-                                maxHeight: '550px', 
+                            <img
+                              src={activePlanDetails.image}
+                              alt={activePlanDetails.name}
+                              onClick={() => setFloorplanLightbox(activePlanDetails)}
+                              style={{
+                                maxWidth: '100%',
+                                maxHeight: '550px',
                                 objectFit: 'contain',
-                              }} 
+                                cursor: 'pointer',
+                                transition: 'transform 0.3s ease'
+                              }}
+                              className="floorplan-image-zoomable"
                             />
                           </div>
                         ) : (
@@ -1302,29 +1147,23 @@ export default function NewProject() {
                           </div>
                         )}
                       </div>
-
                     </div>
-
                   </div>
                 )}
               </div>
             </section>
           )}
-
           {/* Size & Pricing Section (Currently omitted from navigation but kept for structure) */}
           {activeTab === 'pricing' && (
-            <section id="pricing" className="project-pricing-section scroll-section" style={{ position: 'relative', overflow: 'hidden', minHeight: 'calc(100vh - 140px)' }}>
-              <img src="/images/flycatcher_corner_bottomright.png" alt="" className="corner-bird corner-bottom-right" aria-hidden="true" />
-              <div className="container">
-                <ScrollReveal className="section-header" animation="fadeUp">
-                  <span className="section-tag">Pricing</span>
-                  <h2 className="section-title">Size & Price Details</h2>
-                  <p className="section-subtitle" style={{ color: 'var(--color-text-dark)', marginBottom: '32px' }}>Bespoke configurations engineered for luxury space optimization</p>
-                </ScrollReveal>
-              </div>
-            </section>
+            <ProjectPricingSection
+              projectName="Crystal Moonlight"
+              prices={[
+                { label: '3 BHK Villa', val: 'INR 2.26 CR*' },
+                { label: '4 BHK Villa', val: 'INR 2.87 CR*' }
+              ]}
+              unitTypes={['3 BHK Villa', '4 BHK Villa']}
+            />
           )}
-
           {/* Project Status Timeline */}
           {activeTab === 'status' && (
             (() => {
@@ -1351,42 +1190,39 @@ export default function NewProject() {
                 }
               ];
               const currentStatus = projectStatusData[statusMonthIdx];
-              
+
               const handlePrevMonth = () => {
                 setStatusMonthIdx(prev => (prev === 0 ? projectStatusData.length - 1 : prev - 1));
               };
-              
+
               const handleNextMonth = () => {
                 setStatusMonthIdx(prev => (prev === projectStatusData.length - 1 ? 0 : prev + 1));
               };
-
               return (
                 <section id="status" className="project-status-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TR-1.png") right top / cover no-repeat' }}>
                   <div className="container">
                     <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', alignItems: 'center', marginBottom: '50px' }}>
-                      <h2 className="section-title">Project Status</h2>
-                      <p className="section-subtitle" style={{ color: 'var(--color-text-dark)', margin: '0 auto', textAlign: 'center' }}>Live construction tracking and milestone updates</p>
-                    </ScrollReveal>
+                      <h2 className="section-title">Project <span>Status</span></h2>
 
+                    </ScrollReveal>
                     <div className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                       <div className="status-month-container" style={{ display: 'flex', gap: '40px', alignItems: 'center', position: 'relative', width: '100%' }}>
-                        
+
                         {/* Left Side Gap - Month/Year & Navigation */}
                         <div className="status-month-label" style={{ width: '100px', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
                           <button onClick={handlePrevMonth} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-bg-navy)', padding: '4px' }}>
                             <ChevronUp size={28} />
                           </button>
-                          
+
                           <div style={{ textAlign: 'center' }}>
                             <h3 style={{ color: 'var(--color-bg-navy)', fontWeight: '400', margin: '0 0 4px 0' }}>{currentStatus.month}</h3>
                             <span style={{ color: 'var(--color-text-dark)' }}>{currentStatus.year}</span>
                           </div>
-                          
+
                           <button onClick={handleNextMonth} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-bg-navy)', padding: '4px' }}>
                             <ChevronDown size={28} />
                           </button>
                         </div>
-
                         {/* Right Side - Images */}
                         <style>
                           {`
@@ -1416,19 +1252,15 @@ export default function NewProject() {
               );
             })()
           )}
-
         </div>
-
         {/* --- REFINED CONCEPT 3: Cinematic Cut --- */}
         <section className="concept-3-cinematic">
           <h2 className="c3-massive-text">CRYSTAL MOONLIGHT</h2>
-
           <div className="c3-split-layout">
             <div className="c3-image-pane">
               <img src="/images/project/why-cmv.png" alt="Crystal Moonlight Villas" />
               <div className="c3-overlay"></div>
             </div>
-
             <div className="c3-solid-pane">
               <div className="c3-action-area">
                 <span className="c3-tag">Move In Soon! Now</span>
@@ -1443,6 +1275,93 @@ export default function NewProject() {
         </section>
       </main>
 
+      {/* Floor Plan Lightbox Modal */}
+      {floorplanLightbox && (
+        <div className="lightbox-overlay" onClick={() => setFloorplanLightbox(null)} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '40px', boxSizing: 'border-box' }}>
+          <button className="lightbox-close-btn" onClick={() => setFloorplanLightbox(null)}>
+            <X size={24} />
+          </button>
+
+          {currentConfigPlans.length > 1 && (
+            <>
+              <button
+                className="lightbox-arrow-btn prev"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const currIdx = currentConfigPlans.findIndex(p => p.id === floorplanLightbox.id);
+                  const prevIdx = (currIdx - 1 + currentConfigPlans.length) % currentConfigPlans.length;
+                  const prevPlan = currentConfigPlans[prevIdx];
+                  setActivePlanId(prevPlan.id);
+                  setFloorplanLightbox(prevPlan);
+                }}
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                className="lightbox-arrow-btn next"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const currIdx = currentConfigPlans.findIndex(p => p.id === floorplanLightbox.id);
+                  const nextIdx = (currIdx + 1) % currentConfigPlans.length;
+                  const nextPlan = currentConfigPlans[nextIdx];
+                  setActivePlanId(nextPlan.id);
+                  setFloorplanLightbox(nextPlan);
+                }}
+              >
+                <ChevronRight size={24} />
+              </button>
+            </>
+          )}
+
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+            <img
+              src={floorplanLightbox.image}
+              alt={floorplanLightbox.name}
+              style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain', borderRadius: '8px' }}
+            />
+          </div>
+
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: '100%',
+              maxWidth: '900px',
+              margin: '20px auto',
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              borderRadius: '16px',
+              padding: '14px 20px',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+              color: '#ffffff',
+              boxSizing: 'border-box'
+            }}
+          >
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: '400', color: '#b48564', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 16px 0' }}>
+              {floorplanLightbox.name}
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+              <div>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Configuration</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.type}</span>
+              </div>
+              <div>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Built-up Area</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.builtUp}</span>
+              </div>
+              <div>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Plot Area</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.plot}</span>
+              </div>
+              <div>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Direction</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.facing}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Lightbox Modal */}
       {lightboxImage && (
         <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
@@ -1461,7 +1380,6 @@ export default function NewProject() {
           </button>
         </div>
       )}
-
       {/* Video Modal */}
       {isVideoOpen && (
         <div className="lightbox-overlay" onClick={() => setIsVideoOpen(false)}>
@@ -1480,7 +1398,6 @@ export default function NewProject() {
           </div>
         </div>
       )}
-
       {/* Quote / Schedule Booking Modal */}
       {isQuoteOpen && (
         <div className="modal-overlay" onClick={() => setIsQuoteOpen(false)}>
@@ -1490,7 +1407,6 @@ export default function NewProject() {
             </button>
             <h3 className="modal-heading">SCHEDULE A SITE VISIT</h3>
             <p className="modal-subheading">Experience premium luxury in person. Fill out the fields below.</p>
-
             {formSubmitted ? (
               <div className="form-success-message">
                 <CheckCircle2 size={44} className="success-icon-gold" />
@@ -1545,21 +1461,17 @@ export default function NewProject() {
           </div>
         </div>
       )}
-
       <Footer />
-
       <style>{`
         .project-detail-page {
           background-color: var(--color-white);
           min-height: 100vh;
         }
-
         .project-detail-page.hide-main-header .sobha-navbar {
           transform: translateY(-100%);
           opacity: 0;
           pointer-events: none;
         }
-
         .project-detail-page .sobha-navbar {
           grid-column: 1;
           grid-row: 1;
@@ -1568,16 +1480,13 @@ export default function NewProject() {
           top: 0;
           transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease !important;
         }
-
         .hero-nav-wrapper > .project-hero-section {
           grid-column: 1;
           grid-row: 1;
         }
-
         section[id], div[id] {
           scroll-margin-top: 50px; /* offset for sticky subnav only */
         }
-
         .project-sub-nav {
           background: rgba(255, 255, 255, 0.75);
           backdrop-filter: blur(30px) saturate(180%);
@@ -1589,7 +1498,6 @@ export default function NewProject() {
           padding: 0;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
         }
-
         .sub-nav-container {
           display: flex;
           justify-content: space-between;
@@ -1599,7 +1507,6 @@ export default function NewProject() {
           padding: 0 24px;
           position: relative;
         }
-
         .sub-nav-scroll-wrapper {
           display: flex;
           justify-content: center;
@@ -1608,7 +1515,6 @@ export default function NewProject() {
           flex: 1;
           position: relative;
         }
-
         /* â”€â”€ REFINED CONCEPT 3 STYLES â”€â”€ */
         .concept-3-cinematic {
           position: relative;
@@ -1620,25 +1526,21 @@ export default function NewProject() {
           align-items: stretch;
           border-top: 1px solid rgba(255,255,255,0.05);
         }
-
         .c3-massive-text {
           position: absolute;
           bottom: 2%;
           left: 50%;
           transform: translateX(-50%);
-
           font-size: 9vw;
           white-space: nowrap;
           color: transparent;
           -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
           pointer-events: none;
           z-index: 3;
-
           width: 100%;
           text-align: center;
           line-height: 1;
         }
-
         .c3-split-layout {
           display: flex;
           flex: 1;
@@ -1646,26 +1548,22 @@ export default function NewProject() {
           position: relative;
           z-index: 2;
         }
-
         .c3-image-pane {
           width: 60%;
           position: relative;
           display: flex;
         }
-
         .c3-image-pane img {
           width: 100%;
           flex: 1;
           object-fit: cover;
           filter: grayscale(10%) contrast(110%);
         }
-
         .c3-overlay {
           position: absolute;
           inset: 0;
           background: linear-gradient(to right, rgba(29,53,87,0), var(--color-bg-navy));
         }
-
         .c3-solid-pane {
           width: 40%;
           background: var(--color-bg-navy);
@@ -1676,43 +1574,33 @@ export default function NewProject() {
           padding: 80px 5%;
           position: relative;
         }
-
         .c3-action-area {
           max-width: 550px;
           position: relative;
           z-index: 4;
         }
-
         .c3-tag {
-
-
           font-size: 12px;
-
           color: var(--color-bg-cream);
           text-transform: uppercase;
           margin-bottom: 24px;
           display: block;
           font-weight: 400;
         }
-
         .c3-action-area h3 {
           color: var(--color-white);
           line-height: 1.2;
           margin-bottom: 24px;
         }
-
         .c3-desc {
-
           font-size: 16px;
           color: rgba(255,255,255,0.7);
           line-height: 1.6;
           margin-bottom: 40px;
         }
-
         .show-only-on-mobile {
           display: none !important;
         }
-
         /* â”€â”€ INFO GRID STYLES â”€â”€ */
         .info-grid-tag {
           font-family: var(--font-sans);
@@ -1724,7 +1612,6 @@ export default function NewProject() {
           margin-bottom: 8px;
           display: block;
         }
-
         .info-grid-val {
           font-family: var(--font-heading);
           font-size: 28px;
@@ -1736,19 +1623,17 @@ export default function NewProject() {
           display: block;
           letter-spacing: 0.02em;
         }
-
         .info-grid-val-large {
           font-family: var(--font-heading);
           font-size: 36px;
           font-weight: 200;
-          color: var(--color-text-dark);
+          color: #b48564;
           text-transform: uppercase;
           line-height: 1.1;
           margin-bottom: 6px;
           display: block;
           letter-spacing: 0.04em;
         }
-
         .info-grid-desc {
           font-family: var(--font-sans);
           font-size: 10px;
@@ -1758,7 +1643,6 @@ export default function NewProject() {
           margin: 0;
           font-weight: 400;
         }
-
         /* â”€â”€ SLIDING GOLD INDICATOR â”€â”€ */
         .sub-nav-indicator {
           position: absolute;
@@ -1774,13 +1658,10 @@ export default function NewProject() {
           pointer-events: none;
           z-index: 2;
         }
-
         .sub-nav-link {
-
           font-size: 11.5px;
           font-weight: 400;
           color: var(--color-text-dark);
-
           text-transform: uppercase;
           padding: 20px 24px 18px;
           display: inline-flex;
@@ -1793,24 +1674,20 @@ export default function NewProject() {
           transition: color 0.3s ease, background 0.3s ease;
           white-space: nowrap;
         }
-
         .sub-nav-link:hover {
           color: var(--color-text-muted);
           background: rgba(0, 0, 0, 0.03);
         }
-
         .sub-nav-link.active {
           color: var(--color-primary);
           font-weight: 400;
           font-size: 11.5px;
         }
-
         /* â”€â”€ SUBNAV DROPDOWNS â”€â”€ */
         .sub-nav-dropdown-wrapper {
           position: relative;
           display: inline-flex;
         }
-
         .sub-nav-chevron {
           margin-left: 2px;
           display: inline-block;
@@ -1818,17 +1695,14 @@ export default function NewProject() {
           opacity: 0.4;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
         }
-
         .sub-nav-dropdown-wrapper:hover .sub-nav-chevron {
           transform: rotate(180deg);
           opacity: 0.8;
         }
-
         .sub-nav-dropdown-wrapper:hover .more-trigger-icon {
           transform: rotate(90deg) scale(1.1);
           color: var(--color-primary);
         }
-
         .sub-nav-dropdown-menu {
           position: absolute;
           top: calc(100% + 4px);
@@ -1847,21 +1721,17 @@ export default function NewProject() {
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           z-index: 99;
         }
-
         .sub-nav-dropdown-wrapper:hover .sub-nav-dropdown-menu {
           opacity: 1;
           visibility: visible;
           transform: translateX(-50%) translateY(0);
         }
-
         .dropdown-item {
           display: block;
           padding: 10px 16px;
-
           font-size: 12px;
           font-weight: 400;
           color: var(--color-text-muted);
-
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           text-align: left;
           cursor: pointer;
@@ -1870,27 +1740,22 @@ export default function NewProject() {
           border-radius: 8px;
           width: 100%;
         }
-
         .dropdown-item:hover {
           color: var(--color-primary);
           background: rgba(0, 0, 0, 0.06);
           padding-left: 20px;
         }
-
         .dropdown-item.active {
           color: var(--color-primary);
           font-weight: 400;
           background: rgba(0, 0, 0, 0.08);
         }
-
         /* â”€â”€ Nested Tabs (Overview Switcher) â”€â”€ */
         .nested-tabs-container {
           display: flex;
           justify-content: center;
           margin-bottom: 16px; /* Reduced to eliminate negative space */
-          margin-top: 10px;
         }
-
         .nested-tabs-wrapper {
           display: flex;
           background: rgba(0, 0, 0, 0.05);
@@ -1899,38 +1764,31 @@ export default function NewProject() {
           border-radius: 100px;
           gap: 6px;
         }
-
         .nested-tab-btn {
           background: transparent;
           border: none;
           padding: 8px 24px;
-
           font-size: 13.5px;
           font-weight: 400;
           color: var(--color-text-muted);
           border-radius: 100px;
           cursor: pointer;
-
           transition: all 0.3s ease;
         }
-
         .nested-tab-btn:hover {
           color: var(--color-primary);
           background: rgba(0, 0, 0, 0.04);
         }
-
         .nested-tab-btn.active {
           background: var(--color-primary);
           color: var(--color-white);
           font-weight: 400;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
-
         /* â”€â”€ Tab Pane Animations â”€â”€ */
         .fade-in-panel {
           animation: paneFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         @keyframes paneFadeIn {
           from {
             opacity: 0;
@@ -1941,7 +1799,6 @@ export default function NewProject() {
             transform: translateY(0);
           }
         }
-
         .project-hero-section {
           position: relative;
           width: 100%;
@@ -1955,7 +1812,6 @@ export default function NewProject() {
           background-color: var(--color-bg-navy);
           padding-bottom: 80px;
         }
-
         /* â”€â”€ 4-Split Reveal Mask â”€â”€ */
         .project-split-mask {
           position: absolute;
@@ -1976,11 +1832,9 @@ export default function NewProject() {
         .panel-2 { transform-origin: bottom; animation-delay: 0.22s; }
         .panel-3 { transform-origin: top; animation-delay: 0.34s; }
         .panel-4 { transform-origin: bottom; animation-delay: 0.46s; }
-
         @keyframes slideAwayProject {
           to { transform: scaleY(0); }
         }
-
         /* â”€â”€ Background Image â”€â”€ */
         .project-hero-background {
           position: absolute;
@@ -1990,7 +1844,6 @@ export default function NewProject() {
           height: 100%;
           z-index: 1;
         }
-
         .project-hero-bg-image {
           width: 100%;
           height: 100%;
@@ -1998,11 +1851,9 @@ export default function NewProject() {
           object-position: center center;
           transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .project-hero-section:hover .project-hero-bg-image {
           filter: grayscale(0%);
         }
-
         .project-hero-overlay {
           position: absolute;
           top: 0;
@@ -2017,7 +1868,6 @@ export default function NewProject() {
           // );
           z-index: 2;
         }
-
         /* â”€â”€ Light Leak â”€â”€ */
         .project-hero-light-leak {
           position: absolute;
@@ -2027,7 +1877,6 @@ export default function NewProject() {
           overflow: hidden;
           mix-blend-mode: screen;
         }
-
         .project-hero-light-leak::before {
           content: '';
           position: absolute;
@@ -2041,7 +1890,6 @@ export default function NewProject() {
           animation: floatGoldProject 25s infinite alternate ease-in-out;
           will-change: transform;
         }
-
         .project-hero-light-leak::after {
           content: '';
           position: absolute;
@@ -2055,17 +1903,14 @@ export default function NewProject() {
           animation: floatTealProject 30s infinite alternate ease-in-out;
           will-change: transform;
         }
-
         @keyframes floatGoldProject {
           0% { transform: translate3d(0, 0, 0) rotate(0deg); }
           100% { transform: translate3d(80px, 60px, 0) rotate(120deg); }
         }
-
         @keyframes floatTealProject {
           0% { transform: translate3d(0, 0, 0) rotate(0deg); }
           100% { transform: translate3d(-80px, -60px, 0) rotate(-120deg); }
         }
-
         /* â”€â”€ Overlaid Content â”€â”€ */
         .project-hero-content {
           position: relative;
@@ -2078,35 +1923,30 @@ export default function NewProject() {
           max-width: 1400px;
           padding: 0 40px;
         }
-
         .project-hero-text-col {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           text-align: left;
         }
-
         .project-hero-btn-col {
           display: flex;
           flex-direction: column;
           align-items: flex-end;
           margin-bottom: 24px;
         }
-
         .project-tag-reveal {
-
+        
           font-size: 10px;
           font-weight: 400;
           text-transform: uppercase;
           color: rgba(255, 255, 255, 0.7);
-
           margin-bottom: 24px;
           opacity: 0;
           animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           animation-delay: 0.8s;
           display: inline-block;
         }
-
         .hero-cta-btn {
           opacity: 0;
           animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -2116,7 +1956,6 @@ export default function NewProject() {
           border-color: rgba(255, 255, 255, 0.3) !important;
           backdrop-filter: blur(12px);
         }
-
         .hero-cta-btn .btn-circle-arrow {
           background: rgba(255, 255, 255, 0.15) !important;
           color: var(--color-white) !important;
@@ -2128,12 +1967,10 @@ export default function NewProject() {
           color: var(--color-bg-navy) !important;
           box-shadow: 0 8px 30px rgba(255, 255, 255, 0.15) !important;
         }
-
         .hero-cta-btn:hover .btn-circle-arrow {
           background: rgba(255,255,255,0.3) !important;
           color: var(--color-white) !important;
         }
-
         .project-hero-title {
           line-height: 1.1;
           font-size: 30px;
@@ -2144,20 +1981,15 @@ export default function NewProject() {
           animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           animation-delay: 1s;
         }
-
-
-
         .project-hero-subtitle {
           text-transform: uppercase;
           color: rgba(255, 255, 255, 0.85);
-
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
           opacity: 0;
           animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           animation-delay: 1.2s;
           display: inline-block;
         }
-
         @keyframes fadeUpProject {
           from {
             opacity: 0;
@@ -2168,67 +2000,52 @@ export default function NewProject() {
             transform: translateY(0);
           }
         }
-
         /* â”€â”€ SECTION WRAPPER & SUBSECTIONS â”€â”€ */
         .project-section-wrapper {
           background-color: var(--color-bg-light);
         }
-
         .section-header {
           margin-bottom: 0px;
           text-align: left;
         }
-
         .section-subtitle {
           color: var(--color-text-dark);
           line-height: 1.6;
           max-width: 680px;
-          margin-top: 8px;
           margin-bottom: 0;
           text-align: left;
         }
-
         #overview.project-section-wrapper {
           background-color: var(--color-bg-light);
           padding: 80px 0;
         }
-
         .overview-outer-container {
           max-width: var(--container-width);
           margin: 0 auto;
           position: relative;
           z-index: 2;
         }
-
-
-
         /* â”€â”€ Centered Header Styles â”€â”€ */
         .overview-centered-header {
           text-align: center;
           margin-bottom: 40px;
         }
-
         .overview-main-title {
           color: var(--color-text-dark);
-
           text-transform: uppercase;
           margin: 0 0 12px 0;
         }
-
         .overview-sub-title {
-
           font-size: 15px;
           color: var(--color-text-muted);
           margin: 0;
         }
-
         /* â”€â”€ Pill Tabs Styles â”€â”€ */
         .overview-nav-container {
           display: flex;
           justify-content: center;
           margin-bottom: 56px;
         }
-
         .overview-nav-pills {
           display: inline-flex;
           background: rgba(0, 0, 0, 0.04);
@@ -2237,11 +2054,9 @@ export default function NewProject() {
           padding: 6px;
           gap: 6px;
         }
-
         .overview-pill-btn {
           border: none;
           background: transparent;
-
           font-size: 14px;
           font-weight: 400;
           color: var(--color-text-muted);
@@ -2250,19 +2065,16 @@ export default function NewProject() {
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .overview-pill-btn:hover:not(.active) {
           color: var(--color-primary);
           background: rgba(0, 0, 0, 0.04);
         }
-
         .overview-pill-btn.active {
           background: var(--color-primary);
           color: var(--color-white);
           font-weight: 400;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
-
         /* â”€â”€ Grid Layout Styles â”€â”€ */
         .overview-main-grid-redesign {
           display: grid;
@@ -2271,11 +2083,9 @@ export default function NewProject() {
           align-items: center;
           min-height: 420px;
         }
-
         .overview-left-visual {
           width: 100%;
         }
-
         .overview-image-wrapper {
           border-radius: 12px;
           overflow: hidden;
@@ -2283,65 +2093,51 @@ export default function NewProject() {
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
           aspect-ratio: 16/10;
         }
-
         .overview-image-wrapper img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
         }
-
         .overview-right-text {
           width: 100%;
         }
-
         .overview-text-title {
           color: var(--color-primary);
           margin-bottom: 20px;
-
           line-height: 1.2;
         }
-
         .overview-text-desc {
-
           font-size: 15px;
           color: var(--color-text-muted);
           line-height: 1.8;
           margin-bottom: 32px;
         }
-
         /* Curated slide panels */
         .overview-slide-panel {
           animation: ov-panel-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
-
         @keyframes ov-panel-fade {
           from { opacity: 0; transform: translateY(8px); }
           to { opacity: 1; transform: translateY(0); }
         }
-
         /* Curated Amenities View */
         .overview-amenities-view {
           display: flex;
           flex-direction: column;
           width: 100%;
         }
-
         .ov-sub-heading {
-
           font-size: 21px;
           color: var(--color-primary);
           margin: 0 0 20px 0;
           font-weight: 400;
-
         }
-
         .ov-amenities-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 16px 20px;
         }
-
         .ov-amenity-card {
           display: flex;
           align-items: flex-start;
@@ -2350,7 +2146,6 @@ export default function NewProject() {
           background: rgba(255, 255, 255, 0.4);
           border: 1px solid rgba(0, 0, 0, 0.05);
         }
-
         .ov-amenity-icon {
           color: var(--color-primary);
           font-size: 18px;
@@ -2358,37 +2153,30 @@ export default function NewProject() {
           display: flex;
           align-items: center;
         }
-
         .ov-amenity-title {
-
           font-size: 13.5px;
           font-weight: 400;
           color: var(--color-primary);
           margin: 0 0 4px 0;
         }
-
         .ov-amenity-desc {
-
           font-size: 11.5px;
           color: var(--color-text-muted);
           margin: 0;
           line-height: 1.45;
         }
-
         /* Curated Location View */
         .overview-location-view {
           display: flex;
           flex-direction: column;
           width: 100%;
         }
-
         .ov-location-layout {
           display: grid;
           grid-template-columns: 1.2fr 1.05fr;
           gap: 24px;
           align-items: start;
         }
-
         .ov-map-visual {
           position: relative;
           width: 100%;
@@ -2397,27 +2185,21 @@ export default function NewProject() {
           background: rgba(255, 255, 255, 0.6);
           overflow: hidden;
         }
-
         .ov-landmarks-list {
           display: flex;
           flex-direction: column;
         }
-
         .ov-landmarks-title {
-
           font-size: 10px;
           color: var(--color-primary);
-
           margin-bottom: 14px;
           font-weight: 400;
         }
-
         .ov-landmarks-grid {
           display: flex;
           flex-direction: column;
           gap: 12px;
         }
-
         .ov-landmark-item {
           display: flex;
           align-items: flex-start;
@@ -2425,75 +2207,59 @@ export default function NewProject() {
           border-bottom: 1px solid rgba(0, 0, 0, 0.05);
           padding-bottom: 6px;
         }
-
         .ov-landmark-icon {
           color: var(--color-primary);
           flex-shrink: 0;
           margin-top: 1px;
         }
-
         .ov-landmark-name {
-
           font-size: 13px;
           font-weight: 400;
           color: var(--color-text-dark);
           display: block;
         }
-
         .ov-landmark-time {
-
           font-size: 11px;
           color: var(--color-text-muted);
         }
-
         @media (max-width: 960px) {
           .overview-main-grid-redesign {
             grid-template-columns: 1fr;
             gap: 36px;
           }
-
           .overview-text-title {
             margin-bottom: 14px;
           }
-
           .overview-text-desc {
             font-size: 14px;
             line-height: 1.7;
             margin-bottom: 24px;
           }
-
           .overview-nav-pills {
             flex-wrap: wrap;
             justify-content: center;
             border-radius: 24px;
             padding: 8px;
           }
-
           .overview-pill-btn {
             padding: 8px 16px;
             font-size: 13px;
           }
-
           .overview-main-title {
           }
-
           .ov-location-layout {
             grid-template-columns: 1fr;
             gap: 20px;
           }
         }
-
         .sub-section-title {
-
           font-size: 24px;
           font-weight: 400;
           color: var(--color-text-dark);
-
           text-align: center;
           margin-bottom: 40px;
           position: relative;
         }
-
         .sub-section-title::after {
           content: '';
           display: block;
@@ -2502,14 +2268,12 @@ export default function NewProject() {
           background: var(--color-primary);
           margin: 12px auto 0;
         }
-
         /* Amenities Grid Styling */
         .overview-amenities-block {
           padding: 16px 0 0 0; /* Reduced to eliminate negative space */
           background-color: transparent !important;
           border: none !important;
         }
-
         /* â”€â”€ Corner Branch Bird Decorators â”€â”€ */
         .corner-bird {
           position: absolute;
@@ -2520,51 +2284,43 @@ export default function NewProject() {
           height: auto;
           transition: opacity 0.3s ease;
         }
-
         .corner-top-right {
           top: -10px;
           right: -10px;
           animation: gentleFloat 8s ease-in-out infinite;
         }
-
         .corner-top-left {
           top: -10px;
           left: -10px;
           transform: rotate(180)
           animation: gentleFloat 9s ease-in-out infinite 1s;
         }
-
         .corner-bottom-right {
           bottom: 10px;
           right: -10px;
           animation: gentleFloat 7s ease-in-out infinite 0.5s;
         }
-
         @keyframes gentleFloat {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-5px); }
           100% { transform: translateY(0px); }
         }
-
         @media (max-width: 1200px) {
           .corner-bird {
             width: 180px;
             opacity: 0.25;
           }
         }
-
         @media (max-width: 768px) {
           .corner-bird {
             display: none;
           }
         }
-
         .amenities-grid-box {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 30px;
         }
-
         .amenity-card {
           background: var(--color-white);
           padding: 30px 24px;
@@ -2574,13 +2330,11 @@ export default function NewProject() {
           transition: all 0.35s var(--ease-luxury);
           text-align: center;
         }
-
         .amenity-card:hover {
           transform: translateY(-5px);
           border-color: var(--color-primary);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
-
         .amenity-icon-gold {
           color: var(--color-primary);
           margin-bottom: 18px;
@@ -2593,42 +2347,33 @@ export default function NewProject() {
           background: rgba(0, 0, 0, 0.08);
           transition: all 0.3s ease;
         }
-
         .amenity-card:hover .amenity-icon-gold {
           background: var(--color-primary);
           color: var(--color-white);
         }
-
         .amenity-title {
-
           font-size: 17px;
           font-weight: 400;
           color: var(--color-bg-navy);
           margin-bottom: 8px;
-
         }
-
         .amenity-desc {
-
           font-size: 13.5px;
           color: var(--color-text-muted);
           line-height: 1.5;
         }
-
         /* Location Layout Styling */
         .overview-location-block {
           padding: 16px 0 0 0; /* Reduced to eliminate negative space */
           background: transparent !important;
           border: none !important;
         }
-
         .location-grid-layout {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 60px;
           align-items: center;
         }
-
         .location-map-visual {
           height: 350px;
           background-color: var(--color-bg-navy);
@@ -2638,7 +2383,6 @@ export default function NewProject() {
           border: 1px solid rgba(0, 0, 0, 0.2);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-
         .map-grid-layer {
           position: absolute;
           inset: 0;
@@ -2648,7 +2392,6 @@ export default function NewProject() {
             linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
           background-size: 25px 25px;
         }
-
         .map-radar-pulse {
           position: absolute;
           top: 50%;
@@ -2660,12 +2403,10 @@ export default function NewProject() {
           background: rgba(0, 0, 0, 0.15);
           animation: mapRadar 2.5s infinite ease-out;
         }
-
         @keyframes mapRadar {
           0% { width: 0; height: 0; opacity: 1; }
           100% { width: 300px; height: 300px; opacity: 0; }
         }
-
         .map-core-node {
           position: absolute;
           top: 50%;
@@ -2677,28 +2418,22 @@ export default function NewProject() {
           gap: 8px;
           z-index: 10;
         }
-
         .map-core-compass {
           color: var(--color-primary);
           animation: spinCompass 25s infinite linear;
         }
-
         @keyframes spinCompass {
           to { transform: rotate(360deg); }
         }
-
         .map-core-label {
-
           font-size: 9px;
           font-weight: 400;
           color: var(--color-primary);
-
           background: rgba(6, 11, 29, 0.85);
           border: 1px solid var(--color-primary);
           padding: 4px 10px;
           border-radius: 4px;
         }
-
         .map-node {
           position: absolute;
           display: flex;
@@ -2707,7 +2442,6 @@ export default function NewProject() {
           gap: 4px;
           z-index: 5;
         }
-
         .node-dot {
           width: 8px;
           height: 8px;
@@ -2715,14 +2449,10 @@ export default function NewProject() {
           background: var(--color-bg-navy);
           box-shadow: 0 0 10px var(--color-bg-navy);
         }
-
         .node-text {
-
           font-size: 9px;
           color: rgba(255, 255, 255, 0.75);
-
         }
-
         .map-vector-lines {
           position: absolute;
           inset: 0;
@@ -2730,41 +2460,32 @@ export default function NewProject() {
           height: 100%;
           pointer-events: none;
         }
-
         .location-info-list {
           display: flex;
           flex-direction: column;
         }
-
         .location-heading {
-
           font-size: 18px;
           font-weight: 400;
           color: var(--color-text-dark);
           margin-bottom: 24px;
-
         }
-
         .landmarks-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 24px;
         }
-
         .landmark-item {
           display: flex;
           align-items: flex-start;
           gap: 12px;
         }
-
         .landmark-icon {
           color: var(--color-primary);
           margin-top: 2px;
           flex-shrink: 0;
         }
-
         .landmark-name {
-
           font-weight: 400;
         }
         
@@ -2775,7 +2496,6 @@ export default function NewProject() {
           color: var(--color-primary);
           border-top: 1px solid rgba(180, 133, 100, 0.12);
         }
-
         .video-slides-viewport {
           position: relative;
           width: 100%;
@@ -2785,14 +2505,12 @@ export default function NewProject() {
           border: 4px solid #ffffff;
           box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
         }
-
         .video-slides-track {
           display: flex;
           width: 100%;
           height: 100%;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .video-slide-card {
           position: relative;
           flex-shrink: 0;
@@ -2800,14 +2518,12 @@ export default function NewProject() {
           height: 100%;
           overflow: hidden;
         }
-
         .video-slide-thumbnail {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
         }
-
         .video-slide-overlay {
           position: absolute;
           inset: 0;
@@ -2819,32 +2535,24 @@ export default function NewProject() {
           box-sizing: border-box;
           z-index: 5;
         }
-
         .video-slide-info {
           display: flex;
           flex-direction: column;
           gap: 4px;
           text-align: left;
         }
-
         .video-slide-tag {
-
           font-size: 10px;
           font-weight: 400;
           text-transform: uppercase;
           color: #aaaaaa;
-
         }
-
         .video-slide-title {
-
           font-size: 26px;
           font-weight: 400;
           color: #ffffff;
           margin: 0;
-
         }
-
         .video-slide-bottom-bar {
           display: block;
           width: 100%;
@@ -2854,18 +2562,14 @@ export default function NewProject() {
           height: 0;
           z-index: 20;
         }
-
         .video-slide-counter {
-
           font-size: 14px;
           font-weight: 400;
           color: var(--color-primary);
           position: absolute;
           left: 0;
           top: 12px;
-
         }
-
         /* Navigation Arrows on the sides */
         .video-slide-arrow {
           position: absolute;
@@ -2888,22 +2592,18 @@ export default function NewProject() {
           z-index: 10;
           user-select: none;
         }
-
         .video-slide-arrow:hover {
           background-color: #ffffff;
           color: var(--color-primary);
           border-color: #ffffff;
           box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-
         .video-slide-arrow--left {
           left: 16px;
         }
-
         .video-slide-arrow--right {
           right: 16px;
         }
-
         @media (max-width: 768px) {
           .video-slides-viewport {
             height: 320px;
@@ -2923,19 +2623,15 @@ export default function NewProject() {
             transform: translateX(-50%) scale(0.85);
           }
         }
-
         /* â”€â”€ GALLERY SECTION STYLING â”€â”€ */
         .project-gallery-section {
           background-color: var(--color-bg-light);
           padding: 60px 0;
         }
-
         .project-gallery-section .section-subtitle {
           color: var(--color-text-dark);
           margin-bottom: 20px;
         }
-
-
         /* â”€â”€ INNOVATIVE BENTO GRID â”€â”€ */
         .innovative-bento-grid {
           display: grid;
@@ -2944,7 +2640,6 @@ export default function NewProject() {
           gap: 16px;
           padding: 0 16px;
         }
-
         .bento-item {
           position: relative;
           border-radius: 20px;
@@ -2954,12 +2649,10 @@ export default function NewProject() {
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
           transition: transform 0.4s var(--ease-luxury), box-shadow 0.4s var(--ease-luxury);
         }
-
         .bento-item:hover {
           transform: translateY(-4px);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-
         .bento-img {
           width: 100%;
           height: 100%;
@@ -2967,11 +2660,9 @@ export default function NewProject() {
           display: block;
           transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .bento-item:hover .bento-img {
           transform: scale(1.05);
         }
-
         .bento-overlay {
           position: absolute;
           z-index: 2;
@@ -2989,21 +2680,16 @@ export default function NewProject() {
           transform: translateY(10px);
           transition: all 0.4s var(--ease-luxury);
         }
-
         .bento-item:hover .bento-overlay {
           opacity: 1;
           transform: translateY(0);
         }
-
         .bento-title {
-
           font-size: 20px;
           color: var(--color-white);
           font-weight: 400;
-
           margin: 0;
         }
-
         /* Bento Asymmetrical Pattern (Repeats every 7 items) */
         .bento-item-0 { grid-column: span 2; grid-row: span 2; }
         .bento-item-1 { grid-column: span 1; grid-row: span 1; }
@@ -3012,7 +2698,6 @@ export default function NewProject() {
         .bento-item-4 { grid-column: span 1; grid-row: span 2; }
         .bento-item-5 { grid-column: span 2; grid-row: span 1; }
         .bento-item-6 { grid-column: span 1; grid-row: span 1; }
-
         @media (max-width: 992px) {
           .innovative-bento-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -3027,7 +2712,6 @@ export default function NewProject() {
           .bento-item-5 { grid-column: span 1; grid-row: span 1; }
           .bento-item-6 { grid-column: span 2; grid-row: span 1; }
         }
-
         @media (max-width: 576px) {
           .innovative-bento-grid {
             grid-template-columns: 1fr;
@@ -3036,32 +2720,27 @@ export default function NewProject() {
           /* Everything spans 1 col on small phones */
           .bento-item { grid-column: span 1 !important; grid-row: span 1 !important; }
         }
-
         /* â”€â”€ FLOORPLANS SECTION STYLING â”€â”€ */
         .project-floorplans-section {
           background: radial-gradient(circle at top left, var(--color-bg-light) 0%, var(--color-bg-cream) 100%);
           border-top: 1px solid rgba(0, 0, 0, 0.04);
           border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
-
         .project-floorplans-section .section-subtitle {
           color: var(--color-text-dark);
           margin-bottom: 24px;
         }
-
         .floorplan-layout-grid {
           display: grid;
           grid-template-columns: 320px 1fr;
           gap: 50px;
           align-items: flex-start;
         }
-
         .floorplan-tabs-col {
           display: flex;
           flex-direction: column;
           gap: 8px;
         }
-
         .floorplan-tab-btn {
           display: flex;
           align-items: center;
@@ -3073,7 +2752,6 @@ export default function NewProject() {
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
           padding: 12px 20px;
           border-radius: 8px;
-
           font-size: 14px;
           font-weight: 400;
           color: var(--color-text-muted);
@@ -3081,12 +2759,10 @@ export default function NewProject() {
           cursor: pointer;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .floorplan-tab-btn:hover {
           background: rgba(255, 255, 255, 0.35);
           border-color: rgba(255, 255, 255, 0.6);
         }
-
         .floorplan-tab-btn.active {
           border-color: rgba(255, 255, 255, 0.8);
           background: rgba(255, 255, 255, 0.65);
@@ -3094,11 +2770,9 @@ export default function NewProject() {
           font-weight: 400;
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
         }
-
         .btn-tab-num {
           font-size: 10px;
           font-weight: 400;
-
           color: var(--color-text-muted);
           border: 1px solid rgba(0, 0, 0, 0.3);
           width: 24px;
@@ -3109,13 +2783,11 @@ export default function NewProject() {
           justify-content: center;
           transition: all 0.4s ease;
         }
-
         .floorplan-tab-btn.active .btn-tab-num {
           background: var(--color-primary);
           border-color: var(--color-primary);
           color: var(--color-white);
         }
-
         .floorplan-specs-box {
           background: rgba(255, 255, 255, 0.25);
           backdrop-filter: blur(20px);
@@ -3129,12 +2801,10 @@ export default function NewProject() {
           flex-direction: column;
           gap: 8px;
         }
-
         .floorplan-spec-line {
           display: flex;
           justify-content: space-between;
           font-size: 13px;
-
           border-bottom: 1px solid rgba(0, 0, 0, 0.04);
           padding-bottom: 8px;
         }
@@ -3142,24 +2812,17 @@ export default function NewProject() {
           border-bottom: none;
           padding-bottom: 0;
         }
-
         .spec-label {
           color: var(--color-text-muted);
-
         }
-
         .spec-val {
           color: var(--color-text-dark);
           font-weight: 400;
         }
-
-
-
         .floorplan-visual-col {
           display: flex;
           justify-content: center;
         }
-
         .blueprint-canvas {
           width: 100%;
           max-width: 580px;
@@ -3174,7 +2837,6 @@ export default function NewProject() {
           align-items: center;
           justify-content: center;
         }
-
         .blueprint-grid-mesh {
           position: absolute;
           inset: 0;
@@ -3184,39 +2846,32 @@ export default function NewProject() {
             linear-gradient(90deg, rgba(0, 0, 0, 1) 1px, transparent 1px);
           background-size: 20px 20px;
         }
-
         .blueprint-svg {
           width: 100%;
           height: 100%;
           position: relative;
           z-index: 5;
         }
-
         .blueprint-stamp {
           position: absolute;
           bottom: 15px;
           right: 15px;
-
           font-size: 8px;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.35);
-
           border: 1px solid rgba(0, 0, 0, 0.2);
           padding: 3px 8px;
           border-radius: 2px;
         }
-
         /* â”€â”€ PRICING SECTION STYLING â”€â”€ */
         .project-pricing-section {
           background-color: var(--color-bg-light);
           padding: 80px 0;
         }
-
         .project-pricing-section .section-subtitle {
           color: var(--color-text-dark);
           margin-bottom: 48px;
         }
-
         .pricing-cards-container {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -3224,7 +2879,6 @@ export default function NewProject() {
           max-width: 1100px;
           margin: 0 auto;
         }
-
         .pricing-item-card {
           background: var(--color-white);
           border: 1px solid rgba(0, 0, 0, 0.12);
@@ -3236,7 +2890,6 @@ export default function NewProject() {
           box-shadow: 0 4px 25px rgba(0, 0, 0, 0.01);
           transition: all 0.35s var(--ease-luxury);
         }
-
         /* Overview Editorial Layout */
         .overview-editorial-grid {
           display: grid;
@@ -3244,7 +2897,6 @@ export default function NewProject() {
           gap: 60px;
           align-items: end;
         }
-
         @media (max-width: 900px) {
           .overview-editorial-grid {
             grid-template-columns: 1fr;
@@ -3257,7 +2909,6 @@ export default function NewProject() {
             text-align: center;
           }
         }
-
         .amenity-luxury-card .amenity-bg-img {
           transform: scale(1);
         }
@@ -3282,120 +2933,93 @@ export default function NewProject() {
         .amenity-luxury-card:hover .amenity-desc-text {
           color: rgba(255,255,255,1) !important;
         }
-
         .pricing-item-card:hover {
           transform: translateY(-8px);
           box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
           border-color: var(--color-primary);
         }
-
         .pricing-item-card.featured {
           border-color: var(--color-primary);
           box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04);
           background: var(--color-bg-light);
         }
-
         .pricing-item-card.featured:hover {
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
         }
-
         .pricing-badge {
           position: absolute;
           top: -12px;
           left: 28px;
           background: var(--color-primary);
           color: var(--color-bg-light);
-
           font-size: 10px;
           font-weight: 400;
-
           padding: 4px 12px;
           border-radius: 100px;
           border: 1px solid var(--color-primary);
         }
-
         .pricing-badge.featured-badge {
           background: var(--color-primary);
           border-color: var(--color-primary);
           color: var(--color-white);
         }
-
         .pricing-title {
-
           font-size: 20px;
           font-weight: 400;
           color: var(--color-primary);
           margin-bottom: 20px;
           margin-top: 5px;
-
         }
-
         .pricing-divider {
           width: 100%;
           height: 1px;
           background: rgba(0, 0, 0, 0.08);
           margin-bottom: 24px;
         }
-
         .pricing-specs {
           display: flex;
           flex-direction: column;
           gap: 14px;
           margin-bottom: 30px;
         }
-
         .pricing-amount {
           margin-top: auto;
           margin-bottom: 28px;
         }
-
         .pricing-label {
           display: block;
-
           font-size: 11px;
           font-weight: 400;
           color: var(--color-text-muted);
-
           text-transform: uppercase;
           margin-bottom: 4px;
         }
-
         .pricing-val {
-
           font-size: 26px;
           font-weight: 400;
           color: var(--color-primary);
-
         }
-
         .pricing-asterisk {
           font-size: 15px;
           vertical-align: super;
           color: var(--color-text-muted);
         }
-
-
-
         .pricing-fineprint {
           text-align: center;
-
           font-size: 11px;
           color: var(--color-text-muted-light);
           margin-top: 32px;
         }
-
         /* â”€â”€ PROJECT STATUS SECTION STYLING â”€â”€ */
         .project-status-section {
           background-color: var(--color-bg-light);
           padding: 80px 0;
           border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
-
         .project-status-section .section-subtitle {
           color: var(--color-text-dark);
           margin-bottom: 54px;
         }
-
         .status-timeline-container {
           display: grid;
           gap: 60px;
@@ -3403,25 +3027,21 @@ export default function NewProject() {
           margin: 0 auto;
           align-items: center;
         }
-
         .status-img-sm {
           position: relative;
           border-radius: 4px;
           overflow: hidden;
           cursor: pointer;
         }
-
         .status-img-sm img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .status-img-sm:hover img {
           transform: scale(1.05);
         }
-
         .status-img-overlay {
           position: absolute;
           inset: 0;
@@ -3432,13 +3052,9 @@ export default function NewProject() {
           opacity: 0;
           transition: opacity 0.4s ease;
         }
-
         .status-img-sm:hover .status-img-overlay {
           opacity: 1;
         }
-
-
-
         /* â”€â”€ LIGHTBOX / MODAL MEDIA OVERLAYS â”€â”€ */
         .lightbox-overlay {
           position: fixed;
@@ -3449,7 +3065,6 @@ export default function NewProject() {
           align-items: center;
           justify-content: center;
         }
-
         .lightbox-close-btn {
           position: absolute;
           top: 30px;
@@ -3461,11 +3076,9 @@ export default function NewProject() {
           transition: color 0.3s ease;
           z-index: 1010;
         }
-
         .lightbox-close-btn:hover {
           color: var(--color-primary);
         }
-
         .lightbox-arrow-btn {
           position: absolute;
           top: 50%;
@@ -3483,15 +3096,12 @@ export default function NewProject() {
           transition: all 0.3s ease;
           z-index: 1010;
         }
-
         .lightbox-arrow-btn:hover {
           background: var(--color-primary);
           border-color: var(--color-primary);
         }
-
         .lightbox-arrow-btn.prev { left: 40px; }
         .lightbox-arrow-btn.next { right: 40px; }
-
         .lightbox-content {
           max-width: 80%;
           max-height: 80%;
@@ -3501,7 +3111,6 @@ export default function NewProject() {
           gap: 15px;
           position: relative;
         }
-
         .lightbox-img {
           max-width: 100%;
           max-height: 70vh;
@@ -3509,15 +3118,11 @@ export default function NewProject() {
           border-radius: 6px;
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
-
         .lightbox-title {
-
           font-size: 18px;
           color: var(--color-white);
-
           text-align: center;
         }
-
         /* Video Iframe container inside overlay */
         .video-modal-content {
           width: 80%;
@@ -3528,12 +3133,10 @@ export default function NewProject() {
           background: var(--color-bg-navy);
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
-
         .video-iframe {
           width: 100%;
           height: 100%;
         }
-
         /* Inquiry booking Form Modal styling */
         .modal-overlay {
           position: fixed;
@@ -3545,7 +3148,6 @@ export default function NewProject() {
           align-items: center;
           justify-content: center;
         }
-
         .modal-content-card {
           background: var(--color-white);
           border: 1px solid rgba(0, 0, 0, 0.2);
@@ -3557,12 +3159,10 @@ export default function NewProject() {
           box-shadow: 0 25px 55px rgba(0, 0, 0, 0.2);
           animation: modalEntrance 0.4s var(--ease-luxury);
         }
-
         @keyframes modalEntrance {
           from { opacity: 0; transform: translateY(15px) scale(0.97); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
-
         .modal-close-btn {
           position: absolute;
           top: 20px;
@@ -3571,40 +3171,31 @@ export default function NewProject() {
           cursor: pointer;
           transition: color 0.3s ease;
         }
-
         .modal-close-btn:hover {
           color: var(--color-text-dark);
         }
-
         .modal-heading {
-
           font-size: 22px;
           font-weight: 400;
           color: var(--color-text-dark);
           text-align: center;
           margin-bottom: 6px;
-
         }
-
         .modal-subheading {
-
           font-size: 13px;
           color: var(--color-text-muted);
           text-align: center;
           margin-bottom: 28px;
         }
-
         .modal-inquiry-form {
           display: flex;
           flex-direction: column;
           gap: 16px;
         }
-
         .form-group-field {
           position: relative;
           width: 100%;
         }
-
         .form-input-icon {
           position: absolute;
           left: 14px;
@@ -3613,73 +3204,57 @@ export default function NewProject() {
           color: var(--color-text-muted-light);
           pointer-events: none;
         }
-
         .form-group-field input {
           width: 100%;
           padding: 14px 14px 14px 40px;
           border: 1px solid var(--color-border-light);
           border-radius: 6px;
-
           font-size: 13.5px;
           color: var(--color-text-dark);
           outline: none;
           transition: all 0.3s ease;
         }
-
         .form-group-field input:focus {
           border-color: var(--color-primary);
           box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
         }
-
-
-
         .form-success-message {
           text-align: center;
           padding: 20px 0;
           animation: fadeUpProject 0.5s ease forwards;
         }
-
         .success-icon-gold {
           color: var(--color-primary);
           margin-bottom: 16px;
         }
-
         .form-success-message h4 {
-
           font-size: 18px;
           color: var(--color-bg-navy);
           margin-bottom: 6px;
         }
-
         .form-success-message p {
-
           font-size: 13px;
           color: var(--color-text-muted);
         }
-
         /* â”€â”€ Pillars Accordion Styling â”€â”€ */
         .pillars-container {
           width: 100%;
           text-align: left;
         }
-
         .pillars-accordion {
           display: flex;
           flex-direction: column;
           gap: 12px;
           margin-top: 10px;
         }
-
         .pillar-item {
           border-bottom: 1px solid rgba(29, 53, 87, 0.08);
           cursor: pointer;
           transition: all 0.3s ease;
         }
-
         .pillar-item:hover .pillar-title {
           color: var(--color-primary);
         }
-
         .pillar-header {
           display: flex;
           align-items: center;
@@ -3687,7 +3262,6 @@ export default function NewProject() {
           gap: 16px;
           user-select: none;
         }
-
         .pillar-number {
           font-family: var(--font-sans);
           font-size: 13px;
@@ -3696,40 +3270,35 @@ export default function NewProject() {
           opacity: 0.5;
           transition: opacity 0.3s ease;
         }
-
         .pillar-item.active .pillar-number {
           opacity: 1;
+          color: var(--color-highlight);
         }
-
         .pillar-title {
+          font-family: var(--font-sans);
           color: var(--color-text-dark);
           margin: 0;
           flex-grow: 1;
           transition: color 0.3s ease;
         }
-
         .pillar-item.active .pillar-title {
-          color: var(--color-primary);
+          color: var(--color-highlight);
           font-weight: 400;
         }
-
         .pillar-toggle-icon {
           font-size: 18px;
           color: var(--color-primary);
           opacity: 0.6;
           transition: transform 0.3s ease;
         }
-
         .pillar-item.active .pillar-toggle-icon {
           transform: rotate(0deg);
         }
-
         .pillar-body {
           display: flex;
           flex-direction: column;
           gap: 6px;
         }
-
         .pillar-tagline {
           font-family: var(--font-sans);
           font-size: 9.5px;
@@ -3739,7 +3308,6 @@ export default function NewProject() {
           text-transform: uppercase;
           display: block;
         }
-
         .pillar-desc {
           font-family: var(--font-sans);
           font-size: 13px;
@@ -3747,7 +3315,6 @@ export default function NewProject() {
           color: var(--color-text-muted);
           margin: 0;
         }
-
         .vision-dynamic-img-wrapper {
           position: relative;
           overflow: hidden;
@@ -3757,13 +3324,11 @@ export default function NewProject() {
           border: 1px solid rgba(0, 0, 0, 0.1);
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
         }
-
         /* â”€â”€ Floorplan Slide Layout Styles â”€â”€ */
         .floorplan-slide-viewport {
           position: relative;
           width: 100%;
         }
-
         .floorplan-slide-arrow {
           position: absolute;
           top: 50%;
@@ -3782,22 +3347,18 @@ export default function NewProject() {
           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
           transition: all 0.3s ease;
         }
-
         .floorplan-slide-arrow:hover {
           background: var(--color-primary);
           color: var(--color-white);
           transform: translateY(-50%) scale(1.05);
           box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }
-
         .floorplan-slide-arrow.prev {
           left: -24px;
         }
-
         .floorplan-slide-arrow.next {
           right: -24px;
         }
-
         @media (max-width: 768px) {
           .floorplan-slide-arrow {
             width: 40px;
@@ -3810,7 +3371,6 @@ export default function NewProject() {
             right: -12px;
           }
         }
-
         /* â”€â”€ Gallery Spotlight Styles â”€â”€ */
         .gallery-spotlight-viewport {
           position: relative;
@@ -3819,28 +3379,25 @@ export default function NewProject() {
           padding: 20px 0;
           margin-left: calc(-50vw + 50%);
           left: 0;
-          --gallery-card-active-w: 70vw;
+          --gallery-card-active-w: 75vw;
           --gallery-card-w: 55vw;
-          --gallery-gap: 2vw;
+          --gallery-gap: 8vw;
           --gallery-card-offset: calc(50vw - var(--gallery-card-active-w) / 2);
         }
-
         .gallery-spotlight-track {
           display: flex;
           gap: var(--gallery-gap);
           width: max-content;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-spotlight-card {
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
-          aspect-ratio: 16/9;
+          aspect-ratio: 16/10;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
           transition: flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
-
         .gallery-spotlight-arrow {
           position: absolute;
           top: 50%;
@@ -3859,18 +3416,15 @@ export default function NewProject() {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
           transition: all 0.3s ease;
         }
-
         .gallery-spotlight-arrow:hover {
           background: var(--color-white);
           color: var(--color-primary);
           transform: translate(-50%, -50%) scale(1.08);
           box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         }
-
         .gallery-spotlight-arrow.prev {
           left: calc(var(--gallery-card-offset) / 2);
         }
-
         .gallery-spotlight-arrow.next {
           right: calc(var(--gallery-card-offset) / 2);
           transform: translate(50%, -50%);
@@ -3879,7 +3433,6 @@ export default function NewProject() {
         .gallery-spotlight-arrow.next:hover {
           transform: translate(50%, -50%) scale(1.08);
         }
-
         /* â”€â”€ RESPONSIVE MEDIA CONTROLS â”€â”€ */
         @media (max-width: 1024px) {
           .amenities-grid-box {
@@ -3898,7 +3451,6 @@ export default function NewProject() {
             gap: 40px;
           }
         }
-
         @media (max-width: 900px) {
           .project-hero-title {
           }
@@ -3955,11 +3507,9 @@ export default function NewProject() {
               0 2px 8px rgba(0, 0, 0, 0.06) !important;
           }
           .mobile-directory-header {
-
             font-size: 8.5px;
             font-weight: 400;
             color: var(--color-primary);
-
             padding: 8px 12px 4px;
             text-transform: uppercase;
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -4017,7 +3567,6 @@ export default function NewProject() {
             grid-template-columns: repeat(2, 1fr);
           }
         }
-
         @media (max-width: 768px) {
           .pricing-cards-container {
             grid-template-columns: 1fr;
@@ -4032,7 +3581,6 @@ export default function NewProject() {
           .lightbox-arrow-btn.prev { left: 15px; }
           .lightbox-arrow-btn.next { right: 15px; }
           .lightbox-content { max-width: 90%; }
-
           /* Generic layout fixes for screenshotted issues */
           
           /* Hero Section */
@@ -4054,7 +3602,6 @@ export default function NewProject() {
             transform: translateY(0) !important;
             margin-bottom: 20px !important;
           }
-
           /* Video Tours Section */
           .project-video-cta-group {
             flex-direction: column !important;
@@ -4070,7 +3617,6 @@ export default function NewProject() {
           .video-slides-container {
             margin-bottom: 80px !important;
           }
-
           /* "Experience True Luxury" */
           .c3-action-area h3 {
             line-height: 1.1 !important;
@@ -4081,13 +3627,11 @@ export default function NewProject() {
           .c3-image-pane, .c3-solid-pane {
             width: 100% !important;
           }
-
           /* Quick Info / Stats Grid (usually has 4 columns) */
           .project-stats-grid, div[style*="grid-template-columns: repeat(4"], div[style*="gridTemplateColumns: 'repeat(4"] {
             grid-template-columns: 1fr 1fr !important;
             gap: 16px !important;
           }
-
           /* Status Month Grid */
           .status-month-grid, div[style*="grid-template-columns: repeat(3"], div[style*="gridTemplateColumns: 'repeat(3"] {
             grid-template-columns: 1fr 1fr !important;
@@ -4096,7 +3640,6 @@ export default function NewProject() {
             flex-direction: column !important;
             gap: 20px !important;
           }
-
           /* Nested tabs (Specifications, etc.) */
           .nested-tabs-wrapper {
             flex-wrap: wrap !important;
@@ -4118,7 +3661,6 @@ export default function NewProject() {
             font-size: 24px !important;
           }
         }
-
         /* â”€â”€ 3D GALLERY SLIDER â”€â”€ */
         .gallery-deck-viewport {
           position: relative;
@@ -4129,13 +3671,11 @@ export default function NewProject() {
           justify-content: center;
           overflow: hidden;
         }
-
         .gallery-deck-stack {
           position: relative;
           width: 580px;
           height: 380px;
         }
-
         .gallery-deck-card {
           position: absolute;
           inset: 0;
@@ -4146,18 +3686,15 @@ export default function NewProject() {
           cursor: pointer;
           background-color: var(--color-bg-navy);
         }
-
         .gallery-deck-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-deck-card:hover .gallery-deck-img {
           transform: scale(1.05);
         }
-
         .gallery-deck-hover-overlay {
           position: absolute;
           inset: 0;
@@ -4169,30 +3706,23 @@ export default function NewProject() {
           transition: opacity 0.35s ease;
           z-index: 2;
         }
-
         .gallery-deck-card.active:hover .gallery-deck-hover-overlay {
           opacity: 1;
         }
-
         .hover-overlay-zoom-icon {
           color: var(--color-primary);
           margin-bottom: 6px;
           transform: translateY(10px);
           transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-deck-card.active:hover .hover-overlay-zoom-icon {
           transform: translateY(0);
         }
-
         .hover-overlay-title {
-
           font-size: 15px;
           color: var(--color-white);
           font-weight: 400;
-
         }
-
         .gallery-deck-arrow {
           position: absolute;
           top: 50%;
@@ -4211,7 +3741,6 @@ export default function NewProject() {
           box-shadow: 0 4px 15px rgba(29, 53, 87, 0.05);
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-deck-arrow:hover {
           background: var(--color-primary);
           color: var(--color-white);
@@ -4219,10 +3748,8 @@ export default function NewProject() {
           transform: translateY(-50%) scale(1.08);
           box-shadow: 0 8px 20px rgba(29, 53, 87, 0.2);
         }
-
         .gallery-deck-arrow.prev { left: 24px; }
         .gallery-deck-arrow.next { right: 24px; }
-
         @media (max-width: 768px) {
           .gallery-deck-viewport {
             height: 300px;
@@ -4238,7 +3765,6 @@ export default function NewProject() {
           .gallery-deck-arrow.prev { left: 10px; }
           .gallery-deck-arrow.next { right: 10px; }
         }
-
         .play-button-pulsing {
           width: 70px;
           height: 70px;
@@ -4252,13 +3778,11 @@ export default function NewProject() {
           animation: playPulse 2s infinite;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-deck-card:hover .play-button-pulsing {
           transform: scale(1.1);
           background: var(--color-primary);
           color: var(--color-white);
         }
-
         @keyframes playPulse {
           0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
           70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }

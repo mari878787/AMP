@@ -147,7 +147,7 @@ export default function ProjectSpecs({
     : 'perspective(1200px) rotateY(0deg) rotateX(0deg) translateY(0px)';
 
   return (
-    <section className={`sp2-section ${hasRevealed ? 'revealed' : ''}`} id="specifications" ref={sectionRef}>
+    <section className={`sp2-section ${hasRevealed ? 'revealed' : ''}`} id="specifications" style={{ background: 'url("/images/bg/BL-1.png") left bottom / contain no-repeat' }} ref={sectionRef}>
 
       {/* Ambient Background Effects */}
       <div className="sp2-bg-noise" aria-hidden="true"></div>
@@ -156,7 +156,7 @@ export default function ProjectSpecs({
 
       {/* â”€â”€ MOBILE PREVIEW CARD (Hidden on Desktop) â”€â”€ */}
       <div className="sp2-mobile-preview-card">
-        <div className="section-header" style={{ marginBottom: '24px' }}>
+        <div className="section-header">
           <span className="section-tag">Specifications</span>
           <h2 className="section-title" style={{ color: 'var(--color-text-dark)' }}>Technical Specifications</h2>
           <p className="section-subtitle" style={{ color: 'var(--color-text-dark)', marginTop: '8px' }}>Bespoke construction details and premium material selections</p>
@@ -276,62 +276,41 @@ export default function ProjectSpecs({
         </div>
       )}
 
-      {/* â”€â”€ DESKTOP LAYOUT (Hidden on Mobile) â”€â”€ */}
+      {/* ── DESKTOP LAYOUT (Hidden on Mobile) ── */}
       <div className="sp2-layout">
 
-        {/* â”€â”€ LEFT: Title + Tag Cloud â”€â”€ */}
+        {/* ── LEFT: Title + Tag Cloud ── */}
         <ScrollReveal className="sp2-left" animation="fadeUp">
 
-          <div className="section-header" style={{ marginBottom: '32px' }}>
-            {/* <span className="section-tag">Specifications</span> */}
+          <div className="section-header">
             <h2 className="section-title">
-              Technical Specifications
+              {title} <br /><span style={{ color: '#b48564' }}>{highlightTitle}</span>
             </h2>
-          </div>
-
-          {/* Elegant divider */}
-          <div className="sp2-divider">
-            <div className="sp2-divider-line"></div>
-            <div className="sp2-divider-line"></div>
           </div>
 
           {/* Tag Cloud */}
           <div className="sp2-tags" ref={tagsRef}>
-            {tagRows.map((row, rowIdx) => (
-              <div className="sp2-tag-row" key={rowIdx}>
-                {row.map((s, i) => {
-                  const globalIdx = (rowIdx === 0 ? 0 : rowIdx === 1 ? 5 : rowIdx === 2 ? 9 : 13) + i;
-                  return (
-                    <button
-                      key={s.id || globalIdx}
-                      className={`sp2-tag ${globalIdx === activeIdx ? 'active' : ''}`}
-                      onClick={() => switchSpec(globalIdx)}
-                    >
-                      <span className="sp2-tag-text">{s.label}</span>
-                      <span className="sp2-tag-underline"></span>
-                      {globalIdx === activeIdx && <span className="sp2-tag-shimmer"></span>}
-                    </button>
-                  );
-                })}
-              </div>
-            ))}
+            <div className="sp2-tag-flow">
+              {specs.map((s, idx) => (
+                <React.Fragment key={s.id || idx}>
+                  {idx > 0 && <span className="sp2-tag-separator">|</span>}
+                  <button
+                    className={`sp2-tag ${idx === activeIdx ? 'active' : ''}`}
+                    onClick={() => switchSpec(idx)}
+                  >
+                    <span className="sp2-tag-text">{s.label}</span>
+                    {idx === activeIdx && <span className="sp2-tag-gold-underline"></span>}
+                  </button>
+                </React.Fragment>
+              ))}
+            </div>
           </div>
 
         </ScrollReveal>
 
-        {/* â”€â”€ RIGHT: Premium Detail Card â”€â”€ */}
+        {/* ── RIGHT: Premium Detail Card ── */}
         <ScrollReveal className="sp2-right" animation="fadeUp" delay={0.2} as="div">
-          <div
-            className={`sp2-card ${isHovering ? 'hovering' : ''}`}
-            ref={cardRef}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => { setIsHovering(false); setMousePos({ x: 0, y: 0 }); }}
-            style={{ transform: cardTransform }}
-          >
-            {/* Ambient glow behind card */}
-            <div className="sp2-card-glow" aria-hidden="true"></div>
-
+          <div className="sp2-card">
             <div className={`sp2-card-inner ${fading ? 'hide' : 'show'}`}>
 
               {/* Info half */}
@@ -340,54 +319,49 @@ export default function ProjectSpecs({
                   <span className="sp2-card-num" key={displayIdx}>
                     {String(displayIdx + 1).padStart(2, '0')}
                   </span>
+                  <div className="sp2-card-num-gold-line"></div>
                 </div>
                 <h3 className="sp2-card-title">{spec.title}</h3>
-                <div className="sp2-card-sep">
-                  <div className="sp2-card-sep-line"></div>
-                </div>
+                <div className="sp2-card-sep"></div>
                 <div className="sp2-card-details">
                   {spec.details && spec.details.slice(0, 2).map((d, i) => (
-                    <p key={i} className="sp2-card-detail-text" style={{ animationDelay: `${i * 0.08}s` }}>
+                    <p key={i} className="sp2-card-detail-text">
                       {d}
                     </p>
                   ))}
                 </div>
-              </div>
 
-              {/* Image half with architectural overlay */}
-              <div className="sp2-card-visual">
-                <div className="sp2-card-visual-blueprint" aria-hidden="true"></div>
-                <img
-                  src={spec.image}
-                  alt={spec.title}
-                  className="sp2-card-img"
-                />
-                <div className="sp2-card-visual-overlay" aria-hidden="true"></div>
-              </div>
-
-            </div>
-
-            {/* Step Progress Indicator */}
-            <div className="sp2-card-progress">
-              <span className="sp2-progress-current">
-                {String(activeIdx + 1).padStart(2, '0')}
-              </span>
-              <div className="sp2-progress-track">
-                <div className="sp2-progress-fill" style={{ width: `${progress}%` }}></div>
-                <div className="sp2-progress-steps">
-                  {specs.map((_, i) => (
-                    <button
-                      key={i}
-                      className={`sp2-step ${i === activeIdx ? 'active' : ''} ${i < activeIdx ? 'past' : ''}`}
-                      onClick={() => switchSpec(i)}
-                      aria-label={`Specification ${i + 1}`}
-                    />
-                  ))}
+                {/* Bottom Pagination Dashes Row */}
+                <div className="sp2-card-bottom-nav">
+                  <span className="sp2-bottom-nav-num">
+                    {String(activeIdx + 1).padStart(2, '0')}
+                  </span>
+                  <div className="sp2-bottom-nav-dashes">
+                    {specs.map((_, i) => (
+                      <div 
+                        key={i} 
+                        className={`sp2-bottom-dash ${i === activeIdx ? 'active' : ''}`}
+                        onClick={() => switchSpec(i)}
+                      />
+                    ))}
+                  </div>
+                  <span className="sp2-bottom-nav-total">
+                    {String(specs.length).padStart(2, '0')}
+                  </span>
                 </div>
               </div>
-              <span className="sp2-progress-total">
-                {String(specs.length).padStart(2, '0')}
-              </span>
+
+              {/* Image half with blueprint overlay */}
+              <div className="sp2-card-visual">
+                {spec.image && (
+                  <img
+                    src={spec.image}
+                    alt={spec.title}
+                    className="sp2-card-img"
+                  />
+                )}
+              </div>
+
             </div>
           </div>
         </ScrollReveal>
@@ -395,30 +369,8 @@ export default function ProjectSpecs({
       </div>
 
       <style>{`
-        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-           SPECS v2 — LUXURY ATELIER EXPERIENCE
-           Inspired by Armani / Bentley Residences
-           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-
         .section-header {
           margin-bottom: 40px;
-          text-align: left;
-        }
-
-        .section-tag {
-          display: block;
-
-          text-transform: uppercase;
-          color: var(--color-gold-accent);
-          margin-bottom: 12px;
-        }
-
-        .section-subtitle {
-          color: var(--color-text-dark);
-          line-height: 1.6;
-          max-width: 680px;
-          margin-top: 8px;
-          margin-bottom: 0;
           text-align: left;
         }
 
@@ -427,1001 +379,480 @@ export default function ProjectSpecs({
           z-index: 10;
           padding: 80px 0;
           overflow: hidden;
-          border-top: 1px solid rgba(29, 53, 87, 0.06);
-          min-height: calc(100vh - 140px);
-          display: flex;
-          align-items: center;
-          background: url("/images/bg/BL-1.png") left bottom / contain no-repeat;
+          background: #ffffff;
           width: 100%;
           box-sizing: border-box;
         }
 
-        /* â”€â”€ AMBIENT BACKGROUND EFFECTS â”€â”€ */
-        .sp2-bg-noise {
-          position: absolute;
-          inset: 0;
-          opacity: 0.025;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-          background-size: 200px;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        .sp2-bg-glow {
-          position: absolute;
-          top: 30%;
-          right: 10%;
-          width: 600px;
-          height: 600px;
-          background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 65%);
-          pointer-events: none;
-          z-index: 0;
-          animation: sp2-breathe 8s ease-in-out infinite;
-        }
-
-        .sp2-bg-grid {
-          position: absolute;
-          inset: 0;
-          background-image:
-            linear-gradient(rgba(29, 53, 87, 0.018) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(29, 53, 87, 0.018) 1px, transparent 1px);
-          background-size: 80px 80px;
-          pointer-events: none;
-          z-index: 0;
-          mask-image: radial-gradient(ellipse 70% 60% at 60% 50%, black 0%, transparent 100%);
-          -webkit-mask-image: radial-gradient(ellipse 70% 60% at 60% 50%, black 0%, transparent 100%);
-        }
-
-        @keyframes sp2-breathe {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.7; transform: scale(1.08); }
-        }
-
-        /* â”€â”€ REVEAL ANIMATION â”€â”€ */
-        .sp2-section:not(.revealed) .sp2-layout {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        .sp2-section.revealed .sp2-layout {
-          opacity: 1;
-          transform: translateY(0);
-          transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* â”€â”€ MAIN LAYOUT â”€â”€ */
+        /* ── DESKTOP MAIN LAYOUT ── */
         .sp2-layout {
-          max-width: 1320px;
+          max-width: 1200px;
           width: 100%;
           margin: 0 auto;
-          padding: 0 56px;
+          padding: 0 40px;
           display: grid;
-          grid-template-columns: 0.48fr 0.52fr;
-          gap: 72px;
-          align-items: start;
+          grid-template-columns: 5.2fr 6.8fr;
+          gap: 64px;
           position: relative;
           z-index: 1;
           box-sizing: border-box;
         }
 
-        /* â”€â”€ LEFT SIDE â”€â”€ */
+        /* ── LEFT SIDE: SPECIFICATION TABS ── */
         .sp2-left {
-          padding-top: 16px;
-        }
-
-        .sp2-topbar {
           display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 24px;
+          flex-direction: column;
+          justify-content: flex-start;
         }
 
-        .sp2-topbar-diamond {
-          font-size: 7px;
-          background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .sp2-topbar-label {
-
-          font-size: 10.5px;
-          font-weight: 400;
-
-          background: linear-gradient(135deg, var(--color-primary), var(--color-text-muted));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-transform: uppercase;
-          white-space: nowrap;
-        }
-
-        .sp2-topbar-line {
-          flex: 1;
-          max-width: 80px;
-          height: 1px;
-          background: linear-gradient(90deg, rgba(29, 53, 87, 0.25), rgba(29, 53, 87, 0.02));
-          position: relative;
-          overflow: hidden;
-        }
-
-        .sp2-topbar-line-glow {
-          position: absolute;
-          top: -1px;
-          left: -100%;
-          width: 40px;
-          height: 3px;
-          background: linear-gradient(90deg, transparent, rgba(29, 53, 87, 0.6), transparent);
-          animation: sp2-line-sweep 4s ease-in-out infinite;
-        }
-
-        @keyframes sp2-line-sweep {
-          0% { left: -40px; }
-          50% { left: 100%; }
-          100% { left: -40px; }
-        }
-
-        /* â”€â”€ LUXURY TITLE â”€â”€ */
-        .sp2-title {
-
-          color: var(--color-bg-navy);
-          margin: 0 0 32px 0;
-          text-transform: uppercase;
-          line-height: 1.12;
-        }
-
-        .sp2-title-gold {
-
-          font-weight: 400;
-          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 40%, var(--color-primary) 80%, var(--color-text-muted) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          font-style: italic;
-
-          background-size: 200% 100%;
-          animation: sp2-gold-shimmer 6s ease-in-out infinite;
-        }
-
-        @keyframes sp2-gold-shimmer {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-
-        /* â”€â”€ ELEGANT DIVIDER â”€â”€ */
-        .sp2-divider {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 40px;
-        }
-
-        .sp2-divider-line {
-          flex: 1;
-          height: 1px;
-          background: linear-gradient(90deg, rgba(29, 53, 87, 0.2), rgba(29, 53, 87, 0.04));
-        }
-
-        .sp2-divider-line:last-child {
-          background: linear-gradient(90deg, rgba(29, 53, 87, 0.04), rgba(29, 53, 87, 0.2));
-        }
-
-        .sp2-divider-diamond {
-          font-size: 8px;
-          color: var(--color-primary);
-          opacity: 0.4;
-          animation: sp2-diamond-pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes sp2-diamond-pulse {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(1.15); }
-        }
-
-        /* â”€â”€ TAG CLOUD â”€â”€ */
         .sp2-tags {
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: 0;
+          margin-top: 16px;
         }
 
-        .sp2-tag-row {
+        .sp2-tag-flow {
           display: flex;
           flex-wrap: wrap;
+          align-items: center;
           gap: 0;
-          padding-bottom: 20px;
-          border-bottom: 1px solid rgba(6, 11, 29, 0.04);
-          position: relative;
+          padding: 0;
+          background-image: linear-gradient(to bottom, transparent 63px, rgba(0, 0, 0, 0.08) 63px, rgba(0, 0, 0, 0.08) 64px);
+          background-size: 100% 64px;
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
 
-        .sp2-tag-row:last-child {
-          border-bottom: none;
-          padding-bottom: 0;
+        .sp2-tag-separator {
+          color: rgba(0, 0, 0, 0.25);
+          margin: 0 16px;
+          font-size: 13px;
+          font-weight: 300;
+          pointer-events: none;
+          user-select: none;
         }
 
         .sp2-tag {
-
-          color: var(--color-text-muted);
-          background: none;
-          border: none;
-          padding: 6px 0;
-          margin-right: 28px;
-          margin-bottom: 2px;
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
           cursor: pointer;
-          transition: color 0.3s ease;
           position: relative;
-          white-space: nowrap;
+          font-family: var(--font-sans);
+          font-size: 12px;
+          color: #666666;
+          transition: all 0.3s ease;
+          outline: none;
+          box-shadow: none !important;
+          height: 64px;
+          display: inline-flex;
+          align-items: center;
         }
 
-        .sp2-tag-text {
-          position: relative;
-          z-index: 1;
+        .sp2-tag:hover, .sp2-tag.active {
+          color: #000000;
         }
 
-        .sp2-tag-underline {
+        .sp2-tag-gold-underline {
           position: absolute;
-          bottom: 0;
+          bottom: -1px;
           left: 0;
-          width: 0;
-          height: 2px;
-          background: var(--color-primary);
-          transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          right: 0;
+          height: 3px;
+          background: #b48564;
+          z-index: 2;
+          border-radius: 1.5px;
+          animation: sp2-line-reveal 0.3s ease forwards;
         }
 
-        .sp2-tag-shimmer {
-          display: none;
+        @keyframes sp2-line-reveal {
+          from { transform: scaleX(0); }
+          to { transform: scaleX(1); }
         }
 
-        .sp2-tag:hover {
-          color: var(--color-text-dark);
-        }
-
-        .sp2-tag:hover .sp2-tag-underline {
-          width: 100%;
-          background: rgba(29, 53, 87, 0.35);
-        }
-
-        .sp2-tag.active {
-          color: var(--color-text-dark);
-          font-weight: 400;
-        }
-
-        .sp2-tag.active .sp2-tag-underline {
-          width: 100%;
-          background: var(--color-primary);
-        }
-
-        /* â”€â”€ RIGHT DETAIL CARD â”€â”€ */
+        /* ── RIGHT SIDE: SPEC DETAILS PANEL ── */
         .sp2-right {
-          position: sticky;
-          top: 80px;
+          display: flex;
+          align-items: center;
+          width: 100%;
         }
 
         .sp2-card {
-          position: relative;
-          background: rgba(255, 255, 255, 0.45);
-          backdrop-filter: blur(20px) saturate(160%);
-          -webkit-backdrop-filter: blur(20px) saturate(160%);
-          border: 1px solid rgba(255, 255, 255, 0.65);
-          border-top: 1.5px solid rgba(255, 255, 255, 0.85);
-          border-left: 1.5px solid rgba(255, 255, 255, 0.85);
-          border-radius: 24px;
+          width: 100%;
+          background: #ffffff;
+          border-radius: 16px;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
+          border: 1px solid rgba(180, 133, 100, 0.12);
           overflow: hidden;
-          box-shadow:
-            0 30px 80px rgba(29, 53, 87, 0.06),
-            0 8px 24px rgba(29, 53, 87, 0.03),
-            inset 0 1px 2px rgba(255, 255, 255, 0.8);
-          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-          will-change: transform;
-        }
-
-        .sp2-card.hovering {
-          box-shadow:
-            0 40px 100px rgba(29, 53, 87, 0.08),
-            0 12px 36px rgba(29, 53, 87, 0.04),
-            inset 0 1px 2px rgba(255, 255, 255, 0.9);
-        }
-
-        .sp2-card-glow {
-          position: absolute;
-          top: 50%;
-          left: 30%;
-          transform: translate(-50%, -50%);
-          width: 300px;
-          height: 300px;
-          background: radial-gradient(circle, rgba(29, 53, 87, 0.06) 0%, transparent 60%);
-          pointer-events: none;
-          z-index: 0;
-          animation: sp2-card-glow-pulse 5s ease-in-out infinite;
-        }
-
-        @keyframes sp2-card-glow-pulse {
-          0%, 100% { opacity: 0.6; }
-          50% { opacity: 1; }
+          padding: 44px;
+          box-sizing: border-box;
+          min-height: 440px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          position: relative;
         }
 
         .sp2-card-inner {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          min-height: 400px;
-          position: relative;
-          z-index: 1;
-          transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+          grid-template-columns: 6fr 4fr;
+          gap: 40px;
+          width: 100%;
+          align-items: center;
         }
 
         .sp2-card-inner.hide {
           opacity: 0;
-          transform: translateY(12px) scale(0.98);
+          transform: translateY(8px);
+          transition: all 0.25s ease;
         }
         .sp2-card-inner.show {
           opacity: 1;
-          transform: translateY(0) scale(1);
+          transform: translateY(0);
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* â”€â”€ Info half â”€â”€ */
         .sp2-card-info {
-          padding: 20px;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          position: relative;
+          justify-content: flex-start;
+          height: 100%;
         }
 
         .sp2-card-num-wrapper {
-          overflow: hidden;
-          margin-bottom: 18px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 20px;
         }
 
         .sp2-card-num {
-          display: block;
-
-          font-size: 15px;
-          font-weight: 400;
-
-          background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: sp2-num-slide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          font-family: var(--font-sans);
+          font-size: 20px;
+          font-weight: 500;
+          color: #b48564;
+          letter-spacing: 0.05em;
+          line-height: 1;
         }
 
-        @keyframes sp2-num-slide {
-          from { transform: translateY(100%); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
+        .sp2-card-num-gold-line {
+          width: 24px;
+          height: 2px;
+          background: #b48564;
+          margin-top: 6px;
         }
 
         .sp2-card-title {
-          line-height: 1.15;
-
-          color: var(--color-text-dark);
-          margin: 0 0 20px 0;
+          font-family: var(--font-heading);
+          font-size: 24px;
+          font-weight: 500;
+          color: #000000;
           text-transform: uppercase;
+          letter-spacing: 0.08em;
+          margin: 0 0 16px 0;
         }
 
         .sp2-card-sep {
+          width: 40px;
+          height: 1px;
+          background: rgba(0, 0, 0, 0.1);
           margin-bottom: 24px;
-          overflow: hidden;
-        }
-
-        .sp2-card-sep-line {
-          width: 40px;
-          height: 2px;
-          background: linear-gradient(90deg, var(--color-primary), rgba(29, 53, 87, 0.15));
-          border-radius: 1px;
-          transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .sp2-card-inner.show .sp2-card-sep-line {
-          width: 40px;
-        }
-
-        .sp2-card-inner.hide .sp2-card-sep-line {
-          width: 0;
         }
 
         .sp2-card-details {
           display: flex;
           flex-direction: column;
           gap: 16px;
+          margin-bottom: 32px;
         }
 
         .sp2-card-detail-text {
-
+          font-family: var(--font-sans);
           font-size: 14.5px;
-          line-height: 1.8;
-          color: var(--color-text-muted);
+          color: #4f4f4f;
+          line-height: 1.6;
           margin: 0;
-
         }
 
-        .sp2-card-inner.show .sp2-card-detail-text {
-          animation: sp2-detail-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        .sp2-card-bottom-nav {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-top: auto;
         }
 
-        @keyframes sp2-detail-reveal {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
+        .sp2-bottom-nav-num, .sp2-bottom-nav-total {
+          font-family: var(--font-sans);
+          font-size: 12px;
+          color: #888888;
+          font-weight: 500;
         }
 
-        /* â”€â”€ Image half â”€â”€ */
+        .sp2-bottom-nav-dashes {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .sp2-bottom-dash {
+          width: 24px;
+          height: 2px;
+          background: #e0e0e0;
+          cursor: pointer;
+          transition: background 0.3s ease;
+        }
+
+        .sp2-bottom-dash.active {
+          background: #b48564;
+        }
+
         .sp2-card-visual {
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 36px 28px;
-          position: relative;
-          background: rgba(245, 242, 236, 0.25);
-          border-left: 1px solid rgba(29, 53, 87, 0.06);
-          overflow: hidden;
-        }
-
-        .sp2-card-visual-blueprint {
-          position: absolute;
-          inset: 0;
-          background-image:
-            linear-gradient(rgba(29, 53, 87, 0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(29, 53, 87, 0.025) 1px, transparent 1px);
-          background-size: 40px 40px;
-          pointer-events: none;
-          opacity: 0;
-          transition: opacity 0.6s ease;
-        }
-
-        .sp2-card-inner.show .sp2-card-visual-blueprint {
-          opacity: 1;
-        }
-
-        .sp2-card-visual-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(253, 252, 249, 0.15) 0%, transparent 50%, rgba(29, 53, 87, 0.03) 100%);
-          pointer-events: none;
+          height: 100%;
         }
 
         .sp2-card-img {
           max-width: 100%;
-          max-height: 340px;
-          height: auto;
-          display: block;
+          max-height: 280px;
           object-fit: contain;
-          position: relative;
-          z-index: 1;
-          opacity: 0.82;
-          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+          opacity: 0.25;
+          mix-blend-mode: multiply;
+          filter: grayscale(1);
+          pointer-events: none;
         }
 
-        .sp2-card-inner.show .sp2-card-img {
-          animation: sp2-img-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+        /* ── MOBILE PREVIEW & OVERLAYS ── */
+        .sp2-mobile-preview-card {
+          display: none;
+          padding: 0 24px;
+          box-sizing: border-box;
+          width: 100%;
         }
 
-        @keyframes sp2-img-reveal {
-          from { opacity: 0; transform: scale(0.92) translateX(20px); }
-          to { opacity: 0.82; transform: scale(1) translateX(0); }
+        .sp2-preview-frame {
+          background: #ffffff;
+          border: 1px solid rgba(180, 133, 100, 0.2);
+          border-radius: 12px;
+          padding: 32px 24px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+          text-align: center;
         }
 
-        .sp2-card-inner:hover .sp2-card-img {
-          transform: scale(1.04);
-          opacity: 0.9;
+        .sp2-preview-frame-title {
+          font-size: 18px;
+          color: #000;
+          margin-bottom: 12px;
         }
 
-        /* â”€â”€ STEP PROGRESS INDICATOR â”€â”€ */
-        .sp2-card-progress {
+        .sp2-preview-frame-text {
+          font-size: 14px;
+          color: #666;
+          line-height: 1.5;
+          margin-bottom: 20px;
+        }
+
+        .sp2-preview-peek-grid {
           display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 20px 40px;
-          border-top: 1px solid rgba(29, 53, 87, 0.06);
-          background: rgba(255, 255, 255, 0.35);
-          position: relative;
-          z-index: 1;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 8px;
+          margin-bottom: 24px;
         }
 
-        .sp2-progress-current {
-
-          font-size: 13px;
-          font-weight: 400;
-          background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-
-          min-width: 22px;
-        }
-
-        .sp2-progress-total {
-
+        .peek-tag {
           font-size: 12px;
-          font-weight: 400;
-          color: var(--color-text-muted-light);
-
-          min-width: 22px;
-          text-align: right;
+          color: #b48564;
+          background: rgba(180, 133, 100, 0.08);
+          padding: 4px 10px;
+          border-radius: 20px;
         }
 
-        .sp2-progress-track {
-          flex: 1;
-          position: relative;
-          height: 3px;
-          background: rgba(6, 11, 29, 0.04);
-          border-radius: 2px;
-          overflow: hidden;
-        }
-
-        .sp2-progress-fill {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
-          border-radius: 2px;
-          transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 0 8px rgba(29, 53, 87, 0.3);
-        }
-
-        .sp2-progress-steps {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          align-items: center;
-        }
-
-        .sp2-step {
-          flex: 1;
-          height: 100%;
+        .sp2-preview-cta {
+          width: 100%;
+          background: #b48564;
+          color: #fff;
           border: none;
-          background: transparent;
+          padding: 14px 20px;
+          border-radius: 8px;
+          font-weight: 500;
+          letter-spacing: 0.05em;
           cursor: pointer;
-          padding: 8px 0;
-          position: relative;
         }
 
-        .sp2-step:hover::after {
-          content: '';
-          position: absolute;
-          inset: -4px 1px;
-          background: rgba(29, 53, 87, 0.12);
-          border-radius: 2px;
-        }
-
-        /* â”€â”€ MOBILE HIDDEN BY DEFAULT â”€â”€ */
-        .sp2-mobile-preview-card,
+        /* Mobile Atelier overlay modal */
         .sp2-atelier-overlay {
+          position: fixed;
+          inset: 0;
+          background: #ffffff;
+          z-index: 10000;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .sp2-atelier-container {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          padding: 24px;
+          box-sizing: border-box;
+          justify-content: space-between;
+        }
+
+        .sp2-atelier-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid rgba(0,0,0,0.06);
+          padding-bottom: 16px;
+        }
+
+        .sp2-atelier-main-title {
+          font-size: 20px;
+          margin: 4px 0 0 0;
+          color: #000;
+        }
+
+        .sp2-atelier-subtitle {
+          font-size: 10px;
+          color: #888;
+          letter-spacing: 0.1em;
+        }
+
+        .sp2-atelier-close {
+          background: transparent;
+          border: none;
+          font-size: 22px;
+          cursor: pointer;
+        }
+
+        .sp2-atelier-tabs-nav {
+          display: flex;
+          gap: 12px;
+          overflow-x: auto;
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(0,0,0,0.06);
+          scrollbar-width: none;
+        }
+        .sp2-atelier-tabs-nav::-webkit-scrollbar {
           display: none;
         }
 
-        /* â•â•â•â•â•â• RESPONSIVE â•â•â•â•â•â• */
-
-        @media (max-width: 1200px) {
-          .sp2-layout {
-            gap: 48px;
-            padding: 0 36px;
-          }
-          .sp2-title {
-          }
-          .sp2-card-info {
-            padding: 36px 32px;
-          }
-          .sp2-card-title {
-          }
+        .sp2-atelier-nav-pill {
+          background: transparent;
+          border: none;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+          cursor: pointer;
+          white-space: nowrap;
+          opacity: 0.5;
+        }
+        .sp2-atelier-nav-pill.active {
+          opacity: 1;
+          color: #b48564;
+          font-weight: 500;
+        }
+        .pill-num {
+          font-size: 11px;
+        }
+        .pill-label {
+          font-size: 13px;
         }
 
+        .sp2-atelier-content-pane {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 24px 0;
+          box-sizing: border-box;
+          transition: opacity 0.25s ease;
+        }
+        .sp2-atelier-content-pane.fade {
+          opacity: 0;
+        }
+        .sp2-atelier-content-pane.show {
+          opacity: 1;
+        }
+
+        .sp2-atelier-num-marker {
+          font-size: 12px;
+          color: #b48564;
+          margin-bottom: 12px;
+        }
+
+        .sp2-atelier-spec-title {
+          font-size: 22px;
+          color: #000;
+          margin-bottom: 16px;
+        }
+
+        .sp2-atelier-bullets {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .sp2-atelier-bullet-text {
+          font-size: 14.5px;
+          color: #555;
+          line-height: 1.5;
+          margin: 0;
+        }
+
+        .sp2-atelier-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-top: 1px solid rgba(0,0,0,0.06);
+          padding-top: 16px;
+        }
+
+        .sp2-atelier-footer-btn {
+          background: transparent;
+          border: none;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 13px;
+          color: #b48564;
+          font-weight: 500;
+        }
+
+        .sp2-atelier-dots {
+          display: flex;
+          gap: 6px;
+        }
+
+        .sp2-atelier-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #e0e0e0;
+          border: none;
+          padding: 0;
+        }
+        .sp2-atelier-dot.active {
+          background: #b48564;
+        }
+
+        /* ── RESPONSIVE DESIGN ── */
         @media (max-width: 960px) {
           .sp2-layout {
-            display: none !important;
-          }
-
-          .sp2-section {
-            padding: 60px 0 65px;
-          }
-
-          /* Mobile Preview Section */
-          .sp2-mobile-preview-card {
-            display: flex !important;
-            flex-direction: column;
-            padding: 0 24px;
-            box-sizing: border-box;
-          }
-
-          .sp2-preview-topbar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-          }
-
-          .sp2-preview-frame {
-            position: relative;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(29, 53, 87, 0.2);
-            border-radius: 18px;
-            padding: 36px 24px;
-            text-align: center;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(29, 53, 87, 0.04);
-          }
-
-          .sp2-preview-blueprint-mesh {
-            position: absolute;
-            inset: 0;
-            background-image:
-              linear-gradient(rgba(29, 53, 87, 0.015) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(29, 53, 87, 0.015) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
-            opacity: 0.85;
-          }
-
-          .sp2-preview-icon {
-            font-size: 20px;
-            color: var(--color-primary);
-            margin-bottom: 16px;
-            animation: sp2-diamond-pulse 3s infinite ease-in-out;
-          }
-
-          .sp2-preview-frame-title {
-
-            font-size: 22px;
-            font-weight: 400;
-            color: var(--color-bg-navy);
-            margin: 0 0 12px 0;
-
-            text-transform: uppercase;
-          }
-
-          .sp2-preview-frame-text {
-
-            font-size: 13.5px;
-            line-height: 1.65;
-            color: var(--color-text-muted);
-            margin: 0 auto 24px;
-            max-width: 380px;
-          }
-
-          .sp2-preview-peek-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px 12px;
-            margin-bottom: 32px;
-            position: relative;
-            z-index: 1;
-          }
-
-          .peek-tag {
-
-            font-size: 11px;
-            font-weight: 400;
-            color: var(--color-primary);
-            background: rgba(29, 53, 87, 0.06);
-            border: 1px solid rgba(29, 53, 87, 0.12);
-            padding: 4px 10px;
-            border-radius: 100px;
-
-            text-transform: uppercase;
-          }
-
-          .sp2-preview-cta {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 280px;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
-            border: none;
-            color: var(--color-white);
-
-            font-size: 11.5px;
-            font-weight: 400;
-
-            padding: 16px 24px;
-            border-radius: 100px;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(29, 53, 87, 0.25);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          }
-
-          .sp2-preview-cta:active {
-            transform: scale(0.97);
-            box-shadow: 0 4px 12px rgba(29, 53, 87, 0.15);
-          }
-
-          /* â”€â”€ FULL SCREEN ATELIER OVERLAY (LIGHT THEME) â”€â”€ */
-          .sp2-atelier-overlay {
-            display: flex !important;
-            position: fixed;
-            inset: 0;
-            background: var(--color-bg-light);
-            z-index: 99999;
-            flex-direction: column;
-            overflow: hidden;
-            animation: sp2-overlay-fadein 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-          }
-
-          @keyframes sp2-overlay-fadein {
-            from { opacity: 0; transform: scale(1.03); }
-            to { opacity: 1; transform: scale(1); }
-          }
-
-          .sp2-atelier-container {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top right, var(--color-bg-light), var(--color-bg-light));
-            position: relative;
-            box-sizing: border-box;
-          }
-
-          /* Header */
-          .sp2-atelier-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 20px 16px;
-            border-bottom: 1px solid rgba(29, 53, 87, 0.15);
-          }
-
-          .sp2-atelier-title-area {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-          }
-
-          .sp2-atelier-subtitle {
-
-            font-size: 8.5px;
-            font-weight: 400;
-            color: var(--color-primary);
-
-          }
-
-          .sp2-atelier-main-title {
-
-            font-size: 17px;
-            font-weight: 400;
-            color: var(--color-bg-navy);
-            margin: 0;
-
-          }
-
-          .sp2-atelier-close {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid rgba(29, 53, 87, 0.3);
-            background: rgba(29, 53, 87, 0.03);
-            color: var(--color-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.25s ease;
-          }
-
-          .sp2-atelier-close:active {
-            background: var(--color-primary);
-            color: var(--color-white);
-          }
-
-          /* Horizontal Category Bar */
-          .sp2-atelier-tabs-nav {
-            display: flex;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            padding: 14px 20px;
-            gap: 8px;
-            border-bottom: 1px solid rgba(29, 53, 87, 0.1);
-            background: rgba(29, 53, 87, 0.02);
-          }
-
-          .sp2-atelier-tabs-nav::-webkit-scrollbar {
             display: none;
           }
-
-          .sp2-atelier-nav-pill {
-            flex: 0 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            border-radius: 100px;
-            border: 1px solid rgba(29, 53, 87, 0.15);
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--color-text-muted);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          }
-
-          .sp2-atelier-nav-pill.active {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
-            color: var(--color-white);
-            box-shadow: 0 4px 12px rgba(29, 53, 87, 0.18);
-          }
-
-          .sp2-atelier-nav-pill.active .pill-num {
-            color: var(--color-white);
-          }
-
-          .pill-num {
-
-            font-size: 9.5px;
-            font-weight: 400;
-            color: var(--color-primary);
-          }
-
-          .pill-label {
-
-            font-size: 11px;
-            font-weight: 400;
-            white-space: nowrap;
-          }
-
-          /* Content Pane */
-          .sp2-atelier-content-pane {
-            flex: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            padding: 24px 20px;
-            gap: 24px;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-          }
-
-          .sp2-atelier-content-pane.fade {
-            opacity: 0;
-            transform: translateY(8px);
-          }
-
-          .sp2-atelier-content-pane.show {
-            opacity: 1;
-            transform: translateY(0);
-          }
-
-          .sp2-atelier-visual-col {
-            position: relative;
-            width: 100%;
-            height: 180px;
-            border-radius: 14px;
-            border: 1px solid rgba(29, 53, 87, 0.12);
-            background: rgba(255, 255, 255, 0.9);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            box-sizing: border-box;
-            box-shadow: 0 8px 20px rgba(29, 53, 87, 0.02);
-          }
-
-          .sp2-atelier-visual-bg {
-            position: absolute;
-            inset: 0;
-            background-image:
-              linear-gradient(rgba(29, 53, 87, 0.015) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(29, 53, 87, 0.015) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.8;
-          }
-
-          .sp2-atelier-img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            opacity: 0.95;
-          }
-
-          .sp2-atelier-details-col {
-            display: flex;
-            flex-direction: column;
-          }
-
-          .sp2-atelier-num-marker {
-
-            font-size: 9px;
-            font-weight: 400;
-            color: var(--color-primary);
-
-            margin-bottom: 8px;
-            text-transform: uppercase;
-          }
-
-          .sp2-atelier-spec-title {
-
-            font-size: 20px;
-            font-weight: 400;
-            color: var(--color-bg-navy);
-            margin: 0 0 16px 0;
-
-            text-transform: uppercase;
-            border-left: 2px solid var(--color-primary);
-            padding-left: 10px;
-          }
-
-          .sp2-atelier-bullets {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-          }
-
-          .sp2-atelier-bullet-text {
-
-            font-size: 13.5px;
-            line-height: 1.7;
-            color: var(--color-text-muted);
-            margin: 0;
-          }
-
-          /* Footer Controls */
-          .sp2-atelier-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px 24px;
-            border-top: 1px solid rgba(29, 53, 87, 0.12);
-            background: rgba(29, 53, 87, 0.02);
-          }
-
-          .sp2-atelier-footer-btn {
-            background: none;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--color-primary);
-
-            font-size: 11px;
-            font-weight: 400;
-
-            cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-          }
-
-          .sp2-atelier-footer-btn:active {
-            background: rgba(29, 53, 87, 0.08);
-          }
-
-          .sp2-atelier-dots {
-            display: flex;
-            gap: 4px;
-            max-width: 140px;
-            overflow: hidden;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .sp2-atelier-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: rgba(29, 53, 87, 0.2);
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            transition: all 0.25s ease;
-          }
-
-          .sp2-atelier-dot.active {
-            background: var(--color-primary);
-            transform: scale(1.4);
-          }
-        }
-
-        @media (max-width: 600px) {
           .sp2-mobile-preview-card {
-            padding: 0 16px;
+            display: block;
           }
-          
-          .sp2-title {
-            margin-bottom: 20px;
+          .sp2-section {
+            padding: 40px 0;
           }
         }
-      `}</style>
+`}</style>
     </section>
   );
 }

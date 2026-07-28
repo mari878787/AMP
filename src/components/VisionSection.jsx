@@ -65,7 +65,7 @@ export default function VisionSection() {
         }
 
         .vision-star {
-          color: #a2907a; /* Elegant warm bronze color */
+          color: #C49F85; /* Elegant warm bronze color */
         }
 
         .vision-text {

@@ -2,26 +2,31 @@ import React, { useState, useEffect } from 'react';
 import Button from '../Button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { CATEGORIES } from './data/storyData';
+import ProjectMap from './ProjectMap';
 import './NeighbourhoodStory.css';
 
-export default function NeighbourhoodStory({ onEnquire }) {
+export default function NeighbourhoodStory({ onEnquire, projectCoords, projectName }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false);
+  const [hoveredLocationName, setHoveredLocationName] = useState(null);
 
   // Autoplay loop: cycle through all 4 categories (Main Junctions + 3 others) every 5 seconds
   useEffect(() => {
-    if (isHovered) return;
+    if (isHovered || userInteracted) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % CATEGORIES.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, userInteracted]);
 
   const scrollLeft = () => {
+    setUserInteracted(true);
     setActiveIndex((prev) => (prev - 1 + CATEGORIES.length) % CATEGORIES.length);
   };
 
   const scrollRight = () => {
+    setUserInteracted(true);
     setActiveIndex((prev) => (prev + 1) % CATEGORIES.length);
   };
 
@@ -41,7 +46,7 @@ export default function NeighbourhoodStory({ onEnquire }) {
             <p className="loc-advantage__desc">
               Crystal Moon Light places Chennai's major junctions, premium schools, healthcare, and retail hubs at your doorstep.
             </p>
-            
+
             {/* Viewport for timeline carousel cards */}
             <div className="loc-advantage__viewport">
               <div
@@ -55,7 +60,12 @@ export default function NeighbourhoodStory({ onEnquire }) {
                     <div className="loc-advantage__timeline">
                       <div className="loc-advantage__line-track" />
                       {cat.locations.map((item, idx) => (
-                        <div key={idx} className="loc-advantage__item">
+                        <div 
+                          key={idx} 
+                          className="loc-advantage__item"
+                          onMouseEnter={() => setHoveredLocationName(item.name)}
+                          onMouseLeave={() => setHoveredLocationName(null)}
+                        >
                           <div className="loc-advantage__node-box">
                             <span className="loc-advantage__dist">{item.dist}</span>
                             <div className="loc-advantage__dot">
@@ -82,7 +92,10 @@ export default function NeighbourhoodStory({ onEnquire }) {
                 <button
                   key={idx}
                   className={`slider-dot ${idx === activeIndex ? 'active' : ''}`}
-                  onClick={() => setActiveIndex(idx)}
+                  onClick={() => {
+                    setUserInteracted(true);
+                    setActiveIndex(idx);
+                  }}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
               ))}
@@ -115,14 +128,14 @@ export default function NeighbourhoodStory({ onEnquire }) {
               </div>
             </div>
 
-            {/* Image Visual container */}
-            <div className="loc-advantage__image-wrapper">
-              <img
-                key={activeIndex}
-                src={CATEGORIES[activeIndex].image || "/images/project/why-cmv.png"}
-                alt="Location Advantage Visual"
-                className="loc-advantage__image"
-                style={{ animation: 'imageReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1)' }}
+            {/* Project Map Container */}
+            <div className="loc-advantage__map-wrapper">
+              <ProjectMap 
+                activeCategory={CATEGORIES[activeIndex]} 
+                projectCoords={projectCoords} 
+                projectName={projectName}
+                hoveredLocationName={hoveredLocationName}
+                onInteraction={() => setUserInteracted(true)}
               />
             </div>
           </div>

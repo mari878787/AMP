@@ -26,7 +26,7 @@ const CATEGORIES = [
   },
   {
     id: 'plotted',
-    name: 'Plotted',
+    name: 'Plots',
     img: '/images/home/project-image-2.png',
     projects: [
       { id: 'p1', name: 'Ashok Nagar \u2013 Villa Plots', img: '/images/home/project-image-2.png', url: '/ashok-nagar-villa-plots-in-maduranthakam' }
@@ -34,17 +34,23 @@ const CATEGORIES = [
   }
 ];
 
-export default function Navbar() {
+export default function Navbar({ darkText = false }) {
   const [scrolled, setScrolled] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState(CATEGORIES[0]);
-  const [activeProject, setActiveProject] = useState(CATEGORIES[0].projects[0]);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeProject, setActiveProject] = useState(null);
+
+  useEffect(() => {
+    if (!megaMenuOpen) {
+      setActiveCategory(null);
+      setActiveProject(null);
+    }
+  }, [megaMenuOpen]);
 
   // Mobile Menu State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedSubMenu, setExpandedSubMenu] = useState(null); // 'about' or 'projects' or 'properties'
   const [expandedCategory, setExpandedCategory] = useState(null); // 'villas' or 'apartments' or 'plotted'
-  const [logoType, setLogoType] = useState('monogram'); // 'image', 'monogram', 'text'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +79,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`sobha-navbar ${scrolled ? 'is-scrolled' : ''} ${megaMenuOpen ? 'mega-open' : ''} ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+      <header className={`sobha-navbar ${scrolled ? 'is-scrolled' : ''} ${megaMenuOpen ? 'mega-open' : ''} ${mobileMenuOpen ? 'mobile-open' : ''} ${darkText ? 'dark-text' : ''}`}>
         <div className="navbar-container">
 
           {/* Left Navigation (Desktop) */}
@@ -101,30 +107,14 @@ export default function Navbar() {
 
           {/* Center Logo */}
           <a href="/" className="nav-logo-container" style={{ textDecoration: 'none' }}>
-            {logoType === 'monogram' && (
-              <div className="text-logo-wrapper">
-                <div className="text-logo-monogram-img"></div>
-                <div className="text-logo-divider"></div>
-                <div className="text-logo-text">
-                  <span className="text-logo-primary">AADHITHYA MOHAN</span>
-                  <span className="text-logo-secondary">PROPERTIES</span>
-                </div>
+            <div className="text-logo-wrapper">
+              <div className="text-logo-monogram-img"></div>
+              <div className="text-logo-divider"></div>
+              <div className="text-logo-text">
+                <span className="text-logo-primary">AADHITHYA MOHAN</span>
+                <span className="text-logo-secondary">PROPERTIES</span>
               </div>
-            )}
-            {logoType === 'text' && (
-              <div className="text-logo-wrapper" style={{ gap: 0 }}>
-                <div className="text-logo-text" style={{ alignItems: 'center' }}>
-                  <span className="text-logo-primary" style={{ fontSize: '18px' }}>AADHITHYA MOHAN</span>
-                </div>
-              </div>
-            )}
-            {logoType === 'image' && (
-              <img
-                src="/images/logo.png"
-                alt="Brand Logo"
-                className="nav-logo"
-              />
-            )}
+            </div>
           </a>
 
           {/* Right Navigation (Desktop) */}
@@ -148,13 +138,6 @@ export default function Navbar() {
           </div>
 
         </div>
-        
-        {/* Visible triggers to switch logo (Client Demo) */}
-        <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 9999, display: 'flex', gap: '8px', background: 'rgba(255,255,255,0.9)', padding: '6px', borderRadius: '6px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', backdropFilter: 'blur(4px)' }}>
-          <button onClick={() => setLogoType('image')} style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', fontWeight: '500', padding: '6px 12px', background: logoType === 'image' ? '#1A1A1A' : 'transparent', color: logoType === 'image' ? '#fff' : '#1A1A1A', borderRadius: '4px', border: '1px solid rgba(0,0,0,0.1)' }}>Image</button>
-          <button onClick={() => setLogoType('monogram')} style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', fontWeight: '500', padding: '6px 12px', background: logoType === 'monogram' ? '#1A1A1A' : 'transparent', color: logoType === 'monogram' ? '#fff' : '#1A1A1A', borderRadius: '4px', border: '1px solid rgba(0,0,0,0.1)' }}>AMP Monogram</button>
-          <button onClick={() => setLogoType('text')} style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', fontWeight: '500', padding: '6px 12px', background: logoType === 'text' ? '#1A1A1A' : 'transparent', color: logoType === 'text' ? '#fff' : '#1A1A1A', borderRadius: '4px', border: '1px solid rgba(0,0,0,0.1)' }}>Text Only</button>
-        </div>
       </header>
 
       {/* Mega Menu Dropdown (Rendered outside header to prevent backdrop-filter nesting issues) */}
@@ -165,12 +148,15 @@ export default function Navbar() {
         <div className="mega-menu-content">
 
           {/* Column 1: Categories */}
-          <div className="mega-categories">
+          <div
+            className="mega-categories"
+            style={{ borderRight: activeCategory ? '1px solid rgba(0,0,0,0.08)' : 'none' }}
+          >
             <div className="mega-column-title">CATEGORIES</div>
             {CATEGORIES.map(cat => (
               <div
                 key={cat.id}
-                className={`mega-category-item ${activeCategory.id === cat.id ? 'active' : ''}`}
+                className={`mega-category-item ${activeCategory && activeCategory.id === cat.id ? 'active' : ''}`}
                 onMouseEnter={() => {
                   setActiveCategory(cat);
                   setActiveProject(cat.projects[0]);
@@ -183,26 +169,38 @@ export default function Navbar() {
           </div>
 
           {/* Column 2: Projects */}
-          <div className="mega-projects">
-            <div className="mega-column-title">{activeCategory.name}</div>
-            {activeCategory.projects.map(proj => (
-              <div
-                key={proj.id}
-                className={`mega-project-item ${activeProject?.id === proj.id ? 'active' : ''}`}
-                onMouseEnter={() => setActiveProject(proj)}
-              >
-                <a href={proj.url || `/projects/${proj.id}`}>{proj.name}</a>
-              </div>
-            ))}
+          <div
+            className="mega-projects"
+            style={{
+              opacity: activeCategory ? 1 : 0,
+              visibility: activeCategory ? 'visible' : 'hidden',
+              transform: activeCategory ? 'translateX(0)' : 'translateX(-10px)',
+              transition: 'opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s'
+            }}
+          >
+            {activeCategory && (
+              <>
+                <div className="mega-column-title">{activeCategory.name}</div>
+                {activeCategory.projects.map(proj => (
+                  <div
+                    key={proj.id}
+                    className={`mega-project-item ${activeProject?.id === proj.id ? 'active' : ''}`}
+                    onMouseEnter={() => setActiveProject(proj)}
+                  >
+                    <a href={proj.url || `/projects/${proj.id}`}>{proj.name}</a>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
 
           {/* Column 3: Image Display */}
           <div className="mega-image-container">
             <img
-              src={activeProject ? activeProject.img : activeCategory.img}
+              src={activeProject ? activeProject.img : (activeCategory ? activeCategory.img : CATEGORIES[0].img)}
               alt="Category Preview"
               className="mega-image fade-in-image"
-              key={activeProject ? activeProject.id : activeCategory.id}
+              key={activeProject ? activeProject.id : (activeCategory ? activeCategory.id : 'default')}
             />
           </div>
 
@@ -312,27 +310,24 @@ export default function Navbar() {
           width: 100%;
           height: 60px;
           z-index: 99999;
+          // background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
           transition: all 0.4s ease;
-          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.39), #00000004);
-          
         }
 
         .sobha-navbar.mobile-open{
           background: transparent !important;
         }
-          
 
-        .sobha-navbar.is-scrolled {
-          background: rgba(255, 255, 255, 0.75) !important;
+        .sobha-navbar.is-scrolled, .sobha-navbar.mega-open {
+          background: rgba(30, 30, 30, 0.54) !important;
           backdrop-filter: blur(30px) saturate(180%) !important;
           -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
-        
-        .sobha-navbar.mega-open {
-          background: rgba(255, 255, 255, 0.75) !important;
-          backdrop-filter: blur(30px) saturate(180%) !important;
-          -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+
+        .sobha-navbar.dark-text:not(.is-scrolled):not(.mega-open) .nav-link,
+        .sobha-navbar.dark-text:not(.is-scrolled):not(.mega-open) .text-logo-wrapper,
+        .sobha-navbar.dark-text:not(.is-scrolled):not(.mega-open) .icon-button {
+          color: #000000 !important;
         }
 
         .navbar-container {
@@ -372,7 +367,7 @@ export default function Navbar() {
 
         .nav-link {
           font-family: var(--font-sans);
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 400;
           color: #ffffffff;
           text-decoration: none;
@@ -440,15 +435,15 @@ export default function Navbar() {
         }
 
         .is-scrolled .text-logo-wrapper, .sobha-navbar.mega-open .text-logo-wrapper {
-          color: #000;
+          color: #ffffffff;
         }
 
         .nav-link:hover {
-          color: #d18a4a !important;
+          color: #b48564 !important;
         }
 
         .is-scrolled .nav-link, .sobha-navbar.mega-open .nav-link {
-          color: #000;
+          color: #ffffffff;
         }
           
 
@@ -466,7 +461,7 @@ export default function Navbar() {
         }
 
         .is-scrolled .icon-button, .sobha-navbar.mega-open .icon-button{
-          color: #000;
+          color: #ffffffff;
         }
 
         .mobile-menu-trigger-container {
@@ -486,18 +481,29 @@ export default function Navbar() {
           left: 50%;
           width: calc(100% - 80px);
           max-width: 1320px;
-          background: rgba(255, 255, 255, 0.85);
-          backdrop-filter: blur(25px) saturate(180%);
-          -webkit-backdrop-filter: blur(25px) saturate(180%);
+          background: url("/images/hero_placeholders/chinese-city.jpg") left center / cover no-repeat;
           opacity: 0;
           visibility: hidden;
           transform: translate(-50%, -10px);
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-          border: 1px solid rgba(0,0,0,0.05);
           border-top: none;
           cursor: default;
           z-index: 9999;
+          overflow: hidden;
+        }
+
+        .mega-menu::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(25px) saturate(180%);
+          -webkit-backdrop-filter: blur(25px) saturate(180%);
+          z-index: 1;
         }
 
         .mega-menu.visible {
@@ -514,6 +520,8 @@ export default function Navbar() {
           gap: 30px;
           min-height: 280px;
           box-sizing: border-box;
+          position: relative;
+          z-index: 2;
         }
 
         .mega-categories, .mega-projects {
@@ -554,7 +562,7 @@ export default function Navbar() {
         }
 
         .mega-category-item.active a, .mega-category-item:hover a {
-          color: #d18a4a; /* Brand accent color */
+          color: #b48564; /* Brand accent color */
           transform: none;
         }
 
@@ -572,7 +580,7 @@ export default function Navbar() {
         }
 
         .mega-project-item.active a, .mega-project-item:hover a {
-          color: #d18a4a;
+          color: #b48564;
         }
 
         .mega-image-container {
@@ -723,7 +731,7 @@ export default function Navbar() {
         }
 
         .mobile-sub-link:hover {
-          color: #d18a4a;
+          color: #b48564;
         }
 
         /* â”€â”€ Nested Mobile Menu Category List styles â”€â”€ */
@@ -753,7 +761,7 @@ export default function Navbar() {
         }
 
         .mobile-category-title.active {
-          color: var(--color-gold, #d18a4a);
+          color: var(--color-gold, #b48564);
         }
 
         .mobile-category-arrow {
@@ -793,7 +801,7 @@ export default function Navbar() {
         }
 
         .mobile-project-link:hover {
-          color: var(--color-gold, #d18a4a);
+          color: var(--color-gold, #b48564);
         }
 
         .mobile-all-projects-link {
@@ -837,7 +845,7 @@ export default function Navbar() {
         }
 
         .mobile-social-link:hover {
-          color: var(--color-gold, #d18a4a);
+          color: var(--color-gold, #b48564);
         }
 
         /* â”€â”€ Responsive Queries â”€â”€ */

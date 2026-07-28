@@ -29,3 +29,10 @@ dist-ssr
 
 .vercel
 .env*
+
+# Temporary & Heavy Zip Files
+*.zip
+lh_run.txt
+pinggy_out.txt
+public/images/maia.zip
+public/images/maia/

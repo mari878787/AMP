@@ -85,11 +85,8 @@
 }
 
 .loc-advantage__desc {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  color: var(--color-text-muted);
-  line-height: 1.7;
   margin-bottom: 28px;
+  margin-top: 16px;
   max-width: 480px;
 }
 
@@ -126,6 +123,7 @@
     opacity: 0;
     transform: scale(1.05);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -396,8 +394,7 @@
     padding: 40px 0;
   }
 
-  .loc-advantage__title {
-  }
+  .loc-advantage__title {}
 
   .loc-advantage__slide-card {
     padding: 20px 16px;
@@ -424,4 +421,126 @@
   .loc-advantage__name {
     font-size: 13px;
   }
+}
+
+/* ── Custom Interactive Map Styles ── */
+.loc-advantage__map-wrapper {
+  width: 100%;
+  height: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(180, 133, 100, 0.08);
+  border: 1px solid rgba(180, 133, 100, 0.15);
+  background-color: #0b0b0b;
+  position: relative;
+  transition: transform 0.6s var(--ease-luxury), box-shadow 0.6s var(--ease-luxury);
+}
+
+.loc-advantage__map-wrapper:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(180, 133, 100, 0.12);
+}
+
+@media (max-width: 1024px) {
+  .loc-advantage__map-wrapper {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .loc-advantage__map-wrapper {
+    height: 320px;
+  }
+}
+
+/* Custom Leaflet Marker Styling */
+.custom-map-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-map-marker .marker-pin-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-map-marker.project-marker .marker-pin-core {
+  background: #b48564;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(180, 133, 100, 0.4);
+}
+
+.custom-map-marker.project-marker .marker-pin-pulse {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  background: rgba(180, 133, 100, 0.35);
+  border-radius: 50%;
+  animation: centerPulse 2.5s infinite ease-out;
+}
+
+@keyframes centerPulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Custom Teardrop POI Pins (SVG based) */
+.custom-map-pin-svg {
+  position: relative;
+  width: 28px;
+  height: 35px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-map-pin-svg .poi-svg-marker {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.custom-map-pin-svg .pin-path {
+  fill: #b48564;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.custom-map-pin-svg .pin-dot {
+  fill: #ffffff;
+  transition: fill 0.3s ease;
+}
+
+/* Hover & Active Highlight States */
+.custom-map-marker.poi-marker:hover .custom-map-pin-svg,
+.custom-map-marker.poi-marker.active-highlight .custom-map-pin-svg {
+  transform: scale(1.25) translateY(-3px);
+}
+
+.custom-map-marker.poi-marker:hover .pin-path,
+.custom-map-marker.poi-marker.active-highlight .pin-path {
+  fill: #ffffff;
+  stroke: #b48564;
+  stroke-width: 2;
+}
+
+.custom-map-marker.poi-marker:hover .pin-dot,
+.custom-map-marker.poi-marker.active-highlight .pin-dot {
+  fill: #b48564;
 }

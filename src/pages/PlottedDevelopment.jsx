@@ -13,6 +13,7 @@ import WhyProject from '../components/WhyProject';
 import ProjectSpecs from '../components/ProjectSpecs';
 import ScrollReveal from '../components/ScrollReveal';
 import NeighbourhoodStory from '../components/StorySection/NeighbourhoodStory';
+import ProjectPricingSection from '../components/ProjectPricingSection';
 
 const VIDEO_SLIDES = [
   {
@@ -180,7 +181,7 @@ export default function PlottedDevelopment() {
   const [activeVideoIdx, setActiveVideoIdx] = useState(0);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [hideMainHeader, setHideMainHeader] = useState(false);
-  
+
   useEffect(() => {
     const handleOpenModal = (e) => {
       e.preventDefault();
@@ -291,7 +292,7 @@ export default function PlottedDevelopment() {
       const total = galleryImages[section].length;
       if (total <= 1) return;
       const idx = galleryIndices[section];
-      
+
       clearTimeout(galleryTimer.current[section]);
 
       if (idx === total + 1) {
@@ -348,10 +349,12 @@ export default function PlottedDevelopment() {
     // Allow React to render the new section, then scroll to it
     setTimeout(() => {
       const container = document.querySelector('.project-sections-container');
-      if (container) {
+      const subNav = document.querySelector('.project-sub-nav');
+      if (container && subNav) {
         const rect = container.getBoundingClientRect();
-        // Calculate absolute position minus header offsets (~140px for main nav + sub nav)
-        const scrollTop = window.pageYOffset + rect.top - 140;
+        const subNavHeight = subNav.getBoundingClientRect().height;
+        // Scroll exactly to top of the sections container minus the sticky sub-navigation height
+        const scrollTop = window.pageYOffset + rect.top - subNavHeight;
         window.scrollTo({
           top: scrollTop,
           behavior: 'smooth'
@@ -435,43 +438,43 @@ export default function PlottedDevelopment() {
 
           {/* Project Hero Section */}
           <section className="project-hero-section">
-          <div className="project-split-mask" aria-hidden="true">
-            <div className="split-panel panel-1"></div>
-            <div className="split-panel panel-2"></div>
-            <div className="split-panel panel-3"></div>
-            <div className="split-panel panel-4"></div>
-          </div>
-
-          <div className="project-hero-background">
-            <img
-              src="/images/project/ashok-nagar/Web banner AN - 3.jpg (1).jpeg"
-              alt="Crystal Moonlight Villa"
-              className="project-hero-bg-image"
-            />
-            <div className="project-hero-light-leak" aria-hidden="true"></div>
-            <div className="project-hero-overlay"></div>
-          </div>
-
-          <div className="project-hero-content">
-            <div className="project-hero-text-col">
-              <h1 className="project-hero-title">
-                Ashok Nagar – Villa Plots
-              </h1>
-              <p className="project-hero-subtitle">MADURANTHAKAM, CHENGALPATTU DIST.</p>
+            <div className="project-split-mask" aria-hidden="true">
+              <div className="split-panel panel-1"></div>
+              <div className="split-panel panel-2"></div>
+              <div className="split-panel panel-3"></div>
+              <div className="split-panel panel-4"></div>
             </div>
 
-            <div className="project-hero-btn-col">
-              <Button
-                theme="dark"
-                className="hero-cta-btn"
-                onClick={() => setIsQuoteOpen(true)}
-                icon="â†“"
-              >
-                Download Brochure
-              </Button>
+            <div className="project-hero-background">
+              <img
+                src="/images/project/ashok-nagar/Web banner AN - 3.jpg (1).jpeg"
+                alt="Crystal Moonlight Villa"
+                className="project-hero-bg-image"
+              />
+              <div className="project-hero-light-leak" aria-hidden="true"></div>
+              <div className="project-hero-overlay"></div>
             </div>
-          </div>
-        </section>
+
+            <div className="project-hero-content">
+              <div className="project-hero-text-col">
+                <h1 className="project-hero-title">
+                  Ashok Nagar – Villa Plots
+                </h1>
+                <p className="project-hero-subtitle">MADURANTHAKAM, CHENGALPATTU DIST.</p>
+              </div>
+
+              <div className="project-hero-btn-col">
+                <Button
+                  theme="dark"
+                  className="hero-cta-btn"
+                  onClick={() => setIsQuoteOpen(true)}
+                  icon="â†“"
+                >
+                  Download Brochure
+                </Button>
+              </div>
+            </div>
+          </section>
         </div>
 
         {/* Project Sticky Sub-navigation with Tab Dropdowns */}
@@ -485,7 +488,8 @@ export default function PlottedDevelopment() {
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,
-                  opacity: indicatorStyle.opacity }}
+                  opacity: indicatorStyle.opacity
+                }}
               />
 
               <button
@@ -523,6 +527,13 @@ export default function PlottedDevelopment() {
                 className={`sub-nav-link ${activeTab === 'layout-plan' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Layout Plan</span>
+              </button>
+
+              <button
+                onClick={() => handleScrollToSection('pricing')}
+                className={`sub-nav-link ${activeTab === 'pricing' ? 'active' : ''}`}
+              >
+                <span className="sub-nav-text">Price</span>
               </button>
 
               <button
@@ -574,6 +585,12 @@ export default function PlottedDevelopment() {
                   onClick={() => handleScrollToSection('layout-plan')}
                 >
                   Layout Plan
+                </button>
+                <button
+                  className={`dropdown-item ${activeTab === 'pricing' ? 'active' : ''}`}
+                  onClick={() => handleScrollToSection('pricing')}
+                >
+                  Price
                 </button>
                 <button
                   className={`dropdown-item ${activeTab === 'status' ? 'active' : ''}`}
@@ -750,7 +767,7 @@ export default function PlottedDevelopment() {
                 <ScrollReveal className="section-header" animation="fadeUp" style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   {/* <span className="section-tag">Why CML</span> */}
                   <h2 className="section-title">
-                    Bespoke living beyond time
+                    Bespoke living beyond <span>time</span>
                   </h2>
                   {/* <p className="section-subtitle" style={{ marginTop: '8px' }}>
                   Explore the highlights and location advantage of Crystal Moonlight Villa.
@@ -779,13 +796,13 @@ export default function PlottedDevelopment() {
                         <h3 className="overview-text-title" style={{ marginBottom: '24px' }}>
                           Ashok Nagar Villa Plots
                         </h3>
-                        
+
                         <div className="pillars-accordion">
                           {pillars.map((pillar, index) => {
                             const isOpen = index === activePillar;
                             return (
-                              <div 
-                                key={pillar.index} 
+                              <div
+                                key={pillar.index}
                                 className={`pillar-item ${isOpen ? 'active' : ''}`}
                                 onClick={() => setActivePillar(index)}
                               >
@@ -794,7 +811,7 @@ export default function PlottedDevelopment() {
                                   <h4 className="pillar-title">{pillar.title}</h4>
                                   <span className="pillar-toggle-icon">{isOpen ? '−' : '+'}</span>
                                 </div>
-                                <div 
+                                <div
                                   className="pillar-body"
                                   style={{
                                     maxHeight: isOpen ? '220px' : '0px',
@@ -816,8 +833,12 @@ export default function PlottedDevelopment() {
                 </div>
               </div> {/* Close container */}
 
-              {/* â”€â”€ Neighbourhood Story Experience â”€â”€ */}
-              <NeighbourhoodStory onEnquire={() => setIsQuoteOpen(true)} />
+              {/* ── Neighbourhood Story Experience ── */}
+              <NeighbourhoodStory 
+                onEnquire={() => setIsQuoteOpen(true)} 
+                projectCoords={[12.510842, 79.882490]}
+                projectName="Ashok Nagar Villa Plots"
+              />
 
             </section>
           )}
@@ -827,43 +848,43 @@ export default function PlottedDevelopment() {
           {/* Master Gallery Section */}
           {activeTab === 'gallery' && (
             <>
-            <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '60px', paddingBottom: '60px', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / cover no-repeat' }}>
-              <div className="container">
-                <ScrollReveal className="section-header" animation="fadeUp" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '32px' }}>
-                  <h2 className="section-title">
-                    Plot Views & Project Walkthrough
-                  </h2>
-                </ScrollReveal>
-                {/* Gallery Navigation Tabs — Plots & Videos for Plotted Development */}
-                <div className="nested-tabs-container" style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center' }}>
-                  <div className="filter-tabs">
-                    {[
-                      { key: 'plots', label: 'Plot Images' },
-                      { key: 'videos', label: 'Videos' }
-                    ].map(({ key, label }) => (
-                      <button
-                        key={key}
-                        className={`filter-tab-btn ${galleryTab === key ? 'active' : ''}`}
-                        onClick={() => setGalleryTab(key)}
-                      >
-                        {label}
-                      </button>
-                    ))}
+              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '60px', paddingBottom: '60px', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / cover no-repeat' }}>
+                <div className="container">
+                  <ScrollReveal className="section-header" animation="fadeUp" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '32px' }}>
+                    <h2 className="section-title">
+                      Visual <span>Spotlight</span>
+                    </h2>
+                  </ScrollReveal>
+                  {/* Gallery Navigation Tabs — Plots & Videos for Plotted Development */}
+                  <div className="nested-tabs-container" style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center' }}>
+                    <div className="filter-tabs">
+                      {[
+                        { key: 'plots', label: 'Plot Images' },
+                        { key: 'videos', label: 'Videos' }
+                      ].map(({ key, label }) => (
+                        <button
+                          key={key}
+                          className={`filter-tab-btn ${galleryTab === key ? 'active' : ''}`}
+                          onClick={() => setGalleryTab(key)}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </div> {/* Close container here for full-bleed viewport */}
+                </div> {/* Close container here for full-bleed viewport */}
 
-                      {/* Spotlight Active-Card Gallery Carousel */}
-              <div className="gallery-spotlight-viewport">
-                  <div 
+                {/* Spotlight Active-Card Gallery Carousel */}
+                <div className="gallery-spotlight-viewport">
+                  <div
                     className="gallery-spotlight-track"
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 'var(--gallery-gap, 2vw)',
+                      gap: 'var(--gallery-gap, 8vw)',
                       width: 'max-content',
                       transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                      transform: `translateX(calc(var(--gallery-card-offset, 15vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 2vw))))`
+                      transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
                     }}
                   >
                     {(() => {
@@ -885,13 +906,13 @@ export default function PlottedDevelopment() {
                             className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
                             style={{
                               flexShrink: 0,
-                              flexBasis: isActive ? 'var(--gallery-card-active-w, 70vw)' : 'var(--gallery-card-w, 55vw)',
-                              width: isActive ? 'var(--gallery-card-active-w, 70vw)' : 'var(--gallery-card-w, 55vw)',
+                              flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                              width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
                               transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
                               cursor: 'pointer',
                               overflow: 'hidden',
                               position: 'relative',
-                              aspectRatio: '16/9',
+                              aspectRatio: '16/10',
                               boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
                             }}
                             onClick={() => {
@@ -908,9 +929,9 @@ export default function PlottedDevelopment() {
                               }
                             }}
                           >
-                            <img 
-                              src={img.src} 
-                              alt={img.title} 
+                            <img
+                              src={img.src}
+                              alt={img.title}
                               style={{
                                 width: '100%',
                                 height: '100%',
@@ -918,7 +939,7 @@ export default function PlottedDevelopment() {
                                 display: 'block'
                               }}
                             />
-                            
+
                             {galleryTab === 'videos' && (
                               <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
                                 <div className="play-button-pulsing">
@@ -942,16 +963,16 @@ export default function PlottedDevelopment() {
                   </div>
 
                   {/* Navigation Arrows positioned on left/right previews */}
-                  <button 
-                    className="gallery-spotlight-arrow prev" 
-                    onClick={() => prevGallerySlide(galleryTab)} 
+                  <button
+                    className="gallery-spotlight-arrow prev"
+                    onClick={() => prevGallerySlide(galleryTab)}
                     aria-label="Previous image"
                   >
                     <ChevronLeft size={24} />
                   </button>
-                  <button 
-                    className="gallery-spotlight-arrow next" 
-                    onClick={() => nextGallerySlide(galleryTab)} 
+                  <button
+                    className="gallery-spotlight-arrow next"
+                    onClick={() => nextGallerySlide(galleryTab)}
                     aria-label="Next image"
                   >
                     <ChevronRight size={24} />
@@ -970,7 +991,7 @@ export default function PlottedDevelopment() {
                 <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   {/* <span className="section-tag" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--color-bg-light)', border: '1px solid rgba(255,255,255,0.1)' }}>Amenities</span> */}
                   <h2 className="section-title" style={{ color: 'var(--color-text-dark)', marginBottom: '0px' }}>
-                    Luxury Community Amenities
+                    Luxury Community <span>Amenities</span>
                   </h2>
                   <p className="section-subtitle" style={{ color: 'var(--color-text-muted-light)', marginBottom: '24px' }}>
                     Designed for comfort, security, and an enriched community life
@@ -978,20 +999,20 @@ export default function PlottedDevelopment() {
                 </ScrollReveal>
 
                 <div className="amenities-split-layout" style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '32px', width: '100%', padding: '20px 0', alignItems: 'stretch' }}>
-                  
+
                   {/* Left Column: Directory */}
                   <div className="amenities-directory" style={{ width: isMobile ? '100%' : '50%', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', padding: '0 12px' }}>
                       <span style={{ textTransform: 'uppercase', color: 'var(--color-gold)' }}>Directory</span>
                       <span style={{ color: 'var(--color-text-muted-light)' }}>{amenities.length} Amenities</span>
                     </div>
-                    
-                    <div 
+
+                    <div
                       ref={amenitiesListRef}
                       className="amenities-grid-container"
-                      style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
                         gap: '10px',
                         width: '100%'
                       }}
@@ -1006,12 +1027,12 @@ export default function PlottedDevelopment() {
                             border: 'none',
                             borderBottom: amenityIdx === idx ? '2px solid var(--color-primary, #1d3557)' : '1px solid rgba(0,0,0,0.06)',
                             borderRadius: '0px', cursor: 'pointer', transition: 'all 0.3s ease',
-                            color:  '#000000' ,
+                            color: '#000000',
                             boxShadow: 'none',
                             textAlign: 'left', flexShrink: 0
                           }}
                         >
-                          <div style={{ 
+                          <div style={{
                             width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
                             background: amenityIdx === idx ? 'var(--color-bg-navy)' : 'rgba(0,0,0,0.04)',
                             color: amenityIdx === idx ? 'var(--color-white)' : 'var(--color-text-muted-light)', transition: 'all 0.3s ease',
@@ -1028,8 +1049,8 @@ export default function PlottedDevelopment() {
                   {/* Right Column: Visualizer */}
                   <div className="amenities-visualizer" style={{ width: isMobile ? '100%' : '50%', minHeight: isMobile ? '400px' : 'auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 30px 60px rgba(0,0,0,0.1)' }}>
                     {amenities.map((item, idx) => (
-                      <div 
-                        key={idx} 
+                      <div
+                        key={idx}
                         style={{
                           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
                           opacity: amenityIdx === idx ? 1 : 0,
@@ -1039,11 +1060,11 @@ export default function PlottedDevelopment() {
                         }}
                       >
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-                        <div style={{ 
-                          position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '20px 24px' : '30px 40px', 
-                          background: 'linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, transparent 100%)', 
-                          backdropFilter: 'blur(16px) saturate(150%)', WebkitBackdropFilter: 'blur(16px) saturate(150%)', 
-                          borderTop: '1px solid rgba(255, 255, 255, 0.4)', zIndex: 2 
+                        <div style={{
+                          position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '20px 24px' : '30px 40px',
+                          background: 'linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, transparent 100%)',
+                          backdropFilter: 'blur(16px) saturate(150%)', WebkitBackdropFilter: 'blur(16px) saturate(150%)',
+                          borderTop: '1px solid rgba(255, 255, 255, 0.4)', zIndex: 2
                         }}>
                           <h3 style={{ color: '#000000', marginBottom: '12px', fontWeight: '400' }}>{item.title}</h3>
                           <p style={{ color: 'rgba(0,0,0,0.7)', margin: 0 }}>{item.desc}</p>
@@ -1053,7 +1074,7 @@ export default function PlottedDevelopment() {
                   </div>
 
                 </div>
-                  </div>
+              </div>
             </section>
           )}
 
@@ -1062,7 +1083,7 @@ export default function PlottedDevelopment() {
             <section id="layout-plan" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TR-1.png") right top / cover no-repeat', display: 'flex', alignItems: 'center' }}>
               <div className="container" style={{ width: '100%' }}>
                 <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '48px' }}>
-                  <h2 className="section-title">Layout Plan</h2>
+                  <h2 className="section-title">Layout <span>Plan</span></h2>
                   <p className="section-subtitle" style={{ color: 'var(--color-text-dark)' }}>
                     DTCP Approved residential layout — Ashok Nagar, Maduranthakam
                   </p>
@@ -1103,16 +1124,15 @@ export default function PlottedDevelopment() {
 
           {/* Size & Pricing Section (Currently omitted from navigation but kept for structure) */}
           {activeTab === 'pricing' && (
-            <section id="pricing" className="project-pricing-section scroll-section" style={{ position: 'relative', overflow: 'hidden', minHeight: 'calc(100vh - 140px)' }}>
-              <img src="/images/flycatcher_corner_bottomright.png" alt="" className="corner-bird corner-bottom-right" aria-hidden="true" />
-              <div className="container">
-                <ScrollReveal className="section-header" animation="fadeUp">
-                  <span className="section-tag">Pricing</span>
-                  <h2 className="section-title">Size & Price Details</h2>
-                  <p className="section-subtitle" style={{ color: 'var(--color-text-dark)', marginBottom: '32px' }}>Bespoke configurations engineered for luxury space optimization</p>
-                </ScrollReveal>
-              </div>
-            </section>
+            <ProjectPricingSection
+              projectName="Ashok Nagar"
+              priceAED="550 K*"
+              priceINR="1.25 CR*"
+              priceUSD="150 K*"
+              priceEUR="140 K*"
+              priceGBP="120 K*"
+              unitTypes={['Villa Plots']}
+            />
           )}
 
           {/* Project Status Timeline */}
@@ -1141,11 +1161,11 @@ export default function PlottedDevelopment() {
                 }
               ];
               const currentStatus = projectStatusData[statusMonthIdx];
-              
+
               const handlePrevMonth = () => {
                 setStatusMonthIdx(prev => (prev === 0 ? projectStatusData.length - 1 : prev - 1));
               };
-              
+
               const handleNextMonth = () => {
                 setStatusMonthIdx(prev => (prev === projectStatusData.length - 1 ? 0 : prev + 1));
               };
@@ -1154,24 +1174,24 @@ export default function PlottedDevelopment() {
                 <section id="status" className="project-status-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TR-1.png") right top / cover no-repeat' }}>
                   <div className="container">
                     <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', alignItems: 'center', marginBottom: '50px' }}>
-                      <h2 className="section-title">Project Status</h2>
+                      <h2 className="section-title">Project <span>Status</span></h2>
                       <p className="section-subtitle" style={{ color: 'var(--color-text-dark)', margin: '0 auto', textAlign: 'center' }}>Live construction tracking and milestone updates</p>
                     </ScrollReveal>
 
                     <div className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                       <div className="status-month-container" style={{ display: 'flex', gap: '40px', alignItems: 'center', position: 'relative', width: '100%' }}>
-                        
+
                         {/* Left Side Gap - Month/Year & Navigation */}
                         <div className="status-month-label" style={{ width: '100px', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
                           <button onClick={handlePrevMonth} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-bg-navy)', padding: '4px' }}>
                             <ChevronUp size={28} />
                           </button>
-                          
+
                           <div style={{ textAlign: 'center' }}>
                             <h3 style={{ color: 'var(--color-bg-navy)', fontWeight: '400', margin: '0 0 4px 0' }}>{currentStatus.month}</h3>
                             <span style={{ color: 'var(--color-text-dark)' }}>{currentStatus.year}</span>
                           </div>
-                          
+
                           <button onClick={handleNextMonth} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-bg-navy)', padding: '4px' }}>
                             <ChevronDown size={28} />
                           </button>
@@ -1531,7 +1551,7 @@ export default function PlottedDevelopment() {
           font-family: var(--font-heading);
           font-size: 36px;
           font-weight: 200;
-          color: var(--color-text-dark);
+          color: #b48564;
           text-transform: uppercase;
           line-height: 1.1;
           margin-bottom: 6px;
@@ -3614,9 +3634,9 @@ export default function PlottedDevelopment() {
           padding: 20px 0;
           margin-left: calc(-50vw + 50%);
           left: 0;
-          --gallery-card-active-w: 70vw;
+          --gallery-card-active-w: 75vw;
           --gallery-card-w: 55vw;
-          --gallery-gap: 2vw;
+          --gallery-gap: 8vw;
           --gallery-card-offset: calc(50vw - var(--gallery-card-active-w) / 2);
         }
 
@@ -3631,7 +3651,7 @@ export default function PlottedDevelopment() {
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
-          aspect-ratio: 16/9;
+          aspect-ratio: 16/10;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
           transition: flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
