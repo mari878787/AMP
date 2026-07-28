@@ -4,6 +4,12 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import AboutLegacyExpand from '../components/AboutLegacyExpand';
+import AboutQuoteStatement from '../components/AboutQuoteStatement';
+import AboutStatsBar from '../components/AboutStatsBar';
+import AboutPurposeSection from '../components/AboutPurposeSection';
+import AboutJourneyAccordion from '../components/AboutJourneyAccordion';
+import AboutTeamSection from '../components/AboutTeamSection';
+import AboutCareersCTA from '../components/AboutCareersCTA';
 
 const AboutUs = () => {
   useEffect(() => {
@@ -22,77 +28,23 @@ const AboutUs = () => {
         image="/images/maia/5.png"
       />
 
-      {/* 3. Massive Scale Typography (Stats) - No Cards */}
-      <section className="massive-stats-section">
-        <div className="container">
-          <div className="raw-stats-flex">
-            <ScrollReveal animation="fadeUp" delay={0.1} className="raw-stat-item">
-              <div className="raw-stat-number">50<span className="raw-stat-plus">+</span></div>
-              <div className="raw-stat-label">PROJECTS IN DEVELOPMENT</div>
-            </ScrollReveal>
-            
-            <div className="raw-stat-divider"></div>
+      {/* 2. Editorial Quote Statement Section */}
+      <AboutQuoteStatement />
 
-            <ScrollReveal animation="fadeUp" delay={0.2} className="raw-stat-item">
-              <div className="raw-stat-number">600<span className="raw-stat-k">K</span><span className="raw-stat-plus">+</span></div>
-              <div className="raw-stat-label">PRIME LAND DEVELOPED (SQ.FT)</div>
-            </ScrollReveal>
+      {/* 3. Luxury Icon Metrics Bar Section */}
+      <AboutStatsBar />
 
-            <div className="raw-stat-divider"></div>
+      {/* 4. Core Purpose & 4-Pillar Values Section (White Background) */}
+      <AboutPurposeSection />
 
-            <ScrollReveal animation="fadeUp" delay={0.3} className="raw-stat-item">
-              <div className="raw-stat-number">1.5<span className="raw-stat-k">B</span><span className="raw-stat-plus">+</span></div>
-              <div className="raw-stat-label">TOTAL PROJECTS VALUE</div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      {/* 5. Interactive Expanding Timeline Accordion Section */}
+      <AboutJourneyAccordion />
 
-      {/* 4. Elegant Timeline - No Cards, just Typography and Lines */}
-      <section className="elegant-timeline-section">
-        <div className="container">
-          <ScrollReveal animation="fadeUp" style={{ textAlign: 'center', marginBottom: '120px' }}>
-            <span className="section-tag">OUR MILESTONES</span>
-            <h2 className="section-title">The Golden Thread</h2>
-          </ScrollReveal>
+      {/* 6. Meet The Team & Founder Spotlight Section */}
+      <AboutTeamSection />
 
-          <div className="timeline-raw-list">
-            
-            <ScrollReveal animation="fadeUp" delay={0.1} className="timeline-raw-item">
-              <div className="timeline-raw-year">2016</div>
-              <div className="timeline-raw-content">
-                <h3 className="timeline-raw-title">The Beginning</h3>
-                <p className="timeline-raw-desc">Founded with a mission to make homeownership accessible for all, Aadhithya Mohan Properties LLP started its journey with small-scale residential layouts.</p>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fadeUp" delay={0.2} className="timeline-raw-item">
-              <div className="timeline-raw-year">2018</div>
-              <div className="timeline-raw-content">
-                <h3 className="timeline-raw-title">Building Communities</h3>
-                <p className="timeline-raw-desc">Expanded into affordable villa and apartment projects, providing both lifestyle and investment opportunities for countless families.</p>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fadeUp" delay={0.3} className="timeline-raw-item">
-              <div className="timeline-raw-year">2021</div>
-              <div className="timeline-raw-content">
-                <h3 className="timeline-raw-title">Recognition & Growth</h3>
-                <p className="timeline-raw-desc">Awarded "The Short Time Achiever" award for delivering projects faster and with unmatched value, solidifying our reputation in the industry.</p>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fadeUp" delay={0.4} className="timeline-raw-item" style={{ borderBottom: 'none' }}>
-              <div className="timeline-raw-year">2024</div>
-              <div className="timeline-raw-content">
-                <h3 className="timeline-raw-title">Modern Luxury</h3>
-                <p className="timeline-raw-desc">Today, we pioneer the development of premium gated communities, blending contemporary aesthetics with highly functional luxury layouts.</p>
-              </div>
-            </ScrollReveal>
-
-          </div>
-        </div>
-      </section>
+      {/* 7. Careers CTA Section */}
+      <AboutCareersCTA />
 
       <style dangerouslySetInnerHTML={{ __html: `
         /* Ultra-Luxury Theme-Aligned Styles */

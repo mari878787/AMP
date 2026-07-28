@@ -144,7 +144,7 @@ export default function AboutLegacyExpand({
         }
 
         .legacy-years {
-          font-family: var(--font-heading, serif);
+          font-family: var(--font-sans);
           font-size: clamp(80px, 9vw, 130px);
           font-weight: 300;
           line-height: 0.9;
