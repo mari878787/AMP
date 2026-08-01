@@ -154,10 +154,9 @@ export default function HeroSection({ startZoom }) {
         }
         
         .hero-subtitle {
-          font-size: 13px;
-          font-weight: 300;
+          font-size: 16px;
+          font-weight: 500;
           color: rgba(255, 255, 255, 0.85);
-          letter-spacing: 0.18em;
           line-height: 1.8;
           text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
           opacity: 0;

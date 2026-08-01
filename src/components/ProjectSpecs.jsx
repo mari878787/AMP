@@ -427,7 +427,7 @@ export default function ProjectSpecs({
           color: rgba(0, 0, 0, 0.25);
           margin: 0 16px;
           font-size: 13px;
-          font-weight: 300;
+          font-weight: 400;
           pointer-events: none;
           user-select: none;
         }
@@ -439,18 +439,19 @@ export default function ProjectSpecs({
           cursor: pointer;
           position: relative;
           font-family: var(--font-sans);
-          font-size: 12px;
+          font-size: 14px;
           color: #666666;
           transition: all 0.3s ease;
           outline: none;
           box-shadow: none !important;
           height: 64px;
-          display: inline-flex;
           align-items: center;
+          font-weight: 400;
         }
 
         .sp2-tag:hover, .sp2-tag.active {
           color: #000000;
+          font-weight: 600 !important;
         }
 
         .sp2-tag-gold-underline {
@@ -480,7 +481,7 @@ export default function ProjectSpecs({
         .sp2-card {
           width: 100%;
           background: #ffffff;
-          border-radius: 16px;
+          border-radius: 8px;
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
           border: 1px solid rgba(180, 133, 100, 0.12);
           overflow: hidden;

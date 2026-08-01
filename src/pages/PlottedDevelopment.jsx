@@ -1047,7 +1047,7 @@ export default function PlottedDevelopment() {
                   </div>
 
                   {/* Right Column: Visualizer */}
-                  <div className="amenities-visualizer" style={{ width: isMobile ? '100%' : '50%', minHeight: isMobile ? '400px' : 'auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 30px 60px rgba(0,0,0,0.1)' }}>
+                  <div className="amenities-visualizer" style={{ width: isMobile ? '100%' : '50%', minHeight: isMobile ? '400px' : 'auto', position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 30px 60px rgba(0,0,0,0.1)' }}>
                     {amenities.map((item, idx) => (
                       <div
                         key={idx}
@@ -1389,10 +1389,10 @@ export default function PlottedDevelopment() {
         }
 
         .project-sub-nav {
-          background: rgba(255, 255, 255, 0.75);
-          backdrop-filter: blur(30px) saturate(180%);
-          -webkit-backdrop-filter: blur(30px) saturate(180%);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          background: rgba(30, 30, 30, 0.54) !important;
+          backdrop-filter: blur(30px) saturate(180%) !important;
+          -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
           position: sticky;
           top: 0;
           z-index: 90;
@@ -1569,12 +1569,12 @@ export default function PlottedDevelopment() {
           font-weight: 400;
         }
 
-        /* â”€â”€ SLIDING GOLD INDICATOR â”€â”€ */
+        /* ── SLIDING GOLD INDICATOR ── */
         .sub-nav-indicator {
           position: absolute;
           bottom: -1px;
           height: 3.5px;
-          background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-sage) 50%, var(--color-primary) 100%);
+          background: linear-gradient(90deg, #b48564 0%, #d4b66a 50%, #b48564 100%);
           border-radius: 4px 4px 0 0;
           transition: left 0.45s cubic-bezier(0.16, 1, 0.3, 1), width 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
           box-shadow: 
@@ -1586,12 +1586,12 @@ export default function PlottedDevelopment() {
         }
 
         .sub-nav-link {
-
-          font-size: 11.5px;
-          font-weight: 400;
-          color: var(--color-text-dark);
-
+          font-family: var(--font-sans) !important;
+          font-size: 14px;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.7) !important;
           text-transform: uppercase;
+          letter-spacing: 0.1em;
           padding: 20px 24px 18px;
           display: inline-flex;
           align-items: center;
@@ -1605,17 +1605,15 @@ export default function PlottedDevelopment() {
         }
 
         .sub-nav-link:hover {
-          color: var(--color-text-muted);
-          background: rgba(0, 0, 0, 0.03);
+          color: #ffffff !important;
+          background: rgba(255, 255, 255, 0.06) !important;
         }
 
         .sub-nav-link.active {
-          color: var(--color-primary);
-          font-weight: 400;
-          font-size: 11.5px;
+          color: #b48564 !important;
         }
 
-        /* â”€â”€ SUBNAV DROPDOWNS â”€â”€ */
+        /* ── SUBNAV DROPDOWNS ── */
         .sub-nav-dropdown-wrapper {
           position: relative;
           display: inline-flex;
@@ -1636,7 +1634,7 @@ export default function PlottedDevelopment() {
 
         .sub-nav-dropdown-wrapper:hover .more-trigger-icon {
           transform: rotate(90deg) scale(1.1);
-          color: var(--color-primary);
+          color: #ffffff !important;
         }
 
         .sub-nav-dropdown-menu {
@@ -1644,14 +1642,14 @@ export default function PlottedDevelopment() {
           top: calc(100% + 4px);
           left: 50%;
           transform: translateX(-50%) translateY(6px);
-          background: var(--color-white);
-          border: 1px solid rgba(0, 0, 0, 0.12);
+          background: rgba(30, 30, 30, 0.95);
+          border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: 12px;
           min-width: 185px;
           padding: 6px;
           box-shadow:
-            0 12px 40px rgba(0, 0, 0, 0.08),
-            0 2px 8px rgba(0, 0, 0, 0.04);
+            0 12px 40px rgba(0, 0, 0, 0.5),
+            0 2px 8px rgba(0, 0, 0, 0.2);
           opacity: 0;
           visibility: hidden;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1665,13 +1663,12 @@ export default function PlottedDevelopment() {
         }
 
         .dropdown-item {
+          font-family: var(--font-sans) !important;
           display: block;
           padding: 10px 16px;
-
           font-size: 12px;
-          font-weight: 400;
-          color: var(--color-text-muted);
-
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.7);
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           text-align: left;
           cursor: pointer;
@@ -1682,15 +1679,15 @@ export default function PlottedDevelopment() {
         }
 
         .dropdown-item:hover {
-          color: var(--color-primary);
-          background: rgba(0, 0, 0, 0.06);
+          color: #ffffff;
+          background: rgba(255, 255, 255, 0.08);
           padding-left: 20px;
         }
 
         .dropdown-item.active {
-          color: var(--color-primary);
-          font-weight: 400;
-          background: rgba(0, 0, 0, 0.08);
+          color: #b48564;
+          font-weight: 600;
+          background: rgba(255, 255, 255, 0.04);
         }
 
         /* â”€â”€ Nested Tabs (Overview Switcher) â”€â”€ */
@@ -3634,9 +3631,9 @@ export default function PlottedDevelopment() {
           padding: 20px 0;
           margin-left: calc(-50vw + 50%);
           left: 0;
-          --gallery-card-active-w: 75vw;
-          --gallery-card-w: 55vw;
-          --gallery-gap: 8vw;
+          --gallery-card-active-w: 85vw;
+          --gallery-card-w: 65vw;
+          --gallery-gap: 4vw;
           --gallery-card-offset: calc(50vw - var(--gallery-card-active-w) / 2);
         }
 
@@ -3651,7 +3648,7 @@ export default function PlottedDevelopment() {
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
-          aspect-ratio: 16/10;
+          height: 45vw;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
           transition: flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
@@ -3697,6 +3694,15 @@ export default function PlottedDevelopment() {
 
         /* â”€â”€ RESPONSIVE MEDIA CONTROLS â”€â”€ */
         @media (max-width: 1024px) {
+          .gallery-spotlight-viewport {
+            --gallery-card-active-w: 75vw;
+            --gallery-card-w: 55vw;
+            --gallery-gap: 6vw;
+          }
+          .gallery-spotlight-card {
+            height: auto !important;
+            aspect-ratio: 16/10 !important;
+          }
           .amenities-grid-box {
             grid-template-columns: repeat(2, 1fr);
           }
@@ -3745,14 +3751,15 @@ export default function PlottedDevelopment() {
           .sub-nav-mobile-trigger-wrapper {
             display: flex !important;
             align-items: center;
-            background: var(--color-white);
-            border-left: 1px solid rgba(0, 0, 0, 0.08);
+            background: transparent;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             z-index: 10;
             flex-shrink: 0;
           }
           .mobile-grid-trigger-btn {
             padding: 16px 16px 14px !important;
+            color: #ffffff !important;
           }
           .show-only-on-mobile {
             display: inline-flex !important;
@@ -3760,24 +3767,23 @@ export default function PlottedDevelopment() {
           .mobile-directory-menu {
             min-width: 220px;
             padding: 8px;
-            background: rgba(255, 255, 255, 0.95) !important;
+            background: rgba(30, 30, 30, 0.95) !important;
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
             border-radius: 16px !important;
             box-shadow: 
-              0 12px 40px rgba(0, 0, 0, 0.12),
-              0 2px 8px rgba(0, 0, 0, 0.06) !important;
+              0 12px 40px rgba(0, 0, 0, 0.5),
+              0 2px 8px rgba(0, 0, 0, 0.2) !important;
           }
           .mobile-directory-header {
-
             font-size: 8.5px;
-            font-weight: 400;
-            color: var(--color-primary);
-
+            font-weight: 500;
+            color: #ffffff;
+            opacity: 0.4;
             padding: 8px 12px 4px;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             margin-bottom: 6px;
           }
           .mobile-directory-menu .dropdown-item {
@@ -3787,17 +3793,17 @@ export default function PlottedDevelopment() {
             align-items: center;
             justify-content: space-between;
             border-radius: 8px;
-            color: var(--color-text-muted);
-            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
           }
           .mobile-directory-menu .dropdown-item.active {
-            color: var(--color-primary);
-            background: rgba(0, 0, 0, 0.06);
-            font-weight: 400;
+            color: #b48564;
+            background: rgba(255, 255, 255, 0.04);
+            font-weight: 600;
           }
           .mobile-directory-menu .dropdown-item.active::after {
             content: '•';
-            color: var(--color-primary);
+            color: #b48564;
             font-size: 16px;
             line-height: 1;
           }

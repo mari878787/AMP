@@ -109,7 +109,7 @@ export default function ProjectMap({ activeCategory, projectCoords, projectName,
   const activeLocations = activeCategory ? activeCategory.locations : [];
 
   return (
-    <div style={{ width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+    <div style={{ width: '100%', height: '100%', borderRadius: '8px', overflow: 'hidden' }}>
       <MapContainer
         center={centerCoords}
         zoom={14}

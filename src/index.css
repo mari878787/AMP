@@ -1,31 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    AMP — Global Design System
    Boska (Typography) & Helvetica Neue Ultra Light
    â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-@font-face {
-  font-family: 'Soria';
-  src: url('/fonts/soria_regular_macroman/soria-font-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ProximaNovaRegular';
-  src: url('/fonts/ProximaNovaRegular/ProximaNovaRegular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
 
 :root {
   /* â”€â”€ Colour Palette â”€â”€ */
   --color-white: #FFFFFF;
   --color-bg-navy: #000000;
-  --color-bg-light: #EFEFEF;
-  --color-bg-cream: #EFEFEF;
+  --color-bg-light: #f5f5f5;
+  --color-bg-cream: #ffffff;
   --color-highlight: #b48564;
 
   --color-text-dark: #000000;
@@ -47,9 +32,8 @@
   --color-gold-accent: #aaaaaa;
 
   /* â”€â”€ Typography â”€â”€ */
-  --font-heading: 'Cormorant Garamond', serif;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  /* --font-sans: 'Afacad Flux', sans-serif; */
+  --font-heading: 'Playfair Display', serif;
+  --font-sans: 'IBM Plex Sans', sans-serif;
 
   /* â”€â”€ Spacing Scale (8px base) â”€â”€ */
   --space-1: 0.5rem;
@@ -136,7 +120,6 @@ h6 {
   color: var(--color-text-dark);
   font-weight: 300;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
   line-height: 1.3;
   margin: 0;
 }
@@ -255,30 +238,29 @@ button {
 
 .filter-tab-btn.active {
   color: var(--color-primary);
-  font-weight: 400;
+  font-weight: 600;
 }
 
 /* â”€â”€ Section Title — inherits h2 scale â”€â”€ */
 .section-title {
   font-family: var(--font-heading);
   font-size: clamp(24px, 4vw, 34px);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.3;
   color: var(--color-text-dark);
   letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
+  /* text-transform: uppercase; */
+  margin-bottom: 16px;
 }
 
 /* â”€â”€ Display Title — large hero heading â”€â”€ */
 .display-title {
   font-family: var(--font-heading);
   font-size: clamp(36px, 6.5vw, 40px);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.2;
   color: var(--color-text-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.1em;
   margin: 0 0 24px 0;
 }
 
@@ -299,8 +281,8 @@ p,
 .body-text,
 blockquote {
   font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.8;
   color: var(--color-text-muted);
   letter-spacing: 0.07em;
@@ -422,11 +404,18 @@ h3 span,
   box-sizing: border-box;
 }
 
+.btn-luxury-pill *,
+.btn-luxury-outline *,
+.btn-luxury-tab * {
+  font-weight: inherit !important;
+  font-family: inherit !important;
+}
+
 /* Light Theme Button & Dark Theme Button (Both are dark glassmorphic black version now) */
 .btn-luxury-pill,
 .btn-luxury-outline {
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 600;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -665,3 +654,68 @@ html.lenis body {
 
 }
 
+/* ──────────────────────────────────────────────────
+   Global Card and Image Border Radius Configuration (8px)
+   ────────────────────────────────────────────────── */
+
+/* Images */
+img:not(.avatar):not(.testimonial-avatar):not(.logo-img):not(.nav-logo):not(.flycatcher-icon):not([src*="logo"]),
+.project-img-wrap,
+.project-img,
+.blog-img-wrap,
+.blog-img,
+.project-image,
+.blog-image,
+.card-image,
+.hero-image,
+.floorplan-img,
+.masterplan-img,
+.gallery-img,
+.about-hero-img-wrapper,
+.about-journey-img,
+.team-member-img,
+.location-img,
+.specs-img,
+.video-thumbnail,
+.video-player-wrapper video,
+.walkthrough-video-container video,
+.walkthrough-video-container iframe,
+.media-container img,
+.media-container video,
+.project-card-image img {
+  border-radius: 8px !important;
+}
+
+/* Cards & Card-like Containers */
+.project-card,
+.project-item,
+.blog-card,
+.blog-item,
+.amenity-card,
+.amenity-item,
+.journey-accordion-item,
+.legacy-card,
+.team-member-card,
+.careers-card,
+.pricing-form,
+.stat-column-wrapper,
+.stat-card,
+.card,
+.info-card,
+.spec-card,
+.spec-box,
+.detail-item-box,
+.floor-plan-card,
+.price-block,
+.tcs-card,
+.about-purpose-card,
+.careers-position-card,
+.accordion-header-wrapper,
+.accordion-content-wrapper,
+.pricing-wrapper,
+.contact-success-card,
+.lightbox-modal-content,
+.lightbox-modal-media-wrapper,
+.lightbox-modal-media-wrapper img {
+  border-radius: 8px !important;
+}

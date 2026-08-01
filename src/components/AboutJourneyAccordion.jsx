@@ -52,7 +52,7 @@ export default function AboutJourneyAccordion() {
   return (
     <section className="about-journey-section">
       <div className="container journey-container">
-        
+
         {/* Top Header Row */}
         <div className="journey-header">
           <ScrollReveal animation="fadeUp">
@@ -60,10 +60,6 @@ export default function AboutJourneyAccordion() {
             <h2 className="journey-title">
               A Journey Through the Times<span className="journey-title-comma">,</span>
             </h2>
-          </ScrollReveal>
-
-          <ScrollReveal animation="fadeUp" delay={0.15}>
-            <button className="journey-legacy-btn">OUR LEGACY</button>
           </ScrollReveal>
         </div>
 

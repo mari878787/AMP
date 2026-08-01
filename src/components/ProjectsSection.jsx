@@ -292,9 +292,9 @@ export default function ProjectsSection() {
       <style>{`
         /* â”€â”€ Section â”€â”€ */
         .projects-section {
-          --card-active-w: 75vw;
-          --card-w: 55vw;
-          --gap: 8vw;
+          --card-active-w: 85vw;
+          --card-w: 65vw;
+          --gap: 4vw;
           --card-offset: calc(50vw - var(--card-active-w) / 2);
 
           background-color: var(--color-bg-light);
@@ -337,7 +337,7 @@ export default function ProjectsSection() {
         .project-img-wrap {
           position: relative;
           width: 100%;
-          aspect-ratio: 16 / 10;
+          height: 47vw;
           overflow: hidden;
           border: 1px solid rgba(0, 0, 0, 0.08);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
@@ -553,6 +553,11 @@ export default function ProjectsSection() {
           .projects-section {
             --card-active-w: 75vw;
             --card-w: 60vw;
+            --gap: 3vw;
+          }
+          .project-img-wrap {
+            height: auto !important;
+            aspect-ratio: 16 / 10 !important;
           }
         }
 

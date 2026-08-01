@@ -367,8 +367,8 @@ export default function Navbar({ darkText = false }) {
 
         .nav-link {
           font-family: var(--font-sans);
-          font-size: 12px;
-          font-weight: 400;
+          font-size: 14px;
+          font-weight: 600;
           color: #ffffffff;
           text-decoration: none;
           text-transform: uppercase;
@@ -378,7 +378,7 @@ export default function Navbar({ darkText = false }) {
           height: 60px; /* Match header height for perfect y-axis centering */
           display: flex;
           align-items: center;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.1em;
         }
 
         .text-logo-wrapper {
@@ -534,7 +534,7 @@ export default function Navbar({ darkText = false }) {
 
         .mega-column-title {
           font-size: 13px;
-          font-weight: 400;
+          font-weight: 600;
           color: #000000ff;
           text-transform: uppercase;
           margin-bottom: 12px;
@@ -550,7 +550,7 @@ export default function Navbar({ darkText = false }) {
         .mega-category-item a {
           font-family: var(--font-sans);
           font-size: 13px;
-          font-weight: 400;
+          font-weight: 600;
           color: #000000ff;
           text-transform: uppercase;
           text-decoration: none;
@@ -569,7 +569,7 @@ export default function Navbar({ darkText = false }) {
         .mega-project-item a {
           font-family: var(--font-sans);
           font-size: 13px;
-          font-weight: 400;
+          font-weight: 600;
           color: #444444;
           text-transform: uppercase;
           text-decoration: none;

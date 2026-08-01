@@ -1,0 +1,249 @@
+IMAGE ASSET SPECIFICATIONS DIRECTORY - ALL PAGES
+
+--------------------------------------------------------------------------------
+1. HERO & HEADER BANNERS (WIDE LAYOUTS)
+High-resolution wide banner images optimized for large desktop screens that scale responsively for mobile.
+
+* File Path: /images/home/hero.png
+  Page: Home / All Projects
+  Recommended Size: 1920 x 850 px
+  Aspect Ratio: 16:7 (2.25:1)
+  Format: JPEG / WebP
+  Usage: Home Page main visual hero banner
+
+* File Path: /images/project/CML/master-banner.png
+  Page: Crystal Moonlight
+  Recommended Size: 1920 x 850 px
+  Aspect Ratio: 16:7 (2.25:1)
+  Format: JPEG / WebP
+  Usage: Crystal Moonlight Villa wide banner graphic
+
+* File Path: /images/project/ashok-nagar/Web banner AN - 3.jpg (1).jpeg
+  Page: Ashok Nagar
+  Recommended Size: 1920 x 850 px
+  Aspect Ratio: 16:7 (2.25:1)
+  Format: JPEG / WebP
+  Usage: Ashok Nagar Plots main hero banner
+
+* File Path: /images/project/ashok-nagar/Web banner AN - 2.jpg (1).jpeg
+  Page: Ashok Nagar
+  Recommended Size: 1920 x 850 px
+  Aspect Ratio: 16:7 (2.25:1)
+  Format: JPEG / WebP
+  Usage: Ashok Nagar Plots wide layout overview banner
+
+--------------------------------------------------------------------------------
+2. LAYOUTS, SITE PLANS, & BLUEPRINTS
+Architectural layout drawings and floor plan blueprints. High detail and contrast are recommended.
+
+* File Path: /images/project/CML/master-plan.png
+  Page: Crystal Moonlight
+  Recommended Size: 1200 x 800 px
+  Aspect Ratio: 3:2
+  Format: JPEG / PNG
+  Usage: Gated Site Layout Plan
+
+* File Path: /images/project/CML/floor-plan/PLAN A 30X42 NORTHFACE.jpg.jpeg
+  Page: Crystal Moonlight
+  Recommended Size: 1000 x 750 px
+  Aspect Ratio: 4:3
+  Format: JPEG / PNG
+  Usage: 3 BHK Plan A Blueprint
+
+* File Path: /images/project/CML/floor-plan/PLAN - B  30' X 48'  (North Facing )VILLA.jpg.jpeg
+  Page: Crystal Moonlight
+  Recommended Size: 1000 x 750 px
+  Aspect Ratio: 4:3
+  Format: JPEG / PNG
+  Usage: 3 BHK Plan B Blueprint
+
+* File Path: /images/project/CML/floor-plan/PLAN C  -    37' X 42'  (North Facing )VILLA.jpg.jpeg
+  Page: Crystal Moonlight
+  Recommended Size: 1000 x 750 px
+  Aspect Ratio: 4:3
+  Format: JPEG / PNG
+  Usage: 4 BHK Plan C Blueprint
+
+--------------------------------------------------------------------------------
+3. PROJECT GALLERY & INTERIOR SHOWCASES
+High-end renders and photographic visuals representing the interior spaces, façades, and landscape views.
+
+* File Path: /images/villa_exterior_1779810861723.png
+  Page: Crystal Moonlight
+  Recommended Size: 1200 x 800 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Exterior main façade render
+
+* File Path: /images/project_crystal_1779810838661.png
+  Page: Crystal Moonlight
+  Recommended Size: 1200 x 800 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Clubhouse Pool area visual
+
+* File Path: /images/project/why-cmv.png
+  Page: Crystal Moonlight
+  Recommended Size: 1200 x 800 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Entrance Gate portal
+
+* File Path: /images/home/project-image-1.png
+  Page: Home / All Projects
+  Recommended Size: 1200 x 800 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Gated Community wide visual
+
+* File Path: /images/home/project-image-2.png
+  Page: Home / All Projects
+  Recommended Size: 1200 x 800 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Blacktop Internal Roads visual
+
+* File Path: /images/hero_placeholders/ap-1.jpg
+  Page: Home (Philosophy)
+  Recommended Size: 1200 x 800 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Parallax philosophy visual
+
+* File Path: /images/home/build-stand.png
+  Page: Home (Heritage)
+  Recommended Size: 1000 x 1000 px
+  Aspect Ratio: 1:1
+  Format: JPEG / WebP
+  Usage: Heritage section centerpiece
+
+--------------------------------------------------------------------------------
+4. GRID LISTS & BLOG POST CARDS
+Thumbnails and previews for posts, listings, and category grids.
+
+* File Path: /images/hero_placeholders/p1.png
+  Page: Home (Blog)
+  Recommended Size: 800 x 533 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Blog post card 1
+
+* File Path: /images/hero_placeholders/p3.png
+  Page: Home (Blog)
+  Recommended Size: 800 x 533 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Blog post card 2
+
+* File Path: /images/hero_placeholders/p4.png
+  Page: Home (Blog)
+  Recommended Size: 800 x 533 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Blog post card 3
+
+* File Path: /images/maia/1.png to /images/maia/4.png
+  Page: Home (Projects)
+  Recommended Size: 800 x 533 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Slider project thumbnail cards
+
+* File Path: /images/project/CML/amenities/1.png to /images/project/CML/amenities/20.png
+  Page: Crystal Moonlight
+  Recommended Size: 600 x 400 px
+  Aspect Ratio: 3:2
+  Format: JPEG / WebP
+  Usage: Hover grid amenities cards
+
+--------------------------------------------------------------------------------
+5. TIMELINE UPDATES & LOCATIONS
+Progress log updates and local landmark categories.
+
+* File Path: /images/project/CML/Interiors/cml-interior-01.jpg to /images/project/CML/Interiors/cml-interior-08.jpg
+  Page: Crystal Moonlight
+  Recommended Size: 800 x 600 px
+  Aspect Ratio: 4:3
+  Format: JPEG / WebP
+  Usage: Monthly construction/interior updates
+
+* File Path: /images/project/CML/loction/junctions.png
+  Page: Locations (General)
+  Recommended Size: 900 x 675 px
+  Aspect Ratio: 4:3
+  Format: JPEG / WebP
+  Usage: Main Junctions location visual
+
+* File Path: /images/project/CML/loction/educational .png
+  Page: Locations (General)
+  Recommended Size: 900 x 675 px
+  Aspect Ratio: 4:3
+  Format: JPEG / WebP
+  Usage: Schools / Colleges location visual
+
+* File Path: /images/project/CML/loction/hospitals.png
+  Page: Locations (General)
+  Recommended Size: 900 x 675 px
+  Aspect Ratio: 4:3
+  Format: JPEG / WebP
+  Usage: Medical facilities location visual
+
+* File Path: /images/project/CML/loction/entertainment.png
+  Page: Locations (General)
+  Recommended Size: 900 x 675 px
+  Aspect Ratio: 4:3
+  Format: JPEG / WebP
+  Usage: Retail / phoenix mall location visual
+
+--------------------------------------------------------------------------------
+6. LOGO & GRAPHICAL OVERLAYS
+Transparent brand assets and graphic decors.
+
+* File Path: /images/logo.png
+  Page: Navigation / Footer
+  Recommended Size: 240 x 100 px
+  Aspect Ratio: ~2.4:1
+  Format: Transparent PNG
+  Usage: Brand Logo
+
+* File Path: /images/logo-curser-v2.png
+  Page: Home / Navigation
+  Recommended Size: 64 x 64 px
+  Aspect Ratio: 1:1 (Square)
+  Format: B&W PNG mask
+  Usage: Custom hover cursor mask
+
+* File Path: /images/flycatcher_corner_bottomright.png
+  Page: Section Decor
+  Recommended Size: 300 x 300 px
+  Aspect Ratio: 1:1 (Square)
+  Format: Transparent PNG
+  Usage: Bird element overlaying corners
+
+* File Path: /images/footer-tran.png
+  Page: Footer
+  Recommended Size: 600 x 300 px
+  Aspect Ratio: 2:1
+  Format: Transparent PNG
+  Usage: Footer backdrop overlay blueprint
+
+* File Path: /images/testimonial_woman.png
+  Page: Home (Testimonials)
+  Recommended Size: 150 x 150 px
+  Aspect Ratio: 1:1 (Square)
+  Format: JPEG / PNG
+  Usage: Customer testimonial avatar
+
+* File Path: /images/testimonial_man.png
+  Page: Home (Testimonials)
+  Recommended Size: 150 x 150 px
+  Aspect Ratio: 1:1 (Square)
+  Format: JPEG / PNG
+  Usage: Customer testimonial avatar
+
+* File Path: /images/home/background.png
+  Page: Section Backgrounds
+  Recommended Size: 1920 x 1080 px
+  Aspect Ratio: 16:9
+  Format: JPEG / WebP
+  Usage: Light-leak background textures
