@@ -18,7 +18,7 @@ export default function ScrollReveal({
   children,
   animation = 'fadeUp',
   delay = 0,
-  duration = 0.7,
+  duration = 1.4,
   threshold = 0.15,
   once = true,
   className = '',
@@ -49,10 +49,13 @@ export default function ScrollReveal({
     return () => observer.disconnect();
   }, [threshold, once]);
 
+  // Slow down the transition duration for a smooth, luxury reveal
+  const effectiveDuration = duration === 0.7 ? 1.4 : Math.max(duration * 1.4, 1.2);
+
   const animStyle = {
     opacity: visible ? 1 : 0,
     transform: visible ? 'none' : getInitialTransform(animation),
-    transition: `opacity ${duration}s var(--ease-luxury) ${delay}s, transform ${duration}s var(--ease-luxury) ${delay}s`,
+    transition: `opacity ${effectiveDuration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform ${effectiveDuration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
     willChange: 'opacity, transform',
     ...style,
   };
@@ -66,12 +69,12 @@ export default function ScrollReveal({
 
 function getInitialTransform(animation) {
   switch (animation) {
-    case 'fadeUp':    return 'translateY(40px)';
-    case 'fadeDown':  return 'translateY(-40px)';
-    case 'fadeLeft':  return 'translateX(-40px)';
-    case 'fadeRight': return 'translateX(40px)';
-    case 'scaleIn':  return 'scale(0.92)';
-    case 'slideUp':  return 'translateY(60px)';
+    case 'fadeUp':    return 'translateY(50px)';
+    case 'fadeDown':  return 'translateY(-50px)';
+    case 'fadeLeft':  return 'translateX(-50px)';
+    case 'fadeRight': return 'translateX(50px)';
+    case 'scaleIn':  return 'scale(0.90)';
+    case 'slideUp':  return 'translateY(70px)';
     case 'fadeIn':
     default:          return 'none';
   }

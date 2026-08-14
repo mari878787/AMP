@@ -1,77 +1,71 @@
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
 
+const PURPOSE_PILLARS = [
+  {
+    id: 'craftsmanship',
+    title: "Craftsmanship",
+    desc: "When building a home, attention to detail is essential. At Aadhithya Mohan Properties, we recognise this and obsess over every detail—whether it's the quality of the materials, textures, finishes, solid teak frames, polished doors, or anti-skid surfaces. A true craftsman's approach for a harmonious life.",
+    image: "/images/about/craftsmanship.jpg",
+    offset: false
+  },
+  {
+    id: 'thoughtful-design',
+    title: "Thoughtful Design",
+    desc: "At Aadhithya Mohan Properties, home design is not just a structure; it's an enduring work of living art. Homes that are spacious with 100% Vastu compliance and well-utilised spaces. Every stage of planning is carefully considered and tested to ensure a truly thoughtful living experience.",
+    image: "/images/about/thoughtful_design.jpg",
+    offset: true // Offset downward for editorial masonry rhythm
+  },
+  {
+    id: 'signature-quality',
+    title: "Signature Quality",
+    desc: "We are personally involved in every stage of the process, from master planning and material sourcing to construction and final handover. Every home is subjected to rigorous quality inspections to ensure uncompromising structural integrity that lasts for generations.",
+    image: "/images/about/signature_quality.jpg",
+    offset: false
+  }
+];
+
 export default function AboutPurposeSection({
   tag = "OUR PURPOSE",
   title = "We represent the values of real estate development in modern India and intend to build and serve our customers with the utmost integrity and transparency.",
-  pillars = [
-    {
-      id: 1,
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-        </svg>
-      ),
-      title: "Customer Driven",
-      desc: "Our commitment to service drives research, planning and execution, shaping every touchpoint, so each interaction feels attentive, responsive and thoughtfully orchestrated."
-    },
-    {
-      id: 2,
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM12 6l-2 4 4 4-4 4 2 4 6-6-6-6z"/>
-        </svg>
-      ),
-      title: "Meticulous Planning",
-      desc: "We plan with precision and foresight, aligning timelines, budgets and resources through rigorous collaboration to deliver predictable outcomes and exceptional consistency."
-    },
-    {
-      id: 3,
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
-        </svg>
-      ),
-      title: "Intelligent Design",
-      desc: "Intelligent, innovative design guides every feature and material, prioritising function and beauty to create enduring spaces beyond trends and seasons."
-    },
-    {
-      id: 4,
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L2 7l10 5 10-5-10-5zm0 8.5L4.5 7 12 3.25 19.5 7 12 10.5zm0 3L4.5 10 12 6.25 19.5 10 12 13.5zm0 3L4.5 13 12 9.25 19.5 13 12 16.5z"/>
-        </svg>
-      ),
-      title: "Highest Quality, Best Value",
-      desc: "From material selection to craft, we uphold uncompromising standards to ensure lasting value comes together across developments."
-    }
-  ]
+  pillars = PURPOSE_PILLARS
 }) {
   return (
-    <section className="about-purpose-section">
+    <section className="about-purpose-section" id="purpose">
       <div className="container purpose-container">
         
-        {/* Header Block */}
+        {/* Editorial Header */}
         <ScrollReveal animation="fadeUp" className="purpose-header">
-          <span className="purpose-tag">{tag}</span>
-          <h2 className="purpose-title">{title}</h2>
+          <span className="section-tag" style={{ marginBottom: '16px' }}>{tag}</span>
+          <h2 className="section-title" style={{ maxWidth: '980px', margin: '0 0 70px 0', fontWeight: '400', lineHeight: '1.3' }}>
+            {title}
+          </h2>
         </ScrollReveal>
 
-        {/* 4 Pillars Grid */}
-        <div className="purpose-grid">
-          {pillars.map((item, idx) => (
-            <React.Fragment key={item.id}>
-              <ScrollReveal animation="fadeUp" delay={0.1 * (idx + 1)} className="purpose-card">
-                <div className="purpose-icon-wrap">
-                  {item.icon}
-                </div>
-                <h3 className="purpose-card-title">{item.title}</h3>
-                <p className="purpose-card-desc">{item.desc}</p>
-              </ScrollReveal>
-              {idx < pillars.length - 1 && (
-                <div className="purpose-col-line"></div>
-              )}
-            </React.Fragment>
+        {/* 3-Column Editorial Grid with Staggered Visual Rhythm */}
+        <div className="purpose-editorial-grid">
+          {pillars.map((pillar, idx) => (
+            <ScrollReveal 
+              key={pillar.id} 
+              animation="fadeUp" 
+              delay={0.15 * (idx + 1)} 
+              className={`purpose-editorial-col ${pillar.offset ? 'is-offset' : ''}`}
+            >
+              {/* Floating Black and White Image Card with Hover Zoom */}
+              <div className="purpose-img-box">
+                <img 
+                  src={pillar.image} 
+                  alt={pillar.title} 
+                  className="purpose-img" 
+                />
+              </div>
+
+              {/* Editorial Title & Body Text */}
+              <div className="purpose-content-box">
+                <h3 className="purpose-col-heading">{pillar.title}</h3>
+                <p className="body-text">{pillar.desc}</p>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
 
@@ -79,120 +73,129 @@ export default function AboutPurposeSection({
 
       <style>{`
         .about-purpose-section {
-          background-color: #ffffff;
-          padding: 60px 0;
+          background-color: var(--color-bg-light);
+          padding: 110px 0 130px;
           width: 100%;
           box-sizing: border-box;
-          border-bottom: 1px solid #EBE7DF;
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .purpose-container {
-          max-width: 1240px;
+          max-width: 1280px;
           margin: 0 auto;
           padding: 0 40px;
         }
 
         .purpose-header {
-          max-width: 980px;
-          margin-bottom: 90px;
+          margin-bottom: 20px;
         }
 
-        .purpose-tag {
-          font-family: var(--font-sans);
-          font-size: 12px;
-          font-weight: 500;
-          color: #b48564;
-          text-transform: uppercase;
-          letter-spacing: 0.25em;
-          display: block;
-          margin-bottom: 24px;
-        }
-
-        .purpose-title {
-          font-family: var(--font-heading, serif);
-          font-size: clamp(28px, 3.2vw, 44px);
-          font-weight: 400;
-          color: #000000;
-          line-height: 1.3;
-          letter-spacing: -0.015em;
-          text-transform: capitalize;
-          margin: 0;
-        }
-
-        .purpose-grid {
-          display: flex;
-          align-items: stretch;
-          gap: 0;
+        /* ── 3-COLUMN EDITORIAL GRID ── */
+        .purpose-editorial-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 48px;
           width: 100%;
+          position: relative;
         }
 
-        .purpose-card {
-          flex: 1;
-          padding: 0 32px;
+        .purpose-editorial-col {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          padding-right: 24px;
+          border-right: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .purpose-editorial-col:last-child {
+          padding-right: 0;
+          border-right: none;
+        }
+
+        /* Middle Column Staggered Offset */
+        .purpose-editorial-col.is-offset {
+          padding-top: 100px;
+        }
+
+        /* ── BLACK & WHITE IMAGE WITH HOVER ZOOM ── */
+        .purpose-img-box {
+          width: 100%;
+          aspect-ratio: 1 / 1.18;
+          border-radius: 8px;
+          overflow: hidden;
+          background: #111111;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+          margin-bottom: 32px;
+          cursor: pointer;
+        }
+
+        .purpose-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          filter: grayscale(100%) contrast(108%);
+          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+          display: block;
+        }
+
+        .purpose-editorial-col:hover .purpose-img {
+          transform: scale(1.06);
+          filter: grayscale(100%) contrast(115%) brightness(1.05);
+        }
+
+        /* ── EDITORIAL CONTENT ── */
+        .purpose-content-box {
           display: flex;
           flex-direction: column;
         }
 
-        .purpose-card:first-child {
-          padding-left: 0;
-        }
-
-        .purpose-card:last-child {
-          padding-right: 0;
-        }
-
-        .purpose-icon-wrap {
-          color: #000000;
-          margin-bottom: 28px;
-          display: flex;
-          align-items: center;
-        }
-
-        .purpose-card-title {
+        .purpose-col-heading {
           font-family: var(--font-heading, serif);
-          font-size: 22px;
+          font-size: clamp(26px, 2.6vw, 34px);
           font-weight: 400;
-          color: #000000;
+          color: #111111;
+          margin: 0 0 18px 0;
           line-height: 1.25;
-          margin: 0 0 16px 0;
+          letter-spacing: -0.01em;
+          transition: color 0.3s ease;
         }
 
-        .purpose-card-desc {
-          font-family: var(--font-sans);
-          font-size: 13.5px;
-          font-weight: 400;
-          color: #555555;
-          line-height: 1.65;
-          margin: 0;
+        .purpose-editorial-col:hover .purpose-col-heading {
+          color: #b48564;
         }
 
-        .purpose-col-line {
-          width: 1px;
-          background-color: #E2DDD5;
-          flex-shrink: 0;
-          align-self: stretch;
-        }
-
-        @media (max-width: 960px) {
-          .about-purpose-section {
-            padding: 40px 0;
+        /* ── RESPONSIVE MEDIA CONTROLS ── */
+        @media (max-width: 1024px) {
+          .purpose-editorial-grid {
+            grid-template-columns: 1fr;
+            gap: 60px;
           }
+          .purpose-editorial-col {
+            padding-right: 0;
+            border-right: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding-bottom: 50px;
+          }
+          .purpose-editorial-col:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+          }
+          .purpose-editorial-col.is-offset {
+            padding-top: 0;
+          }
+          .purpose-img-box {
+            aspect-ratio: 16 / 10;
+          }
+        }
+
+        @media (max-width: 600px) {
           .purpose-container {
-            padding: 0 24px;
+            padding: 0 20px;
           }
-          .purpose-header {
-            margin-bottom: 50px;
-          }
-          .purpose-grid {
-            flex-direction: column;
-            gap: 40px;
-          }
-          .purpose-card {
-            padding: 0;
-          }
-          .purpose-col-line {
-            width: 100%;
-            height: 1px;
+          .about-purpose-section {
+            padding: 70px 0 90px;
           }
         }
       `}</style>

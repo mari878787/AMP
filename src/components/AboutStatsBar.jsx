@@ -1,148 +1,253 @@
-import React from 'react';
-import { Layers, Users, PieChart } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
 import ScrollReveal from './ScrollReveal';
 
-export default function AboutStatsBar({
-  stats = [
-    {
-      id: 1,
-      icon: <Layers size={36} strokeWidth={1.2} color="#b48564" />,
-      value: "~600K+",
-      label: "Square Feet of Land Area Developed"
-    },
-    {
-      id: 2,
-      icon: <Users size={36} strokeWidth={1.2} color="#b48564" />,
-      value: "~500+",
-      label: "Happy Families & Homeowners"
-    },
-    {
-      id: 3,
-      icon: <PieChart size={36} strokeWidth={1.2} color="#b48564" />,
-      value: "9+ Yrs",
-      label: "Of Uncompromising Excellence"
+// Dynamic Counter-Up (Runner) Component
+function StatRunner({ target, prefix = "", suffix = "" }) {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const elementRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting && !hasStarted) {
+        setHasStarted(true);
+      }
+    }, { threshold: 0.15 });
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
     }
-  ]
+
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    let start = 0;
+    const end = parseInt(target, 10);
+    if (isNaN(end)) {
+      return;
+    }
+
+    const duration = 1800; // 1.8 seconds duration
+    const stepTime = Math.max(Math.floor(duration / end), 8);
+    
+    // Calculate increment step to be smooth
+    const increment = Math.ceil(end / (duration / stepTime));
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        clearInterval(timer);
+        setCount(end);
+      } else {
+        setCount(start);
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [hasStarted, target]);
+
+  return (
+    <span ref={elementRef}>
+      {prefix}{hasStarted ? count.toLocaleString() : "0"}{suffix}
+    </span>
+  );
+}
+
+const STATS_DATA = [
+  {
+    id: 1,
+    icon: (
+      <img 
+        src="/images/about/stat_land_icon.png" 
+        alt="Land Area Developed" 
+        className="stat-image-icon"
+      />
+    ),
+    targetValue: "600",
+    prefix: "~",
+    suffix: "K+",
+    label: "Square Feet of Land Area Developed"
+  },
+  {
+    id: 2,
+    icon: (
+      <img 
+        src="/images/about/stat_family_icon.png" 
+        alt="Happy Families" 
+        className="stat-image-icon"
+      />
+    ),
+    targetValue: "500",
+    prefix: "~",
+    suffix: "+",
+    label: "Happy Families & Homeowners"
+  },
+  {
+    id: 3,
+    icon: (
+      <img 
+        src="/images/about/stat_completed_icon.png" 
+        alt="Boutique Luxury Projects Completed" 
+        className="stat-image-icon"
+      />
+    ),
+    targetValue: "15",
+    prefix: "",
+    suffix: "+",
+    label: "Boutique Luxury Projects Completed"
+  }
+];
+
+export default function AboutStatsBar({
+  stats = STATS_DATA
 }) {
   return (
     <section className="about-stats-bar-section">
       <div className="container stats-bar-container">
         {stats.map((item, idx) => (
-          <React.Fragment key={item.id || idx}>
-            <ScrollReveal animation="fadeUp" delay={idx * 0.1} className="stat-bar-item-wrap">
-              <div className="stat-bar-item">
-                <div className="stat-icon-pane">
-                  {item.icon}
-                </div>
-                
-                <div className="stat-inner-divider"></div>
-
-                <div className="stat-text-pane">
-                  <h3 className="stat-number">{item.value}</h3>
-                  <p className="stat-desc">{item.label}</p>
-                </div>
+          <ScrollReveal 
+            key={item.id || idx} 
+            animation="fadeUp" 
+            delay={idx * 0.1} 
+            className="stat-col"
+          >
+            <div className="stat-item-inner">
+              {/* Custom Icon Wrapper */}
+              <div className="stat-icon-wrap">
+                {item.icon}
               </div>
-            </ScrollReveal>
 
-            {idx < stats.length - 1 && (
-              <div className="stat-item-col-divider"></div>
-            )}
-          </React.Fragment>
+              {/* Thin Vertical Line Separator */}
+              <div className="stat-inner-line" />
+
+              {/* Right Stat Text Group */}
+              <div className="stat-text-wrap">
+                <h3 className="stat-value">
+                  <StatRunner 
+                    target={item.targetValue} 
+                    prefix={item.prefix} 
+                    suffix={item.suffix} 
+                  />
+                </h3>
+                <p className="stat-label">{item.label}</p>
+              </div>
+            </div>
+          </ScrollReveal>
         ))}
       </div>
 
       <style>{`
         .about-stats-bar-section {
           width: 100%;
-          background-color: #ffffff;
-          padding: 70px 0;
-          border-top: 1px solid #EBE7DF;
-          border-bottom: 1px solid #EBE7DF;
+          background-color: var(--color-white);
+          padding: 60px 0;
           box-sizing: border-box;
-          background-color: var(--color-bg-light);
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .stats-bar-container {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 20px;
-          max-width: 1200px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          max-width: 1280px;
           margin: 0 auto;
           padding: 0 40px;
         }
 
-        .stat-bar-item-wrap {
-          flex: 1;
-          display: flex;
-          justify-content: center;
-        }
-
-        .stat-bar-item {
+        .stat-col {
           display: flex;
           align-items: center;
+          justify-content: center;
+          padding: 0 32px;
+          border-right: 1px solid #E2DDD5;
         }
 
-        .stat-icon-pane {
+        .stat-col:first-child {
+          padding-left: 0;
+        }
+
+        .stat-col:last-child {
+          padding-right: 0;
+          border-right: none;
+        }
+
+        .stat-item-inner {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .stat-icon-wrap {
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          width: 64px;
+          height: 48px;
         }
 
-        .stat-inner-divider {
+        .stat-image-icon {
+          width: 44px;
+          height: 44px;
+          object-fit: contain;
+          filter: invert(61%) sepia(18%) saturate(1064%) hue-rotate(338deg) brightness(88%) contrast(85%);
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stat-col:hover .stat-image-icon {
+          transform: scale(1.12) translateY(-2px);
+        }
+
+        .stat-inner-line {
           width: 1px;
           height: 48px;
           background-color: #E2DDD5;
-          margin: 0 24px;
           flex-shrink: 0;
         }
 
-        .stat-text-pane {
+        .stat-text-wrap {
           display: flex;
           flex-direction: column;
         }
 
-        .stat-number {
+        .stat-value {
           font-family: var(--font-heading, serif);
-          font-size: clamp(32px, 3.6vw, 48px);
-          font-weight: 300;
-          color: #000000;
+          font-size: clamp(34px, 3.8vw, 48px);
+          font-weight: 400;
+          color: #111111;
           line-height: 1;
           letter-spacing: -0.02em;
           margin: 0 0 6px 0;
         }
 
-        .stat-desc {
+        .stat-label {
           font-family: var(--font-sans);
-          font-size: 11.5px;
-          font-weight: 500;
+          font-size: 13px;
+          font-weight: 400;
           color: #444444;
-          text-transform: uppercase;
-          letter-spacing: 0.04em;
           margin: 0;
-          line-height: 1.3;
-        }
-
-        .stat-item-col-divider {
-          width: 1px;
-          height: 60px;
-          background-color: #E2DDD5;
-          flex-shrink: 0;
+          line-height: 1.35;
         }
 
         @media (max-width: 960px) {
           .stats-bar-container {
-            flex-direction: column;
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 36px;
             padding: 0 24px;
           }
-          .stat-item-col-divider {
-            width: 120px;
-            height: 1px;
+          .stat-col {
+            padding: 0 0 36px 0 !important;
+            border-right: none !important;
+            border-bottom: 1px solid #E2DDD5;
+            justify-content: flex-start;
           }
-          .stat-bar-item {
-            justify-content: center;
+          .stat-col:last-child {
+            border-bottom: none;
+            padding-bottom: 0 !important;
           }
         }
       `}</style>

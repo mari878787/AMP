@@ -18,10 +18,10 @@ const AboutUs = () => {
 
   return (
     <div className="about-us-page">
-      <Navbar darkText={true} />
+      <Navbar />
       {/* 1. Hero Section: GSAP Scroll-Driven Image Expansion */}
       <AboutLegacyExpand 
-        legacyYears="10"
+        legacyYears="10+"
         legacyTitle="years of"
         legacySubtitle="INCREDIBLE LEGACY"
         description="Aadhithya Mohan Properties was founded in 2016 by a first-generation entrepreneur Mr. PNC Menon, the founder of the Group. The entity is a multinational, multiproduct group with developments and investments in the UAE, India, and UK."

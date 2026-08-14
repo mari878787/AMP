@@ -30,18 +30,22 @@ export default function PhilosophySection() {
           <div className="detail-content">
             <ScrollReveal animation="fadeUp" delay={0.1}>
               <h2 className="detail-title section-title">
-                The Pinnacle <br className='desktop-only-br' />
-                of Luxury
+                Excellence Begins Long Before It Is Built.
               </h2>
             </ScrollReveal>
             <ScrollReveal animation="fadeUp" delay={0.25}>
-              <p className="detail-desc">
-                At Adhithya Mohan, we understand that true excellence lies in the meticulous attention to detail and the artistry of craftsmanship. Guided by a commitment to perfection, we believe in crafting not just homes but immersive experiences where every nuance is thoughtfully considered.
+              <p className="body-text">
+                At Aadhithya Mohan Properties LLP, we believe excellence is never an afterthought. It is the foundation upon which every home, every community, and every legacy begins.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal animation="fadeUp" delay={0.25}>
+              <p className="body-text" style={{ marginTop: '24px' }}>
+                Long before the first foundation is laid, every decision is guided by meticulous planning, uncompromising standards, and an unwavering pursuit of craftsmanship. The result is architecture of enduring character—homes that are thoughtfully conceived, impeccably executed, and created to retain their value for generations.
               </p>
             </ScrollReveal>
             <ScrollReveal animation="fadeUp" delay={0.4}>
               <div style={{ marginTop: '40px' }}>
-                <Button href="#contact" theme="dark">
+                <Button href="/about" theme="dark">
                   DISCOVER MORE
                 </Button>
               </div>
@@ -54,7 +58,7 @@ export default function PhilosophySection() {
           <ScrollReveal className="detail-image" animation="fadeUp" delay={0.55} duration={0.9}>
             {/* Soft fade mask on the left side of the image container to blend into white */}
             <div className="image-fade-wrapper">
-              <ParallaxImage src="/images/hero_placeholders/ap-1.jpg" alt="The Art of Detail" />
+              <ParallaxImage src="/images/hero_placeholders/ap-2.jpg" alt="The Art of Detail" />
             </div>
           </ScrollReveal>
         </div>
@@ -63,7 +67,7 @@ export default function PhilosophySection() {
 
       <style>{`
         .about-section {
-          background-color: var(--color-white);
+          background-color: var(--color-bg-light);
           position: relative;
           z-index: 2;
           width: 100%;
@@ -73,7 +77,7 @@ export default function PhilosophySection() {
 
         .art-of-detail-grid {
           display: grid;
-          grid-template-columns: .8fr 1.2fr;
+          grid-template-columns: .9fr 1.1fr;
           align-items: stretch;
           height: 100%;
         }
@@ -81,7 +85,6 @@ export default function PhilosophySection() {
         .content-column {
           /* Compute left padding so it perfectly aligns with standard container (max-width container-width minus container padding) */
           padding-left: max(40px, calc((100vw - var(--container-width) + 48px) / 2));
-          padding-right: 80px;
           height: 100%;
           display: flex;
           flex-direction: column;
@@ -122,6 +125,7 @@ export default function PhilosophySection() {
           width: 100%;
           height: 120%; /* Extra height for parallax */
           object-fit: cover;
+          // filter: grayscale(100%) contrast(108%) brightness(96%);
         }
 
         @media (max-width: 1024px) {

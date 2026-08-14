@@ -7,7 +7,7 @@
   width: 100%;
   padding: 80px 0;
   /* Compact padding for screen fit */
-  background: url("/images/bg/BR-1.png") right bottom / cover no-repeat;
+  /* background: url("/images/bg/BR-1.png") right bottom / cover no-repeat; */
   color: var(--color-primary);
   overflow-x: hidden;
   /* Prevent horizontal scroll bar */
@@ -37,7 +37,7 @@
   transform: translateY(-5px) rotate(1deg);
 }
 
-/* â”€â”€ Container & Grid â”€â”€ */
+/* ── Container & Grid ── */
 .loc-advantage__container {
   max-width: var(--container-width);
   margin: 0 auto;
@@ -48,10 +48,33 @@
   box-sizing: border-box;
 }
 
+/* ── Section Center Header ── */
+.loc-advantage__header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.loc-advantage__center-title {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.loc-advantage__center-desc {
+  text-align: center;
+  margin: 14px auto 0 auto;
+  max-width: 640px;
+  color: var(--color-text-dark);
+}
+
 .loc-advantage__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: .7fr 1.3fr;
+  gap: 24px;
   align-items: stretch;
   width: 100%;
   margin: 0 auto;
@@ -200,7 +223,6 @@
 
 .loc-advantage__slide-card-title {
   color: var(--color-primary);
-  letter-spacing: 0.03em;
   margin-bottom: 16px;
   border-bottom: 1px solid rgba(180, 133, 100, 0.1);
   padding-bottom: 8px;
@@ -258,8 +280,8 @@
 }
 
 .loc-advantage__dot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background-color: #b48564;
   justify-self: center;
@@ -267,26 +289,28 @@
   position: relative;
   z-index: 2;
   box-shadow: 0 0 0 4px var(--color-white), 0 0 0 6px rgba(180, 133, 100, 0.2);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .loc-advantage__dot-pulse {
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 1px solid rgba(180, 133, 100, 0.4);
+  border: 1px solid rgba(180, 133, 100, 0.5);
   opacity: 0;
   transform: scale(0.8);
   transition: all 0.3s ease;
 }
 
-.loc-advantage__item:hover .loc-advantage__dot {
-  transform: scale(1.3);
+.loc-advantage__item:hover .loc-advantage__dot,
+.loc-advantage__item.active .loc-advantage__dot {
+  transform: scale(1.35);
   background-color: var(--color-primary);
-  box-shadow: 0 0 0 4px var(--color-white), 0 0 0 7px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 4px var(--color-white), 0 0 0 8px rgba(180, 133, 100, 0.35);
 }
 
-.loc-advantage__item:hover .loc-advantage__dot-pulse {
+.loc-advantage__item:hover .loc-advantage__dot-pulse,
+.loc-advantage__item.active .loc-advantage__dot-pulse {
   opacity: 1;
   transform: scale(1.4);
   animation: locPulse 1.6s infinite ease-out;
@@ -309,8 +333,10 @@
   transition: color 0.3s ease;
 }
 
-.loc-advantage__item:hover .loc-advantage__name {
+.loc-advantage__item:hover .loc-advantage__name,
+.loc-advantage__item.active .loc-advantage__name {
   color: #b48564;
+  font-weight: 500;
 }
 
 .loc-advantage__subname {
@@ -329,7 +355,13 @@
   margin-top: 14px;
 }
 
+.leaflet-bottom {
+  bottom: -100px;
+}
 
+.leaflet-right {
+    right: -1000px;
+}
 
 /* Footer & CTA */
 .loc-advantage__footer {
@@ -352,9 +384,9 @@
   }
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ─────────────────────────────────────────
    Responsive Design
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ───────────────────────────────────────── */
 
 @media (max-width: 1024px) {
   .loc-advantage {
@@ -426,7 +458,7 @@
 /* ── Custom Interactive Map Styles ── */
 .loc-advantage__map-wrapper {
   width: 100%;
-  height: 480px;
+  height: 100%;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 16px 40px rgba(180, 133, 100, 0.08);
@@ -470,21 +502,21 @@
 .custom-map-marker.project-marker .marker-pin-core {
   background: #b48564;
   color: #ffffff;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 2px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(180, 133, 100, 0.4);
+  box-shadow: 0 4px 12px rgba(180, 133, 100, 0.45);
 }
 
 .custom-map-marker.project-marker .marker-pin-pulse {
   position: absolute;
-  width: 52px;
-  height: 52px;
-  background: rgba(180, 133, 100, 0.35);
+  width: 64px;
+  height: 64px;
+  background: rgba(180, 133, 100, 0.38);
   border-radius: 50%;
   animation: centerPulse 2.5s infinite ease-out;
 }
@@ -503,9 +535,33 @@
 /* Custom Teardrop POI Pins (SVG based) */
 .custom-map-pin-svg {
   position: relative;
-  width: 28px;
-  height: 35px;
+  width: 32px;
+  height: 40px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.poi-pin-light-pulse {
+  position: absolute;
+  top: 9px;
+  left: 16px;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  background: rgba(180, 133, 100, 0.32);
+  border-radius: 50%;
+  z-index: -1;
+  animation: poiLightPulse 2.2s infinite ease-out;
+}
+
+@keyframes poiLightPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
 }
 
 .custom-map-pin-svg .poi-svg-marker {

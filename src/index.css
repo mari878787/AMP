@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* 
    AMP — Global Design System
    Boska (Typography) & Helvetica Neue Ultra Light
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   */
 
 :root {
-  /* â”€â”€ Colour Palette â”€â”€ */
+  /* ── Colour Palette ── */
   --color-white: #FFFFFF;
   --color-bg-navy: #000000;
-  --color-bg-light: #f5f5f5;
+  --color-bg-light: #efefef;
   --color-bg-cream: #ffffff;
   --color-highlight: #b48564;
 
@@ -31,7 +31,7 @@
   --color-gold-highlight: #e0e0e0;
   --color-gold-accent: #aaaaaa;
 
-  /* â”€â”€ Typography â”€â”€ */
+  /* ── Typography ── */
   --font-heading: 'Playfair Display', serif;
   --font-sans: 'IBM Plex Sans', sans-serif;
 
@@ -119,7 +119,7 @@ h6 {
   font-family: var(--font-heading);
   color: var(--color-text-dark);
   font-weight: 300;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.01em;
   line-height: 1.3;
   margin: 0;
 }
@@ -127,37 +127,37 @@ h6 {
 h1 {
   font-size: clamp(38px, 6.5vw, 48px);
   line-height: 1.2;
-  letter-spacing: 0.24em;
+  letter-spacing: -0.01em;
 }
 
 h2 {
   font-size: clamp(24px, 4vw, 36px);
   line-height: 1.3;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.01em;
 }
 
 h3 {
   font-size: clamp(18px, 2.5vw, 20px);
   line-height: 1.3;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.01em;
 }
 
 h4 {
   font-size: 14px;
   line-height: 1.35;
-  letter-spacing: 0.22em;
+  letter-spacing: -0.01em;
 }
 
 h5 {
   font-size: 12px;
   line-height: 1.4;
-  letter-spacing: 0.2em;
+  letter-spacing: -0.01em;
 }
 
 h6 {
   font-size: 10px;
   line-height: 1.5;
-  letter-spacing: 0.2em;
+  letter-spacing: -0.01em;
 }
 
 /* â”€â”€ Links â”€â”€ */
@@ -167,13 +167,50 @@ a {
   transition: all 0.25s ease;
 }
 
-/* â”€â”€ Buttons â”€â”€ */
+/* ── Buttons ── */
 button {
   font-family: inherit;
   cursor: pointer;
   border: none;
   background: none;
   outline: none;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  background: #111111;
+  border: 1px solid #111111;
+  padding: 14px 32px;
+  border-radius: 40px !important;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #b48564;
+  color: #ffffff !important;
+  border-color: #b48564;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(180, 133, 100, 0.25);
+}
+
+.btn-primary .btn-arrow {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translate(2px, -2px);
 }
 
 /* â”€â”€ Selection Highlight â”€â”€ */
@@ -238,17 +275,17 @@ button {
 
 .filter-tab-btn.active {
   color: var(--color-primary);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* â”€â”€ Section Title — inherits h2 scale â”€â”€ */
 .section-title {
   font-family: var(--font-heading);
-  font-size: clamp(24px, 4vw, 34px);
+  font-size: clamp(24px, 4vw, 48px);
   font-weight: 400;
   line-height: 1.3;
   color: var(--color-text-dark);
-  letter-spacing: 0.1em;
+  letter-spacing: -0.01em;
   /* text-transform: uppercase; */
   margin-bottom: 16px;
 }
@@ -257,23 +294,11 @@ button {
 .display-title {
   font-family: var(--font-heading);
   font-size: clamp(36px, 6.5vw, 40px);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.2;
   color: var(--color-text-dark);
-  letter-spacing: 0.1em;
+  letter-spacing: -0.01em;
   margin: 0 0 24px 0;
-}
-
-@media (max-width: 900px) {
-  .section-title {
-    letter-spacing: 0.22em;
-  }
-}
-
-@media (max-width: 600px) {
-  .section-title {
-    letter-spacing: 0.18em;
-  }
 }
 
 /* â”€â”€ Body Text System â”€â”€ */
@@ -281,11 +306,12 @@ p,
 .body-text,
 blockquote {
   font-family: var(--font-sans);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.8;
-  color: var(--color-text-muted);
-  letter-spacing: 0.07em;
+  font-size: 21px;
+  font-weight: 350;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+  letter-spacing: 0em;
+  /* text-align: justify; */
 }
 
 /* â”€â”€ Label / Micro Text â”€â”€ */
@@ -592,6 +618,19 @@ h3 span,
 
 
 
+@media (max-width: 960px) {
+  .floorplan-slide-content-grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .floorplan-slide-visual-col {
+    order: 1 !important;
+  }
+  .floorplan-slide-details-col {
+    order: 2 !important;
+  }
+}
+
 @media (max-width: 768px) {
   .desktop-only-br {
     display: none !important;
@@ -648,7 +687,7 @@ html.lenis body {
   textarea *,
   .slider-arrow *,
   .filter-tab-btn *,
-  [role="button"] * {
+  [role="button"] *, .pillar-header * {
     cursor: pointer !important;
   }
 

@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Search, ChevronDown, Menu, X, Globe } from 'lucide-react';
+import { Search, ChevronDown, Menu, X, Globe, ArrowRight } from 'lucide-react';
 
 const CATEGORIES = [
   {
     id: 'villas',
-    name: 'Villa',
-    img: '/images/hero_placeholders/chinese-city.jpg',
+    name: 'Villas',
+    img: '/images/project/CML/master-banner.png',
     projects: [
-      { id: 'r1', name: 'Modern Luxury Villa', img: '/images/hero_placeholders/chinese-city.jpg' },
-      { id: 'r2', name: 'Crystal Moonlight Villa', img: '/images/hero_placeholders/bird-view-shanghai-china.jpg' },
-      { id: 'v1', name: 'Sunset Villas', img: '/images/hero_placeholders/bird-view-shanghai-china.jpg' },
-      { id: 'v2', name: 'Ocean View Villas', img: '/images/hero_placeholders/chinese-city.jpg' },
-      { id: 'v3', name: 'Palm Grove Estate', img: '/images/hero_placeholders/bird-view-shanghai-china.jpg' }
+      { id: 'crystal-moonlight', name: 'Crystal Moonlight Villas', location: 'Medavakkam, Chennai', img: '/images/project/CML/master-banner.png', url: '/crystal-moonlight-villa' },
+      { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai', img: '/images/home/project-image-2.png', url: '/crystal-moonlight-villa' }
     ]
   },
   {
     id: 'apartments',
     name: 'Apartments',
-    img: '/images/hero_placeholders/chinese-city.jpg',
+    img: '/images/project_crystal_1779810838661.png',
     projects: [
-      { id: 'a1', name: 'Skyline Heights', img: '/images/hero_placeholders/bird-view-shanghai-china.jpg' },
-      { id: 'a2', name: 'Urban Nexus', img: '/images/hero_placeholders/chinese-city.jpg' },
-      { id: 'a3', name: 'The Pinnacle', img: '/images/hero_placeholders/bird-view-shanghai-china.jpg' }
+      { id: 'pasha-pinnacle', name: 'Pasha Pinnacle', location: 'Royapettah, Chennai', img: '/images/project_crystal_1779810838661.png', url: '/crystal-moonlight-villa' }
     ]
   },
   {
     id: 'plotted',
     name: 'Plots',
-    img: '/images/home/project-image-2.png',
+    img: '/images/home/project-image-1.png',
     projects: [
-      { id: 'p1', name: 'Ashok Nagar \u2013 Villa Plots', img: '/images/home/project-image-2.png', url: '/ashok-nagar-villa-plots-in-maduranthakam' }
+      { id: 'ashok-nagar', name: 'Ashok Nagar', location: 'Maduranthakam, Chennai', img: '/images/home/project-image-2.png', url: '/ashok-nagar-villa-plots-in-maduranthakam' },
+      { id: 'cmr-global', name: 'CMR Global City', location: 'Maduranthakam, Chennai', img: '/images/home/project-image-1.png', url: '/ashok-nagar-villa-plots-in-maduranthakam' },
+      { id: 'guberalakshmi', name: 'Guberalakshmi Nagar', location: 'Chennai', img: '/images/home/project-image-1.png', url: '/ashok-nagar-villa-plots-in-maduranthakam' }
     ]
   }
 ];
@@ -40,12 +37,42 @@ export default function Navbar({ darkText = false }) {
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
 
+  // Search State
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Extract all projects for searching
+  const allProjectsFlat = CATEGORIES.flatMap(cat => cat.projects);
+  const searchResults = searchQuery.trim() === '' ? [] : allProjectsFlat.filter(p => 
+    p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    (p.location && p.location.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
   useEffect(() => {
     if (!megaMenuOpen) {
       setActiveCategory(null);
       setActiveProject(null);
     }
   }, [megaMenuOpen]);
+
+  // Handle Search Overlay Body Lock & Escape
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setIsSearchOpen(false);
+    };
+    if (isSearchOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+      setTimeout(() => setSearchQuery(''), 300); // Clear after fade out
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isSearchOpen]);
 
   // Mobile Menu State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -107,21 +134,19 @@ export default function Navbar({ darkText = false }) {
 
           {/* Center Logo */}
           <a href="/" className="nav-logo-container" style={{ textDecoration: 'none' }}>
-            <div className="text-logo-wrapper">
-              <div className="text-logo-monogram-img"></div>
-              <div className="text-logo-divider"></div>
-              <div className="text-logo-text">
-                <span className="text-logo-primary">AADHITHYA MOHAN</span>
-                <span className="text-logo-secondary">PROPERTIES</span>
-              </div>
-            </div>
+            <img 
+              src={(isSearchOpen || (darkText && !scrolled && !megaMenuOpen)) ? "/images/black-logo.png" : "/images/white-logo.png"} 
+              alt="Aadhithya Mohan Properties" 
+              className="nav-logo-img" 
+              style={{ height: '34px', width: 'auto', objectFit: 'contain', transition: 'all 0.3s ease' }} 
+            />
           </a>
 
           {/* Right Navigation (Desktop) */}
           <nav className="nav-right desktop-only">
             <a href="/careers" className="nav-link">CAREERS</a>
             <a href="/contact" className="nav-link">CONTACT US</a>
-            <button className="icon-button">
+            <button className="icon-button" onClick={() => setIsSearchOpen(true)} aria-label="Open Search">
               <Search size={18} strokeWidth={2} />
             </button>
           </nav>
@@ -187,7 +212,10 @@ export default function Navbar({ darkText = false }) {
                     className={`mega-project-item ${activeProject?.id === proj.id ? 'active' : ''}`}
                     onMouseEnter={() => setActiveProject(proj)}
                   >
-                    <a href={proj.url || `/projects/${proj.id}`}>{proj.name}</a>
+                    <a href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : `/projects?category=${activeCategory.id}`)}>
+                      <div className="mega-project-name">{proj.name}</div>
+                      {proj.location && <div className="mega-project-location">{proj.location}</div>}
+                    </a>
                   </div>
                 ))}
               </>
@@ -266,7 +294,8 @@ export default function Navbar({ darkText = false }) {
                         onClick={() => setMobileMenuOpen(false)}
                         className="mobile-project-link"
                       >
-                        {proj.name}
+                        <div className="mobile-project-name">{proj.name}</div>
+                        {proj.location && <div className="mobile-project-location">{proj.location}</div>}
                       </a>
                     ))}
                   </div>
@@ -300,6 +329,52 @@ export default function Navbar({ darkText = false }) {
           </div>
 
         </nav>
+      </div>
+
+      {/* Full Screen Search Overlay */}
+      <div className={`search-overlay ${isSearchOpen ? 'visible' : ''}`}>
+        <button className="search-overlay-close" onClick={() => setIsSearchOpen(false)} aria-label="Close Search">
+          <X size={36} strokeWidth={1.5} />
+        </button>
+        <div className="search-container">
+          <div className="search-input-wrapper">
+            <Search size={32} className="search-input-icon" />
+            <input 
+              type="text" 
+              className="search-input" 
+              placeholder="Search projects, locations..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              autoFocus={isSearchOpen}
+            />
+          </div>
+          
+          <div className="search-results">
+            {searchQuery.trim() !== '' && searchResults.length === 0 && (
+              <div className="search-no-results">No projects found for "{searchQuery}"</div>
+            )}
+            {searchResults.map((proj, idx) => (
+              <a 
+                href={proj.url || '/crystal-moonlight-villa'} 
+                className="search-result-item" 
+                key={proj.id} 
+                onClick={() => setIsSearchOpen(false)}
+                style={{ animationDelay: `${idx * 0.05}s` }}
+              >
+                <div className="search-result-img">
+                  <img src={proj.img} alt={proj.name} />
+                </div>
+                <div className="search-result-info">
+                  <h4 className="search-result-title">{proj.name}</h4>
+                  {proj.location && <p className="search-result-loc">{proj.location}</p>}
+                </div>
+                <div className="search-result-action">
+                  <ArrowRight size={22} className="search-result-arrow" />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       <style>{`
@@ -367,8 +442,8 @@ export default function Navbar({ darkText = false }) {
 
         .nav-link {
           font-family: var(--font-sans);
-          font-size: 14px;
-          font-weight: 600;
+          font-size: 13px;
+          font-weight: 400;
           color: #ffffffff;
           text-decoration: none;
           text-transform: uppercase;
@@ -550,7 +625,7 @@ export default function Navbar({ darkText = false }) {
         .mega-category-item a {
           font-family: var(--font-sans);
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 400;
           color: #000000ff;
           text-transform: uppercase;
           text-decoration: none;
@@ -569,18 +644,41 @@ export default function Navbar({ darkText = false }) {
         .mega-project-item a {
           font-family: var(--font-sans);
           font-size: 13px;
-          font-weight: 600;
-          color: #444444;
+          font-weight: 400;
+          color: var(--color-text-dark);
           text-transform: uppercase;
           text-decoration: none;
           transition: all 0.3s ease;
-          display: block;
+          display: flex;
+          flex-direction: column;
           padding: 6px 0;
           letter-spacing: 0.05em;
         }
 
+        .mega-project-name {
+          font-size: 13px;
+          font-weight: 400;
+          color: inherit;
+          text-transform: uppercase;
+        }
+
+        .mega-project-location {
+          font-size: 10px;
+          font-weight: 400;
+          color: #888888;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          margin-top: 2px;
+          transition: color 0.3s ease;
+        }
+
         .mega-project-item.active a, .mega-project-item:hover a {
           color: #b48564;
+        }
+
+        .mega-project-item.active .mega-project-location, .mega-project-item:hover .mega-project-location {
+          // color: #b48564;
+          opacity: 0.85;
         }
 
         .mega-image-container {
@@ -797,7 +895,23 @@ export default function Navbar({ darkText = false }) {
           text-transform: uppercase;
           letter-spacing: 0.04em;
           padding: 4px 0;
+          display: flex;
+          flex-direction: column;
           transition: color 0.3s ease;
+        }
+
+        .mobile-project-name {
+          font-size: 12px;
+          color: inherit;
+        }
+
+        .mobile-project-location {
+          font-size: 9px;
+          font-weight: 400;
+          color: #888888;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          margin-top: 1px;
         }
 
         .mobile-project-link:hover {
@@ -870,6 +984,206 @@ export default function Navbar({ darkText = false }) {
           .sobha-navbar {
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+          }
+        }
+
+        /* ── Search Overlay ── */
+        .search-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.98);
+          z-index: 10000;
+          display: flex;
+          flex-direction: column;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.4s ease;
+          overflow-y: auto;
+        }
+
+        .search-overlay.visible {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .search-overlay-close {
+          position: absolute;
+          top: 40px;
+          right: 60px;
+          background: transparent;
+          border: none;
+          color: #111111;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          z-index: 2;
+        }
+
+        .search-overlay-close:hover {
+          transform: rotate(90deg);
+        }
+
+        .search-container {
+          width: 100%;
+          max-width: 900px;
+          margin: 120px auto 60px;
+          padding: 0 40px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .search-input-wrapper {
+          display: flex;
+          align-items: center;
+          border-bottom: 2px solid #111111;
+          padding-bottom: 16px;
+          margin-bottom: 60px;
+        }
+
+        .search-input-icon {
+          color: #b48564;
+          margin-right: 24px;
+        }
+
+        .search-input {
+          flex: 1;
+          background: transparent;
+          border: none;
+          outline: none;
+          font-family: var(--font-heading);
+          font-size: clamp(32px, 5vw, 48px);
+          color: #111111;
+        }
+
+        .search-input::placeholder {
+          color: rgba(0, 0, 0, 0.15);
+        }
+
+        .search-results {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .search-no-results {
+          font-family: var(--font-sans);
+          font-size: 18px;
+          color: #888888;
+          text-align: center;
+          padding: 40px 0;
+        }
+
+        .search-result-item {
+          display: flex;
+          align-items: center;
+          background: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          padding: 16px;
+          border-radius: 8px;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        .search-overlay.visible .search-result-item {
+          animation: fadeUpSearch 0.5s ease forwards;
+        }
+
+        .search-result-item:hover {
+          border-color: rgba(180, 133, 100, 0.4);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+          transform: translateY(-2px) !important;
+        }
+
+        .search-result-img {
+          width: 100px;
+          height: 70px;
+          border-radius: 4px;
+          overflow: hidden;
+          margin-right: 24px;
+          flex-shrink: 0;
+        }
+
+        .search-result-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .search-result-info {
+          flex: 1;
+        }
+
+        .search-result-title {
+          font-family: var(--font-heading);
+          font-size: 24px;
+          color: #111111;
+          margin: 0 0 4px 0;
+          transition: color 0.3s ease;
+        }
+
+        .search-result-item:hover .search-result-title {
+          color: #b48564;
+        }
+
+        .search-result-loc {
+          font-family: var(--font-sans);
+          font-size: 13px;
+          color: #888888;
+          margin: 0;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+
+        .search-result-action {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #111111;
+          transition: all 0.3s ease;
+        }
+
+        .search-result-item:hover .search-result-action {
+          background: #111111;
+          color: #ffffff;
+          border-color: #111111;
+        }
+
+        @keyframes fadeUpSearch {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .search-overlay-close {
+            top: 20px;
+            right: 20px;
+          }
+          .search-container {
+            margin-top: 80px;
+            padding: 0 20px;
+          }
+          .search-input-icon {
+            margin-right: 16px;
+          }
+          .search-result-item {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .search-result-img {
+            width: 100%;
+            height: 160px;
+            margin-right: 0;
+            margin-bottom: 16px;
+          }
+          .search-result-action {
+            display: none;
           }
         }
       `}</style>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Sparkles } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 export default function ProjectSpecs({
@@ -154,7 +154,7 @@ export default function ProjectSpecs({
       <div className="sp2-bg-glow" aria-hidden="true"></div>
       <div className="sp2-bg-grid" aria-hidden="true"></div>
 
-      {/* â”€â”€ MOBILE PREVIEW CARD (Hidden on Desktop) â”€â”€ */}
+      {/* ── MOBILE PREVIEW CARD (Hidden on Desktop) ── */}
       <div className="sp2-mobile-preview-card">
         <div className="section-header">
           <span className="section-tag">Specifications</span>
@@ -163,17 +163,18 @@ export default function ProjectSpecs({
         </div>
         
         <div className="sp2-preview-frame">
-          <div className="sp2-preview-blueprint-mesh"></div>
-          <div className="sp2-preview-icon">âœ¦</div>
+          <div className="sp2-preview-icon">
+            <Sparkles size={26} color="#b48564" style={{ margin: '0 auto 12px auto', display: 'block' }} />
+          </div>
           <h3 className="sp2-preview-frame-title">Technical Specifications</h3>
           <p className="sp2-preview-frame-text">
             Immerse yourself in the technical engineering, structural layout, premium materials, and bespoke utility details of Crystal Moonlight Villa.
           </p>
           <div className="sp2-preview-peek-grid">
-            <span className="peek-tag">âœ¦ Structure</span>
-            <span className="peek-tag">âœ¦ Flooring</span>
-            <span className="peek-tag">âœ¦ Electrical</span>
-            <span className="peek-tag">âœ¦ +12 More</span>
+            <span className="peek-tag">✦ Structure</span>
+            <span className="peek-tag">✦ Flooring</span>
+            <span className="peek-tag">✦ Electrical</span>
+            <span className="peek-tag">✦ +12 More</span>
           </div>
           <button className="sp2-preview-cta" onClick={() => setIsAtelierOpen(true)}>
             EXPLORE TECHNICAL ATELIER
@@ -181,7 +182,7 @@ export default function ProjectSpecs({
         </div>
       </div>
 
-      {/* â”€â”€ MOBILE FULL-SCREEN ATELIER OVERLAY â”€â”€ */}
+      {/* ── MOBILE FULL-SCREEN ATELIER OVERLAY ── */}
       {isAtelierOpen && (
         <div className="sp2-atelier-overlay">
           <div className="sp2-atelier-container">
@@ -193,7 +194,7 @@ export default function ProjectSpecs({
                 <h2 className="sp2-atelier-main-title">TECHNICAL ATELIER</h2>
               </div>
               <button className="sp2-atelier-close" onClick={() => setIsAtelierOpen(false)} aria-label="Close specifications">
-                âœ•
+                <X size={22} color="#111111" />
               </button>
             </div>
 
@@ -324,7 +325,7 @@ export default function ProjectSpecs({
                 <h3 className="sp2-card-title">{spec.title}</h3>
                 <div className="sp2-card-sep"></div>
                 <div className="sp2-card-details">
-                  {spec.details && spec.details.slice(0, 2).map((d, i) => (
+                  {spec.details && spec.details.map((d, i) => (
                     <p key={i} className="sp2-card-detail-text">
                       {d}
                     </p>
@@ -439,7 +440,7 @@ export default function ProjectSpecs({
           cursor: pointer;
           position: relative;
           font-family: var(--font-sans);
-          font-size: 14px;
+          font-size: 18px;
           color: #666666;
           transition: all 0.3s ease;
           outline: none;
@@ -569,9 +570,9 @@ export default function ProjectSpecs({
 
         .sp2-card-detail-text {
           font-family: var(--font-sans);
-          font-size: 14.5px;
+          font-size: 18px;
           color: #4f4f4f;
-          line-height: 1.6;
+          line-height: 1.5;
           margin: 0;
         }
 

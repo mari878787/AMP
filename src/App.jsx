@@ -5,6 +5,7 @@ import NewProject from './pages/NewProject';
 import PlottedDevelopment from './pages/PlottedDevelopment';
 import AboutUs from './pages/AboutUs';
 import AllProjects from './pages/AllProjects';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import StickyActionBar from './components/StickyActionBar';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -53,6 +54,7 @@ function App() {
         <Route path="/ashok-nagar" element={<PlottedDevelopment />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/projects" element={<AllProjects />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
       <StickyActionBar />
     </Router>

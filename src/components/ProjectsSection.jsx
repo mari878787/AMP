@@ -6,44 +6,64 @@ import ScrollReveal from './ScrollReveal';
 const ALL_PROJECTS = [
   {
     id: 1,
-    category: 'Apartment',
-    title: 'Pelican Grove',
-    location: 'North Bangalore - Jakkur',
-    area: '4,200 Sq.Ft.',
-    image: '/images/maia/1.png',
-    link: '#',
+    category: 'Villa',
+    title: 'Crystal Moonlight Villas',
+    location: 'Medavakkam, Chennai',
+    area: '2,233 - 2,287 Sq.Ft.',
+    image: '/images/project_crystal_1779810838661.png',
+    link: '/crystal-moonlight-villa',
     centerInfo: '3 BHK & 4 BHK'
   },
   {
     id: 2,
-    category: 'Apartment',
-    title: '27 Summit',
-    location: 'Central Bangalore - Richmond Road',
-    area: '3,800 Sq.Ft.',
-    image: '/images/maia/2.png',
-    link: '#',
-    centerInfo: '3 BHK & 4 BHK'
+    category: 'Villa',
+    title: 'Bay Vista',
+    location: 'ECR, Chennai',
+    area: '3,000 - 4,500 Sq.Ft.',
+    image: '/images/home/project-image-2.png',
+    link: '/crystal-moonlight-villa',
+    centerInfo: 'Bespoke Villas'
   },
   {
     id: 3,
-    category: 'Villa',
-    title: 'Mélange',
-    location: 'Saligramam, Chennai',
-    area: '5,500 Sq.Ft.',
-    image: '/images/maia/3.png',
-    link: '#',
-    centerInfo: '4 BHK & 5 BHK'
+    category: 'Apartment',
+    title: 'Pasha Pinnacle',
+    location: 'Royapettah, Chennai',
+    area: '1,500 - 2,400 Sq.Ft.',
+    image: '/images/project_crystal_1779810838661.png',
+    link: '/crystal-moonlight-villa',
+    centerInfo: 'Boutique Apartments'
   },
   {
     id: 4,
     category: 'Plots',
-    title: 'Reserve 16',
-    location: 'ECR, Pattipulam',
-    area: '2,400 - 4,100 Sq.Ft.',
-    image: '/images/maia/4.png',
-    link: '/crystal-moonlight-villa',
+    title: 'Ashok Nagar',
+    location: 'Maduranthakam, Chennai',
+    area: '1,200 - 2,400 Sq.Ft.',
+    image: '/images/home/project-image-2.png',
+    link: '/ashok-nagar-villa-plots-in-maduranthakam',
     centerInfo: 'Villa Plots'
   },
+  {
+    id: 5,
+    category: 'Plots',
+    title: 'CMR Global City',
+    location: 'Maduranthakam, Chennai',
+    area: '800 - 2,000 Sq.Ft.',
+    image: '/images/home/project-image-1.png',
+    link: '/ashok-nagar-villa-plots-in-maduranthakam',
+    centerInfo: 'Gated Plots'
+  },
+  {
+    id: 6,
+    category: 'Plots',
+    title: 'Guberalakshmi Nagar',
+    location: 'Chennai',
+    area: '600 - 1,800 Sq.Ft.',
+    image: '/images/home/project-image-1.png',
+    link: '/ashok-nagar-villa-plots-in-maduranthakam',
+    centerInfo: 'Residential Plots'
+  }
 ];
 
 const ArrowLeft = () => (
@@ -290,23 +310,32 @@ export default function ProjectsSection() {
       </div>
 
       <style>{`
-        /* â”€â”€ Section â”€â”€ */
+        /* ── Section ── */
         .projects-section {
           --card-active-w: 85vw;
           --card-w: 65vw;
-          --gap: 4vw;
+          --gap: 3vw;
           --card-offset: calc(50vw - var(--card-active-w) / 2);
 
-          background-color: var(--color-bg-light);
-          padding: 80px 0;
+          background-color: var(--color-white);
+          padding: 42px 0 18px 0;
           overflow: hidden;
+          box-sizing: border-box;
+          gap: 10px;
+          min-height: calc(100vh - 60px);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
 
         .slider-viewport-wrapper {
           width: 100%;
           overflow: hidden;
           position: relative;
-          padding: 30px 0 40px;
+          padding: 6px 0 8px;
+          flex-grow: 1;
+          display: flex;
+          align-items: center;
         }
 
         .slider-viewport {
@@ -321,7 +350,7 @@ export default function ProjectsSection() {
           will-change: transform;
         }
 
-        /* â”€â”€ Card â”€â”€ */
+        /* ── Card ── */
         .project-card {
           flex: 0 0 var(--card-w);
           min-width: 0;
@@ -337,7 +366,9 @@ export default function ProjectsSection() {
         .project-img-wrap {
           position: relative;
           width: 100%;
-          height: 47vw;
+          height: calc(100vh - 165px);
+          max-height: 720px;
+          min-height: 360px;
           overflow: hidden;
           border: 1px solid rgba(0, 0, 0, 0.08);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
@@ -350,7 +381,7 @@ export default function ProjectsSection() {
           transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           pointer-events: none;
         }
-        .project-card.active:hover .project-img { transform: scale(1.04); }
+        .project-card.active:hover .project-img { transform: scale(1.2); }
 
         .project-overlay {
           position: absolute;
@@ -395,21 +426,21 @@ export default function ProjectsSection() {
         }
 
         .overlay-title {
-          font-family: var(--font-sans);
+          font-family: var(--font-heading);
           font-weight: 300;
-          font-size: 22px;
+          font-size: 32px;
           color: var(--color-white);
           line-height: 1.2;
-          text-transform: uppercase;
-          letter-spacing: 0.15em;
+          // text-transform: uppercase;
+          letter-spacing: -0.01em;
           text-align: left;
         }
 
         .overlay-center-info {
           color: #fff;
           font-family: var(--font-sans);
-          font-size: 13px;
-          letter-spacing: 0.1em;
+          font-size: 20px;
+          letter-spacing: 0m;
           text-transform: uppercase;
           text-align: center;
         }
@@ -417,8 +448,8 @@ export default function ProjectsSection() {
         .overlay-location {
           color: rgba(255, 255, 255, 0.85);
           font-family: var(--font-sans);
-          font-size: 13px;
-          letter-spacing: 0.08em;
+          font-size: 20px;
+          letter-spacing: 0em;
           text-align: right;
         }
 
@@ -531,42 +562,44 @@ export default function ProjectsSection() {
           }
         }
 
-        /* â”€â”€ Bottom row â”€â”€ */
+        /* ── Bottom row ── */
         .slider-bottom-row {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-top: 36px;
+          margin-top: 6px;
+          margin-bottom: 4px;
           flex-wrap: wrap;
-          gap: 16px;
+          gap: 8px;
         }
 
-        /* â”€â”€ Dots â”€â”€ */
+        /* ── Dots ── */
         .slider-dots {
           display: flex;
           gap: 8px;
           align-items: center;
         }
 
-        /* â”€â”€ Responsive â”€â”€ */
+        /* ── Responsive ── */
         @media (max-width: 1024px) {
           .projects-section {
-            --card-active-w: 75vw;
-            --card-w: 60vw;
+            --card-active-w: 82vw;
+            --card-w: 64vw;
             --gap: 3vw;
           }
           .project-img-wrap {
-            height: auto !important;
-            aspect-ratio: 16 / 10 !important;
+            height: calc(100dvh - 150px) !important;
+            max-height: 640px !important;
+            min-height: 300px !important;
           }
         }
 
         @media (max-width: 768px) {
           .projects-section {
-            --card-active-w: 80vw;
-            --card-w: 65vw;
+            --card-active-w: 88vw;
+            --card-w: 70vw;
             --gap: 4vw;
-            padding: 60px 0;
+            padding: 8px 0 4px 0;
           }
 
           .projects-header {

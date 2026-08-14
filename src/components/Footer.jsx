@@ -11,8 +11,7 @@ export default function Footer() {
           {/* Logo & Brand Column */}
           <div className="footer-col-brand">
             <div className="footer-logo-wrap">
-              <img src="/images/logo.png" alt="Aadhithya Mohan Logo" className="footer-logo" />
-              {/* <div className="footer-brand-name">AADHITHYA MOHAN</div> */}
+              <img src="/images/black-logo.png" alt="Aadhithya Mohan Properties" className="footer-logo" style={{ height: '54px', width: 'auto', objectFit: 'contain' }} />
             </div>
             
             <h3 className="footer-tagline">
@@ -56,7 +55,7 @@ export default function Footer() {
             <ul className="footer-links">
               <li><a href="#faqs">FAQS</a></li>
               <li><a href="#terms">Terms & Conditions</a></li>
-              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="/privacy-policy">Privacy Policy</a></li>
               <li><a href="#disclaimer">Disclaimer</a></li>
             </ul>
           </div>

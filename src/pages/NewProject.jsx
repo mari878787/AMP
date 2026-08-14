@@ -37,95 +37,115 @@ const VIDEO_SLIDES = [
 ];
 const SPECIFICATIONS = [
   {
-    id: 'structure',
-    label: 'Structure',
+    id: 'foundation',
+    label: 'Foundation',
     index: '01',
-    title: 'STRUCTURE',
+    title: 'FOUNDATION',
     details: [
-      'Pile foundation with RCC Column & Beam.',
-      'Chamber bricks for all walls — Main walls 9" & Partition walls 4Â½" thickness.',
-      'Ceiling height: 10Â½ ft (top) | 9 ft 7Â½ in (bottom height).'
+      'All pile foundations with 19 feet of rock bottom shall be as per the Structural Drawing.'
     ],
     image: '/images/project/spec-structure.png'
   },
   {
-    id: 'doors-windows',
-    label: 'Doors & Windows',
+    id: 'structure-plastering',
+    label: 'Structure & Plastering',
     index: '02',
-    title: 'DOORS & WINDOWS',
+    title: 'STRUCTURE & PLASTERING',
     details: [
-      'Teak wood frames for all doors. Main door frames polished; all doors painted with Satin Enamel Asian Paint.',
-      'Main door: Solid teak with Melamine/Matte Finish — Asian Paint varnish both sides, ornamental border.',
-      'Interior doors: 32mm imported plywood arrangement with mica finish & SS fittings.',
-      '5-Star Fiber Reinforced Polymer (FRP) waterproof doors — polished exterior, painted interior.',
-      'UPVC windows with mosquito net shutters & safety grills.',
-      'Basement height: 3 or 4 feet.'
+      'External Walls in Red Bricks.',
+      'Partition Walls in Red Bricks.',
+      'Internal Walls plastered in Cement',
+      'R.C.C Framed Structure with Columns, Beams and Slabs'
     ],
     image: '/images/project/spec-structure.png'
   },
   {
-    id: 'electrical',
-    label: 'Electrical',
+    id: 'painting',
+    label: 'Painting',
     index: '03',
-    title: 'ELECTRICAL',
+    title: 'PAINTING',
     details: [
-      'Concealed electrical wiring; modular switches of Anchor / Legrand / GM Switches.',
-      'Finolex pipes & Orbit / Finolex / KEI wires — three-phase concealed power supply with changeover switches.',
-      'Home theatre & inverter provision in the living room.',
-      '15A AC power points for all bedrooms + one in the living area.',
-      'Adequate 5A power points in the living room, bedrooms, kitchen & service area.',
-      'Cable TV & telephone points in all bedrooms and living room.'
+      'Interiors: Emulsion Premium Paint with Two Coat Asian / Dulux Putty.',
+      'Exteriors: Texture with Asian all-weather coat paints.'
+    ],
+    image: '/images/project/spec-structure.png'
+  },
+  {
+    id: 'flooring',
+    label: 'Flooring(Kajaria)',
+    index: '04',
+    title: 'FLOORING(KAJARIA)',
+    details: [
+      '4 X 4 Vitrified Tiles for Living, Dining,',
+      '4 X 4 Vitrified Tiles for Bedrooms and Kitchen',
+      '4 X 4 Vitrified Tiles for Bathrooms',
+      '2 X 2 Vitrified Tiles for Balcony',
+      'Anti-Skid Tiles in Rest Rooms and Utility Area',
+      'Terrace Kerala Cool Roof Tile',
+      'Stairs Block Granite With SS Rails'
+    ],
+    image: '/images/project/spec-structure.png'
+  },
+  {
+    id: 'doors',
+    label: 'Doors',
+    index: '05',
+    title: 'DOORS',
+    details: [
+      'Engineered Wooden Door Frame and Shutter with Teak Wood Laminate finish for the main door.',
+      'Engineered Wooden Door Frame and Shutter for all the internal doors with a laminate finish.',
+      'Toilets: WPC doors.'
+    ],
+    image: '/images/project/spec-structure.png'
+  },
+  {
+    id: 'windows-grills',
+    label: 'Windows & Grills',
+    index: '06',
+    title: 'WINDOWS & GRILLS',
+    details: [
+      'Balcony: UPVC French doorsin balcony only with Sliding Glass shutters.',
+      "Windows: UPVC Frames with Sliding Glass Shutters and MS Grill as per the Architect's Design & 12mm Rod Thickness in grills"
     ],
     image: '/images/project/spec-structure.png'
   },
   {
     id: 'kitchen',
     label: 'Kitchen',
-    index: '04',
+    index: '07',
     title: 'KITCHEN',
     details: [
-      'Polished Black Granite Galaxy platform (L-shape) with SS single bowl sink & drain board 24" Ã— 18".',
-      'Ceramic tile Kajaria dado — 2 feet height above the counter.',
-      'Separate plumbing connections: Corporation water, bore/well water & RO water purifier.',
-      '15A power points in the kitchen for wet grinder, electrical oven, mixer-grinder & refrigerator.'
+      'Kajaria wall tiles upto roof above the Kitchen Platform.',
+      'Granite platform with SS sink with Drain Board',
+      'Provision for Water Purification System in Kitchen.',
+      'Provision for a washing machine in the utility area.'
     ],
     image: '/images/project/spec-structure.png'
   },
   {
-    id: 'wall-finish',
-    label: 'Wall Finish',
-    index: '05',
-    title: 'WALL FINISH',
+    id: 'bathrooms',
+    label: 'Bathrooms',
+    index: '08',
+    title: 'BATHROOMS',
     details: [
-      'Exterior walls: 2-coat emulsion finish.',
-      'Interior walls & ceiling: 2 coats Asian paint + 1 coat internal primer + 1 coat acrylic putty, coloured with 2 coats of emulsion.'
+      'Wall Tiles up to roof height.',
+      'Jaquar or Equivalent wall mounted closets, Washbasins.',
+      'Jaquar or Equivalent CP Fittings.',
+      'Provision for a horizontally shaped Geyser and Exhaust Fan.'
     ],
     image: '/images/project/spec-structure.png'
   },
   {
-    id: 'bathroom',
-    label: 'Bathroom',
-    index: '06',
-    title: 'BATHROOM',
+    id: 'electricals',
+    label: 'Electricals',
+    index: '09',
+    title: 'ELECTRICALS',
     details: [
-      'Anti-skid tiles for toilet flooring to match wall tiles.',
-      'All fittings: Jaguar or equivalent brands; shower with concealed diverter and spout.',
-      'Complete toilet accessories: towel rods & soap trays.',
-      'Exhaust fan & power supply provision for water heater in each toilet.'
-    ],
-    image: '/images/project/spec-structure.png'
-  },
-  {
-    id: 'other-provisions',
-    label: 'Other Provisions',
-    index: '07',
-    title: 'OTHER PROVISIONS',
-    details: [
-      'Rainwater harvesting system & EV car charging points.',
-      'ISI-specified PVC Finol concealed pipes for water and sanitary fittings.',
-      'Visible pipelines colour-matched with building facade using open clamps.',
-      'Sewage system connection with PVC pipes.',
-      'Adequate capacity electrical main panel board for each flat on the ground floor.'
+      'Three Phase Power Supply with independent E.B meters.',
+      'Modular Switches.',
+      'Television Points in the living room and the master bedroom.',
+      'Telephone Point in Living Room.',
+      'Data points in living rooms and all Bedrooms'
     ],
     image: '/images/project/spec-structure.png'
   }
@@ -191,27 +211,33 @@ export default function NewProject() {
   const pillars = [
     {
       index: "01",
-      title: "Architectural Brilliance",
-      desc: "Crafted with G+1 and G+2 structures featuring high-end architectural styling and 10.5 ft ceilings that amplify natural light. The construction utilizes premium chamber bricks, solid teak wood frames, polished doors, modular Legrand switch systems, and anti-skid bathroom surfaces to establish a masterclass of structural excellence.",
-      image: "/images/villa_exterior_1779810861723.png"
-    },
-    {
-      index: "02",
-      title: "Strategic Location",
-      desc: "Nestled in Medavakkam, a highly-coveted residential hub offering direct connectivity. Residents enjoy being just 3 minutes from the Medavakkam junction, 10 minutes from the OMR IT Corridor (Sholinganallur), and 15 minutes from Velachery MRTS, putting prime business nodes, schools, and hospitals at your doorstep.",
+      title: "An Enduring Address",
+      desc: "Nestled in Medavakkam, Crystal Moonlight offers the rare balance of tranquil living and prime connectivity, surrounded by top educational, healthcare, and business hubs for enduring value.",
       image: "/images/project_crystal_1779810838661.png"
     },
     {
+      index: "02",
+      title: "Architecture That Endures",
+      desc: "Envisioned with timeless elegance, each villa features 100% Vastu-compliant expansive layouts, premium specifications, and meticulous craftsmanship designed to enrich everyday living.",
+      image: "/images/villa_exterior_1779810861723.png"
+    },
+    {
       index: "03",
-      title: "Gated Security",
-      desc: "Designed to offer ultimate peace of mind inside a private community of just 47 bespoke villas. The enclave is protected by 24/7 smart CCTV surveillance, dedicated security guard cabins, entry barricades, and secure boundary fencing to create a safe haven for your family.",
-      image: "/images/project/why-cmv.png"
+      title: "Tailored to Your Vision",
+      desc: "Reflecting your individuality, Crystal Moonlight offers the flexibility to personalise select layouts and bespoke finishes, adapting effortlessly to your family's evolving lifestyle.",
+      image: "/images/project/CML/Interiors/cml-interior-01.jpg"
     },
     {
       index: "04",
-      title: "Premium Lifestyle",
-      desc: "Equipped with rich community amenities that enhance your daily living. Features include private EV charging ports, paved avenue trees, street lighting, high-tech gym facilities, indoor badminton, conventional banquet halls, supermarkets, and children's outdoor play zones.",
-      image: "/images/project/CML/Interiors/cml-interior-01.jpg"
+      title: "The Privilege of Privacy",
+      desc: "A limited collection of independent villas in a secure gated enclave, offering round-the-clock security, serene privacy, and total peace of mind for your family.",
+      image: "/images/project/why-cmv.png"
+    },
+    {
+      index: "05",
+      title: "Value That Endures",
+      desc: "Combining a coveted location with superior construction and timeless design, Crystal Moonlight is an appreciating asset crafted to be treasured for generations.",
+      image: "/images/home/hero.png"
     }
   ];
   const [statusMonthIdx, setStatusMonthIdx] = useState(0);
@@ -237,7 +263,17 @@ export default function NewProject() {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  const [quoteForm, setQuoteForm] = useState({ name: '', email: '', phone: '', note: '' });
+  const [quoteForm, setQuoteForm] = useState({ 
+    contactMode: 'callback',
+    firstName: '', 
+    lastName: '',
+    phoneCode: '+91',
+    phone: '',
+    email: '', 
+    config: '3 BHK Villa',
+    privacy: false,
+    updates: false
+  });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [activeLandmarkIdx, setActiveLandmarkIdx] = useState(0);
   const [galleryIndices, setGalleryIndices] = useState({ exteriors: 1, interiors: 1, videos: 1 });
@@ -248,33 +284,29 @@ export default function NewProject() {
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [amenityIdx, setAmenityIdx] = useState(0);
   const amenities = [
-    { image: "/images/project/CML/amenities/1.png", icon: <Home size={22} />, title: "Gated Community Entry", desc: "Premium and secure entry for residents." },
-    { image: "/images/project/CML/amenities/2.png", icon: <Zap size={22} />, title: "Street Lighting", desc: "Well-illuminated internal roads." },
-    { image: "/images/project/CML/amenities/3.png", icon: <Trees size={22} />, title: "Avenue Trees", desc: "Lush green tree-lined avenues." },
-    { image: "/images/project/CML/amenities/4.png", icon: <Play size={22} />, title: "Kids Indoor Games", desc: "Safe and fun indoor play areas." },
-    { image: "/images/project/CML/amenities/5.png", icon: <Coffee size={22} />, title: "CafÃ©", desc: "A relaxed social space with seating." },
-    { image: "/images/project/CML/amenities/6.png", icon: <Stethoscope size={22} />, title: "Pharmacy", desc: "Medical essentials at your doorstep." },
-    { image: "/images/project/CML/amenities/7.png", icon: <Users size={22} />, title: "Banquet Hall", desc: "Convention hall for events and gatherings." },
-    { image: "/images/project/CML/amenities/8.png", icon: <Gamepad2 size={22} />, title: "Arcade Games Centre", desc: "Indoor games centre and arcade." },
-    { image: "/images/project/CML/amenities/9.png", icon: <ShieldCheck size={22} />, title: "24/7 Security", desc: "Round-the-clock manned security." },
-    { image: "/images/project/CML/amenities/20.png", icon: <Zap size={22} />, title: "EV Charging Points", desc: "Dedicated EV charging stations." },
-    { image: "/images/project/CML/amenities/10.png", icon: <Layers size={22} />, title: "Blacktop Internal Roads", desc: "Smooth and durable internal roads." },
-    { image: "/images/project/CML/amenities/11.png", icon: <CheckCircle2 size={22} />, title: "Potable Water Supply", desc: "Continuous and safe drinking water supply." },
-    { image: "/images/project/CML/amenities/12.png", icon: <Activity size={22} />, title: "Terrace Open Turf", desc: "Multi-sport arena on the terrace level." },
-    { image: "/images/project/CML/amenities/13.png", icon: <ShoppingBag size={22} />, title: "Supermarket", desc: "Daily essentials and groceries within reach." },
-    { image: "/images/project/CML/amenities/14.png", icon: <CreditCard size={22} />, title: "Bank & ATM", desc: "Financial convenience within the community." },
-    { image: "/images/project/CML/amenities/15.png", icon: <Stethoscope size={22} />, title: "Clinic", desc: "Primary healthcare center." },
-    { image: "/images/project/CML/amenities/16.png", icon: <Dumbbell size={22} />, title: "Gym & Wellness Centre", desc: "Fully equipped with modern fitness equipment." },
-    { image: "/images/project/CML/amenities/17.png", icon: <Activity size={22} />, title: "Indoor Squash & Badminton", desc: "Dedicated courts for squash and badminton." },
-    { image: "/images/project/CML/amenities/18.png", icon: <Video size={22} />, title: "CCTV Surveillance", desc: "24/7 smart CCTV surveillance." },
-    { image: "/images/project/CML/amenities/19.png", icon: <Baby size={22} />, title: "CrÃ¨che", desc: "Safe supervised childcare." }
+    { image: "/images/project/CML/amenities/18.png", icon: <i className="fa-solid fa-video" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "24*7 Security", desc: "Round-the-clock smart surveillance." },
+    { image: "/images/project/CML/amenities/7.png", icon: <i className="fa-solid fa-house-user" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Clubhouse", desc: "A massive, premium recreational space." },
+    { image: "/images/project/CML/amenities/16.png", icon: <i className="fa-solid fa-dumbbell" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Gym", desc: "Fully equipped with modern fitness equipment." },
+    { image: "/images/project/CML/amenities/7.png", icon: <i className="fa-regular fa-calendar-check" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Party Hall", desc: "Elegant space for events and gatherings." },
+    { image: "/images/project/CML/amenities/8.png", icon: <i className="fa-solid fa-gamepad" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Indoor Games", desc: "Dedicated area for indoor recreation." },
+    { image: "/images/project/CML/amenities/17.png", icon: <i className="fa-solid fa-spa" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Yoga Room", desc: "A tranquil space for wellness and meditation." },
+    { image: "/images/project/CML/amenities/4.png", icon: <i className="fa-solid fa-child" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Play Area", desc: "Safe and fun play zones for children." },
+    { image: "/images/project/CML/amenities/10.png", icon: <i className="fa-solid fa-road" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Paver Blocks", desc: "Neat and durable landscaping blocks." },
+    { image: "/images/project/CML/amenities/2.png", icon: <i className="fa-regular fa-lightbulb" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Solar Lighting", desc: "Eco-friendly illumination." },
+    { image: "/images/project/CML/amenities/20.png", icon: <i className="fa-solid fa-satellite-dish" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "DTH Connection", desc: "Ready connections for entertainment." },
+    { image: "/images/project/CML/amenities/11.png", icon: <i className="fa-solid fa-cloud-showers-water" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Rainwater Harvesting", desc: "As per CMWSSB Norms." },
+    { image: "/images/project/CML/amenities/12.png", icon: <i className="fa-solid fa-paint-roller" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Coarse Paint", desc: "Weather coarse paint on the terrace floor." },
+    { image: "/images/project/CML/amenities/3.png", icon: <i className="fa-solid fa-bug-slash" style={{ fontSize: '13px', opacity: 0.85 }}></i>, title: "Anti-Termite", desc: "Ensuring long-lasting protection." }
   ];
+  const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
+
   useEffect(() => {
+    if (!isAmenityAutoPlay) return;
     const interval = setInterval(() => {
       setAmenityIdx((prev) => (prev + 1) % amenities.length);
     }, 4500);
     return () => clearInterval(interval);
-  }, [amenities.length]);
+  }, [amenities.length, isAmenityAutoPlay]);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -482,7 +514,7 @@ export default function NewProject() {
             <div className="project-hero-content">
               <div className="project-hero-text-col">
                 {/* <span className="project-tag-reveal">PREMIUM GATED VILLAS</span> */}
-                <h1 className="project-hero-title">
+                <h1 className="project-hero-title display-title">
                   Crystal Moonlight Villa
                 </h1>
                 <p className="project-hero-subtitle">MEDAVAKKAM, CHENNAI</p>
@@ -506,14 +538,14 @@ export default function NewProject() {
             {/* Scrollable area containing all section links */}
             <div className="sub-nav-scroll-wrapper" ref={navContainerRef}>
               {/* Sliding gold indicator */}
-              <div
+              {/* <div
                 className="sub-nav-indicator"
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,
                   opacity: indicatorStyle.opacity
                 }}
-              />
+              /> */}
               <button
                 onClick={() => handleScrollToSection('overview')}
                 className={`sub-nav-link ${activeTab === 'overview' ? 'active' : ''}`}
@@ -630,33 +662,51 @@ export default function NewProject() {
         <div className="project-sections-container">
           {/* Overview Section - Minimalist Editorial Design */}
           {activeTab === 'overview' && (
-            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', background: 'url("/images/bg/TL-1.png") left top / contain no-repeat', /*minHeight: 'calc(100vh - 140px)',*/ display: 'flex', alignItems: 'center' }}>
+            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', /*minHeight: 'calc(100vh - 140px)',*/ display: 'flex', alignItems: 'center' }}>
               <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-                {/* Top Left Label */}
-                <div style={{ display: 'flex', marginBottom: '0px' }}>
-                  <span style={{ textTransform: 'uppercase', color: 'var(--color-text-dark)', fontWeight: '400' }}>
-                    ABOUT PROJECT
-                  </span>
-                </div>
                 {/* Main Content Grid */}
                 <div className="overview-editorial-grid">
-                  {/* Left Column: Watermark Text */}
-                  <div style={{ position: 'relative' }}>
-                    <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '160px', lineHeight: '1', background: 'linear-gradient(180deg, #D6C8B8 0%, #D6C8B8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0, letterSpacing: '-0.02em', fontWeight: '400', transform: 'translateY(24px)' }}>
-                      CML
-                    </h2>
-                  </div>
-                  {/* Right Column: Editorial Paragraphs */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', paddingBottom: '20px' }}>
-                    <p style={{ color: 'var(--color-text-dark)', margin: 0, fontWeight: '400' }}>
-                      Crystal Moonlight by Aadhithya Mohan Properties represents the pinnacle of premium residential developments in Medavakkam, Chennai. The brand is built around the idea that homes are not just structures, but powerful statements that define presence.
-                    </p>
-                    <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
-                      The goal of the project was to design an emotionally engaging community experience that reflects this philosophy. The key challenge was to balance expressive visual design with usability — creating a thriving living environment while maintaining a deep connection to nature and serenity.
-                    </p>
-                    <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
-                      Through the use of modern luxury architecture, meticulous material selection, and statement-driven craftsmanship, our aim is to highlight each villa's unique footprint and support a lifestyle upgrade for generations to come.
-                    </p>
+                  {/* Left Column: Overview Image */}
+                  <ScrollReveal animation="fadeRight" delay={0.1}>
+                    <div className="overview-img-container" style={{ position: 'relative', width: '100%', minHeight: '380px', maxHeight: '480px', overflow: 'hidden', borderRadius: '4px' }}>
+                      <img
+                        src="/images/project/CML/overview.jpeg"
+                        alt="Crystal Moonlight Overview"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', borderRadius: '4px' }}
+                      />
+                    </div>
+                  </ScrollReveal>
+                  {/* Right Column: Section Label & Editorial Paragraphs */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingBottom: '20px' }}>
+                    {/* <ScrollReveal animation="fadeUp" delay={0.15}>
+                      <span className='section-title' style={{ marginBottom: '0px' }}>
+                        About Project
+                      </span>
+                    </ScrollReveal> */}
+
+                    <ScrollReveal animation="fadeUp" delay={0.2}>
+                      <span className='overview-main-title'>
+                        Where Contemporary Design Meets Serene Community Living
+                      </span>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="fadeUp" delay={0.25}>
+                      <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
+                        Some homes are designed to accommodate life. Others are designed to enrich it.
+                      </p>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="fadeUp" delay={0.3}>
+                      <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
+                        Crystal Moonlight is an exclusive gated villa community, created for families who value refined living, privacy, and the quiet confidence of a home built for generations. Nestled in the heart of Medavakkam, it presents a collection of thoughtfully crafted independent villas where every detail reflects timeless design and uncompromising craftsmanship.
+                      </p>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="fadeUp" delay={0.35}>
+                      <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
+                        Designed with generous living spaces, elegant contemporary architecture, and the flexibility to be tailored to individual lifestyles, each residence offers the comfort of a home that is uniquely your own. Surrounded by tranquil landscaped spaces while remaining seamlessly connected to Chennai's leading business, educational, healthcare, and lifestyle destinations, Crystal Moonlight brings together the rare balance of serenity, convenience, and lasting value.
+                      </p>
+                    </ScrollReveal>
                   </div>
                 </div>
               </div>
@@ -664,37 +714,27 @@ export default function NewProject() {
           )}
           {/* Project Details Section - Inspired by Luxury Data Grid */}
           {activeTab === 'overview' && (
-            <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0', background: 'var(--color-white)' }}>
+            <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0' }}>
               <ProjectDetailsGrid />
             </section>
           )}
-          {/* Master Plan Image Section */}
-          {activeTab === 'overview' && (
-            <section className="project-section-wrapper scroll-section" style={{ padding: '0', background: 'var(--color-bg-cream)' }}>
-              {/* Full Width Image */}
-              <ScrollReveal animation="fadeUp" delay={0.1}>
-                <div style={{ width: '100%' }}>
-                  <img src="/images/project/CML/master-banner.png" alt="Crystal Moonlight Master Plan Banner" style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }} />
-                </div>
-              </ScrollReveal>
-            </section>
-          )}
+          
           {/* Project Overview Section */}
           {activeTab === 'why-project' && (
             <section id="why-project" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0 0', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / contain no-repeat' }}>
               <div className="container">
                 {/* ── Left-Aligned Header ── */}
-                <ScrollReveal className="section-header" animation="fadeUp" style={{ marginBottom: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <ScrollReveal className="section-header" animation="fadeUp" style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <h2 className="section-title">
                     Crystal Moonlight Villa
                   </h2>
-                  <p className="section-subtitle" style={{ fontSize: '13px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
+                  {/* <p className="section-subtitle" style={{ fontSize: '16px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
                     Bespoke living <span>beyond time</span>
-                  </p>
+                  </p> */}
                 </ScrollReveal>
                 {/* ── Left-Aligned Tab Pills ── */}
                 {/* ── Highlights Block Two-Column Grid ── */}
-                <div className="overview-main-grid-redesign" style={{ marginBottom: '100px' }}>
+                <div className="overview-main-grid-redesign">
                   {/* Left Side Content (Visuals) */}
                   <div className="overview-left-visual">
                     <ScrollReveal animation="fadeRight">
@@ -725,7 +765,7 @@ export default function NewProject() {
                                 <div
                                   className="pillar-body"
                                   style={{
-                                    maxHeight: isOpen ? '220px' : '0px',
+                                    maxHeight: isOpen ? '360px' : '0px',
                                     opacity: isOpen ? 1 : 0,
                                     overflow: 'hidden',
                                     transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
@@ -754,15 +794,15 @@ export default function NewProject() {
           {/* Master Gallery Section */}
           {activeTab === 'gallery' && (
             <>
-              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '60px', paddingBottom: '60px', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / cover no-repeat' }}>
+              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '50px', paddingBottom: '50px', minHeight: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: 'url("/images/bg/TL-1.png") left top / cover no-repeat' }}>
                 <div className="container">
-                  <ScrollReveal className="section-header" animation="fadeUp" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                  <ScrollReveal className="section-header" animation="fadeUp" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '8px' }}>
                     <h2 className="section-title">
                       Visual <span>Spotlight</span>
                     </h2>
                   </ScrollReveal>
                   {/* Gallery Navigation Tabs */}
-                  <div className="nested-tabs-container" style={{ display: 'flex', justifyContent: 'center' }}>
+                  <ScrollReveal animation="fadeUp" delay={0.15} className="nested-tabs-container" style={{ marginBottom: '12px', display: 'flex', justifyContent: 'center' }}>
                     <div className="filter-tabs">
                       {['exteriors', 'interiors', 'videos'].map(tab => (
                         <button
@@ -774,10 +814,10 @@ export default function NewProject() {
                         </button>
                       ))}
                     </div>
-                  </div>
+                  </ScrollReveal>
                 </div> {/* Close container here for full-bleed viewport */}
                 {/* Spotlight Active-Card Gallery Carousel */}
-                <div className="gallery-spotlight-viewport">
+                <ScrollReveal animation="fadeUp" delay={0.25} className="gallery-spotlight-viewport">
                   <div
                     className="gallery-spotlight-track"
                     style={{
@@ -812,7 +852,9 @@ export default function NewProject() {
                               cursor: 'pointer',
                               overflow: 'hidden',
                               position: 'relative',
-                              aspectRatio: '16/10',
+                              height: 'calc(100vh - 165px)',
+                              maxHeight: '720px',
+                              minHeight: '320px',
                               boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
                             }}
                             onClick={() => {
@@ -832,12 +874,7 @@ export default function NewProject() {
                             <img
                               src={img.src}
                               alt={img.title}
-                              style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                display: 'block'
-                              }}
+                              className="gallery-spotlight-img"
                             />
 
                             {galleryTab === 'videos' && (
@@ -875,7 +912,7 @@ export default function NewProject() {
                   >
                     <ChevronRight size={24} />
                   </button>
-                </div>
+                </ScrollReveal>
               </section>
             </>
           )}
@@ -890,21 +927,24 @@ export default function NewProject() {
           )}
           {/* Premium Amenities Section */}
           {activeTab === 'amenities' && (
-            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0', backgroundColor: 'var(--color-bg-navy)', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center', background: 'url("/images/bg/TR-1.png") right top / contain no-repeat' }}>
-              <div className="container" style={{ width: '100%' }}>
-                <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  {/* <span className="section-tag" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--color-bg-light)', border: '1px solid rgba(255,255,255,0.1)' }}>Amenities</span> */}
-                  <h2 className="section-title" >
-                    Luxury Community <span>Amenities</span>
+            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', backgroundColor: '#ffffff', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center' }}>
+              {/* Optional ambient background leaf or shape */}
+              <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: '400px', height: '400px', background: 'url("/images/bg/TR-1.png") center / contain no-repeat', opacity: 0.1, pointerEvents: 'none' }}></div>
+              
+              <div className="container" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
+                <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '60px' }}>
+                  <h2 className="section-title">
+                    Luxury Community <span style={{ color: 'var(--color-highlight)' }}>Amenities</span>
                   </h2>
                 </ScrollReveal>
-                <div className="amenities-split-layout" style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '32px', width: '100%', padding: '20px 0', alignItems: 'stretch' }}>
+
+                <div className="amenities-split-layout" style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '40px' : '60px', width: '100%', alignItems: 'stretch' }}>
 
                   {/* Left Column: Directory */}
-                  <div className="amenities-directory" style={{ width: isMobile ? '100%' : '50%', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', padding: '0 12px' }}>
-                      <span style={{ textTransform: 'uppercase', color: 'var(--color-gold)' }}>Directory</span>
-                      <span style={{ color: 'var(--color-text-muted-light)' }}>{amenities.length} Amenities</span>
+                  <ScrollReveal animation="fadeRight" delay={0.15} className="amenities-directory" style={{ width: isMobile ? '100%' : '45%', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid rgba(143, 143, 143, 0.23)' }}>
+                      <span style={{ textTransform: 'uppercase', color: '#000000ff', fontSize: '13px' }}>Directory</span>
+                      <span style={{ color: '#000000ff', fontSize: '14px' }}>{amenities.length} Amenities</span>
                     </div>
 
                     <div
@@ -913,40 +953,49 @@ export default function NewProject() {
                       style={{
                         display: 'grid',
                         gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-                        gap: '5px',
+                        columnGap: '24px',
+                        rowGap: '0px',
                         width: '100%'
                       }}
                     >
-                      {amenities.map((item, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setAmenityIdx(idx)}
-                          style={{
-                            display: 'flex', alignItems: 'center', gap: '12px', padding: '8px 4px',
-                            background: 'transparent',
-                            border: 'none',
-                            borderBottom: amenityIdx === idx ? '2px solid var(--color-highlight, #1d3557)' : '1px solid rgba(0,0,0,0.06)',
-                            borderRadius: '0px', cursor: 'pointer', transition: 'all 0.3s ease',
-                            color: '#000000',
-                            boxShadow: 'none',
-                            textAlign: 'left', flexShrink: 0
-                          }}
-                        >
-                          <div style={{
-                            width: '26px', height: '26px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '5px',
-                            background: amenityIdx === idx ? 'var(--color-highlight)' : 'rgba(0,0,0,0.04)',
-                            color: amenityIdx === idx ? 'var(--color-white)' : 'var(--color-text-muted-light)', transition: 'all 0.3s ease',
-                            flexShrink: 0
-                          }}>
-                            {item.icon}
-                          </div>
-                          <span style={{ flex: 1, fontWeight: amenityIdx === idx ? 600 : 400, fontSize: '12.5px', whiteSpace: 'normal', wordBreak: 'break-word', lineHeight: '1.3' }}>{item.title}</span>
-                        </button>
-                      ))}
+                      {amenities.map((item, idx) => {
+                        const isActive = amenityIdx === idx;
+                        return (
+                          <button
+                            key={idx}
+                            onClick={() => {
+                              setAmenityIdx(idx);
+                              setIsAmenityAutoPlay(false);
+                            }}
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: '14px', padding: '16px',
+                              background: isActive ? 'var(--color-bg-light)' : 'transparent',
+                              border: 'none',
+                              borderBottom: isActive ? '1px solid transparent' : '1px solid rgba(0,0,0,0.06)',
+                              cursor: 'pointer', transition: 'all 0.3s ease',
+                              textAlign: 'left', outline: 'none',
+                              width: '100%', minWidth: 0, overflow: 'hidden'
+                            }}
+                          >
+                            <div style={{
+                              width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                              background: isActive ? 'rgba(180, 133, 100, 0.08)' : 'transparent',
+                              border: isActive ? '1px solid #b48564' : '1px solid rgba(0,0,0,0.1)',
+                              color: isActive ? '#b48564' : '#000000ff',
+                              transition: 'all 0.3s ease',
+                              flexShrink: 0
+                            }}>
+                              {item.icon}
+                            </div>
+                            <span style={{ flex: 1, fontWeight: isActive ? '400' : '300', fontSize: '16px', color: isActive ? 'var(--color-highlight)' : '#000', lineHeight: '1.4', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</span>
+                          </button>
+                        );
+                      })}
                     </div>
-                  </div>
+                  </ScrollReveal>
+
                   {/* Right Column: Visualizer */}
-                  <div className="amenities-visualizer" style={{ width: isMobile ? '100%' : '50%', minHeight: isMobile ? '400px' : 'auto', position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 30px 60px rgba(0,0,0,0.1)' }}>
+                  <ScrollReveal animation="fadeLeft" delay={0.25} className="amenities-visualizer" style={{ width: isMobile ? '100%' : '55%', minHeight: isMobile ? '350px' : '500px', position: 'relative', borderRadius: '8px', overflow: 'hidden' }}>
                     {amenities.map((item, idx) => (
                       <div
                         key={idx}
@@ -959,18 +1008,25 @@ export default function NewProject() {
                         }}
                       >
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+                        
+                        {/* Elegant glassmorphic bottom overlay */}
                         <div style={{
-                          position: 'absolute', bottom: 0, left: 0, right: 0, padding: isMobile ? '20px 24px' : '30px 40px',
-                          background: 'linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, transparent 100%)',
-                          backdropFilter: 'blur(16px) saturate(150%)', WebkitBackdropFilter: 'blur(16px) saturate(150%)',
-                          borderTop: '1px solid rgba(255, 255, 255, 0.4)', zIndex: 2
+                          position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%',
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+                          display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+                          padding: isMobile ? '24px' : '40px',
+                          zIndex: 2
                         }}>
-                          <h3 style={{ color: '#000000', marginBottom: '12px', fontWeight: '400' }}>{item.title}</h3>
-                          <p style={{ color: 'rgba(0,0,0,0.7)', margin: 0 }}>{item.desc}</p>
+                          <div style={{
+                            paddingTop: '20px'
+                          }}>
+                            <h3 style={{ color: '#ffffff', marginBottom: '8px', fontWeight: '500', fontSize: '24px', fontFamily: 'var(--font-heading)' }}>{item.title}</h3>
+                            <p style={{ color: 'rgba(255,255,255,0.8)', margin: 0, fontSize: '15px', fontWeight: '300' }}>{item.desc}</p>
+                          </div>
                         </div>
                       </div>
                     ))}
-                  </div>
+                  </ScrollReveal>
                 </div>
               </div>
             </section>
@@ -984,7 +1040,7 @@ export default function NewProject() {
                   <h2 className="section-title">Architectural <span>Layouts</span></h2>
                 </ScrollReveal>
                 {/* Top-Level Category Switcher */}
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
+                <ScrollReveal animation="fadeUp" delay={0.1} style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
                   <div className="filter-tabs">
                     {['masterPlan', 'floorPlan', 'elevations'].map(cat => {
                       const labels = { masterPlan: 'Master Plan', floorPlan: 'Unit Plan', elevations: 'Elevations' };
@@ -999,22 +1055,22 @@ export default function NewProject() {
                       );
                     })}
                   </div>
-                </div>
+                </ScrollReveal>
                 {layoutCategory === 'masterPlan' && (
-                  <div className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <ScrollReveal animation="fadeUp" delay={0.2} className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img src={layoutsData.masterPlan.image} alt="Master Plan" style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }} />
-                  </div>
+                  </ScrollReveal>
                 )}
                 {layoutCategory === 'elevations' && (
-                  <div className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <ScrollReveal animation="fadeUp" delay={0.2} className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ textAlign: 'center', padding: '60px', background: 'rgba(255,255,255,0.5)', borderRadius: '16px', width: '100%', border: '1px solid rgba(0,0,0,0.05)' }}>
                       <p style={{ color: 'var(--color-text-dark)' }}>{layoutsData.elevations.description}</p>
                       <p style={{ marginTop: '16px', color: 'var(--color-text-muted)' }}>Image coming soon...</p>
                     </div>
-                  </div>
+                  </ScrollReveal>
                 )}
                 {layoutCategory === 'floorPlan' && (
-                  <div className="floorplan-slide-viewport" style={{ position: 'relative', width: '100%', padding: '20px 40px' }}>
+                  <ScrollReveal animation="fadeUp" delay={0.2} className="floorplan-slide-viewport" style={{ position: 'relative', width: '100%', padding: '20px 40px' }}>
 
                     {/* Left/Right Arrow Buttons on the outer sides */}
                     {currentConfigPlans.length > 1 && (
@@ -1036,7 +1092,7 @@ export default function NewProject() {
                       </>
                     )}
                     {/* Tabs row: 3 BHK and 4 BHK using standard filter-tabs style */}
-                    <div style={{ display: 'flex', marginBottom: '40px', borderBottom: '1px solid rgba(0,0,0,0.08)', width: '100%' }}>
+                    <div style={{ display: 'flex', marginBottom: '40px', borderBottom: '.1px solid rgba(0,0,0,0.08)', width: '100%' }}>
                       <div className="filter-tabs" style={{ display: 'flex', gap: '0' }}>
                         {['3bhk', '4bhk'].map(conf => {
                           const confLabel = conf === '3bhk' ? '3 BHK' : '4 BHK';
@@ -1054,7 +1110,7 @@ export default function NewProject() {
                                 paddingLeft: conf === '3bhk' ? '0' : '24px',
                                 background: 'transparent',
                                 border: 'none',
-                                borderRight: conf === '3bhk' ? '1px solid rgba(0, 0, 0, 0.15)' : 'none',
+                                borderRight: conf === '3bhk' ? '.1px solid rgba(0, 0, 0, 0.15)' : 'none',
                                 cursor: 'pointer',
                                 outline: 'none',
                                 boxShadow: 'none'
@@ -1065,9 +1121,9 @@ export default function NewProject() {
                                   position: 'relative',
                                   display: 'inline-block',
                                   paddingBottom: '12px',
-                                  borderBottom: isActive ? '.5px solid var(--color-text-dark)' : '.5px solid transparent',
+                                  borderBottom: isActive ? '.1px solid var(--color-text-dark)' : '.1px solid transparent',
                                   marginBottom: '-1px',
-                                  fontWeight: isActive ? '500' : '400',
+                                  fontWeight: isActive ? '400' : '400',
                                   color: isActive ? '#000000' : 'var(--color-text-muted-light)',
                                   textTransform: 'uppercase',
                                   letterSpacing: '0.12em',
@@ -1087,7 +1143,7 @@ export default function NewProject() {
                     <div className="floorplan-slide-content-grid" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 7fr', gap: '30px', alignItems: 'center' }}>
 
                       {/* Left Column: Details */}
-                      <div className="floorplan-slide-details-col" style={{ textAlign: 'left' }}>
+                      <div className="floorplan-slide-details-col" style={{ textAlign: 'left', order: isMobile ? 2 : 1 }}>
                         <h3 className="floorplan-slide-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '32px', fontWeight: '400', color: 'var(--color-highlight)', marginBottom: '32px' }}>
                           {activePlanDetails.name}
                         </h3>
@@ -1112,14 +1168,14 @@ export default function NewProject() {
                         <Button
                           theme="light"
                           onClick={() => setIsQuoteOpen(true)}
-                          icon="â†“"
+                          icon="↓"
                           style={{ minWidth: '220px', boxSizing: 'border-box' }}
                         >
                           Download Floorplan PDF
                         </Button>
                       </div>
                       {/* Right Column: Visualizer */}
-                      <div className="floorplan-slide-visual-col" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <div className="floorplan-slide-visual-col" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', order: isMobile ? 1 : 2 }}>
                         {activePlanDetails.image ? (
                           <div className="floorplan-slide-img-wrap" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <img
@@ -1148,7 +1204,7 @@ export default function NewProject() {
                         )}
                       </div>
                     </div>
-                  </div>
+                  </ScrollReveal>
                 )}
               </div>
             </section>
@@ -1205,7 +1261,7 @@ export default function NewProject() {
                       <h2 className="section-title">Project <span>Status</span></h2>
 
                     </ScrollReveal>
-                    <div className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
+                    <ScrollReveal animation="fadeUp" delay={0.2} className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                       <div className="status-month-container" style={{ display: 'flex', gap: '40px', alignItems: 'center', position: 'relative', width: '100%' }}>
 
                         {/* Left Side Gap - Month/Year & Navigation */}
@@ -1246,7 +1302,7 @@ export default function NewProject() {
                           ))}
                         </div>
                       </div>
-                    </div>
+                    </ScrollReveal>
                   </div>
                 </section>
               );
@@ -1401,64 +1457,122 @@ export default function NewProject() {
       {/* Quote / Schedule Booking Modal */}
       {isQuoteOpen && (
         <div className="modal-overlay" onClick={() => setIsQuoteOpen(false)}>
-          <div className="modal-content-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)}>
-              <X size={18} />
-            </button>
-            <h3 className="modal-heading">SCHEDULE A SITE VISIT</h3>
-            <p className="modal-subheading">Experience premium luxury in person. Fill out the fields below.</p>
-            {formSubmitted ? (
-              <div className="form-success-message">
-                <CheckCircle2 size={44} className="success-icon-gold" />
-                <h4>Inquiry Received Successfully</h4>
-                <p>One of our client service executives will contact you shortly.</p>
+          <div className="modal-content-card split-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-image-panel">
+              <div className="modal-image-overlay">
+                <h3>Crystal Moonlight</h3>
+                <p>Bespoke Luxury Living</p>
               </div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="modal-inquiry-form">
-                <div className="form-group-field">
-                  <User size={15} className="form-input-icon" />
-                  <input
-                    type="text"
-                    placeholder="Full Name"
-                    required
-                    value={quoteForm.name}
-                    onChange={e => setQuoteForm({ ...quoteForm, name: e.target.value })}
-                  />
+            </div>
+            
+            <div className="modal-form-panel">
+              <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)}>
+                <X size={18} />
+              </button>
+              
+              <div className="modal-header-block-light">
+                <h3 className="modal-heading-light">SCHEDULE A VISIT</h3>
+                <p className="modal-subheading-light">Experience premium luxury in person.</p>
+              </div>
+              
+              <div className="modal-body-light">
+              {formSubmitted ? (
+                <div className="form-success-message">
+                  <CheckCircle2 size={48} className="success-icon-gold" />
+                  <h4>Inquiry Received Successfully</h4>
+                  <p>One of our client service executives will contact you shortly.</p>
                 </div>
-                <div className="form-group-field">
-                  <Mail size={15} className="form-input-icon" />
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    required
-                    value={quoteForm.email}
-                    onChange={e => setQuoteForm({ ...quoteForm, email: e.target.value })}
-                  />
-                </div>
-                <div className="form-group-field">
-                  <Phone size={15} className="form-input-icon" />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    required
-                    value={quoteForm.phone}
-                    onChange={e => setQuoteForm({ ...quoteForm, phone: e.target.value })}
-                  />
-                </div>
-                <div className="form-group-field text-area">
-                  <input
-                    type="text"
-                    placeholder="Notes (e.g. preferred dates, facings)"
-                    value={quoteForm.note}
-                    onChange={e => setQuoteForm({ ...quoteForm, note: e.target.value })}
-                  />
-                </div>
-                <Button type="submit" theme="light" style={{ width: '100%', padding: '10px 10px 10px 24px' }}>
-                  Submit Inquiry
-                </Button>
-              </form>
-            )}
+              ) : (
+                <form onSubmit={handleFormSubmit} className="modal-inquiry-form-new">
+                  {/* Preferred Mode of Contact */}
+                  <div className="form-radio-group">
+                    <label className="form-label-top">Preferred Mode of Contact *</label>
+                    <div className="radio-options">
+                      <label className="radio-label">
+                        <input 
+                          type="radio" 
+                          name="contactMode" 
+                          value="callback" 
+                          checked={quoteForm.contactMode === 'callback'} 
+                          onChange={(e) => setQuoteForm({...quoteForm, contactMode: e.target.value})} 
+                        />
+                        <span className="radio-custom"></span>
+                        Request a call back
+                      </label>
+                      <label className="radio-label">
+                        <input 
+                          type="radio" 
+                          name="contactMode" 
+                          value="videocall" 
+                          checked={quoteForm.contactMode === 'videocall'} 
+                          onChange={(e) => setQuoteForm({...quoteForm, contactMode: e.target.value})} 
+                        />
+                        <span className="radio-custom"></span>
+                        Schedule a video call
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Name Row */}
+                  <div className="form-row-2">
+                    <div className="form-group-outline">
+                      <input type="text" placeholder="First Name *" required value={quoteForm.firstName} onChange={e => setQuoteForm({...quoteForm, firstName: e.target.value})} />
+                    </div>
+                    <div className="form-group-outline">
+                      <input type="text" placeholder="Last Name *" required value={quoteForm.lastName} onChange={e => setQuoteForm({...quoteForm, lastName: e.target.value})} />
+                    </div>
+                  </div>
+
+                  {/* Phone Row */}
+                  <div className="form-row-phone">
+                    <div className="form-group-outline phone-code">
+                      <select value={quoteForm.phoneCode} onChange={e => setQuoteForm({...quoteForm, phoneCode: e.target.value})}>
+                        <option value="+91">IN +91</option>
+                        <option value="+1">US +1</option>
+                        <option value="+44">UK +44</option>
+                        <option value="+971">AE +971</option>
+                      </select>
+                    </div>
+                    <div className="form-group-outline phone-number">
+                      <input type="tel" placeholder="Phone Number *" required value={quoteForm.phone} onChange={e => setQuoteForm({...quoteForm, phone: e.target.value})} />
+                    </div>
+                  </div>
+
+                  {/* Email & Config Row */}
+                  <div className="form-row-2">
+                    <div className="form-group-outline">
+                      <input type="email" placeholder="Email Address *" required value={quoteForm.email} onChange={e => setQuoteForm({...quoteForm, email: e.target.value})} />
+                    </div>
+                    <div className="form-group-outline">
+                      <select value={quoteForm.config} onChange={e => setQuoteForm({...quoteForm, config: e.target.value})}>
+                        <option value="3 BHK Villa">3 BHK Villa</option>
+                        <option value="4 BHK Villa">4 BHK Villa</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Checkboxes */}
+                  <div className="form-checkbox-group">
+                    <label className="checkbox-label">
+                      <input type="checkbox" required checked={quoteForm.privacy} onChange={e => setQuoteForm({...quoteForm, privacy: e.target.checked})} />
+                      <span className="checkbox-custom"></span>
+                      <span>I've read and agree to the <a href="#privacy" style={{color: '#b48564', textDecoration: 'underline'}}>privacy policy. *</a></span>
+                    </label>
+                    <label className="checkbox-label">
+                      <input type="checkbox" checked={quoteForm.updates} onChange={e => setQuoteForm({...quoteForm, updates: e.target.checked})} />
+                      <span className="checkbox-custom"></span>
+                      <span>I'd like to receive priority project updates and offers.</span>
+                    </label>
+                  </div>
+
+                  <Button type="submit" theme="dark" style={{ width: '100%', marginTop: '8px', padding: '16px' }}>
+                    REQUEST PRICING DETAILS
+                  </Button>
+                </form>
+              )}
+            </div>
           </div>
+        </div>
         </div>
       )}
       <Footer />
@@ -1643,44 +1757,47 @@ export default function NewProject() {
           margin: 0;
           font-weight: 400;
         }
-        /* â”€â”€ SLIDING GOLD INDICATOR â”€â”€ */
+        /* ── SLIDING GOLD INDICATOR ── */
         .sub-nav-indicator {
           position: absolute;
           bottom: -1px;
           height: 3.5px;
-          background: linear-gradient(90deg, #b48564 0%, #d4b66a 50%, #b48564 100%);
+          background: linear-gradient(90deg, #f3c892 0%, #ffe6c2 50%, #f3c892 100%);
           border-radius: 4px 4px 0 0;
           transition: left 0.45s cubic-bezier(0.16, 1, 0.3, 1), width 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
           box-shadow: 
-            0 2px 10px rgba(0, 0, 0, 0.6), 
-            0 0 20px rgba(0, 0, 0, 0.4),
-            0 0 35px rgba(212, 182, 106, 0.2);
+            0 0 14px rgba(243, 200, 146, 0.8), 
+            0 0 28px rgba(243, 200, 146, 0.4);
           pointer-events: none;
           z-index: 2;
         }
         .sub-nav-link {
           font-family: var(--font-sans) !important;
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 600;
-          color: rgba(255, 255, 255, 0.7) !important;
+          color: rgba(255, 255, 255, 0.85) !important;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          padding: 20px 24px 18px;
+          padding: 18px 24px;
           display: inline-flex;
           align-items: center;
           gap: 4px;
-          background: transparent;
+          background: transparent !important;
           border: none;
           cursor: pointer;
           position: relative;
-          transition: color 0.3s ease, background 0.3s ease;
+          transition: color 0.3s ease, text-shadow 0.3s ease;
           white-space: nowrap;
         }
         .sub-nav-link:hover {
-          color: #ffffff !important;
-          background: rgba(255, 255, 255, 0.06) !important;
+          color: #f3c892 !important;
+          background: transparent !important;
         }
         .sub-nav-link.active {
+          color: #f3c892 !important;
+          font-weight: 700 !important;
+          background: transparent !important;
+          text-shadow: 0 0 12px rgba(243, 200, 146, 0.5);
         }
         /* ── SUBNAV DROPDOWNS ── */
         .sub-nav-dropdown-wrapper {
@@ -1860,13 +1977,15 @@ export default function NewProject() {
           left: 0;
           width: 100%;
           height: 100%;
-          // background: linear-gradient(
-          //   to bottom, 
-          //   rgba(6, 11, 29, 0.7) 0%, 
-          //   rgba(6, 11, 29, 0.4) 50%, 
-          //   rgba(6, 11, 29, 0.75) 100%
-          // );
+          background: linear-gradient(
+            180deg,
+            rgba(15, 15, 15, 0.75) 0%,
+            rgba(15, 15, 15, 0.25) 35%,
+            rgba(15, 15, 15, 0.45) 70%,
+            rgba(15, 15, 15, 0.85) 100%
+          );
           z-index: 2;
+          pointer-events: none;
         }
         /* â”€â”€ Light Leak â”€â”€ */
         .project-hero-light-leak {
@@ -1972,22 +2091,12 @@ export default function NewProject() {
           color: var(--color-white) !important;
         }
         .project-hero-title {
-          line-height: 1.1;
-          font-size: 30px;
           color: var(--color-white);
-          margin-bottom: 24px;
-          text-shadow: 0 4px 30px rgba(0, 0, 0, 0.65), 0 2px 10px rgba(0, 0, 0, 0.4);
-          opacity: 0;
-          animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 1s;
         }
         .project-hero-subtitle {
           text-transform: uppercase;
           color: rgba(255, 255, 255, 0.85);
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-          opacity: 0;
-          animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 1.2s;
           display: inline-block;
         }
         @keyframes fadeUpProject {
@@ -2016,7 +2125,7 @@ export default function NewProject() {
           text-align: left;
         }
         #overview.project-section-wrapper {
-          background-color: var(--color-bg-light);
+          background-color: var(--color-white);
           padding: 80px 0;
         }
         .overview-outer-container {
@@ -2033,7 +2142,8 @@ export default function NewProject() {
         .overview-main-title {
           color: var(--color-text-dark);
           text-transform: uppercase;
-          margin: 0 0 12px 0;
+          font-size: 22px;
+          font-weight: 400;
         }
         .overview-sub-title {
           font-size: 15px;
@@ -2895,7 +3005,7 @@ export default function NewProject() {
           display: grid;
           grid-template-columns: 1fr 2fr;
           gap: 60px;
-          align-items: end;
+          align-items: center;
         }
         @media (max-width: 900px) {
           .overview-editorial-grid {
@@ -3141,100 +3251,279 @@ export default function NewProject() {
         .modal-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(6, 11, 29, 0.85);
-          backdrop-filter: blur(8px);
+          background: rgba(0, 0, 0, 0.75);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           z-index: 1000;
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 20px;
         }
         .modal-content-card {
           background: var(--color-white);
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          border-radius: 16px;
+          border-radius: 8px;
           width: 90%;
-          max-width: 440px;
-          padding: 40px;
+          max-width: 1040px; /* Wider for split layout */
           position: relative;
-          box-shadow: 0 25px 55px rgba(0, 0, 0, 0.2);
-          animation: modalEntrance 0.4s var(--ease-luxury);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+          animation: modalEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          overflow: hidden;
+          padding: 0;
+          display: flex;
         }
         @keyframes modalEntrance {
-          from { opacity: 0; transform: translateY(15px) scale(0.97); }
+          from { opacity: 0; transform: translateY(20px) scale(0.96); }
           to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        /* Left Image Panel */
+        .modal-image-panel {
+          flex: 1;
+          background: url('/images/project/CML/master-banner.png') center/cover no-repeat;
+          position: relative;
+          display: flex;
+          align-items: flex-end;
+          padding: 40px 32px;
+        }
+        .modal-image-panel::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
+        }
+        .modal-image-overlay {
+          position: relative;
+          z-index: 2;
+          color: #ffffff;
+        }
+        .modal-image-overlay h3 {
+          font-family: var(--font-heading);
+          font-size: 28px;
+          font-weight: 400;
+          margin: 0 0 4px 0;
+
+        color: #fff;
+        }
+        .modal-image-overlay p {
+          font-family: var(--font-sans);
+          font-size: 13.5px;
+          opacity: 0.8;
+          margin: 0;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #fff;
+        }
+        
+        /* Right Form Panel */
+        .modal-form-panel {
+          flex: 1.1;
+          display: flex;
+          flex-direction: column;
+          background: #ffffff;
+          position: relative;
+        }
+
+        /* Light Header */
+        .modal-header-block-light {
+          padding: 40px 40px 24px;
+          text-align: left;
+        }
+        .modal-heading-light {
+          font-family: var(--font-heading);
+          font-size: 26px;
+          font-weight: 400;
+          color: #111111;
+          margin-bottom: 8px;
+          letter-spacing: 0.02em;
+        }
+        .modal-subheading-light {
+          font-family: var(--font-sans);
+          font-size: 14px;
+          color: rgba(0, 0, 0, 0.6);
+          margin: 0;
         }
         .modal-close-btn {
           position: absolute;
-          top: 20px;
-          right: 20px;
-          color: var(--color-text-muted-light);
+          top: 16px;
+          right: 16px;
+          background: transparent;
+          border: none;
+          border-radius: 50%;
+          width: 34px;
+          height: 34px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(0,0,0,0.4);
           cursor: pointer;
-          transition: color 0.3s ease;
+          z-index: 10;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .modal-close-btn:hover {
-          color: var(--color-text-dark);
+          color: #111111;
+          transform: rotate(90deg);
         }
-        .modal-heading {
-          font-size: 22px;
-          font-weight: 400;
-          color: var(--color-text-dark);
-          text-align: center;
-          margin-bottom: 6px;
+        
+        .modal-body-light {
+          padding: 0 40px 40px;
         }
-        .modal-subheading {
-          font-size: 13px;
-          color: var(--color-text-muted);
-          text-align: center;
-          margin-bottom: 28px;
-        }
-        .modal-inquiry-form {
+        
+        /* New Form Styles */
+        .modal-inquiry-form-new {
           display: flex;
           flex-direction: column;
+          gap: 20px;
+        }
+        .form-radio-group {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .form-label-top {
+          font-family: var(--font-sans);
+          font-size: 13px;
+          font-weight: 600;
+          color: rgba(0,0,0,0.6);
+        }
+        .radio-options {
+          display: flex;
+          gap: 24px;
+        }
+        .radio-label {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+          color: #111111;
+          cursor: pointer;
+        }
+        .radio-label input[type="radio"] {
+          display: none;
+        }
+        .radio-custom {
+          width: 16px;
+          height: 16px;
+          border: 1px solid rgba(0,0,0,0.3);
+          border-radius: 50%;
+          position: relative;
+          display: inline-block;
+          transition: all 0.2s ease;
+        }
+        .radio-label input[type="radio"]:checked + .radio-custom {
+          border-color: #b48564;
+        }
+        .radio-label input[type="radio"]:checked + .radio-custom::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 8px;
+          height: 8px;
+          background: #b48564;
+          border-radius: 50%;
+        }
+        .form-row-2 {
+          display: flex;
           gap: 16px;
         }
-        .form-group-field {
-          position: relative;
-          width: 100%;
+        .form-row-phone {
+          display: flex;
+          gap: 16px;
         }
-        .form-input-icon {
-          position: absolute;
-          left: 14px;
-          top: 50%;
-          transform: translateY(-50%);
-          color: var(--color-text-muted-light);
-          pointer-events: none;
+        .phone-code {
+          flex: 0 0 100px;
         }
-        .form-group-field input {
+        .phone-number {
+          flex: 1;
+        }
+        .form-group-outline {
+          flex: 1;
+        }
+        .form-group-outline input, .form-group-outline select {
           width: 100%;
-          padding: 14px 14px 14px 40px;
-          border: 1px solid var(--color-border-light);
-          border-radius: 6px;
-          font-size: 13.5px;
-          color: var(--color-text-dark);
+          padding: 12px 14px;
+          border: 1px solid rgba(0,0,0,0.15);
+          border-radius: 4px;
+          font-family: var(--font-sans);
+          font-size: 14px;
+          color: #111111;
           outline: none;
-          transition: all 0.3s ease;
+          background: #ffffff;
+          transition: border-color 0.3s ease;
+          box-sizing: border-box;
         }
-        .form-group-field input:focus {
-          border-color: var(--color-primary);
-          box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+        .form-group-outline input::placeholder {
+          color: rgba(0,0,0,0.5);
         }
+        .form-group-outline input:focus, .form-group-outline select:focus {
+          border-color: #b48564;
+        }
+        .form-checkbox-group {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-top: 4px;
+        }
+        .checkbox-label {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          font-size: 13px;
+          color: rgba(0,0,0,0.7);
+          cursor: pointer;
+        }
+        .checkbox-label input[type="checkbox"] {
+          display: none;
+        }
+        .checkbox-custom {
+          width: 16px;
+          height: 16px;
+          border: 1px solid rgba(0,0,0,0.2);
+          border-radius: 3px;
+          position: relative;
+          display: inline-block;
+          flex-shrink: 0;
+          margin-top: 2px;
+          transition: all 0.2s ease;
+        }
+        .checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
+          background: #b48564;
+          border-color: #b48564;
+        }
+        .checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after {
+          content: '';
+          position: absolute;
+          left: 4px;
+          top: 1px;
+          width: 4px;
+          height: 8px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+        
+        /* Success Message */
         .form-success-message {
           text-align: center;
           padding: 20px 0;
           animation: fadeUpProject 0.5s ease forwards;
         }
         .success-icon-gold {
-          color: var(--color-primary);
+          color: #b48564;
           margin-bottom: 16px;
         }
         .form-success-message h4 {
-          font-size: 18px;
-          color: var(--color-bg-navy);
-          margin-bottom: 6px;
+          font-family: var(--font-heading);
+          font-size: 22px;
+          font-weight: 400;
+          color: #111111;
+          margin-bottom: 8px;
         }
         .form-success-message p {
-          font-size: 13px;
-          color: var(--color-text-muted);
+          font-size: 14px;
+          color: rgba(0, 0, 0, 0.6);
         }
         /* â”€â”€ Pillars Accordion Styling â”€â”€ */
         .pillars-container {
@@ -3258,9 +3547,10 @@ export default function NewProject() {
         .pillar-header {
           display: flex;
           align-items: center;
-          padding: 16px 0;
+          padding: 10px 15px;
           gap: 16px;
           user-select: none;
+          background-color: var(--color-bg-light);
         }
         .pillar-number {
           font-family: var(--font-sans);
@@ -3277,15 +3567,15 @@ export default function NewProject() {
         .pillar-title {
           font-family: var(--font-sans);
           color: var(--color-text-dark);
-          font-weight: 400;
+          font-weight: 300;
           font-size: 18px;
           margin: 0;
           flex-grow: 1;
           transition: color 0.3s ease;
+          letter-spacing: 0.1em;
         }
         .pillar-item.active .pillar-title {
           color: var(--color-highlight);
-          font-weight: 600;
         }
         .pillar-toggle-icon {
           font-size: 18px;
@@ -3312,7 +3602,8 @@ export default function NewProject() {
         }
         .pillar-desc {
           color: var(--color-text-muted);
-          font-weight:400;
+          font-size: 18px;
+          padding: 15px;
           margin: 0;
         }
         .vision-dynamic-img-wrapper {
@@ -3394,9 +3685,21 @@ export default function NewProject() {
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
-          height: 45vw;
+          height: calc(100vh - 165px);
+          max-height: 720px;
+          min-height: 320px;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
           transition: flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+        }
+        .gallery-spotlight-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-spotlight-card:hover .gallery-spotlight-img {
+          transform: scale(1.2);
         }
         .gallery-spotlight-arrow {
           position: absolute;
@@ -3433,6 +3736,27 @@ export default function NewProject() {
         .gallery-spotlight-arrow.next:hover {
           transform: translate(50%, -50%) scale(1.08);
         }
+        
+        /* Modal Split Layout Styles */
+        @media (max-width: 768px) {
+          .modal-content-card.split-modal {
+            flex-direction: column;
+            max-width: 440px;
+            width: 95%;
+            margin: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+          }
+          .modal-image-panel {
+            height: 200px;
+            flex: none;
+            padding: 24px;
+          }
+          .modal-form-panel {
+            flex: none;
+          }
+        }
+
         /* â”€â”€ RESPONSIVE MEDIA CONTROLS â”€â”€ */
         @media (max-width: 1024px) {
           .gallery-spotlight-viewport {

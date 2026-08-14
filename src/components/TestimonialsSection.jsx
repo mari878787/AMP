@@ -147,7 +147,7 @@ export default function TestimonialsSection() {
                 <div className="tcs-body">
                   <div className="tcs-quote-mark" aria-hidden="true">"</div>
                   <blockquote className="tcs-quote">{t.quote}</blockquote>
-                  <div style={{ width: '40px', height: '1px', backgroundColor: 'var(--color-text-muted)', margin: '24px 0 16px' }} />
+                  <div style={{ width: '36px', height: '1px', backgroundColor: 'rgba(0, 0, 0, 0.25)', margin: '18px 0 12px' }} />
                   <p className="tcs-name">{t.name}</p>
                 </div>
               </article>
@@ -177,24 +177,23 @@ export default function TestimonialsSection() {
           /* left offset so the active card is centred */
           --card-offset: calc(50% - var(--card-w) / 2);
 
-          background: var(--color-white);
+          background: var(--color-bg-light, #f8f9fa);
           padding: var(--space-8) 0;
           overflow: hidden;
         }
 
-        /* â”€â”€ Header â”€â”€ */
+        /* ── Header ── */
         .tcs-header {
           text-align: center;
-          margin-bottom: var(--space-4);
           padding: 0 24px;
         }
 
         .tcs-subtitle {
-          color: var(--color-text-muted);
-          line-height: 1.7;
+          text-align: center;
+          color: #666666;
         }
 
-        /* â”€â”€ Viewport â”€â”€ */
+        /* ── Viewport ── */
         .tcs-viewport {
           width: 100%;
           overflow: hidden;
@@ -204,44 +203,43 @@ export default function TestimonialsSection() {
         }
         .tcs-viewport:active { cursor: grabbing; }
 
-        /* â”€â”€ Track â”€â”€ */
+        /* ── Track ── */
         .tcs-track {
           display: flex;
           gap: var(--gap);
           will-change: transform;
         }
 
-        /* â”€â”€ Card â”€â”€ */
+        /* ── Card (Monochrome Black & White) ── */
         .tcs-card {
           flex: 0 0 var(--card-w);
-          background: rgba(255, 255, 255, 0.35);
-          backdrop-filter: blur(20px) saturate(160%);
-          -webkit-backdrop-filter: blur(20px) saturate(160%);
-          border: 1px solid rgba(255, 255, 255, 0.6);
-          border-radius: 10px;
+          background: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          border-radius: 8px;
           display: flex;
           flex-direction: row;
           overflow: hidden;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
           min-height: 400px;
-          opacity: 0.5;
-          transform: scale(0.92);
-          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          opacity: 0.4;
+          transform: scale(0.94);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
         }
         .tcs-card.active {
           opacity: 1;
           transform: scale(1);
-          background: rgba(255, 255, 255, 0.7);
+          background: #ffffff;
           cursor: default;
-          border: 1px solid #eaebecff;
+          border: 1px solid rgba(0, 0, 0, 0.14);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
         }
 
-        /* â”€â”€ Photo column â”€â”€ */
+        /* ── Photo column (Black & White Editorial) ── */
         .tcs-photo-col {
           flex: 0 0 360px;
           overflow: hidden;
-          background: var(--color-border-light);
+          background: #e9ecef;
         }
         .tcs-photo {
           width: 100%;
@@ -250,50 +248,58 @@ export default function TestimonialsSection() {
           object-position: center top;
           display: block;
           pointer-events: none;
+          filter: grayscale(100%) contrast(108%) brightness(98%);
+          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
-        /* â”€â”€ Body â”€â”€ */
+        .tcs-card:hover .tcs-photo {
+          transform: scale(1.2);
+        }
+
+        /* ── Body (Clean Monochrome) ── */
         .tcs-body {
           flex: 1;
-          padding: 40px 44px 36px;
+          padding: 44px 48px 40px;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          gap: 16px;
+          gap: 14px;
+          background: #ffffff;
         }
         .tcs-quote-mark {
           font-family: Georgia, serif;
-          font-size: 56px;
+          font-size: 52px;
           line-height: 0.85;
-          color: #3b71b8;
-          opacity: 0.7;
-          height: 30px;
+          color: #111111;
+          opacity: 0.85;
+          height: 28px;
           overflow: hidden;
         }
         .tcs-quote {
           font-style: normal;
-          line-height: 1.75;
+          line-height: 1.8;
           margin: 0;
           max-width: 520px;
+          color: #222222;
+          font-size: 15.5px;
         }
         .tcs-name {
-
           font-size: 13px;
-          font-weight: 400;
-          color: var(--color-text-dark);
-
+          font-weight: 500;
+          color: #111111;
           margin-top: 4px;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
-        /* â”€â”€ Dots â”€â”€ */
+        /* ── Dots ── */
         .tcs-dots {
           display: flex;
           justify-content: center;
           gap: 8px;
         }
 
-
-        /* â”€â”€ Responsive â”€â”€ */
+        /* ── Responsive ── */
         @media (max-width: 1024px) {
           .tcs-section {
             --card-w: 720px;

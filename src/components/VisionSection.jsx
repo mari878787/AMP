@@ -1,5 +1,6 @@
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
+import Button from './Button';
 
 export default function VisionSection() {
   return (
@@ -31,9 +32,9 @@ export default function VisionSection() {
         {/* CTA Button */}
         <ScrollReveal animation="fadeUp" delay={0.25}>
           <div className="vision-cta-wrap">
-            <a href="/projects" className="btn-luxury-outline ">
-               VIEW OUR PROJECTS
-            </a>
+            <Button href="/projects" theme="dark">
+              VIEW OUR PROJECTS
+            </Button>
           </div>
         </ScrollReveal>
 
@@ -41,7 +42,7 @@ export default function VisionSection() {
 
       <style>{`
         .vision-section {
-          background-color: var(--color-bg-light);
+          background-color: var(--color-white);
           padding: 0px 0 80px 0;
           text-align: center;
           position: relative;
@@ -77,6 +78,7 @@ export default function VisionSection() {
           letter-spacing: 0.02em;
           margin-bottom: 40px;
           max-width: 820px;
+          color: #111111;
         }
 
        

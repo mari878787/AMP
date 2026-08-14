@@ -122,7 +122,7 @@ export default function BlogSection() {
 
       <style>{`
         .blog-section {
-          background: var(--color-bg-light);
+          background: var(--color-white);
           padding: var(--space-8) 0;
         }
 
@@ -154,7 +154,7 @@ export default function BlogSection() {
         /* â”€â”€ Card â”€â”€ */
         .blog-card {
           position: relative;
-          min-height: 620px;
+          min-height: 520px;
           display: flex;
           align-items: flex-end;
           overflow: hidden;
@@ -179,7 +179,7 @@ export default function BlogSection() {
           object-fit: cover;
           transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .blog-card:hover .blog-img { transform: scale(1.05); }
+        .blog-card:hover .blog-img { transform: scale(1.2); }
 
         /* â”€â”€ Body (Glassmorphism Overlay) â”€â”€ */
         .blog-body {

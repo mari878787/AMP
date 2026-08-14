@@ -213,14 +213,14 @@ export default function PlottedDevelopment() {
   const [amenityIdx, setAmenityIdx] = useState(0);
 
   const amenities = [
-    { image: "/images/home/project-image-2.png", icon: <Home size={22} />, title: "Gated Community Entry", desc: "Premium and secure entry for all residents." },
-    { image: "/images/home/project-image-1.png", icon: <Zap size={22} />, title: "Solar Street Lighting", desc: "Well-illuminated roads with solar-powered lights." },
-    { image: "/images/home/project-image-2.png", icon: <Trees size={22} />, title: "Avenue Trees", desc: "A healthy and serene lifestyle with lush greenery." },
-    { image: "/images/home/project-image-1.png", icon: <ShieldCheck size={22} />, title: "24/7 Security", desc: "Safe and secure living environment." },
-    { image: "/images/home/project-image-2.png", icon: <Layers size={22} />, title: "Blacktop Internal Roads", desc: "Smooth and durable internal roads." },
-    { image: "/images/home/project-image-1.png", icon: <CheckCircle2 size={22} />, title: "Water Availability", desc: "Hassle-free water availability to each plot." },
-    { image: "/images/home/project-image-2.png", icon: <Video size={22} />, title: "CCTV Surveillance", desc: "24/7 smart CCTV surveillance of common areas." },
-    { image: "/images/home/project-image-1.png", icon: <Shield size={22} />, title: "Compound Wall", desc: "Secure boundary compound wall around the layout." }
+    { image: "/images/home/project-image-2.png", icon: <i className="fa-solid fa-archway" style={{ fontSize: '13px' }}></i>, title: "Gated Community Entry", desc: "Premium and secure entry for all residents." },
+    { image: "/images/home/project-image-1.png", icon: <i className="fa-solid fa-solar-panel" style={{ fontSize: '13px' }}></i>, title: "Solar Street Lighting", desc: "Well-illuminated roads with solar-powered lights." },
+    { image: "/images/home/project-image-2.png", icon: <i className="fa-solid fa-tree" style={{ fontSize: '13px' }}></i>, title: "Avenue Trees", desc: "A healthy and serene lifestyle with lush greenery." },
+    { image: "/images/home/project-image-1.png", icon: <i className="fa-solid fa-shield-halved" style={{ fontSize: '13px' }}></i>, title: "24/7 Security", desc: "Safe and secure living environment." },
+    { image: "/images/home/project-image-2.png", icon: <i className="fa-solid fa-road" style={{ fontSize: '13px' }}></i>, title: "Blacktop Internal Roads", desc: "Smooth and durable internal roads." },
+    { image: "/images/home/project-image-1.png", icon: <i className="fa-solid fa-faucet-drip" style={{ fontSize: '13px' }}></i>, title: "Water Availability", desc: "Hassle-free water availability to each plot." },
+    { image: "/images/home/project-image-2.png", icon: <i className="fa-solid fa-video" style={{ fontSize: '13px' }}></i>, title: "CCTV Surveillance", desc: "24/7 smart CCTV surveillance of common areas." },
+    { image: "/images/home/project-image-1.png", icon: <i className="fa-solid fa-shield" style={{ fontSize: '13px' }}></i>, title: "Compound Wall", desc: "Secure boundary compound wall around the layout." }
   ];
 
   useEffect(() => {
@@ -612,35 +612,43 @@ export default function PlottedDevelopment() {
               <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
 
                 {/* Top Left Label */}
-                <div style={{ display: 'flex', marginBottom: '0px' }}>
+                <ScrollReveal animation="fadeUp" delay={0.05} style={{ display: 'flex', marginBottom: '0px' }}>
                   <span style={{ textTransform: 'uppercase', color: 'var(--color-text-dark)', fontWeight: '400' }}>
                     ABOUT PROJECT
                   </span>
-                </div>
+                </ScrollReveal>
 
                 {/* Main Content Grid */}
                 <div className="overview-editorial-grid">
 
                   {/* Left Column: Watermark Text */}
-                  <div style={{ position: 'relative' }}>
-                    <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '160px', lineHeight: '1', background: 'linear-gradient(180deg, #D6C8B8 0%, #D6C8B8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0, letterSpacing: '-0.02em', fontWeight: '400', transform: 'translateY(24px)' }}>
-                      AN
-                    </h2>
-                  </div>
+                  <ScrollReveal animation="fadeRight" delay={0.1}>
+                    <div style={{ position: 'relative' }}>
+                      <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '160px', lineHeight: '1', background: 'linear-gradient(180deg, #D6C8B8 0%, #D6C8B8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0, letterSpacing: '-0.02em', fontWeight: '400', transform: 'translateY(24px)' }}>
+                        AN
+                      </h2>
+                    </div>
+                  </ScrollReveal>
 
                   {/* Right Column: Editorial Paragraphs */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', paddingBottom: '20px' }}>
-                    <p style={{ color: 'var(--color-text-dark)', margin: 0, fontWeight: '400' }}>
-                      Ashok Nagar is a thoughtfully planned residential plotted development by Aadhithya Mohan Properties, strategically located in Maduranthakam. Designed for families, investors, and future homeowners, this DTCP & RERA Approved layout offers premium villa plots with excellent road connectivity, well-developed infrastructure, and a peaceful environment.
-                    </p>
+                    <ScrollReveal animation="fadeUp" delay={0.15}>
+                      <p style={{ color: 'var(--color-text-dark)', margin: 0, fontWeight: '400' }}>
+                        Ashok Nagar is a thoughtfully planned residential plotted development by Aadhithya Mohan Properties, strategically located in Maduranthakam. Designed for families, investors, and future homeowners, this DTCP & RERA Approved layout offers premium villa plots with excellent road connectivity, well-developed infrastructure, and a peaceful environment.
+                      </p>
+                    </ScrollReveal>
 
-                    <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
-                      Located just 200 meters from GST Road (NH-32), Ashok Nagar provides quick access to Chennai while offering the benefits of a rapidly developing locality. With proposed government infrastructure projects, industrial growth, and increasing residential demand, this project presents an excellent opportunity for long-term capital appreciation.
-                    </p>
+                    <ScrollReveal animation="fadeUp" delay={0.25}>
+                      <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
+                        Located just 200 meters from GST Road (NH-32), Ashok Nagar provides quick access to Chennai while offering the benefits of a rapidly developing locality. With proposed government infrastructure projects, industrial growth, and increasing residential demand, this project presents an excellent opportunity for long-term capital appreciation.
+                      </p>
+                    </ScrollReveal>
 
-                    <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
-                      Whether you&apos;re planning to build your dream home or secure a high-growth investment, Ashok Nagar offers the perfect balance of affordability, convenience, and future value.
-                    </p>
+                    <ScrollReveal animation="fadeUp" delay={0.35}>
+                      <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
+                        Whether you&apos;re planning to build your dream home or secure a high-growth investment, Ashok Nagar offers the perfect balance of affordability, convenience, and future value.
+                      </p>
+                    </ScrollReveal>
                   </div>
 
                 </div>
@@ -848,15 +856,15 @@ export default function PlottedDevelopment() {
           {/* Master Gallery Section */}
           {activeTab === 'gallery' && (
             <>
-              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '60px', paddingBottom: '60px', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / cover no-repeat' }}>
+              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '12px', paddingBottom: '8px', minHeight: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: 'url("/images/bg/TL-1.png") left top / cover no-repeat' }}>
                 <div className="container">
-                  <ScrollReveal className="section-header" animation="fadeUp" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '32px' }}>
+                  <ScrollReveal className="section-header" animation="fadeUp" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '8px' }}>
                     <h2 className="section-title">
                       Visual <span>Spotlight</span>
                     </h2>
                   </ScrollReveal>
                   {/* Gallery Navigation Tabs — Plots & Videos for Plotted Development */}
-                  <div className="nested-tabs-container" style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center' }}>
+                  <div className="nested-tabs-container" style={{ marginBottom: '12px', display: 'flex', justifyContent: 'center' }}>
                     <div className="filter-tabs">
                       {[
                         { key: 'plots', label: 'Plot Images' },
@@ -912,7 +920,9 @@ export default function PlottedDevelopment() {
                               cursor: 'pointer',
                               overflow: 'hidden',
                               position: 'relative',
-                              aspectRatio: '16/10',
+                              height: 'calc(100vh - 165px)',
+                              maxHeight: '720px',
+                              minHeight: '320px',
                               boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
                             }}
                             onClick={() => {
@@ -932,12 +942,7 @@ export default function PlottedDevelopment() {
                             <img
                               src={img.src}
                               alt={img.title}
-                              style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                display: 'block'
-                              }}
+                              className="gallery-spotlight-img"
                             />
 
                             {galleryTab === 'videos' && (
@@ -1108,7 +1113,7 @@ export default function PlottedDevelopment() {
                 </ScrollReveal>
 
                 {/* CTA Row */}
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
+                <ScrollReveal animation="fadeUp" delay={0.3} style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
                   <Button
                     theme="light"
                     onClick={() => setIsQuoteOpen(true)}
@@ -1117,7 +1122,7 @@ export default function PlottedDevelopment() {
                   >
                     Download Layout Brochure
                   </Button>
-                </div>
+                </ScrollReveal>
               </div>
             </section>
           )}
@@ -1178,7 +1183,7 @@ export default function PlottedDevelopment() {
                       <p className="section-subtitle" style={{ color: 'var(--color-text-dark)', margin: '0 auto', textAlign: 'center' }}>Live construction tracking and milestone updates</p>
                     </ScrollReveal>
 
-                    <div className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
+                    <ScrollReveal animation="fadeUp" delay={0.2} className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                       <div className="status-month-container" style={{ display: 'flex', gap: '40px', alignItems: 'center', position: 'relative', width: '100%' }}>
 
                         {/* Left Side Gap - Month/Year & Navigation */}
@@ -1220,7 +1225,7 @@ export default function PlottedDevelopment() {
                           ))}
                         </div>
                       </div>
-                    </div>
+                    </ScrollReveal>
                   </div>
                 </section>
               );
@@ -1574,13 +1579,12 @@ export default function PlottedDevelopment() {
           position: absolute;
           bottom: -1px;
           height: 3.5px;
-          background: linear-gradient(90deg, #b48564 0%, #d4b66a 50%, #b48564 100%);
+          background: linear-gradient(90deg, #f3c892 0%, #ffe6c2 50%, #f3c892 100%);
           border-radius: 4px 4px 0 0;
           transition: left 0.45s cubic-bezier(0.16, 1, 0.3, 1), width 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
           box-shadow: 
-            0 2px 10px rgba(0, 0, 0, 0.6), 
-            0 0 20px rgba(0, 0, 0, 0.4),
-            0 0 35px rgba(212, 182, 106, 0.2);
+            0 0 14px rgba(243, 200, 146, 0.8), 
+            0 0 28px rgba(243, 200, 146, 0.4);
           pointer-events: none;
           z-index: 2;
         }
@@ -1589,28 +1593,31 @@ export default function PlottedDevelopment() {
           font-family: var(--font-sans) !important;
           font-size: 14px;
           font-weight: 600;
-          color: rgba(255, 255, 255, 0.7) !important;
+          color: rgba(255, 255, 255, 0.85) !important;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          padding: 20px 24px 18px;
+          padding: 18px 24px;
           display: inline-flex;
           align-items: center;
           gap: 4px;
-          background: transparent;
+          background: transparent !important;
           border: none;
           cursor: pointer;
           position: relative;
-          transition: color 0.3s ease, background 0.3s ease;
+          transition: color 0.3s ease, text-shadow 0.3s ease;
           white-space: nowrap;
         }
 
         .sub-nav-link:hover {
-          color: #ffffff !important;
-          background: rgba(255, 255, 255, 0.06) !important;
+          color: #f3c892 !important;
+          background: transparent !important;
         }
 
         .sub-nav-link.active {
-          color: #b48564 !important;
+          color: #f3c892 !important;
+          font-weight: 700 !important;
+          background: transparent !important;
+          text-shadow: 0 0 12px rgba(243, 200, 146, 0.5);
         }
 
         /* ── SUBNAV DROPDOWNS ── */
@@ -1816,13 +1823,15 @@ export default function PlottedDevelopment() {
           left: 0;
           width: 100%;
           height: 100%;
-          // background: linear-gradient(
-          //   to bottom, 
-          //   rgba(6, 11, 29, 0.7) 0%, 
-          //   rgba(6, 11, 29, 0.4) 50%, 
-          //   rgba(6, 11, 29, 0.75) 100%
-          // );
+          background: linear-gradient(
+            180deg,
+            rgba(15, 15, 15, 0.75) 0%,
+            rgba(15, 15, 15, 0.25) 35%,
+            rgba(15, 15, 15, 0.45) 70%,
+            rgba(15, 15, 15, 0.85) 100%
+          );
           z-index: 2;
+          pointer-events: none;
         }
 
         /* â”€â”€ Light Leak â”€â”€ */
@@ -3648,9 +3657,23 @@ export default function PlottedDevelopment() {
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
-          height: 45vw;
+          height: calc(100vh - 165px);
+          max-height: 720px;
+          min-height: 320px;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
           transition: flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+        }
+
+        .gallery-spotlight-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-spotlight-card:hover .gallery-spotlight-img {
+          transform: scale(1.08);
         }
 
         .gallery-spotlight-arrow {

@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
+import ScrollReveal from './ScrollReveal';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
-const HERO_IMAGES = [
-  '/images/hero_placeholders/bird-view-shanghai-china.jpg',
-  '/images/hero_placeholders/chinese-city.jpg'
+const HERO_SLIDES = [
+  {
+    image: '/images/home/hero.png',
+    title: 'Crystal Moonlight Villas',
+    subtitle: 'Ultra Luxury Gated Community in Medavakkam',
+    link: '/crystal-moonlight-villa'
+  },
+  {
+    image: '/images/hero_placeholders/aerial-view-small-village-country-roadside.jpg',
+    title: 'Ashok Nagar',
+    subtitle: 'Exclusive Gated Villa Plots in Maduranthakam',
+    link: '/ashok-nagar-villa-plots-in-maduranthakam'
+  },
+  {
+    image: '/images/home/project-image-1.png',
+    title: 'Bay Vista',
+    subtitle: 'Bespoke Luxury Villas on ECR',
+    link: '/crystal-moonlight-villa'
+  }
 ];
 
 export default function HeroSection({ startZoom }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const currentSlide = HERO_SLIDES[activeIndex] || HERO_SLIDES[0];
+
   return (
     <section className="hero-section" id="hero">
       {/* Background Image Slider Container */}
@@ -20,16 +40,17 @@ export default function HeroSection({ startZoom }) {
           loop={true}
           speed={2000}
           autoplay={{
-            delay: 4000,
+            delay: 4500,
             disableOnInteraction: false
           }}
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           className="hero-swiper"
         >
-          {HERO_IMAGES.map((img, idx) => (
+          {HERO_SLIDES.map((slide, idx) => (
             <SwiperSlide key={idx}>
               <img
-                src={img}
-                alt={`Hero background ${idx + 1}`}
+                src={slide.image}
+                alt={slide.title}
                 className={`hero-bg-image ${startZoom ? 'animate-zoom' : ''}`}
               />
             </SwiperSlide>
@@ -40,19 +61,24 @@ export default function HeroSection({ startZoom }) {
 
       {/* Overlaid Content */}
       <div className="container hero-content">
-        <div className="hero-text-block">
-          <h1 className="display-title hero-title">
-            Beyond Luxury
-          </h1>
-          <p className="hero-subtitle">
-            Where elegance meets visionary design.
-          </p>
-        </div>
-        <div className="hero-cta-block">
-          <a href="#projects" className="btn-discover">
-            DISCOVER
-          </a>
-        </div>
+        <ScrollReveal animation="fadeUp" delay={0.1}>
+          <div className="hero-text-block" key={activeIndex} style={{ animation: 'fadeUp 0.8s ease forwards' }}>
+            <h1 className="display-title hero-title">
+              {currentSlide.title}
+            </h1>
+            <p className="hero-subtitle">
+              {currentSlide.subtitle}
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal animation="fadeUp" delay={0.25}>
+          <div className="hero-cta-block" key={`cta-${activeIndex}`} style={{ animation: 'fadeUp 0.8s ease forwards' }}>
+            <a href={currentSlide.link} className="btn-discover">
+              DISCOVER
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
 
       <style>{`
@@ -139,9 +165,6 @@ export default function HeroSection({ startZoom }) {
           margin-bottom: 18px;
         }
 
-        .hero-cta-block {
-          text-align: left;
-        }
         
         .hero-title {
           line-height: 1.25;
@@ -155,7 +178,8 @@ export default function HeroSection({ startZoom }) {
         
         .hero-subtitle {
           font-size: 16px;
-          font-weight: 500;
+          font-weight: 400;
+          text-align: center;
           color: rgba(255, 255, 255, 0.85);
           line-height: 1.8;
           text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -172,13 +196,13 @@ export default function HeroSection({ startZoom }) {
           font-weight: 400;
 
           color: rgba(255, 255, 255, 0.85);
-          background: rgba(255, 255, 255, 0.15);
+          background: rgba(255, 255, 255, 0.47);
           border: 1px solid rgba(255, 255, 255, 0.3);
           padding: 14px 40px;
           border-radius: 100px;
           text-decoration: none;
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(38px);
+          -webkit-backdrop-filter: blur(38px);
           transition: all 0.4s ease;
           opacity: 0;
           animation: fadeUp 1.4s var(--ease-luxury) forwards;

@@ -19,13 +19,13 @@ const createProjectMarker = () => {
       <div class="marker-pin-wrapper">
         <div class="marker-pin-pulse"></div>
         <div class="marker-pin-core">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
       </div>
     `,
-    iconSize: [40, 40],
-    iconAnchor: [20, 20],
-    popupAnchor: [0, -20]
+    iconSize: [46, 46],
+    iconAnchor: [23, 23],
+    popupAnchor: [0, -23]
   });
 };
 
@@ -35,15 +35,16 @@ const createPoiMarker = (isHighlighted) => {
     className: `custom-map-marker poi-marker ${isHighlighted ? 'active-highlight' : ''}`,
     html: `
       <div class="custom-map-pin-svg">
+        ${isHighlighted ? '<div class="poi-pin-light-pulse"></div>' : ''}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" class="poi-svg-marker">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" class="pin-path" />
           <circle cx="12" cy="9" r="3" class="pin-dot" />
         </svg>
       </div>
     `,
-    iconSize: [28, 35],
-    iconAnchor: [14, 35],
-    popupAnchor: [0, -32]
+    iconSize: [32, 40],
+    iconAnchor: [16, 40],
+    popupAnchor: [0, -36]
   });
 };
 
@@ -103,7 +104,7 @@ function InteractionDetector({ onInteraction }) {
   return null;
 }
 
-export default function ProjectMap({ activeCategory, projectCoords, projectName, hoveredLocationName, onInteraction }) {
+export default function ProjectMap({ activeCategory, projectCoords, projectName, activeLocationName, onHoverLocation, onInteraction }) {
   // Fallback coordinates: Medavakkam, Chennai (approx 12.915566, 80.183492)
   const centerCoords = projectCoords || [12.915566, 80.183492];
   const activeLocations = activeCategory ? activeCategory.locations : [];
@@ -117,13 +118,16 @@ export default function ProjectMap({ activeCategory, projectCoords, projectName,
         style={{ width: '100%', height: '100%' }}
       >
         <TileLayer
-          attribution='&copy; Google Maps'
-          url="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
+          attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`}
+          tileSize={256}
+          zoomOffset={0}
+          maxZoom={19}
         />
         
         {/* Project Center Marker */}
         <Marker position={centerCoords} icon={createProjectMarker()}>
-          <Tooltip direction="top" offset={[0, -18]}>
+          <Tooltip direction="top" offset={[0, -22]}>
             <div style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 'bold' }}>
               {projectName || "Project Site"}
             </div>
@@ -133,23 +137,28 @@ export default function ProjectMap({ activeCategory, projectCoords, projectName,
         {/* Dynamic Category Markers */}
         {activeLocations.map((loc, idx) => {
           if (!loc.lat || !loc.lng) return null;
-          const isHighlighted = hoveredLocationName === loc.name;
+          const isHighlighted = activeLocationName === loc.name;
           return (
             <Marker 
-              key={`${idx}-${isHighlighted}`} 
+              key={`${loc.name}-${isHighlighted}`} 
               position={[loc.lat, loc.lng]} 
               icon={createPoiMarker(isHighlighted)}
+              eventHandlers={{
+                mouseover: () => onHoverLocation && onHoverLocation(loc.name),
+              }}
             >
-              <Tooltip 
-                permanent={isHighlighted}
-                direction="top" 
-                offset={[0, -28]}
-              >
-                <div style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
-                  <strong>{loc.name}</strong><br />
-                  <span style={{ color: '#b48564', fontWeight: '500' }}>Distance: {loc.dist}</span>
-                </div>
-              </Tooltip>
+              {isHighlighted && (
+                <Tooltip 
+                  permanent={true}
+                  direction="top" 
+                  offset={[0, -32]}
+                >
+                  <div style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
+                    <strong>{loc.name}</strong><br />
+                    <span style={{ color: '#b48564', fontWeight: '500' }}>Distance: {loc.dist}</span>
+                  </div>
+                </Tooltip>
+              )}
             </Marker>
           );
         })}
