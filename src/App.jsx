@@ -7,6 +7,7 @@ import PlottedDevelopment from './pages/PlottedDevelopment';
 import AboutUs from './pages/AboutUs';
 import AllProjects from './pages/AllProjects';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import ContactUs from './pages/ContactUs';
 import StickyActionBar from './components/StickyActionBar';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -57,6 +58,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/projects" element={<AllProjects />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
       <StickyActionBar />
     </Router>

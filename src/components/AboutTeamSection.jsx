@@ -76,7 +76,7 @@ const MANAGEMENT_LEADERS = [
   }
 ];
 
-export default function AboutTeamSection() {
+export default function AboutTeamSection({ showExecutives = true }) {
   const [selectedMember, setSelectedMember] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   
@@ -96,6 +96,7 @@ export default function AboutTeamSection() {
 
   // Smooth GSAP Pin & ScrollTrigger transition (MD -> CEO)
   useEffect(() => {
+    if (!showExecutives) return;
     const pinEl = pinSectionRef.current;
     const mdEl = mdSlideRef.current;
     const ceoEl = ceoSlideRef.current;
@@ -154,7 +155,8 @@ export default function AboutTeamSection() {
     <div className="sobha-leadership-wrapper" id="team">
 
       {/* ── 1. PINNED GSAP SCROLL SPOTLIGHT (MD -> CEO SMOOTH CROSSFADE) ── */}
-      <div className="sobha-gsap-pin-container" ref={pinSectionRef}>
+      {showExecutives && (
+        <div className="sobha-gsap-pin-container" ref={pinSectionRef}>
         
         {/* Subtle Architectural Skyline Background */}
         <div className="sobha-hero-bg" style={{ backgroundImage: `url('/images/about/leadership_hero_bg.jpg')` }} />
@@ -264,6 +266,7 @@ export default function AboutTeamSection() {
 
         </div>
       </div>
+      )}
 
       {/* ── 2. OUR TEAM SECTION (THE PEOPLE WHO BRING OUR VISION IN TO LIFE) ── */}
       <section className="sobha-team-section">

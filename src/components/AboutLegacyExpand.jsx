@@ -265,8 +265,8 @@ export default function AboutLegacyExpand({
 
         .legacy-heading {
           font-family: var(--font-heading, serif);
-          font-size: clamp(22px, 2vw, 30px);
-          font-weight: 400;
+          font-size: clamp(25px, 2vw, 35px);
+          font-weight: 500;
           color: #111111;
           margin: 0 0 16px 0;
           line-height: 1.25;
@@ -278,7 +278,7 @@ export default function AboutLegacyExpand({
           font-size: clamp(16px, 0.95vw, 16px);
           line-height: 1.66;
           color: #2b2b2b;
-          margin: 0 0 12px 0;
+          margin: 0 0 18px 0;
           text-align: justify;
           letter-spacing: 0.01em;
         }

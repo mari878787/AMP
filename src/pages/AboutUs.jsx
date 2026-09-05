@@ -9,6 +9,7 @@ import AboutStatsBar from '../components/AboutStatsBar';
 import AboutPurposeSection from '../components/AboutPurposeSection';
 import AboutJourneyAccordion from '../components/AboutJourneyAccordion';
 import AboutTeamSection from '../components/AboutTeamSection';
+import AboutLeaderDarkVariant from '../components/AboutLeaderDarkVariant';
 import AboutCareersCTA from '../components/AboutCareersCTA';
 
 const AboutUs = () => {
@@ -45,8 +46,11 @@ const AboutUs = () => {
       {/* 5. Interactive Expanding Timeline Accordion Section */}
       <AboutJourneyAccordion />
 
-      {/* 6. Meet The Team & Founder Spotlight Section */}
-      <AboutTeamSection />
+      {/* 6. Executive Leadership Section (Dark Editorial Blend) */}
+      <AboutLeaderDarkVariant />
+
+      {/* 6B. Management Team Grid & Bio Modals */}
+      <AboutTeamSection showExecutives={false} />
 
       {/* 7. Careers CTA Section */}
       <AboutCareersCTA />

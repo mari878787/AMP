@@ -603,7 +603,7 @@ export default function Navbar({ darkText = false }) {
 
         .mega-column-title {
           font-family: var(--font-heading);
-          font-size: 13px;
+          font-size: 18px;
           font-weight: 500;
           color: #000000ff;
           text-transform: uppercase;
@@ -619,7 +619,7 @@ export default function Navbar({ darkText = false }) {
 
         .mega-category-item a {
           font-family: var(--font-heading);
-          font-size: 13px;
+          font-size: 16px;
           font-weight: 500;
           color: #000000ff;
           text-transform: uppercase;
@@ -638,7 +638,7 @@ export default function Navbar({ darkText = false }) {
 
         .mega-project-item a {
           font-family: var(--font-heading);
-          font-size: 13px;
+          font-size: 16px;
           font-weight: 400;
           color: var(--color-text-dark);
           text-transform: uppercase;
@@ -651,8 +651,8 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mega-project-name {
-          font-size: 13px;
-          font-weight: 500;
+          font-size: 16px;
+          font-weight: 400;
           color: inherit;
           text-transform: uppercase;
         }

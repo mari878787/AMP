@@ -688,25 +688,25 @@ export default function NewProject({ project }) {
                       </span>
                     </ScrollReveal> */}
 
-                    <ScrollReveal animation="fadeUp" delay={0.3}>
+                    <ScrollReveal animation="fadeUp" delay={0.2}>
                       <h2 className='overview-main-title'>
                         Where Contemporary Design Meets Serene Community Living
                       </h2>
                     </ScrollReveal>
 
-                    <ScrollReveal animation="fadeUp" delay={0.35}>
+                    <ScrollReveal animation="fadeUp" delay={0.25}>
                       <p style={{ color: 'var(--color-text-dark)', margin: '10px 0 0', fontSize: '20px', textAlign: 'justify' }}>
                         Some homes are designed to accommodate life. Others are designed to enrich it.
                       </p>
                     </ScrollReveal>
 
-                    <ScrollReveal animation="fadeUp" delay={0.4}>
+                    <ScrollReveal animation="fadeUp" delay={0.3}>
                       <p style={{ color: 'var(--color-text-dark)', margin: 0, fontSize: '20px', textAlign: 'justify' }}>
                         Crystal Moonlight is an exclusive gated villa community, created for families who value refined living, privacy, and the quiet confidence of a home built for generations. Nestled in the heart of Medavakkam, it presents a collection of thoughtfully crafted independent villas where every detail reflects timeless design and uncompromising craftsmanship.
                       </p>
                     </ScrollReveal>
 
-                    <ScrollReveal animation="fadeUp" delay={0.45}>
+                    <ScrollReveal animation="fadeUp" delay={0.35}>
                       <p style={{ color: 'var(--color-text-dark)', margin: 0, fontSize: '20px', textAlign: 'justify' }}>
                         Designed with generous living spaces, elegant contemporary architecture, and the flexibility to be tailored to individual lifestyles, each residence offers the comfort of a home that is uniquely your own. Surrounded by tranquil landscaped spaces while remaining seamlessly connected to Chennai's leading business, educational, healthcare, and lifestyle destinations, Crystal Moonlight brings together the rare balance of serenity, convenience, and lasting value.
                       </p>
