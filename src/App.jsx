@@ -13,6 +13,8 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import LaunchCountdownWidget from './components/LaunchCountdownWidget';
+
 import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -61,6 +63,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
       </Routes>
       <StickyActionBar />
+      <LaunchCountdownWidget />
     </Router>
   );
 }
