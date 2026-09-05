@@ -24,8 +24,13 @@ const AboutUs = () => {
         legacyYears="10+"
         legacyTitle="years of"
         legacySubtitle="INCREDIBLE LEGACY"
-        description="Aadhithya Mohan Properties was founded in 2016 by a first-generation entrepreneur Mr. PNC Menon, the founder of the Group. The entity is a multinational, multiproduct group with developments and investments in the UAE, India, and UK."
-        image="/images/maia/5.png"
+        heading="Where Trust Creates Lasting Value"
+        paragraphs={[
+          "Founded in 2016, Aadhithya Mohan Properties has spent the past decade guided by a simple belief—that the true measure of real estate lies not merely in what is built, but in the trust it earns and the value it creates over time.",
+          "What began with residential apartments and thoughtfully planned land communities has evolved into a portfolio of luxury residences, premium land developments, and distinctive residential communities. While the scale and character of our projects have grown, the principles behind them have remained constant: meticulous planning, uncompromising standards, integrity, and a deep respect for craftsmanship.",
+          "As we enter our next decade, our ambition remains deliberately focused: to create developments that inspire confidence today and become a source of pride and enduring value for generations to come."
+        ]}
+        image="/images/about/CML ABOUT US.png"
       />
 
       {/* 2. Editorial Quote Statement Section */}

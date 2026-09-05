@@ -119,7 +119,7 @@ export default function AboutQuoteStatement() {
         }
 
         .quote-pipe-btn.is-active {
-          color: #111111;
+          color: #B58767;
         }
 
         .quote-pipe-divider {

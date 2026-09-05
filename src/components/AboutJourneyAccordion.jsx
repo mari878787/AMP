@@ -103,7 +103,7 @@ export default function AboutJourneyAccordion() {
       <style>{`
         .about-journey-section {
           background-color: var(--color-white);
-          padding: 60px 0 30px;
+          padding: 60px 0 0px;
           width: 100%;
           box-sizing: border-box;
           overflow: hidden;

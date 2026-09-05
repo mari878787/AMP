@@ -9,8 +9,14 @@ export default function AboutLegacyExpand({
   legacyYears = "10+",
   legacyTitle = "years of",
   legacySubtitle = "INCREDIBLE LEGACY",
-  description = "Aadhithya Mohan Properties represents the pinnacle of premium residential developments in Medavakkam, Chennai. The brand is built around the idea that homes are not just structures, but powerful statements that define presence and elevate living for generations to come.",
-  image = "/images/maia/5.png"
+  heading = "Where Trust Creates Lasting Value",
+  paragraphs = [
+    "Founded in 2016, Aadhithya Mohan Properties has spent the past decade guided by a simple belief—that the true measure of real estate lies not merely in what is built, but in the trust it earns and the value it creates over time.",
+    "What began with residential apartments and thoughtfully planned land communities has evolved into a portfolio of luxury residences, premium land developments, and distinctive residential communities. While the scale and character of our projects have grown, the principles behind them have remained constant: meticulous planning, uncompromising standards, integrity, and a deep respect for craftsmanship.",
+    "As we enter our next decade, our ambition remains deliberately focused: to create developments that inspire confidence today and become a source of pride and enduring value for generations to come."
+  ],
+  description,
+  image = "/images/about/CML ABOUT US.png"
 }) {
   const sectionRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -19,8 +25,8 @@ export default function AboutLegacyExpand({
   const rightTextRef = useRef(null);
 
   useGSAP(() => {
-    // Only run full GSAP pinning & expansion on viewports >= 640px
-    if (typeof window !== 'undefined' && window.innerWidth < 640) return;
+    // Only run full GSAP pinning & expansion on viewports >= 768px
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     if (!sectionRef.current || !imageWrapRef.current) return;
 
     const tl = gsap.timeline({
@@ -35,16 +41,18 @@ export default function AboutLegacyExpand({
       }
     });
 
-    // 1. Shrink image from full screen (100vw, 100vh, 0px radius) down to small container (25vw, 72vh, 8px radius)
+    // 1. Shrink image from full screen (100vw, 100vh, 0px radius, left 50%) down to small container (23vw, 72vh, left 41.5%, 8px radius)
     tl.fromTo(imageWrapRef.current,
       {
         width: '100vw',
         height: '100vh',
+        left: '50%',
         borderRadius: '0px'
       },
       {
         width: '25vw',
         height: '72vh',
+        left: '40%',
         borderRadius: '8px',
         ease: 'none'
       },
@@ -111,9 +119,16 @@ export default function AboutLegacyExpand({
 
         {/* Right Column: Editorial Description */}
         <div ref={rightTextRef} className="about-legacy-right">
-          <p className="body-text">
-            {description}
-          </p>
+          {heading && <h3 className="legacy-heading">{heading}</h3>}
+          {paragraphs && Array.isArray(paragraphs) ? (
+            paragraphs.map((p, idx) => (
+              <p key={idx} className="body-text">
+                {p}
+              </p>
+            ))
+          ) : (
+            <p className="body-text">{description}</p>
+          )}
         </div>
 
       </div>
@@ -155,9 +170,9 @@ export default function AboutLegacyExpand({
         /* ── LEFT EMBLEM ── */
         .about-legacy-left {
           position: absolute;
-          left: 6%;
+          left: 4.5%;
           z-index: 10;
-          max-width: 320px;
+          max-width: clamp(200px, 20vw, 270px);
           pointer-events: none;
           transform-origin: center left;
           will-change: opacity, transform, filter;
@@ -172,7 +187,7 @@ export default function AboutLegacyExpand({
 
         .legacy-years {
           font-family: var(--font-sans);
-          font-size: clamp(80px, 9vw, 130px);
+          font-size: clamp(70px, 7.5vw, 115px);
           font-weight: 300;
           line-height: 0.9;
           color: #000000;
@@ -185,7 +200,7 @@ export default function AboutLegacyExpand({
 
         .legacy-label {
           font-family: var(--font-heading, serif);
-          font-size: 20px;
+          font-size: clamp(16px, 1.4vw, 20px);
           font-style: italic;
           color: #666666;
           display: block;
@@ -193,11 +208,11 @@ export default function AboutLegacyExpand({
 
         .legacy-subtitle {
           font-family: var(--font-heading, serif);
-          font-size: clamp(20px, 2.2vw, 32px);
+          font-size: clamp(18px, 1.8vw, 28px);
           font-weight: 400;
           color: #b48564;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.08em;
           margin: 4px 0 0 0;
           line-height: 1.1;
         }
@@ -213,7 +228,7 @@ export default function AboutLegacyExpand({
           border-radius: 0px;
           overflow: hidden;
           z-index: 5;
-          will-change: width, height, border-radius;
+          will-change: width, height, border-radius, left;
         }
 
         .about-legacy-img {
@@ -227,13 +242,7 @@ export default function AboutLegacyExpand({
         .legacy-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(
-            to bottom, 
-            rgba(0, 0, 0, 0.75) 0%, 
-            rgba(0, 0, 0, 0.0) 25%, 
-            rgba(0, 0, 0, 0.3) 70%, 
-            rgba(0, 0, 0, 0.75) 100%
-          );
+          background: linear-gradient(to bottom, rgb(0 0 0 / 27%) 0%, rgba(0, 0, 0, 0.0) 25%, rgb(0 0 0 / 0%) 70%, rgb(255 255 255 / 0%) 100%);
           pointer-events: none;
           z-index: 6;
         }
@@ -241,43 +250,117 @@ export default function AboutLegacyExpand({
         /* ── RIGHT EDITORIAL ── */
         .about-legacy-right {
           position: absolute;
-          right: 6%;
+          left: 56.5%;
+          right: 3.5%;
           z-index: 10;
-          max-width: 340px;
+          max-width: clamp(400px, 39vw, 560px);
           pointer-events: none;
           transform-origin: center right;
           will-change: opacity, transform, filter;
           opacity: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .legacy-heading {
+          font-family: var(--font-heading, serif);
+          font-size: clamp(22px, 2vw, 30px);
+          font-weight: 400;
+          color: #111111;
+          margin: 0 0 16px 0;
+          line-height: 1.25;
+          letter-spacing: 0.02em;
+        }
+
+        .about-legacy-right .body-text {
+          font-family: var(--font-sans);
+          font-size: clamp(16px, 0.95vw, 16px);
+          line-height: 1.66;
+          color: #2b2b2b;
+          margin: 0 0 12px 0;
+          text-align: justify;
+          letter-spacing: 0.01em;
+        }
+
+        .about-legacy-right .body-text:last-child {
+          margin-bottom: 0;
         }
 
         /* ── RESPONSIVE MOBILE OVERRIDES ── */
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .about-legacy-expand-section {
             min-height: auto;
-            padding: 60px 0;
+            padding: 30px 0 50px 0;
+            overflow: visible;
           }
           .about-legacy-wrapper {
             height: auto;
             flex-direction: column;
-            padding: 0 24px;
-            gap: 32px;
-          }
-          .about-legacy-left, .about-legacy-right {
+            gap: 24px;
             position: relative;
-            left: auto;
-            right: auto;
-            max-width: 100%;
-            pointer-events: auto;
+          }
+          .about-legacy-img-wrap {
+            position: relative !important;
+            left: auto !important;
+            top: auto !important;
+            transform: none !important;
+            width: 100% !important;
+            height: clamp(280px, 45vh, 400px) !important;
+            border-radius: 8px !important;
+            order: 1;
+          }
+          .about-legacy-left {
+            position: relative !important;
+            left: auto !important;
+            right: auto !important;
+            max-width: 100% !important;
+            pointer-events: auto !important;
             text-align: center;
             align-items: center;
+            padding: 30px 0 0;
+            opacity: 1 !important;
+            transform: none !important;
+            filter: none !important;
+            order: 2;
           }
           .legacy-emblem {
             align-items: center;
           }
-          .about-legacy-img-wrap {
-            width: 100% !important;
-            height: 380px !important;
-            border-radius: 8px !important;
+          .legacy-years {
+            font-size: clamp(64px, 16vw, 84px);
+            line-height: 1;
+          }
+          .legacy-label {
+            font-size: 17px;
+          }
+          .legacy-subtitle {
+            font-size: 22px;
+          }
+          .about-legacy-right {
+            position: relative !important;
+            left: auto !important;
+            right: auto !important;
+            max-width: 540px !important;
+            margin: 0 auto;
+            pointer-events: auto !important;
+            text-align: center;
+            opacity: 1 !important;
+            transform: none !important;
+            filter: none !important;
+            order: 3;
+            padding: 0 16px;
+          }
+          .legacy-heading {
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 14px;
+          }
+          .about-legacy-right .body-text {
+            font-size: 15px;
+            line-height: 1.65;
+            text-align: center;
+            margin-bottom: 12px;
           }
         }
       `}</style>

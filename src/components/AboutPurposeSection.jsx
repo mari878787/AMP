@@ -3,24 +3,36 @@ import ScrollReveal from './ScrollReveal';
 
 const PURPOSE_PILLARS = [
   {
-    id: 'craftsmanship',
-    title: "Craftsmanship",
-    desc: "When building a home, attention to detail is essential. At Aadhithya Mohan Properties, we recognise this and obsess over every detail—whether it's the quality of the materials, textures, finishes, solid teak frames, polished doors, or anti-skid surfaces. A true craftsman's approach for a harmonious life.",
-    image: "/images/about/craftsmanship.jpg",
+    id: 'purposeful-design',
+    title: "Purposeful Design",
+    paragraphs: [
+      "Design goes beyond architecture and aesthetics. It begins with understanding the potential of a location, the character of the land, and the people who will ultimately experience the spaces we create.",
+      "From master planning and spatial relationships to functionality, privacy, natural light, and landscape, every element is considered as part of a larger vision. The most enduring spaces are those where thoughtful decisions are experienced effortlessly in everyday life.",
+      "Nothing exists without reason. Every detail has a purpose, contributing to developments that are considered, relevant, and distinctive in character."
+    ],
+    image: "/images/about/thoughtful_design.jpg",
     offset: false
   },
   {
-    id: 'thoughtful-design',
-    title: "Thoughtful Design",
-    desc: "At Aadhithya Mohan Properties, home design is not just a structure; it's an enduring work of living art. Homes that are spacious with 100% Vastu compliance and well-utilised spaces. Every stage of planning is carefully considered and tested to ensure a truly thoughtful living experience.",
-    image: "/images/about/thoughtful_design.jpg",
+    id: 'uncompromising-standards',
+    title: "Uncompromising Standards",
+    paragraphs: [
+      "Quality extends far beyond what is immediately visible. It is reflected in the materials we select, the methods we adopt, the expertise we bring together, and the attention given to every stage of development.",
+      "From planning and construction to finishes and final delivery, every detail is approached with precision, consistency, and accountability. It is a discipline that leaves no room for compromise where quality matters.",
+      "Because lasting quality is never the result of a single decision. It is the outcome of countless decisions, made with care and held to the same exacting standard from beginning to completion."
+    ],
+    image: "/images/about/signature_quality.jpg",
     offset: true // Offset downward for editorial masonry rhythm
   },
   {
-    id: 'signature-quality',
-    title: "Signature Quality",
-    desc: "We are personally involved in every stage of the process, from master planning and material sourcing to construction and final handover. Every home is subjected to rigorous quality inspections to ensure uncompromising structural integrity that lasts for generations.",
-    image: "/images/about/signature_quality.jpg",
+    id: 'enduring-value',
+    title: "Enduring Value",
+    paragraphs: [
+      "The true measure of a development is revealed over time—not simply by how it is received at completion, but by how well it continues to serve, remain relevant, and hold its value in the years that follow.",
+      "That perspective shapes every decision, from identifying locations with long-term potential and planning responsibly to creating spaces that continue to meet the evolving needs of the people and communities they serve.",
+      "What we create should offer more than value for the present. It should become a source of pride, a meaningful asset, and something of lasting significance for generations to come."
+    ],
+    image: "/images/about/craftsmanship.jpg",
     offset: false
   }
 ];
@@ -63,7 +75,15 @@ export default function AboutPurposeSection({
               {/* Editorial Title & Body Text */}
               <div className="purpose-content-box">
                 <h3 className="purpose-col-heading">{pillar.title}</h3>
-                <p className="body-text">{pillar.desc}</p>
+                {pillar.paragraphs ? (
+                  pillar.paragraphs.map((para, pIdx) => (
+                    <p key={pIdx} className="body-text" style={{ marginBottom: '14px', lineHeight: '1.68', color: '#333' }}>
+                      {para}
+                    </p>
+                  ))
+                ) : (
+                  <p className="body-text">{pillar.desc}</p>
+                )}
               </div>
             </ScrollReveal>
           ))}
@@ -153,13 +173,25 @@ export default function AboutPurposeSection({
 
         .purpose-col-heading {
           font-family: var(--font-heading, serif);
-          font-size: clamp(26px, 2.6vw, 34px);
-          font-weight: 400;
+          font-size: clamp(24px, 2.2vw, 30px);
+          font-weight: 500;
           color: #111111;
-          margin: 0 0 18px 0;
+          margin: 0 0 20px 0;
           line-height: 1.25;
           letter-spacing: -0.01em;
           transition: color 0.3s ease;
+        }
+
+        .purpose-content-box .body-text {
+          font-size: 15px;
+          line-height: 1.72;
+          color: #444444;
+          font-weight: 300;
+          margin-bottom: 14px;
+        }
+
+        .purpose-content-box .body-text:last-child {
+          margin-bottom: 0;
         }
 
         .purpose-editorial-col:hover .purpose-col-heading {
