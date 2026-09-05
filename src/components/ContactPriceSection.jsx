@@ -3,7 +3,7 @@ import { CheckCircle2 } from 'lucide-react';
 import Button from './Button';
 
 export default function ContactPriceSection({
-  projectName = "Crystal Moonlight Villa",
+  projectName = "Crystal Moonlight",
   pricingString = "AED 9.05 M* | INR 22.6 CR* | USD 2.48 M* | EUR 2.18 M* | GBP 1.89 M*",
   unitOptions = ["3 BHK Villa", "4 BHK Villa"],
   showGlobalDisclaimer = true

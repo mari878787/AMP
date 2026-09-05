@@ -7,7 +7,7 @@ const ALL_PROJECTS = [
   {
     id: 1,
     category: 'Villa',
-    title: 'Crystal Moonlight Villas',
+    title: 'Crystal Moonlight',
     location: 'Medavakkam, Chennai',
     area: '2,233 - 2,287 Sq.Ft.',
     image: '/images/project_crystal_1779810838661.png',
@@ -31,7 +31,7 @@ const ALL_PROJECTS = [
     location: 'Royapettah, Chennai',
     area: '1,500 - 2,400 Sq.Ft.',
     image: '/images/project_crystal_1779810838661.png',
-    link: '/crystal-moonlight-villa',
+    link: '/pasha-pinnacle',
     centerInfo: 'Boutique Apartments'
   },
   {
@@ -599,7 +599,7 @@ export default function ProjectsSection() {
             --card-active-w: 88vw;
             --card-w: 70vw;
             --gap: 4vw;
-            padding: 8px 0 4px 0;
+            padding: 38px 0 4px 0;
           }
 
           .projects-header {

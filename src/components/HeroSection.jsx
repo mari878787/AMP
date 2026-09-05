@@ -8,7 +8,7 @@ import 'swiper/css/effect-fade';
 const HERO_SLIDES = [
   {
     image: '/images/home/hero.png',
-    title: 'Crystal Moonlight Villas',
+    title: 'Crystal Moonlight',
     subtitle: 'Ultra Luxury Gated Community in Medavakkam',
     link: '/crystal-moonlight-villa'
   },

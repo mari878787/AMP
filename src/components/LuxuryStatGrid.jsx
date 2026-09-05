@@ -4,10 +4,11 @@ export default function LuxuryStatGrid({
   titleLine1 = "CRYSTAL",
   titleLine2 = "MOONLIGHT",
   projectSub = "MEDAVAKKAM, CHENNAI",
+  reraNo = "TN/29/Building/001/2024",
   stat1 = { tag: "PROPERTY TYPE", val: "PREMIUM", desc: "VILLAS" },
   stat2 = { tag: "CONFIGURATIONS", val: "3 & 4", desc: "BHK" },
   stat3 = { tag: "COMMUNITY", val: 47, desc: "VILLAS" },
-  stat4 = { tag: "STATUS", val: "ONGOING", desc: "PROJECT" }
+  stat4 = { tag: "SITE EXTENT", val: "15", desc: "ACRES" }
 }) {
   const [visible, setVisible] = useState(false);
   const [communityCount, setCommunityCount] = useState(0);
@@ -126,9 +127,14 @@ export default function LuxuryStatGrid({
               {renderStaggeredText(titleLine2, visible, 0.65)}
             </span>
           </span>
-          <span className="info-grid-desc transition-reveal delay-5">
+          <span className="info-grid-desc transition-reveal delay-5" style={{ marginBottom: '4px' }}>
             {projectSub}
           </span>
+          {reraNo && (
+            <span className="info-grid-desc transition-reveal delay-5" style={{ fontSize: '10px', color: '#777777', letterSpacing: '0.06em' }}>
+              ({reraNo})
+            </span>
+          )}
         </div>
 
         {/* Animated Divider Right */}

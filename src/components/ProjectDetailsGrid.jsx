@@ -4,7 +4,29 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProjectDetailsGrid() {
+export default function ProjectDetailsGrid({
+  stat1Tag = 'TOTAL UNITS',
+  stat1Val = 47,
+  stat1Desc = 'VILLAS',
+  stat1Count = 47,
+
+  stat2Tag = 'CONFIGURATION',
+  stat2Val = '3 & 4',
+  stat2Desc = 'BHK',
+
+  projectTag = 'PROJECT',
+  projectName = 'CRYSTAL MOONLIGHT',
+  location = 'MEDAVAKKAM, CHENNAI',
+  reraNo = '(TN/29/Building/001/2024)',
+
+  stat3Tag = 'SIZE RANGE',
+  stat3Val = '2,233 - 2,287',
+  stat3Desc = 'SQ.FT.',
+
+  stat4Tag = 'SITE EXTENT',
+  stat4Val = '15',
+  stat4Desc = 'ACRES'
+}) {
   const containerRef = useRef(null);
   const countRef = useRef(null);
   const [count, setCount] = useState(0);
@@ -42,7 +64,7 @@ export default function ProjectDetailsGrid() {
       );
     }
 
-    // 3. Stagger reveal for the stat blocks (PROPERTY TYPE, CONFIG, COMMUNITY, STATUS)
+    // 3. Stagger reveal for the stat blocks
     if (stats.length > 0) {
       tl.fromTo(stats,
         { y: 30, opacity: 0 },
@@ -51,7 +73,7 @@ export default function ProjectDetailsGrid() {
       );
     }
 
-    // 4. Stagger reveal letters of CRYSTAL MOONLIGHT
+    // 4. Stagger reveal letters of projectName
     if (centerTitle) {
       const text = centerTitle.innerText;
       centerTitle.innerHTML = text.split('').map(char => 
@@ -77,21 +99,23 @@ export default function ProjectDetailsGrid() {
       );
     }
 
-    // 6. Number Count Up for COMMUNITY (47)
-    const communityObj = { val: 0 };
-    tl.to(communityObj, {
-      val: 47,
-      duration: 1.5,
-      ease: 'power2.out',
-      onUpdate: () => {
-        setCount(Math.floor(communityObj.val));
-      }
-    }, '-=1');
+    // 6. Number Count Up for Total Units
+    if (typeof stat1Count === 'number' && stat1Count > 0) {
+      const communityObj = { val: 0 };
+      tl.to(communityObj, {
+        val: stat1Count,
+        duration: 1.5,
+        ease: 'power2.out',
+        onUpdate: () => {
+          setCount(Math.floor(communityObj.val));
+        }
+      }, '-=1');
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, []);
+  }, [stat1Count]);
 
   return (
     <div ref={containerRef} style={{ width: '100%' }}>
@@ -104,34 +128,39 @@ export default function ProjectDetailsGrid() {
 
             {/* Left Stats Group */}
             <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-              {/* Stat 1 */}
+              {/* Stat 1: Total Units */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                <span className="info-grid-tag">PROPERTY TYPE</span>
-                <span className="info-grid-val">PREMIUM</span>
-                <span className="info-grid-desc">VILLAS</span>
+                <span className="info-grid-tag">{stat1Tag}</span>
+                <span className="info-grid-val" ref={countRef}>
+                  {typeof stat1Count === 'number' && stat1Count > 0 ? count : stat1Val}
+                </span>
+                <span className="info-grid-desc">{stat1Desc}</span>
               </div>
 
-              {/* Stat 2 */}
+              {/* Stat 2: Configuration */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                <span className="info-grid-tag">CONFIGURATIONS</span>
-                <span className="info-grid-val">3 & 4</span>
-                <span className="info-grid-desc">BHK</span>
+                <span className="info-grid-tag">{stat2Tag}</span>
+                <span className="info-grid-val">{stat2Val}</span>
+                <span className="info-grid-desc">{stat2Desc}</span>
               </div>
             </div>
 
             {/* Vertical Divider Left */}
             <div className="divider-line" style={{ width: '1px', height: '120px', background: 'rgba(0, 0, 0, 0.08)', alignSelf: 'center', willChange: 'transform' }}></div>
 
-            {/* Center Logo Group */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto', padding: '0 40px', minWidth: '280px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
-                <span className="info-grid-tag center-text-reveal" style={{ marginBottom: '8px' }}>PROJECT</span>
+            {/* Center: Project Name Group */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto', padding: '0 30px', minWidth: '280px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '16px' }}>
+                <span className="info-grid-tag center-text-reveal" style={{ marginBottom: '8px' }}>{projectTag}</span>
                 <span className="info-grid-val-large" style={{ display: 'block', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                  CRYSTAL MOONLIGHT
+                  {projectName}
                 </span>
               </div>
-              <span className="info-grid-desc center-text-reveal">
-                MEDAVAKKAM, CHENNAI
+              <span className="info-grid-desc center-text-reveal" style={{ marginBottom: '6px' }}>
+                {location}
+              </span>
+              <span className="info-grid-rera center-text-reveal" style={{ fontSize: '11px', letterSpacing: '0.06em', color: '#777777', textTransform: 'uppercase', fontFamily: 'var(--font-sans)', fontWeight: '400' }}>
+                {reraNo}
               </span>
             </div>
 
@@ -140,20 +169,22 @@ export default function ProjectDetailsGrid() {
 
             {/* Right Stats Group */}
             <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-              {/* Stat 3 */}
+              {/* Stat 3: Size Range */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                <span className="info-grid-tag">COMMUNITY</span>
-                <span className="info-grid-val" ref={countRef}>
-                  {count}
+                <span className="info-grid-tag">{stat3Tag}</span>
+                <span className="info-grid-val" style={{ fontSize: '24px', whiteSpace: 'nowrap' }}>
+                  {stat3Val}
                 </span>
-                <span className="info-grid-desc">VILLAS</span>
+                <span className="info-grid-desc">{stat3Desc}</span>
               </div>
 
-              {/* Stat 4 */}
+              {/* Stat 4: Site Extent / Structure */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                <span className="info-grid-tag">STATUS</span>
-                <span className="info-grid-val">ONGOING</span>
-                <span className="info-grid-desc">PROJECT</span>
+                <span className="info-grid-tag">{stat4Tag}</span>
+                <span className="info-grid-val" style={{ fontSize: '24px', whiteSpace: 'nowrap' }}>
+                  {stat4Val}
+                </span>
+                <span className="info-grid-desc">{stat4Desc}</span>
               </div>
             </div>
 

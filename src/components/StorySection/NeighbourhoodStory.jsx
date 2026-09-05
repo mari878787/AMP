@@ -1,27 +1,87 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../Button';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { 
+  Compass, 
+  GraduationCap, 
+  HeartPulse, 
+  ShoppingBag, 
+  ChevronDown, 
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-react';
 import { CATEGORIES } from './data/storyData';
 import ProjectMap from './ProjectMap';
 import ScrollReveal from '../ScrollReveal';
 import './NeighbourhoodStory.css';
 
+// Category icon mapper
+const getCategoryIcon = (id, size = 15) => {
+  switch (id) {
+    case 'junctions':
+      return <Compass size={size} />;
+    case 'education':
+      return <GraduationCap size={size} />;
+    case 'hospitals':
+      return <HeartPulse size={size} />;
+    case 'shopping':
+    default:
+      return <ShoppingBag size={size} />;
+  }
+};
+
 export default function NeighbourhoodStory({ onEnquire, projectCoords, projectName }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [userInteracted, setUserInteracted] = useState(false);
+  const [activeCatIndex, setActiveCatIndex] = useState(0);
   const [selectedLocationName, setSelectedLocationName] = useState(null);
+  const [isCardHovered, setIsCardHovered] = useState(false);
+  const [isPinHovered, setIsPinHovered] = useState(false);
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false);
+  const [progress, setProgress] = useState(0); // 0 to 100%
 
-  const activeCategory = CATEGORIES[activeIndex];
+  // Coordinates for Medavakkam default
+  const defaultCoords = projectCoords || [12.9175, 80.1915];
 
-  // Set 1st location of active category as default on mount & when category changes
+  const currentCategory = CATEGORIES[activeCatIndex] || CATEGORIES[0];
+  const isTimerPaused = isCardHovered || isPinHovered;
+
+  // Set default landmark on category change
   useEffect(() => {
-    if (activeCategory && activeCategory.locations && activeCategory.locations.length > 0) {
-      setSelectedLocationName(activeCategory.locations[0].name);
-    } else {
-      setSelectedLocationName(null);
+    if (currentCategory && currentCategory.locations && currentCategory.locations.length > 0) {
+      setSelectedLocationName(currentCategory.locations[0].name);
     }
-  }, [activeIndex]);
+  }, [activeCatIndex, currentCategory]);
+
+  // 10-Second Auto-Rotation Timer with Progress Bar
+  useEffect(() => {
+    if (isTimerPaused) return; // Pause auto-rotation when user hovers the card or a map pin
+
+    const stepMs = 100;
+    const totalDurationMs = 10000; // 10 seconds per category
+    const increment = (stepMs / totalDurationMs) * 100;
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setActiveCatIndex((catIdx) => (catIdx + 1) % CATEGORIES.length);
+          return 0;
+        }
+        return prev + increment;
+      });
+    }, stepMs);
+
+    return () => clearInterval(interval);
+  }, [isTimerPaused]);
+
+  const handlePrevCategory = (e) => {
+    e.stopPropagation();
+    setProgress(0);
+    setActiveCatIndex((prev) => (prev - 1 + CATEGORIES.length) % CATEGORIES.length);
+  };
+
+  const handleNextCategory = (e) => {
+    e.stopPropagation();
+    setProgress(0);
+    setActiveCatIndex((prev) => (prev + 1) % CATEGORIES.length);
+  };
 
   const handleHoverLocation = (name) => {
     if (name) {
@@ -29,141 +89,136 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
     }
   };
 
-  // Autoplay loop: cycle through all 4 categories (Main Junctions + 3 others) every 5 seconds
-  useEffect(() => {
-    if (isHovered || userInteracted) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % CATEGORIES.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [isHovered, userInteracted]);
-
-  const scrollLeft = () => {
-    setUserInteracted(true);
-    setActiveIndex((prev) => (prev - 1 + CATEGORIES.length) % CATEGORIES.length);
-  };
-
-  const scrollRight = () => {
-    setUserInteracted(true);
-    setActiveIndex((prev) => (prev + 1) % CATEGORIES.length);
-  };
-
   return (
-    <section className="loc-advantage">
-      {/* Corner Bird Decor */}
-
-
-      <div className="loc-advantage__container">
-        {/* Section Center Headline */}
-        <ScrollReveal animation="fadeUp" delay={0.05} className="loc-advantage__header-center">
-          <h2 className="section-title loc-advantage__center-title">
-            Connectivity meets exclusivity.
+    <section className="loc-advantage-hero-section">
+      
+      {/* Clean Header */}
+      <div className="loc-advantage-header-container">
+        <ScrollReveal animation="fadeUp" delay={0.15} className="loc-advantage-header-block">
+          <h2 className="section-title loc-advantage-main-title">
+            Connectivity Meets <span>Exclusivity</span>
           </h2>
         </ScrollReveal>
+      </div>
 
-        <div className="loc-advantage__grid">
+      {/* ── 100% EDGE-TO-EDGE FULL-WIDTH HERO MAP CANVAS ── */}
+      <div className="loc-advantage-fullwidth-map-shell">
+        
+        <div className="loc-advantage-map-viewport">
+          
+          {/* Full Width Map Component */}
+          <ProjectMap 
+            activeCategory={currentCategory} 
+            projectCoords={defaultCoords} 
+            projectName={projectName}
+            activeLocationName={selectedLocationName}
+            onHoverLocation={handleHoverLocation}
+            onPinHoverChange={setIsPinHovered}
+            mapStyle="streets-v12"
+          />
 
-          {/* Column 1: Static Intro & Timeline Card */}
-          <div className="loc-advantage__intro">
-            {/* Viewport for timeline carousel cards */}
-            <ScrollReveal className="loc-advantage__viewport" animation="fadeUp" delay={0.15}>
-              <div
-                className="loc-advantage__slideable-track"
-                style={{ transform: `translateX(calc(-${activeIndex * 100}% - ${activeIndex * 80}px))` }}
-              >
-                {CATEGORIES.map((cat) => (
-                  <div key={cat.id} className="loc-advantage__slide-card">
-                    <h4 className="loc-advantage__slide-card-title loc-advantage__slideable-title">{cat.label}</h4>
-
-                    <div className="loc-advantage__timeline">
-                      <div className="loc-advantage__line-track" />
-                      {cat.locations.map((item, idx) => {
-                        const isActiveLocation = item.name === selectedLocationName;
-                        return (
-                          <div 
-                            key={idx} 
-                            className={`loc-advantage__item ${isActiveLocation ? 'active' : ''}`}
-                            onMouseEnter={() => handleHoverLocation(item.name)}
-                          >
-                            <div className="loc-advantage__node-box">
-                              <span className="loc-advantage__dist">{item.dist}</span>
-                              <div className="loc-advantage__dot">
-                                <div className="loc-advantage__dot-pulse" />
-                              </div>
-                            </div>
-                            <div className="loc-advantage__details">
-                              <span className="loc-advantage__name">{item.name}</span>
-                              <span className="loc-advantage__subname">
-                                {cat.id === 'junctions' ? 'Direct Connectivity' : 'Access Point'}
-                              </span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-
-            {/* Carousel progress dots indicators */}
-            <div className="loc-advantage__carousel-dots">
-              {CATEGORIES.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={`slider-dot ${idx === activeIndex ? 'active' : ''}`}
-                  onClick={() => {
-                    setUserInteracted(true);
-                    setActiveIndex(idx);
-                  }}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Column 2: Location Header and Visual Swapping Image */}
-          <ScrollReveal
-            animation="fadeUp"
-            delay={0.35}
-            className="loc-advantage__carousel-section"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+          {/* ── CLEAN LIGHT FLOATING CARD (DEFAULT CLOSED ON MOBILE, OPEN ON DESKTOP) ── */}
+          <div 
+            className={`map-floating-drawer-card ${isMobileExpanded ? 'is-mobile-expanded' : 'is-mobile-collapsed'}`}
+            onMouseEnter={() => setIsCardHovered(true)}
+            onMouseLeave={() => setIsCardHovered(false)}
           >
-            <div className="loc-advantage__slideable-header">
-              <h3 className="loc-advantage__slideable-title">Location Advantages</h3>
-              <div className="loc-advantage__arrows" style={{ display: 'flex', gap: '12px' }}>
-                <button
-                  className="slider-arrow"
-                  onClick={scrollLeft}
-                  aria-label="Slide Left"
-                >
-                  <ArrowLeft size={18} strokeWidth={1.5} />
-                </button>
-                <button
-                  className="slider-arrow"
-                  onClick={scrollRight}
-                  aria-label="Slide Right"
-                >
-                  <ArrowRight size={18} strokeWidth={1.5} />
-                </button>
-              </div>
-            </div>
-
-            {/* Project Map Container */}
-            <div className="loc-advantage__map-wrapper">
-              <ProjectMap 
-                activeCategory={activeCategory} 
-                projectCoords={projectCoords} 
-                projectName={projectName}
-                activeLocationName={selectedLocationName}
-                onHoverLocation={(name) => handleHoverLocation(name)}
-                onInteraction={() => setUserInteracted(true)}
+            {/* 10s Timer Animated Progress Bar */}
+            <div className="drawer-progress-track">
+              <div 
+                className="drawer-progress-bar" 
+                style={{ width: `${progress}%` }} 
               />
             </div>
-          </ScrollReveal>
+
+            {/* Header Bar with Slide Arrows & Toggle */}
+            <div 
+              className="floating-drawer-header"
+              onClick={() => setIsMobileExpanded(prev => !prev)}
+            >
+              <div className="drawer-header-left">
+                <div className="drawer-cat-icon-badge">
+                  {getCategoryIcon(currentCategory.id, 16)}
+                </div>
+                <div className="drawer-header-text">
+                  <h3 className="drawer-title">{currentCategory.label}</h3>
+                </div>
+              </div>
+
+              <div className="drawer-header-right">
+                {/* Previous & Next Slide Arrows */}
+                <div className="drawer-arrows-group">
+                  <button 
+                    className="drawer-arrow-btn" 
+                    onClick={handlePrevCategory}
+                    aria-label="Previous Category"
+                    title="Previous Category"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button 
+                    className="drawer-arrow-btn" 
+                    onClick={handleNextCategory}
+                    aria-label="Next Category"
+                    title="Next Category"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+
+                <span className="drawer-poi-count-badge">
+                  {currentCategory.locations.length} Places
+                </span>
+
+                {/* Mobile Expand / Collapse Chevron */}
+                <button 
+                  className="drawer-mobile-toggle-btn"
+                  aria-label={isMobileExpanded ? "Collapse List" : "Expand List"}
+                >
+                  {isMobileExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                </button>
+              </div>
+            </div>
+
+            {/* Expandable Content Body */}
+            <div className="floating-drawer-body">
+              
+              {/* Timeline Landmarks List with Distances */}
+              <div className="drawer-landmarks-list-scroll">
+                <div className="drawer-timeline-container">
+                  <div className="drawer-timeline-line" />
+                  
+                  {currentCategory.locations.map((loc, idx) => {
+                    const isSelected = loc.name === selectedLocationName;
+                    return (
+                      <div
+                        key={idx}
+                        className={`drawer-landmark-item ${isSelected ? 'active-highlight' : ''}`}
+                        onMouseEnter={() => handleHoverLocation(loc.name)}
+                        onClick={() => handleHoverLocation(loc.name)}
+                      >
+                        <div className="landmark-node-box">
+                          <span className="landmark-distance-tag">{loc.dist}</span>
+                          <div className="landmark-dot-pulse">
+                            <div className="landmark-dot-center" />
+                          </div>
+                        </div>
+
+                        <div className="landmark-info-box">
+                          <span className="landmark-name">{loc.name}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
 
         </div>
+
       </div>
     </section>
   );

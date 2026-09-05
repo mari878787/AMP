@@ -25,7 +25,7 @@ export default function WhyProject({
       <div className="why-project-grid">
         
         {/* Left Column: Collage Image */}
-        <ScrollReveal className="why-project-media" animation="fadeLeft" as="div">
+        <ScrollReveal className="why-project-media" animation="fadeLeft" delay={0.1} as="div">
           <img
             src={imageSrc}
             alt={`${projectName} Gated Entrance`}
@@ -34,7 +34,7 @@ export default function WhyProject({
         </ScrollReveal>
 
         {/* Right Column: Content */}
-        <ScrollReveal className="why-project-content" animation="fadeUp" delay={0.15} as="div">
+        <ScrollReveal className="why-project-content" animation="fadeUp" delay={0.25} as="div">
           <div className="why-project-content-wrapper">
             <h2 className="section-title">
               WHY {firstWord}<br />{remainingWords}

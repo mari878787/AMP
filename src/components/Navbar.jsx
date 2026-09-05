@@ -7,7 +7,7 @@ const CATEGORIES = [
     name: 'Villas',
     img: '/images/project/CML/master-banner.png',
     projects: [
-      { id: 'crystal-moonlight', name: 'Crystal Moonlight Villas', location: 'Medavakkam, Chennai', img: '/images/project/CML/master-banner.png', url: '/crystal-moonlight-villa' },
+      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/master-banner.png', url: '/crystal-moonlight-villa' },
       { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai', img: '/images/home/project-image-2.png', url: '/crystal-moonlight-villa' }
     ]
   },
@@ -16,7 +16,7 @@ const CATEGORIES = [
     name: 'Apartments',
     img: '/images/project_crystal_1779810838661.png',
     projects: [
-      { id: 'pasha-pinnacle', name: 'Pasha Pinnacle', location: 'Royapettah, Chennai', img: '/images/project_crystal_1779810838661.png', url: '/crystal-moonlight-villa' }
+      { id: 'pasha-pinnacle', name: 'Pasha Pinnacle', location: 'Royapettah, Chennai', img: '/images/project_crystal_1779810838661.png', url: '/pasha-pinnacle' }
     ]
   },
   {
@@ -43,8 +43,8 @@ export default function Navbar({ darkText = false }) {
 
   // Extract all projects for searching
   const allProjectsFlat = CATEGORIES.flatMap(cat => cat.projects);
-  const searchResults = searchQuery.trim() === '' ? [] : allProjectsFlat.filter(p => 
-    p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+  const searchResults = searchQuery.trim() === '' ? [] : allProjectsFlat.filter(p =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     (p.location && p.location.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
@@ -134,11 +134,11 @@ export default function Navbar({ darkText = false }) {
 
           {/* Center Logo */}
           <a href="/" className="nav-logo-container" style={{ textDecoration: 'none' }}>
-            <img 
-              src={(isSearchOpen || (darkText && !scrolled && !megaMenuOpen)) ? "/images/black-logo.png" : "/images/white-logo.png"} 
-              alt="Aadhithya Mohan Properties" 
-              className="nav-logo-img" 
-              style={{ height: '34px', width: 'auto', objectFit: 'contain', transition: 'all 0.3s ease' }} 
+            <img
+              src={(isSearchOpen || (darkText && !scrolled && !megaMenuOpen)) ? "/images/black-logo.png" : "/images/white-logo.png"}
+              alt="Aadhithya Mohan Properties"
+              className="nav-logo-img"
+              style={{ height: '44px', width: 'auto', objectFit: 'contain', transition: 'all 0.3s ease' }}
             />
           </a>
 
@@ -175,7 +175,7 @@ export default function Navbar({ darkText = false }) {
           {/* Column 1: Categories */}
           <div
             className="mega-categories"
-            style={{ borderRight: activeCategory ? '1px solid rgba(0,0,0,0.08)' : 'none' }}
+            style={{ borderRight: activeCategory ? '1px solid rgba(0,0,0,0.2)' : 'none' }}
           >
             <div className="mega-column-title">CATEGORIES</div>
             {CATEGORIES.map(cat => (
@@ -235,25 +235,8 @@ export default function Navbar({ darkText = false }) {
         </div>
       </div>
 
-      {/* â”€â”€ Mobile Navigation Drawer Overlay â”€â”€ */}
+      {/* ── Mobile Navigation Drawer Overlay ── */}
       <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'is-open' : ''}`}>
-        <div className="mobile-nav-drawer-header">
-          {/* Brand Logo inside mobile drawer */}
-          <img
-            src="/images/logo.png"
-            alt="Brand Logo"
-            className="mobile-drawer-logo"
-          />
-          {/* Header containing X close button */}
-          <button
-            className="mobile-drawer-close"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-label="Close menu"
-          >
-            <X size={28} />
-          </button>
-        </div>
-
         <nav className="mobile-nav-menu">
 
           {/* Link: ABOUT US */}
@@ -339,25 +322,25 @@ export default function Navbar({ darkText = false }) {
         <div className="search-container">
           <div className="search-input-wrapper">
             <Search size={32} className="search-input-icon" />
-            <input 
-              type="text" 
-              className="search-input" 
-              placeholder="Search projects, locations..." 
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search projects, locations..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               autoFocus={isSearchOpen}
             />
           </div>
-          
+
           <div className="search-results">
             {searchQuery.trim() !== '' && searchResults.length === 0 && (
               <div className="search-no-results">No projects found for "{searchQuery}"</div>
             )}
             {searchResults.map((proj, idx) => (
-              <a 
-                href={proj.url || '/crystal-moonlight-villa'} 
-                className="search-result-item" 
-                key={proj.id} 
+              <a
+                href={proj.url || '/crystal-moonlight-villa'}
+                className="search-result-item"
+                key={proj.id}
                 onClick={() => setIsSearchOpen(false)}
                 style={{ animationDelay: `${idx * 0.05}s` }}
               >
@@ -385,18 +368,29 @@ export default function Navbar({ darkText = false }) {
           width: 100%;
           height: 60px;
           z-index: 99999;
-          // background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+          background: linear-gradient(180deg, rgba(10, 10, 10, 0.65) 0%, rgba(20, 20, 20, 0.3) 60%, transparent 100%);
           transition: all 0.4s ease;
         }
 
-        .sobha-navbar.mobile-open{
-          background: transparent !important;
+        .sobha-navbar.mobile-open {
+          background: 
+            linear-gradient(180deg, rgb(39 39 39 / 92%) 0%, rgb(0 0 0 / 70%) 38%, rgb(0 0 0 / 80%) 50%, rgb(0 0 0 / 95%) 100%), linear-gradient(115deg, rgb(11 11 11) 0%, rgb(14 14 14 / 80%) 35%, rgb(0 0 0 / 92%) 50%, rgb(8 8 8 / 80%) 65%, rgb(33 34 35 / 73%) 100%) !important;
+          -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(108%) !important;
+          backdrop-filter: blur(24px) saturate(200%) brightness(108%) !important;
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 12px 35px rgba(0, 0, 0, 0.35) !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sobha-navbar.mobile-open .text-logo-wrapper,
+        .sobha-navbar.mobile-open .icon-button {
+          color: #ffffff !important;
         }
 
         .sobha-navbar.is-scrolled, .sobha-navbar.mega-open {
-          background: rgba(30, 30, 30, 0.54) !important;
-          backdrop-filter: blur(30px) saturate(180%) !important;
-          -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+          background: 
+            linear-gradient(180deg, rgb(39 39 39 / 86%) 0%, rgb(0 0 0 / 41%) 38%, rgb(0 0 0 / 49%) 50%, rgb(0 0 0 / 82%) 100%), linear-gradient(115deg, rgb(11 11 11) 0%, rgb(14 14 14 / 80%) 35%, rgb(0 0 0 / 92%) 50%, rgb(8 8 8 / 80%) 65%, rgb(33 34 35 / 73%) 100%) !important;
+          -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(108%) !important;
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 12px 35px rgba(0, 0, 0, 0.35) !important;
         }
 
         .sobha-navbar.dark-text:not(.is-scrolled):not(.mega-open) .nav-link,
@@ -556,7 +550,7 @@ export default function Navbar({ darkText = false }) {
           left: 50%;
           width: calc(100% - 80px);
           max-width: 1320px;
-          background: url("/images/hero_placeholders/chinese-city.jpg") left center / cover no-repeat;
+          background: url("/images/nav-villa.png") left center / cover no-repeat;
           opacity: 0;
           visibility: hidden;
           transform: translate(-50%, -10px);
@@ -575,9 +569,9 @@ export default function Navbar({ darkText = false }) {
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(25px) saturate(180%);
-          -webkit-backdrop-filter: blur(25px) saturate(180%);
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(15px) saturate(180%);
+          -webkit-backdrop-filter: blur(15px) saturate(180%);
           z-index: 1;
         }
 
@@ -604,17 +598,18 @@ export default function Navbar({ darkText = false }) {
           flex-direction: column;
           padding-top: 10px;
           padding-right: 30px;
-          border-right: 1px solid rgba(0,0,0,0.08);
+          border-right: 1px solid rgba(0, 0, 0, 0.2);
         }
 
         .mega-column-title {
+          font-family: var(--font-heading);
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 500;
           color: #000000ff;
           text-transform: uppercase;
           margin-bottom: 12px;
           padding-bottom: 12px;
-          border-bottom: 1px solid rgba(0,0,0,0.08);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
           letter-spacing: 0.08em;
         }
 
@@ -623,9 +618,9 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mega-category-item a {
-          font-family: var(--font-sans);
+          font-family: var(--font-heading);
           font-size: 13px;
-          font-weight: 400;
+          font-weight: 500;
           color: #000000ff;
           text-transform: uppercase;
           text-decoration: none;
@@ -633,16 +628,16 @@ export default function Navbar({ darkText = false }) {
           display: block;
           padding: 6px 0px;
           border-radius: 8px;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
         }
 
         .mega-category-item.active a, .mega-category-item:hover a {
-          color: #b48564; /* Brand accent color */
+          color: #b48564;
           transform: none;
         }
 
         .mega-project-item a {
-          font-family: var(--font-sans);
+          font-family: var(--font-heading);
           font-size: 13px;
           font-weight: 400;
           color: var(--color-text-dark);
@@ -652,20 +647,21 @@ export default function Navbar({ darkText = false }) {
           display: flex;
           flex-direction: column;
           padding: 6px 0;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
         }
 
         .mega-project-name {
           font-size: 13px;
-          font-weight: 400;
+          font-weight: 500;
           color: inherit;
           text-transform: uppercase;
         }
 
         .mega-project-location {
+        font-family: var(--font-sans);
           font-size: 10px;
-          font-weight: 400;
-          color: #888888;
+          font-weight: 300;
+          color: #232323ff;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           margin-top: 2px;
@@ -703,71 +699,58 @@ export default function Navbar({ darkText = false }) {
           to { opacity: 1; transform: scale(1); }
         }
 
-        /* â”€â”€ Mobile Drawer Panel (White Transparent/Glass Style) â”€â”€ */
+        /* ── Mobile Drawer Panel (Slides Top-to-Bottom below Sticky Header) ── */
         .mobile-nav-drawer {
           position: fixed;
-          top: 0;
+          top: 60px;
+          left: 0;
           right: 0;
           width: 100%;
-          max-width: 480px;
-          height: 100vh;
-          z-index: 99999;
-          background: rgba(255, 255, 255, 0.85); /* White transparent */
-          backdrop-filter: blur(25px) saturate(180%);
-          -webkit-backdrop-filter: blur(25px) saturate(180%);
-          border-left: 1px solid rgba(0, 0, 0, 0.05);
-          box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+          max-width: 100%;
+          height: calc(100vh - 60px);
+          height: calc(100dvh - 60px);
+          z-index: 99998;
+          background: url("/images/nav-villa.png") center / cover no-repeat;
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
           display: flex;
           flex-direction: column;
-          transform: translateX(100%);
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          transform: translateY(-100%);
+          opacity: 0;
+          visibility: hidden;
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.4s;
+          overflow: hidden;
+        }
+
+        .mobile-nav-drawer::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(15px) saturate(180%);
+          -webkit-backdrop-filter: blur(15px) saturate(180%);
+          z-index: 1;
         }
 
         .mobile-nav-drawer.is-open {
-          transform: translateX(0);
-        }
-
-        .mobile-nav-drawer-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px 40px;
-          height: 60px;
-        }
-
-        .mobile-drawer-logo {
-          height: 32px;
-          width: auto;
-          object-fit: contain;
-        }
-
-        .mobile-drawer-close {
-          background: none;
-          border: none;
-          color: #000000;
-          cursor: pointer;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: opacity 0.3s ease;
-        }
-
-        .mobile-drawer-close:hover {
-          opacity: 0.6;
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
         }
 
         .mobile-nav-menu {
+          position: relative;
+          z-index: 2;
           flex: 1;
           overflow-y: auto;
-          padding: 20px 40px 60px;
+          padding: 28px 24px 60px;
           display: flex;
           flex-direction: column;
           gap: 24px;
         }
 
         .mobile-nav-item-wrapper {
-          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.12);
           padding-bottom: 16px;
         }
 
@@ -781,11 +764,11 @@ export default function Navbar({ darkText = false }) {
         .mobile-nav-main-link {
           font-family: var(--font-sans);
           font-size: 16px;
-          font-weight: 400;
+          font-weight: 500;
           color: #000000;
           text-transform: uppercase;
           text-decoration: none;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
           display: block;
         }
 
@@ -812,18 +795,18 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mobile-sub-menu.is-expanded {
-          max-height: 250px;
+          max-height: 350px;
           margin-top: 16px;
         }
 
         .mobile-sub-link {
-          font-family: var(--font-sans);
-          font-size: 13px;
-          font-weight: 400;
-          color: #444444;
+          font-family: var(--font-heading);
+          font-size: 16px;
+          font-weight: 500;
+          color: #222222;
           text-transform: uppercase;
           text-decoration: none;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.08em;
           padding: 4px 0;
           transition: color 0.3s ease;
         }
@@ -832,7 +815,7 @@ export default function Navbar({ darkText = false }) {
           color: #b48564;
         }
 
-        /* â”€â”€ Nested Mobile Menu Category List styles â”€â”€ */
+        /* ── Nested Mobile Menu Category List styles ── */
         .mobile-category-group {
           margin-bottom: 8px;
         }
@@ -843,28 +826,28 @@ export default function Navbar({ darkText = false }) {
           align-items: center;
           cursor: pointer;
           padding: 6px 0;
-          border-bottom: 1px solid rgba(0,0,0,0.03);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .mobile-category-title {
-          font-family: var(--font-sans);
-          font-size: 13px;
-          font-weight: 400;
-          color: #333333;
+          font-family: var(--font-heading);
+          font-size: 16px;
+          font-weight: 500;
+          color: #000000;
           text-transform: uppercase;
           text-decoration: none;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.08em;
           padding: 4px 0;
           transition: color 0.3s ease;
         }
 
         .mobile-category-title.active {
-          color: var(--color-gold, #b48564);
+          color: #b48564;
         }
 
         .mobile-category-arrow {
           transition: transform 0.3s ease;
-          color: #666;
+          color: #444444;
         }
 
         .mobile-category-arrow.is-rotated {
@@ -888,12 +871,12 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mobile-project-link {
-          font-family: var(--font-sans);
-          font-size: 12px;
-          color: #555555;
+          font-family: var(--font-heading);
+          font-size: 13px;
+          color: #333333;
           text-decoration: none;
           text-transform: uppercase;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.08em;
           padding: 4px 0;
           display: flex;
           flex-direction: column;
@@ -901,47 +884,50 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mobile-project-name {
-          font-size: 12px;
+          font-size: 16px;
+          font-weight: 500;
           color: inherit;
         }
 
         .mobile-project-location {
-          font-size: 9px;
-          font-weight: 400;
-          color: #888888;
+          font-family: var(--font-sans);
+          font-size: 10px;
+          font-weight: 300;
+          color: #232323;
           text-transform: uppercase;
           letter-spacing: 0.06em;
-          margin-top: 1px;
+          margin-top: 2px;
         }
 
         .mobile-project-link:hover {
-          color: var(--color-gold, #b48564);
+          color: #b48564;
         }
 
         .mobile-all-projects-link {
-          font-weight: 400;
+          font-weight: 500;
           margin-top: 12px;
           display: block;
-          border-top: 1px solid rgba(0,0,0,0.06);
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
           padding-top: 12px;
+          color: #000000;
         }
 
-        /* â”€â”€ Mobile Social Links â”€â”€ */
+        /* ── Mobile Social Links ── */
         .mobile-social-links {
           margin-top: auto;
           display: flex;
           gap: 0;
           padding-top: 40px;
-          border-top: 1px solid rgba(0,0,0,0.05);
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .mobile-social-link {
           font-size: 11px;
-          font-weight: 400;
+          font-weight: 500;
           color: #000000;
           text-decoration: none;
           text-transform: uppercase;
-          font-family: var(--font-sans);
+          font-family: var(--font-heading);
           letter-spacing: 0.12em;
           border-right: 1px solid rgba(0, 0, 0, 0.15);
           padding: 0 16px;

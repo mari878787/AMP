@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Tooltip, useMap } from 'react-leaflet';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Tooltip, Circle, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -11,7 +11,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// Custom project marker icon (Gold home icon)
+// Custom project site marker icon (Gold home icon with pulse)
 const createProjectMarker = () => {
   return L.divIcon({
     className: 'custom-map-marker project-marker',
@@ -19,17 +19,17 @@ const createProjectMarker = () => {
       <div class="marker-pin-wrapper">
         <div class="marker-pin-pulse"></div>
         <div class="marker-pin-core">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
       </div>
     `,
-    iconSize: [46, 46],
-    iconAnchor: [23, 23],
-    popupAnchor: [0, -23]
+    iconSize: [52, 52],
+    iconAnchor: [26, 26],
+    popupAnchor: [0, -26]
   });
 };
 
-// Custom POI marker icon (Teardrop default location icon using inline SVG)
+// Custom POI marker icon (Teardrop landmark pin with category icon support)
 const createPoiMarker = (isHighlighted) => {
   return L.divIcon({
     className: `custom-map-marker poi-marker ${isHighlighted ? 'active-highlight' : ''}`,
@@ -42,53 +42,48 @@ const createPoiMarker = (isHighlighted) => {
         </svg>
       </div>
     `,
-    iconSize: [32, 40],
-    iconAnchor: [16, 40],
-    popupAnchor: [0, -36]
+    iconSize: [34, 42],
+    iconAnchor: [17, 42],
+    popupAnchor: [0, -38]
   });
 };
 
-// Helper component to auto-pan and zoom the map to fit all active markers
-function ChangeView({ center, markers, categoryId }) {
+// Component to dynamically fit/zoom map bounds strictly focusing on local category locations
+function ChangeView({ center, activeLocations, categoryId }) {
   const map = useMap();
-  const centerLat = center ? center[0] : 0;
-  const centerLng = center ? center[1] : 0;
 
   useEffect(() => {
     if (!map) return;
-    
-    // Force Leaflet to recalculate size and redraw missing tiles
-    const timer = setTimeout(() => {
-      map.invalidateSize();
-    }, 250);
+    map.invalidateSize();
 
-    if (markers && markers.length > 0) {
-      const bounds = L.latLngBounds([[centerLat, centerLng]]);
-      let hasCloseMarkers = false;
-
-      markers.forEach(m => {
-        // Only include markers that are within ~22km (0.2 degrees) of the project site
-        if (Math.abs(m.lat - centerLat) < 0.2 && Math.abs(m.lng - centerLng) < 0.2) {
-          bounds.extend([m.lat, m.lng]);
-          hasCloseMarkers = true;
+    // Collect all points for active category: Project Center + Landmarks
+    const points = [[center[0], center[1]]];
+    if (activeLocations && activeLocations.length > 0) {
+      activeLocations.forEach(loc => {
+        if (loc.lat && loc.lng) {
+          points.push([loc.lat, loc.lng]);
         }
       });
-
-      if (hasCloseMarkers) {
-        map.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 });
-      } else {
-        map.setView([centerLat, centerLng], 14);
-      }
-    } else {
-      map.setView([centerLat, centerLng], 14);
     }
 
-    return () => clearTimeout(timer);
-  }, [centerLat, centerLng, categoryId, map]);
+    if (points.length > 1) {
+      const bounds = L.latLngBounds(points);
+      // Tightly focus only on the neighborhood locations
+      map.fitBounds(bounds, {
+        padding: [45, 45],
+        maxZoom: 14.5,
+        animate: true,
+        duration: 1.0
+      });
+    } else {
+      map.flyTo(center, 13.6, { duration: 1.0 });
+    }
+  }, [categoryId, activeLocations, center, map]);
+
   return null;
 }
 
-// Helper component to detect user dragging or zooming the map
+// Interaction listener helper
 function InteractionDetector({ onInteraction }) {
   const map = useMap();
   useEffect(() => {
@@ -104,32 +99,166 @@ function InteractionDetector({ onInteraction }) {
   return null;
 }
 
-export default function ProjectMap({ activeCategory, projectCoords, projectName, activeLocationName, onHoverLocation, onInteraction }) {
-  // Fallback coordinates: Medavakkam, Chennai (approx 12.915566, 80.183492)
-  const centerCoords = projectCoords || [12.915566, 80.183492];
+export default function ProjectMap({ 
+  activeCategory, 
+  projectCoords, 
+  projectName, 
+  activeLocationName, 
+  onHoverLocation, 
+  onPinHoverChange,
+  onInteraction,
+  mapStyle = 'streets-v12'
+}) {
+  // Coordinates for Medavakkam/Santhosapuram Main Road, Chennai
+  const centerCoords = projectCoords || [12.9175, 80.1915];
   const activeLocations = activeCategory ? activeCategory.locations : [];
 
+  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
+
+  // Dynamic Route Coordinates between Project and Hovered Landmark
+  const [routeCoordinates, setRouteCoordinates] = useState(null);
+  const routeCacheRef = useRef({});
+
+  // Fetch real road route using Mapbox Driving Directions API
+  const fetchMapboxRoute = async (targetLoc) => {
+    if (!targetLoc || !targetLoc.lat || !targetLoc.lng) return null;
+    const startLng = centerCoords[1];
+    const startLat = centerCoords[0];
+    const endLng = targetLoc.lng;
+    const endLat = targetLoc.lat;
+    const cacheKey = `${startLat},${startLng}->${endLat},${endLng}`;
+
+    if (routeCacheRef.current[cacheKey]) {
+      return routeCacheRef.current[cacheKey];
+    }
+
+    const mapboxDirectionsUrl = `https://api.mapbox.com/directions/v5/mapbox/driving/${startLng},${startLat};${endLng},${endLat}?geometries=geojson&overview=full&access_token=${mapboxToken}`;
+
+    try {
+      const res = await fetch(mapboxDirectionsUrl);
+      const data = await res.json();
+      if (data && data.routes && data.routes[0] && data.routes[0].geometry) {
+        // Mapbox returns [lng, lat]; Leaflet requires [lat, lng]
+        const roadPoints = data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
+        routeCacheRef.current[cacheKey] = roadPoints;
+        return roadPoints;
+      }
+    } catch (err) {
+      console.warn("Mapbox routing fallback:", err);
+    }
+    return null;
+  };
+
+  // Pre-fetch routes for all locations in the active category
+  useEffect(() => {
+    if (!activeLocations || activeLocations.length === 0) return;
+    activeLocations.forEach(loc => {
+      fetchMapboxRoute(loc);
+    });
+  }, [activeLocations, centerCoords]);
+
+  // Set active route when hovered location changes
+  useEffect(() => {
+    if (!activeLocationName) {
+      setRouteCoordinates(null);
+      return;
+    }
+
+    const targetLoc = activeLocations.find(l => l.name === activeLocationName);
+    if (!targetLoc) {
+      setRouteCoordinates(null);
+      return;
+    }
+
+    const startLng = centerCoords[1];
+    const startLat = centerCoords[0];
+    const endLng = targetLoc.lng;
+    const endLat = targetLoc.lat;
+    const cacheKey = `${startLat},${startLng}->${endLat},${endLng}`;
+
+    if (routeCacheRef.current[cacheKey]) {
+      setRouteCoordinates(routeCacheRef.current[cacheKey]);
+    } else {
+      fetchMapboxRoute(targetLoc).then(points => {
+        if (points) setRouteCoordinates(points);
+      });
+    }
+  }, [activeLocationName, activeLocations, centerCoords]);
+
   return (
-    <div style={{ width: '100%', height: '100%', borderRadius: '8px', overflow: 'hidden' }}>
+    <div className="project-map-canvas-container">
       <MapContainer
         center={centerCoords}
-        zoom={14}
-        scrollWheelZoom={true}
-        style={{ width: '100%', height: '100%' }}
+        zoom={13.2}
+        minZoom={12}
+        scrollWheelZoom={false}
+        className="leaflet-hero-map"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`}
+          url={`https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/tiles/256/{z}/{x}/{y}?access_token=${mapboxToken}`}
           tileSize={256}
           zoomOffset={0}
           maxZoom={19}
         />
+
+        {/* Subtle Luxury Gold Radius Ring (3km) around Project */}
+        <Circle
+          center={centerCoords}
+          radius={3000}
+          pathOptions={{
+            color: '#b48564',
+            fillColor: '#b48564',
+            fillOpacity: 0.04,
+            weight: 1.5,
+            dashArray: '4, 8'
+          }}
+        />
+
+        {/* Animated Shortest Route Polyline when Hovering Location */}
+        {routeCoordinates && (
+          <>
+            {/* Outer Glow Route Path */}
+            <Polyline
+              positions={routeCoordinates}
+              pathOptions={{
+                color: '#b48564',
+                weight: 5,
+                opacity: 0.85,
+                lineCap: 'round',
+                lineJoin: 'round',
+                className: 'animated-route-glow'
+              }}
+            />
+            {/* Inner Animated Dashed Flow Line */}
+            <Polyline
+              positions={routeCoordinates}
+              pathOptions={{
+                color: '#ffffff',
+                weight: 2.5,
+                dashArray: '7, 14',
+                opacity: 0.95,
+                lineCap: 'round',
+                lineJoin: 'round',
+                className: 'animated-route-dash'
+              }}
+            />
+          </>
+        )}
         
         {/* Project Center Marker */}
-        <Marker position={centerCoords} icon={createProjectMarker()}>
-          <Tooltip direction="top" offset={[0, -22]}>
-            <div style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 'bold' }}>
-              {projectName || "Project Site"}
+        <Marker 
+          position={centerCoords} 
+          icon={createProjectMarker()}
+          eventHandlers={{
+            mouseover: () => onPinHoverChange && onPinHoverChange(true),
+            mouseout: () => onPinHoverChange && onPinHoverChange(false),
+          }}
+        >
+          <Tooltip direction="top" offset={[0, -26]} permanent={true}>
+            <div className="project-marker-tooltip">
+              <span className="project-marker-name">{projectName || "Crystal Moonlight"}</span>
+              <span className="project-marker-tag">PROJECT LOCATION</span>
             </div>
           </Tooltip>
         </Marker>
@@ -144,18 +273,25 @@ export default function ProjectMap({ activeCategory, projectCoords, projectName,
               position={[loc.lat, loc.lng]} 
               icon={createPoiMarker(isHighlighted)}
               eventHandlers={{
-                mouseover: () => onHoverLocation && onHoverLocation(loc.name),
+                mouseover: () => {
+                  onHoverLocation && onHoverLocation(loc.name);
+                  onPinHoverChange && onPinHoverChange(true);
+                },
+                mouseout: () => {
+                  onPinHoverChange && onPinHoverChange(false);
+                },
+                click: () => onHoverLocation && onHoverLocation(loc.name),
               }}
             >
               {isHighlighted && (
                 <Tooltip 
                   permanent={true}
                   direction="top" 
-                  offset={[0, -32]}
+                  offset={[0, -36]}
                 >
-                  <div style={{ fontFamily: 'var(--font-sans)', fontSize: '12px' }}>
-                    <strong>{loc.name}</strong><br />
-                    <span style={{ color: '#b48564', fontWeight: '500' }}>Distance: {loc.dist}</span>
+                  <div className="poi-marker-tooltip">
+                    <strong>{loc.name}</strong>
+                    <span className="poi-dist-badge">{loc.dist}</span>
                   </div>
                 </Tooltip>
               )}
@@ -165,7 +301,7 @@ export default function ProjectMap({ activeCategory, projectCoords, projectName,
 
         <ChangeView 
           center={centerCoords} 
-          markers={activeLocations} 
+          activeLocations={activeLocations} 
           categoryId={activeCategory ? activeCategory.id : ''} 
         />
         <InteractionDetector onInteraction={onInteraction} />

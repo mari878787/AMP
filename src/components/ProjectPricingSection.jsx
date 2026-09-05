@@ -11,7 +11,7 @@ const COUNTRY_CODES = [
 ];
 
 export default function ProjectPricingSection({
-  projectName = "Crystal Moonlight Villa",
+  projectName = "Crystal Moonlight",
   startingPrice = "INR 2.26 CR*",
   prices = [
     { label: '3 BHK Villa', val: 'INR 2.26 CR*' },
@@ -59,7 +59,7 @@ export default function ProjectPricingSection({
       <div className="pricing-wrapper">
 
         {/* Left Column: Title, Starting From Price & Channel Partner Details */}
-        <ScrollReveal className="pricing-info-col" animation="fadeUp" delay={0.05}>
+        <ScrollReveal className="pricing-info-col" animation="fadeUp" delay={0.15}>
           <span className="starting-prices-tag">
             {activeFormType === 'partner' ? 'PARTNERSHIP PROGRAM' : 'INVESTMENT & PRICING'}
           </span>
@@ -129,7 +129,7 @@ export default function ProjectPricingSection({
         </ScrollReveal>
 
         {/* Right Column: Interactive Form */}
-        <ScrollReveal className="pricing-form-col" animation="fadeLeft" delay={0.25}>
+        <ScrollReveal className="pricing-form-col" animation="fadeLeft" delay={0.35}>
           {success ? (
             <div className="success-card">
               <div className="success-icon">✓</div>

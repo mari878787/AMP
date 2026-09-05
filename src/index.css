@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import './components/StorySection/NeighbourhoodStory.css';
 
 /* 
    AMP — Global Design System
@@ -278,10 +279,17 @@ button {
   font-weight: 400;
 }
 
+@media (max-width: 768px) {
+  .filter-tab-btn {
+    font-size: 13px !important;
+    padding: 0 12px !important;
+  }
+}
+
 /* â”€â”€ Section Title — inherits h2 scale â”€â”€ */
 .section-title {
   font-family: var(--font-heading);
-  font-size: clamp(24px, 4vw, 48px);
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 400;
   line-height: 1.3;
   color: var(--color-text-dark);
@@ -499,6 +507,32 @@ h3 span,
   transform: translateX(3px);
 }
 
+.btn-discover {
+          display: inline-block;
+
+          font-size: 11px;
+          font-weight: 400;
+
+          color: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.47);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          padding: 14px 40px;
+          border-radius: 100px;
+          text-decoration: none;
+          backdrop-filter: blur(38px);
+          -webkit-backdrop-filter: blur(38px);
+          transition: all 0.4s ease;
+          opacity: 0;
+          animation: fadeUp 1.4s var(--ease-luxury) forwards;
+          animation-delay: 2.8s;
+        }
+        
+        .btn-discover:hover {
+          background: rgba(255, 255, 255, 0.3);
+          color: #fff;
+          border-color: rgba(255, 255, 255, 0.6);
+        }
+
 /* â”€â”€ Projects Tab Switcher (Liquid Glass) â”€â”€ */
 .projects-tabs-switcher {
   display: inline-flex !important;
@@ -698,7 +732,7 @@ html.lenis body {
    ────────────────────────────────────────────────── */
 
 /* Images */
-img:not(.avatar):not(.testimonial-avatar):not(.logo-img):not(.nav-logo):not(.flycatcher-icon):not([src*="logo"]),
+img:not(.avatar):not(.testimonial-avatar):not(.logo-img):not(.nav-logo):not(.flycatcher-icon):not(.spec-icon-img):not([src*="logo"]):not([src*="allProject"]):not([src*="icon"]):not(.icon-img),
 .project-img-wrap,
 .project-img,
 .blog-img-wrap,
@@ -723,6 +757,13 @@ img:not(.avatar):not(.testimonial-avatar):not(.logo-img):not(.nav-logo):not(.fly
 .media-container video,
 .project-card-image img {
   border-radius: 8px !important;
+}
+
+/* Ensure Spec Icons have 0 border-radius */
+.spec-icon-img,
+img.spec-icon-img,
+.ap-icon-spec img {
+  border-radius: 0px !important;
 }
 
 /* Cards & Card-like Containers */
