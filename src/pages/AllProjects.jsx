@@ -4,18 +4,23 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import Button from '../components/Button';
-import { ArrowRight, MapPin, Home, Layers, Tag, ChevronDown } from 'lucide-react';
+import { ArrowRight, MapPin, Home, Layers, Tag, ChevronDown, Map, Building2, Maximize, FileText } from 'lucide-react';
 
 const PROJECTS_DATA = [
   {
     id: 1,
-    title: 'Crystal Moonlight Villas',
+    title: 'Crystal Moonlight',
     location: 'Medavakkam, Chennai',
     category: 'Villas',
     status: 'Ongoing',
-    units: '3 & 4 BHK Luxury Villas',
-    area: '2,233 - 2,287 Sq.Ft.',
-    price: 'Price on Request',
+    siteExtent: '15 Acres',
+    totalUnits: '120 Units',
+    bhkConfig: '3 & 4 BHK',
+    unitSize: '2,233 - 2,287 Sq.Ft.',
+    reraNo: 'TN/29/Building/001/2024',
+    price: '₹1 Cr - ₹3 Cr',
+    priceRange: '₹1 Cr - ₹3 Cr',
+    bedrooms: ['3 BHK', '4 BHK'],
     image: '/images/project_crystal_1779810838661.png',
     link: '/crystal-moonlight-villa'
   },
@@ -25,9 +30,14 @@ const PROJECTS_DATA = [
     location: 'ECR, Chennai',
     category: 'Villas',
     status: 'Ongoing',
-    units: 'Bespoke Luxury Villas',
-    area: '3,000 - 4,500 Sq.Ft.',
-    price: 'Price on Request',
+    siteExtent: '5 Acres',
+    totalUnits: '42 Units',
+    bhkConfig: 'Bespoke',
+    unitSize: '3,000 - 4,500 Sq.Ft.',
+    reraNo: 'TN/01/Building/042/2023',
+    price: 'Above ₹3 Cr',
+    priceRange: 'Above ₹3 Cr',
+    bedrooms: ['Bespoke'],
     image: '/images/home/project-image-2.png',
     link: '/crystal-moonlight-villa'
   },
@@ -37,11 +47,16 @@ const PROJECTS_DATA = [
     location: 'Royapettah, Chennai',
     category: 'Apartments',
     status: 'Ongoing',
-    units: 'Premium Apartments',
-    area: '1,500 - 2,400 Sq.Ft.',
-    price: 'Price on Request',
+    siteExtent: '2.5 Acres',
+    totalUnits: '220 Units',
+    bhkConfig: '2 & 3 BHK',
+    unitSize: '1,500 - 2,400 Sq.Ft.',
+    reraNo: 'TN/29/Building/029/2024',
+    price: 'Under ₹1 Cr',
+    priceRange: 'Under ₹1 Cr',
+    bedrooms: ['2 BHK', '3 BHK'],
     image: '/images/project_crystal_1779810838661.png',
-    link: '/crystal-moonlight-villa'
+    link: '/pasha-pinnacle'
   },
   {
     id: 4,
@@ -49,9 +64,13 @@ const PROJECTS_DATA = [
     location: 'Maduranthakam, Chennai',
     category: 'Plots',
     status: 'Ongoing',
-    units: 'Villa Plots',
-    area: '1,200 - 2,400 Sq.Ft.',
-    price: 'Price on Request',
+    siteExtent: '20 Acres',
+    totalUnits: '450 Plots',
+    bhkConfig: 'Villa Plots',
+    unitSize: '1,200 - 2,400 Sq.Ft.',
+    reraNo: 'TN/01/Layout/105/2022',
+    price: 'Under ₹1 Cr',
+    priceRange: 'Under ₹1 Cr',
     image: '/images/home/project-image-2.png',
     link: '/ashok-nagar-villa-plots-in-maduranthakam'
   },
@@ -61,9 +80,13 @@ const PROJECTS_DATA = [
     location: 'Maduranthakam, Chennai',
     category: 'Plots',
     status: 'Ongoing',
-    units: 'Plots',
-    area: '800 - 2,000 Sq.Ft.',
-    price: 'Price on Request',
+    siteExtent: '45 Acres',
+    totalUnits: '800 Plots',
+    bhkConfig: 'Plots',
+    unitSize: '800 - 2,000 Sq.Ft.',
+    reraNo: 'TN/01/Layout/023/2023',
+    price: '₹1 Cr - ₹3 Cr',
+    priceRange: '₹1 Cr - ₹3 Cr',
     image: '/images/home/project-image-1.png',
     link: '/ashok-nagar-villa-plots-in-maduranthakam'
   },
@@ -73,9 +96,13 @@ const PROJECTS_DATA = [
     location: 'Chennai',
     category: 'Plots',
     status: 'Ongoing',
-    units: 'Residential Plots',
-    area: '600 - 1,800 Sq.Ft.',
-    price: 'Price on Request',
+    siteExtent: '15 Acres',
+    totalUnits: '320 Plots',
+    bhkConfig: 'Residential Plots',
+    unitSize: '600 - 1,800 Sq.Ft.',
+    reraNo: 'TN/01/Layout/044/2024',
+    price: 'Under ₹1 Cr',
+    priceRange: 'Under ₹1 Cr',
     image: '/images/home/project-image-1.png',
     link: '/ashok-nagar-villa-plots-in-maduranthakam'
   }
@@ -133,9 +160,13 @@ export default function AllProjects() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeStatus, setActiveStatus] = useState('All');
   const [activeLocation, setActiveLocation] = useState('All');
+  const [activePrice, setActivePrice] = useState('All');
+  const [activeBedrooms, setActiveBedrooms] = useState('All');
 
-  // Derive unique locations from project data
-  const locationOptions = ['All', ...Array.from(new Set(PROJECTS_DATA.map(p => p.location)))];
+  // Derive unique locations from project data (only for plots)
+  const locationOptions = ['All', ...Array.from(new Set(PROJECTS_DATA.filter(p => p.category === 'Plots').map(p => p.location)))];
+  const priceOptions = ['All', 'Under ₹1 Cr', '₹1 Cr - ₹3 Cr', 'Above ₹3 Cr', 'Price on Request'];
+  const bedroomOptions = ['All', '2 BHK', '3 BHK', '4 BHK', 'Bespoke'];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -152,12 +183,20 @@ export default function AllProjects() {
   const filteredProjects = PROJECTS_DATA.filter(project => {
     const matchCategory = activeCategory === 'All' || project.category === activeCategory;
     const matchStatus = activeStatus === 'All' || project.status === activeStatus;
-    const matchLocation = activeLocation === 'All' || project.location === activeLocation;
-    return matchCategory && matchStatus && matchLocation;
+    const matchPrice = activePrice === 'All' || project.priceRange === activePrice;
+
+    let matchDynamic = true;
+    if (activeCategory === 'Plots') {
+      matchDynamic = activeLocation === 'All' || project.location === activeLocation;
+    } else {
+      matchDynamic = activeBedrooms === 'All' || (project.bedrooms && project.bedrooms.includes(activeBedrooms));
+    }
+
+    return matchCategory && matchStatus && matchPrice && matchDynamic;
   });
 
   return (
-    <div className="all-projects-page" style={{ backgroundColor: 'var(--color-bg-light)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="all-projects-page" style={{ backgroundColor: 'var(--color-white)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar theme="dark" />
 
       <main style={{ flexGrow: 1, paddingBottom: '100px' }}>
@@ -193,26 +232,43 @@ export default function AllProjects() {
 
               {/* Category Dropdown */}
               <FilterDropdown
-                label="Category"
+                label="Property Type"
                 options={['All', 'Villas', 'Apartments', 'Plots']}
                 value={activeCategory}
                 onChange={setActiveCategory}
               />
 
-              {/* Location Dropdown */}
-              <FilterDropdown
-                label="Location"
-                options={locationOptions}
-                value={activeLocation}
-                onChange={setActiveLocation}
-              />
+              {/* Dynamic Dropdown: Bedrooms or Location */}
+              {activeCategory === 'Plots' ? (
+                <FilterDropdown
+                  label="Location"
+                  options={locationOptions}
+                  value={activeLocation}
+                  onChange={setActiveLocation}
+                />
+              ) : (
+                <FilterDropdown
+                  label="Bedrooms"
+                  options={bedroomOptions}
+                  value={activeBedrooms}
+                  onChange={setActiveBedrooms}
+                />
+              )}
 
               {/* Status Dropdown */}
               <FilterDropdown
-                label="Status"
+                label="Project Status"
                 options={['All', 'Ongoing', 'Completed']}
                 value={activeStatus}
                 onChange={setActiveStatus}
+              />
+
+              {/* Price Dropdown */}
+              <FilterDropdown
+                label="Price"
+                options={priceOptions}
+                value={activePrice}
+                onChange={setActivePrice}
               />
 
             </div>
@@ -221,10 +277,10 @@ export default function AllProjects() {
           {/* Results Count */}
           <div className="projects-count-bar">
             <span>Showing <strong>{filteredProjects.length}</strong> {filteredProjects.length === 1 ? 'Project' : 'Projects'}</span>
-            {(activeCategory !== 'All' || activeStatus !== 'All' || activeLocation !== 'All') && (
+            {(activeCategory !== 'All' || activeStatus !== 'All' || activeLocation !== 'All' || activePrice !== 'All' || activeBedrooms !== 'All') && (
               <button
                 className="clear-filter-text-btn"
-                onClick={() => { setActiveCategory('All'); setActiveStatus('All'); setActiveLocation('All'); }}
+                onClick={() => { setActiveCategory('All'); setActiveStatus('All'); setActiveLocation('All'); setActivePrice('All'); setActiveBedrooms('All'); }}
               >
                 Reset Filters
               </button>
@@ -253,39 +309,127 @@ export default function AllProjects() {
 
                         {/* Bottom Structured Information Overlay */}
                         <div className="ap-overlay-box">
-                          {/* Title & Location */}
+                          {/* Title, Sub-Location & Price with RERA */}
                           <div className="ap-header-row">
-                            <h3 className="ap-project-title">{project.title}</h3>
-                            <div className="ap-location-tag">
-                              <MapPin size={14} className="ap-pin-icon" />
-                              <span>{project.location}</span>
+                            <div className="ap-title-location-group">
+                              <h3 className="ap-project-title">{project.title}</h3>
+                              <div className="ap-location-subtext">
+                                <MapPin size={13} className="ap-pin-icon" />
+                                <span>{project.location}</span>
+                              </div>
+                            </div>
+                            <div className="ap-price-rera-group">
+                              <span className="ap-price-value">{project.priceRange || project.price}</span>
                             </div>
                           </div>
 
-                          {/* Structured Information Grid */}
-                          <div className="ap-info-specs-grid">
-                            <div className="ap-spec-col">
-                              <span className="spec-label">Configuration</span>
-                              <span className="spec-value">{project.units}</span>
-                            </div>
-                            <div className="ap-spec-divider"></div>
-                            <div className="ap-spec-col">
-                              <span className="spec-label">Area</span>
-                              <span className="spec-value">{project.area}</span>
-                            </div>
-                            <div className="ap-spec-divider"></div>
-                            <div className="ap-spec-col">
-                              <span className="spec-label">Price</span>
-                              <span className="spec-value spec-price">{project.price}</span>
-                            </div>
-                          </div>
+                          {/* Horizontal Thin Line */}
+                          <div style={{ width: '100%', height: '.5px', backgroundColor: 'rgba(255, 255, 255, 0.15)', marginTop: '-4px', marginBottom: '2px' }}></div>
 
-                          {/* Action Link */}
-                          <div className="ap-action-row">
-                            <span className="ap-discover-btn">
-                              EXPLORE DETAILS
-                              <ArrowRight size={15} className="ap-arrow" />
-                            </span>
+                          {/* Structured Information Grid - Icon Format (3-col + 2-col) */}
+                          {/* Structured Information Grid - Icon Format (3-col + 2-col) */}
+                          <div className="ap-icon-specs-container" style={{ display: 'flex', flexDirection: 'column', gap: '22px', marginTop: '12px' }}>
+                            {/* First Row: 3 Columns (Configuration / Units / Size for Villas/Apts; Units / Extent / Size for Plots) */}
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                              {project.category === 'Plots' ? (
+                                <>
+                                  <div className="ap-icon-spec">
+                                    <img 
+                                      src="/images/allProject/plot-total-units.png" 
+                                      alt="Total Units" 
+                                      className="spec-icon-img" 
+                                    />
+                                    <div className="spec-text-group">
+                                      <span className="spec-label">Total Units</span>
+                                      <span className="spec-value">{project.totalUnits}</span>
+                                    </div>
+                                  </div>
+                                  <div className="ap-spec-divider"></div>
+                                  <div className="ap-icon-spec">
+                                    <img 
+                                      src="/images/allProject/site-extention.png" 
+                                      alt="Site Extent" 
+                                      className="spec-icon-img" 
+                                    />
+                                    <div className="spec-text-group">
+                                      <span className="spec-label">Site Extent</span>
+                                      <span className="spec-value">{project.siteExtent}</span>
+                                    </div>
+                                  </div>
+                                  <div className="ap-spec-divider"></div>
+                                  <div className="ap-icon-spec">
+                                    <img 
+                                      src="/images/allProject/unit-size.png" 
+                                      alt="Unit Size" 
+                                      className="spec-icon-img" 
+                                    />
+                                    <div className="spec-text-group">
+                                      <span className="spec-label">Unit Size</span>
+                                      <span className="spec-value">{project.unitSize}</span>
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  <div className="ap-icon-spec">
+                                    <img 
+                                      src="/images/allProject/Configuration.png" 
+                                      alt="Configuration" 
+                                      className="spec-icon-img" 
+                                    />
+                                    <div className="spec-text-group">
+                                      <span className="spec-label">Configuration</span>
+                                      <span className="spec-value">{project.bhkConfig}</span>
+                                    </div>
+                                  </div>
+                                  <div className="ap-spec-divider"></div>
+                                  <div className="ap-icon-spec">
+                                    <img 
+                                      src="/images/allProject/total-units.png" 
+                                      alt="Total Units" 
+                                      className="spec-icon-img" 
+                                    />
+                                    <div className="spec-text-group">
+                                      <span className="spec-label">Total Units</span>
+                                      <span className="spec-value">{project.totalUnits}</span>
+                                    </div>
+                                  </div>
+                                  <div className="ap-spec-divider"></div>
+                                  <div className="ap-icon-spec">
+                                    <img 
+                                      src="/images/allProject/unit-size.png" 
+                                      alt="Unit Size" 
+                                      className="spec-icon-img" 
+                                    />
+                                    <div className="spec-text-group">
+                                      <span className="spec-label">Unit Size</span>
+                                      <span className="spec-value">{project.unitSize}</span>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                            </div>
+
+                            {/* Second Row: RERA Number & Explore Project Outline Button */}
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                              <div className="ap-icon-spec">
+                                <img 
+                                  src="/images/allProject/rera.png" 
+                                  alt="RERA Number" 
+                                  className="spec-icon-img" 
+                                />
+                                <div className="spec-text-group">
+                                  <span className="spec-label">RERA Number</span>
+                                  <span className="spec-value">{project.reraNo}</span>
+                                </div>
+                              </div>
+                              <div className="ap-explore-outline-cell">
+                                <span className="ap-explore-outline-btn ">
+                                  EXPLORE PROJECT
+                                  <ArrowRight size={13} className="ap-arrow" />
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -318,13 +462,13 @@ export default function AllProjects() {
           align-items: flex-end;
           padding: 0 0 50px 0;
           margin-bottom: 60px;
-          background: url("/images/home/hero.png") center/cover no-repeat;
+          background: url("/images/about/CML ABOUT US.png") center/cover no-repeat;
         }
 
         .all-projects-hero-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.6) 100%);
+          background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.23) 100%);
         }
 
         .hero-tag-light {
@@ -341,7 +485,7 @@ export default function AllProjects() {
           font-family: var(--font-heading);
           font-size: clamp(36px, 5vw, 56px);
           font-weight: 400;
-          color: #ffffff;
+          color: #31302fd2;
           margin: 0 0 12px 0;
           line-height: 1.15;
         }
@@ -349,7 +493,7 @@ export default function AllProjects() {
         .hero-page-sub {
           font-family: var(--font-sans);
           font-size: clamp(15px, 2vw, 17px);
-          color: rgba(255, 255, 255, 0.85);
+          color: rgba(112, 91, 91, 0.77);
           max-width: 620px;
           margin: 0;
           line-height: 1.6;
@@ -422,13 +566,16 @@ export default function AllProjects() {
         .filter-dropdown-left {
           display: flex;
           flex-direction: column;
-          gap: 6px;
+          align-items: flex-start;
+          text-align: left;
+          gap: 12px;
         }
 
         .filter-dropdown-chevron {
           color: #888888;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
           flex-shrink: 0;
+          margin-top: 20px;
         }
 
         .filter-dropdown.is-open .filter-dropdown-chevron {
@@ -614,7 +761,7 @@ export default function AllProjects() {
           background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.8) 65%, transparent 100%);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
-          padding: 40px 24px 22px 24px;
+          padding: 20px 30px 30px;
           color: #ffffff;
           display: flex;
           flex-direction: column;
@@ -624,9 +771,15 @@ export default function AllProjects() {
         .ap-header-row {
           display: flex;
           justify-content: space-between;
-          align-items: flex-end;
-          gap: 12px;
-          flex-wrap: wrap;
+          align-items: center;
+          gap: 16px;
+          width: 100%;
+        }
+
+        .ap-title-location-group {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
         }
 
         .ap-project-title {
@@ -638,13 +791,42 @@ export default function AllProjects() {
           line-height: 1.2;
         }
 
-        .ap-location-tag {
+        .ap-location-subtext {
           display: flex;
           align-items: center;
-          gap: 6px;
-          color: rgba(255, 255, 255, 0.8);
+          gap: 5px;
+          color: rgba(255, 255, 255, 0.7);
           font-size: 13px;
           font-weight: 400;
+          font-family: var(--font-sans);
+          letter-spacing: 0.01em;
+        }
+
+        .ap-price-rera-group {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          justify-content: center;
+          text-align: right;
+          flex-shrink: 0;
+          gap: 3px;
+        }
+
+        .ap-price-value {
+          font-family: var(--font-heading);
+          font-size: 24px;
+          font-weight: 400;
+          color: #ffffff;
+          letter-spacing: -0.01em;
+          line-height: 1.1;
+        }
+
+        .ap-price-rera {
+          font-family: var(--font-sans);
+          font-size: 11px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.65);
+          letter-spacing: 0.03em;
         }
 
         .ap-pin-icon {
@@ -652,40 +834,51 @@ export default function AllProjects() {
           flex-shrink: 0;
         }
 
-        /* Specs Bar Grid */
-        .ap-info-specs-grid {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          background: rgba(255, 255, 255, 0.08);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          border-radius: 8px;
-          padding: 12px 18px;
-          gap: 12px;
+        /* Specs Icon Grid */
+        .ap-icon-specs-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px 16px;
+          margin-top: 4px;
         }
 
-        .ap-spec-col {
+        .ap-icon-spec {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .spec-icon-img {
+          width: 28px;
+          height: 28px;
+          object-fit: contain;
+          filter: brightness(0) invert(1) opacity(0.85);
+          flex-shrink: 0;
+          border-radius: 0px !important;
+        }
+
+        .spec-icon {
+          color: rgba(255, 255, 255, 0.6);
+          flex-shrink: 0;
+          stroke-width: 1.2;
+        }
+
+        .spec-text-group {
           display: flex;
           flex-direction: column;
-          gap: 3px;
-          flex: 1;
+          gap: 2px;
         }
 
         .spec-label {
           font-size: 10px;
-          font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          color: rgba(255, 255, 255, 0.6);
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.7);
         }
 
         .spec-value {
-          font-size: 13.5px;
-          font-weight: 500;
+          font-size: 14px;
+          font-weight: 400;
           color: #ffffff;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
 
         .spec-price {
@@ -694,33 +887,55 @@ export default function AllProjects() {
         }
 
         .ap-spec-divider {
-          width: 1px;
-          height: 28px;
-          background: rgba(255, 255, 255, 0.15);
+          width: 0.5px;
+          height: 24px;
+          background: rgba(255, 255, 255, 0.1);
+          flex-shrink: 0;
+          margin: 0 auto;
+        }
+
+        /* Outline Explore Project Button (in 2nd row) */
+        .ap-explore-outline-cell {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
           flex-shrink: 0;
         }
 
-        /* Action Row */
-        .ap-action-row {
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-        }
-
-        .ap-discover-btn {
-          font-size: 11.5px;
+        .ap-explore-outline-btn {
+          font-family: var(--font-sans);
+          font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.14em;
-          color: #ffffff;
+          text-transform: uppercase;
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          transition: gap 0.3s ease, color 0.3s ease;
+          gap: 8px;
+          color: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.47);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          padding: 10px 20px;
+          border-radius: 100px;
+          text-decoration: none;
+          backdrop-filter: blur(38px);
+          -webkit-backdrop-filter: blur(38px);
+          transition: all 0.4s ease;
+          white-space: nowrap;
         }
 
-        .ap-card:hover .ap-discover-btn {
+        .ap-card:hover .ap-explore-outline-btn {
+          background: rgba(180, 133, 100, 0.18);
+          border-color: #b48564;
           color: #d8b28f;
-          gap: 10px;
+          gap: 12px;
+        }
+
+        .ap-arrow {
+          transition: transform 0.3s ease;
+        }
+
+        .ap-card:hover .ap-arrow {
+          transform: translateX(3px);
         }
 
         .ap-arrow {

@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import Button from '../components/Button';
 import {
   MapPin, Compass, Shield, Zap, Home, Play,
   Layers, CheckCircle2, ArrowRight, Download,
   Maximize2, ChevronLeft, ChevronRight, X, Phone, Mail, User, Clock, ChevronDown, ChevronUp, LayoutGrid,
   ShoppingBag, Coffee, Cross, Stethoscope, CreditCard, Dumbbell, Activity, Gamepad2, Trees, Users, Baby, ShieldCheck, Video,
-  FileText, MessageCircle
+  FileText, MessageCircle, RotateCcw
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -13,81 +14,133 @@ import WhyProject from '../components/WhyProject';
 import ProjectSpecs from '../components/ProjectSpecs';
 import ScrollReveal from '../components/ScrollReveal';
 import NeighbourhoodStory from '../components/StorySection/NeighbourhoodStory';
+import ProjectDetailsGrid from '../components/ProjectDetailsGrid';
 import ProjectPricingSection from '../components/ProjectPricingSection';
-
 const VIDEO_SLIDES = [
   {
-    title: "Ashok Nagar Layout Tour",
+    title: "Gated Community Walkthrough",
     thumbnail: "/images/home/project-image-2.png",
     buttonLabel: "WALKTHROUGH",
-    url: "https://www.youtube.com/embed/l6EzZafb1Pk?autoplay=1&mute=1"
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
+  },
+  {
+    title: "Ultra-Luxury Interior Showcase",
+    thumbnail: "/images/project/CML/Interiors/cml-interior-01.jpg",
+    buttonLabel: "WALKTHROUGH",
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
+  },
+  {
+    title: "Medavakkam & Drone Aerial Tour",
+    thumbnail: "/images/home/project-image-1.png",
+    buttonLabel: "DROON",
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
   }
 ];
-
 const SPECIFICATIONS = [
   {
-    id: 'approvals',
-    label: 'Approvals & Titles',
+    id: 'structure',
+    label: 'Structure',
     index: '01',
-    title: 'APPROVALS & TITLES',
+    title: 'STRUCTURE',
     details: [
-      'DTCP Approved Residential Layout.',
-      'RERA Registered Project with clear market titles.',
-      'Approved plot layouts ready for immediate registration.'
+      'RCC Framed structure',
+      'A robust structural system made of Reinforced Cement Concrete (RCC) columns, beams, and slabs, designed to safely carry building loads and transfer them to the foundation. It provides strength, durability, stability, and flexibility in architectural planning.'
     ],
-    image: '/images/home/project-image-2.png'
+    image: '/images/project/spec-structure.png'
   },
   {
-    id: 'roads',
-    label: 'Internal Roads',
+    id: 'wall-finish',
+    label: 'Wall Finish',
     index: '02',
-    title: 'INTERNAL ROADS',
+    title: 'WALL FINISH',
     details: [
-      'Smooth, durable blacktop layout internal roads.',
-      'Well-paved sidewalks with concrete curbs.',
-      'Layout avenue trees along all streets.'
+      'Red Bricks',
+      'High-quality traditional masonry units made from natural clay, offering strength, durability, thermal insulation, and long-lasting performance. They provide a solid and reliable wall construction while giving the building a natural, timeless finish.'
     ],
-    image: '/images/home/project-image-2.png'
+    image: '/images/project/spec-structure.png'
   },
   {
-    id: 'utilities',
-    label: 'Electricity & Water',
+    id: 'floor-finish',
+    label: 'Floor Finish',
     index: '03',
-    title: 'ELECTRICITY & WATER',
+    title: 'FLOOR FINISH',
     details: [
-      'Underground electrical conduits laid up to each plot boundary.',
-      'Dedicated layout transformer and solar street lighting system.',
-      'Concealed water pipelines running to every individual plot inlet.'
+      'Vitrified Tiles',
+      'High-quality vitrified tiles providing a smooth, durable, low-maintenance, and elegant flooring finish. They offer excellent resistance to stains, moisture, and daily wear while enhancing the overall look of the interiors.'
     ],
-    image: '/images/home/project-image-2.png'
+    image: '/images/project/spec-structure.png'
   },
   {
-    id: 'drainage',
-    label: 'Stormwater Drains',
+    id: 'kitchen-dining',
+    label: 'Kitchen & Dining',
     index: '04',
-    title: 'STORMWATER DRAINS',
+    title: 'KITCHEN & DINING',
     details: [
-      'Reinforced concrete closed stormwater drains along both sides of the road.',
-      'Designed to prevent waterlogging during heavy monsoons.',
-      'Rainwater harvesting structures integrated.'
+      '20mm thick jet black granite top with stainless steel sink.',
+      '20mm thick jet black granite countertop with a durable stainless steel sink, offering a sleek, hygienic, easy-to-maintain, and elegant finish for the kitchen and dining space.'
     ],
-    image: '/images/home/project-image-2.png'
+    image: '/images/project/spec-structure.png'
   },
   {
-    id: 'gated-infrastructure',
-    label: 'Security & Compound',
+    id: 'bathroom',
+    label: 'Bathroom',
     index: '05',
-    title: 'SECURITY & COMPOUND',
+    title: 'BATHROOM',
     details: [
-      'Gated community layout entry with arch and secure boundary compound wall.',
-      'Dedicated security guard cabin at the main entrance gate.',
-      '24/7 smart CCTV surveillance of all common streets.'
+      'Jaguar / Equivalent sanitary fittings',
+      'Premium Jaguar or equivalent sanitary fittings, selected for durability, reliable performance, water efficiency, and a modern, elegant finish, ensuring comfort and functionality in every bathroom.'
     ],
-    image: '/images/home/project-image-2.png'
+    image: '/images/project/spec-structure.png'
+  },
+  {
+    id: 'joinery-windows',
+    label: 'Joinery & Windows',
+    index: '06',
+    title: 'JOINERY & WINDOWS',
+    details: [
+      'UPVC Windows',
+      'High-quality UPVC windows providing excellent durability, weather resistance, thermal insulation, and low maintenance, with a clean and modern appearance.'
+    ],
+    image: '/images/project/spec-structure.png'
+  },
+  {
+    id: 'internal-staircase',
+    label: 'Internal Staircases',
+    index: '07',
+    title: 'INTERNAL STAIRCASES ( VILLAS DUPLEX UNITS )',
+    details: [
+      'stainless steels hand rail',
+      'Elegant stainless steel handrails providing a sleek, modern appearance with excellent strength, durability, corrosion resistance, and low maintenance, ensuring safety and comfort along the staircase.'
+    ],
+    image: '/images/project/spec-structure.png'
+  },
+  {
+    id: 'electrical-points',
+    label: 'Electrical Points',
+    index: '08',
+    title: 'ELECTRICAL POINTS',
+    details: [
+      'Finolex brand wires / Anchor Switches',
+      'Electrical wiring using Finolex brand wires with Anchor switches, ensuring reliable electrical performance, safety, durability, and a quality finish throughout the villa.'
+    ],
+    image: '/images/project/spec-structure.png'
+  },
+  {
+    id: 'common-features',
+    label: 'Common Features',
+    index: '09',
+    title: 'COMMON FEATURES',
+    details: [
+      'Fujitech lift / Solar power for common area / Gym',
+      'Provision of a Fujitech lift, solar power for common areas, and a well-equipped gym, offering enhanced convenience, energy efficiency, comfort, and modern lifestyle amenities for residents.'
+    ],
+    image: '/images/project/spec-structure.png'
   }
 ];
+export default function PashaPinnacle() {
+  const location = useLocation();
+  const isPashaPinnacle = true;
 
-export default function PlottedDevelopment() {
   const [activeTab, setActiveTab] = useState('overview');
   const [activeSubSection, setActiveSubSection] = useState('highlights');
   const [showAllInteriors, setShowAllInteriors] = useState(false);
@@ -104,78 +157,81 @@ export default function PlottedDevelopment() {
     setActiveSubSection(whySubSections[nextIdx]);
   };
   const [lightboxSection, setLightboxSection] = useState('exteriors');
-  const [layoutCategory, setLayoutCategory] = useState('masterPlan'); // 'masterPlan', 'floorPlan', 'elevations'
-  const [floorPlanConfig, setFloorPlanConfig] = useState('smallPlots'); // 'smallPlots', 'largePlots'
+  const [layoutCategory, setLayoutCategory] = useState(isPashaPinnacle ? 'typicalFloorPlan' : 'masterPlan');
+  const [floorPlanConfig, setFloorPlanConfig] = useState('2bhk'); // '3bhk', '4bhk'
   const [activePlanId, setActivePlanId] = useState('planA');
+
+  useEffect(() => {
+    setLayoutCategory(isPashaPinnacle ? 'typicalFloorPlan' : 'masterPlan');
+  }, [isPashaPinnacle]);
 
   const layoutsData = {
     masterPlan: {
-      image: '/images/project/ashok-nagar/Web banner AN - 2.jpg (1).jpeg',
-      description: 'The DTCP approved layout map for the Ashok Nagar plotted development.'
+      image: '/images/project/CML/master-plan.png',
+      description: 'Master site layout for Pasha Pinnacle.'
+    },
+    typicalFloorPlan: {
+      image: '/images/project/CML/master-plan.png',
+      description: 'Typical architectural floor plan layout.'
     },
     floorPlan: {
-      'smallPlots': [
-        { id: 'planA', name: 'Premium Plot (657 - 1200 Sq.Ft.)', type: 'Residential Plot', builtUp: 'Ready to Construct', plot: '657 - 1,200 Sq.Ft.', facing: 'North & East Facing Available', image: '/images/home/project-image-2.png' },
+      '2bhk': [
+        { id: 'planA', name: 'Plan A (2 BHK)', type: '2 BHK', builtUp: '1,500 Sq.Ft.', plot: '1,100 Sq.Ft.', facing: 'North / East Facing', image: '/images/project/CML/floor-plan/PLAN A 30X42 NORTHFACE.jpg.jpeg' },
       ],
-      'largePlots': [
-        { id: 'planB', name: 'Executive Plot (1200 - 2400 Sq.Ft.)', type: 'Residential Plot', builtUp: 'Ready to Construct', plot: '1,200 - 2,400 Sq.Ft.', facing: 'All Facings Available', image: '/images/home/project-image-1.png' },
+      '3bhk': [
+        { id: 'planB', name: 'Plan B (3 BHK)', type: '3 BHK', builtUp: '2,400 Sq.Ft.', plot: '1,450 Sq.Ft.', facing: 'North / East Facing', image: "/images/project/CML/floor-plan/PLAN - B  30' X 48'  (North Facing )VILLA.jpg.jpeg" },
       ]
     },
-    elevations: {
-      image: '/images/project/ashok-nagar/Web banner AN - 2.jpg (1).jpeg',
-      description: 'Site layout plan and infrastructure views.'
+    walkthrough360: {
+      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1',
+      description: '360 Degree Virtual Walkthrough'
     }
   };
-
   const currentConfigPlans = layoutsData.floorPlan[floorPlanConfig] || [];
   const activePlanDetails = currentConfigPlans.find(p => p.id === activePlanId) || currentConfigPlans[0];
-
   const handlePrevPlan = () => {
     if (currentConfigPlans.length <= 1) return;
     const currIdx = currentConfigPlans.findIndex(p => p.id === activePlanId);
     const prevIdx = (currIdx - 1 + currentConfigPlans.length) % currentConfigPlans.length;
     setActivePlanId(currentConfigPlans[prevIdx].id);
   };
-
   const handleNextPlan = () => {
     if (currentConfigPlans.length <= 1) return;
     const currIdx = currentConfigPlans.findIndex(p => p.id === activePlanId);
     const nextIdx = (currIdx + 1) % currentConfigPlans.length;
     setActivePlanId(currentConfigPlans[nextIdx].id);
   };
-
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [floorplanLightbox, setFloorplanLightbox] = useState(null);
   const [lightboxIdx, setLightboxIdx] = useState(0);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activePillar, setActivePillar] = useState(0);
-
   const pillars = [
     {
       index: "01",
-      title: "DTCP & RERA Approved",
-      desc: "Ashok Nagar is a fully approved residential layout, assuring complete legal safety, transparent documentation, and immediate registrability for families and investors alike.",
-      image: "/images/home/project-image-2.png"
+      title: "Boutique by Design",
+      desc: "With only a limited collection of residences, Pasha Pinnacle offers a quieter and more intimate living experience. Thoughtfully planned spaces and a close-knit residential environment create the warmth, privacy, and comfort that define boutique living.",
+      image: "/images/project_crystal_1779810838661.png"
     },
     {
       index: "02",
-      title: "GST Road Proximity",
-      desc: "Located just 200 meters (2 minutes) from GST Road (NH-32) in Maduranthakam. Residents benefit from rapid transit connection to Tambaram, Chengalpattu, and central Chennai.",
-      image: "/images/home/project-image-1.png"
+      title: "Designed for Better Living",
+      desc: "Every residence has been carefully planned to maximise space, natural light, and cross ventilation while ensuring effortless functionality. Contemporary layouts and refined interiors create homes that are elegant, inviting, and perfectly suited to modern city living.",
+      image: "/images/villa_exterior_1779810861723.png"
     },
     {
       index: "03",
-      title: "Gated Infrastructure",
-      desc: "Equipped with smooth blacktop internal roads, underground electrical conduits, closed storm water drainage channels, water pipelines to each plot, and solar street lighting.",
-      image: "/images/home/project-image-2.png"
+      title: "An Address That Endures",
+      desc: "Exceptional homes derive their value from both their location and the life they offer. Combining a distinguished central address with enduring quality and thoughtful planning, Pasha Pinnacle is a home that continues to reward its owners for years to come.",
+      image: "/images/project/CML/Interiors/cml-interior-01.jpg"
     },
     {
       index: "04",
-      title: "High Growth Potential",
-      desc: "Maduranthakam is a rapidly emerging industrial and educational hub. Close proximity to colleges, hospitals, and corporate parks ensures high-yield capital appreciation.",
-      image: "/images/home/project-image-1.png"
+      title: "Privacy & Peace of Mind",
+      desc: "Gated luxury living with 24/7 smart surveillance, covered car parking, and dedicated community facilities.",
+      image: "/images/project/why-cmv.png"
     }
   ];
-
   const [statusMonthIdx, setStatusMonthIdx] = useState(0);
   const [activeVideoUrl, setActiveVideoUrl] = useState('https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1');
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
@@ -192,36 +248,49 @@ export default function PlottedDevelopment() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
-  const [quoteForm, setQuoteForm] = useState({ name: '', email: '', phone: '', note: '' });
+  const [quoteForm, setQuoteForm] = useState({
+    contactMode: 'callback',
+    firstName: '',
+    lastName: '',
+    phoneCode: '+91',
+    phone: '',
+    email: '',
+    config: '2 BHK Apartment',
+    privacy: false,
+    updates: false
+  });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [activeLandmarkIdx, setActiveLandmarkIdx] = useState(0);
-  const [galleryIndices, setGalleryIndices] = useState({ plots: 1, videos: 1 });
-  const [galleryTab, setGalleryTab] = useState('plots');
+  const [galleryIndices, setGalleryIndices] = useState({ exteriors: 1, interiors: 1, videos: 1 });
+  const [galleryTab, setGalleryTab] = useState('exteriors');
   const [isMobile, setIsMobile] = useState(false);
   const navContainerRef = useRef(null);
   const amenitiesListRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [amenityIdx, setAmenityIdx] = useState(0);
-
   const amenities = [
-    { image: "/images/home/project-image-2.png", icon: <i className="fa-solid fa-archway" style={{ fontSize: '13px' }}></i>, title: "Gated Community Entry", desc: "Premium and secure entry for all residents." },
-    { image: "/images/home/project-image-1.png", icon: <i className="fa-solid fa-solar-panel" style={{ fontSize: '13px' }}></i>, title: "Solar Street Lighting", desc: "Well-illuminated roads with solar-powered lights." },
-    { image: "/images/home/project-image-2.png", icon: <i className="fa-solid fa-tree" style={{ fontSize: '13px' }}></i>, title: "Avenue Trees", desc: "A healthy and serene lifestyle with lush greenery." },
-    { image: "/images/home/project-image-1.png", icon: <i className="fa-solid fa-shield-halved" style={{ fontSize: '13px' }}></i>, title: "24/7 Security", desc: "Safe and secure living environment." },
-    { image: "/images/home/project-image-2.png", icon: <i className="fa-solid fa-road" style={{ fontSize: '13px' }}></i>, title: "Blacktop Internal Roads", desc: "Smooth and durable internal roads." },
-    { image: "/images/home/project-image-1.png", icon: <i className="fa-solid fa-faucet-drip" style={{ fontSize: '13px' }}></i>, title: "Water Availability", desc: "Hassle-free water availability to each plot." },
-    { image: "/images/home/project-image-2.png", icon: <i className="fa-solid fa-video" style={{ fontSize: '13px' }}></i>, title: "CCTV Surveillance", desc: "24/7 smart CCTV surveillance of common areas." },
-    { image: "/images/home/project-image-1.png", icon: <i className="fa-solid fa-shield" style={{ fontSize: '13px' }}></i>, title: "Compound Wall", desc: "Secure boundary compound wall around the layout." }
+    { image: "/images/project/CML/amenities/18.png", icon: "/images/project/CML/amenities/icon/Security.png", title: "24*7 Security", desc: "Round-the-clock smart surveillance." },
+    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/CML/amenities/icon/Clubhouse.png", title: "Clubhouse", desc: "A massive, premium recreational space." },
+    { image: "/images/project/CML/amenities/16.png", icon: "/images/project/CML/amenities/icon/gym.png", title: "Gym", desc: "Fully equipped with modern fitness equipment." },
+    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/CML/amenities/icon/PartyHall.png", title: "Party Hall", desc: "Elegant space for events and gatherings." },
+    { image: "/images/project/CML/amenities/8.png", icon: "/images/project/CML/amenities/icon/Indoor Games.png", title: "Indoor Games", desc: "Dedicated area for indoor recreation." },
+    { image: "/images/project/CML/amenities/17.png", icon: "/images/project/CML/amenities/icon/yogaRoom.png", title: "Yoga Room", desc: "A tranquil space for wellness and meditation." },
+    { image: "/images/project/CML/amenities/4.png", icon: "/images/project/CML/amenities/icon/Play Area.png", title: "Play Area", desc: "Safe and fun play zones for children." },
+    { image: "/images/project/CML/amenities/2.png", icon: "/images/project/CML/amenities/icon/Solar Lighting.png", title: "Solar Lighting", desc: "Eco-friendly illumination." },
+    { image: "/images/project/CML/amenities/20.png", icon: "/images/project/CML/amenities/icon/DTH Connection.png", title: "DTH Connection", desc: "Ready connections for entertainment." },
+    { image: "/images/project/CML/amenities/11.png", icon: "/images/project/CML/amenities/icon/Rainwater Harvesting.png", title: "Rainwater Harvesting", desc: "As per CMWSSB Norms." },
+    { image: "/images/project/CML/amenities/12.png", icon: "/images/project/CML/amenities/icon/Coarse Paint.png", title: "Coarse Paint", desc: "Weather coarse paint on the terrace floor." },
+    { image: "/images/project/CML/amenities/3.png", icon: "/images/project/CML/amenities/icon/Anti-Termite.png", title: "Anti-Termite", desc: "Ensuring long-lasting protection." }
   ];
+  const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
 
   useEffect(() => {
+    if (!isAmenityAutoPlay) return;
     const interval = setInterval(() => {
       setAmenityIdx((prev) => (prev + 1) % amenities.length);
     }, 4500);
     return () => clearInterval(interval);
-  }, [amenities.length]);
-
+  }, [amenities.length, isAmenityAutoPlay]);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -230,7 +299,6 @@ export default function PlottedDevelopment() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   // Sliding indicator for sub-nav
   useEffect(() => {
     const updateIndicator = () => {
@@ -243,14 +311,12 @@ export default function PlottedDevelopment() {
       }
       const containerRect = container.getBoundingClientRect();
       const activeRect = activeLink.getBoundingClientRect();
-
       // Calculate position relative to container, adding scrollLeft to account for horizontal scrolling on mobile
       setIndicatorStyle({
         left: activeRect.left - containerRect.left + container.scrollLeft,
         width: activeRect.width,
         opacity: 1,
       });
-
       // Auto-scroll the active tab into view on mobile screens
       if (window.innerWidth < 900) {
         activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -259,13 +325,11 @@ export default function PlottedDevelopment() {
     // Small delay to let DOM update
     const timer = setTimeout(updateIndicator, 50);
     window.addEventListener('resize', updateIndicator);
-
     // Also update on scroll of the sub-nav itself (for mobile horizontal scroll)
     const container = navContainerRef.current;
     if (container) {
       container.addEventListener('scroll', updateIndicator);
     }
-
     return () => {
       clearTimeout(timer);
       window.removeEventListener('resize', updateIndicator);
@@ -274,10 +338,8 @@ export default function PlottedDevelopment() {
       }
     };
   }, [activeTab]);
-
   const [galleryAnim, setGalleryAnim] = useState({ exteriors: true, interiors: true, videos: true });
   const galleryTimer = useRef({ exteriors: null, interiors: null, videos: null });
-
   useEffect(() => {
     ['exteriors', 'interiors', 'videos'].forEach((section) => {
       if (!galleryImages[section]) return;
@@ -286,7 +348,6 @@ export default function PlottedDevelopment() {
       const idx = galleryIndices[section];
 
       clearTimeout(galleryTimer.current[section]);
-
       if (idx === total + 1) {
         galleryTimer.current[section] = setTimeout(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: false }));
@@ -300,7 +361,6 @@ export default function PlottedDevelopment() {
       }
     });
   }, [galleryIndices]);
-
   useEffect(() => {
     ['exteriors', 'interiors', 'videos'].forEach((section) => {
       if (!galleryAnim[section]) {
@@ -311,7 +371,6 @@ export default function PlottedDevelopment() {
       }
     });
   }, [galleryAnim]);
-
   const prevGallerySlide = (section) => {
     if (galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
@@ -320,7 +379,6 @@ export default function PlottedDevelopment() {
       [section]: prev[section] - 1
     }));
   };
-
   const nextGallerySlide = (section) => {
     if (galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
@@ -329,12 +387,10 @@ export default function PlottedDevelopment() {
       [section]: prev[section] + 1
     }));
   };
-
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   // Scroll Spy removed - now using Tabbed Interface (block layout)
   const handleScrollToSection = (sectionId) => {
     setActiveTab(sectionId);
@@ -353,33 +409,33 @@ export default function PlottedDevelopment() {
       }
     }, 10);
   };
-
   const handleSubSectionNavigate = (subSectionId) => {
     setActiveSubSection(subSectionId);
     handleScrollToSection('why-project');
   };
-
   // amenities array moved to top of component
-
   const landmarks = [
-    { title: "GST Road (NH-32)", dist: "2 mins" },
-    { title: "Railway Station & Bus Stand", dist: "5-10 mins" },
-    { title: "Sri Malolan College of Arts & Science", dist: "4 mins" },
-    { title: "Dr. Ramakrishnan Memorial Hospital", dist: "5 mins" },
-    { title: "VM Vidyakendra Matriculation School", dist: "9 mins" },
-    { title: "Chengalpattu Junction", dist: "20 mins" }
+    { title: "Express Avenue Mall", dist: "3 mins" },
+    { title: "Kauvery Hospital & Apollo", dist: "5 mins" },
+    { title: "Marina Beach & Promenade", dist: "8 mins" },
+    { title: "Spencer Plaza & Mount Road", dist: "4 mins" },
+    { title: "St. George's Cathedral", dist: "4 mins" },
+    { title: "Chennai Central Station", dist: "10 mins" }
   ];
-
   const galleryImages = {
-    plots: [
-      { src: '/images/project/ashok-nagar/Web banner AN - 2.jpg (1).jpeg', title: 'Ashok Nagar Layout Overview' },
-      { src: '/images/home/project-image-2.png', title: 'Blacktop Internal Roads' },
-      { src: '/images/home/project-image-1.png', title: 'Gated Community Entrance' },
-      { src: '/images/home/project-image-2.png', title: 'Avenue Tree Plantation' },
-    ],
-    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url }))
+    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
+    interiors: Array.from({ length: 33 }, (_, i) => ({
+      src: `/images/project/CML/Interiors/cml-interior-${String(i + 1).padStart(2, '0')}.jpg`,
+      title: `Crystal Moonlight Interior ${i + 1}`
+    })),
+    exteriors: [
+      { src: '/images/villa_exterior_1779810861723.png', title: 'Moonlight Villa FaÃ§ade' },
+      { src: '/images/project_crystal_1779810838661.png', title: 'Recreational Pool Deck' },
+      { src: '/images/project/why-cmv.png', title: 'Gated Community Portico' },
+      { src: '/images/home/hero.png', title: 'Premium Landscaped Backyard' },
+      { src: '/images/home/project-image-2.png', title: 'Evening FaÃ§ade View' }
+    ]
   };
-
   useEffect(() => {
     const interval = setInterval(() => {
       setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
@@ -390,27 +446,23 @@ export default function PlottedDevelopment() {
     }, 5000);
     return () => clearInterval(interval);
   }, [galleryTab, galleryImages]);
-
   const handleOpenLightbox = (section, idx) => {
     setLightboxIdx(idx);
     setLightboxSection(section);
     setLightboxImage(galleryImages[section][idx]);
   };
-
   const handleLightboxPrev = () => {
     const list = galleryImages[lightboxSection];
     const prevIdx = (lightboxIdx - 1 + list.length) % list.length;
     setLightboxIdx(prevIdx);
     setLightboxImage(list[prevIdx]);
   };
-
   const handleLightboxNext = () => {
     const list = galleryImages[lightboxSection];
     const nextIdx = (lightboxIdx + 1) % list.length;
     setLightboxIdx(nextIdx);
     setLightboxImage(list[nextIdx]);
   };
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setFormSubmitted(true);
@@ -420,10 +472,9 @@ export default function PlottedDevelopment() {
       setQuoteForm({ name: '', email: '', phone: '', note: '' });
     }, 2500);
   };
-
   return (
     <div className={`project-detail-page ${hideMainHeader ? 'hide-main-header' : ''}`}>
-      <Navbar projectTitle="Ashok Nagar – Villa Plots" />
+      <Navbar projectTitle="Pasha Pinnacle" />
       <main>
         {/* Project Hero Section */}
         <section className="project-hero-section">
@@ -433,25 +484,23 @@ export default function PlottedDevelopment() {
               <div className="split-panel panel-3"></div>
               <div className="split-panel panel-4"></div>
             </div>
-
             <div className="project-hero-background">
               <img
-                src="/images/project/ashok-nagar/Web banner AN - 3.jpg (1).jpeg"
-                alt="Ashok Nagar Villa Plots"
+                src="/images/project/CML/Elevation.png"
+                alt="Pasha Pinnacle"
                 className="project-hero-bg-image"
               />
               <div className="project-hero-light-leak" aria-hidden="true"></div>
               <div className="project-hero-overlay"></div>
             </div>
-
             <div className="project-hero-content">
               <div className="project-hero-text-col">
-                <h1 className="project-hero-title">
-                  Ashok Nagar – Villa Plots
+                {/* <span className="project-tag-reveal">PREMIUM GATED VILLAS</span> */}
+                <h1 className="project-hero-title display-title">
+                  Pasha Pinnacle
                 </h1>
-                <p className="project-hero-subtitle">MADURANTHAKAM, CHENGALPATTU DIST.</p>
+                <p className="project-hero-subtitle">ROYAPETTAH, CHENNAI</p>
               </div>
-
               <div className="project-hero-btn-col">
                 <Button
                   theme="dark"
@@ -464,66 +513,62 @@ export default function PlottedDevelopment() {
               </div>
             </div>
           </section>
-
         {/* Project Sticky Sub-navigation with Tab Dropdowns */}
         <nav className="project-sub-nav">
           <div className="container sub-nav-container">
             {/* Scrollable area containing all section links */}
             <div className="sub-nav-scroll-wrapper" ref={navContainerRef}>
               {/* Sliding gold indicator */}
-              <div
+              {/* <div
                 className="sub-nav-indicator"
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,
                   opacity: indicatorStyle.opacity
                 }}
-              />
-
+              /> */}
               <button
                 onClick={() => handleScrollToSection('overview')}
                 className={`sub-nav-link ${activeTab === 'overview' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Overview</span>
               </button>
-
               <button
                 onClick={() => handleScrollToSection('why-project')}
                 className={`sub-nav-link ${activeTab === 'why-project' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Why Project</span>
               </button>
-
-
-
               <button
                 onClick={() => handleScrollToSection('gallery')}
                 className={`sub-nav-link ${activeTab === 'gallery' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Gallery</span>
               </button>
-
+              <button
+                onClick={() => handleScrollToSection('floorplans')}
+                className={`sub-nav-link ${activeTab === 'floorplans' ? 'active' : ''}`}
+              >
+                <span className="sub-nav-text">Floor Plans</span>
+              </button>
+              <button
+                onClick={() => handleScrollToSection('specifications')}
+                className={`sub-nav-link ${activeTab === 'specifications' ? 'active' : ''}`}
+              >
+                <span className="sub-nav-text">Specifications</span>
+              </button>
               <button
                 onClick={() => handleScrollToSection('amenities')}
                 className={`sub-nav-link ${activeTab === 'amenities' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Amenities</span>
               </button>
-
-              <button
-                onClick={() => handleScrollToSection('layout-plan')}
-                className={`sub-nav-link ${activeTab === 'layout-plan' ? 'active' : ''}`}
-              >
-                <span className="sub-nav-text">Layout Plan</span>
-              </button>
-
               <button
                 onClick={() => handleScrollToSection('pricing')}
                 className={`sub-nav-link ${activeTab === 'pricing' ? 'active' : ''}`}
               >
                 <span className="sub-nav-text">Price</span>
               </button>
-
               <button
                 onClick={() => handleScrollToSection('status')}
                 className={`sub-nav-link ${activeTab === 'status' ? 'active' : ''}`}
@@ -531,7 +576,6 @@ export default function PlottedDevelopment() {
                 <span className="sub-nav-text">Status</span>
               </button>
             </div>
-
             {/* Fixed Right Directory Trigger for Mobile */}
             <div className="sub-nav-dropdown-wrapper sub-nav-mobile-trigger-wrapper show-only-on-mobile">
               <button
@@ -555,7 +599,6 @@ export default function PlottedDevelopment() {
                 >
                   Why Project
                 </button>
-
                 <button
                   className={`dropdown-item ${activeTab === 'gallery' ? 'active' : ''}`}
                   onClick={() => handleScrollToSection('gallery')}
@@ -563,16 +606,22 @@ export default function PlottedDevelopment() {
                   Gallery
                 </button>
                 <button
+                  className={`dropdown-item ${activeTab === 'floorplans' ? 'active' : ''}`}
+                  onClick={() => handleScrollToSection('floorplans')}
+                >
+                  Floor Plans
+                </button>
+                <button
+                  className={`dropdown-item ${activeTab === 'specifications' ? 'active' : ''}`}
+                  onClick={() => handleScrollToSection('specifications')}
+                >
+                  Specifications
+                </button>
+                <button
                   className={`dropdown-item ${activeTab === 'amenities' ? 'active' : ''}`}
                   onClick={() => handleScrollToSection('amenities')}
                 >
                   Amenities
-                </button>
-                <button
-                  className={`dropdown-item ${activeTab === 'layout-plan' ? 'active' : ''}`}
-                  onClick={() => handleScrollToSection('layout-plan')}
-                >
-                  Layout Plan
                 </button>
                 <button
                   className={`dropdown-item ${activeTab === 'pricing' ? 'active' : ''}`}
@@ -590,219 +639,122 @@ export default function PlottedDevelopment() {
             </div>
           </div>
         </nav>
-
         {/* Project Sections Container */}
         <div className="project-sections-container">
-
           {/* Overview Section - Minimalist Editorial Design */}
           {activeTab === 'overview' && (
-            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0', background: 'url("/images/bg/TL-1.png") left top / contain no-repeat', /*minHeight: 'calc(100vh - 140px)',*/ display: 'flex', alignItems: 'center' }}>
+            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', /*minHeight: 'calc(100vh - 140px)',*/ display: 'flex', alignItems: 'center' }}>
               {/* Project Logo Badge (Overview Section only) */}
               <div 
                 className="overview-logo-badge" 
-                title="CMR Global City"
+                title="Pasha Pinnacle"
               >
                 <img
-                  src="/images/project/project-logos/Project Logos_CMR Global City.png"
-                  alt="CMR Global City Logo"
+                  src="/images/project/project-logos/Project Logos_Pasha Pinnacle.png"
+                  alt="Pasha Pinnacle Logo"
                   className="overview-logo-img"
                 />
               </div>
               <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-
-                {/* Top Left Label */}
-                <ScrollReveal animation="fadeUp" delay={0.15} style={{ display: 'flex', marginBottom: '0px' }}>
-                  <span style={{ textTransform: 'uppercase', color: 'var(--color-text-dark)', fontWeight: '400' }}>
-                    ABOUT PROJECT
-                  </span>
-                </ScrollReveal>
-
                 {/* Main Content Grid */}
                 <div className="overview-editorial-grid">
-
-                  {/* Left Column: Watermark Text */}
+                  {/* Left Column: Overview Image */}
                   <ScrollReveal animation="fadeRight" delay={0.2}>
-                    <div style={{ position: 'relative' }}>
-                      <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '160px', lineHeight: '1', background: 'linear-gradient(180deg, #D6C8B8 0%, #D6C8B8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0, letterSpacing: '-0.02em', fontWeight: '400', transform: 'translateY(24px)' }}>
-                        AN
-                      </h2>
+                    <div className="overview-img-container" style={{ position: 'relative', width: '100%', minHeight: '380px', maxHeight: '480px', overflow: 'hidden', borderRadius: '4px' }}>
+                      <img
+                        src="/images/project/CML/overview.jpeg"
+                        alt="Crystal Moonlight Overview"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', borderRadius: '4px' }}
+                      />
                     </div>
                   </ScrollReveal>
+                  {/* Right Column: Section Label & Editorial Paragraphs */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingBottom: '20px' }}>
+                    {/* <ScrollReveal animation="fadeUp" delay={0.25}>
+                      <span className='section-title' style={{ marginBottom: '0px' }}>
+                        About Project
+                      </span>
+                    </ScrollReveal> */}
 
-                  {/* Right Column: Editorial Paragraphs */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', paddingBottom: '20px' }}>
-                    <ScrollReveal animation="fadeUp" delay={0.25}>
-                      <p style={{ color: 'var(--color-text-dark)', margin: 0, fontWeight: '400' }}>
-                        Ashok Nagar is a thoughtfully planned residential plotted development by Aadhithya Mohan Properties, strategically located in Maduranthakam. Designed for families, investors, and future homeowners, this DTCP & RERA Approved layout offers premium villa plots with excellent road connectivity, well-developed infrastructure, and a peaceful environment.
-                      </p>
+                    <ScrollReveal animation="fadeUp" delay={0.3}>
+                      <h2 className='overview-main-title'>
+                        Where Contemporary Design Meets Urban Elegance
+                      </h2>
                     </ScrollReveal>
 
                     <ScrollReveal animation="fadeUp" delay={0.35}>
-                      <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
-                        Located just 200 meters from GST Road (NH-32), Ashok Nagar provides quick access to Chennai while offering the benefits of a rapidly developing locality. With proposed government infrastructure projects, industrial growth, and increasing residential demand, this project presents an excellent opportunity for long-term capital appreciation.
+                      <p style={{ color: 'var(--color-text-dark)', margin: '10px 0 0', fontSize: '20px', textAlign: 'justify' }}>
+                        Every city has a few neighbourhoods that remain timeless, valued not for passing trends, but for the life they offer. Royapettah is one of them.
+                      </p>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="fadeUp" delay={0.4}>
+                      <p style={{ color: 'var(--color-text-dark)', margin: 0, fontSize: '20px', textAlign: 'justify' }}>
+                        Set within this enduring address, Pasha Pinnacle is a boutique collection of residences created for those who appreciate thoughtful design, generous living spaces, and the convenience of living at the centre of it all. Contemporary architecture, light-filled interiors, and naturally ventilated spaces come together to create homes that feel refined, welcoming, and effortlessly liveable.
                       </p>
                     </ScrollReveal>
 
                     <ScrollReveal animation="fadeUp" delay={0.45}>
-                      <p style={{ color: 'var(--color-text-dark)', margin: 0 }}>
-                        Whether you&apos;re planning to build your dream home or secure a high-growth investment, Ashok Nagar offers the perfect balance of affordability, convenience, and future value.
+                      <p style={{ color: 'var(--color-text-dark)', margin: 0, fontSize: '20px', textAlign: 'justify' }}>
+                        From everyday essentials to Chennai's leading business districts, educational institutions, healthcare centres, and lifestyle destinations, everything lies within easy reach. Pasha Pinnacle is more than a place to live—it is an address that reflects the quiet confidence of a home chosen well.
                       </p>
                     </ScrollReveal>
                   </div>
-
                 </div>
               </div>
             </section>
           )}
-
-          {/* Master Plan Image Section */}
-          {activeTab === 'overview' && (
-            <section className="project-section-wrapper scroll-section" style={{ padding: '0', background: 'var(--color-bg-cream)' }}>
-
-
-              {/* Full Width Image */}
-              <ScrollReveal animation="fadeUp" delay={0.2}>
-                <div style={{ width: '100%' }}>
-                  <img src="/images/project/ashok-nagar/Web banner AN - 2.jpg (1).jpeg" alt="Ashok Nagar Villa Plots in Maduranthakam" style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }} />
-                </div>
-              </ScrollReveal>
-            </section>
-          )}
-
           {/* Project Details Section - Inspired by Luxury Data Grid */}
           {activeTab === 'overview' && (
-            <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '100px 0', background: 'var(--color-bg-cream)', borderTop: '1px solid rgba(212, 175, 55, 0.1)', borderBottom: '1px solid rgba(212, 175, 55, 0.1)' }}>
-
-              <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-                <div style={{ width: '100%' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '30px', maxWidth: '1200px', margin: '0 auto' }}>
-
-                    {/* Left Stats Group */}
-                    <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-                      {/* Stat 1 */}
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                        <ScrollReveal animation="slideUp" delay={0.2} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                          <span className="info-grid-tag">
-                            PROPERTY TYPE
-                          </span>
-                          <span className="info-grid-val">
-                            VILLA
-                          </span>
-                          <span className="info-grid-desc">
-                            PLOTS
-                          </span>
-                        </ScrollReveal>
-                      </div>
-
-                      {/* Stat 2 */}
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                        <ScrollReveal animation="slideUp" delay={0.3} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                          <span className="info-grid-tag">
-                            PLOT SIZES
-                          </span>
-                          <span className="info-grid-val">
-                            657+
-                          </span>
-                          <span className="info-grid-desc">
-                            SQ.FT
-                          </span>
-                        </ScrollReveal>
-                      </div>
-                    </div>
-
-                    {/* Center Logo Group */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto', padding: '0 40px', borderLeft: '1px solid rgba(0, 0, 0, 0.05)', borderRight: '1px solid rgba(0, 0, 0, 0.05)', minWidth: '250px' }}>
-                      <ScrollReveal animation="scaleIn" delay={0.4} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <span className="info-grid-tag" style={{ marginBottom: '8px' }}>PROJECT</span>
-                            <span className="info-grid-val-large">ASHOK NAGAR</span>
-                          </div>
-                        </div>
-                        <span className="info-grid-desc">
-                          MADURANTHAKAM, CHENGALPATTU
-                        </span>
-                      </ScrollReveal>
-                    </div>
-
-                    {/* Right Stats Group */}
-                    <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-                      {/* Stat 3 */}
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                        <ScrollReveal animation="slideUp" delay={0.5} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                          <span className="info-grid-tag">
-                            TOTAL
-                          </span>
-                          <span className="info-grid-val">
-                            48
-                          </span>
-                          <span className="info-grid-desc">
-                            PLOTS
-                          </span>
-                        </ScrollReveal>
-                      </div>
-
-                      {/* Stat 4 */}
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
-                        <ScrollReveal animation="slideUp" delay={0.6} duration={1.2} once={false} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                          <span className="info-grid-tag">
-                            STATUS
-                          </span>
-                          <span className="info-grid-val">
-                            READY
-                          </span>
-                          <span className="info-grid-desc">
-                            TO BUILD
-                          </span>
-                        </ScrollReveal>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
+            <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0' }}>
+              <ProjectDetailsGrid 
+                stat1Tag="TOTAL UNITS"
+                stat1Val="220"
+                stat1Desc="UNITS"
+                stat1Count={220}
+                stat2Tag="CONFIGURATION"
+                stat2Val="2 & 3"
+                stat2Desc="BHK"
+                projectTag="PROJECT"
+                projectName="PASHA PINNACLE"
+                location="ROYAPETTAH, CHENNAI"
+                reraNo="(TN/29/Building/029/2024)"
+                stat3Tag="SIZE RANGE"
+                stat3Val="1,500 - 2,400"
+                stat3Desc="SQ.FT."
+                stat4Tag="STRUCTURE"
+                stat4Val="STILT + 5"
+                stat4Desc="FLOORS"
+              />
             </section>
           )}
 
           {/* Project Overview Section */}
           {activeTab === 'why-project' && (
-            <section id="why-project" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0 0', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TL-1.png") left top / contain no-repeat' }}>
-
-              <div className="container">
-
+            <section id="why-project" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0 0', minHeight: 'calc(100vh - 140px)', background: '#fff' }}>
+              <div className="container" style={{ padding: '0 0 60px' }}>
                 {/* ── Left-Aligned Header ── */}
                 <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  {/* <span className="section-tag">Why CML</span> */}
                   <h2 className="section-title">
-                    Bespoke living beyond <span>time</span>
+                    Why Pasha Pinnacle
                   </h2>
-                  {/* <p className="section-subtitle" style={{ marginTop: '8px' }}>
-                  Explore the highlights and location advantage of Crystal Moonlight.
-                </p> */}
+                  
                 </ScrollReveal>
-
                 {/* ── Left-Aligned Tab Pills ── */}
                 {/* ── Highlights Block Two-Column Grid ── */}
-                <div className="overview-main-grid-redesign" style={{ marginBottom: '100px' }}>
+                <div className="overview-main-grid-redesign">
                   {/* Left Side Content (Visuals) */}
                   <div className="overview-left-visual">
                     <ScrollReveal animation="fadeRight" delay={0.1}>
                       <div className="overview-image-wrapper">
-                        <img src="/images/home/project-image-2.png" alt="Ashok Nagar Layout Entrance" />
+                        <img src="/images/project_crystal_1779810838661.png" alt="Pasha Pinnacle - Salient Features" />
                       </div>
                     </ScrollReveal>
                   </div>
-
                   {/* Right Side Content (Text & CTAs) */}
                   <div className="overview-right-text">
                     <ScrollReveal animation="fadeLeft" delay={0.1}>
                       <div className="pillars-container">
-                        <span className="highlights-badge-tag" style={{ color: 'var(--color-text-muted-light)', fontWeight: '400', textTransform: 'uppercase', marginBottom: '10px', display: 'block' }}>
-                          Plotted Development • Ready to Build
-                        </span>
-                        <h3 className="overview-text-title" style={{ marginBottom: '24px' }}>
-                          Ashok Nagar Villa Plots
-                        </h3>
 
                         <div className="pillars-accordion">
                           {pillars.map((pillar, index) => {
@@ -821,7 +773,7 @@ export default function PlottedDevelopment() {
                                 <div
                                   className="pillar-body"
                                   style={{
-                                    maxHeight: isOpen ? '220px' : '0px',
+                                    maxHeight: isOpen ? '360px' : '0px',
                                     opacity: isOpen ? 1 : 0,
                                     overflow: 'hidden',
                                     transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
@@ -839,19 +791,14 @@ export default function PlottedDevelopment() {
                   </div>
                 </div>
               </div> {/* Close container */}
-
               {/* ── Neighbourhood Story Experience ── */}
-              <NeighbourhoodStory 
-                onEnquire={() => setIsQuoteOpen(true)} 
-                projectCoords={[12.510842, 79.882490]}
-                projectName="Ashok Nagar Villa Plots"
+              <NeighbourhoodStory
+                onEnquire={() => setIsQuoteOpen(true)}
+                projectCoords={[13.0587, 80.2642]}
+                projectName="Pasha Pinnacle"
               />
-
             </section>
           )}
-
-
-
           {/* Master Gallery Section */}
           {activeTab === 'gallery' && (
             <>
@@ -862,27 +809,23 @@ export default function PlottedDevelopment() {
                       Visual <span>Spotlight</span>
                     </h2>
                   </ScrollReveal>
-                  {/* Gallery Navigation Tabs — Plots & Videos for Plotted Development */}
-                  <div className="nested-tabs-container" style={{ marginBottom: '4px', display: 'flex', justifyContent: 'center' }}>
+                  {/* Gallery Navigation Tabs */}
+                  <ScrollReveal animation="fadeUp" delay={0.25} className="nested-tabs-container" style={{ marginBottom: '4px', display: 'flex', justifyContent: 'center' }}>
                     <div className="filter-tabs">
-                      {[
-                        { key: 'plots', label: 'Plot Images' },
-                        { key: 'videos', label: 'Videos' }
-                      ].map(({ key, label }) => (
+                      {['exteriors', 'interiors', 'videos'].map(tab => (
                         <button
-                          key={key}
-                          className={`filter-tab-btn ${galleryTab === key ? 'active' : ''}`}
-                          onClick={() => setGalleryTab(key)}
+                          key={tab}
+                          className={`filter-tab-btn ${galleryTab === tab ? 'active' : ''}`}
+                          onClick={() => setGalleryTab(tab)}
                         >
-                          {label}
+                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
                         </button>
                       ))}
                     </div>
-                  </div>
+                  </ScrollReveal>
                 </div> {/* Close container here for full-bleed viewport */}
-
                 {/* Spotlight Active-Card Gallery Carousel */}
-                <div className="gallery-spotlight-viewport">
+                <ScrollReveal animation="fadeUp" delay={0.35} className="gallery-spotlight-viewport">
                   <div
                     className="gallery-spotlight-track"
                     style={{
@@ -900,13 +843,11 @@ export default function PlottedDevelopment() {
                       const extended = total > 1
                         ? [items[total - 1], ...items, items[0]]
                         : items;
-
                       return extended.map((img, idx) => {
                         const isActive = idx === galleryIndices[galleryTab];
                         const realIdx = total > 1
                           ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
                           : 0;
-
                         return (
                           <div
                             key={idx}
@@ -951,7 +892,6 @@ export default function PlottedDevelopment() {
                                 </div>
                               </div>
                             )}
-
                             <div className="gallery-deck-hover-overlay">
                               {galleryTab !== 'videos' && (
                                 <>
@@ -965,7 +905,6 @@ export default function PlottedDevelopment() {
                       });
                     })()}
                   </div>
-
                   {/* Navigation Arrows positioned on left/right previews */}
                   <button
                     className="gallery-spotlight-arrow prev"
@@ -981,34 +920,39 @@ export default function PlottedDevelopment() {
                   >
                     <ChevronRight size={24} />
                   </button>
-                </div>
+                </ScrollReveal>
               </section>
             </>
           )}
-
-
-
+          {/* Specifications Section */}
+          {activeTab === 'specifications' && (
+            <ProjectSpecs
+              specs={SPECIFICATIONS}
+              title="PROJECT"
+              highlightTitle="SPECIFICATIONS"
+              subtitle="PROJECT DETAILS"
+            />
+          )}
           {/* Premium Amenities Section */}
           {activeTab === 'amenities' && (
-            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0', backgroundColor: 'var(--color-bg-navy)', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center', background: 'url("/images/bg/TR-1.png") right top / contain no-repeat' }}>
-              <div className="container" style={{ width: '100%' }}>
-                <ScrollReveal className="section-header" animation="fadeUp" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  {/* <span className="section-tag" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--color-bg-light)', border: '1px solid rgba(255,255,255,0.1)' }}>Amenities</span> */}
-                  <h2 className="section-title" style={{ color: 'var(--color-text-dark)', marginBottom: '0px' }}>
-                    Luxury Community <span>Amenities</span>
+            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', backgroundColor: '#ffffff', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center' }}>
+              {/* Optional ambient background leaf or shape */}
+              <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: '400px', height: '400px', background: 'url("/images/bg/TR-1.png") center / contain no-repeat', opacity: 0.1, pointerEvents: 'none' }}></div>
+
+              <div className="container" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
+                <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '60px' }}>
+                  <h2 className="section-title">
+                    Luxury Community <span style={{ color: 'var(--color-highlight)' }}>Amenities</span>
                   </h2>
-                  <p className="section-subtitle" style={{ color: 'var(--color-text-muted-light)', marginBottom: '24px' }}>
-                    Designed for comfort, security, and an enriched community life
-                  </p>
                 </ScrollReveal>
 
                 <div className="amenities-split-layout">
 
                   {/* Left Column: Directory */}
-                  <div className="amenities-directory">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', padding: '0 12px' }}>
-                      <span style={{ textTransform: 'uppercase', color: 'var(--color-gold)' }}>Directory</span>
-                      <span style={{ color: 'var(--color-text-muted-light)' }}>{amenities.length} Amenities</span>
+                  <ScrollReveal animation="fadeRight" delay={0.25} className="amenities-directory">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid rgba(143, 143, 143, 0.23)' }}>
+                      <span style={{ textTransform: 'uppercase', color: '#000000ff', fontSize: '13px' }}>Directory</span>
+                      <span style={{ color: '#000000ff', fontSize: '14px' }}>{amenities.length} Amenities</span>
                     </div>
 
                     <div
@@ -1020,29 +964,45 @@ export default function PlottedDevelopment() {
                         return (
                           <div key={idx} className="amenity-item-wrapper" style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                             <button
-                              onClick={() => setAmenityIdx(idx)}
+                              onClick={() => {
+                                setAmenityIdx(idx);
+                                setIsAmenityAutoPlay(false);
+                              }}
                               className={`amenity-item-btn ${isActive ? 'active' : ''}`}
                               style={{
-                                display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 4px',
-                                background: 'transparent',
+                                display: 'flex', alignItems: 'center', gap: '14px', padding: '16px',
+                                background: isActive ? 'var(--color-bg-light)' : 'transparent',
                                 border: 'none',
-                                borderBottom: isActive ? '2px solid var(--color-primary, #1d3557)' : '1px solid rgba(0,0,0,0.06)',
-                                borderRadius: '0px', cursor: 'pointer', transition: 'all 0.3s ease',
-                                color: '#000000',
-                                boxShadow: 'none',
-                                textAlign: 'left', flexShrink: 0,
-                                width: '100%'
+                                borderBottom: isActive ? '1px solid transparent' : '1px solid rgba(0,0,0,0.06)',
+                                cursor: 'pointer', transition: 'all 0.3s ease',
+                                textAlign: 'left', outline: 'none',
+                                width: '100%', minWidth: 0, overflow: 'hidden'
                               }}
                             >
                               <div style={{
-                                width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                background: isActive ? 'var(--color-bg-navy)' : 'rgba(0,0,0,0.04)',
-                                color: isActive ? 'var(--color-white)' : 'var(--color-text-muted-light)', transition: 'all 0.3s ease',
-                                flexShrink: 0
+                                width: '34px', height: '34px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                background: isActive ? 'rgba(180, 133, 100, 0.12)' : 'rgba(0,0,0,0.03)',
+                                border: isActive ? '1px solid #b48564' : '1px solid rgba(0,0,0,0.08)',
+                                transition: 'all 0.3s ease',
+                                flexShrink: 0,
+                                padding: '6px'
                               }}>
-                                {item.icon}
+                                {typeof item.icon === 'string' ? (
+                                  <img
+                                    src={item.icon}
+                                    alt={item.title}
+                                    style={{
+                                      width: '18px',
+                                      height: '18px',
+                                      objectFit: 'contain',
+                                      filter: isActive ? 'none' : 'grayscale(100%) opacity(0.7)'
+                                    }}
+                                  />
+                                ) : (
+                                  item.icon
+                                )}
                               </div>
-                              <span style={{ flex: 1, fontWeight: isActive ? 600 : 400, fontSize: '13px', whiteSpace: 'normal', wordBreak: 'break-word', lineHeight: '1.3' }}>{item.title}</span>
+                              <span style={{ flex: 1, fontWeight: isActive ? '400' : '300', fontSize: '16px', color: isActive ? 'var(--color-highlight)' : '#000', lineHeight: '1.4', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</span>
                             </button>
 
                             {/* Mobile Inline Image Card under the active amenity item */}
@@ -1059,10 +1019,10 @@ export default function PlottedDevelopment() {
                         );
                       })}
                     </div>
-                  </div>
+                  </ScrollReveal>
 
                   {/* Right Column: Desktop Visualizer */}
-                  <div className="amenities-visualizer">
+                  <ScrollReveal animation="fadeLeft" delay={0.35} className="amenities-visualizer">
                     {amenities.map((item, idx) => (
                       <div
                         key={idx}
@@ -1075,81 +1035,316 @@ export default function PlottedDevelopment() {
                         }}
                       >
                         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+
+                        {/* Elegant bottom overlay */}
                         <div style={{
-                          position: 'absolute', bottom: 0, left: 0, right: 0, padding: '30px 40px',
-                          background: 'linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, transparent 100%)',
-                          backdropFilter: 'blur(16px) saturate(150%)', WebkitBackdropFilter: 'blur(16px) saturate(150%)',
-                          borderTop: '1px solid rgba(255, 255, 255, 0.4)', zIndex: 2
+                          position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%',
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+                          display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+                          padding: '40px',
+                          zIndex: 2
                         }}>
-                          <h3 style={{ color: '#000000', marginBottom: '12px', fontWeight: '400' }}>{item.title}</h3>
-                          <p style={{ color: 'rgba(0,0,0,0.7)', margin: 0 }}>{item.desc}</p>
+                          <div style={{ paddingTop: '20px' }}>
+                            <h3 style={{ color: '#ffffff', marginBottom: '8px', fontWeight: '500', fontSize: '24px', fontFamily: 'var(--font-heading)' }}>{item.title}</h3>
+                            <p style={{ color: 'rgba(255,255,255,0.8)', margin: 0, fontSize: '15px', fontWeight: '300' }}>{item.desc}</p>
+                          </div>
                         </div>
                       </div>
                     ))}
-                  </div>
-
+                  </ScrollReveal>
                 </div>
               </div>
             </section>
           )}
-
-          {/* Layout Plan Section */}
-          {activeTab === 'layout-plan' && (
-            <section id="layout-plan" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0', minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TR-1.png") right top / cover no-repeat', display: 'flex', alignItems: 'center' }}>
+          {/* Master Floor Plans Section */}
+          {activeTab === 'floorplans' && (
+            <section id="floorplans" className="project-floorplans-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center', padding: '40px 0', background: '#fff' }}>
               <div className="container" style={{ width: '100%' }}>
-                <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '48px' }}>
-                  <h2 className="section-title">Layout <span>Plan</span></h2>
-                  <p className="section-subtitle" style={{ color: 'var(--color-text-dark)' }}>
-                    DTCP Approved residential layout — Ashok Nagar, Maduranthakam
-                  </p>
+                <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  {/* <span className="section-tag">Floor Plans</span> */}
+                  <h2 className="section-title">Architectural <span>Layouts</span></h2>
                 </ScrollReveal>
-
-                {/* Master Plan Image */}
-                <ScrollReveal animation="fadeUp" delay={0.3}>
-                  <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '40px' }}>
-                    <img
-                      src={layoutsData.masterPlan.image}
-                      alt="Ashok Nagar Layout Plan — DTCP Approved"
-                      style={{
-                        maxWidth: '100%',
-                        maxHeight: '720px',
-                        objectFit: 'contain',
-                        borderRadius: '16px',
-                        boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-                        background: '#fff'
-                      }}
-                    />
+                {/* Top-Level Category Switcher */}
+                <ScrollReveal animation="fadeUp" delay={0.2} style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                  <div className="filter-tabs">
+                    {(isPashaPinnacle
+                      ? [
+                        { id: 'typicalFloorPlan', label: 'Typical Floor plan' },
+                        { id: 'floorPlan', label: 'Unit Plan' },
+                        { id: 'walkthrough360', label: '360° Walkthrough' }
+                      ]
+                      : [
+                        { id: 'masterPlan', label: 'Master Plan' },
+                        { id: 'floorPlan', label: 'Unit Plan' },
+                        { id: 'walkthrough360', label: '360° Walkthrough' }
+                      ]
+                    ).map(tab => (
+                      <button
+                        key={tab.id}
+                        className={`filter-tab-btn ${layoutCategory === tab.id ? 'active' : ''}`}
+                        onClick={() => setLayoutCategory(tab.id)}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
                   </div>
                 </ScrollReveal>
 
-                {/* CTA Row */}
-                <ScrollReveal animation="fadeUp" delay={0.4} style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
-                  <Button
-                    theme="light"
-                    onClick={() => setIsQuoteOpen(true)}
-                    icon="↓"
-                    style={{ minWidth: '240px' }}
-                  >
-                    Download Layout Brochure
-                  </Button>
-                </ScrollReveal>
+                {/* Master Plan Panel (CML) */}
+                {layoutCategory === 'masterPlan' && (
+                  <ScrollReveal animation="fadeUp" delay={0.3} className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <img
+                      src={layoutsData.masterPlan.image}
+                      alt="Master Plan"
+                      onClick={() => setFloorplanLightbox({ image: layoutsData.masterPlan.image, name: 'Master Plan' })}
+                      style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
+                    />
+                  </ScrollReveal>
+                )}
+
+                {/* Typical Floor Plan Panel (Pasha Pinnacle - No Legends. Only Plan) */}
+                {layoutCategory === 'typicalFloorPlan' && (
+                  <ScrollReveal animation="fadeUp" delay={0.3} className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <img
+                      src={layoutsData.typicalFloorPlan.image}
+                      alt="Typical Floor Plan"
+                      onClick={() => setFloorplanLightbox({ image: layoutsData.typicalFloorPlan.image, name: 'Typical Floor Plan' })}
+                      style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
+                    />
+                  </ScrollReveal>
+                )}
+
+                {/* 360 Degree Walkthrough Panel - Coming Soon */}
+                {layoutCategory === 'walkthrough360' && (
+                  <ScrollReveal animation="fadeUp" delay={0.3} className="layout-walkthrough-container" style={{ width: '100%', maxWidth: '800px', margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={{
+                      textAlign: 'center',
+                      padding: '70px 30px',
+                      background: 'rgba(255, 255, 255, 0.85)',
+                      backdropFilter: 'blur(20px)',
+                      WebkitBackdropFilter: 'blur(20px)',
+                      borderRadius: '16px',
+                      width: '100%',
+                      border: '1px solid rgba(0, 0, 0, 0.08)',
+                      boxShadow: '0 20px 50px rgba(0, 0, 0, 0.04)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '16px'
+                    }}>
+                      <div style={{
+                        width: '56px',
+                        height: '56px',
+                        borderRadius: '50%',
+                        background: 'rgba(180, 133, 100, 0.12)',
+                        color: '#b48564',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                        <RotateCcw size={26} />
+                      </div>
+
+                      <span style={{
+                        fontSize: '11px',
+                        fontWeight: '600',
+                        letterSpacing: '0.16em',
+                        textTransform: 'uppercase',
+                        color: '#b48564'
+                      }}>
+                        360° Immersive Experience
+                      </span>
+
+                      <h3 style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '28px',
+                        fontWeight: '400',
+                        color: 'var(--color-primary, #111111)',
+                        margin: 0
+                      }}>
+                        360° Virtual Walkthrough
+                      </h3>
+
+                      <p style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '15px',
+                        color: 'var(--color-text-muted, #666666)',
+                        maxWidth: '460px',
+                        margin: 0,
+                        lineHeight: '1.6'
+                      }}>
+                        The interactive 360° virtual walkthrough is currently in curation and will be available soon.
+                      </p>
+
+                      <div style={{ marginTop: '8px' }}>
+                        <span style={{
+                          display: 'inline-block',
+                          padding: '8px 22px',
+                          borderRadius: '100px',
+                          background: '#f3efe8',
+                          color: '#8f6b4e',
+                          fontSize: '12px',
+                          fontWeight: '600',
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase'
+                        }}>
+                          Coming Soon
+                        </span>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                )}
+                {layoutCategory === 'floorPlan' && (
+                  <ScrollReveal animation="fadeUp" delay={0.3} className="floorplan-slide-viewport" style={{ position: 'relative', width: '100%' }}>
+
+                    {/* Left/Right Arrow Buttons on the outer sides */}
+                    {currentConfigPlans.length > 1 && (
+                      <>
+                        <button
+                          className="floorplan-slide-arrow prev"
+                          onClick={handlePrevPlan}
+                          aria-label="Previous floor plan"
+                        >
+                          <ChevronLeft size={28} />
+                        </button>
+                        <button
+                          className="floorplan-slide-arrow next"
+                          onClick={handleNextPlan}
+                          aria-label="Next floor plan"
+                        >
+                          <ChevronRight size={28} />
+                        </button>
+                      </>
+                    )}
+                    {/* Tabs row: 3 BHK and 4 BHK using standard filter-tabs style */}
+                    <div style={{ display: 'flex', marginBottom: '40px', borderBottom: '.1px solid rgba(0,0,0,0.08)', width: '100%' }}>
+                      <div className="filter-tabs" style={{ display: 'flex', gap: '0' }}>
+                        {['3bhk', '4bhk'].map(conf => {
+                          const confLabel = conf === '3bhk' ? '3 BHK' : '4 BHK';
+                          const isActive = floorPlanConfig === conf;
+                          return (
+                            <button
+                              key={conf}
+                              onClick={() => {
+                                setFloorPlanConfig(conf);
+                                setActivePlanId(layoutsData.floorPlan[conf][0].id);
+                              }}
+                              className={`filter-tab-btn ${isActive ? 'active' : ''}`}
+                              style={{
+                                padding: '0 24px',
+                                paddingLeft: conf === '3bhk' ? '0' : '24px',
+                                background: 'transparent',
+                                border: 'none',
+                                borderRight: conf === '3bhk' ? '.1px solid rgba(0, 0, 0, 0.15)' : 'none',
+                                cursor: 'pointer',
+                                outline: 'none',
+                                boxShadow: 'none'
+                              }}
+                            >
+                              <span
+                                style={{
+                                  position: 'relative',
+                                  display: 'inline-block',
+                                  paddingBottom: '12px',
+                                  borderBottom: isActive ? '.1px solid var(--color-text-dark)' : '.1px solid transparent',
+                                  marginBottom: '-1px',
+                                  fontWeight: isActive ? '400' : '400',
+                                  color: isActive ? '#000000' : 'var(--color-text-muted-light)',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.12em',
+                                  fontFamily: 'var(--font-sans)',
+                                  fontSize: isMobile ? '13px' : '14px',
+                                  transition: 'all 0.3s ease'
+                                }}
+                              >
+                                {confLabel}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    {/* Main Slide Layout */}
+                    <div className="floorplan-slide-content-grid" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 7fr', gap: '30px', alignItems: 'center' }}>
+
+                      {/* Left Column: Details */}
+                      <div className="floorplan-slide-details-col" style={{ textAlign: 'left', order: isMobile ? 2 : 1 }}>
+                        <h3 className="floorplan-slide-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '32px', fontWeight: '400', color: 'var(--color-highlight)', marginBottom: '32px' }}>
+                          {activePlanDetails.name}
+                        </h3>
+                        <div className="floorplan-slide-specs-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '40px' }}>
+                          {/* <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Configuration</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.type}</span>
+                          </div> */}
+                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Built-up Area</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.builtUp}</span>
+                          </div>
+                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Plot Area</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.plot}</span>
+                          </div>
+                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Direction</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.facing}</span>
+                          </div>
+                        </div>
+                        <Button
+                          theme="light"
+                          onClick={() => setIsQuoteOpen(true)}
+                          icon="↓"
+                          style={{ minWidth: '220px', boxSizing: 'border-box' }}
+                        >
+                          Download Floorplan PDF
+                        </Button>
+                      </div>
+                      {/* Right Column: Visualizer */}
+                      <div className="floorplan-slide-visual-col" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', order: isMobile ? 1 : 2 }}>
+                        {activePlanDetails.image ? (
+                          <div className="floorplan-slide-img-wrap" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <img
+                              src={activePlanDetails.image}
+                              alt={activePlanDetails.name}
+                              onClick={() => setFloorplanLightbox(activePlanDetails)}
+                              style={{
+                                maxWidth: '100%',
+                                maxHeight: '550px',
+                                objectFit: 'contain',
+                                cursor: 'pointer',
+                                transition: 'transform 0.3s ease'
+                              }}
+                              className="floorplan-image-zoomable"
+                            />
+                          </div>
+                        ) : (
+                          <div className="blueprint-canvas" style={{ width: '100%', minHeight: '400px', backgroundColor: 'var(--color-bg-navy)', borderRadius: '16px' }}>
+                            <div className="blueprint-grid-mesh"></div>
+                            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'var(--color-text-muted-light)' }}>
+                              <LayoutGrid size={48} style={{ marginBottom: '24px', opacity: 0.8 }} />
+                              <span style={{ color: 'var(--color-bg-light)' }}>{activePlanDetails.name}</span>
+                              <span style={{ textTransform: 'uppercase', marginTop: '16px', color: 'var(--color-gold)' }}>Interactive Blueprint Layout</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                )}
               </div>
             </section>
           )}
-
           {/* Size & Pricing Section (Currently omitted from navigation but kept for structure) */}
           {activeTab === 'pricing' && (
             <ProjectPricingSection
-              projectName="Ashok Nagar"
-              priceAED="550 K*"
-              priceINR="1.25 CR*"
-              priceUSD="150 K*"
-              priceEUR="140 K*"
-              priceGBP="120 K*"
-              unitTypes={['Villa Plots']}
+              projectName="Pasha Pinnacle"
+              prices={[
+                { label: '2 BHK Apartment', val: 'INR 1.25 CR*' },
+                { label: '3 BHK Apartment', val: 'INR 1.95 CR*' }
+              ]}
+              unitTypes={['2 BHK Apartment', '3 BHK Apartment']}
             />
           )}
-
           {/* Project Status Timeline */}
           {activeTab === 'status' && (
             (() => {
@@ -1184,15 +1379,13 @@ export default function PlottedDevelopment() {
               const handleNextMonth = () => {
                 setStatusMonthIdx(prev => (prev === projectStatusData.length - 1 ? 0 : prev + 1));
               };
-
               return (
-                <section id="status" className="project-status-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', background: 'url("/images/bg/TR-1.png") right top / cover no-repeat' }}>
+                <section id="status" className="project-status-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', background: '#fff' }}>
                   <div className="container">
                     <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', alignItems: 'center', marginBottom: '50px' }}>
                       <h2 className="section-title">Project <span>Status</span></h2>
-                      <p className="section-subtitle" style={{ color: 'var(--color-text-dark)', margin: '0 auto', textAlign: 'center' }}>Live construction tracking and milestone updates</p>
-                    </ScrollReveal>
 
+                    </ScrollReveal>
                     <ScrollReveal animation="fadeUp" delay={0.3} className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                       <div className="status-month-container">
 
@@ -1333,33 +1526,119 @@ export default function PlottedDevelopment() {
               );
             })()
           )}
-
         </div>
-
-        {/* --- REFINED CONCEPT 3: Cinematic Cut --- */}
-        <section className="concept-3-cinematic">
-          <h2 className="c3-massive-text">CRYSTAL MOONLIGHT</h2>
-
-          <div className="c3-split-layout">
-            <div className="c3-image-pane">
-              <img src="/images/project/why-cmv.png" alt="Crystal Moonlight" />
-              <div className="c3-overlay"></div>
-            </div>
-
-            <div className="c3-solid-pane">
-              <div className="c3-action-area">
-                <span className="c3-tag">Move In Soon! Now</span>
-                <h3>Experience True<br />Luxury.</h3>
-                <p className="c3-desc">Experience the pinnacle of luxury living in Medavakkam. Secure your legacy today.</p>
-                <Button theme="dark" onClick={() => setIsQuoteOpen(true)}>
-                  ENQUIRE NOW
-                </Button>
-              </div>
-            </div>
-          </div>
+        {/* --- PROJECT CTA BANNER SECTION --- */}
+        <section
+          className="project-cta-banner-section"
+          style={{
+            position: 'relative',
+            width: '100%',
+            overflow: 'hidden',
+            cursor: 'pointer',
+            lineHeight: 0
+          }}
+          onClick={() => setIsQuoteOpen(true)}
+        >
+          <img
+            src="/images/project/Crystal moonlight down section.png"
+            alt="Crystal Moonlight - Experience True Luxury"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              objectFit: 'cover'
+            }}
+          />
         </section>
       </main>
 
+      {/* Floor Plan Lightbox Modal */}
+      {floorplanLightbox && (
+        <div className="lightbox-overlay" onClick={() => setFloorplanLightbox(null)} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '40px', boxSizing: 'border-box' }}>
+          <button className="lightbox-close-btn" onClick={() => setFloorplanLightbox(null)}>
+            <X size={24} />
+          </button>
+
+          {currentConfigPlans.length > 1 && (
+            <>
+              <button
+                className="lightbox-arrow-btn prev"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const currIdx = currentConfigPlans.findIndex(p => p.id === floorplanLightbox.id);
+                  const prevIdx = (currIdx - 1 + currentConfigPlans.length) % currentConfigPlans.length;
+                  const prevPlan = currentConfigPlans[prevIdx];
+                  setActivePlanId(prevPlan.id);
+                  setFloorplanLightbox(prevPlan);
+                }}
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                className="lightbox-arrow-btn next"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const currIdx = currentConfigPlans.findIndex(p => p.id === floorplanLightbox.id);
+                  const nextIdx = (currIdx + 1) % currentConfigPlans.length;
+                  const nextPlan = currentConfigPlans[nextIdx];
+                  setActivePlanId(nextPlan.id);
+                  setFloorplanLightbox(nextPlan);
+                }}
+              >
+                <ChevronRight size={24} />
+              </button>
+            </>
+          )}
+
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+            <img
+              src={floorplanLightbox.image}
+              alt={floorplanLightbox.name}
+              style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain', borderRadius: '8px' }}
+            />
+          </div>
+
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: '100%',
+              maxWidth: '900px',
+              margin: '20px auto',
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              borderRadius: '16px',
+              padding: '14px 20px',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+              color: '#ffffff',
+              boxSizing: 'border-box'
+            }}
+          >
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: '400', color: '#b48564', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 16px 0' }}>
+              {floorplanLightbox.name}
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+              <div>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Configuration</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.type}</span>
+              </div>
+              <div>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Built-up Area</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.builtUp}</span>
+              </div>
+              <div>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Plot Area</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.plot}</span>
+              </div>
+              <div>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Direction</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.facing}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Lightbox Modal */}
       {lightboxImage && (
         <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
@@ -1378,7 +1657,6 @@ export default function PlottedDevelopment() {
           </button>
         </div>
       )}
-
       {/* Video Modal */}
       {isVideoOpen && (
         <div className="lightbox-overlay" onClick={() => setIsVideoOpen(false)}>
@@ -1397,80 +1675,133 @@ export default function PlottedDevelopment() {
           </div>
         </div>
       )}
-
       {/* Quote / Schedule Booking Modal */}
       {isQuoteOpen && (
         <div className="modal-overlay" onClick={() => setIsQuoteOpen(false)}>
-          <div className="modal-content-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)}>
-              <X size={18} />
-            </button>
-            <h3 className="modal-heading">SCHEDULE A SITE VISIT</h3>
-            <p className="modal-subheading">Experience premium luxury in person. Fill out the fields below.</p>
-
-            {formSubmitted ? (
-              <div className="form-success-message">
-                <CheckCircle2 size={44} className="success-icon-gold" />
-                <h4>Inquiry Received Successfully</h4>
-                <p>One of our client service executives will contact you shortly.</p>
+          <div className="modal-content-card split-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-image-panel">
+              <div className="modal-image-overlay">
+                <h3>Pasha Pinnacle</h3>
+                <p>Luxury Apartments in Royapettah</p>
               </div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="modal-inquiry-form">
-                <div className="form-group-field">
-                  <User size={15} className="form-input-icon" />
-                  <input
-                    type="text"
-                    placeholder="Full Name"
-                    required
-                    value={quoteForm.name}
-                    onChange={e => setQuoteForm({ ...quoteForm, name: e.target.value })}
-                  />
-                </div>
-                <div className="form-group-field">
-                  <Mail size={15} className="form-input-icon" />
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    required
-                    value={quoteForm.email}
-                    onChange={e => setQuoteForm({ ...quoteForm, email: e.target.value })}
-                  />
-                </div>
-                <div className="form-group-field">
-                  <Phone size={15} className="form-input-icon" />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    required
-                    value={quoteForm.phone}
-                    onChange={e => setQuoteForm({ ...quoteForm, phone: e.target.value })}
-                  />
-                </div>
-                <div className="form-group-field text-area">
-                  <input
-                    type="text"
-                    placeholder="Notes (e.g. preferred dates, facings)"
-                    value={quoteForm.note}
-                    onChange={e => setQuoteForm({ ...quoteForm, note: e.target.value })}
-                  />
-                </div>
-                <Button type="submit" theme="light" style={{ width: '100%', padding: '10px 10px 10px 24px' }}>
-                  Submit Inquiry
-                </Button>
-              </form>
-            )}
+            </div>
+
+            <div className="modal-form-panel">
+              <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)}>
+                <X size={18} />
+              </button>
+
+              <div className="modal-header-block-light">
+                <h3 className="modal-heading-light">SCHEDULE A VISIT</h3>
+                <p className="modal-subheading-light">Experience premium luxury in person.</p>
+              </div>
+
+              <div className="modal-body-light">
+                {formSubmitted ? (
+                  <div className="form-success-message">
+                    <CheckCircle2 size={48} className="success-icon-gold" />
+                    <h4>Inquiry Received Successfully</h4>
+                    <p>One of our client service executives will contact you shortly.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleFormSubmit} className="modal-inquiry-form-new">
+                    {/* Preferred Mode of Contact */}
+                    <div className="form-radio-group">
+                      <label className="form-label-top">Preferred Mode of Contact *</label>
+                      <div className="radio-options">
+                        <label className="radio-label">
+                          <input
+                            type="radio"
+                            name="contactMode"
+                            value="callback"
+                            checked={quoteForm.contactMode === 'callback'}
+                            onChange={(e) => setQuoteForm({ ...quoteForm, contactMode: e.target.value })}
+                          />
+                          <span className="radio-custom"></span>
+                          Request a call back
+                        </label>
+                        <label className="radio-label">
+                          <input
+                            type="radio"
+                            name="contactMode"
+                            value="videocall"
+                            checked={quoteForm.contactMode === 'videocall'}
+                            onChange={(e) => setQuoteForm({ ...quoteForm, contactMode: e.target.value })}
+                          />
+                          <span className="radio-custom"></span>
+                          Schedule a video call
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Name Row */}
+                    <div className="form-row-2">
+                      <div className="form-group-outline">
+                        <input type="text" placeholder="First Name *" required value={quoteForm.firstName} onChange={e => setQuoteForm({ ...quoteForm, firstName: e.target.value })} />
+                      </div>
+                      <div className="form-group-outline">
+                        <input type="text" placeholder="Last Name *" required value={quoteForm.lastName} onChange={e => setQuoteForm({ ...quoteForm, lastName: e.target.value })} />
+                      </div>
+                    </div>
+
+                    {/* Phone Row */}
+                    <div className="form-row-phone">
+                      <div className="form-group-outline phone-code">
+                        <select value={quoteForm.phoneCode} onChange={e => setQuoteForm({ ...quoteForm, phoneCode: e.target.value })}>
+                          <option value="+91">IN +91</option>
+                          <option value="+1">US +1</option>
+                          <option value="+44">UK +44</option>
+                          <option value="+971">AE +971</option>
+                        </select>
+                      </div>
+                      <div className="form-group-outline phone-number">
+                        <input type="tel" placeholder="Phone Number *" required value={quoteForm.phone} onChange={e => setQuoteForm({ ...quoteForm, phone: e.target.value })} />
+                      </div>
+                    </div>
+
+                    {/* Email & Config Row */}
+                    <div className="form-row-2">
+                      <div className="form-group-outline">
+                        <input type="email" placeholder="Email Address *" required value={quoteForm.email} onChange={e => setQuoteForm({ ...quoteForm, email: e.target.value })} />
+                      </div>
+                      <div className="form-group-outline">
+                        <select value={quoteForm.config} onChange={e => setQuoteForm({ ...quoteForm, config: e.target.value })}>
+                          <option value="2 BHK Apartment">2 BHK Apartment</option>
+                          <option value="3 BHK Apartment">3 BHK Apartment</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Checkboxes */}
+                    <div className="form-checkbox-group">
+                      <label className="checkbox-label">
+                        <input type="checkbox" required checked={quoteForm.privacy} onChange={e => setQuoteForm({ ...quoteForm, privacy: e.target.checked })} />
+                        <span className="checkbox-custom"></span>
+                        <span>I've read and agree to the <a href="#privacy" style={{ color: '#b48564', textDecoration: 'underline' }}>privacy policy. *</a></span>
+                      </label>
+                      <label className="checkbox-label">
+                        <input type="checkbox" checked={quoteForm.updates} onChange={e => setQuoteForm({ ...quoteForm, updates: e.target.checked })} />
+                        <span className="checkbox-custom"></span>
+                        <span>I'd like to receive priority project updates and offers.</span>
+                      </label>
+                    </div>
+
+                    <Button type="submit" theme="dark" style={{ width: '100%', marginTop: '8px', padding: '16px' }}>
+                      REQUEST PRICING DETAILS
+                    </Button>
+                  </form>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}
-
       <Footer />
-
       <style>{`
         .project-detail-page {
           background-color: var(--color-white);
           min-height: 100vh;
         }
-
         .project-detail-page .sobha-navbar:not(.mega-open):not(.mobile-open) {
           background: linear-gradient(180deg, rgba(10, 10, 10, 0.45) 0%, transparent 100%) !important;
           box-shadow: none !important;
@@ -1478,21 +1809,17 @@ export default function PlottedDevelopment() {
           -webkit-backdrop-filter: none !important;
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease !important;
         }
-
         .project-detail-page.hide-main-header .sobha-navbar {
           transform: translateY(-100%) !important;
           opacity: 0 !important;
           pointer-events: none !important;
         }
-
         section[id], div[id] {
           scroll-margin-top: 55px; /* offset for sticky subnav */
         }
-
         .project-sub-nav {
           background: 
-            linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 38%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.55) 100%),
-            linear-gradient(115deg, rgba(26, 28, 34, 0.88) 0%, rgba(58, 63, 72, 0.82) 35%, rgba(90, 98, 112, 0.88) 50%, rgba(48, 52, 60, 0.82) 65%, rgba(22, 24, 28, 0.88) 100%) !important;
+            linear-gradient(180deg, rgb(39 39 39 / 86%) 0%, rgb(35 35 35) 38%, rgb(0 0 0 / 55%) 50%, rgb(0 0 0 / 80%) 100%), linear-gradient(115deg, rgba(26, 28, 34, 0.85) 0%, rgb(14 14 14 / 80%) 35%, rgb(47 47 47 / 80%) 50%, rgb(53 53 53 / 80%) 65%, rgb(33 34 35 / 73%) 100%) !important;
           backdrop-filter: blur(24px) saturate(200%) brightness(108%) !important;
           -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(108%) !important;
           position: sticky;
@@ -1501,7 +1828,6 @@ export default function PlottedDevelopment() {
           padding: 0;
           box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.16) !important;
         }
-
         .overview-logo-badge {
           position: absolute;
           top: 0;
@@ -1516,7 +1842,6 @@ export default function PlottedDevelopment() {
           align-items: center;
           justify-content: center;
           z-index: 9980;
-          height: 48px;
           width: 140px;
           overflow: hidden;
           box-sizing: border-box;
@@ -1527,12 +1852,14 @@ export default function PlottedDevelopment() {
           transform: translateY(2px);
         }
         .overview-logo-img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
+          width: 100% !important;
+          height: 100% !important;
+          max-width: 100% !important;
+          max-height: 100% !important;
+          object-fit: contain !important;
           transform: scale(1.6);
           transform-origin: center;
-          display: block;
+          display: block !important;
           pointer-events: none;
         }
         @media (min-width: 1248px) {
@@ -1544,12 +1871,12 @@ export default function PlottedDevelopment() {
           .overview-logo-badge {
             left: 14px;
             height: 38px;
+            max-height: 38px;
             width: 105px;
             padding: 4px 8px;
             border-radius: 0 0 5px 5px;
           }
         }
-
         .sub-nav-container {
           display: flex;
           justify-content: space-between;
@@ -1559,7 +1886,6 @@ export default function PlottedDevelopment() {
           padding: 0 24px;
           position: relative;
         }
-
         .sub-nav-scroll-wrapper {
           display: flex;
           justify-content: center;
@@ -1568,7 +1894,6 @@ export default function PlottedDevelopment() {
           flex: 1;
           position: relative;
         }
-
         /* â”€â”€ REFINED CONCEPT 3 STYLES â”€â”€ */
         .concept-3-cinematic {
           position: relative;
@@ -1580,25 +1905,21 @@ export default function PlottedDevelopment() {
           align-items: stretch;
           border-top: 1px solid rgba(255,255,255,0.05);
         }
-
         .c3-massive-text {
           position: absolute;
           bottom: 2%;
           left: 50%;
           transform: translateX(-50%);
-
           font-size: 9vw;
           white-space: nowrap;
           color: transparent;
           -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
           pointer-events: none;
           z-index: 3;
-
           width: 100%;
           text-align: center;
           line-height: 1;
         }
-
         .c3-split-layout {
           display: flex;
           flex: 1;
@@ -1606,26 +1927,22 @@ export default function PlottedDevelopment() {
           position: relative;
           z-index: 2;
         }
-
         .c3-image-pane {
           width: 60%;
           position: relative;
           display: flex;
         }
-
         .c3-image-pane img {
           width: 100%;
           flex: 1;
           object-fit: cover;
           filter: grayscale(10%) contrast(110%);
         }
-
         .c3-overlay {
           position: absolute;
           inset: 0;
           background: linear-gradient(to right, rgba(29,53,87,0), var(--color-bg-navy));
         }
-
         .c3-solid-pane {
           width: 40%;
           background: var(--color-bg-navy);
@@ -1636,43 +1953,33 @@ export default function PlottedDevelopment() {
           padding: 80px 5%;
           position: relative;
         }
-
         .c3-action-area {
           max-width: 550px;
           position: relative;
           z-index: 4;
         }
-
         .c3-tag {
-
-
           font-size: 12px;
-
           color: var(--color-bg-cream);
           text-transform: uppercase;
           margin-bottom: 24px;
           display: block;
           font-weight: 400;
         }
-
         .c3-action-area h3 {
           color: var(--color-white);
           line-height: 1.2;
           margin-bottom: 24px;
         }
-
         .c3-desc {
-
           font-size: 16px;
           color: rgba(255,255,255,0.7);
           line-height: 1.6;
           margin-bottom: 40px;
         }
-
         .show-only-on-mobile {
           display: none !important;
         }
-
         /* â”€â”€ INFO GRID STYLES â”€â”€ */
         .info-grid-tag {
           font-family: var(--font-sans);
@@ -1684,7 +1991,6 @@ export default function PlottedDevelopment() {
           margin-bottom: 8px;
           display: block;
         }
-
         .info-grid-val {
           font-family: var(--font-heading);
           font-size: 28px;
@@ -1696,10 +2002,9 @@ export default function PlottedDevelopment() {
           display: block;
           letter-spacing: 0.02em;
         }
-
         .info-grid-val-large {
           font-family: var(--font-heading);
-          font-size: 36px;
+          font-size: 30px;
           font-weight: 200;
           color: #b48564;
           text-transform: uppercase;
@@ -1708,7 +2013,6 @@ export default function PlottedDevelopment() {
           display: block;
           letter-spacing: 0.04em;
         }
-
         .info-grid-desc {
           font-family: var(--font-sans);
           font-size: 10px;
@@ -1718,7 +2022,6 @@ export default function PlottedDevelopment() {
           margin: 0;
           font-weight: 400;
         }
-
         /* ── SLIDING GOLD INDICATOR ── */
         .sub-nav-indicator {
           position: absolute;
@@ -1733,10 +2036,9 @@ export default function PlottedDevelopment() {
           pointer-events: none;
           z-index: 2;
         }
-
         .sub-nav-link {
           font-family: var(--font-sans) !important;
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 600;
           color: rgba(255, 255, 255, 0.85) !important;
           text-transform: uppercase;
@@ -1752,25 +2054,21 @@ export default function PlottedDevelopment() {
           transition: color 0.3s ease, text-shadow 0.3s ease;
           white-space: nowrap;
         }
-
         .sub-nav-link:hover {
-          color: #f3c892 !important;
+          color: #B48564 !important;
           background: transparent !important;
         }
-
         .sub-nav-link.active {
-          color: #f3c892 !important;
+          color: #B48564 !important;
           font-weight: 700 !important;
           background: transparent !important;
           text-shadow: 0 0 12px rgba(243, 200, 146, 0.5);
         }
-
         /* ── SUBNAV DROPDOWNS ── */
         .sub-nav-dropdown-wrapper {
           position: relative;
           display: inline-flex;
         }
-
         .sub-nav-chevron {
           margin-left: 2px;
           display: inline-block;
@@ -1778,17 +2076,14 @@ export default function PlottedDevelopment() {
           opacity: 0.4;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
         }
-
         .sub-nav-dropdown-wrapper:hover .sub-nav-chevron {
           transform: rotate(180deg);
           opacity: 0.8;
         }
-
         .sub-nav-dropdown-wrapper:hover .more-trigger-icon {
           transform: rotate(90deg) scale(1.1);
           color: #ffffff !important;
         }
-
         .sub-nav-dropdown-menu {
           position: absolute;
           top: calc(100% + 4px);
@@ -1807,13 +2102,11 @@ export default function PlottedDevelopment() {
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           z-index: 99;
         }
-
         .sub-nav-dropdown-wrapper:hover .sub-nav-dropdown-menu {
           opacity: 1;
           visibility: visible;
           transform: translateX(-50%) translateY(0);
         }
-
         .dropdown-item {
           font-family: var(--font-sans) !important;
           display: block;
@@ -1829,27 +2122,22 @@ export default function PlottedDevelopment() {
           border-radius: 8px;
           width: 100%;
         }
-
         .dropdown-item:hover {
           color: #ffffff;
           background: rgba(255, 255, 255, 0.08);
           padding-left: 20px;
         }
-
         .dropdown-item.active {
           color: #b48564;
           font-weight: 600;
           background: rgba(255, 255, 255, 0.04);
         }
-
         /* â”€â”€ Nested Tabs (Overview Switcher) â”€â”€ */
         .nested-tabs-container {
           display: flex;
           justify-content: center;
           margin-bottom: 16px; /* Reduced to eliminate negative space */
-          margin-top: 10px;
         }
-
         .nested-tabs-wrapper {
           display: flex;
           background: rgba(0, 0, 0, 0.05);
@@ -1858,38 +2146,31 @@ export default function PlottedDevelopment() {
           border-radius: 100px;
           gap: 6px;
         }
-
         .nested-tab-btn {
           background: transparent;
           border: none;
           padding: 8px 24px;
-
           font-size: 13.5px;
           font-weight: 400;
           color: var(--color-text-muted);
           border-radius: 100px;
           cursor: pointer;
-
           transition: all 0.3s ease;
         }
-
         .nested-tab-btn:hover {
           color: var(--color-primary);
           background: rgba(0, 0, 0, 0.04);
         }
-
         .nested-tab-btn.active {
           background: var(--color-primary);
           color: var(--color-white);
           font-weight: 400;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
-
         /* â”€â”€ Tab Pane Animations â”€â”€ */
         .fade-in-panel {
           animation: paneFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
         @keyframes paneFadeIn {
           from {
             opacity: 0;
@@ -1900,7 +2181,6 @@ export default function PlottedDevelopment() {
             transform: translateY(0);
           }
         }
-
         .project-hero-section {
           position: relative;
           width: 100%;
@@ -1914,7 +2194,6 @@ export default function PlottedDevelopment() {
           background-color: var(--color-bg-navy);
           padding-bottom: 80px;
         }
-
         /* â”€â”€ 4-Split Reveal Mask â”€â”€ */
         .project-split-mask {
           position: absolute;
@@ -1935,11 +2214,9 @@ export default function PlottedDevelopment() {
         .panel-2 { transform-origin: bottom; animation-delay: 0.22s; }
         .panel-3 { transform-origin: top; animation-delay: 0.34s; }
         .panel-4 { transform-origin: bottom; animation-delay: 0.46s; }
-
         @keyframes slideAwayProject {
           to { transform: scaleY(0); }
         }
-
         /* â”€â”€ Background Image â”€â”€ */
         .project-hero-background {
           position: absolute;
@@ -1949,7 +2226,6 @@ export default function PlottedDevelopment() {
           height: 100%;
           z-index: 1;
         }
-
         .project-hero-bg-image {
           width: 100%;
           height: 100%;
@@ -1957,11 +2233,9 @@ export default function PlottedDevelopment() {
           object-position: center center;
           transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .project-hero-section:hover .project-hero-bg-image {
           filter: grayscale(0%);
         }
-
         .project-hero-overlay {
           position: absolute;
           top: 0;
@@ -1971,14 +2245,15 @@ export default function PlottedDevelopment() {
           background: linear-gradient(
             180deg,
             rgba(15, 15, 15, 0.75) 0%,
-            rgba(15, 15, 15, 0.25) 35%,
-            rgba(15, 15, 15, 0.45) 70%,
-            rgba(15, 15, 15, 0.85) 100%
+            rgba(15, 15, 15, 0) 10%,
+            rgba(15, 15, 15, 0) 35%,
+            rgba(15, 15, 15, 0) 70%,
+            rgba(15, 15, 15, 0.46) 90%,
+            rgba(15, 15, 15, 1) 100%
           );
           z-index: 2;
           pointer-events: none;
         }
-
         /* â”€â”€ Light Leak â”€â”€ */
         .project-hero-light-leak {
           position: absolute;
@@ -1988,7 +2263,6 @@ export default function PlottedDevelopment() {
           overflow: hidden;
           mix-blend-mode: screen;
         }
-
         .project-hero-light-leak::before {
           content: '';
           position: absolute;
@@ -2002,7 +2276,6 @@ export default function PlottedDevelopment() {
           animation: floatGoldProject 25s infinite alternate ease-in-out;
           will-change: transform;
         }
-
         .project-hero-light-leak::after {
           content: '';
           position: absolute;
@@ -2016,17 +2289,14 @@ export default function PlottedDevelopment() {
           animation: floatTealProject 30s infinite alternate ease-in-out;
           will-change: transform;
         }
-
         @keyframes floatGoldProject {
           0% { transform: translate3d(0, 0, 0) rotate(0deg); }
           100% { transform: translate3d(80px, 60px, 0) rotate(120deg); }
         }
-
         @keyframes floatTealProject {
           0% { transform: translate3d(0, 0, 0) rotate(0deg); }
           100% { transform: translate3d(-80px, -60px, 0) rotate(-120deg); }
         }
-
         /* â”€â”€ Overlaid Content â”€â”€ */
         .project-hero-content {
           position: relative;
@@ -2039,45 +2309,39 @@ export default function PlottedDevelopment() {
           max-width: 1400px;
           padding: 0 40px;
         }
-
         .project-hero-text-col {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           text-align: left;
         }
-
         .project-hero-btn-col {
           display: flex;
           flex-direction: column;
           align-items: flex-end;
           margin-bottom: 24px;
         }
-
         .project-tag-reveal {
-
+        
           font-size: 10px;
           font-weight: 400;
           text-transform: uppercase;
           color: rgba(255, 255, 255, 0.7);
-
           margin-bottom: 24px;
           opacity: 0;
           animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           animation-delay: 0.8s;
           display: inline-block;
         }
-
         .hero-cta-btn {
           opacity: 0;
           animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           animation-delay: 1.4s;
-          background: rgba(255, 255, 255, 0.38) !important;
+          background: rgba(255,255,255,0.1) !important;
           color: var(--color-white) !important;
           border-color: rgba(255, 255, 255, 0.3) !important;
           backdrop-filter: blur(12px);
         }
-
         .hero-cta-btn .btn-circle-arrow {
           background: rgba(255, 255, 255, 0.15) !important;
           color: var(--color-white) !important;
@@ -2089,36 +2353,19 @@ export default function PlottedDevelopment() {
           color: var(--color-bg-navy) !important;
           box-shadow: 0 8px 30px rgba(255, 255, 255, 0.15) !important;
         }
-
         .hero-cta-btn:hover .btn-circle-arrow {
           background: rgba(255,255,255,0.3) !important;
           color: var(--color-white) !important;
         }
-
         .project-hero-title {
-          line-height: 1.1;
-          font-size: 30px;
           color: var(--color-white);
-          margin-bottom: 24px;
-          text-shadow: 0 4px 30px rgba(0, 0, 0, 0.65), 0 2px 10px rgba(0, 0, 0, 0.4);
-          opacity: 0;
-          animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 1s;
         }
-
-
-
         .project-hero-subtitle {
           text-transform: uppercase;
           color: rgba(255, 255, 255, 0.85);
-
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-          opacity: 0;
-          animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 1.2s;
           display: inline-block;
         }
-
         @keyframes fadeUpProject {
           from {
             opacity: 0;
@@ -2129,67 +2376,54 @@ export default function PlottedDevelopment() {
             transform: translateY(0);
           }
         }
-
         /* â”€â”€ SECTION WRAPPER & SUBSECTIONS â”€â”€ */
         .project-section-wrapper {
           background-color: var(--color-bg-light);
         }
-
         .section-header {
           margin-bottom: 0px;
           text-align: left;
         }
-
         .section-subtitle {
           color: var(--color-text-dark);
           line-height: 1.6;
           max-width: 680px;
-          margin-top: 8px;
           margin-bottom: 0;
           text-align: left;
         }
-
         #overview.project-section-wrapper {
-          background-color: var(--color-bg-light);
+          background-color: var(--color-white);
           padding: 80px 0;
         }
-
         .overview-outer-container {
           max-width: var(--container-width);
           margin: 0 auto;
           position: relative;
           z-index: 2;
         }
-
-
-
         /* â”€â”€ Centered Header Styles â”€â”€ */
         .overview-centered-header {
           text-align: center;
           margin-bottom: 40px;
         }
-
         .overview-main-title {
           color: var(--color-text-dark);
-
           text-transform: uppercase;
-          margin: 0 0 12px 0;
+          font-size: 32px;
+          font-weight: 400;
+          letter-spacing: 0px;
         }
-
         .overview-sub-title {
-
           font-size: 15px;
           color: var(--color-text-muted);
           margin: 0;
         }
-
         /* â”€â”€ Pill Tabs Styles â”€â”€ */
         .overview-nav-container {
           display: flex;
           justify-content: center;
           margin-bottom: 56px;
         }
-
         .overview-nav-pills {
           display: inline-flex;
           background: rgba(0, 0, 0, 0.04);
@@ -2198,11 +2432,9 @@ export default function PlottedDevelopment() {
           padding: 6px;
           gap: 6px;
         }
-
         .overview-pill-btn {
           border: none;
           background: transparent;
-
           font-size: 14px;
           font-weight: 400;
           color: var(--color-text-muted);
@@ -2211,19 +2443,16 @@ export default function PlottedDevelopment() {
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .overview-pill-btn:hover:not(.active) {
           color: var(--color-primary);
           background: rgba(0, 0, 0, 0.04);
         }
-
         .overview-pill-btn.active {
           background: var(--color-primary);
           color: var(--color-white);
           font-weight: 400;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
-
         /* â”€â”€ Grid Layout Styles â”€â”€ */
         .overview-main-grid-redesign {
           display: grid;
@@ -2232,77 +2461,60 @@ export default function PlottedDevelopment() {
           align-items: center;
           min-height: 420px;
         }
-
         .overview-left-visual {
           width: 100%;
         }
-
         .overview-image-wrapper {
-          border-radius: 12px;
+          border-radius: 8px;
           overflow: hidden;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+          // box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
           aspect-ratio: 16/10;
         }
-
         .overview-image-wrapper img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
         }
-
         .overview-right-text {
           width: 100%;
         }
-
         .overview-text-title {
           color: var(--color-primary);
           margin-bottom: 20px;
-
           line-height: 1.2;
         }
-
         .overview-text-desc {
-
           font-size: 15px;
           color: var(--color-text-muted);
           line-height: 1.8;
           margin-bottom: 32px;
         }
-
         /* Curated slide panels */
         .overview-slide-panel {
           animation: ov-panel-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
-
         @keyframes ov-panel-fade {
           from { opacity: 0; transform: translateY(8px); }
           to { opacity: 1; transform: translateY(0); }
         }
-
         /* Curated Amenities View */
         .overview-amenities-view {
           display: flex;
           flex-direction: column;
           width: 100%;
         }
-
         .ov-sub-heading {
-
           font-size: 21px;
           color: var(--color-primary);
           margin: 0 0 20px 0;
           font-weight: 400;
-
         }
-
         .ov-amenities-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 16px 20px;
         }
-
         .ov-amenity-card {
           display: flex;
           align-items: flex-start;
@@ -2311,7 +2523,6 @@ export default function PlottedDevelopment() {
           background: rgba(255, 255, 255, 0.4);
           border: 1px solid rgba(0, 0, 0, 0.05);
         }
-
         .ov-amenity-icon {
           color: var(--color-primary);
           font-size: 18px;
@@ -2319,37 +2530,30 @@ export default function PlottedDevelopment() {
           display: flex;
           align-items: center;
         }
-
         .ov-amenity-title {
-
           font-size: 13.5px;
           font-weight: 400;
           color: var(--color-primary);
           margin: 0 0 4px 0;
         }
-
         .ov-amenity-desc {
-
           font-size: 11.5px;
           color: var(--color-text-muted);
           margin: 0;
           line-height: 1.45;
         }
-
         /* Curated Location View */
         .overview-location-view {
           display: flex;
           flex-direction: column;
           width: 100%;
         }
-
         .ov-location-layout {
           display: grid;
           grid-template-columns: 1.2fr 1.05fr;
           gap: 24px;
           align-items: start;
         }
-
         .ov-map-visual {
           position: relative;
           width: 100%;
@@ -2358,27 +2562,21 @@ export default function PlottedDevelopment() {
           background: rgba(255, 255, 255, 0.6);
           overflow: hidden;
         }
-
         .ov-landmarks-list {
           display: flex;
           flex-direction: column;
         }
-
         .ov-landmarks-title {
-
           font-size: 10px;
           color: var(--color-primary);
-
           margin-bottom: 14px;
           font-weight: 400;
         }
-
         .ov-landmarks-grid {
           display: flex;
           flex-direction: column;
           gap: 12px;
         }
-
         .ov-landmark-item {
           display: flex;
           align-items: flex-start;
@@ -2386,75 +2584,58 @@ export default function PlottedDevelopment() {
           border-bottom: 1px solid rgba(0, 0, 0, 0.05);
           padding-bottom: 6px;
         }
-
         .ov-landmark-icon {
           color: var(--color-primary);
           flex-shrink: 0;
           margin-top: 1px;
         }
-
         .ov-landmark-name {
-
           font-size: 13px;
           font-weight: 400;
           color: var(--color-text-dark);
           display: block;
         }
-
         .ov-landmark-time {
-
           font-size: 11px;
           color: var(--color-text-muted);
         }
-
         @media (max-width: 960px) {
           .overview-main-grid-redesign {
             grid-template-columns: 1fr;
             gap: 36px;
+            margin: 0 10px;
           }
-
           .overview-text-title {
             margin-bottom: 14px;
           }
-
           .overview-text-desc {
             font-size: 14px;
             line-height: 1.7;
             margin-bottom: 24px;
           }
-
           .overview-nav-pills {
             flex-wrap: wrap;
             justify-content: center;
             border-radius: 24px;
             padding: 8px;
           }
-
           .overview-pill-btn {
             padding: 8px 16px;
             font-size: 13px;
           }
-
-          .overview-main-title {
-          }
-
           .ov-location-layout {
             grid-template-columns: 1fr;
             gap: 20px;
           }
         }
-
         .sub-section-title {
-
           font-size: 24px;
           font-weight: 400;
           color: var(--color-text-dark);
-
           text-align: center;
           margin-bottom: 40px;
           position: relative;
         }
-
         .sub-section-title::after {
           content: '';
           display: block;
@@ -2463,14 +2644,12 @@ export default function PlottedDevelopment() {
           background: var(--color-primary);
           margin: 12px auto 0;
         }
-
         /* Amenities Grid Styling */
         .overview-amenities-block {
           padding: 16px 0 0 0; /* Reduced to eliminate negative space */
           background-color: transparent !important;
           border: none !important;
         }
-
         /* â”€â”€ Corner Branch Bird Decorators â”€â”€ */
         .corner-bird {
           position: absolute;
@@ -2481,45 +2660,38 @@ export default function PlottedDevelopment() {
           height: auto;
           transition: opacity 0.3s ease;
         }
-
         .corner-top-right {
           top: -10px;
           right: -10px;
           animation: gentleFloat 8s ease-in-out infinite;
         }
-
         .corner-top-left {
           top: -10px;
           left: -10px;
           transform: rotate(180)
           animation: gentleFloat 9s ease-in-out infinite 1s;
         }
-
         .corner-bottom-right {
           bottom: 10px;
           right: -10px;
           animation: gentleFloat 7s ease-in-out infinite 0.5s;
         }
-
         @keyframes gentleFloat {
           0% { transform: translateY(0px); }
           50% { transform: translateY(-5px); }
           100% { transform: translateY(0px); }
         }
-
         @media (max-width: 1200px) {
           .corner-bird {
             width: 180px;
             opacity: 0.25;
           }
         }
-
         @media (max-width: 768px) {
           .corner-bird {
             display: none;
           }
         }
-
         /* ── Amenities Interactive Split Layout ── */
         .amenities-split-layout {
           display: flex;
@@ -2562,7 +2734,6 @@ export default function PlottedDevelopment() {
           grid-template-columns: repeat(3, 1fr);
           gap: 30px;
         }
-
         .amenity-card {
           background: var(--color-white);
           padding: 30px 24px;
@@ -2572,13 +2743,11 @@ export default function PlottedDevelopment() {
           transition: all 0.35s var(--ease-luxury);
           text-align: center;
         }
-
         .amenity-card:hover {
           transform: translateY(-5px);
           border-color: var(--color-primary);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
-
         .amenity-icon-gold {
           color: var(--color-primary);
           margin-bottom: 18px;
@@ -2591,42 +2760,33 @@ export default function PlottedDevelopment() {
           background: rgba(0, 0, 0, 0.08);
           transition: all 0.3s ease;
         }
-
         .amenity-card:hover .amenity-icon-gold {
           background: var(--color-primary);
           color: var(--color-white);
         }
-
         .amenity-title {
-
           font-size: 17px;
           font-weight: 400;
           color: var(--color-bg-navy);
           margin-bottom: 8px;
-
         }
-
         .amenity-desc {
-
           font-size: 13.5px;
           color: var(--color-text-muted);
           line-height: 1.5;
         }
-
         /* Location Layout Styling */
         .overview-location-block {
           padding: 16px 0 0 0; /* Reduced to eliminate negative space */
           background: transparent !important;
           border: none !important;
         }
-
         .location-grid-layout {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 60px;
           align-items: center;
         }
-
         .location-map-visual {
           height: 350px;
           background-color: var(--color-bg-navy);
@@ -2636,7 +2796,6 @@ export default function PlottedDevelopment() {
           border: 1px solid rgba(0, 0, 0, 0.2);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-
         .map-grid-layer {
           position: absolute;
           inset: 0;
@@ -2646,7 +2805,6 @@ export default function PlottedDevelopment() {
             linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px);
           background-size: 25px 25px;
         }
-
         .map-radar-pulse {
           position: absolute;
           top: 50%;
@@ -2658,12 +2816,10 @@ export default function PlottedDevelopment() {
           background: rgba(0, 0, 0, 0.15);
           animation: mapRadar 2.5s infinite ease-out;
         }
-
         @keyframes mapRadar {
           0% { width: 0; height: 0; opacity: 1; }
           100% { width: 300px; height: 300px; opacity: 0; }
         }
-
         .map-core-node {
           position: absolute;
           top: 50%;
@@ -2675,28 +2831,22 @@ export default function PlottedDevelopment() {
           gap: 8px;
           z-index: 10;
         }
-
         .map-core-compass {
           color: var(--color-primary);
           animation: spinCompass 25s infinite linear;
         }
-
         @keyframes spinCompass {
           to { transform: rotate(360deg); }
         }
-
         .map-core-label {
-
           font-size: 9px;
           font-weight: 400;
           color: var(--color-primary);
-
           background: rgba(6, 11, 29, 0.85);
           border: 1px solid var(--color-primary);
           padding: 4px 10px;
           border-radius: 4px;
         }
-
         .map-node {
           position: absolute;
           display: flex;
@@ -2705,7 +2855,6 @@ export default function PlottedDevelopment() {
           gap: 4px;
           z-index: 5;
         }
-
         .node-dot {
           width: 8px;
           height: 8px;
@@ -2713,14 +2862,10 @@ export default function PlottedDevelopment() {
           background: var(--color-bg-navy);
           box-shadow: 0 0 10px var(--color-bg-navy);
         }
-
         .node-text {
-
           font-size: 9px;
           color: rgba(255, 255, 255, 0.75);
-
         }
-
         .map-vector-lines {
           position: absolute;
           inset: 0;
@@ -2728,41 +2873,32 @@ export default function PlottedDevelopment() {
           height: 100%;
           pointer-events: none;
         }
-
         .location-info-list {
           display: flex;
           flex-direction: column;
         }
-
         .location-heading {
-
           font-size: 18px;
           font-weight: 400;
           color: var(--color-text-dark);
           margin-bottom: 24px;
-
         }
-
         .landmarks-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 24px;
         }
-
         .landmark-item {
           display: flex;
           align-items: flex-start;
           gap: 12px;
         }
-
         .landmark-icon {
           color: var(--color-primary);
           margin-top: 2px;
           flex-shrink: 0;
         }
-
         .landmark-name {
-
           font-weight: 400;
         }
         
@@ -2773,7 +2909,6 @@ export default function PlottedDevelopment() {
           color: var(--color-primary);
           border-top: 1px solid rgba(180, 133, 100, 0.12);
         }
-
         .video-slides-viewport {
           position: relative;
           width: 100%;
@@ -2783,14 +2918,12 @@ export default function PlottedDevelopment() {
           border: 4px solid #ffffff;
           box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
         }
-
         .video-slides-track {
           display: flex;
           width: 100%;
           height: 100%;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .video-slide-card {
           position: relative;
           flex-shrink: 0;
@@ -2798,14 +2931,12 @@ export default function PlottedDevelopment() {
           height: 100%;
           overflow: hidden;
         }
-
         .video-slide-thumbnail {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
         }
-
         .video-slide-overlay {
           position: absolute;
           inset: 0;
@@ -2817,32 +2948,24 @@ export default function PlottedDevelopment() {
           box-sizing: border-box;
           z-index: 5;
         }
-
         .video-slide-info {
           display: flex;
           flex-direction: column;
           gap: 4px;
           text-align: left;
         }
-
         .video-slide-tag {
-
           font-size: 10px;
           font-weight: 400;
           text-transform: uppercase;
           color: #aaaaaa;
-
         }
-
         .video-slide-title {
-
           font-size: 26px;
           font-weight: 400;
           color: #ffffff;
           margin: 0;
-
         }
-
         .video-slide-bottom-bar {
           display: block;
           width: 100%;
@@ -2852,18 +2975,14 @@ export default function PlottedDevelopment() {
           height: 0;
           z-index: 20;
         }
-
         .video-slide-counter {
-
           font-size: 14px;
           font-weight: 400;
           color: var(--color-primary);
           position: absolute;
           left: 0;
           top: 12px;
-
         }
-
         /* Navigation Arrows on the sides */
         .video-slide-arrow {
           position: absolute;
@@ -2886,22 +3005,18 @@ export default function PlottedDevelopment() {
           z-index: 10;
           user-select: none;
         }
-
         .video-slide-arrow:hover {
           background-color: #ffffff;
           color: var(--color-primary);
           border-color: #ffffff;
           box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-
         .video-slide-arrow--left {
           left: 16px;
         }
-
         .video-slide-arrow--right {
           right: 16px;
         }
-
         @media (max-width: 768px) {
           .video-slides-viewport {
             height: 320px;
@@ -2921,19 +3036,15 @@ export default function PlottedDevelopment() {
             transform: translateX(-50%) scale(0.85);
           }
         }
-
         /* â”€â”€ GALLERY SECTION STYLING â”€â”€ */
         .project-gallery-section {
           background-color: var(--color-bg-light);
           padding: 60px 0;
         }
-
         .project-gallery-section .section-subtitle {
           color: var(--color-text-dark);
           margin-bottom: 20px;
         }
-
-
         /* â”€â”€ INNOVATIVE BENTO GRID â”€â”€ */
         .innovative-bento-grid {
           display: grid;
@@ -2942,7 +3053,6 @@ export default function PlottedDevelopment() {
           gap: 16px;
           padding: 0 16px;
         }
-
         .bento-item {
           position: relative;
           border-radius: 20px;
@@ -2952,12 +3062,10 @@ export default function PlottedDevelopment() {
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
           transition: transform 0.4s var(--ease-luxury), box-shadow 0.4s var(--ease-luxury);
         }
-
         .bento-item:hover {
           transform: translateY(-4px);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-
         .bento-img {
           width: 100%;
           height: 100%;
@@ -2965,11 +3073,9 @@ export default function PlottedDevelopment() {
           display: block;
           transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .bento-item:hover .bento-img {
           transform: scale(1.05);
         }
-
         .bento-overlay {
           position: absolute;
           z-index: 2;
@@ -2987,21 +3093,16 @@ export default function PlottedDevelopment() {
           transform: translateY(10px);
           transition: all 0.4s var(--ease-luxury);
         }
-
         .bento-item:hover .bento-overlay {
           opacity: 1;
           transform: translateY(0);
         }
-
         .bento-title {
-
           font-size: 20px;
           color: var(--color-white);
           font-weight: 400;
-
           margin: 0;
         }
-
         /* Bento Asymmetrical Pattern (Repeats every 7 items) */
         .bento-item-0 { grid-column: span 2; grid-row: span 2; }
         .bento-item-1 { grid-column: span 1; grid-row: span 1; }
@@ -3010,7 +3111,6 @@ export default function PlottedDevelopment() {
         .bento-item-4 { grid-column: span 1; grid-row: span 2; }
         .bento-item-5 { grid-column: span 2; grid-row: span 1; }
         .bento-item-6 { grid-column: span 1; grid-row: span 1; }
-
         @media (max-width: 992px) {
           .innovative-bento-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -3025,7 +3125,6 @@ export default function PlottedDevelopment() {
           .bento-item-5 { grid-column: span 1; grid-row: span 1; }
           .bento-item-6 { grid-column: span 2; grid-row: span 1; }
         }
-
         @media (max-width: 576px) {
           .innovative-bento-grid {
             grid-template-columns: 1fr;
@@ -3034,32 +3133,27 @@ export default function PlottedDevelopment() {
           /* Everything spans 1 col on small phones */
           .bento-item { grid-column: span 1 !important; grid-row: span 1 !important; }
         }
-
         /* â”€â”€ FLOORPLANS SECTION STYLING â”€â”€ */
         .project-floorplans-section {
           background: radial-gradient(circle at top left, var(--color-bg-light) 0%, var(--color-bg-cream) 100%);
           border-top: 1px solid rgba(0, 0, 0, 0.04);
           border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
-
         .project-floorplans-section .section-subtitle {
           color: var(--color-text-dark);
           margin-bottom: 24px;
         }
-
         .floorplan-layout-grid {
           display: grid;
           grid-template-columns: 320px 1fr;
           gap: 50px;
           align-items: flex-start;
         }
-
         .floorplan-tabs-col {
           display: flex;
           flex-direction: column;
           gap: 8px;
         }
-
         .floorplan-tab-btn {
           display: flex;
           align-items: center;
@@ -3071,7 +3165,6 @@ export default function PlottedDevelopment() {
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
           padding: 12px 20px;
           border-radius: 8px;
-
           font-size: 14px;
           font-weight: 400;
           color: var(--color-text-muted);
@@ -3079,12 +3172,10 @@ export default function PlottedDevelopment() {
           cursor: pointer;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .floorplan-tab-btn:hover {
           background: rgba(255, 255, 255, 0.35);
           border-color: rgba(255, 255, 255, 0.6);
         }
-
         .floorplan-tab-btn.active {
           border-color: rgba(255, 255, 255, 0.8);
           background: rgba(255, 255, 255, 0.65);
@@ -3092,11 +3183,9 @@ export default function PlottedDevelopment() {
           font-weight: 400;
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
         }
-
         .btn-tab-num {
           font-size: 10px;
           font-weight: 400;
-
           color: var(--color-text-muted);
           border: 1px solid rgba(0, 0, 0, 0.3);
           width: 24px;
@@ -3107,13 +3196,11 @@ export default function PlottedDevelopment() {
           justify-content: center;
           transition: all 0.4s ease;
         }
-
         .floorplan-tab-btn.active .btn-tab-num {
           background: var(--color-primary);
           border-color: var(--color-primary);
           color: var(--color-white);
         }
-
         .floorplan-specs-box {
           background: rgba(255, 255, 255, 0.25);
           backdrop-filter: blur(20px);
@@ -3127,12 +3214,10 @@ export default function PlottedDevelopment() {
           flex-direction: column;
           gap: 8px;
         }
-
         .floorplan-spec-line {
           display: flex;
           justify-content: space-between;
           font-size: 13px;
-
           border-bottom: 1px solid rgba(0, 0, 0, 0.04);
           padding-bottom: 8px;
         }
@@ -3140,24 +3225,17 @@ export default function PlottedDevelopment() {
           border-bottom: none;
           padding-bottom: 0;
         }
-
         .spec-label {
           color: var(--color-text-muted);
-
         }
-
         .spec-val {
           color: var(--color-text-dark);
           font-weight: 400;
         }
-
-
-
         .floorplan-visual-col {
           display: flex;
           justify-content: center;
         }
-
         .blueprint-canvas {
           width: 100%;
           max-width: 580px;
@@ -3172,7 +3250,6 @@ export default function PlottedDevelopment() {
           align-items: center;
           justify-content: center;
         }
-
         .blueprint-grid-mesh {
           position: absolute;
           inset: 0;
@@ -3182,39 +3259,32 @@ export default function PlottedDevelopment() {
             linear-gradient(90deg, rgba(0, 0, 0, 1) 1px, transparent 1px);
           background-size: 20px 20px;
         }
-
         .blueprint-svg {
           width: 100%;
           height: 100%;
           position: relative;
           z-index: 5;
         }
-
         .blueprint-stamp {
           position: absolute;
           bottom: 15px;
           right: 15px;
-
           font-size: 8px;
           font-weight: 400;
           color: rgba(0, 0, 0, 0.35);
-
           border: 1px solid rgba(0, 0, 0, 0.2);
           padding: 3px 8px;
           border-radius: 2px;
         }
-
         /* â”€â”€ PRICING SECTION STYLING â”€â”€ */
         .project-pricing-section {
           background-color: var(--color-bg-light);
           padding: 80px 0;
         }
-
         .project-pricing-section .section-subtitle {
           color: var(--color-text-dark);
           margin-bottom: 48px;
         }
-
         .pricing-cards-container {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -3222,7 +3292,6 @@ export default function PlottedDevelopment() {
           max-width: 1100px;
           margin: 0 auto;
         }
-
         .pricing-item-card {
           background: var(--color-white);
           border: 1px solid rgba(0, 0, 0, 0.12);
@@ -3234,15 +3303,13 @@ export default function PlottedDevelopment() {
           box-shadow: 0 4px 25px rgba(0, 0, 0, 0.01);
           transition: all 0.35s var(--ease-luxury);
         }
-
         /* Overview Editorial Layout */
         .overview-editorial-grid {
           display: grid;
           grid-template-columns: 1fr 2fr;
           gap: 60px;
-          align-items: end;
+          align-items: center;
         }
-
         @media (max-width: 900px) {
           .overview-editorial-grid {
             grid-template-columns: 1fr;
@@ -3251,7 +3318,6 @@ export default function PlottedDevelopment() {
           }
           
         }
-
         .amenity-luxury-card .amenity-bg-img {
           transform: scale(1);
         }
@@ -3276,120 +3342,93 @@ export default function PlottedDevelopment() {
         .amenity-luxury-card:hover .amenity-desc-text {
           color: rgba(255,255,255,1) !important;
         }
-
         .pricing-item-card:hover {
           transform: translateY(-8px);
           box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
           border-color: var(--color-primary);
         }
-
         .pricing-item-card.featured {
           border-color: var(--color-primary);
           box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04);
           background: var(--color-bg-light);
         }
-
         .pricing-item-card.featured:hover {
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
         }
-
         .pricing-badge {
           position: absolute;
           top: -12px;
           left: 28px;
           background: var(--color-primary);
           color: var(--color-bg-light);
-
           font-size: 10px;
           font-weight: 400;
-
           padding: 4px 12px;
           border-radius: 100px;
           border: 1px solid var(--color-primary);
         }
-
         .pricing-badge.featured-badge {
           background: var(--color-primary);
           border-color: var(--color-primary);
           color: var(--color-white);
         }
-
         .pricing-title {
-
           font-size: 20px;
           font-weight: 400;
           color: var(--color-primary);
           margin-bottom: 20px;
           margin-top: 5px;
-
         }
-
         .pricing-divider {
           width: 100%;
           height: 1px;
           background: rgba(0, 0, 0, 0.08);
           margin-bottom: 24px;
         }
-
         .pricing-specs {
           display: flex;
           flex-direction: column;
           gap: 14px;
           margin-bottom: 30px;
         }
-
         .pricing-amount {
           margin-top: auto;
           margin-bottom: 28px;
         }
-
         .pricing-label {
           display: block;
-
           font-size: 11px;
           font-weight: 400;
           color: var(--color-text-muted);
-
           text-transform: uppercase;
           margin-bottom: 4px;
         }
-
         .pricing-val {
-
           font-size: 26px;
           font-weight: 400;
           color: var(--color-primary);
-
         }
-
         .pricing-asterisk {
           font-size: 15px;
           vertical-align: super;
           color: var(--color-text-muted);
         }
-
-
-
         .pricing-fineprint {
           text-align: center;
-
           font-size: 11px;
           color: var(--color-text-muted-light);
           margin-top: 32px;
         }
-
         /* â”€â”€ PROJECT STATUS SECTION STYLING â”€â”€ */
         .project-status-section {
           background-color: var(--color-bg-light);
           padding: 80px 0;
           border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
-
         .project-status-section .section-subtitle {
           color: var(--color-text-dark);
           margin-bottom: 54px;
         }
-
         .status-timeline-container {
           display: grid;
           gap: 60px;
@@ -3397,25 +3436,21 @@ export default function PlottedDevelopment() {
           margin: 0 auto;
           align-items: center;
         }
-
         .status-img-sm {
           position: relative;
           border-radius: 4px;
           overflow: hidden;
           cursor: pointer;
         }
-
         .status-img-sm img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .status-img-sm:hover img {
           transform: scale(1.05);
         }
-
         .status-img-overlay {
           position: absolute;
           inset: 0;
@@ -3426,13 +3461,9 @@ export default function PlottedDevelopment() {
           opacity: 0;
           transition: opacity 0.4s ease;
         }
-
         .status-img-sm:hover .status-img-overlay {
           opacity: 1;
         }
-
-
-
         /* â”€â”€ LIGHTBOX / MODAL MEDIA OVERLAYS â”€â”€ */
         .lightbox-overlay {
           position: fixed;
@@ -3443,7 +3474,6 @@ export default function PlottedDevelopment() {
           align-items: center;
           justify-content: center;
         }
-
         .lightbox-close-btn {
           position: absolute;
           top: 30px;
@@ -3455,11 +3485,9 @@ export default function PlottedDevelopment() {
           transition: color 0.3s ease;
           z-index: 1010;
         }
-
         .lightbox-close-btn:hover {
           color: var(--color-primary);
         }
-
         .lightbox-arrow-btn {
           position: absolute;
           top: 50%;
@@ -3477,15 +3505,12 @@ export default function PlottedDevelopment() {
           transition: all 0.3s ease;
           z-index: 1010;
         }
-
         .lightbox-arrow-btn:hover {
           background: var(--color-primary);
           border-color: var(--color-primary);
         }
-
         .lightbox-arrow-btn.prev { left: 40px; }
         .lightbox-arrow-btn.next { right: 40px; }
-
         .lightbox-content {
           max-width: 80%;
           max-height: 80%;
@@ -3495,7 +3520,6 @@ export default function PlottedDevelopment() {
           gap: 15px;
           position: relative;
         }
-
         .lightbox-img {
           max-width: 100%;
           max-height: 70vh;
@@ -3503,15 +3527,11 @@ export default function PlottedDevelopment() {
           border-radius: 6px;
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
-
         .lightbox-title {
-
           font-size: 18px;
           color: var(--color-white);
-
           text-align: center;
         }
-
         /* Video Iframe container inside overlay */
         .video-modal-content {
           width: 80%;
@@ -3522,166 +3542,315 @@ export default function PlottedDevelopment() {
           background: var(--color-bg-navy);
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
-
         .video-iframe {
           width: 100%;
           height: 100%;
         }
-
         /* Inquiry booking Form Modal styling */
         .modal-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(6, 11, 29, 0.85);
-          backdrop-filter: blur(8px);
+          background: rgba(0, 0, 0, 0.75);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           z-index: 1000;
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 20px;
         }
-
         .modal-content-card {
           background: var(--color-white);
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          border-radius: 16px;
+          border-radius: 8px;
           width: 90%;
-          max-width: 440px;
-          padding: 40px;
+          max-width: 1040px; /* Wider for split layout */
           position: relative;
-          box-shadow: 0 25px 55px rgba(0, 0, 0, 0.2);
-          animation: modalEntrance 0.4s var(--ease-luxury);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+          animation: modalEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          overflow: hidden;
+          padding: 0;
+          display: flex;
         }
-
         @keyframes modalEntrance {
-          from { opacity: 0; transform: translateY(15px) scale(0.97); }
+          from { opacity: 0; transform: translateY(20px) scale(0.96); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
-
-        .modal-close-btn {
+        
+        /* Left Image Panel */
+        .modal-image-panel {
+          flex: 1;
+          background: url('/images/project/CML/master-banner.png') center/cover no-repeat;
+          position: relative;
+          display: flex;
+          align-items: flex-end;
+          padding: 40px 32px;
+        }
+        .modal-image-panel::after {
+          content: '';
           position: absolute;
-          top: 20px;
-          right: 20px;
-          color: var(--color-text-muted-light);
-          cursor: pointer;
-          transition: color 0.3s ease;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
         }
-
-        .modal-close-btn:hover {
-          color: var(--color-text-dark);
+        .modal-image-overlay {
+          position: relative;
+          z-index: 2;
+          color: #ffffff;
         }
-
-        .modal-heading {
-
-          font-size: 22px;
+        .modal-image-overlay h3 {
+          font-family: var(--font-heading);
+          font-size: 28px;
           font-weight: 400;
-          color: var(--color-text-dark);
-          text-align: center;
-          margin-bottom: 6px;
+          margin: 0 0 4px 0;
 
+        color: #fff;
         }
-
-        .modal-subheading {
-
-          font-size: 13px;
-          color: var(--color-text-muted);
-          text-align: center;
-          margin-bottom: 28px;
+        .modal-image-overlay p {
+          font-family: var(--font-sans);
+          font-size: 13.5px;
+          opacity: 0.8;
+          margin: 0;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #fff;
         }
-
-        .modal-inquiry-form {
+        
+        /* Right Form Panel */
+        .modal-form-panel {
+          flex: 1.1;
           display: flex;
           flex-direction: column;
+          background: #ffffff;
+          position: relative;
+        }
+
+        /* Light Header */
+        .modal-header-block-light {
+          padding: 40px 40px 24px;
+          text-align: left;
+        }
+        .modal-heading-light {
+          font-family: var(--font-heading);
+          font-size: 26px;
+          font-weight: 400;
+          color: #111111;
+          margin-bottom: 8px;
+          letter-spacing: 0.02em;
+        }
+        .modal-subheading-light {
+          font-family: var(--font-sans);
+          font-size: 14px;
+          color: rgba(0, 0, 0, 0.6);
+          margin: 0;
+        }
+        .modal-close-btn {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          background: transparent;
+          border: none;
+          border-radius: 50%;
+          width: 34px;
+          height: 34px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(0,0,0,0.4);
+          cursor: pointer;
+          z-index: 10;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-close-btn:hover {
+          color: #111111;
+          transform: rotate(90deg);
+        }
+        
+        .modal-body-light {
+          padding: 0 40px 40px;
+        }
+        
+        /* New Form Styles */
+        .modal-inquiry-form-new {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+        .form-radio-group {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .form-label-top {
+          font-family: var(--font-sans);
+          font-size: 13px;
+          font-weight: 600;
+          color: rgba(0,0,0,0.6);
+        }
+        .radio-options {
+          display: flex;
+          gap: 24px;
+        }
+        .radio-label {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+          color: #111111;
+          cursor: pointer;
+        }
+        .radio-label input[type="radio"] {
+          display: none;
+        }
+        .radio-custom {
+          width: 16px;
+          height: 16px;
+          border: 1px solid rgba(0,0,0,0.3);
+          border-radius: 50%;
+          position: relative;
+          display: inline-block;
+          transition: all 0.2s ease;
+        }
+        .radio-label input[type="radio"]:checked + .radio-custom {
+          border-color: #b48564;
+        }
+        .radio-label input[type="radio"]:checked + .radio-custom::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 8px;
+          height: 8px;
+          background: #b48564;
+          border-radius: 50%;
+        }
+        .form-row-2 {
+          display: flex;
           gap: 16px;
         }
-
-        .form-group-field {
-          position: relative;
-          width: 100%;
+        .form-row-phone {
+          display: flex;
+          gap: 16px;
         }
-
-        .form-input-icon {
-          position: absolute;
-          left: 14px;
-          top: 50%;
-          transform: translateY(-50%);
-          color: var(--color-text-muted-light);
-          pointer-events: none;
+        .phone-code {
+          flex: 0 0 100px;
         }
-
-        .form-group-field input {
+        .phone-number {
+          flex: 1;
+        }
+        .form-group-outline {
+          flex: 1;
+        }
+        .form-group-outline input, .form-group-outline select {
           width: 100%;
-          padding: 14px 14px 14px 40px;
-          border: 1px solid var(--color-border-light);
-          border-radius: 6px;
-
-          font-size: 13.5px;
-          color: var(--color-text-dark);
+          padding: 12px 14px;
+          border: 1px solid rgba(0,0,0,0.15);
+          border-radius: 4px;
+          font-family: var(--font-sans);
+          font-size: 14px;
+          color: #111111;
           outline: none;
-          transition: all 0.3s ease;
+          background: #ffffff;
+          transition: border-color 0.3s ease;
+          box-sizing: border-box;
         }
-
-        .form-group-field input:focus {
-          border-color: var(--color-primary);
-          box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+        .form-group-outline input::placeholder {
+          color: rgba(0,0,0,0.5);
         }
-
-
-
+        .form-group-outline input:focus, .form-group-outline select:focus {
+          border-color: #b48564;
+        }
+        .form-checkbox-group {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-top: 4px;
+        }
+        .checkbox-label {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          font-size: 13px;
+          color: rgba(0,0,0,0.7);
+          cursor: pointer;
+        }
+        .checkbox-label input[type="checkbox"] {
+          display: none;
+        }
+        .checkbox-custom {
+          width: 16px;
+          height: 16px;
+          border: 1px solid rgba(0,0,0,0.2);
+          border-radius: 3px;
+          position: relative;
+          display: inline-block;
+          flex-shrink: 0;
+          margin-top: 2px;
+          transition: all 0.2s ease;
+        }
+        .checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
+          background: #b48564;
+          border-color: #b48564;
+        }
+        .checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after {
+          content: '';
+          position: absolute;
+          left: 4px;
+          top: 1px;
+          width: 4px;
+          height: 8px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+        
+        /* Success Message */
         .form-success-message {
           text-align: center;
           padding: 20px 0;
           animation: fadeUpProject 0.5s ease forwards;
         }
-
         .success-icon-gold {
-          color: var(--color-primary);
+          color: #b48564;
           margin-bottom: 16px;
         }
-
         .form-success-message h4 {
-
-          font-size: 18px;
-          color: var(--color-bg-navy);
-          margin-bottom: 6px;
+          font-family: var(--font-heading);
+          font-size: 22px;
+          font-weight: 400;
+          color: #111111;
+          margin-bottom: 8px;
         }
-
         .form-success-message p {
-
-          font-size: 13px;
-          color: var(--color-text-muted);
+          font-size: 14px;
+          color: rgba(0, 0, 0, 0.6);
         }
-
         /* â”€â”€ Pillars Accordion Styling â”€â”€ */
         .pillars-container {
           width: 100%;
           text-align: left;
         }
-
         .pillars-accordion {
           display: flex;
           flex-direction: column;
           gap: 12px;
           margin-top: 10px;
         }
-
         .pillar-item {
           border-bottom: 1px solid rgba(29, 53, 87, 0.08);
           cursor: pointer;
           transition: all 0.3s ease;
         }
-
         .pillar-item:hover .pillar-title {
           color: var(--color-primary);
         }
-
         .pillar-header {
           display: flex;
           align-items: center;
-          padding: 16px 0;
+          padding: 10px 15px;
           gap: 16px;
           user-select: none;
+          background-color: var(--color-bg-light);
         }
-
         .pillar-number {
           font-family: var(--font-sans);
           font-size: 13px;
@@ -3690,45 +3859,37 @@ export default function PlottedDevelopment() {
           opacity: 0.5;
           transition: opacity 0.3s ease;
         }
-
         .pillar-item.active .pillar-number {
           opacity: 1;
+          color: var(--color-highlight);
         }
-
         .pillar-title {
-          font-family: var(--font-heading);
-          font-size: 19px;
-          font-weight: 400;
+          font-family: var(--font-sans);
           color: var(--color-text-dark);
+          font-weight:400;
+          font-size: 18px;
           margin: 0;
           flex-grow: 1;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
           transition: color 0.3s ease;
+          letter-spacing: 0.1em;
         }
-
         .pillar-item.active .pillar-title {
-          color: var(--color-primary);
-          font-weight: 400;
+          color: var(--color-highlight);
         }
-
         .pillar-toggle-icon {
           font-size: 18px;
           color: var(--color-primary);
           opacity: 0.6;
           transition: transform 0.3s ease;
         }
-
         .pillar-item.active .pillar-toggle-icon {
           transform: rotate(0deg);
         }
-
         .pillar-body {
           display: flex;
           flex-direction: column;
           gap: 6px;
         }
-
         .pillar-tagline {
           font-family: var(--font-sans);
           font-size: 9.5px;
@@ -3738,15 +3899,12 @@ export default function PlottedDevelopment() {
           text-transform: uppercase;
           display: block;
         }
-
         .pillar-desc {
-          font-family: var(--font-sans);
-          font-size: 13px;
-          line-height: 1.6;
           color: var(--color-text-muted);
+          font-size: 18px;
+          padding: 15px;
           margin: 0;
         }
-
         .vision-dynamic-img-wrapper {
           position: relative;
           overflow: hidden;
@@ -3756,14 +3914,12 @@ export default function PlottedDevelopment() {
           border: 1px solid rgba(0, 0, 0, 0.1);
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
         }
-
         /* â”€â”€ Floorplan Slide Layout Styles â”€â”€ */
         .floorplan-slide-viewport {
           position: relative;
           width: 100%;
           padding: 20px 40px;
         }
-
         .floorplan-slide-arrow {
           position: absolute;
           top: 50%;
@@ -3782,22 +3938,18 @@ export default function PlottedDevelopment() {
           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
           transition: all 0.3s ease;
         }
-
         .floorplan-slide-arrow:hover {
           background: var(--color-primary);
           color: var(--color-white);
           transform: translateY(-50%) scale(1.05);
           box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }
-
         .floorplan-slide-arrow.prev {
           left: -24px;
         }
-
         .floorplan-slide-arrow.next {
           right: -24px;
         }
-
         @media (max-width: 768px) {
           .floorplan-slide-arrow {
             width: 40px;
@@ -3810,7 +3962,6 @@ export default function PlottedDevelopment() {
             right: -12px;
           }
         }
-
         /* â”€â”€ Gallery Spotlight Styles â”€â”€ */
         .gallery-spotlight-viewport {
           position: relative;
@@ -3824,14 +3975,12 @@ export default function PlottedDevelopment() {
           --gallery-gap: 4vw;
           --gallery-card-offset: calc(50vw - var(--gallery-card-active-w) / 2);
         }
-
         .gallery-spotlight-track {
           display: flex;
           gap: var(--gallery-gap);
           width: max-content;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-spotlight-card {
           flex-shrink: 0;
           position: relative;
@@ -3839,10 +3988,10 @@ export default function PlottedDevelopment() {
           height: calc(100vh - 165px);
           max-height: 720px;
           min-height: 320px;
+          border-radius: 8px;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
           transition: flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
-
         .gallery-spotlight-img {
           width: 100%;
           height: 100%;
@@ -3850,11 +3999,9 @@ export default function PlottedDevelopment() {
           display: block;
           transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-spotlight-card:hover .gallery-spotlight-img {
-          transform: scale(1.08);
+          transform: scale(1.2);
         }
-
         .gallery-spotlight-arrow {
           position: absolute;
           top: 50%;
@@ -3873,18 +4020,15 @@ export default function PlottedDevelopment() {
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
           transition: all 0.3s ease;
         }
-
         .gallery-spotlight-arrow:hover {
           background: var(--color-white);
           color: var(--color-primary);
           transform: translate(-50%, -50%) scale(1.08);
           box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         }
-
         .gallery-spotlight-arrow.prev {
           left: calc(var(--gallery-card-offset) / 2);
         }
-
         .gallery-spotlight-arrow.next {
           right: calc(var(--gallery-card-offset) / 2);
           transform: translate(50%, -50%);
@@ -3892,6 +4036,26 @@ export default function PlottedDevelopment() {
         
         .gallery-spotlight-arrow.next:hover {
           transform: translate(50%, -50%) scale(1.08);
+        }
+        
+        /* Modal Split Layout Styles */
+        @media (max-width: 768px) {
+          .modal-content-card.split-modal {
+            flex-direction: column;
+            max-width: 440px;
+            width: 95%;
+            margin: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+          }
+          .modal-image-panel {
+            height: 200px;
+            flex: none;
+            padding: 24px;
+          }
+          .modal-form-panel {
+            flex: none;
+          }
         }
 
         /* ── RESPONSIVE MEDIA CONTROLS ── */
@@ -3922,25 +4086,7 @@ export default function PlottedDevelopment() {
             gap: 40px;
           }
         }
-
         @media (max-width: 900px) {
-          .project-detail-page .sobha-navbar {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            z-index: 99999 !important;
-            transform: none !important;
-            opacity: 1 !important;
-            pointer-events: auto !important;
-          }
-          .project-sub-nav {
-            top: 60px !important;
-            z-index: 9990 !important;
-          }
-          section[id], div[id] {
-            scroll-margin-top: 115px; /* offset for 60px navbar + sticky subnav */
-          }
           .project-hero-title {
           }
           .sub-nav-container {
@@ -3991,7 +4137,7 @@ export default function PlottedDevelopment() {
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            border-radius: 16px !important;
+            border-radius: 8px !important;
             box-shadow: 
               0 12px 40px rgba(0, 0, 0, 0.5),
               0 2px 8px rgba(0, 0, 0, 0.2) !important;
@@ -4058,14 +4204,13 @@ export default function PlottedDevelopment() {
             grid-template-columns: repeat(2, 1fr);
           }
         }
-
         @media (max-width: 768px) {
           .project-gallery-section {
             padding-top: 10px !important;
             padding-bottom: 16px !important;
             min-height: auto !important;
             justify-content: flex-start !important;
-            gap: 6px !important;
+            gap: 26px !important;
           }
           .project-gallery-section .section-header {
             margin-bottom: 0px !important;
@@ -4168,7 +4313,6 @@ export default function PlottedDevelopment() {
           .lightbox-arrow-btn.prev { left: 15px; }
           .lightbox-arrow-btn.next { right: 15px; }
           .lightbox-content { max-width: 90%; }
-
           /* Generic layout fixes for screenshotted issues */
           
           /* Hero Section */
@@ -4183,8 +4327,6 @@ export default function PlottedDevelopment() {
             margin-bottom: 0px !important;
           }
           
-        
-
           /* Video Tours Section */
           .project-video-cta-group {
             flex-direction: column !important;
@@ -4200,7 +4342,6 @@ export default function PlottedDevelopment() {
           .video-slides-container {
             margin-bottom: 80px !important;
           }
-
           /* "Experience True Luxury" */
           .c3-action-area h3 {
             line-height: 1.1 !important;
@@ -4211,13 +4352,11 @@ export default function PlottedDevelopment() {
           .c3-image-pane, .c3-solid-pane {
             width: 100% !important;
           }
-
           /* Quick Info / Stats Grid (usually has 4 columns) */
           .project-stats-grid, div[style*="grid-template-columns: repeat(4"], div[style*="gridTemplateColumns: 'repeat(4"] {
             grid-template-columns: 1fr 1fr !important;
             gap: 16px !important;
           }
-
           /* Status Month Grid */
           .status-month-grid, div[style*="grid-template-columns: repeat(3"], div[style*="gridTemplateColumns: 'repeat(3"] {
             grid-template-columns: 1fr !important;
@@ -4227,7 +4366,6 @@ export default function PlottedDevelopment() {
             flex-direction: column !important;
             gap: 24px !important;
           }
-
           /* Nested tabs (Specifications, etc.) */
           .nested-tabs-wrapper {
             flex-wrap: wrap !important;
@@ -4249,7 +4387,6 @@ export default function PlottedDevelopment() {
             font-size: 24px !important;
           }
         }
-
         /* â”€â”€ 3D GALLERY SLIDER â”€â”€ */
         .gallery-deck-viewport {
           position: relative;
@@ -4260,13 +4397,11 @@ export default function PlottedDevelopment() {
           justify-content: center;
           overflow: hidden;
         }
-
         .gallery-deck-stack {
           position: relative;
           width: 580px;
           height: 380px;
         }
-
         .gallery-deck-card {
           position: absolute;
           inset: 0;
@@ -4277,18 +4412,15 @@ export default function PlottedDevelopment() {
           cursor: pointer;
           background-color: var(--color-bg-navy);
         }
-
         .gallery-deck-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-deck-card:hover .gallery-deck-img {
           transform: scale(1.05);
         }
-
         .gallery-deck-hover-overlay {
           position: absolute;
           inset: 0;
@@ -4300,30 +4432,23 @@ export default function PlottedDevelopment() {
           transition: opacity 0.35s ease;
           z-index: 2;
         }
-
         .gallery-deck-card.active:hover .gallery-deck-hover-overlay {
           opacity: 1;
         }
-
         .hover-overlay-zoom-icon {
           color: var(--color-primary);
           margin-bottom: 6px;
           transform: translateY(10px);
           transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-deck-card.active:hover .hover-overlay-zoom-icon {
           transform: translateY(0);
         }
-
         .hover-overlay-title {
-
           font-size: 15px;
           color: var(--color-white);
           font-weight: 400;
-
         }
-
         .gallery-deck-arrow {
           position: absolute;
           top: 50%;
@@ -4342,7 +4467,6 @@ export default function PlottedDevelopment() {
           box-shadow: 0 4px 15px rgba(29, 53, 87, 0.05);
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-deck-arrow:hover {
           background: var(--color-primary);
           color: var(--color-white);
@@ -4350,10 +4474,8 @@ export default function PlottedDevelopment() {
           transform: translateY(-50%) scale(1.08);
           box-shadow: 0 8px 20px rgba(29, 53, 87, 0.2);
         }
-
         .gallery-deck-arrow.prev { left: 24px; }
         .gallery-deck-arrow.next { right: 24px; }
-
         @media (max-width: 768px) {
           .gallery-deck-viewport {
             height: 300px;
@@ -4369,7 +4491,6 @@ export default function PlottedDevelopment() {
           .gallery-deck-arrow.prev { left: 10px; }
           .gallery-deck-arrow.next { right: 10px; }
         }
-
         .play-button-pulsing {
           width: 70px;
           height: 70px;
@@ -4383,13 +4504,11 @@ export default function PlottedDevelopment() {
           animation: playPulse 2s infinite;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .gallery-deck-card:hover .play-button-pulsing {
           transform: scale(1.1);
           background: var(--color-primary);
           color: var(--color-white);
         }
-
         @keyframes playPulse {
           0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
           70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }

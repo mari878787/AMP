@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import NewProject from './pages/NewProject';
+import PashaPinnacle from './pages/PashaPinnacle';
 import PlottedDevelopment from './pages/PlottedDevelopment';
 import AboutUs from './pages/AboutUs';
 import AllProjects from './pages/AllProjects';
@@ -50,6 +51,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/crystal-moonlight-villa" element={<NewProject />} />
         <Route path="/new-project" element={<NewProject />} />
+        <Route path="/pasha-pinnacle" element={<PashaPinnacle />} />
         <Route path="/ashok-nagar-villa-plots-in-maduranthakam" element={<PlottedDevelopment />} />
         <Route path="/ashok-nagar" element={<PlottedDevelopment />} />
         <Route path="/about" element={<AboutUs />} />
