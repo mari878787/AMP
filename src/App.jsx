@@ -13,7 +13,7 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import LaunchCountdownWidget from './components/LaunchCountdownWidget';
+import ComingSoonPage from './pages/ComingSoonPage';
 
 import './App.css';
 
@@ -51,7 +51,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<ComingSoonPage />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/crystal-moonlight-villa" element={<NewProject />} />
         <Route path="/new-project" element={<NewProject />} />
         <Route path="/pasha-pinnacle" element={<PashaPinnacle />} />
@@ -62,8 +63,6 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/contact" element={<ContactUs />} />
       </Routes>
-      <StickyActionBar />
-      <LaunchCountdownWidget />
     </Router>
   );
 }
