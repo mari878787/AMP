@@ -12,11 +12,10 @@ const COUNTRY_CODES = [
 
 export default function ProjectPricingSection({
   projectName = "Crystal Moonlight",
-  startingPrice = "INR 2.26 CR*",
-  prices = [
-    { label: '3 BHK Villa', val: 'INR 2.26 CR*' },
-    { label: '4 BHK Villa', val: 'INR 2.87 CR*' }
-  ],
+  tag = "CONNECT WITH US",
+  showPricing = false,
+  startingPrice = "",
+  prices = [],
   unitTypes = ['3 BHK Villa', '4 BHK Villa']
 }) {
   const [activeFormType, setActiveFormType] = useState('buy'); // 'buy', 'partner'
@@ -38,8 +37,6 @@ export default function ProjectPricingSection({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const displayStartingPrice = startingPrice || (prices.length > 0 ? prices[0].val : 'INR 2.26 CR*');
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.agreeTerms) {
@@ -58,10 +55,10 @@ export default function ProjectPricingSection({
     <section className="pricing-section-container" id="pricing" style={{ minHeight: 'calc(100vh - 140px)' }}>
       <div className="pricing-wrapper">
 
-        {/* Left Column: Title, Starting From Price & Channel Partner Details */}
+        {/* Left Column: Title & Information Details */}
         <ScrollReveal className="pricing-info-col" animation="fadeUp" delay={0.15}>
           <span className="starting-prices-tag">
-            {activeFormType === 'partner' ? 'PARTNERSHIP PROGRAM' : 'INVESTMENT & PRICING'}
+            {activeFormType === 'partner' ? 'PARTNERSHIP PROGRAM' : tag}
           </span>
 
           <h2 className="section-title">
@@ -104,12 +101,9 @@ export default function ProjectPricingSection({
                 <span className="partner-contact-email">partners@aadhithyamohan.com</span>
               </div>
             </div>
-          ) : (
-            /* Starting From Price Banner & Breakdown */
+          ) : showPricing && prices && prices.length > 0 ? (
+            /* Optional Price Breakdown if explicitly enabled */
             <div className="pricing-display-group">
-              
-
-              {/* Unit Configuration Prices Grid */}
               <div className="prices-grid">
                 {prices.map((item, idx) => (
                   <div key={idx} className="price-item">
@@ -121,11 +115,33 @@ export default function ProjectPricingSection({
                 ))}
               </div>
             </div>
+          ) : (
+            <div className="contact-info-details-box" style={{ marginTop: '24px' }}>
+              <p style={{ fontSize: '16px', lineHeight: '1.7', color: '#555555', margin: '0 0 24px 0' }}>
+                Connect with our dedicated relationship managers to schedule a private site visit, explore available floor plans, and receive complete project brochures.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#111111', fontSize: '15px' }}>
+                  <span style={{ color: '#b48564', fontSize: '16px' }}>✦</span>
+                  <span>Exclusive Site Walkthroughs & Layout Tours</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#111111', fontSize: '15px' }}>
+                  <span style={{ color: '#b48564', fontSize: '16px' }}>✦</span>
+                  <span>Personalized Payment Schedules & Bank Loan Assistance</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#111111', fontSize: '15px' }}>
+                  <span style={{ color: '#b48564', fontSize: '16px' }}>✦</span>
+                  <span>Direct Consultation with Project Advisors</span>
+                </div>
+              </div>
+            </div>
           )}
 
-          <p className="pricing-disclaimer">
-            *Prices mentioned are indicative starting prices, subject to applicable taxes, government charges, and inventory availability.
-          </p>
+          {showPricing && activeFormType !== 'partner' && (
+            <p className="pricing-disclaimer">
+              *Prices mentioned are indicative starting prices, subject to applicable taxes, government charges, and inventory availability.
+            </p>
+          )}
         </ScrollReveal>
 
         {/* Right Column: Interactive Form */}

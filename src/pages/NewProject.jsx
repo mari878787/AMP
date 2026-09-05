@@ -221,27 +221,32 @@ export default function NewProject({ project }) {
   const pillars = [
     {
       index: "01",
-      title: "An Enduring Address",
-      desc: "Nestled in Medavakkam, Crystal Moonlight offers the rare balance of tranquil living and prime connectivity, surrounded by top educational, healthcare, and business hubs for enduring value.",
-      image: "/images/project_crystal_1779810838661.png"
+      title: "Salient Features",
+      points: [
+        "Exclusive collection of 47 ultra-contemporary 3 & 4 BHK villas.",
+        "100% Vastu-compliant homes with private terrace cabana.",
+        "Grand 24,000 sq. ft. clubhouse with 20+ lifestyle amenities.",
+        "Expansive 10,000 sq. ft. swimming pool & leisure deck."
+      ],
+      image: "/images/project/why-cmv.png"
     },
     {
       index: "02",
-      title: "Architecture That Endures",
-      desc: "Envisioned with timeless elegance, each villa features 100% Vastu-compliant expansive layouts, premium specifications, and meticulous craftsmanship designed to enrich everyday living.",
-      image: "/images/villa_exterior_1779810861723.png"
-    },
-    {
-      index: "03",
       title: "Tailored to Your Vision",
-      desc: "Reflecting your individuality, Crystal Moonlight offers the flexibility to personalise select layouts and bespoke finishes, adapting effortlessly to your family's evolving lifestyle.",
+      desc: "Every family lives differently, and every home should reflect that individuality. Crystal Moonlight offers the flexibility to personalise selected layouts and finishes, allowing your home to evolve around your lifestyle while preserving the architectural harmony of the community.",
       image: "/images/project/CML/Interiors/cml-interior-01.jpg"
     },
     {
-      index: "04",
+      index: "03",
       title: "The Privilege of Privacy",
-      desc: "A limited collection of independent villas in a secure gated enclave, offering round-the-clock security, serene privacy, and total peace of mind for your family.",
-      image: "/images/project/why-cmv.png"
+      desc: "A limited collection of independent villas within a secure gated community creates an environment where privacy, tranquillity, and peace of mind become part of everyday living. Thoughtfully planned surroundings and round-the-clock security ensure a setting where families can truly feel at home.",
+      image: "/images/villa_exterior_1779810861723.png"
+    },
+    {
+      index: "04",
+      title: "Value That Endures",
+      desc: "The finest homes are measured not only by where they stand, but by how they stand the test of time. Combining a coveted location, thoughtful planning, exceptional quality, and enduring appeal, Crystal Moonlight is a home designed to be treasured for generations.",
+      image: "/images/project_crystal_1779810838661.png"
     }
   ];
   const [statusMonthIdx, setStatusMonthIdx] = useState(0);
@@ -788,14 +793,25 @@ export default function NewProject({ project }) {
                                 <div
                                   className="pillar-body"
                                   style={{
-                                    maxHeight: isOpen ? '360px' : '0px',
+                                    maxHeight: isOpen ? '450px' : '0px',
                                     opacity: isOpen ? 1 : 0,
                                     overflow: 'hidden',
                                     transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
                                     paddingBottom: isOpen ? '16px' : '0px'
                                   }}
                                 >
-                                  <p className="pillar-desc">{pillar.desc}</p>
+                                  {pillar.points ? (
+                                    <ul className='pillar-desc' style={{ margin: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                      {pillar.points.map((pt, pIdx) => (
+                                        <li key={pIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '18px', lineHeight: '1.5', margin: 0, padding: 0, letterSpacing: 0 }}>
+                                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#000000ff', marginTop: '10px' }} />
+                                          <span style={{ margin: 0, padding: 0 }}>{pt}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  ) : (
+                                    <p className="pillar-desc" style={{ margin: '0', lineHeight: '1.68' }}>{pillar.desc}</p>
+                                  )}
                                 </div>
                               </div>
                             );
@@ -1349,14 +1365,9 @@ export default function NewProject({ project }) {
               </div>
             </section>
           )}
-          {/* Size & Pricing Section (Currently omitted from navigation but kept for structure) */}
           {activeTab === 'pricing' && (
             <ProjectPricingSection
               projectName="Crystal Moonlight"
-              prices={[
-                { label: '3 BHK Villa', val: 'INR 2.26 CR*' },
-                { label: '4 BHK Villa', val: 'INR 2.87 CR*' }
-              ]}
               unitTypes={['3 BHK Villa', '4 BHK Villa']}
             />
           )}
@@ -3879,9 +3890,9 @@ export default function NewProject({ project }) {
           color: var(--color-highlight);
         }
         .pillar-title {
-          font-family: var(--font-sans);
+          font-family: var(--font-heading);
           color: var(--color-text-dark);
-          font-weight:400;
+          font-weight:500;
           font-size: 18px;
           margin: 0;
           flex-grow: 1;

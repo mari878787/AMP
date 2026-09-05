@@ -1334,14 +1334,9 @@ export default function PashaPinnacle() {
               </div>
             </section>
           )}
-          {/* Size & Pricing Section (Currently omitted from navigation but kept for structure) */}
           {activeTab === 'pricing' && (
             <ProjectPricingSection
               projectName="Pasha Pinnacle"
-              prices={[
-                { label: '2 BHK Apartment', val: 'INR 1.25 CR*' },
-                { label: '3 BHK Apartment', val: 'INR 1.95 CR*' }
-              ]}
               unitTypes={['2 BHK Apartment', '3 BHK Apartment']}
             />
           )}
@@ -1983,7 +1978,7 @@ export default function PashaPinnacle() {
         /* â”€â”€ INFO GRID STYLES â”€â”€ */
         .info-grid-tag {
           font-family: var(--font-sans);
-          font-size: 9px;
+          font-size: 11px;
           font-weight: 400;
           color: var(--color-text-muted-light);
           letter-spacing: 0.2em;

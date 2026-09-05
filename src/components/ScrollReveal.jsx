@@ -69,14 +69,7 @@ export default function ScrollReveal({
 }
 
 function getInitialTransform(animation) {
-  switch (animation) {
-    case 'fadeUp':    return 'translateY(50px)';
-    case 'fadeDown':  return 'translateY(-50px)';
-    case 'fadeLeft':  return 'translateX(-50px)';
-    case 'fadeRight': return 'translateX(50px)';
-    case 'scaleIn':  return 'scale(0.90)';
-    case 'slideUp':  return 'translateY(70px)';
-    case 'fadeIn':
-    default:          return 'none';
-  }
+  if (animation === 'fadeIn') return 'none';
+  // All animations strictly fadeUp with zero side movement
+  return 'translateY(36px)';
 }
