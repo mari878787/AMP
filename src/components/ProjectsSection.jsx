@@ -216,79 +216,81 @@ export default function ProjectsSection() {
       </div>
 
       {/* ── Slider viewport wrapper (Full Bleed) ── */}
-      <div className="slider-viewport-wrapper">
-        
-        {/* Absolute Left/Right Arrow Buttons */}
-        <button
-          className="projects-slide-arrow prev"
-          onClick={prev}
-          disabled={total <= 1}
-          aria-label="Previous projects"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <button
-          className="projects-slide-arrow next"
-          onClick={next}
-          disabled={total <= 1}
-          aria-label="Next projects"
-        >
-          <ChevronRight size={24} />
-        </button>
-
-        <div
-          className="slider-viewport"
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={(e) => {
-            onMouseUp(e);
-            setIsHovered(false);
-          }}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-        >
-          <div
-            className="slider-track"
-            style={{ 
-              transform: total > 1
-                ? `translateX(calc(var(--card-offset) - ${idx} * (var(--card-w) + var(--gap))))` 
-                : `translateX(var(--card-offset))`,
-              transition: anim ? 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' : 'none'
-            }}
+      <ScrollReveal animation="fadeUp" delay={0.05} duration={0.8} threshold={0.01} rootMargin="0px 0px 80px 0px" className="slider-viewport-reveal-wrap">
+        <div className="slider-viewport-wrapper">
+          
+          {/* Absolute Left/Right Arrow Buttons */}
+          <button
+            className="projects-slide-arrow prev"
+            onClick={prev}
+            disabled={total <= 1}
+            aria-label="Previous projects"
           >
-            {extended.map((project, i) => {
-              const isActive = total > 1 ? (i === idx) : true;
-              return (
-                <a
-                  key={`${project.id}-${i}`}
-                  href={project.link || "#contact"}
-                  className={`project-card ${isActive ? 'active' : ''}`}
-                  onClick={e => dragging.current && e.preventDefault()}
-                >
-                  <div className="project-img-wrap">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="project-img"
-                      draggable="false"
-                    />
-                    <span className="project-category-badge">{project.category}</span>
-                    <div className="project-overlay">
-                      <div className="project-overlay-details">
-                        <span className="overlay-title">{project.title}</span>
-                        <span className="overlay-center-info">{project.centerInfo}</span>
-                        <span className="overlay-location">{project.location}</span>
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            className="projects-slide-arrow next"
+            onClick={next}
+            disabled={total <= 1}
+            aria-label="Next projects"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          <div
+            className="slider-viewport"
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={onMouseUp}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={(e) => {
+              onMouseUp(e);
+              setIsHovered(false);
+            }}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
+            <div
+              className="slider-track"
+              style={{ 
+                transform: total > 1
+                  ? `translateX(calc(var(--card-offset) - ${idx} * (var(--card-w) + var(--gap))))` 
+                  : `translateX(var(--card-offset))`,
+                transition: anim ? 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' : 'none'
+              }}
+            >
+              {extended.map((project, i) => {
+                const isActive = total > 1 ? (i === idx) : true;
+                return (
+                  <a
+                    key={`${project.id}-${i}`}
+                    href={project.link || "#contact"}
+                    className={`project-card ${isActive ? 'active' : ''}`}
+                    onClick={e => dragging.current && e.preventDefault()}
+                  >
+                    <div className="project-img-wrap">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="project-img"
+                        draggable="false"
+                      />
+                      <span className="project-category-badge">{project.category}</span>
+                      <div className="project-overlay">
+                        <div className="project-overlay-details">
+                          <span className="overlay-title">{project.title}</span>
+                          <span className="overlay-center-info">{project.centerInfo}</span>
+                          <span className="overlay-location">{project.location}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </a>
-              );
-            })}
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
 
       <div className="container">
         {/* â”€â”€ Dots + CTA row â”€â”€ */}

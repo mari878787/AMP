@@ -20,6 +20,7 @@ export default function ScrollReveal({
   delay = 0,
   duration = 1.4,
   threshold = 0.15,
+  rootMargin = '0px',
   once = true,
   className = '',
   style = {},
@@ -42,12 +43,12 @@ export default function ScrollReveal({
           setVisible(false);
         }
       },
-      { threshold }
+      { threshold, rootMargin }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [threshold, once]);
+  }, [threshold, rootMargin, once]);
 
   // Slow down the transition duration for a smooth, luxury reveal
   const effectiveDuration = duration === 0.7 ? 1.4 : Math.max(duration * 1.4, 1.2);
