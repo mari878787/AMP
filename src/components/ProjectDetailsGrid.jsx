@@ -128,19 +128,21 @@ export default function ProjectDetailsGrid({
 
             {/* Left Stats Group */}
             <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-              {/* Stat 1: Total Units */}
+              {/* Stat 1: Site Extent / Custom */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
                 <span className="info-grid-tag">{stat1Tag}</span>
-                <span className="info-grid-val" ref={countRef}>
+                <span className="info-grid-val" style={String(stat1Val).length > 6 ? { fontSize: '24px', whiteSpace: 'nowrap' } : {}}>
                   {typeof stat1Count === 'number' && stat1Count > 0 ? count : stat1Val}
                 </span>
                 <span className="info-grid-desc">{stat1Desc}</span>
               </div>
 
-              {/* Stat 2: Configuration */}
+              {/* Stat 2: Total Units / Custom */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
                 <span className="info-grid-tag">{stat2Tag}</span>
-                <span className="info-grid-val">{stat2Val}</span>
+                <span className="info-grid-val" style={String(stat2Val).length > 6 ? { fontSize: '24px', whiteSpace: 'nowrap' } : {}}>
+                  {stat2Val}
+                </span>
                 <span className="info-grid-desc">{stat2Desc}</span>
               </div>
             </div>
@@ -169,19 +171,19 @@ export default function ProjectDetailsGrid({
 
             {/* Right Stats Group */}
             <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-              {/* Stat 3: Size Range */}
+              {/* Stat 3: Configuration / Custom */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
                 <span className="info-grid-tag">{stat3Tag}</span>
-                <span className="info-grid-val" style={{ fontSize: '24px', whiteSpace: 'nowrap' }}>
+                <span className="info-grid-val" style={String(stat3Val).length > 6 ? { fontSize: '24px', whiteSpace: 'nowrap' } : {}}>
                   {stat3Val}
                 </span>
                 <span className="info-grid-desc">{stat3Desc}</span>
               </div>
 
-              {/* Stat 4: Site Extent / Structure */}
+              {/* Stat 4: Size Range / Custom */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
                 <span className="info-grid-tag">{stat4Tag}</span>
-                <span className="info-grid-val" style={{ fontSize: '24px', whiteSpace: 'nowrap' }}>
+                <span className="info-grid-val" style={String(stat4Val).length > 6 ? { fontSize: '24px', whiteSpace: 'nowrap' } : {}}>
                   {stat4Val}
                 </span>
                 <span className="info-grid-desc">{stat4Desc}</span>

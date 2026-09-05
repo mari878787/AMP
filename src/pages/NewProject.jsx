@@ -720,23 +720,23 @@ export default function NewProject({ project }) {
           {activeTab === 'overview' && (
             <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0' }}>
               <ProjectDetailsGrid 
-                stat1Tag="TOTAL UNITS"
-                stat1Val="47"
-                stat1Desc="VILLAS"
-                stat1Count={47}
-                stat2Tag="CONFIGURATION"
-                stat2Val="3 & 4"
-                stat2Desc="BHK"
+                stat1Tag="SITE EXTENT"
+                stat1Val="15"
+                stat1Desc="ACRES"
+                stat1Count={15}
+                stat2Tag="TOTAL UNITS"
+                stat2Val="47"
+                stat2Desc="VILLAS"
                 projectTag="PROJECT"
                 projectName="CRYSTAL MOONLIGHT"
                 location="MEDAVAKKAM, CHENNAI"
                 reraNo="(TN/29/Building/001/2024)"
-                stat3Tag="SIZE RANGE"
-                stat3Val="2,233 - 2,287"
-                stat3Desc="SQ.FT."
-                stat4Tag="SITE EXTENT"
-                stat4Val="15"
-                stat4Desc="ACRES"
+                stat3Tag="CONFIGURATION"
+                stat3Val="3 & 4"
+                stat3Desc="BHK"
+                stat4Tag="SIZE RANGE"
+                stat4Val="2,233 - 2,287"
+                stat4Desc="SQ.FT."
               />
             </section>
           )}
@@ -1997,7 +1997,7 @@ export default function NewProject({ project }) {
         /* â”€â”€ INFO GRID STYLES â”€â”€ */
         .info-grid-tag {
           font-family: var(--font-sans);
-          font-size: 9px;
+          font-size: 11px;
           font-weight: 400;
           color: var(--color-text-muted-light);
           letter-spacing: 0.2em;
