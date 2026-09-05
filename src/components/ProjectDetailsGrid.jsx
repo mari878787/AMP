@@ -5,31 +5,32 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectDetailsGrid({
-  stat1Tag = 'TOTAL UNITS',
-  stat1Val = 47,
-  stat1Desc = 'VILLAS',
-  stat1Count = 47,
+  stat1Tag = 'SITE EXTENT',
+  stat1Val = '15',
+  stat1Desc = 'ACRES',
+  stat1Count = 15,
 
-  stat2Tag = 'CONFIGURATION',
-  stat2Val = '3 & 4',
-  stat2Desc = 'BHK',
+  stat2Tag = 'TOTAL UNITS',
+  stat2Val = '47',
+  stat2Desc = 'VILLAS',
+  stat2Count = 47,
 
   projectTag = 'PROJECT',
   projectName = 'CRYSTAL MOONLIGHT',
   location = 'MEDAVAKKAM, CHENNAI',
   reraNo = '(TN/29/Building/001/2024)',
 
-  stat3Tag = 'SIZE RANGE',
-  stat3Val = '2,233 - 2,287',
-  stat3Desc = 'SQ.FT.',
+  stat3Tag = 'CONFIGURATION',
+  stat3Val = '3 & 4',
+  stat3Desc = 'BHK',
 
-  stat4Tag = 'SITE EXTENT',
-  stat4Val = '15',
-  stat4Desc = 'ACRES'
+  stat4Tag = 'SIZE RANGE',
+  stat4Val = '2,233 - 2,287',
+  stat4Desc = 'SQ.FT.'
 }) {
   const containerRef = useRef(null);
-  const countRef = useRef(null);
-  const [count, setCount] = useState(0);
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -99,23 +100,36 @@ export default function ProjectDetailsGrid({
       );
     }
 
-    // 6. Number Count Up for Total Units
+    // 6. Number Count Up for Stat 1 (e.g. Site Extent)
     if (typeof stat1Count === 'number' && stat1Count > 0) {
-      const communityObj = { val: 0 };
-      tl.to(communityObj, {
+      const obj1 = { val: 0 };
+      tl.to(obj1, {
         val: stat1Count,
         duration: 1.5,
         ease: 'power2.out',
         onUpdate: () => {
-          setCount(Math.floor(communityObj.val));
+          setCount1(Math.floor(obj1.val));
         }
       }, '-=1');
+    }
+
+    // 7. Number Count Up for Stat 2 (e.g. Total Units)
+    if (typeof stat2Count === 'number' && stat2Count > 0) {
+      const obj2 = { val: 0 };
+      tl.to(obj2, {
+        val: stat2Count,
+        duration: 1.5,
+        ease: 'power2.out',
+        onUpdate: () => {
+          setCount2(Math.floor(obj2.val));
+        }
+      }, '<');
     }
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, [stat1Count]);
+  }, [stat1Count, stat2Count]);
 
   return (
     <div ref={containerRef} style={{ width: '100%' }}>
@@ -128,20 +142,20 @@ export default function ProjectDetailsGrid({
 
             {/* Left Stats Group */}
             <div style={{ display: 'flex', gap: '30px', flex: 1, justifyContent: 'center', minWidth: '200px' }}>
-              {/* Stat 1: Site Extent / Custom */}
+              {/* Stat 1: Site Extent */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
                 <span className="info-grid-tag">{stat1Tag}</span>
                 <span className="info-grid-val" style={String(stat1Val).length > 6 ? { fontSize: '24px', whiteSpace: 'nowrap' } : {}}>
-                  {typeof stat1Count === 'number' && stat1Count > 0 ? count : stat1Val}
+                  {typeof stat1Count === 'number' && stat1Count > 0 ? count1 : stat1Val}
                 </span>
                 <span className="info-grid-desc">{stat1Desc}</span>
               </div>
 
-              {/* Stat 2: Total Units / Custom */}
+              {/* Stat 2: Total Units */}
               <div className="stat-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', flex: 1 }}>
                 <span className="info-grid-tag">{stat2Tag}</span>
                 <span className="info-grid-val" style={String(stat2Val).length > 6 ? { fontSize: '24px', whiteSpace: 'nowrap' } : {}}>
-                  {stat2Val}
+                  {typeof stat2Count === 'number' && stat2Count > 0 ? count2 : stat2Val}
                 </span>
                 <span className="info-grid-desc">{stat2Desc}</span>
               </div>

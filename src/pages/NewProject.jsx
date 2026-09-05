@@ -727,6 +727,7 @@ export default function NewProject({ project }) {
                 stat2Tag="TOTAL UNITS"
                 stat2Val="47"
                 stat2Desc="VILLAS"
+                stat2Count={47}
                 projectTag="PROJECT"
                 projectName="CRYSTAL MOONLIGHT"
                 location="MEDAVAKKAM, CHENNAI"
