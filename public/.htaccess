@@ -1,9 +1,23 @@
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType text/css .css
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-l
+
+  # Do not rewrite existing files or directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Do not rewrite missing asset/script requests to index.html (return 404 instead of serving HTML as JS)
+  RewriteCond %{REQUEST_URI} \.(js|mjs|css|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot|mp4)$ [NC]
+  RewriteRule ^ - [R=404,L]
+
+  # SPA fallback for page navigation
   RewriteRule . /index.html [L]
 </IfModule>

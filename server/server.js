@@ -30,6 +30,25 @@ if (!fs.existsSync(LEADS_FILE)) {
 app.use(cors());
 app.use(express.json());
 
+// Path to compiled frontend dist directory
+const DIST_DIR = path.resolve(__dirname, '../dist');
+
+// Serve static assets from dist with explicit MIME types and caching
+if (fs.existsSync(DIST_DIR)) {
+  app.use(express.static(DIST_DIR, {
+    maxAge: '1d',
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.js') || filePath.endsWith('.mjs')) {
+        res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
+      } else if (filePath.endsWith('.css')) {
+        res.setHeader('Content-Type', 'text/css; charset=UTF-8');
+      } else if (filePath.endsWith('.webp')) {
+        res.setHeader('Content-Type', 'image/webp');
+      }
+    }
+  }));
+}
+
 // Transporter configuration
 let transporter = null;
 
@@ -256,6 +275,21 @@ app.post('/api/leads', async (req, res) => {
     });
   }
 });
+
+// SPA Routing Fallback: Send index.html for all frontend routes (e.g. /home, /about, /contact)
+if (fs.existsSync(DIST_DIR)) {
+  app.get('*', (req, res, next) => {
+    // Exclude API routes
+    if (req.path.startsWith('/api/')) {
+      return next();
+    }
+    // If request has a file extension (like missing .js or .css), return 404 instead of index.html
+    if (path.extname(req.path)) {
+      return res.status(404).type('text/plain').send('Asset not found');
+    }
+    res.sendFile(path.join(DIST_DIR, 'index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`🚀 AMP Backend Lead Server running on http://localhost:${PORT}`);
