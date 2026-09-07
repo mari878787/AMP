@@ -8,24 +8,12 @@ export default function LaunchCountdownWidget() {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    // Target Launch Date: Next Monday (September 7, 2026 at 09:00:00 AM local time)
-    // If today is Saturday Sep 5, Monday is Sep 7.
-    const now = new Date();
-    const mondayLaunch = new Date();
-    
-    // Calculate target Monday:
-    const dayOfWeek = now.getDay(); // 0 is Sunday, 6 is Saturday
-    let daysUntilMonday = (1 - dayOfWeek + 7) % 7;
-    if (daysUntilMonday === 0 && now.getHours() >= 9) {
-      daysUntilMonday = 7; // Target next Monday if today is Monday past launch time
-    }
-    
-    mondayLaunch.setDate(now.getDate() + daysUntilMonday);
-    mondayLaunch.setHours(9, 0, 0, 0);
+    // Target Launch Date: September 7, 2026 at 4:55 PM IST
+    const targetLaunch = new Date('2026-09-07T16:55:00+05:30');
 
     const updateCountdown = () => {
       const currentTime = new Date().getTime();
-      const difference = mondayLaunch.getTime() - currentTime;
+      const difference = targetLaunch.getTime() - currentTime;
 
       if (difference <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
