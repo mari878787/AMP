@@ -214,18 +214,6 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           facing: 'Rear Facing',
           image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-b-rear.jpeg'
         }
-      ],
-      'stilt': [
-        {
-          id: 'stilt-ground',
-          name: 'Stilt + Ground Floor Plan',
-          type: 'Stilt + Ground',
-          saleableArea: 'Common Area',
-          reraCarpetArea: 'Parking & Entry',
-          uds: '-',
-          facing: 'Ground Level',
-          image: '/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg'
-        }
       ]
     },
     walkthrough360: {
@@ -1389,14 +1377,13 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                         </button>
                       </>
                     )}
-                    {/* Tabs row: Block A, Block B, and Stilt + Ground Floor */}
+                    {/* Tabs row: Block A, Block B */}
                     <div style={{ display: 'flex', marginBottom: '40px', borderBottom: '.1px solid rgba(0,0,0,0.08)', width: '100%' }}>
                       <div className="filter-tabs" style={{ display: 'flex', gap: '0', flexWrap: 'wrap' }}>
                         {Object.keys(layoutsData.floorPlan).map((conf, index, arr) => {
                           const confLabels = {
                             blockA: 'Block A',
                             blockB: 'Block B',
-                            stilt: 'Stilt + Ground Floor',
                             '3bhk': '3 BHK',
                             '4bhk': '4 BHK'
                           };
