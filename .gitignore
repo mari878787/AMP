@@ -8,7 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
 dist-ssr
 *.local
 
@@ -43,4 +42,7 @@ node-env/
 *.dng
 public/images/project/CMR/*.mp4
 public/images/project/CMR/*.DNG
+dist/images/project/CMR/*.mp4
+dist/images/project/CMR/*.DNG
+
 
