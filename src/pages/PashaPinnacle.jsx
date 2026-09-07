@@ -167,7 +167,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
       description: 'Master Floor Plan layout for Pasha Pinnacle, Royapettah.'
     },
     typicalFloorPlan: {
-      image: '/images/project/pasha-pinnacle/floorplan/Pasha Detailed Floor Plan - 1200x800.jpg.jpeg',
+      image: '/images/project/pasha-pinnacle/floorplan/pasha-detailed-floor-plan.jpeg',
       description: 'Typical architectural floor plan layout for Pasha Pinnacle.'
     },
     floorPlan: {
@@ -180,7 +180,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: '925 Sq.Ft.',
           uds: '421 Sq.Ft.',
           facing: 'Front Facing',
-          image: '/images/project/pasha-pinnacle/floorplan/Floor Plan_Block A - Front.jpg.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-a-front.jpeg'
         },
         {
           id: 'blockA-rear',
@@ -190,7 +190,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: '935 Sq.Ft.',
           uds: '408 Sq.Ft.',
           facing: 'Rear Facing',
-          image: '/images/project/pasha-pinnacle/floorplan/Floor Plan_Block A - Rear.jpg.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-a-rear.jpeg'
         }
       ],
       'blockB': [
@@ -202,7 +202,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: '925 Sq.Ft.',
           uds: '421 Sq.Ft.',
           facing: 'Front Facing',
-          image: '/images/project/pasha-pinnacle/floorplan/Floor Plan_Block B - Front.jpg.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-b-front.jpeg'
         },
         {
           id: 'blockB-rear',
@@ -212,7 +212,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: '945 Sq.Ft.',
           uds: '408 Sq.Ft.',
           facing: 'Rear Facing',
-          image: '/images/project/pasha-pinnacle/floorplan/Floor Plan_Block B - Rear.jpg.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-b-rear.jpeg'
         }
       ],
       'stilt': [
@@ -224,7 +224,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: 'Parking & Entry',
           uds: '-',
           facing: 'Ground Level',
-          image: '/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg'
         }
       ]
     },
@@ -1224,7 +1224,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                       <div className="filter-tabs" style={{ display: 'flex', gap: '0' }}>
                         {[
                           { id: 'typical', label: 'Typical Floor Plan', image: layoutsData.typicalFloorPlan.image },
-                          { id: 'stilt', label: 'Stilt + Ground Floor', image: '/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg' }
+                          { id: 'stilt', label: 'Stilt + Ground Floor', image: '/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg' }
                         ].map((sub, index, arr) => {
                           const isActive = typicalSubTab === sub.id;
                           return (
@@ -1277,9 +1277,9 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                         />
                       ) : (
                         <img
-                          src="/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg"
+                          src="/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg"
                           alt="Stilt + Ground Floor"
-                          onClick={() => setFloorplanLightbox({ image: '/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg', name: 'Stilt + Ground Floor' })}
+                          onClick={() => setFloorplanLightbox({ image: '/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg', name: 'Stilt + Ground Floor' })}
                           style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
                         />
                       )}
