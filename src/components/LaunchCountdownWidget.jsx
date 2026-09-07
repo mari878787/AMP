@@ -8,8 +8,8 @@ export default function LaunchCountdownWidget() {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    // Target Launch Date: September 7, 2026 at 4:55 PM IST
-    const targetLaunch = new Date('2026-09-07T16:55:00+05:30');
+    // Target Launch Date: September 7, 2026 at 4:20 PM IST
+    const targetLaunch = new Date('2026-09-07T16:20:00+05:30');
 
     const updateCountdown = () => {
       const currentTime = new Date().getTime();
