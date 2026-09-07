@@ -23,7 +23,7 @@ const PROJECTS_DATA = [
     price: '₹1 Cr - ₹3 Cr',
     priceRange: '₹1 Cr - ₹3 Cr',
     bedrooms: ['3 BHK', '4 BHK'],
-    image: '/images/project_crystal_1779810838661.png',
+    image: '/images/project/CML/Elevation-card.png',
     link: '/crystal-moonlight-villa'
   },
   {

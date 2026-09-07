@@ -138,6 +138,122 @@
   50% { opacity: 1; transform: scale(1.2); }
 }
 
+/* ── Live Celebration Card & Transition ── */
+.cs-live-celebration-card {
+  width: 100%;
+  max-width: 640px;
+  background: #ffffff;
+  border: 2px solid #b48564;
+  border-radius: 24px;
+  padding: 48px 36px;
+  box-shadow: 0 25px 60px rgba(180, 133, 100, 0.15), 0 0 35px rgba(180, 133, 100, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: csLiveEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes csLiveEntrance {
+  0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.live-badge-active {
+  background: rgba(180, 133, 100, 0.15);
+  border-color: #b48564;
+  color: #b48564;
+  box-shadow: 0 0 15px rgba(180, 133, 100, 0.25);
+  animation: csBadgeGlow 2s infinite alternate;
+}
+
+@keyframes csBadgeGlow {
+  0% { box-shadow: 0 0 10px rgba(180, 133, 100, 0.2); }
+  100% { box-shadow: 0 0 22px rgba(180, 133, 100, 0.5); }
+}
+
+.cs-sparkle-icon-live {
+  color: #b48564;
+  animation: csSpinSparkle 3s linear infinite;
+}
+
+@keyframes csSpinSparkle {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.cs-title-live {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: clamp(38px, 6vw, 64px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: 12px 0 16px;
+  line-height: 1.1;
+}
+
+.cs-title-gold-glow {
+  color: #b48564;
+  text-shadow: 0 0 25px rgba(180, 133, 100, 0.4);
+}
+
+.cs-live-subtitle {
+  font-family: var(--font-sans, sans-serif);
+  font-size: clamp(14px, 1.3vw, 16px);
+  color: #4a4a4a;
+  max-width: 500px;
+  line-height: 1.6;
+  margin: 0 0 32px;
+}
+
+.cs-live-progress-container {
+  width: 100%;
+  max-width: 320px;
+  height: 4px;
+  background: rgba(180, 133, 100, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.cs-live-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #b48564, #d4af37);
+  width: 0%;
+  border-radius: 10px;
+  animation: csLiveProgress 3.5s linear forwards;
+}
+
+@keyframes csLiveProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.cs-enter-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+  border-radius: 50px;
+  padding: 14px 36px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cs-enter-home-btn:hover {
+  background: #b48564;
+  border-color: #b48564;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(180, 133, 100, 0.3);
+}
+
 @media (max-width: 600px) {
   .cs-timer-card {
     padding: 24px 16px;
@@ -145,5 +261,8 @@
   .cs-timer-sep {
     font-size: 20px;
     margin-top: -10px;
+  }
+  .cs-live-celebration-card {
+    padding: 36px 20px;
   }
 }
