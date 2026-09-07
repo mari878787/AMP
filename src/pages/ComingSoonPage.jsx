@@ -4,8 +4,8 @@ import Home from './Home';
 import './ComingSoonPage.css';
 
 export default function ComingSoonPage() {
-  // Target Launch: 4:20 PM IST today (September 7, 2026)
-  const targetLaunch = new Date('2026-09-07T16:20:00+05:30');
+  // Target Launch: 4:10 PM IST today (September 7, 2026)
+  const targetLaunch = new Date('2026-09-07T16:10:00+05:30');
   
   const [isLive, setIsLive] = useState(() => new Date().getTime() >= targetLaunch.getTime());
   const [showLiveCelebration, setShowLiveCelebration] = useState(false);
