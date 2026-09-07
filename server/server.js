@@ -287,6 +287,9 @@ if (fs.existsSync(DIST_DIR)) {
     if (path.extname(req.path)) {
       return res.status(404).type('text/plain').send('Asset not found');
     }
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   });
 }
