@@ -6,28 +6,44 @@ export default function StickyActionBar({ onEnquire }) {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
 
+  // If on coming soon page, hide
+  if (location.pathname === '/') {
+    return null;
+  }
+
   // Check if current page is one of the project detail pages
   const isProjectPage = [
     '/crystal-moonlight-villa',
     '/new-project',
+    '/pasha-pinnacle',
     '/ashok-nagar-villa-plots-in-maduranthakam',
-    '/ashok-nagar'
+    '/ashok-nagar',
+    '/cmr-global-city',
+    '/cmr-global'
   ].includes(location.pathname);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show sticky bar only after scrolling past 300px
-      if (window.scrollY > 300) {
+      const scrollY = window.lenis?.scroll ?? window.scrollY;
+      if (scrollY > 150) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    if (window.lenis) {
+      window.lenis.on('scroll', handleScroll);
+    }
     handleScroll(); // Check initial state on mount
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (window.lenis) {
+        window.lenis.off('scroll', handleScroll);
+      }
+    };
+  }, [location.pathname]);
 
   const handleEnquireClick = (e) => {
     if (onEnquire) {
@@ -80,7 +96,7 @@ export default function StickyActionBar({ onEnquire }) {
               <Play size={18} className="mobile-sticky-icon" />
               <span className="mobile-sticky-label">Walkthrough</span>
             </button>
-            <a href="tel:+919000000000" className="mobile-sticky-item">
+            <a href="tel:+919585044440" className="mobile-sticky-item">
               <Phone size={18} className="mobile-sticky-icon" />
               <span className="mobile-sticky-label">Call</span>
             </a>
@@ -92,12 +108,12 @@ export default function StickyActionBar({ onEnquire }) {
         ) : (
           <>
             {/* Normal Page: Call, WhatsApp, Enquire */}
-            <a href="tel:+919000000000" className="mobile-sticky-item">
+            <a href="tel:+919585044440" className="mobile-sticky-item">
               <Phone size={18} className="mobile-sticky-icon" />
               <span className="mobile-sticky-label">Call</span>
             </a>
             <a 
-              href="https://wa.me/919000000000" 
+              href="https://wa.me/919585044440" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="mobile-sticky-item"

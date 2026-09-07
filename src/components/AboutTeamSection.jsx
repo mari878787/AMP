@@ -8,16 +8,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 const MD_LEADER = {
   id: 1,
-  name: "V. Sai Mohan",
-  role: "Founder, Chairman & Managing Director",
-  signatureTitle: "V. Sai Mohan",
-  signatureSub: "Founder, Chairman & Managing Director",
-  quote: "PERFECTION IS NOT A DREAM, BUT A REALITY THAT I STRIVE TOWARDS IN MY WORK",
+  name: "Mr. Sai Mohan",
+  role: "Managing Director",
+  signatureTitle: "Sai Mohan",
+  signatureSub: "Managing Director",
+  quote: "HIS JOURNEY IS NOT JUST ABOUT BUILDING PROPERTIES—IT IS ABOUT BUILDING PEOPLE, RELATIONSHIPS, AND OPPORTUNITIES.",
   image: "/images/team/sai-mohan-cutout.png",
-  modalImage: "/images/team/sai-mohan.png",
+  modalImage: "/images/about/team/Mohan_MD1.jpeg",
   bio: [
-    "V. Sai Mohan is the Founder, Chairman & MD of Aadhithya Mohan Properties. A visionary first-generation entrepreneur, he has spearheaded landmark residential developments across Chennai with an unyielding commitment to architectural perfection, enduring quality, and customer trust.",
-    "Under his stewardship, Aadhithya Mohan Properties has evolved into a premier luxury developer known for creating bespoke villa communities that harmonize modern engineering with natural landscapes. His hands-on leadership ensures every project adheres to the highest benchmarks of structural durability, legal transparency, and aesthetic excellence."
+    "Mr. Sai Mohan is a real estate entrepreneur with 15+ years of experience built through passion, persistence, and real-world experience. His journey is not just about building properties—it is about building people, relationships, and opportunities.",
+    "As a Builder, Promoter, Marketer, and Entrepreneur, he understands the industry from the ground level to the leadership level. What makes his journey special is his belief that success becomes meaningful when the people around you grow along with you.",
+    "He welcomes talented professionals, marketers, builders, entrepreneurs, and business minds who dream of creating something bigger. For him, joining a company is not simply accepting a job—it is becoming part of a vision and a journey.",
+    "He believes in giving people the freedom to think, the opportunity to perform, and the platform to build their own success. His vision is to create a strong real estate ecosystem where customers, employees, investors, and business partners all grow together.",
+    "With experience behind him and a bigger vision ahead, he continues to build not just projects, but a team and a legacy that people can proudly be part of. If you have the ambition to grow, the courage to dream, and the passion to build—Mr. Sai Mohan believes there is always a place for you in the journey."
   ]
 };
 
@@ -40,39 +43,26 @@ const CEO_LEADER = {
 const MANAGEMENT_LEADERS = [
   {
     id: 3,
-    name: "Afroz",
-    role: "Vice-President, Sales & Marketing",
+    name: "M. A. Afroz",
+    role: "Sales & Strategic Development",
     bio: [
-      "Afroz manages end-to-end customer engagement, sales strategy, and brand outreach. With deep market insight and a customer-first approach, he ensures every client experiences seamless service and absolute transparency throughout their luxury home-buying journey."
+      "With over two decades of experience shaping the residential real estate landscape, M. A. Afroz brings a proven track record in leading sales and marketing functions across landmark projects. His expertise lies in elevating asset positioning to consistently arrive at price points and commercial terms that serve both client priorities and asset value.",
+      "M. A. Afroz possesses a deep, end-to-end understanding of the residential real estate lifecycle, from development and market strategy to sales and operational management, guided by a nuanced appreciation of Chennai’s real estate market dynamics. His expertise spans property sales, asset positioning, customer engagement and commercial negotiations, with a strong ability to identify market opportunities, build lasting client relationships and drive value through effective sales strategies.",
+      "With his extensive experience across key geographies in Chennai, he has honed his ability to navigate evolving residential real estate trends and economic cycles with agility.",
+      "At AADHITHYA MOHAN, M. A. Afroz brings strategic foresight to sales, marketing and real estate development, integrating market intelligence, relationship capital and a strong understanding of customer and market needs to strengthen the organisation’s residential real estate portfolio and reinforce its commitment to building lasting value."
     ],
-    image: "/images/team/afroz.jpg"
+    image: "/images/about/team/afroz.jpeg"
   },
   {
     id: 4,
-    name: "Bala",
-    role: "Vice-President, Planning & Development",
+    name: "RS Balamurugan",
+    role: "Head of Operations",
     bio: [
-      "Bala oversees project planning, architectural coordination, and operational development. With an eye for structural excellence and regulatory compliance, he ensures every development meets the highest standards of safety and sustainability."
+      "RS Balamurugan brings over a decade of professional experience across operations, sales, business development, and team leadership. As Head of Operations at Aadhithya Mohan Properties, He heads pre-sales, channel partners division, also plays a pivotal role in sales and marketing. with a strong focus on business growth and operational excellence.",
+      "With a strategic and data-driven approach, he oversees the complete sales journey from lead generation and customer engagement to site visits, negotiations, and successful closures. His expertise in performance management, process optimization, CRM systems, and team development enables him to build high-performing teams and create efficient, customer-focused operations.",
+      "Known for his leadership, analytical thinking, and proactive approach, Balamurugan plays a key role in strengthening sales performance, developing channel partnerships, and driving sustainable growth for Aadhithya Mohan Properties."
     ],
-    image: "/images/team/afroz.jpg"
-  },
-  {
-    id: 5,
-    name: "Priya Sundaram",
-    role: "Head of Architecture & Design",
-    bio: [
-      "Priya heads architectural design and spatial innovation at Aadhithya Mohan Properties. Combining contemporary aesthetics with functional luxury, she ensures every villa and community reflects thoughtful ergonomics and enduring beauty."
-    ],
-    image: "/images/team/priya.png"
-  },
-  {
-    id: 6,
-    name: "Karthik Narayanan",
-    role: "Vice-President, Finance & Operations",
-    bio: [
-      "Karthik leads corporate finance, fiscal management, and operational efficiency across all portfolio projects, ensuring resilient value creation, disciplined capital allocation, and on-time project execution."
-    ],
-    image: "/images/team/karthik.jpg"
+    image: "/images/about/team/bala.jpeg"
   }
 ];
 
@@ -166,7 +156,7 @@ export default function AboutTeamSection({ showExecutives = true }) {
           
           {/* Centered Top Section Header */}
           <div className="sobha-section-top-header">
-            <span className="sobha-header-eyebrow">EXECUTIVE LEADERSHIP</span>
+            <span className="sobha-header-eyebrow">OUR LEADERS</span>
             <h2 className="sobha-header-title">The People Behind Our Vision</h2>
           </div>
 
@@ -280,7 +270,7 @@ export default function AboutTeamSection({ showExecutives = true }) {
               <h2 className="section-title">The People Who Bring Our Vision In to Life</h2>
             </ScrollReveal>
             <ScrollReveal animation="fadeUp" delay={0.15}>
-              <p className="text-body" style={{ maxWidth: '680px', margin: '0 auto' }}>
+              <p className="text-body" style={{ maxWidth: '680px', margin: '0 auto', textAlign: "center" }}>
                 A multidisciplinary team of domain specialists driving engineering rigor, customer satisfaction, and strategic excellence.
               </p>
             </ScrollReveal>
@@ -676,14 +666,15 @@ export default function AboutTeamSection({ showExecutives = true }) {
 
         .sobha-team-cards-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 24px;
-          max-width: 1320px;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+          justify-content: center;
+          gap: 32px;
+          max-width: 820px;
           margin: 0 auto;
         }
 
         .sobha-team-card-col {
-          height: 460px;
+          height: 480px;
         }
 
         .sobha-team-member-card {

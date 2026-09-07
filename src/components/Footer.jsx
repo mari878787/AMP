@@ -20,20 +20,19 @@ export default function Footer() {
             </h3>
             
             <p className="footer-desc">
-              Thoughtfully designed spaces in prime locations,<br />
-              enriching lives and creating long term value<br />
+              Thoughtfully designed spaces in prime locations,
+              enriching lives and creating long term value
               for generations.
             </p>
           </div>
           
           {/* Offerings Column */}
           <div className="footer-col">
-            <h4 className="footer-col-title">OUR OFFERINGS</h4>
+            <h4 className="footer-col-title">PROJECTS</h4>
             <ul className="footer-links">
-              <li><a href="/all-projects?category=Villa">Villas</a></li>
-              <li><a href="/all-projects?category=Apartment">Apartments</a></li>
-              <li><a href="/all-projects?category=Plotted">Plotted Developments</a></li>
-              <li><a href="#projects">Commercial</a></li>
+              <li><a href="/projects?category=villas">Villas</a></li>
+              <li><a href="/projects?category=apartments">Apartments</a></li>
+              <li><a href="/projects?category=plots">Plot</a></li>
             </ul>
           </div>
           
@@ -41,11 +40,10 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-col-title">COMPANY</h4>
             <ul className="footer-links">
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#projects">Our Projects</a></li>
-              <li><a href="#careers">Careers</a></li>
-              <li><a href="#news">News & Media</a></li>
-              <li><a href="#contact">Contact Us</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/projects">Our Projects</a></li>
+              <li><a href="/about#careers">Careers</a></li>
+              <li><a href="/contact">Contact Us</a></li>
             </ul>
           </div>
           
@@ -53,10 +51,9 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-col-title">SUPPORT</h4>
             <ul className="footer-links">
-              <li><a href="#faqs">FAQS</a></li>
-              <li><a href="#terms">Terms & Conditions</a></li>
               <li><a href="/privacy-policy">Privacy Policy</a></li>
-              <li><a href="#disclaimer">Disclaimer</a></li>
+              <li><a href="/contact">Customer Support</a></li>
+              <li><a href="/contact">Enquiries</a></li>
             </ul>
           </div>
           
@@ -110,13 +107,10 @@ export default function Footer() {
           <div className="footer-contact-info">
             <div className="contact-col-touch">
               <h4 className="footer-col-title">GET IN TOUCH</h4>
-              <p className="contact-value">+91 xxxxxxxxxx</p>
-              <p className="contact-value font-email">info@aadithya.com</p>
-            </div>
-            <div className="contact-col-address">
+              <a href="tel:+919585044440" className="contact-value" style={{ textDecoration: 'none' }}>+91 9585044440</a>
+              <a href="mailto:info@aadhithyamohanproperties.com" className="contact-value font-email" style={{ textDecoration: 'none' }}>info@aadhithyamohanproperties.com</a>
               <p className="address-value">
-                No. 123, Anna Salai, Chennai,<br />
-                Tamil Nadu - 600006
+                2nd Floor, VNCT Building, No 5, Mahalingapuram Main Rd, Mahalingapuram, Nugambakkam, Chennai, Tamil Nadu 600034
               </p>
             </div>
           </div>
@@ -126,7 +120,7 @@ export default function Footer() {
         {/* Copyright Row */}
         <div className="footer-copyright-row">
           <p className="copyright-text">
-            &copy; {new Date().getFullYear()} Aadhithya Mohan. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Aadhithya Mohan Properties. All Rights Reserved.
           </p>
           <p className="copyright-design">
             Designed & Developed by <a href="https://markvtechdigital.com" target="_blank" rel="noopener noreferrer" className="credits-link">Markvtech</a>
@@ -191,7 +185,7 @@ export default function Footer() {
 
 
         .footer-desc {
-          font-size: 13.5px;
+          font-size: 16px;
           line-height: 1.6;
           color: var(--color-text-dark);
         }
@@ -204,7 +198,7 @@ export default function Footer() {
 
         .footer-col-title {
 
-          font-size: 11.5px;
+          font-size: 22px;
           font-weight: 400;
 
           color: var(--color-text-dark);
@@ -221,9 +215,10 @@ export default function Footer() {
         }
 
         .footer-links a {
-          font-size: 13px;
+          font-size: 16px;
           color: var(--color-text-muted);
           transition: color 0.25s ease, padding-left 0.25s ease;
+          letter-spacing: 0;
         }
 
         .footer-links a:hover {
@@ -238,7 +233,7 @@ export default function Footer() {
         }
 
         .subscribe-desc {
-          font-size: 13px;
+          font-size: 16px;
           line-height: 1.5;
           color: var(--color-text-muted);
         }
@@ -331,7 +326,7 @@ export default function Footer() {
 
         .footer-contact-info {
           display: grid;
-          grid-template-columns: 1.1fr 1fr;
+          grid-template-columns: 1fr;
           gap: var(--space-4);
           padding-bottom: 60px;
         }
@@ -344,7 +339,7 @@ export default function Footer() {
 
         .contact-value {
 
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 400;
           color: var(--color-text-muted);
           line-height: 1.2;
@@ -410,7 +405,7 @@ export default function Footer() {
             grid-column: span 1;
           }
           .footer-tagline {
-            font-size: 24px;
+            font-size: 32px;
           }
           .footer-contact-info {
             grid-template-columns: 1fr;

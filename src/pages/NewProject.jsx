@@ -43,21 +43,23 @@ const SPECIFICATIONS = [
     index: '01',
     title: 'STRUCTURE',
     details: [
-      'RCC Framed structure',
-      'A robust structural system made of Reinforced Cement Concrete (RCC) columns, beams, and slabs, designed to safely carry building loads and transfer them to the foundation. It provides strength, durability, stability, and flexibility in architectural planning.'
+      'R.C.C Framed Structure with Columns, Beams and Slabs.',
+      'External Walls in Red Bricks.',
+      'Partition Walls in Red Bricks.',
+      'Internal Walls plastered in Cement.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/stracture.jpeg'
   },
   {
-    id: 'wall-finish',
-    label: 'Wall Finish',
+    id: 'wall-tiles',
+    label: 'Wall Tiles',
     index: '02',
-    title: 'WALL FINISH',
+    title: 'WALL TILES',
     details: [
-      'Red Bricks',
-      'High-quality traditional masonry units made from natural clay, offering strength, durability, thermal insulation, and long-lasting performance. They provide a solid and reliable wall construction while giving the building a natural, timeless finish.'
+      'Toilets: Premium tiles up to ceiling height.',
+      'Kitchen: Designer tile DADO for 2 feet height over counter.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/spec_wall_tiles.jpg'
   },
   {
     id: 'floor-finish',
@@ -65,10 +67,12 @@ const SPECIFICATIONS = [
     index: '03',
     title: 'FLOOR FINISH',
     details: [
-      'Vitrified Tiles',
-      'High-quality vitrified tiles providing a smooth, durable, low-maintenance, and elegant flooring finish. They offer excellent resistance to stains, moisture, and daily wear while enhancing the overall look of the interiors.'
+      '4 X 4 Vitrified Tiles for Living, Dining, Bedrooms and Kitchen.',
+      '4 X 4 Vitrified Tiles for Bathrooms.',
+      '2 X 2 Vitrified Tiles for Balcony.',
+      'Anti Skid Tiles in Rest Rooms and Utility area.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/spec_flooring.jpg'
   },
   {
     id: 'kitchen-dining',
@@ -76,32 +80,9 @@ const SPECIFICATIONS = [
     index: '04',
     title: 'KITCHEN & DINING',
     details: [
-      'Black Quartz sink with Single Bowl / Black jet grantie',
-      '20mm thick jet black granite countertop with a durable stainless steel sink, offering a sleek, hygienic, easy-to-maintain, and elegant finish for the kitchen and dining space.'
+      'Black Quartz sink with Single Bowl / Black jet granite.'
     ],
-    image: '/images/project/spec-structure.png'
-  },
-  {
-    id: 'balcony',
-    label: 'Balcony',
-    index: '05',
-    title: 'BALCONY',
-    details: [
-      'Toughedn glass with stainless steels hand rail',
-      'High-safety toughened glass railings with premium stainless steel handrails, providing unobstructed views, modern elegance, and dependable durability.'
-    ],
-    image: '/images/project/spec-structure.png'
-  },
-  {
-    id: 'bathroom',
-    label: 'Bathroom',
-    index: '06',
-    title: 'BATHROOM',
-    details: [
-      'Jaguar / Equivalent sanitory fittings',
-      'Premium Jaguar or equivalent sanitary fittings, selected for durability, reliable performance, water efficiency, and a modern, elegant finish, ensuring comfort and functionality in every bathroom.'
-    ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/Kitchen.jpeg'
   },
   {
     id: 'joinery-windows',
@@ -109,10 +90,33 @@ const SPECIFICATIONS = [
     index: '07',
     title: 'JOINERY & WINDOWS',
     details: [
-      'Aluminium frame windows',
-      'High-quality UPVC / Aluminium windows providing excellent durability, weather resistance, thermal insulation, and low maintenance, with a clean and modern appearance.'
+      'Windows: Aluminium Framed with Sliding Glass Shutters and MS Grill as per the Architect’s Design.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/WINDOWS.png'
+  },
+  {
+    id: 'plumbing-sanitary',
+    label: 'Plumbing & Sanitary Fittings',
+    index: '05',
+    title: 'PLUMBING & SANITARY FITTINGS',
+    details: [
+      'Jaguar / Equivalent sanitary fittings.',
+      'Provision for Horizontal shaped Geyser and Exhaust Fan.'
+    ],
+    image: '/images/project/specs/PLUMBING .png'
+  },
+  {
+    id: 'doors',
+    label: 'Doors',
+    index: '06',
+    title: 'DOORS',
+    details: [
+      'Engineered Wooden Door Frame and Shutter with Teak Wood Laminate finish for Main Door.',
+      'Engineered Wooden Door Frame and Shutter for all the internal doors with Laminate Finish.',
+      'Toilets: WPC doors.',
+      'Balcony: Aluminium Framed French doors with Sliding Glass shutters.'
+    ],
+    image: '/images/project/specs/Doors.jpeg'
   },
   {
     id: 'internal-staircase',
@@ -120,10 +124,9 @@ const SPECIFICATIONS = [
     index: '08',
     title: 'INTERNAL STAIRCASES ( VILLAS DUPLEX UNITS)',
     details: [
-      'Toughedn glass with stainless steels hand rail',
-      'Elegant stainless steel handrails providing a sleek, modern appearance with excellent strength, durability, corrosion resistance, and low maintenance, ensuring safety and comfort along the staircase.'
+      'Toughened glass with stainless steel hand rail.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/Living Area.jpeg'
   },
   {
     id: 'electrical-points',
@@ -131,10 +134,9 @@ const SPECIFICATIONS = [
     index: '09',
     title: 'ELECTRICAL POINTS',
     details: [
-      'Finolex brand wires / Anchor Switches',
-      'Electrical wiring using Finolex brand wires with Anchor switches, ensuring reliable electrical performance, safety, durability, and a quality finish throughout the villa.'
+      'Anchor switches, Orbit wires.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/Electrical.jpeg'
   },
   {
     id: 'common-features',
@@ -142,10 +144,9 @@ const SPECIFICATIONS = [
     index: '10',
     title: 'COMMON FEATURES',
     details: [
-      'Club House / Avenue trees, 24*7 Security',
-      'Provision of a Fujitech lift, solar power for common areas, and a well-equipped gym, offering enhanced convenience, energy efficiency, comfort, and modern lifestyle amenities for residents.'
+      'Club House / Avenue trees, 24*7 Security.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/common.png'
   }
 ];
 export default function NewProject({ project }) {
@@ -170,7 +171,7 @@ export default function NewProject({ project }) {
   const [lightboxSection, setLightboxSection] = useState('exteriors');
   const [layoutCategory, setLayoutCategory] = useState(isPashaPinnacle ? 'typicalFloorPlan' : 'masterPlan');
   const [floorPlanConfig, setFloorPlanConfig] = useState('3bhk'); // '3bhk', '4bhk'
-  const [activePlanId, setActivePlanId] = useState('planA');
+  const [activePlanId, setActivePlanId] = useState('plan3bhk_20_27');
 
   useEffect(() => {
     setLayoutCategory(isPashaPinnacle ? 'typicalFloorPlan' : 'masterPlan');
@@ -178,20 +179,53 @@ export default function NewProject({ project }) {
 
   const layoutsData = {
     masterPlan: {
-      image: '/images/project/CML/master-plan.png',
+      image: '/images/project/CML/floor-plan/master-plan.png',
       description: 'The master plan for the Crystal Moonlight project.'
     },
     typicalFloorPlan: {
-      image: '/images/project/CML/master-plan.png',
+      image: '/images/project/CML/floor-plan/master-plan.png',
       description: 'Typical architectural floor plan layout without legends.'
     },
     floorPlan: {
       '3bhk': [
-        { id: 'planA', name: 'Plan A (G+1)', type: '3 BHK', builtUp: '2,233 Sq.Ft.', plot: '1,260 Sq.Ft.', facing: 'North Facing', image: '/images/project/CML/floor-plan/PLAN A 30X42 NORTHFACE.jpg.jpeg' },
-        { id: 'planB', name: 'Plan B (G+1)', type: '3 BHK', builtUp: '2,287 Sq.Ft.', plot: '1,260 Sq.Ft.', facing: 'North Facing', image: "/images/project/CML/floor-plan/PLAN - B  30' X 48'  (North Facing )VILLA.jpg.jpeg" },
+        {
+          id: 'plan3bhk_20_27',
+          name: '3 BHK Villa (Units 20–27)',
+          type: '3 BHK Villa',
+          builtUp: '2,250 Sq.Ft.',
+          plot: '1,200 – 1,350 Sq.Ft.',
+          facing: 'North & East Facing',
+          image: '/images/project/CML/floor-plan/CML 3BHK 20-27.jpg.jpeg'
+        }
       ],
       '4bhk': [
-        { id: 'planC', name: 'Plan C (G+2)', type: '4 BHK', builtUp: '2,287 Sq.Ft.', plot: '1,440 Sq.Ft.', facing: 'North Facing', image: "/images/project/CML/floor-plan/PLAN C  -    37' X 42'  (North Facing )VILLA.jpg.jpeg" },
+        {
+          id: 'plan4bhk_1_10',
+          name: '4 BHK Luxury Villa (Units 1–10)',
+          type: '4 BHK Villa',
+          builtUp: '2,850 Sq.Ft.',
+          plot: '1,500 – 1,650 Sq.Ft.',
+          facing: 'North & East Facing',
+          image: '/images/project/CML/floor-plan/CML 4BHK 1-10.jpg.jpeg'
+        },
+        {
+          id: 'plan4bhk_20_27',
+          name: '4 BHK Grand Villa (Units 20–27)',
+          type: '4 BHK Villa',
+          builtUp: '3,100 Sq.Ft.',
+          plot: '1,600 – 1,800 Sq.Ft.',
+          facing: 'East & North Facing',
+          image: '/images/project/CML/floor-plan/CML 4BHK 20-27.jpg.jpeg'
+        },
+        {
+          id: 'plan4bhk_sig',
+          name: '4 BHK Signature Villa',
+          type: '4 BHK Villa',
+          builtUp: '3,300 Sq.Ft.',
+          plot: '1,800 – 2,000 Sq.Ft.',
+          facing: 'North Facing',
+          image: '/images/project/CML/floor-plan/CML 4BHK.jpg (1).jpeg'
+        }
       ]
     },
     walkthrough360: {
@@ -255,6 +289,15 @@ export default function NewProject({ project }) {
   const [hideMainHeader, setHideMainHeader] = useState(false);
 
   useEffect(() => {
+    const handleOpenInquiry = (e) => {
+      e.preventDefault();
+      setIsQuoteOpen(true);
+    };
+    window.addEventListener('open-inquiry-modal', handleOpenInquiry);
+    return () => window.removeEventListener('open-inquiry-modal', handleOpenInquiry);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const heroEl = document.querySelector('.project-hero-section');
       const threshold = heroEl ? heroEl.offsetHeight - 60 : window.innerHeight - 60;
@@ -291,13 +334,13 @@ export default function NewProject({ project }) {
     { image: "/images/project/CML/amenities/16.png", icon: "/images/project/CML/amenities/icon/gym.png", title: "Gym", desc: "Fully equipped with modern fitness equipment." },
     { image: "/images/project/CML/amenities/7.png", icon: "/images/project/CML/amenities/icon/PartyHall.png", title: "Party Hall", desc: "Elegant space for events and gatherings." },
     { image: "/images/project/CML/amenities/8.png", icon: "/images/project/CML/amenities/icon/Indoor Games.png", title: "Indoor Games", desc: "Dedicated area for indoor recreation." },
-    { image: "/images/project/CML/amenities/17.png", icon: "/images/project/CML/amenities/icon/yogaRoom.png", title: "Yoga Room", desc: "A tranquil space for wellness and meditation." },
+    { image: "/images/project/aminities/villa & apartment/yoha-room.png", icon: "/images/project/CML/amenities/icon/yogaRoom.png", title: "Yoga Room", desc: "A tranquil space for wellness and meditation." },
     { image: "/images/project/CML/amenities/4.png", icon: "/images/project/CML/amenities/icon/Play Area.png", title: "Play Area", desc: "Safe and fun play zones for children." },
     { image: "/images/project/CML/amenities/2.png", icon: "/images/project/CML/amenities/icon/Solar Lighting.png", title: "Solar Lighting", desc: "Eco-friendly illumination." },
     { image: "/images/project/CML/amenities/20.png", icon: "/images/project/CML/amenities/icon/DTH Connection.png", title: "DTH Connection", desc: "Ready connections for entertainment." },
     { image: "/images/project/CML/amenities/11.png", icon: "/images/project/CML/amenities/icon/Rainwater Harvesting.png", title: "Rainwater Harvesting", desc: "As per CMWSSB Norms." },
     { image: "/images/project/CML/amenities/12.png", icon: "/images/project/CML/amenities/icon/Coarse Paint.png", title: "Coarse Paint", desc: "Weather coarse paint on the terrace floor." },
-    { image: "/images/project/CML/amenities/3.png", icon: "/images/project/CML/amenities/icon/Anti-Termite.png", title: "Anti-Termite", desc: "Ensuring long-lasting protection." }
+    { image: "/images/project/aminities/villa & apartment/Anti-Termite.png", icon: "/images/project/CML/amenities/icon/Anti-Termite.png", title: "Anti-Termite", desc: "Ensuring long-lasting protection." }
   ];
   const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
 
@@ -446,11 +489,16 @@ export default function NewProject({ project }) {
       title: `Crystal Moonlight Interior ${i + 1}`
     })),
     exteriors: [
-      { src: '/images/villa_exterior_1779810861723.png', title: 'Moonlight Villa FaÃ§ade' },
-      { src: '/images/project_crystal_1779810838661.png', title: 'Recreational Pool Deck' },
-      { src: '/images/project/why-cmv.png', title: 'Gated Community Portico' },
-      { src: '/images/home/hero.png', title: 'Premium Landscaped Backyard' },
-      { src: '/images/home/project-image-2.png', title: 'Evening FaÃ§ade View' }
+      { src: '/images/project/CML/extirior/1500x850.png', title: 'Villa Architectural Perspective' },
+      { src: '/images/project/CML/extirior/North_Day_4K_Front.png', title: 'North Facing Villa Façade' },
+      { src: '/images/project/CML/extirior/North_Day_4K_Front_2.png', title: 'Contemporary Front Elevation' },
+      { src: '/images/project/CML/extirior/North_Day_4K_Left_2.png', title: 'Villa Corner Perspective' },
+      { src: '/images/project/CML/extirior/North_Day_4K_Right_2.png', title: 'Side Elevation & Landscaping' },
+      { src: '/images/project/CML/extirior/North_Day_4K_Top_2.png', title: 'Aerial Community Panorama' },
+      { src: '/images/project/CML/extirior/North_Day_4K_Top_3.png', title: 'Master Plan Aerial View' },
+      { src: '/images/project/CML/extirior/North_Day_4K_Top_5.png', title: 'Avenue Aerial Perspective' },
+      { src: '/images/project/CML/extirior/North_Row_4K_Day 2.png', title: 'Villa Row Streetscape' },
+      { src: '/images/project/CML/extirior/North_Row_8k.jpg.jpeg', title: 'Grand Community Boulevard' }
     ]
   };
   useEffect(() => {
@@ -482,11 +530,35 @@ export default function NewProject({ project }) {
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    const fullName = `${quoteForm.firstName || ''} ${quoteForm.lastName || ''}`.trim();
+    const phone = `${quoteForm.phoneCode || '+91'} ${quoteForm.phoneNumber || ''}`.trim();
+    const mode = quoteForm.contactMode === 'videocall' ? 'Schedule a Video Call' : 'Request a Callback';
+    
+    const subject = encodeURIComponent(`Schedule Visit / Inquiry - Crystal Moonlight (${fullName || 'Lead'})`);
+    const body = encodeURIComponent(
+      `Project: Crystal Moonlight\n` +
+      `Name: ${fullName}\n` +
+      `Phone: ${phone}\n` +
+      `Email: ${quoteForm.email || 'N/A'}\n` +
+      `Preferred Contact Mode: ${mode}\n`
+    );
+
+    window.location.href = `mailto:info@aadhithyamohanproperties.com?subject=${subject}&body=${body}`;
+
     setFormSubmitted(true);
     setTimeout(() => {
       setFormSubmitted(false);
       setIsQuoteOpen(false);
-      setQuoteForm({ name: '', email: '', phone: '', note: '' });
+      setQuoteForm({
+        contactMode: 'callback',
+        firstName: '',
+        lastName: '',
+        phoneCode: '+91',
+        phoneNumber: '',
+        email: '',
+        agreedPrivacy: false,
+        agreedOffers: false
+      });
     }, 2500);
   };
   return (
@@ -495,41 +567,42 @@ export default function NewProject({ project }) {
       <main>
         {/* Project Hero Section */}
         <section className="project-hero-section">
-            <div className="project-split-mask" aria-hidden="true">
-              <div className="split-panel panel-1"></div>
-              <div className="split-panel panel-2"></div>
-              <div className="split-panel panel-3"></div>
-              <div className="split-panel panel-4"></div>
-            </div>
-            <div className="project-hero-background">
+          <div className="project-hero-background">
+            <picture className="project-hero-picture">
+              <source media="(max-width: 768px)" srcSet="/images/project/CML/hero-mobile.png" />
               <img
                 src="/images/project/CML/Elevation.png"
                 alt="Crystal Moonlight"
-                className="project-hero-bg-image"
+                className="project-hero-bg-image animate-zoom"
               />
-              <div className="project-hero-light-leak" aria-hidden="true"></div>
-              <div className="project-hero-overlay"></div>
-            </div>
-            <div className="project-hero-content">
-              <div className="project-hero-text-col">
-                {/* <span className="project-tag-reveal">PREMIUM GATED VILLAS</span> */}
-                <h1 className="project-hero-title display-title">
+            </picture>
+            <div className="project-hero-overlay"></div>
+          </div>
+          <div className="container project-hero-content">
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <div className="project-hero-text-block">
+                <h1 className="display-title project-hero-title">
                   Crystal Moonlight
                 </h1>
-                <p className="project-hero-subtitle">MEDAVAKKAM, CHENNAI</p>
+                <p className="project-hero-subtitle">
+                  Ultra Luxury Gated Community in Medavakkam
+                </p>
               </div>
-              <div className="project-hero-btn-col">
-                <Button
-                  theme="dark"
-                  className="hero-cta-btn"
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.25}>
+              <div className="project-hero-cta-block">
+                <button
+                  type="button"
                   onClick={() => setIsQuoteOpen(true)}
-                  icon="â†“"
+                  className="btn-discover"
                 >
-                  Download Brochure
-                </Button>
+                  DOWNLOAD BROCHURE
+                </button>
               </div>
-            </div>
-          </section>
+            </ScrollReveal>
+          </div>
+        </section>
         {/* Project Sticky Sub-navigation with Tab Dropdowns */}
         <nav className="project-sub-nav">
           <div className="container sub-nav-container">
@@ -726,9 +799,9 @@ export default function NewProject({ project }) {
             <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0' }}>
               <ProjectDetailsGrid 
                 stat1Tag="SITE EXTENT"
-                stat1Val="15"
+                stat1Val="2.25"
                 stat1Desc="ACRES"
-                stat1Count={15}
+                stat1Count={2.25}
                 stat2Tag="TOTAL UNITS"
                 stat2Val="47"
                 stat2Desc="VILLAS"
@@ -741,7 +814,7 @@ export default function NewProject({ project }) {
                 stat3Val="3 & 4"
                 stat3Desc="BHK"
                 stat4Tag="SIZE RANGE"
-                stat4Val="2,233 - 2,287"
+                stat4Val="2,200 - 3,300"
                 stat4Desc="SQ.FT."
               />
             </section>
@@ -805,7 +878,7 @@ export default function NewProject({ project }) {
                                       {pillar.points.map((pt, pIdx) => (
                                         <li key={pIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '18px', lineHeight: '1.5', margin: 0, padding: 0, letterSpacing: 0 }}>
                                           <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#000000ff', marginTop: '10px' }} />
-                                          <span style={{ margin: 0, padding: 0 }}>{pt}</span>
+                                          <span style={{ margin: 0, padding: 0, letterSpacing: 0 }}>{pt}</span>
                                         </li>
                                       ))}
                                     </ul>
@@ -825,7 +898,7 @@ export default function NewProject({ project }) {
               {/* ── Neighbourhood Story Experience ── */}
               <NeighbourhoodStory
                 onEnquire={() => setIsQuoteOpen(true)}
-                projectCoords={[12.9175, 80.1915]}
+                projectCoords={[12.9298995, 80.1954121]}
                 projectName="Crystal Moonlight"
               />
             </section>
@@ -855,102 +928,143 @@ export default function NewProject({ project }) {
                     </div>
                   </ScrollReveal>
                 </div> {/* Close container here for full-bleed viewport */}
-                {/* Spotlight Active-Card Gallery Carousel */}
+                {/* Spotlight Active-Card Gallery Carousel / Coming Soon */}
                 <ScrollReveal animation="fadeUp" delay={0.35} className="gallery-spotlight-viewport">
-                  <div
-                    className="gallery-spotlight-track"
-                    style={{
+                  {galleryTab === 'videos' ? (
+                    <div style={{
+                      width: '100%',
+                      minHeight: '420px',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 'var(--gallery-gap, 8vw)',
-                      width: 'max-content',
-                      transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                      transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
-                    }}
-                  >
-                    {(() => {
-                      const items = galleryImages[galleryTab];
-                      const total = items.length;
-                      const extended = total > 1
-                        ? [items[total - 1], ...items, items[0]]
-                        : items;
-                      return extended.map((img, idx) => {
-                        const isActive = idx === galleryIndices[galleryTab];
-                        const realIdx = total > 1
-                          ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
-                          : 0;
-                        return (
-                          <div
-                            key={idx}
-                            className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
-                            style={{
-                              flexShrink: 0,
-                              flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                              width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                              transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
-                              cursor: 'pointer',
-                              overflow: 'hidden',
-                              position: 'relative',
-                              height: 'calc(100vh - 165px)',
-                              maxHeight: '720px',
-                              minHeight: '320px',
-                              boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
-                            }}
-                            onClick={() => {
-                              if (isActive) {
-                                if (galleryTab === 'videos') {
-                                  setActiveVideoUrl(img.url);
-                                  setIsVideoOpen(true);
-                                } else {
-                                  handleOpenLightbox(galleryTab, realIdx);
-                                }
-                              } else {
-                                setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
-                                setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
-                              }
-                            }}
-                          >
-                            <img
-                              src={img.src}
-                              alt={img.title}
-                              className="gallery-spotlight-img"
-                            />
+                      justifyContent: 'center',
+                      padding: '40px 20px',
+                      boxSizing: 'border-box'
+                    }}>
+                      <div style={{
+                        maxWidth: '560px',
+                        width: '100%',
+                        textAlign: 'center',
+                        padding: '60px 40px',
+                        border: '1px solid rgba(180, 133, 100, 0.25)',
+                        borderRadius: '8px',
+                        background: 'linear-gradient(180deg, #FAF8F5 0%, #FFFFFF 100%)',
+                        boxShadow: '0 20px 50px rgba(0,0,0,0.04)'
+                      }}>
+                        <span style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '12px',
+                          fontWeight: '600',
+                          letterSpacing: '0.22em',
+                          color: '#b48564',
+                          textTransform: 'uppercase',
+                          display: 'block',
+                          marginBottom: '14px'
+                        }}>
+                          COMING SOON
+                        </span>
+                        <h3 style={{
+                          fontFamily: 'var(--font-heading)',
+                          fontSize: 'clamp(26px, 2.8vw, 34px)',
+                          fontWeight: '400',
+                          color: '#1a1a1a',
+                          margin: '0 0 16px 0',
+                          lineHeight: '1.2'
+                        }}>
+                          Video Tour & Walkthrough
+                        </h3>
+                        <p style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '15px',
+                          lineHeight: '1.7',
+                          color: '#666',
+                          margin: 0
+                        }}>
+                          The official video tour and project walkthrough for Crystal Moonlight will be released soon.
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        className="gallery-spotlight-track"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--gallery-gap, 8vw)',
+                          width: 'max-content',
+                          transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+                          transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
+                        }}
+                      >
+                        {(() => {
+                          const items = galleryImages[galleryTab] || [];
+                          const total = items.length;
+                          const extended = total > 1
+                            ? [items[total - 1], ...items, items[0]]
+                            : items;
+                          return extended.map((img, idx) => {
+                            const isActive = idx === galleryIndices[galleryTab];
+                            const realIdx = total > 1
+                              ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
+                              : 0;
+                            return (
+                              <div
+                                key={idx}
+                                className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
+                                style={{
+                                  flexShrink: 0,
+                                  flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                  width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                  transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
+                                  cursor: 'pointer',
+                                  overflow: 'hidden',
+                                  position: 'relative',
+                                  height: 'calc(100vh - 165px)',
+                                  maxHeight: '720px',
+                                  minHeight: '320px',
+                                  boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
+                                }}
+                                onClick={() => {
+                                  if (isActive) {
+                                    handleOpenLightbox(galleryTab, realIdx);
+                                  } else {
+                                    setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
+                                    setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
+                                  }
+                                }}
+                              >
+                                <img
+                                  src={img.src}
+                                  alt={img.title}
+                                  className="gallery-spotlight-img"
+                                />
 
-                            {galleryTab === 'videos' && (
-                              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
-                                <div className="play-button-pulsing">
-                                  <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
-                                </div>
-                              </div>
-                            )}
-                            <div className="gallery-deck-hover-overlay">
-                              {galleryTab !== 'videos' && (
-                                <>
+                                <div className="gallery-deck-hover-overlay">
                                   <Maximize2 size={24} className="hover-overlay-zoom-icon" />
                                   <span className="hover-overlay-title">{img.title}</span>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      });
-                    })()}
-                  </div>
-                  {/* Navigation Arrows positioned on left/right previews */}
-                  <button
-                    className="gallery-spotlight-arrow prev"
-                    onClick={() => prevGallerySlide(galleryTab)}
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft size={24} />
-                  </button>
-                  <button
-                    className="gallery-spotlight-arrow next"
-                    onClick={() => nextGallerySlide(galleryTab)}
-                    aria-label="Next image"
-                  >
-                    <ChevronRight size={24} />
-                  </button>
+                                </div>
+                              </div>
+                            );
+                          });
+                        })()}
+                      </div>
+                      {/* Navigation Arrows positioned on left/right previews */}
+                      <button
+                        className="gallery-spotlight-arrow prev"
+                        onClick={() => prevGallerySlide(galleryTab)}
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeft size={24} />
+                      </button>
+                      <button
+                        className="gallery-spotlight-arrow next"
+                        onClick={() => nextGallerySlide(galleryTab)}
+                        aria-label="Next image"
+                      >
+                        <ChevronRight size={24} />
+                      </button>
+                    </>
+                  )}
                 </ScrollReveal>
               </section>
             </>
@@ -968,7 +1082,7 @@ export default function NewProject({ project }) {
           {activeTab === 'amenities' && (
             <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', backgroundColor: '#ffffff', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center' }}>
               {/* Optional ambient background leaf or shape */}
-              <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: '400px', height: '400px', background: 'url("/images/bg/TR-1.png") center / contain no-repeat', opacity: 0.1, pointerEvents: 'none' }}></div>
+              <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: '400px', height: '400px', background: '#ffffff', opacity: 0.1, pointerEvents: 'none' }}></div>
 
               <div className="container" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
                 <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '60px' }}>
@@ -1001,22 +1115,23 @@ export default function NewProject({ project }) {
                               }}
                               className={`amenity-item-btn ${isActive ? 'active' : ''}`}
                               style={{
-                                display: 'flex', alignItems: 'center', gap: '14px', padding: '16px',
+                                display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 18px',
                                 background: isActive ? 'var(--color-bg-light)' : 'transparent',
+                                borderRadius: '8px',
                                 border: 'none',
                                 borderBottom: isActive ? '1px solid transparent' : '1px solid rgba(0,0,0,0.06)',
                                 cursor: 'pointer', transition: 'all 0.3s ease',
                                 textAlign: 'left', outline: 'none',
-                                width: '100%', minWidth: 0, overflow: 'hidden'
+                                width: '100%', minWidth: 0
                               }}
                             >
                               <div style={{
-                                width: '34px', height: '34px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                background: isActive ? 'rgba(180, 133, 100, 0.12)' : 'rgba(0,0,0,0.03)',
+                                width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                background: isActive ? 'rgba(180, 133, 100, 0.14)' : 'rgba(0,0,0,0.03)',
                                 border: isActive ? '1px solid #b48564' : '1px solid rgba(0,0,0,0.08)',
                                 transition: 'all 0.3s ease',
                                 flexShrink: 0,
-                                padding: '6px'
+                                padding: '7px'
                               }}>
                                 {typeof item.icon === 'string' ? (
                                   <img
@@ -1033,13 +1148,17 @@ export default function NewProject({ project }) {
                                   item.icon
                                 )}
                               </div>
-                              <span style={{ flex: 1, fontWeight: isActive ? '400' : '300', fontSize: '16px', color: isActive ? 'var(--color-highlight)' : '#000', lineHeight: '1.4', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</span>
+                              <span style={{ flex: 1, fontWeight: isActive ? '500' : '400', fontSize: '15px', color: isActive ? 'var(--color-highlight)' : '#1a1a1a', lineHeight: '1.4', whiteSpace: 'normal', wordBreak: 'break-word' }}>{item.title}</span>
                             </button>
 
                             {/* Mobile Inline Image Card under the active amenity item */}
                             {isActive && (
                               <div className="amenity-mobile-inline-card">
-                                <div className="amenity-mobile-card-img" style={{ backgroundImage: `url(${item.image})` }} />
+                                <img
+                                  src={encodeURI(item.image)}
+                                  alt={item.title}
+                                  className="amenity-mobile-card-img"
+                                />
                                 <div className="amenity-mobile-card-overlay">
                                   <h4 className="amenity-mobile-card-title">{item.title}</h4>
                                   <p className="amenity-mobile-card-desc">{item.desc}</p>
@@ -1060,24 +1179,37 @@ export default function NewProject({ project }) {
                         style={{
                           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
                           opacity: amenityIdx === idx ? 1 : 0,
-                          transform: amenityIdx === idx ? 'scale(1)' : 'scale(1.05)',
-                          transition: 'opacity 0.8s ease, transform 1.2s ease',
+                          transform: amenityIdx === idx ? 'scale(1)' : 'scale(1.04)',
+                          transition: 'opacity 0.6s ease, transform 0.8s ease',
                           pointerEvents: amenityIdx === idx ? 'auto' : 'none'
                         }}
                       >
-                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+                        <img
+                          src={encodeURI(item.image)}
+                          alt={item.title}
+                          style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            display: 'block'
+                          }}
+                        />
 
                         {/* Elegant bottom overlay */}
                         <div style={{
                           position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%',
-                          background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 60%, transparent 100%)',
                           display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-                          padding: '40px',
+                          padding: '36px',
                           zIndex: 2
                         }}>
-                          <div style={{ paddingTop: '20px' }}>
-                            <h3 style={{ color: '#ffffff', marginBottom: '8px', fontWeight: '500', fontSize: '24px', fontFamily: 'var(--font-heading)' }}>{item.title}</h3>
-                            <p style={{ color: 'rgba(255,255,255,0.8)', margin: 0, fontSize: '15px', fontWeight: '300' }}>{item.desc}</p>
+                          <div>
+                            <h3 style={{ color: '#ffffff', marginBottom: '8px', fontWeight: '500', fontSize: '22px', fontFamily: 'var(--font-heading)' }}>{item.title}</h3>
+                            <p style={{ color: 'rgba(255,255,255,0.85)', margin: 0, fontSize: '14px', fontWeight: '300', lineHeight: '1.6' }}>{item.desc}</p>
                           </div>
                         </div>
                       </div>
@@ -1295,6 +1427,36 @@ export default function NewProject({ project }) {
                         })}
                       </div>
                     </div>
+
+                    {/* Variant Pills for Configurations with Multiple Plans */}
+                    {currentConfigPlans.length > 1 && (
+                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '28px', marginTop: '-20px' }}>
+                        {currentConfigPlans.map(plan => {
+                          const isSelected = activePlanId === plan.id;
+                          return (
+                            <button
+                              key={plan.id}
+                              onClick={() => setActivePlanId(plan.id)}
+                              style={{
+                                padding: '8px 18px',
+                                borderRadius: '24px',
+                                fontSize: '13px',
+                                fontWeight: isSelected ? '500' : '400',
+                                border: isSelected ? '1px solid var(--color-highlight)' : '1px solid rgba(0,0,0,0.1)',
+                                background: isSelected ? 'rgba(180, 133, 100, 0.12)' : '#f9f9f9',
+                                color: isSelected ? 'var(--color-highlight)' : '#333',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                outline: 'none'
+                              }}
+                            >
+                              {plan.name}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
                     {/* Main Slide Layout */}
                     <div className="floorplan-slide-content-grid" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 7fr', gap: '30px', alignItems: 'center' }}>
 
@@ -1321,14 +1483,6 @@ export default function NewProject({ project }) {
                             <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.facing}</span>
                           </div>
                         </div>
-                        <Button
-                          theme="light"
-                          onClick={() => setIsQuoteOpen(true)}
-                          icon="↓"
-                          style={{ minWidth: '220px', boxSizing: 'border-box' }}
-                        >
-                          Download Floorplan PDF
-                        </Button>
                       </div>
                       {/* Right Column: Visualizer */}
                       <div className="floorplan-slide-visual-col" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', order: isMobile ? 1 : 2 }}>
@@ -1376,27 +1530,12 @@ export default function NewProject({ project }) {
             (() => {
               const projectStatusData = [
                 {
-                  month: 'May',
+                  month: 'August',
                   year: '2026',
-                  images: [1, 2, 3, 4, 5, 6].map(num => `/images/project/CML/Interiors/cml-interior-${num.toString().padStart(2, '0')}.jpg`)
-                },
-                {
-                  month: 'April',
-                  year: '2026',
-                  images: [7, 8, 1, 2, 3, 4].map(num => `/images/project/CML/Interiors/cml-interior-${num.toString().padStart(2, '0')}.jpg`)
-                },
-                {
-                  month: 'March',
-                  year: '2026',
-                  images: [5, 6, 7, 8, 1, 2].map(num => `/images/project/CML/Interiors/cml-interior-${num.toString().padStart(2, '0')}.jpg`)
-                },
-                {
-                  month: 'February',
-                  year: '2026',
-                  images: [3, 4, 5, 6, 7, 8].map(num => `/images/project/CML/Interiors/cml-interior-${num.toString().padStart(2, '0')}.jpg`)
+                  images: [1, 2, 3, 4, 5, 6].map(num => `/images/project/CML/status/agaust/${num}.jpeg`)
                 }
               ];
-              const currentStatus = projectStatusData[statusMonthIdx];
+              const currentStatus = projectStatusData[statusMonthIdx] || projectStatusData[0];
 
               const handlePrevMonth = () => {
                 setStatusMonthIdx(prev => (prev === 0 ? projectStatusData.length - 1 : prev - 1));
@@ -1415,30 +1554,36 @@ export default function NewProject({ project }) {
                     <ScrollReveal animation="fadeUp" delay={0.3} className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
                       <div className="status-month-container">
 
-                        {/* Month/Year & Landscape Navigation */}
+                        {/* Month/Year Navigation */}
                         <div className="status-month-label">
-                          <button
-                            onClick={handlePrevMonth}
-                            className="status-nav-btn prev"
-                            aria-label="Previous month"
-                            type="button"
-                          >
-                            <ChevronLeft size={22} />
-                          </button>
+                          {projectStatusData.length > 1 && (
+                            <button
+                              onClick={handlePrevMonth}
+                              className="status-nav-btn prev"
+                              aria-label="Previous month"
+                              type="button"
+                            >
+                              <span className="status-icon-desktop"><ChevronUp size={20} /></span>
+                              <span className="status-icon-mobile"><ChevronLeft size={20} /></span>
+                            </button>
+                          )}
 
                           <div className="status-month-text">
                             <h3 className="status-month-title">{currentStatus.month}</h3>
                             <span className="status-year-subtitle">{currentStatus.year}</span>
                           </div>
 
-                          <button
-                            onClick={handleNextMonth}
-                            className="status-nav-btn next"
-                            aria-label="Next month"
-                            type="button"
-                          >
-                            <ChevronRight size={22} />
-                          </button>
+                          {projectStatusData.length > 1 && (
+                            <button
+                              onClick={handleNextMonth}
+                              className="status-nav-btn next"
+                              aria-label="Next month"
+                              type="button"
+                            >
+                              <span className="status-icon-desktop"><ChevronDown size={20} /></span>
+                              <span className="status-icon-mobile"><ChevronRight size={20} /></span>
+                            </button>
+                          )}
                         </div>
 
                         {/* Right Side - Images */}
@@ -1460,10 +1605,22 @@ export default function NewProject({ project }) {
                             }
                             .status-month-label {
                               display: flex;
+                              flex-direction: column;
                               align-items: center;
                               justify-content: center;
                               gap: 16px;
                               flex-shrink: 0;
+                              padding: 10px 0;
+                            }
+                            .status-icon-desktop {
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                            }
+                            .status-icon-mobile {
+                              display: none;
+                              align-items: center;
+                              justify-content: center;
                             }
                             .status-nav-btn {
                               background: transparent;
@@ -1513,8 +1670,17 @@ export default function NewProject({ project }) {
                                 align-items: center !important;
                               }
                               .status-month-label {
+                                flex-direction: row !important;
                                 width: 100% !important;
                                 justify-content: center !important;
+                                gap: 24px !important;
+                                padding: 0 !important;
+                              }
+                              .status-icon-desktop {
+                                display: none !important;
+                              }
+                              .status-icon-mobile {
+                                display: flex !important;
                               }
                               .status-month-grid {
                                 grid-template-columns: repeat(2, 1fr) !important;
@@ -1565,16 +1731,19 @@ export default function NewProject({ project }) {
           }}
           onClick={() => setIsQuoteOpen(true)}
         >
-          <img
-            src="/images/project/Crystal moonlight down section.png"
-            alt="Crystal Moonlight - Experience True Luxury"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-              objectFit: 'cover'
-            }}
-          />
+          <picture style={{ display: 'block', width: '100%' }}>
+            <source media="(max-width: 768px)" srcSet="/images/project/CML/CTA-mobile.png" />
+            <img
+              src="/images/project/CML/CTA.png"
+              alt="Crystal Moonlight - Experience True Luxury"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                objectFit: 'cover'
+              }}
+            />
+          </picture>
         </section>
       </main>
 
@@ -1690,14 +1859,25 @@ export default function NewProject({ project }) {
             <X size={24} />
           </button>
           <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
-            <iframe
-              className="video-iframe"
-              src={activeVideoUrl}
-              title="Villa Walkthrough Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            {activeVideoUrl && (activeVideoUrl.endsWith('.mp4') || activeVideoUrl.includes('.mp4')) ? (
+              <video
+                className="video-iframe"
+                src={encodeURI(activeVideoUrl)}
+                controls
+                autoPlay
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#000' }}
+              />
+            ) : (
+              <iframe
+                className="video-iframe"
+                src={activeVideoUrl}
+                title="Villa Walkthrough Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            )}
           </div>
         </div>
       )}
@@ -1896,8 +2076,6 @@ export default function NewProject({ project }) {
         @media (max-width: 768px) {
           .overview-logo-badge {
             left: 14px;
-            height: 38px;
-            max-height: 38px;
             width: 105px;
             padding: 4px 8px;
             border-radius: 0 0 5px 5px;
@@ -2009,7 +2187,7 @@ export default function NewProject({ project }) {
         /* â”€â”€ INFO GRID STYLES â”€â”€ */
         .info-grid-tag {
           font-family: var(--font-sans);
-          font-size: 11px;
+          font-size: 14px;
           font-weight: 400;
           color: var(--color-text-muted-light);
           letter-spacing: 0.2em;
@@ -2041,7 +2219,7 @@ export default function NewProject({ project }) {
         }
         .info-grid-desc {
           font-family: var(--font-sans);
-          font-size: 10px;
+          font-size: 12px;
           color: var(--color-text-dark);
           text-transform: uppercase;
           letter-spacing: 0.15em;
@@ -2210,58 +2388,47 @@ export default function NewProject({ project }) {
         .project-hero-section {
           position: relative;
           width: 100%;
+          height: 100vh;
           height: 100dvh;
-          /* min-height removed to ensure perfect screen fit */
+          min-height: -webkit-fill-available;
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
           align-items: center;
           overflow: hidden;
+          padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
           background-color: var(--color-bg-navy);
-          padding-bottom: 80px;
+          will-change: transform, opacity;
         }
-        /* â”€â”€ 4-Split Reveal Mask â”€â”€ */
-        .project-split-mask {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          z-index: 40;
-          pointer-events: none;
-        }
-        
-        .split-panel {
-          flex: 1;
-          height: 100%;
-          background-color: var(--color-bg-navy);
-          animation: slideAwayProject 1.2s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-        }
-        
-        .panel-1 { transform-origin: top; animation-delay: 0.1s; }
-        .panel-2 { transform-origin: bottom; animation-delay: 0.22s; }
-        .panel-3 { transform-origin: top; animation-delay: 0.34s; }
-        .panel-4 { transform-origin: bottom; animation-delay: 0.46s; }
-        @keyframes slideAwayProject {
-          to { transform: scaleY(0); }
-        }
-        /* â”€â”€ Background Image â”€â”€ */
+
         .project-hero-background {
           position: absolute;
-          bottom: 0;
+          top: 0;
           left: 0;
           width: 100%;
           height: 100%;
           z-index: 1;
         }
+
+        .project-hero-picture {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+
         .project-hero-bg-image {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center center;
-          transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          object-position: center bottom;
+          transform: scale(1);
+          transition: filter 0.8s ease-in-out;
         }
-        .project-hero-section:hover .project-hero-bg-image {
-          filter: grayscale(0%);
+
+        .project-hero-bg-image.animate-zoom {
+          animation: slowZoom 15s ease-in-out infinite alternate;
         }
+
         .project-hero-overlay {
           position: absolute;
           top: 0;
@@ -2269,128 +2436,74 @@ export default function NewProject({ project }) {
           width: 100%;
           height: 100%;
           background: linear-gradient(
-            180deg,
-            rgba(15, 15, 15, 0.75) 0%,
-            rgba(15, 15, 15, 0) 10%,
-            rgba(15, 15, 15, 0) 35%,
-            rgba(15, 15, 15, 0) 70%,
-            rgba(15, 15, 15, 0.46) 90%,
-            rgba(15, 15, 15, 1) 100%
+            to bottom, 
+            rgba(0, 0, 0, 0.75) 0%, 
+            rgba(0, 0, 0, 0.0) 25%, 
+            rgba(0, 0, 0, 0) 60%, 
+            rgba(0, 0, 0, 0.85) 100%
           );
           z-index: 2;
           pointer-events: none;
         }
-        /* â”€â”€ Light Leak â”€â”€ */
-        .project-hero-light-leak {
-          position: absolute;
-          inset: 0;
-          z-index: 3;
-          pointer-events: none;
-          overflow: hidden;
-          mix-blend-mode: screen;
-        }
-        .project-hero-light-leak::before {
-          content: '';
-          position: absolute;
-          top: -20%;
-          left: -20%;
-          width: 80%;
-          height: 80%;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.03) 50%, transparent 80%);
-          filter: blur(80px);
-          animation: floatGoldProject 25s infinite alternate ease-in-out;
-          will-change: transform;
-        }
-        .project-hero-light-leak::after {
-          content: '';
-          position: absolute;
-          bottom: -20%;
-          right: -20%;
-          width: 80%;
-          height: 80%;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(2, 132, 199, 0.12) 0%, rgba(2, 132, 199, 0.03) 50%, transparent 80%);
-          filter: blur(80px);
-          animation: floatTealProject 30s infinite alternate ease-in-out;
-          will-change: transform;
-        }
-        @keyframes floatGoldProject {
-          0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-          100% { transform: translate3d(80px, 60px, 0) rotate(120deg); }
-        }
-        @keyframes floatTealProject {
-          0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-          100% { transform: translate3d(-80px, -60px, 0) rotate(-120deg); }
-        }
-        /* â”€â”€ Overlaid Content â”€â”€ */
+
         .project-hero-content {
           position: relative;
           z-index: 10;
           display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: flex-end;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center; 
           width: 100%;
-          max-width: 1400px;
           padding: 0 40px;
+          margin-bottom: clamp(60px, 10vh, 110px);
         }
-        .project-hero-text-col {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          text-align: left;
+
+        .project-hero-text-block {
+          text-align: center; 
+          margin-bottom: 18px;
         }
-        .project-hero-btn-col {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          margin-bottom: 24px;
-        }
-        .project-tag-reveal {
-        
-          font-size: 10px;
-          font-weight: 400;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 24px;
-          opacity: 0;
-          animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 0.8s;
-          display: inline-block;
-        }
-        .hero-cta-btn {
-          opacity: 0;
-          animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 1.4s;
-          background: rgba(255,255,255,0.1) !important;
-          color: var(--color-white) !important;
-          border-color: rgba(255, 255, 255, 0.3) !important;
-          backdrop-filter: blur(12px);
-        }
-        .hero-cta-btn .btn-circle-arrow {
-          background: rgba(255, 255, 255, 0.15) !important;
-          color: var(--color-white) !important;
-        }
-        
-        .hero-cta-btn:hover {
-          background: var(--color-white) !important;
-          border-color: var(--color-white) !important;
-          color: var(--color-bg-navy) !important;
-          box-shadow: 0 8px 30px rgba(255, 255, 255, 0.15) !important;
-        }
-        .hero-cta-btn:hover .btn-circle-arrow {
-          background: rgba(255,255,255,0.3) !important;
-          color: var(--color-white) !important;
-        }
+
         .project-hero-title {
-          color: var(--color-white);
+          line-height: 1.25;
+          color: rgba(255, 255, 255, 0.95);
+          margin-bottom: 12px;
+          text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          text-align: center;
         }
+
         .project-hero-subtitle {
-          text-transform: uppercase;
+          font-size: 20px;
+          font-weight: 400;
+          text-align: center;
           color: rgba(255, 255, 255, 0.85);
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+          line-height: 1.8;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          margin-bottom: 8px;
+        }
+
+        .project-hero-cta-block .btn-discover {
           display: inline-block;
+          font-size: 11px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.47);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          padding: 14px 40px;
+          border-radius: 100px;
+          text-decoration: none;
+          backdrop-filter: blur(38px);
+          -webkit-backdrop-filter: blur(38px);
+          transition: all 0.4s ease;
+          cursor: pointer;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        .project-hero-cta-block .btn-discover:hover {
+          background: rgba(255, 255, 255, 0.3);
+          color: #fff;
+          border-color: rgba(255, 255, 255, 0.8);
+          transform: translateY(-2px);
         }
         @keyframes fadeUpProject {
           from {
@@ -2493,13 +2606,16 @@ export default function NewProject({ project }) {
         .overview-image-wrapper {
           border-radius: 8px;
           overflow: hidden;
-          // box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
-          aspect-ratio: 16/10;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .overview-image-wrapper img {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
+          height: auto;
+          max-height: 650px;
+          object-fit: contain;
           display: block;
         }
         .overview-right-text {
@@ -2722,29 +2838,30 @@ export default function NewProject({ project }) {
         .amenities-split-layout {
           display: flex;
           flex-direction: row;
-          gap: 60px;
+          gap: 40px;
           width: 100%;
           align-items: stretch;
         }
         .amenities-directory {
-          width: 45%;
+          width: 46%;
           display: flex;
           flex-direction: column;
         }
         .amenities-grid-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          column-gap: 24px;
-          row-gap: 0px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
           width: 100%;
         }
         .amenities-visualizer {
           display: block;
-          width: 55%;
-          min-height: 500px;
+          width: 54%;
+          min-height: 520px;
           position: relative;
-          border-radius: 8px;
+          border-radius: 12px;
           overflow: hidden;
+          background-color: #111;
+          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
         }
         .amenity-mobile-inline-card {
           display: none;
@@ -3605,7 +3722,7 @@ export default function NewProject({ project }) {
         /* Left Image Panel */
         .modal-image-panel {
           flex: 1;
-          background: url('/images/project/CML/master-banner.png') center/cover no-repeat;
+          background: url('/images/project/CML/Elevation-card.png') center/cover no-repeat;
           position: relative;
           display: flex;
           align-items: flex-end;
@@ -4232,26 +4349,22 @@ export default function NewProject({ project }) {
         }
         @media (max-width: 768px) {
           .project-gallery-section {
-            padding-top: 10px !important;
-            padding-bottom: 16px !important;
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
             min-height: auto !important;
             justify-content: flex-start !important;
             gap: 26px !important;
-          }
-          .project-gallery-section .section-header {
-            margin-bottom: 0px !important;
-          }
-          .project-gallery-section .section-title {
-            margin-bottom: 4px !important;
-            font-size: 28px !important;
-            line-height: 1.2 !important;
           }
           .project-gallery-section .nested-tabs-container {
             margin-bottom: 2px !important;
           }
           .filter-tab-btn {
             padding: 0 12px !important;
-            font-size: 13px !important;
+            font-size: 16px !important;
+          }
+
+          .project-sections-container .filter-tab-btn {
+            font-size: 14px !important;
           }
           .gallery-spotlight-viewport {
             --gallery-card-active-w: 88vw !important;
@@ -4282,7 +4395,9 @@ export default function NewProject({ project }) {
             width: 100% !important;
           }
           .amenities-grid-container {
-            grid-template-columns: 1fr !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
           }
           .amenities-visualizer {
             display: none !important;
@@ -4303,8 +4418,8 @@ export default function NewProject({ project }) {
             inset: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
+            object-fit: cover;
+            object-position: center;
           }
           .amenity-mobile-card-overlay {
             position: absolute;
@@ -4343,14 +4458,27 @@ export default function NewProject({ project }) {
           
           /* Hero Section */
           .project-hero-content {
+            padding: 0 20px !important;
+            margin-bottom: clamp(75px, 14vh, 100px) !important;
+            align-items: center !important;
+            text-align: center !important;
             flex-direction: column !important;
-            align-items: flex-start !important;
             justify-content: flex-end !important;
-            gap: 32px !important;
+          }
+          .project-hero-text-block {
+            margin-bottom: 22px !important;
+            text-align: center !important;
           }
           .project-hero-title {
-            line-height: 1.1 !important;
-            margin-bottom: 0px !important;
+            text-align: center !important;
+            line-height: 1.25 !important;
+          }
+          .project-hero-subtitle {
+            text-align: center !important;
+          }
+          .project-hero-cta-block .btn-discover {
+            padding: 12px 32px !important;
+            font-size: 14px !important;
           }
           
           /* Video Tours Section */

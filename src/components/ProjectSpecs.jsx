@@ -101,7 +101,7 @@ export default function ProjectSpecs({
   const spec = specs[activeIdx];
 
   return (
-    <section className={`sp2-section ${hasRevealed ? 'revealed' : ''}`} id="specifications" style={{ background: 'url("/images/bg/BL-1.png") left bottom / contain no-repeat' }} ref={sectionRef}>
+    <section className={`sp2-section ${hasRevealed ? 'revealed' : ''}`} id="specifications" style={{ background: '#ffffff' }} ref={sectionRef}>
 
       {/* Main Unified Layout for Desktop, Tablet, and Mobile */}
       <div className="sp2-layout">
@@ -161,7 +161,7 @@ export default function ProjectSpecs({
 
                 <div className="sp2-card-details">
                   {spec.details && spec.details.map((d, i) => (
-                    <p key={i} className={`sp2-card-detail-text ${i === 0 ? 'sp2-card-detail-lead' : ''}`}>
+                    <p key={i} className="sp2-card-detail-text">
                       {d}
                     </p>
                   ))}
@@ -343,9 +343,9 @@ export default function ProjectSpecs({
           box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
           border: 1px solid rgba(180, 133, 100, 0.15);
           overflow: hidden;
-          padding: 40px;
-          box-sizing: border-box;
-          min-height: 420px;
+          padding: 0;
+          height: 550px;
+          min-height: 550px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -354,11 +354,12 @@ export default function ProjectSpecs({
 
         .sp2-card-inner {
           display: grid;
-          grid-template-columns: 6.5fr 3.5fr;
-          gap: 32px;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 0;
           width: 100%;
-          align-items: center;
-          min-height: 100%;
+          align-items: stretch;
+          height: 100%;
+          position: relative;
         }
 
         .sp2-card-inner.hide {
@@ -375,8 +376,12 @@ export default function ProjectSpecs({
         .sp2-card-info {
           display: flex;
           flex-direction: column;
-          justify-content: flex-start;
+          justify-content: space-between;
           height: 100%;
+          padding: 40px 24px 32px 40px;
+          box-sizing: border-box;
+          z-index: 2;
+          position: relative;
         }
 
         .sp2-card-num-wrapper {
@@ -432,14 +437,6 @@ export default function ProjectSpecs({
           color: #4f4f4f;
           line-height: 1.55;
           margin: 0;
-        }
-
-        .sp2-card-detail-text.sp2-card-detail-lead {
-          font-size: 17px;
-          font-weight: 600;
-          color: #111111;
-          letter-spacing: -0.01em;
-          margin-bottom: 4px;
         }
 
         .sp2-card-bottom-nav {
@@ -501,19 +498,24 @@ export default function ProjectSpecs({
           position: relative;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           height: 100%;
+          width: 100%;
+          overflow: visible;
+          background: transparent;
         }
 
         .sp2-card-img {
-          max-width: 100%;
-          max-height: 240px;
-          object-fit: contain;
-          opacity: 0.22;
-          mix-blend-mode: multiply;
-          filter: grayscale(1);
+          width: 100%;
+          height: 100%;
+          object-position: right center;
+          transform: scale(1.15);
+          transform-origin: right center;
           pointer-events: none;
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        
 
         /* ── RESPONSIVE MOBILE ADAPTATION ── */
         @media (max-width: 960px) {
@@ -544,18 +546,27 @@ export default function ProjectSpecs({
           }
 
           .sp2-tag {
-            font-size: 14px;
+            font-size: 18px;
             height: 46px;
           }
 
           .sp2-card {
             padding: 24px 20px;
-            min-height: auto;
+            min-height: 380px;
+            height: auto;
           }
 
           .sp2-card-inner {
             grid-template-columns: 1fr;
             gap: 16px;
+            height: 100%;
+          }
+
+          .sp2-card-info {
+            min-height: 330px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
           }
 
           .sp2-card-visual {

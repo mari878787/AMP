@@ -18,22 +18,10 @@ import ProjectDetailsGrid from '../components/ProjectDetailsGrid';
 import ProjectPricingSection from '../components/ProjectPricingSection';
 const VIDEO_SLIDES = [
   {
-    title: "Gated Community Walkthrough",
-    thumbnail: "/images/home/project-image-2.png",
+    title: "Pasha Pinnacle Walkthrough",
+    thumbnail: "/images/project/pasha-pinnacle/overview.png",
     buttonLabel: "WALKTHROUGH",
-    url: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
-  },
-  {
-    title: "Ultra-Luxury Interior Showcase",
-    thumbnail: "/images/project/CML/Interiors/cml-interior-01.jpg",
-    buttonLabel: "WALKTHROUGH",
-    url: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
-  },
-  {
-    title: "Medavakkam & Drone Aerial Tour",
-    thumbnail: "/images/home/project-image-1.png",
-    buttonLabel: "DROON",
-    url: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
+    url: "/images/project/pasha-pinnacle/pasha-pinnacle walkthrough.mp4"
   }
 ];
 const SPECIFICATIONS = [
@@ -43,21 +31,20 @@ const SPECIFICATIONS = [
     index: '01',
     title: 'STRUCTURE',
     details: [
-      'RCC Framed structure',
-      'A robust structural system made of Reinforced Cement Concrete (RCC) columns, beams, and slabs, designed to safely carry building loads and transfer them to the foundation. It provides strength, durability, stability, and flexibility in architectural planning.'
+      'Seismic Zone III Compliant Reinforced Cement Concrete (RCC) framed Structure of columns, beams, and slabs, designed to carry building loads and transfer them to the foundation safely. It provides strength, durability, stability, and flexibility in architectural planning.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/stracture.jpeg'
   },
   {
-    id: 'wall-finish',
-    label: 'Wall Finish',
+    id: 'wall-tiles',
+    label: 'Wall Tiles',
     index: '02',
-    title: 'WALL FINISH',
+    title: 'WALL TILES',
     details: [
-      'Red Bricks',
-      'High-quality traditional masonry units made from natural clay, offering strength, durability, thermal insulation, and long-lasting performance. They provide a solid and reliable wall construction while giving the building a natural, timeless finish.'
+      'Toilets: Premium tiles up to false ceiling height.',
+      'Kitchen: Designer tile DADO for 2 feet height over counter.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/spec_wall_tiles.jpg'
   },
   {
     id: 'floor-finish',
@@ -65,10 +52,12 @@ const SPECIFICATIONS = [
     index: '03',
     title: 'FLOOR FINISH',
     details: [
-      'Vitrified Tiles',
-      'High-quality vitrified tiles providing a smooth, durable, low-maintenance, and elegant flooring finish. They offer excellent resistance to stains, moisture, and daily wear while enhancing the overall look of the interiors.'
+      'Foyer, Living, Dining & Kitchen: Vitrified tiles.',
+      'Toilets: Anti-Skid tiles.',
+      'Common Area & Staircase: Indian Granite.',
+      'Utility & Balcony: Tiles as per architecture design intent.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/spec_flooring.jpg'
   },
   {
     id: 'kitchen-dining',
@@ -76,68 +65,74 @@ const SPECIFICATIONS = [
     index: '04',
     title: 'KITCHEN & DINING',
     details: [
-      '20mm thick jet black granite top with stainless steel sink.',
       '20mm thick jet black granite countertop with a durable stainless steel sink, offering a sleek, hygienic, easy-to-maintain, and elegant finish for the kitchen and dining space.'
     ],
-    image: '/images/project/spec-structure.png'
-  },
-  {
-    id: 'bathroom',
-    label: 'Bathroom',
-    index: '05',
-    title: 'BATHROOM',
-    details: [
-      'Jaguar / Equivalent sanitary fittings',
-      'Premium Jaguar or equivalent sanitary fittings, selected for durability, reliable performance, water efficiency, and a modern, elegant finish, ensuring comfort and functionality in every bathroom.'
-    ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/Kitchen.jpeg'
   },
   {
     id: 'joinery-windows',
     label: 'Joinery & Windows',
-    index: '06',
+    index: '07',
     title: 'JOINERY & WINDOWS',
     details: [
-      'UPVC Windows',
       'High-quality UPVC windows providing excellent durability, weather resistance, thermal insulation, and low maintenance, with a clean and modern appearance.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/WINDOWS.png'
+  },
+  {
+    id: 'plumbing-sanitary',
+    label: 'Plumbing & Sanitary Fittings',
+    index: '05',
+    title: 'PLUMBING & SANITARY FITTINGS',
+    details: [
+      'CPVC Concealed water line.',
+      'Premium Jaguar or equivalent sanitary fittings, selected for durability, reliable performance, water efficiency, and a modern, elegant finish, ensuring comfort and functionality in every bathroom.'
+    ],
+    image: '/images/project/specs/PLUMBING .png'
+  },
+  {
+    id: 'doors',
+    label: 'Doors',
+    index: '06',
+    title: 'DOORS',
+    details: [
+      'Main Door: First quality Teak wood of 8 feet height and solid teak wood door of 45mm thick frame and 25mm thick plank with melamine polish finish fitted with necessary Godrej lock & brass fittings.',
+      'Other Doors: Frames teak wood with 32mm Flush door shutters in water proof using mortise lock with stainless steel Hinges.'
+    ],
+    image: '/images/project/specs/Doors.jpeg'
   },
   {
     id: 'internal-staircase',
     label: 'Internal Staircases',
-    index: '07',
-    title: 'INTERNAL STAIRCASES ( VILLAS DUPLEX UNITS )',
+    index: '08',
+    title: 'INTERNAL STAIRCASES ( VILLAS DUPLEX UNITS)',
     details: [
-      'stainless steels hand rail',
       'Elegant stainless steel handrails providing a sleek, modern appearance with excellent strength, durability, corrosion resistance, and low maintenance, ensuring safety and comfort along the staircase.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/Living Area.jpeg'
   },
   {
     id: 'electrical-points',
     label: 'Electrical Points',
-    index: '08',
+    index: '09',
     title: 'ELECTRICAL POINTS',
     details: [
-      'Finolex brand wires / Anchor Switches',
-      'Electrical wiring using Finolex brand wires with Anchor switches, ensuring reliable electrical performance, safety, durability, and a quality finish throughout the villa.'
+      'Electrical wiring using Finolex brand wires with Anchor switches, ensuring reliable electrical performance, safety, durability, and a quality finishing.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/Electrical.jpeg'
   },
   {
     id: 'common-features',
     label: 'Common Features',
-    index: '09',
+    index: '10',
     title: 'COMMON FEATURES',
     details: [
-      'Fujitech lift / Solar power for common area / Gym',
       'Provision of a Fujitech lift, solar power for common areas, and a well-equipped gym, offering enhanced convenience, energy efficiency, comfort, and modern lifestyle amenities for residents.'
     ],
-    image: '/images/project/spec-structure.png'
+    image: '/images/project/specs/common.png'
   }
 ];
-export default function PashaPinnacle() {
+export default function PashaPinnacle({ project = 'pasha' }) {
   const location = useLocation();
   const isPashaPinnacle = true;
 
@@ -158,8 +153,9 @@ export default function PashaPinnacle() {
   };
   const [lightboxSection, setLightboxSection] = useState('exteriors');
   const [layoutCategory, setLayoutCategory] = useState(isPashaPinnacle ? 'typicalFloorPlan' : 'masterPlan');
-  const [floorPlanConfig, setFloorPlanConfig] = useState('2bhk'); // '3bhk', '4bhk'
-  const [activePlanId, setActivePlanId] = useState('planA');
+  const [typicalSubTab, setTypicalSubTab] = useState('typical');
+  const [floorPlanConfig, setFloorPlanConfig] = useState('blockA');
+  const [activePlanId, setActivePlanId] = useState('blockA');
 
   useEffect(() => {
     setLayoutCategory(isPashaPinnacle ? 'typicalFloorPlan' : 'masterPlan');
@@ -167,19 +163,69 @@ export default function PashaPinnacle() {
 
   const layoutsData = {
     masterPlan: {
-      image: '/images/project/CML/master-plan.png',
-      description: 'Master site layout for Pasha Pinnacle.'
+      image: '/images/project/pasha-pinnacle/floorplan/Pasha Detailed Floor Plan - 1200x800.jpg.jpeg',
+      description: 'Master Floor Plan layout for Pasha Pinnacle, Royapettah.'
     },
     typicalFloorPlan: {
-      image: '/images/project/CML/master-plan.png',
-      description: 'Typical architectural floor plan layout.'
+      image: '/images/project/pasha-pinnacle/floorplan/Pasha Detailed Floor Plan - 1200x800.jpg.jpeg',
+      description: 'Typical architectural floor plan layout for Pasha Pinnacle.'
     },
     floorPlan: {
-      '2bhk': [
-        { id: 'planA', name: 'Plan A (2 BHK)', type: '2 BHK', builtUp: '1,500 Sq.Ft.', plot: '1,100 Sq.Ft.', facing: 'North / East Facing', image: '/images/project/CML/floor-plan/PLAN A 30X42 NORTHFACE.jpg.jpeg' },
+      'blockA': [
+        {
+          id: 'blockA-front',
+          name: 'Block A - Front Facing',
+          type: '3 BHK',
+          saleableArea: '1,335 Sq.Ft.',
+          reraCarpetArea: '925 Sq.Ft.',
+          uds: '421 Sq.Ft.',
+          facing: 'Front Facing',
+          image: '/images/project/pasha-pinnacle/floorplan/Floor Plan_Block A - Front.jpg.jpeg'
+        },
+        {
+          id: 'blockA-rear',
+          name: 'Block A - Rear Facing',
+          type: '3 BHK',
+          saleableArea: '1,342 Sq.Ft.',
+          reraCarpetArea: '935 Sq.Ft.',
+          uds: '408 Sq.Ft.',
+          facing: 'Rear Facing',
+          image: '/images/project/pasha-pinnacle/floorplan/Floor Plan_Block A - Rear.jpg.jpeg'
+        }
       ],
-      '3bhk': [
-        { id: 'planB', name: 'Plan B (3 BHK)', type: '3 BHK', builtUp: '2,400 Sq.Ft.', plot: '1,450 Sq.Ft.', facing: 'North / East Facing', image: "/images/project/CML/floor-plan/PLAN - B  30' X 48'  (North Facing )VILLA.jpg.jpeg" },
+      'blockB': [
+        {
+          id: 'blockB-front',
+          name: 'Block B - Front Facing',
+          type: '3 BHK',
+          saleableArea: '1,335 Sq.Ft.',
+          reraCarpetArea: '925 Sq.Ft.',
+          uds: '421 Sq.Ft.',
+          facing: 'Front Facing',
+          image: '/images/project/pasha-pinnacle/floorplan/Floor Plan_Block B - Front.jpg.jpeg'
+        },
+        {
+          id: 'blockB-rear',
+          name: 'Block B - Rear Facing',
+          type: '3 BHK',
+          saleableArea: '1,358 Sq.Ft.',
+          reraCarpetArea: '945 Sq.Ft.',
+          uds: '408 Sq.Ft.',
+          facing: 'Rear Facing',
+          image: '/images/project/pasha-pinnacle/floorplan/Floor Plan_Block B - Rear.jpg.jpeg'
+        }
+      ],
+      'stilt': [
+        {
+          id: 'stilt-ground',
+          name: 'Stilt + Ground Floor Plan',
+          type: 'Stilt + Ground',
+          saleableArea: 'Common Area',
+          reraCarpetArea: 'Parking & Entry',
+          uds: '-',
+          facing: 'Ground Level',
+          image: '/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg'
+        }
       ]
     },
     walkthrough360: {
@@ -211,31 +257,34 @@ export default function PashaPinnacle() {
       index: "01",
       title: "Boutique by Design",
       desc: "With only a limited collection of residences, Pasha Pinnacle offers a quieter and more intimate living experience. Thoughtfully planned spaces and a close-knit residential environment create the warmth, privacy, and comfort that define boutique living.",
-      image: "/images/project_crystal_1779810838661.png"
+      image: "/images/project/why-cmv.png"
     },
     {
       index: "02",
       title: "Designed for Better Living",
       desc: "Every residence has been carefully planned to maximise space, natural light, and cross ventilation while ensuring effortless functionality. Contemporary layouts and refined interiors create homes that are elegant, inviting, and perfectly suited to modern city living.",
-      image: "/images/villa_exterior_1779810861723.png"
+      image: "/images/project/CML/Interiors/cml-interior-01.jpg"
     },
     {
       index: "03",
       title: "An Address That Endures",
       desc: "Exceptional homes derive their value from both their location and the life they offer. Combining a distinguished central address with enduring quality and thoughtful planning, Pasha Pinnacle is a home that continues to reward its owners for years to come.",
-      image: "/images/project/CML/Interiors/cml-interior-01.jpg"
-    },
-    {
-      index: "04",
-      title: "Privacy & Peace of Mind",
-      desc: "Gated luxury living with 24/7 smart surveillance, covered car parking, and dedicated community facilities.",
-      image: "/images/project/why-cmv.png"
+      image: "/images/project/pasha-pinnacle/card.png"
     }
   ];
   const [statusMonthIdx, setStatusMonthIdx] = useState(0);
   const [activeVideoUrl, setActiveVideoUrl] = useState('https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1');
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [hideMainHeader, setHideMainHeader] = useState(false);
+
+  useEffect(() => {
+    const handleOpenInquiry = (e) => {
+      e.preventDefault();
+      setIsQuoteOpen(true);
+    };
+    window.addEventListener('open-inquiry-modal', handleOpenInquiry);
+    return () => window.removeEventListener('open-inquiry-modal', handleOpenInquiry);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -255,7 +304,7 @@ export default function PashaPinnacle() {
     phoneCode: '+91',
     phone: '',
     email: '',
-    config: '2 BHK Apartment',
+    config: '3 BHK Villa',
     privacy: false,
     updates: false
   });
@@ -269,18 +318,60 @@ export default function PashaPinnacle() {
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [amenityIdx, setAmenityIdx] = useState(0);
   const amenities = [
-    { image: "/images/project/CML/amenities/18.png", icon: "/images/project/CML/amenities/icon/Security.png", title: "24*7 Security", desc: "Round-the-clock smart surveillance." },
-    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/CML/amenities/icon/Clubhouse.png", title: "Clubhouse", desc: "A massive, premium recreational space." },
-    { image: "/images/project/CML/amenities/16.png", icon: "/images/project/CML/amenities/icon/gym.png", title: "Gym", desc: "Fully equipped with modern fitness equipment." },
-    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/CML/amenities/icon/PartyHall.png", title: "Party Hall", desc: "Elegant space for events and gatherings." },
-    { image: "/images/project/CML/amenities/8.png", icon: "/images/project/CML/amenities/icon/Indoor Games.png", title: "Indoor Games", desc: "Dedicated area for indoor recreation." },
-    { image: "/images/project/CML/amenities/17.png", icon: "/images/project/CML/amenities/icon/yogaRoom.png", title: "Yoga Room", desc: "A tranquil space for wellness and meditation." },
-    { image: "/images/project/CML/amenities/4.png", icon: "/images/project/CML/amenities/icon/Play Area.png", title: "Play Area", desc: "Safe and fun play zones for children." },
-    { image: "/images/project/CML/amenities/2.png", icon: "/images/project/CML/amenities/icon/Solar Lighting.png", title: "Solar Lighting", desc: "Eco-friendly illumination." },
-    { image: "/images/project/CML/amenities/20.png", icon: "/images/project/CML/amenities/icon/DTH Connection.png", title: "DTH Connection", desc: "Ready connections for entertainment." },
-    { image: "/images/project/CML/amenities/11.png", icon: "/images/project/CML/amenities/icon/Rainwater Harvesting.png", title: "Rainwater Harvesting", desc: "As per CMWSSB Norms." },
-    { image: "/images/project/CML/amenities/12.png", icon: "/images/project/CML/amenities/icon/Coarse Paint.png", title: "Coarse Paint", desc: "Weather coarse paint on the terrace floor." },
-    { image: "/images/project/CML/amenities/3.png", icon: "/images/project/CML/amenities/icon/Anti-Termite.png", title: "Anti-Termite", desc: "Ensuring long-lasting protection." }
+    {
+      title: "Dedicated Stilt Floor Car Parking",
+      desc: "Reserved, sheltered parking spaces located at the stilt level for effortless vehicle access and security.",
+      image: "/images/project/aminities/villa & apartment/Dedicated Stilt Floor Car Parking.png",
+      icon: "/images/project/CML/amenities/icon/Security.png"
+    },
+    {
+      title: "Automatic Passenger Lift",
+      desc: "Modern, high-efficiency automatic passenger elevator ensuring seamless vertical connectivity across all floors.",
+      image: "/images/project/aminities/villa & apartment/Automatic Passenger Lift.png",
+      icon: "/images/project/CML/amenities/icon/Clubhouse.png"
+    },
+    {
+      title: "Power Backup / DG Generator",
+      desc: "Uninterrupted power backup infrastructure for common areas, elevators, and essential residential utilities.",
+      image: "/images/project/aminities/villa & apartment/Power Backup  DG Generator .png",
+      icon: "/images/project/CML/amenities/icon/Solar Lighting.png"
+    },
+    {
+      title: "Underground Sump & Dedicated Bore Well",
+      desc: "Robust dual-source water supply system with dedicated underground storage sump and bore well facilities.",
+      image: "/images/project/aminities/villa & apartment/Underground Sump & Dedicated Bore Well.png",
+      icon: "/images/project/CML/amenities/icon/Rainwater Harvesting.png"
+    },
+    {
+      title: "Private Balconies in Every Unit",
+      desc: "Generously sized private balconies attached to every residence, offering open street views and natural ventilation.",
+      image: "/images/project/aminities/villa & apartment/Private Balconies in Every Unit.png",
+      icon: "/images/project/CML/amenities/icon/Coarse Paint.png"
+    },
+    {
+      title: "Landscaped Common Entrance & Green Touches",
+      desc: "Elegantly detailed arrival foyer and common spaces featuring curated landscaping and greenery.",
+      image: "/images/project/aminities/villa & apartment/Landscaped Common Entrance & Green Touches.png",
+      icon: "/images/project/CML/amenities/icon/Play Area.png"
+    },
+    {
+      title: "Gated, Secure Entry",
+      desc: "Controlled-access gated entrance with dedicated security arrangements ensuring family privacy and peace of mind.",
+      image: "/images/project/aminities/plots/Arch Gated Community with Compound Wall.png",
+      icon: "/images/project/CML/amenities/icon/Security.png"
+    },
+    {
+      title: "Dedicated Service/Utility Yard in Every Kitchen",
+      desc: "Separate, private utility and wash yard attached to every kitchen for seamless everyday domestic convenience.",
+      image: "/images/project/aminities/villa & apartment/Dedicated ServiceUtility Yard in Every Kitchen.png",
+      icon: "/images/project/CML/amenities/icon/DTH Connection.png"
+    },
+    {
+      title: "East–West Cross Ventilated Layouts",
+      desc: "Architecturally engineered dual-orientation layouts maximizing fresh airflow, natural daylight, and thermal comfort.",
+      image: "/images/project/aminities/villa & apartment/East–West Cross Ventilated Layouts.png",
+      icon: "/images/project/CML/amenities/icon/yogaRoom.png"
+    }
   ];
   const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
 
@@ -413,27 +504,80 @@ export default function PashaPinnacle() {
     setActiveSubSection(subSectionId);
     handleScrollToSection('why-project');
   };
-  // amenities array moved to top of component
+  const PASHA_NEIGHBOURHOOD = [
+    {
+      id: 'junctions',
+      label: 'Connectivity',
+      image: '/images/project/CML/loction/junctions.png',
+      locations: [
+        { name: 'Royapettah High Road', dist: '2 Mins', lat: 13.0515, lng: 80.2612 },
+        { name: 'Anna Salai', dist: '3 Mins', lat: 13.0585, lng: 80.2575 },
+        { name: 'Thousand Lights Metro', dist: '5 Mins', lat: 13.0578, lng: 80.2528 },
+        { name: 'Chennai Central Station', dist: '15 Mins', lat: 13.0827, lng: 80.2757 },
+        { name: 'Chennai International Airport', dist: '35 Mins', lat: 12.9850, lng: 80.1650 },
+      ],
+    },
+    {
+      id: 'education',
+      label: 'Educational Institutions',
+      image: '/images/project/CML/loction/educational .png',
+      locations: [
+        { name: 'Stella Maris College', dist: '4 Mins', lat: 13.0475, lng: 80.2530 },
+        { name: 'National Public School', dist: '6 Mins', lat: 13.0545, lng: 80.2580 },
+        { name: 'DAV Group of Schools', dist: '8 Mins', lat: 13.0550, lng: 80.2625 },
+        { name: 'Vidya Mandir', dist: '10 Mins', lat: 13.0375, lng: 80.2660 },
+      ],
+    },
+    {
+      id: 'hospitals',
+      label: 'Healthcare',
+      image: '/images/project/CML/loction/hospitals.png',
+      locations: [
+        { name: 'Government Royapettah Hospital', dist: '3 Mins', lat: 13.0540, lng: 80.2628 },
+        { name: 'Apollo Hospitals', dist: '7 Mins', lat: 13.0610, lng: 80.2520 },
+        { name: 'Kauvery Hospital', dist: '10 Mins', lat: 13.0360, lng: 80.2560 },
+      ],
+    },
+    {
+      id: 'shopping',
+      label: 'Lifestyle & Leisure',
+      image: '/images/project/CML/loction/entertainment.png',
+      locations: [
+        { name: 'Express Avenue Mall', dist: '5 Mins', lat: 13.0588, lng: 80.2642 },
+        { name: 'Spencer Plaza', dist: '6 Mins', lat: 13.0615, lng: 80.2610 },
+        { name: 'Sathyam Cinemas', dist: '5 Mins', lat: 13.0532, lng: 80.2575 },
+        { name: 'Marina Beach', dist: '8 Mins', lat: 13.0500, lng: 80.2820 },
+      ],
+    },
+  ];
+
   const landmarks = [
-    { title: "Express Avenue Mall", dist: "3 mins" },
-    { title: "Kauvery Hospital & Apollo", dist: "5 mins" },
-    { title: "Marina Beach & Promenade", dist: "8 mins" },
-    { title: "Spencer Plaza & Mount Road", dist: "4 mins" },
-    { title: "St. George's Cathedral", dist: "4 mins" },
-    { title: "Chennai Central Station", dist: "10 mins" }
+    { title: "Royapettah High Road", dist: "2 mins" },
+    { title: "Anna Salai", dist: "3 mins" },
+    { title: "Express Avenue Mall", dist: "5 mins" },
+    { title: "Thousand Lights Metro", dist: "5 mins" },
+    { title: "Stella Maris College", dist: "4 mins" },
+    { title: "Government Royapettah Hospital", dist: "3 mins" },
+    { title: "Marina Beach", dist: "8 mins" }
   ];
   const galleryImages = {
     videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
-    interiors: Array.from({ length: 33 }, (_, i) => ({
-      src: `/images/project/CML/Interiors/cml-interior-${String(i + 1).padStart(2, '0')}.jpg`,
-      title: `Crystal Moonlight Interior ${i + 1}`
-    })),
+    interiors: [],
     exteriors: [
-      { src: '/images/villa_exterior_1779810861723.png', title: 'Moonlight Villa FaÃ§ade' },
-      { src: '/images/project_crystal_1779810838661.png', title: 'Recreational Pool Deck' },
-      { src: '/images/project/why-cmv.png', title: 'Gated Community Portico' },
-      { src: '/images/home/hero.png', title: 'Premium Landscaped Backyard' },
-      { src: '/images/home/project-image-2.png', title: 'Evening FaÃ§ade View' }
+      { src: '/images/project/pasha-pinnacle/extirior/1.png', title: 'Pasha Pinnacle Architectural Façade' },
+      { src: '/images/project/pasha-pinnacle/extirior/4.png', title: 'Front Elevation & Entrance' },
+      { src: '/images/project/pasha-pinnacle/extirior/8.png', title: 'Contemporary Street View' },
+      { src: '/images/project/pasha-pinnacle/extirior/10.png', title: 'Building Perspective' },
+      { src: '/images/project/pasha-pinnacle/extirior/12.png', title: 'Balcony & Exterior Detailing' },
+      { src: '/images/project/pasha-pinnacle/extirior/13.png', title: 'Upper Level Architecture' },
+      { src: '/images/project/pasha-pinnacle/extirior/17.png', title: 'Exterior Elevation View' },
+      { src: '/images/project/pasha-pinnacle/extirior/22.png', title: 'Side Profile & Clean Lines' },
+      { src: '/images/project/pasha-pinnacle/extirior/24.png', title: 'Architectural Lighting & Form' },
+      { src: '/images/project/pasha-pinnacle/extirior/27.png', title: 'Gated Residence Portico' },
+      { src: '/images/project/pasha-pinnacle/extirior/29.png', title: 'Boutique Residence Perspective' },
+      { src: '/images/project/pasha-pinnacle/extirior/30.png', title: 'Contemporary Residence Elevation' },
+      { src: '/images/project/pasha-pinnacle/extirior/33.png', title: 'Stilt Parking & Arrival Bay' },
+      { src: '/images/project/pasha-pinnacle/extirior/34.png', title: 'Pasha Pinnacle Overview' }
     ]
   };
   useEffect(() => {
@@ -465,11 +609,35 @@ export default function PashaPinnacle() {
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    const fullName = `${quoteForm.firstName || ''} ${quoteForm.lastName || ''}`.trim();
+    const phone = `${quoteForm.phoneCode || '+91'} ${quoteForm.phoneNumber || ''}`.trim();
+    const mode = quoteForm.contactMode === 'videocall' ? 'Schedule a Video Call' : 'Request a Callback';
+    
+    const subject = encodeURIComponent(`Schedule Visit / Inquiry - Pasha Pinnacle (${fullName || 'Lead'})`);
+    const body = encodeURIComponent(
+      `Project: Pasha Pinnacle\n` +
+      `Name: ${fullName}\n` +
+      `Phone: ${phone}\n` +
+      `Email: ${quoteForm.email || 'N/A'}\n` +
+      `Preferred Contact Mode: ${mode}\n`
+    );
+
+    window.location.href = `mailto:info@aadhithyamohanproperties.com?subject=${subject}&body=${body}`;
+
     setFormSubmitted(true);
     setTimeout(() => {
       setFormSubmitted(false);
       setIsQuoteOpen(false);
-      setQuoteForm({ name: '', email: '', phone: '', note: '' });
+      setQuoteForm({
+        contactMode: 'callback',
+        firstName: '',
+        lastName: '',
+        phoneCode: '+91',
+        phoneNumber: '',
+        email: '',
+        agreedPrivacy: false,
+        agreedOffers: false
+      });
     }, 2500);
   };
   return (
@@ -478,41 +646,42 @@ export default function PashaPinnacle() {
       <main>
         {/* Project Hero Section */}
         <section className="project-hero-section">
-            <div className="project-split-mask" aria-hidden="true">
-              <div className="split-panel panel-1"></div>
-              <div className="split-panel panel-2"></div>
-              <div className="split-panel panel-3"></div>
-              <div className="split-panel panel-4"></div>
-            </div>
-            <div className="project-hero-background">
+          <div className="project-hero-background">
+            <picture className="project-hero-picture">
+              <source media="(max-width: 768px)" srcSet="/images/project/pasha-pinnacle/mobile-hero.png" />
               <img
-                src="/images/project/CML/Elevation.png"
-                alt="Pasha Pinnacle"
-                className="project-hero-bg-image"
+                src="/images/project/pasha-pinnacle/hero.png"
+                alt="Pasha Pinnacle - Where Contemporary Design Meets Urban Elegance"
+                className="project-hero-bg-image animate-zoom"
               />
-              <div className="project-hero-light-leak" aria-hidden="true"></div>
-              <div className="project-hero-overlay"></div>
-            </div>
-            <div className="project-hero-content">
-              <div className="project-hero-text-col">
-                {/* <span className="project-tag-reveal">PREMIUM GATED VILLAS</span> */}
-                <h1 className="project-hero-title display-title">
+            </picture>
+            <div className="project-hero-overlay"></div>
+          </div>
+          <div className="container project-hero-content">
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <div className="project-hero-text-block">
+                <h1 className="display-title project-hero-title">
                   Pasha Pinnacle
                 </h1>
-                <p className="project-hero-subtitle">ROYAPETTAH, CHENNAI</p>
+                <p className="project-hero-subtitle">
+                  Where Contemporary Design Meets Urban Elegance
+                </p>
               </div>
-              <div className="project-hero-btn-col">
-                <Button
-                  theme="dark"
-                  className="hero-cta-btn"
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.25}>
+              <div className="project-hero-cta-block">
+                <button
+                  type="button"
                   onClick={() => setIsQuoteOpen(true)}
-                  icon="â†“"
+                  className="btn-discover"
                 >
-                  Download Brochure
-                </Button>
+                  DOWNLOAD BROCHURE
+                </button>
               </div>
-            </div>
-          </section>
+            </ScrollReveal>
+          </div>
+        </section>
         {/* Project Sticky Sub-navigation with Tab Dropdowns */}
         <nav className="project-sub-nav">
           <div className="container sub-nav-container">
@@ -660,41 +829,35 @@ export default function PashaPinnacle() {
                 <div className="overview-editorial-grid">
                   {/* Left Column: Overview Image */}
                   <ScrollReveal animation="fadeRight" delay={0.2}>
-                    <div className="overview-img-container" style={{ position: 'relative', width: '100%', minHeight: '380px', maxHeight: '480px', overflow: 'hidden', borderRadius: '4px' }}>
+                    <div className="overview-img-container" style={{ position: 'relative', width: '100%', overflow: 'hidden', borderRadius: '4px' }}>
                       <img
-                        src="/images/project/CML/overview.jpeg"
-                        alt="Crystal Moonlight Overview"
+                        src="/images/project/pasha-pinnacle/overview.png"
+                        alt="Pasha Pinnacle Overview"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', borderRadius: '4px' }}
                       />
                     </div>
                   </ScrollReveal>
                   {/* Right Column: Section Label & Editorial Paragraphs */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingBottom: '20px' }}>
-                    {/* <ScrollReveal animation="fadeUp" delay={0.25}>
-                      <span className='section-title' style={{ marginBottom: '0px' }}>
-                        About Project
-                      </span>
-                    </ScrollReveal> */}
-
-                    <ScrollReveal animation="fadeUp" delay={0.3}>
+                    <ScrollReveal animation="fadeUp" delay={0.2}>
                       <h2 className='overview-main-title'>
                         Where Contemporary Design Meets Urban Elegance
                       </h2>
                     </ScrollReveal>
 
-                    <ScrollReveal animation="fadeUp" delay={0.35}>
+                    <ScrollReveal animation="fadeUp" delay={0.25}>
                       <p style={{ color: 'var(--color-text-dark)', margin: '10px 0 0', fontSize: '20px', textAlign: 'justify' }}>
                         Every city has a few neighbourhoods that remain timeless, valued not for passing trends, but for the life they offer. Royapettah is one of them.
                       </p>
                     </ScrollReveal>
 
-                    <ScrollReveal animation="fadeUp" delay={0.4}>
+                    <ScrollReveal animation="fadeUp" delay={0.3}>
                       <p style={{ color: 'var(--color-text-dark)', margin: 0, fontSize: '20px', textAlign: 'justify' }}>
                         Set within this enduring address, Pasha Pinnacle is a boutique collection of residences created for those who appreciate thoughtful design, generous living spaces, and the convenience of living at the centre of it all. Contemporary architecture, light-filled interiors, and naturally ventilated spaces come together to create homes that feel refined, welcoming, and effortlessly liveable.
                       </p>
                     </ScrollReveal>
 
-                    <ScrollReveal animation="fadeUp" delay={0.45}>
+                    <ScrollReveal animation="fadeUp" delay={0.35}>
                       <p style={{ color: 'var(--color-text-dark)', margin: 0, fontSize: '20px', textAlign: 'justify' }}>
                         From everyday essentials to Chennai's leading business districts, educational institutions, healthcare centres, and lifestyle destinations, everything lies within easy reach. Pasha Pinnacle is more than a place to live—it is an address that reflects the quiet confidence of a home chosen well.
                       </p>
@@ -708,23 +871,24 @@ export default function PashaPinnacle() {
           {activeTab === 'overview' && (
             <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0' }}>
               <ProjectDetailsGrid 
-                stat1Tag="TOTAL UNITS"
-                stat1Val="220"
-                stat1Desc="UNITS"
-                stat1Count={220}
-                stat2Tag="CONFIGURATION"
-                stat2Val="2 & 3"
-                stat2Desc="BHK"
+                stat1Tag="STRUCTURE"
+                stat1Val="G + 3"
+                stat1Desc="FLOORS"
+                stat1Count={0}
+                stat2Tag="TOTAL UNITS"
+                stat2Val="12"
+                stat2Desc="UNITS"
+                stat2Count={12}
                 projectTag="PROJECT"
                 projectName="PASHA PINNACLE"
                 location="ROYAPETTAH, CHENNAI"
-                reraNo="(TN/29/Building/029/2024)"
-                stat3Tag="SIZE RANGE"
-                stat3Val="1,500 - 2,400"
-                stat3Desc="SQ.FT."
-                stat4Tag="STRUCTURE"
-                stat4Val="STILT + 5"
-                stat4Desc="FLOORS"
+                reraNo=""
+                stat3Tag="CONFIGURATION"
+                stat3Val="3"
+                stat3Desc="BHK"
+                stat4Tag="SIZE RANGE"
+                stat4Val="1,335 - 1,358"
+                stat4Desc="SQ.FT."
               />
             </section>
           )}
@@ -736,9 +900,11 @@ export default function PashaPinnacle() {
                 {/* ── Left-Aligned Header ── */}
                 <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <h2 className="section-title">
-                    Why Pasha Pinnacle
+                    Pasha Pinnacle
                   </h2>
-                  
+                  {/* <p className="section-subtitle" style={{ fontSize: '16px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
+                    Bespoke living <span>beyond time</span>
+                  </p> */}
                 </ScrollReveal>
                 {/* ── Left-Aligned Tab Pills ── */}
                 {/* ── Highlights Block Two-Column Grid ── */}
@@ -747,7 +913,7 @@ export default function PashaPinnacle() {
                   <div className="overview-left-visual">
                     <ScrollReveal animation="fadeRight" delay={0.1}>
                       <div className="overview-image-wrapper">
-                        <img src="/images/project_crystal_1779810838661.png" alt="Pasha Pinnacle - Salient Features" />
+                        <img src="/images/project/pasha-pinnacle/why-project.png" alt="Pasha Pinnacle" />
                       </div>
                     </ScrollReveal>
                   </div>
@@ -773,14 +939,25 @@ export default function PashaPinnacle() {
                                 <div
                                   className="pillar-body"
                                   style={{
-                                    maxHeight: isOpen ? '360px' : '0px',
+                                    maxHeight: isOpen ? '450px' : '0px',
                                     opacity: isOpen ? 1 : 0,
                                     overflow: 'hidden',
                                     transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
                                     paddingBottom: isOpen ? '16px' : '0px'
                                   }}
                                 >
-                                  <p className="pillar-desc">{pillar.desc}</p>
+                                  {pillar.points ? (
+                                    <ul className='pillar-desc' style={{ margin: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                      {pillar.points.map((pt, pIdx) => (
+                                        <li key={pIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '18px', lineHeight: '1.5', margin: 0, padding: 0, letterSpacing: 0 }}>
+                                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#000000ff', marginTop: '10px' }} />
+                                          <span style={{ margin: 0, padding: 0 }}>{pt}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  ) : (
+                                    <p className="pillar-desc" style={{ margin: '0', lineHeight: '1.68' }}>{pillar.desc}</p>
+                                  )}
                                 </div>
                               </div>
                             );
@@ -794,8 +971,9 @@ export default function PashaPinnacle() {
               {/* ── Neighbourhood Story Experience ── */}
               <NeighbourhoodStory
                 onEnquire={() => setIsQuoteOpen(true)}
-                projectCoords={[13.0587, 80.2642]}
+                projectCoords={[13.0524, 80.2600]}
                 projectName="Pasha Pinnacle"
+                categories={PASHA_NEIGHBOURHOOD}
               />
             </section>
           )}
@@ -824,102 +1002,160 @@ export default function PashaPinnacle() {
                     </div>
                   </ScrollReveal>
                 </div> {/* Close container here for full-bleed viewport */}
-                {/* Spotlight Active-Card Gallery Carousel */}
+                {/* Spotlight Active-Card Gallery Carousel / Coming Soon */}
                 <ScrollReveal animation="fadeUp" delay={0.35} className="gallery-spotlight-viewport">
-                  <div
-                    className="gallery-spotlight-track"
-                    style={{
+                  {galleryTab === 'interiors' ? (
+                    <div style={{
+                      width: '100%',
+                      minHeight: '420px',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 'var(--gallery-gap, 8vw)',
-                      width: 'max-content',
-                      transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                      transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
-                    }}
-                  >
-                    {(() => {
-                      const items = galleryImages[galleryTab];
-                      const total = items.length;
-                      const extended = total > 1
-                        ? [items[total - 1], ...items, items[0]]
-                        : items;
-                      return extended.map((img, idx) => {
-                        const isActive = idx === galleryIndices[galleryTab];
-                        const realIdx = total > 1
-                          ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
-                          : 0;
-                        return (
-                          <div
-                            key={idx}
-                            className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
-                            style={{
-                              flexShrink: 0,
-                              flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                              width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                              transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
-                              cursor: 'pointer',
-                              overflow: 'hidden',
-                              position: 'relative',
-                              height: 'calc(100vh - 165px)',
-                              maxHeight: '720px',
-                              minHeight: '320px',
-                              boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
-                            }}
-                            onClick={() => {
-                              if (isActive) {
-                                if (galleryTab === 'videos') {
-                                  setActiveVideoUrl(img.url);
-                                  setIsVideoOpen(true);
-                                } else {
-                                  handleOpenLightbox(galleryTab, realIdx);
-                                }
-                              } else {
-                                setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
-                                setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
-                              }
-                            }}
-                          >
-                            <img
-                              src={img.src}
-                              alt={img.title}
-                              className="gallery-spotlight-img"
-                            />
+                      justifyContent: 'center',
+                      padding: '40px 20px',
+                      boxSizing: 'border-box'
+                    }}>
+                      <div style={{
+                        maxWidth: '560px',
+                        width: '100%',
+                        textAlign: 'center',
+                        padding: '60px 40px',
+                        border: '1px solid rgba(180, 133, 100, 0.25)',
+                        borderRadius: '8px',
+                        background: 'linear-gradient(180deg, #FAF8F5 0%, #FFFFFF 100%)',
+                        boxShadow: '0 20px 50px rgba(0,0,0,0.04)'
+                      }}>
+                        <span style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '12px',
+                          fontWeight: '600',
+                          letterSpacing: '0.22em',
+                          color: '#b48564',
+                          textTransform: 'uppercase',
+                          display: 'block',
+                          marginBottom: '14px'
+                        }}>
+                          COMING SOON
+                        </span>
+                        <h3 style={{
+                          fontFamily: 'var(--font-heading)',
+                          fontSize: 'clamp(26px, 2.8vw, 34px)',
+                          color: '#103328',
+                          margin: '0 0 14px 0',
+                          fontWeight: '400',
+                          lineHeight: '1.2'
+                        }}>
+                          Interior Visualizations
+                        </h3>
+                        <p style={{
+                          fontFamily: 'var(--font-sans)',
+                          fontSize: '15px',
+                          color: '#666666',
+                          lineHeight: '1.75',
+                          margin: 0
+                        }}>
+                          Curated high-resolution interior perspectives for Pasha Pinnacle are currently in production and will be unveiled soon.
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        className="gallery-spotlight-track"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--gallery-gap, 8vw)',
+                          width: 'max-content',
+                          transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+                          transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
+                        }}
+                      >
+                        {(() => {
+                          const items = galleryImages[galleryTab] || [];
+                          const total = items.length;
+                          if (total === 0) return null;
+                          const extended = total > 1
+                            ? [items[total - 1], ...items, items[0]]
+                            : items;
+                          return extended.map((img, idx) => {
+                            const isActive = idx === galleryIndices[galleryTab];
+                            const realIdx = total > 1
+                              ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
+                              : 0;
+                            return (
+                              <div
+                                key={idx}
+                                className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
+                                style={{
+                                  flexShrink: 0,
+                                  flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                  width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                  transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
+                                  cursor: 'pointer',
+                                  overflow: 'hidden',
+                                  position: 'relative',
+                                  height: 'calc(100vh - 165px)',
+                                  maxHeight: '720px',
+                                  minHeight: '320px',
+                                  boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
+                                }}
+                                onClick={() => {
+                                  if (isActive) {
+                                    if (galleryTab === 'videos') {
+                                      setActiveVideoUrl(img.url);
+                                      setIsVideoOpen(true);
+                                    } else {
+                                      handleOpenLightbox(galleryTab, realIdx);
+                                    }
+                                  } else {
+                                    setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
+                                    setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
+                                  }
+                                }}
+                              >
+                                <img
+                                  src={img.src}
+                                  alt={img.title}
+                                  className="gallery-spotlight-img"
+                                />
 
-                            {galleryTab === 'videos' && (
-                              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
-                                <div className="play-button-pulsing">
-                                  <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
+                                {galleryTab === 'videos' && (
+                                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
+                                    <div className="play-button-pulsing">
+                                      <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
+                                    </div>
+                                  </div>
+                                )}
+                                <div className="gallery-deck-hover-overlay">
+                                  {galleryTab !== 'videos' && (
+                                    <>
+                                      <Maximize2 size={24} className="hover-overlay-zoom-icon" />
+                                      <span className="hover-overlay-title">{img.title}</span>
+                                    </>
+                                  )}
                                 </div>
                               </div>
-                            )}
-                            <div className="gallery-deck-hover-overlay">
-                              {galleryTab !== 'videos' && (
-                                <>
-                                  <Maximize2 size={24} className="hover-overlay-zoom-icon" />
-                                  <span className="hover-overlay-title">{img.title}</span>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      });
-                    })()}
-                  </div>
-                  {/* Navigation Arrows positioned on left/right previews */}
-                  <button
-                    className="gallery-spotlight-arrow prev"
-                    onClick={() => prevGallerySlide(galleryTab)}
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft size={24} />
-                  </button>
-                  <button
-                    className="gallery-spotlight-arrow next"
-                    onClick={() => nextGallerySlide(galleryTab)}
-                    aria-label="Next image"
-                  >
-                    <ChevronRight size={24} />
-                  </button>
+                            );
+                          });
+                        })()}
+                      </div>
+                      {/* Navigation Arrows positioned on left/right previews */}
+                      <button
+                        className="gallery-spotlight-arrow prev"
+                        onClick={() => prevGallerySlide(galleryTab)}
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeft size={24} />
+                      </button>
+                      <button
+                        className="gallery-spotlight-arrow next"
+                        onClick={() => nextGallerySlide(galleryTab)}
+                        aria-label="Next image"
+                      >
+                        <ChevronRight size={24} />
+                      </button>
+                    </>
+                  )}
                 </ScrollReveal>
               </section>
             </>
@@ -933,129 +1169,7 @@ export default function PashaPinnacle() {
               subtitle="PROJECT DETAILS"
             />
           )}
-          {/* Premium Amenities Section */}
-          {activeTab === 'amenities' && (
-            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', backgroundColor: '#ffffff', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center' }}>
-              {/* Optional ambient background leaf or shape */}
-              <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: '400px', height: '400px', background: 'url("/images/bg/TR-1.png") center / contain no-repeat', opacity: 0.1, pointerEvents: 'none' }}></div>
 
-              <div className="container" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
-                <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '60px' }}>
-                  <h2 className="section-title">
-                    Luxury Community <span style={{ color: 'var(--color-highlight)' }}>Amenities</span>
-                  </h2>
-                </ScrollReveal>
-
-                <div className="amenities-split-layout">
-
-                  {/* Left Column: Directory */}
-                  <ScrollReveal animation="fadeRight" delay={0.25} className="amenities-directory">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid rgba(143, 143, 143, 0.23)' }}>
-                      <span style={{ textTransform: 'uppercase', color: '#000000ff', fontSize: '13px' }}>Directory</span>
-                      <span style={{ color: '#000000ff', fontSize: '14px' }}>{amenities.length} Amenities</span>
-                    </div>
-
-                    <div
-                      ref={amenitiesListRef}
-                      className="amenities-grid-container"
-                    >
-                      {amenities.map((item, idx) => {
-                        const isActive = amenityIdx === idx;
-                        return (
-                          <div key={idx} className="amenity-item-wrapper" style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-                            <button
-                              onClick={() => {
-                                setAmenityIdx(idx);
-                                setIsAmenityAutoPlay(false);
-                              }}
-                              className={`amenity-item-btn ${isActive ? 'active' : ''}`}
-                              style={{
-                                display: 'flex', alignItems: 'center', gap: '14px', padding: '16px',
-                                background: isActive ? 'var(--color-bg-light)' : 'transparent',
-                                border: 'none',
-                                borderBottom: isActive ? '1px solid transparent' : '1px solid rgba(0,0,0,0.06)',
-                                cursor: 'pointer', transition: 'all 0.3s ease',
-                                textAlign: 'left', outline: 'none',
-                                width: '100%', minWidth: 0, overflow: 'hidden'
-                              }}
-                            >
-                              <div style={{
-                                width: '34px', height: '34px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                background: isActive ? 'rgba(180, 133, 100, 0.12)' : 'rgba(0,0,0,0.03)',
-                                border: isActive ? '1px solid #b48564' : '1px solid rgba(0,0,0,0.08)',
-                                transition: 'all 0.3s ease',
-                                flexShrink: 0,
-                                padding: '6px'
-                              }}>
-                                {typeof item.icon === 'string' ? (
-                                  <img
-                                    src={item.icon}
-                                    alt={item.title}
-                                    style={{
-                                      width: '18px',
-                                      height: '18px',
-                                      objectFit: 'contain',
-                                      filter: isActive ? 'none' : 'grayscale(100%) opacity(0.7)'
-                                    }}
-                                  />
-                                ) : (
-                                  item.icon
-                                )}
-                              </div>
-                              <span style={{ flex: 1, fontWeight: isActive ? '400' : '300', fontSize: '16px', color: isActive ? 'var(--color-highlight)' : '#000', lineHeight: '1.4', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</span>
-                            </button>
-
-                            {/* Mobile Inline Image Card under the active amenity item */}
-                            {isActive && (
-                              <div className="amenity-mobile-inline-card">
-                                <div className="amenity-mobile-card-img" style={{ backgroundImage: `url(${item.image})` }} />
-                                <div className="amenity-mobile-card-overlay">
-                                  <h4 className="amenity-mobile-card-title">{item.title}</h4>
-                                  <p className="amenity-mobile-card-desc">{item.desc}</p>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </ScrollReveal>
-
-                  {/* Right Column: Desktop Visualizer */}
-                  <ScrollReveal animation="fadeLeft" delay={0.35} className="amenities-visualizer">
-                    {amenities.map((item, idx) => (
-                      <div
-                        key={idx}
-                        style={{
-                          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-                          opacity: amenityIdx === idx ? 1 : 0,
-                          transform: amenityIdx === idx ? 'scale(1)' : 'scale(1.05)',
-                          transition: 'opacity 0.8s ease, transform 1.2s ease',
-                          pointerEvents: amenityIdx === idx ? 'auto' : 'none'
-                        }}
-                      >
-                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-
-                        {/* Elegant bottom overlay */}
-                        <div style={{
-                          position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%',
-                          background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
-                          display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-                          padding: '40px',
-                          zIndex: 2
-                        }}>
-                          <div style={{ paddingTop: '20px' }}>
-                            <h3 style={{ color: '#ffffff', marginBottom: '8px', fontWeight: '500', fontSize: '24px', fontFamily: 'var(--font-heading)' }}>{item.title}</h3>
-                            <p style={{ color: 'rgba(255,255,255,0.8)', margin: 0, fontSize: '15px', fontWeight: '300' }}>{item.desc}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </ScrollReveal>
-                </div>
-              </div>
-            </section>
-          )}
           {/* Master Floor Plans Section */}
           {activeTab === 'floorplans' && (
             <section id="floorplans" className="project-floorplans-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center', padding: '40px 0', background: '#fff' }}>
@@ -1102,15 +1216,74 @@ export default function PashaPinnacle() {
                   </ScrollReveal>
                 )}
 
-                {/* Typical Floor Plan Panel (Pasha Pinnacle - No Legends. Only Plan) */}
+                {/* Typical Floor Plan Panel (Pasha Pinnacle) */}
                 {layoutCategory === 'typicalFloorPlan' && (
-                  <ScrollReveal animation="fadeUp" delay={0.3} className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <img
-                      src={layoutsData.typicalFloorPlan.image}
-                      alt="Typical Floor Plan"
-                      onClick={() => setFloorplanLightbox({ image: layoutsData.typicalFloorPlan.image, name: 'Typical Floor Plan' })}
-                      style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
-                    />
+                  <ScrollReveal animation="fadeUp" delay={0.3} style={{ width: '100%' }}>
+                    {/* Sub-tabs row: Typical Floor Plan | Stilt + Ground Floor */}
+                    <div style={{ display: 'flex', marginBottom: '35px', borderBottom: '.1px solid rgba(0,0,0,0.08)', width: '100%', justifyContent: 'flex-start' }}>
+                      <div className="filter-tabs" style={{ display: 'flex', gap: '0' }}>
+                        {[
+                          { id: 'typical', label: 'Typical Floor Plan', image: layoutsData.typicalFloorPlan.image },
+                          { id: 'stilt', label: 'Stilt + Ground Floor', image: '/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg' }
+                        ].map((sub, index, arr) => {
+                          const isActive = typicalSubTab === sub.id;
+                          return (
+                            <button
+                              key={sub.id}
+                              onClick={() => setTypicalSubTab(sub.id)}
+                              className={`filter-tab-btn ${isActive ? 'active' : ''}`}
+                              style={{
+                                padding: '0 24px',
+                                paddingLeft: index === 0 ? '0' : '24px',
+                                background: 'transparent',
+                                border: 'none',
+                                borderRight: index !== arr.length - 1 ? '.1px solid rgba(0, 0, 0, 0.15)' : 'none',
+                                cursor: 'pointer',
+                                outline: 'none',
+                                boxShadow: 'none'
+                              }}
+                            >
+                              <span
+                                style={{
+                                  position: 'relative',
+                                  display: 'inline-block',
+                                  paddingBottom: '12px',
+                                  borderBottom: isActive ? '.1px solid var(--color-text-dark)' : '.1px solid transparent',
+                                  marginBottom: '-1px',
+                                  fontWeight: isActive ? '400' : '400',
+                                  color: isActive ? '#000000' : 'var(--color-text-muted-light)',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.12em',
+                                  fontFamily: 'var(--font-sans)',
+                                  fontSize: isMobile ? '13px' : '14px',
+                                  transition: 'all 0.3s ease'
+                                }}
+                              >
+                                {sub.label}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      {typicalSubTab === 'typical' ? (
+                        <img
+                          src={layoutsData.typicalFloorPlan.image}
+                          alt="Typical Floor Plan"
+                          onClick={() => setFloorplanLightbox({ image: layoutsData.typicalFloorPlan.image, name: 'Typical Floor Plan' })}
+                          style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
+                        />
+                      ) : (
+                        <img
+                          src="/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg"
+                          alt="Stilt + Ground Floor"
+                          onClick={() => setFloorplanLightbox({ image: '/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg', name: 'Stilt + Ground Floor' })}
+                          style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
+                        />
+                      )}
+                    </div>
                   </ScrollReveal>
                 )}
 
@@ -1216,26 +1389,35 @@ export default function PashaPinnacle() {
                         </button>
                       </>
                     )}
-                    {/* Tabs row: 3 BHK and 4 BHK using standard filter-tabs style */}
+                    {/* Tabs row: Block A, Block B, and Stilt + Ground Floor */}
                     <div style={{ display: 'flex', marginBottom: '40px', borderBottom: '.1px solid rgba(0,0,0,0.08)', width: '100%' }}>
-                      <div className="filter-tabs" style={{ display: 'flex', gap: '0' }}>
-                        {['3bhk', '4bhk'].map(conf => {
-                          const confLabel = conf === '3bhk' ? '3 BHK' : '4 BHK';
+                      <div className="filter-tabs" style={{ display: 'flex', gap: '0', flexWrap: 'wrap' }}>
+                        {Object.keys(layoutsData.floorPlan).map((conf, index, arr) => {
+                          const confLabels = {
+                            blockA: 'Block A',
+                            blockB: 'Block B',
+                            stilt: 'Stilt + Ground Floor',
+                            '3bhk': '3 BHK',
+                            '4bhk': '4 BHK'
+                          };
+                          const confLabel = confLabels[conf] || conf;
                           const isActive = floorPlanConfig === conf;
                           return (
                             <button
                               key={conf}
                               onClick={() => {
                                 setFloorPlanConfig(conf);
-                                setActivePlanId(layoutsData.floorPlan[conf][0].id);
+                                if (layoutsData.floorPlan[conf]?.[0]) {
+                                  setActivePlanId(layoutsData.floorPlan[conf][0].id);
+                                }
                               }}
                               className={`filter-tab-btn ${isActive ? 'active' : ''}`}
                               style={{
                                 padding: '0 24px',
-                                paddingLeft: conf === '3bhk' ? '0' : '24px',
+                                paddingLeft: index === 0 ? '0' : '24px',
                                 background: 'transparent',
                                 border: 'none',
-                                borderRight: conf === '3bhk' ? '.1px solid rgba(0, 0, 0, 0.15)' : 'none',
+                                borderRight: index !== arr.length - 1 ? '.1px solid rgba(0, 0, 0, 0.15)' : 'none',
                                 cursor: 'pointer',
                                 outline: 'none',
                                 boxShadow: 'none'
@@ -1270,38 +1452,30 @@ export default function PashaPinnacle() {
                       {/* Left Column: Details */}
                       <div className="floorplan-slide-details-col" style={{ textAlign: 'left', order: isMobile ? 2 : 1 }}>
                         <h3 className="floorplan-slide-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '32px', fontWeight: '400', color: 'var(--color-highlight)', marginBottom: '32px' }}>
-                          {activePlanDetails.name}
+                          {activePlanDetails?.name}
                         </h3>
                         <div className="floorplan-slide-specs-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '40px' }}>
-                          {/* <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Configuration</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.type}</span>
-                          </div> */}
                           <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Built-up Area</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.builtUp}</span>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Saleable Area</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails?.saleableArea || activePlanDetails?.builtUp}</span>
                           </div>
                           <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Plot Area</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.plot}</span>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Rera Carpet Area</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails?.reraCarpetArea || activePlanDetails?.builtUp}</span>
                           </div>
                           <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Direction</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.facing}</span>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>UDS</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails?.uds || activePlanDetails?.plot}</span>
+                          </div>
+                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Facing</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails?.facing}</span>
                           </div>
                         </div>
-                        <Button
-                          theme="light"
-                          onClick={() => setIsQuoteOpen(true)}
-                          icon="↓"
-                          style={{ minWidth: '220px', boxSizing: 'border-box' }}
-                        >
-                          Download Floorplan PDF
-                        </Button>
                       </div>
                       {/* Right Column: Visualizer */}
                       <div className="floorplan-slide-visual-col" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', order: isMobile ? 1 : 2 }}>
-                        {activePlanDetails.image ? (
+                        {activePlanDetails?.image ? (
                           <div className="floorplan-slide-img-wrap" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <img
                               src={activePlanDetails.image}
@@ -1322,7 +1496,7 @@ export default function PashaPinnacle() {
                             <div className="blueprint-grid-mesh"></div>
                             <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'var(--color-text-muted-light)' }}>
                               <LayoutGrid size={48} style={{ marginBottom: '24px', opacity: 0.8 }} />
-                              <span style={{ color: 'var(--color-bg-light)' }}>{activePlanDetails.name}</span>
+                              <span style={{ color: 'var(--color-bg-light)' }}>{activePlanDetails?.name}</span>
                               <span style={{ textTransform: 'uppercase', marginTop: '16px', color: 'var(--color-gold)' }}>Interactive Blueprint Layout</span>
                             </div>
                           </div>
@@ -1334,192 +1508,210 @@ export default function PashaPinnacle() {
               </div>
             </section>
           )}
+          {/* Premium Amenities Section */}
+          {activeTab === 'amenities' && (
+            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', backgroundColor: '#ffffff', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center' }}>
+              <div className="container" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
+                <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '60px' }}>
+                  <h2 className="section-title">
+                    Boutique Residence <span style={{ color: 'var(--color-highlight)' }}>Amenities</span>
+                  </h2>
+                </ScrollReveal>
+
+                <div className="amenities-split-layout">
+
+                  {/* Left Column: Directory */}
+                  <ScrollReveal animation="fadeRight" delay={0.25} className="amenities-directory">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid rgba(143, 143, 143, 0.23)' }}>
+                      <span style={{ textTransform: 'uppercase', color: '#000000ff', fontSize: '13px' }}>Directory</span>
+                      <span style={{ color: '#000000ff', fontSize: '14px' }}>{amenities.length} Amenities</span>
+                    </div>
+
+                    <div
+                      ref={amenitiesListRef}
+                      className="amenities-grid-container"
+                    >
+                      {amenities.map((item, idx) => {
+                        const isActive = amenityIdx === idx;
+                        return (
+                          <div key={idx} className="amenity-item-wrapper" style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+                            <button
+                              onClick={() => {
+                                setAmenityIdx(idx);
+                                setIsAmenityAutoPlay(false);
+                              }}
+                              className={`amenity-item-btn ${isActive ? 'active' : ''}`}
+                              style={{
+                                display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 18px',
+                                background: isActive ? 'var(--color-bg-light)' : 'transparent',
+                                borderRadius: '8px',
+                                border: 'none',
+                                borderBottom: isActive ? '1px solid transparent' : '1px solid rgba(0,0,0,0.06)',
+                                cursor: 'pointer', transition: 'all 0.3s ease',
+                                textAlign: 'left', outline: 'none',
+                                width: '100%', minWidth: 0
+                              }}
+                            >
+                              <div style={{
+                                width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                background: isActive ? 'rgba(180, 133, 100, 0.14)' : 'rgba(0,0,0,0.03)',
+                                border: isActive ? '1px solid #b48564' : '1px solid rgba(0,0,0,0.08)',
+                                transition: 'all 0.3s ease',
+                                flexShrink: 0,
+                                padding: '7px'
+                              }}>
+                                {typeof item.icon === 'string' ? (
+                                  <img
+                                    src={item.icon}
+                                    alt={item.title}
+                                    style={{
+                                      width: '18px',
+                                      height: '18px',
+                                      objectFit: 'contain',
+                                      filter: isActive ? 'none' : 'grayscale(100%) opacity(0.7)'
+                                    }}
+                                  />
+                                ) : (
+                                  item.icon
+                                )}
+                              </div>
+                              <span style={{ flex: 1, fontWeight: isActive ? '500' : '400', fontSize: '15px', color: isActive ? 'var(--color-highlight)' : '#1a1a1a', lineHeight: '1.4', whiteSpace: 'normal', wordBreak: 'break-word' }}>{item.title}</span>
+                            </button>
+
+                            {/* Mobile Inline Image Card under the active amenity item */}
+                            {isActive && (
+                              <div className="amenity-mobile-inline-card">
+                                <img
+                                  src={encodeURI(item.image)}
+                                  alt={item.title}
+                                  className="amenity-mobile-card-img"
+                                />
+                                <div className="amenity-mobile-card-overlay">
+                                  <h4 className="amenity-mobile-card-title">{item.title}</h4>
+                                  <p className="amenity-mobile-card-desc">{item.desc}</p>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </ScrollReveal>
+
+                  {/* Right Column: Desktop Visualizer */}
+                  <ScrollReveal animation="fadeLeft" delay={0.35} className="amenities-visualizer">
+                    {amenities.map((item, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                          opacity: amenityIdx === idx ? 1 : 0,
+                          transform: amenityIdx === idx ? 'scale(1)' : 'scale(1.04)',
+                          transition: 'opacity 0.6s ease, transform 0.8s ease',
+                          pointerEvents: amenityIdx === idx ? 'auto' : 'none'
+                        }}
+                      >
+                        <img
+                          src={encodeURI(item.image)}
+                          alt={item.title}
+                          style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            display: 'block'
+                          }}
+                        />
+
+                        {/* Elegant bottom overlay */}
+                        <div style={{
+                          position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%',
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 60%, transparent 100%)',
+                          display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+                          padding: '36px',
+                          zIndex: 2
+                        }}>
+                          <div>
+                            <h3 style={{ color: '#ffffff', marginBottom: '8px', fontWeight: '500', fontSize: '22px', fontFamily: 'var(--font-heading)' }}>{item.title}</h3>
+                            <p style={{ color: 'rgba(255,255,255,0.85)', margin: 0, fontSize: '14px', fontWeight: '300', lineHeight: '1.6' }}>{item.desc}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </ScrollReveal>
+                </div>
+              </div>
+            </section>
+          )}
+
           {activeTab === 'pricing' && (
             <ProjectPricingSection
               projectName="Pasha Pinnacle"
               unitTypes={['2 BHK Apartment', '3 BHK Apartment']}
             />
           )}
-          {/* Project Status Timeline */}
+          {/* Project Status Section */}
           {activeTab === 'status' && (
-            (() => {
-              const projectStatusData = [
-                {
-                  month: 'May',
-                  year: '2026',
-                  images: [1, 2, 3, 4, 5, 6].map(num => `/images/project/CML/Interiors/cml-interior-${num.toString().padStart(2, '0')}.jpg`)
-                },
-                {
-                  month: 'April',
-                  year: '2026',
-                  images: [7, 8, 1, 2, 3, 4].map(num => `/images/project/CML/Interiors/cml-interior-${num.toString().padStart(2, '0')}.jpg`)
-                },
-                {
-                  month: 'March',
-                  year: '2026',
-                  images: [5, 6, 7, 8, 1, 2].map(num => `/images/project/CML/Interiors/cml-interior-${num.toString().padStart(2, '0')}.jpg`)
-                },
-                {
-                  month: 'February',
-                  year: '2026',
-                  images: [3, 4, 5, 6, 7, 8].map(num => `/images/project/CML/Interiors/cml-interior-${num.toString().padStart(2, '0')}.jpg`)
-                }
-              ];
-              const currentStatus = projectStatusData[statusMonthIdx];
+            <section id="status" className="project-status-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', background: '#fff', display: 'flex', alignItems: 'center', padding: '60px 0' }}>
+              <div className="container" style={{ width: '100%' }}>
+                <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '30px' }}>
+                  <h2 className="section-title">Project <span>Status</span></h2>
+                </ScrollReveal>
 
-              const handlePrevMonth = () => {
-                setStatusMonthIdx(prev => (prev === 0 ? projectStatusData.length - 1 : prev - 1));
-              };
+                <ScrollReveal animation="fadeUp" delay={0.25} style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                  <div style={{
+                    maxWidth: '600px',
+                    width: '100%',
+                    textAlign: 'center',
+                    padding: '60px 40px',
+                    border: '1px solid rgba(180, 133, 100, 0.25)',
+                    borderRadius: '8px',
+                    background: 'linear-gradient(180deg, #FAF8F5 0%, #FFFFFF 100%)',
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.04)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '14px'
+                  }}>
+                    <span style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '12px',
+                      fontWeight: '600',
+                      letterSpacing: '0.22em',
+                      color: '#b48564',
+                      textTransform: 'uppercase',
+                      display: 'block'
+                    }}>
+                      COMING SOON
+                    </span>
 
-              const handleNextMonth = () => {
-                setStatusMonthIdx(prev => (prev === projectStatusData.length - 1 ? 0 : prev + 1));
-              };
-              return (
-                <section id="status" className="project-status-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', background: '#fff' }}>
-                  <div className="container">
-                    <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', alignItems: 'center', marginBottom: '50px' }}>
-                      <h2 className="section-title">Project <span>Status</span></h2>
+                    <h3 style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: 'clamp(26px, 2.8vw, 34px)',
+                      color: '#103328',
+                      margin: 0,
+                      fontWeight: '400',
+                      lineHeight: '1.2'
+                    }}>
+                      Construction Milestone Updates
+                    </h3>
 
-                    </ScrollReveal>
-                    <ScrollReveal animation="fadeUp" delay={0.3} className="status-timeline-container" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto' }}>
-                      <div className="status-month-container">
-
-                        {/* Month/Year & Landscape Navigation */}
-                        <div className="status-month-label">
-                          <button
-                            onClick={handlePrevMonth}
-                            className="status-nav-btn prev"
-                            aria-label="Previous month"
-                            type="button"
-                          >
-                            <ChevronLeft size={22} />
-                          </button>
-
-                          <div className="status-month-text">
-                            <h3 className="status-month-title">{currentStatus.month}</h3>
-                            <span className="status-year-subtitle">{currentStatus.year}</span>
-                          </div>
-
-                          <button
-                            onClick={handleNextMonth}
-                            className="status-nav-btn next"
-                            aria-label="Next month"
-                            type="button"
-                          >
-                            <ChevronRight size={22} />
-                          </button>
-                        </div>
-
-                        {/* Right Side - Images */}
-                        <style>
-                          {`
-                            @keyframes statusFadeIn {
-                              from { opacity: 0; transform: translateY(10px); }
-                              to { opacity: 1; transform: translateY(0); }
-                            }
-                            .status-animate-grid {
-                              animation: statusFadeIn 0.5s ease forwards;
-                            }
-                            .status-month-container {
-                              display: flex;
-                              gap: 40px;
-                              align-items: center;
-                              position: relative;
-                              width: 100%;
-                            }
-                            .status-month-label {
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                              gap: 16px;
-                              flex-shrink: 0;
-                            }
-                            .status-nav-btn {
-                              background: transparent;
-                              border: 1px solid rgba(0, 0, 0, 0.12);
-                              width: 36px;
-                              height: 36px;
-                              border-radius: 50%;
-                              display: flex;
-                              align-items: center;
-                              justify-content: center;
-                              cursor: pointer;
-                              color: var(--color-bg-navy, #111);
-                              transition: all 0.25s ease;
-                              padding: 0;
-                            }
-                            .status-nav-btn:hover {
-                              background: var(--color-primary, #111);
-                              color: #fff;
-                              border-color: var(--color-primary, #111);
-                            }
-                            .status-month-text {
-                              text-align: center;
-                              min-width: 90px;
-                            }
-                            .status-month-title {
-                              color: var(--color-bg-navy, #111);
-                              font-weight: 400;
-                              font-family: var(--font-heading);
-                              font-size: 22px;
-                              margin: 0 0 2px 0;
-                            }
-                            .status-year-subtitle {
-                              color: var(--color-text-dark, #555);
-                              font-size: 14px;
-                            }
-                            .status-month-grid {
-                              display: grid;
-                              grid-template-columns: repeat(3, 1fr);
-                              gap: 16px;
-                              flex-grow: 1;
-                              width: 100%;
-                            }
-                            @media (max-width: 900px) {
-                              .status-month-container {
-                                flex-direction: column !important;
-                                gap: 24px !important;
-                                align-items: center !important;
-                              }
-                              .status-month-label {
-                                width: 100% !important;
-                                justify-content: center !important;
-                              }
-                              .status-month-grid {
-                                grid-template-columns: repeat(2, 1fr) !important;
-                                width: 100% !important;
-                                gap: 14px !important;
-                              }
-                            }
-                            @media (max-width: 600px) {
-                              .status-month-container {
-                                flex-direction: column !important;
-                                gap: 20px !important;
-                              }
-                              .status-month-grid {
-                                grid-template-columns: 1fr !important;
-                                width: 100% !important;
-                                gap: 14px !important;
-                              }
-                            }
-                          `}
-                        </style>
-                        <div key={statusMonthIdx} className="status-month-grid status-animate-grid">
-                          {currentStatus.images.map((imgSrc, idx) => (
-                            <div key={idx} className="status-img-sm" style={{ aspectRatio: '16/11' }} onClick={() => setLightboxImage({ src: imgSrc, title: `Construction Progress ${idx + 1}` })}>
-                              <img src={imgSrc} alt={`Progress ${idx + 1}`} />
-                              <div className="status-img-overlay">
-                                <Maximize2 size={24} color="var(--color-white)" />
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </ScrollReveal>
+                    <p style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '15px',
+                      color: '#666666',
+                      lineHeight: '1.75',
+                      margin: 0
+                    }}>
+                      Periodic photographic site progress reports and construction status milestones for Pasha Pinnacle are currently in production and will be updated soon.
+                    </p>
                   </div>
-                </section>
-              );
-            })()
+                </ScrollReveal>
+              </div>
+            </section>
           )}
         </div>
         {/* --- PROJECT CTA BANNER SECTION --- */}
@@ -1534,16 +1726,19 @@ export default function PashaPinnacle() {
           }}
           onClick={() => setIsQuoteOpen(true)}
         >
-          <img
-            src="/images/project/Crystal moonlight down section.png"
-            alt="Crystal Moonlight - Experience True Luxury"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-              objectFit: 'cover'
-            }}
-          />
+          <picture style={{ display: 'block', width: '100%' }}>
+            <source media="(max-width: 768px)" srcSet="/images/project/pasha-pinnacle/CTA-mobile.png" />
+            <img
+              src="/images/project/pasha-pinnacle/CTA.png"
+              alt="Pasha Pinnacle - Where Contemporary Design Meets Urban Elegance"
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                objectFit: 'cover'
+              }}
+            />
+          </picture>
         </section>
       </main>
 
@@ -1615,19 +1810,19 @@ export default function PashaPinnacle() {
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
               <div>
-                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Configuration</span>
-                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.type}</span>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Saleable Area</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.saleableArea || floorplanLightbox.builtUp}</span>
               </div>
               <div>
-                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Built-up Area</span>
-                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.builtUp}</span>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Rera Carpet Area</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.reraCarpetArea || floorplanLightbox.builtUp}</span>
               </div>
               <div>
-                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Plot Area</span>
-                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.plot}</span>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>UDS</span>
+                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.uds || floorplanLightbox.plot}</span>
               </div>
               <div>
-                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Direction</span>
+                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Facing</span>
                 <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.facing}</span>
               </div>
             </div>
@@ -1659,14 +1854,25 @@ export default function PashaPinnacle() {
             <X size={24} />
           </button>
           <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
-            <iframe
-              className="video-iframe"
-              src={activeVideoUrl}
-              title="Villa Walkthrough Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            {activeVideoUrl && (activeVideoUrl.endsWith('.mp4') || activeVideoUrl.includes('.mp4')) ? (
+              <video
+                className="video-iframe"
+                src={encodeURI(activeVideoUrl)}
+                controls
+                autoPlay
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#000' }}
+              />
+            ) : (
+              <iframe
+                className="video-iframe"
+                src={activeVideoUrl}
+                title="Villa Walkthrough Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            )}
           </div>
         </div>
       )}
@@ -1677,7 +1883,7 @@ export default function PashaPinnacle() {
             <div className="modal-image-panel">
               <div className="modal-image-overlay">
                 <h3>Pasha Pinnacle</h3>
-                <p>Luxury Apartments in Royapettah</p>
+                <p>Ultra-Luxury Residences in Royapettah</p>
               </div>
             </div>
 
@@ -1761,8 +1967,8 @@ export default function PashaPinnacle() {
                       </div>
                       <div className="form-group-outline">
                         <select value={quoteForm.config} onChange={e => setQuoteForm({ ...quoteForm, config: e.target.value })}>
-                          <option value="2 BHK Apartment">2 BHK Apartment</option>
-                          <option value="3 BHK Apartment">3 BHK Apartment</option>
+                          <option value="3 BHK Villa">3 BHK Villa</option>
+                          <option value="4 BHK Villa">4 BHK Villa</option>
                         </select>
                       </div>
                     </div>
@@ -1865,8 +2071,6 @@ export default function PashaPinnacle() {
         @media (max-width: 768px) {
           .overview-logo-badge {
             left: 14px;
-            height: 38px;
-            max-height: 38px;
             width: 105px;
             padding: 4px 8px;
             border-radius: 0 0 5px 5px;
@@ -1978,7 +2182,7 @@ export default function PashaPinnacle() {
         /* â”€â”€ INFO GRID STYLES â”€â”€ */
         .info-grid-tag {
           font-family: var(--font-sans);
-          font-size: 11px;
+          font-size: 14px;
           font-weight: 400;
           color: var(--color-text-muted-light);
           letter-spacing: 0.2em;
@@ -2010,7 +2214,7 @@ export default function PashaPinnacle() {
         }
         .info-grid-desc {
           font-family: var(--font-sans);
-          font-size: 10px;
+          font-size: 12px;
           color: var(--color-text-dark);
           text-transform: uppercase;
           letter-spacing: 0.15em;
@@ -2179,58 +2383,47 @@ export default function PashaPinnacle() {
         .project-hero-section {
           position: relative;
           width: 100%;
+          height: 100vh;
           height: 100dvh;
-          /* min-height removed to ensure perfect screen fit */
+          min-height: -webkit-fill-available;
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
           align-items: center;
           overflow: hidden;
+          padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
           background-color: var(--color-bg-navy);
-          padding-bottom: 80px;
+          will-change: transform, opacity;
         }
-        /* â”€â”€ 4-Split Reveal Mask â”€â”€ */
-        .project-split-mask {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          z-index: 40;
-          pointer-events: none;
-        }
-        
-        .split-panel {
-          flex: 1;
-          height: 100%;
-          background-color: var(--color-bg-navy);
-          animation: slideAwayProject 1.2s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-        }
-        
-        .panel-1 { transform-origin: top; animation-delay: 0.1s; }
-        .panel-2 { transform-origin: bottom; animation-delay: 0.22s; }
-        .panel-3 { transform-origin: top; animation-delay: 0.34s; }
-        .panel-4 { transform-origin: bottom; animation-delay: 0.46s; }
-        @keyframes slideAwayProject {
-          to { transform: scaleY(0); }
-        }
-        /* â”€â”€ Background Image â”€â”€ */
+
         .project-hero-background {
           position: absolute;
-          bottom: 0;
+          top: 0;
           left: 0;
           width: 100%;
           height: 100%;
           z-index: 1;
         }
+
+        .project-hero-picture {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+
         .project-hero-bg-image {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center center;
-          transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          object-position: center bottom;
+          transform: scale(1);
+          transition: filter 0.8s ease-in-out;
         }
-        .project-hero-section:hover .project-hero-bg-image {
-          filter: grayscale(0%);
+
+        .project-hero-bg-image.animate-zoom {
+          animation: slowZoom 15s ease-in-out infinite alternate;
         }
+
         .project-hero-overlay {
           position: absolute;
           top: 0;
@@ -2238,128 +2431,74 @@ export default function PashaPinnacle() {
           width: 100%;
           height: 100%;
           background: linear-gradient(
-            180deg,
-            rgba(15, 15, 15, 0.75) 0%,
-            rgba(15, 15, 15, 0) 10%,
-            rgba(15, 15, 15, 0) 35%,
-            rgba(15, 15, 15, 0) 70%,
-            rgba(15, 15, 15, 0.46) 90%,
-            rgba(15, 15, 15, 1) 100%
+            to bottom, 
+            rgba(0, 0, 0, 0.75) 0%, 
+            rgba(0, 0, 0, 0.0) 25%, 
+            rgba(0, 0, 0, 0) 60%, 
+            rgba(0, 0, 0, 0.85) 100%
           );
           z-index: 2;
           pointer-events: none;
         }
-        /* â”€â”€ Light Leak â”€â”€ */
-        .project-hero-light-leak {
-          position: absolute;
-          inset: 0;
-          z-index: 3;
-          pointer-events: none;
-          overflow: hidden;
-          mix-blend-mode: screen;
-        }
-        .project-hero-light-leak::before {
-          content: '';
-          position: absolute;
-          top: -20%;
-          left: -20%;
-          width: 80%;
-          height: 80%;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.03) 50%, transparent 80%);
-          filter: blur(80px);
-          animation: floatGoldProject 25s infinite alternate ease-in-out;
-          will-change: transform;
-        }
-        .project-hero-light-leak::after {
-          content: '';
-          position: absolute;
-          bottom: -20%;
-          right: -20%;
-          width: 80%;
-          height: 80%;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(2, 132, 199, 0.12) 0%, rgba(2, 132, 199, 0.03) 50%, transparent 80%);
-          filter: blur(80px);
-          animation: floatTealProject 30s infinite alternate ease-in-out;
-          will-change: transform;
-        }
-        @keyframes floatGoldProject {
-          0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-          100% { transform: translate3d(80px, 60px, 0) rotate(120deg); }
-        }
-        @keyframes floatTealProject {
-          0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-          100% { transform: translate3d(-80px, -60px, 0) rotate(-120deg); }
-        }
-        /* â”€â”€ Overlaid Content â”€â”€ */
+
         .project-hero-content {
           position: relative;
           z-index: 10;
           display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: flex-end;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: center; 
           width: 100%;
-          max-width: 1400px;
           padding: 0 40px;
+          margin-bottom: clamp(60px, 10vh, 110px);
         }
-        .project-hero-text-col {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          text-align: left;
+
+        .project-hero-text-block {
+          text-align: center; 
+          margin-bottom: 18px;
         }
-        .project-hero-btn-col {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          margin-bottom: 24px;
-        }
-        .project-tag-reveal {
-        
-          font-size: 10px;
-          font-weight: 400;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 24px;
-          opacity: 0;
-          animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 0.8s;
-          display: inline-block;
-        }
-        .hero-cta-btn {
-          opacity: 0;
-          animation: fadeUpProject 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          animation-delay: 1.4s;
-          background: rgba(255,255,255,0.1) !important;
-          color: var(--color-white) !important;
-          border-color: rgba(255, 255, 255, 0.3) !important;
-          backdrop-filter: blur(12px);
-        }
-        .hero-cta-btn .btn-circle-arrow {
-          background: rgba(255, 255, 255, 0.15) !important;
-          color: var(--color-white) !important;
-        }
-        
-        .hero-cta-btn:hover {
-          background: var(--color-white) !important;
-          border-color: var(--color-white) !important;
-          color: var(--color-bg-navy) !important;
-          box-shadow: 0 8px 30px rgba(255, 255, 255, 0.15) !important;
-        }
-        .hero-cta-btn:hover .btn-circle-arrow {
-          background: rgba(255,255,255,0.3) !important;
-          color: var(--color-white) !important;
-        }
+
         .project-hero-title {
-          color: var(--color-white);
+          line-height: 1.25;
+          color: rgba(255, 255, 255, 0.95);
+          margin-bottom: 12px;
+          text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          text-align: center;
         }
+
         .project-hero-subtitle {
-          text-transform: uppercase;
+          font-size: 20px;
+          font-weight: 400;
+          text-align: center;
           color: rgba(255, 255, 255, 0.85);
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+          line-height: 1.8;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          margin-bottom: 8px;
+        }
+
+        .project-hero-cta-block .btn-discover {
           display: inline-block;
+          font-size: 11px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.47);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          padding: 14px 40px;
+          border-radius: 100px;
+          text-decoration: none;
+          backdrop-filter: blur(38px);
+          -webkit-backdrop-filter: blur(38px);
+          transition: all 0.4s ease;
+          cursor: pointer;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        .project-hero-cta-block .btn-discover:hover {
+          background: rgba(255, 255, 255, 0.3);
+          color: #fff;
+          border-color: rgba(255, 255, 255, 0.8);
+          transform: translateY(-2px);
         }
         @keyframes fadeUpProject {
           from {
@@ -2462,13 +2601,16 @@ export default function PashaPinnacle() {
         .overview-image-wrapper {
           border-radius: 8px;
           overflow: hidden;
-          // box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
-          aspect-ratio: 16/10;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .overview-image-wrapper img {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
+          height: auto;
+          max-height: 650px;
+          object-fit: contain;
           display: block;
         }
         .overview-right-text {
@@ -2691,29 +2833,30 @@ export default function PashaPinnacle() {
         .amenities-split-layout {
           display: flex;
           flex-direction: row;
-          gap: 60px;
+          gap: 40px;
           width: 100%;
           align-items: stretch;
         }
         .amenities-directory {
-          width: 45%;
+          width: 46%;
           display: flex;
           flex-direction: column;
         }
         .amenities-grid-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          column-gap: 24px;
-          row-gap: 0px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
           width: 100%;
         }
         .amenities-visualizer {
           display: block;
-          width: 55%;
-          min-height: 500px;
+          width: 54%;
+          min-height: 520px;
           position: relative;
-          border-radius: 8px;
+          border-radius: 12px;
           overflow: hidden;
+          background-color: #111;
+          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
         }
         .amenity-mobile-inline-card {
           display: none;
@@ -3574,7 +3717,7 @@ export default function PashaPinnacle() {
         /* Left Image Panel */
         .modal-image-panel {
           flex: 1;
-          background: url('/images/project/CML/master-banner.png') center/cover no-repeat;
+          background: url('/images/project/pasha-pinnacle/hero.png') center/cover no-repeat;
           position: relative;
           display: flex;
           align-items: flex-end;
@@ -3859,9 +4002,9 @@ export default function PashaPinnacle() {
           color: var(--color-highlight);
         }
         .pillar-title {
-          font-family: var(--font-sans);
+          font-family: var(--font-heading);
           color: var(--color-text-dark);
-          font-weight:400;
+          font-weight:500;
           font-size: 18px;
           margin: 0;
           flex-grow: 1;
@@ -4201,26 +4344,22 @@ export default function PashaPinnacle() {
         }
         @media (max-width: 768px) {
           .project-gallery-section {
-            padding-top: 10px !important;
-            padding-bottom: 16px !important;
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
             min-height: auto !important;
             justify-content: flex-start !important;
             gap: 26px !important;
-          }
-          .project-gallery-section .section-header {
-            margin-bottom: 0px !important;
-          }
-          .project-gallery-section .section-title {
-            margin-bottom: 4px !important;
-            font-size: 28px !important;
-            line-height: 1.2 !important;
           }
           .project-gallery-section .nested-tabs-container {
             margin-bottom: 2px !important;
           }
           .filter-tab-btn {
             padding: 0 12px !important;
-            font-size: 13px !important;
+            font-size: 16px !important;
+          }
+
+          .project-sections-container .filter-tab-btn {
+            font-size: 14px !important;
           }
           .gallery-spotlight-viewport {
             --gallery-card-active-w: 88vw !important;
@@ -4272,8 +4411,8 @@ export default function PashaPinnacle() {
             inset: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
+            object-fit: cover;
+            object-position: center;
           }
           .amenity-mobile-card-overlay {
             position: absolute;
@@ -4312,14 +4451,27 @@ export default function PashaPinnacle() {
           
           /* Hero Section */
           .project-hero-content {
+            padding: 0 20px !important;
+            margin-bottom: clamp(75px, 14vh, 100px) !important;
+            align-items: center !important;
+            text-align: center !important;
             flex-direction: column !important;
-            align-items: flex-start !important;
             justify-content: flex-end !important;
-            gap: 32px !important;
+          }
+          .project-hero-text-block {
+            margin-bottom: 22px !important;
+            text-align: center !important;
           }
           .project-hero-title {
-            line-height: 1.1 !important;
-            margin-bottom: 0px !important;
+            text-align: center !important;
+            line-height: 1.25 !important;
+          }
+          .project-hero-subtitle {
+            text-align: center !important;
+          }
+          .project-hero-cta-block .btn-discover {
+            padding: 12px 32px !important;
+            font-size: 14px !important;
           }
           
           /* Video Tours Section */

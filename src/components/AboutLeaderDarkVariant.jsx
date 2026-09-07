@@ -5,16 +5,19 @@ import { ArrowUpRight, X } from 'lucide-react';
 const DARK_LEADERS = [
   {
     id: 1,
-    name: "V. Sai Mohan",
-    role: "FOUNDER, CHAIRMAN & MANAGING DIRECTOR",
-    signatureTitle: "V. Sai Mohan",
-    quote: "Perfection is not a dream, but a reality that I strive towards in every foundation we lay.",
-    desc: "A visionary first-generation entrepreneur, Mr. V. Sai Mohan has spearheaded landmark residential developments across Chennai with an unyielding commitment to architectural perfection, enduring quality, and customer trust. His hands-on leadership ensures every development adheres to the highest benchmarks of structural durability and legal transparency.",
+    name: "Mr. Sai Mohan",
+    role: "MANAGING DIRECTOR",
+    signatureTitle: "Sai Mohan",
+    quote: "His journey is not just about building properties—it is about building people, relationships, and opportunities.",
+    desc: "Mr. Sai Mohan is a real estate entrepreneur with 15+ years of experience built through passion, persistence, and real-world experience. As a Builder, Promoter, Marketer, and Entrepreneur, he understands the industry from the ground level to the leadership level.",
     bio: [
-      "V. Sai Mohan is the Founder, Chairman & MD of Aadhithya Mohan Properties. A visionary first-generation entrepreneur, he has spearheaded landmark residential developments across Chennai with an unyielding commitment to architectural perfection, enduring quality, and customer trust.",
-      "Under his stewardship, Aadhithya Mohan Properties has evolved into a premier luxury developer known for creating bespoke villa communities that harmonize modern engineering with natural landscapes. His hands-on leadership ensures every project adheres to the highest benchmarks of structural durability, legal transparency, and aesthetic excellence."
+      "Mr. Sai Mohan is a real estate entrepreneur with 15+ years of experience built through passion, persistence, and real-world experience. His journey is not just about building properties—it is about building people, relationships, and opportunities.",
+      "As a Builder, Promoter, Marketer, and Entrepreneur, he understands the industry from the ground level to the leadership level. What makes his journey special is his belief that success becomes meaningful when the people around you grow along with you.",
+      "He welcomes talented professionals, marketers, builders, entrepreneurs, and business minds who dream of creating something bigger. For him, joining a company is not simply accepting a job—it is becoming part of a vision and a journey.",
+      "He believes in giving people the freedom to think, the opportunity to perform, and the platform to build their own success. His vision is to create a strong real estate ecosystem where customers, employees, investors, and business partners all grow together.",
+      "With experience behind him and a bigger vision ahead, he continues to build not just projects, but a team and a legacy that people can proudly be part of. If you have the ambition to grow, the courage to dream, and the passion to build—Mr. Sai Mohan believes there is always a place for you in the journey."
     ],
-    image: "/images/team/sai-mohan.png"
+    image: "/images/about/team/Mohan_MD1.jpeg"
   },
   {
     id: 2,
@@ -47,11 +50,28 @@ export default function AboutLeaderDarkVariant() {
 
   return (
     <div className="dark-leadership-stack" id="executive-leadership">
+      {/* Centered Top Section Header */}
+      <div className="dark-leader-section-header">
+        <ScrollReveal animation="fadeUp">
+          <span className="dark-leader-eyebrow">OUR LEADERS</span>
+        </ScrollReveal>
+        <ScrollReveal animation="fadeUp" delay={0.08}>
+          <h2 className="section-title dark-leader-title">
+            The People Behind Our Vision
+          </h2>
+        </ScrollReveal>
+      </div>
+
       {DARK_LEADERS.map((leader, idx) => (
-        <section 
-          className={`dark-leader-variant-section ${idx % 2 !== 0 ? 'dark-leader-alt-row' : ''}`} 
-          key={leader.id}
-        >
+        <React.Fragment key={leader.id}>
+          {idx > 0 && (
+            <div className="dark-leader-divider-wrap">
+              <div className="dark-leader-divider-line" />
+            </div>
+          )}
+          <section 
+            className={`dark-leader-variant-section ${idx % 2 !== 0 ? 'dark-leader-alt-row' : ''}`}
+          >
           <div className="dark-leader-container">
             
             {/* Left Side: Leader Portrait with Seamless Gradient Blend */}
@@ -125,6 +145,7 @@ export default function AboutLeaderDarkVariant() {
 
           </div>
         </section>
+        </React.Fragment>
       ))}
 
       {/* ── LIGHT ARCHITECTURAL FULL BIOGRAPHY MODAL (MATCHING SCREENSHOT) ── */}
@@ -170,22 +191,64 @@ export default function AboutLeaderDarkVariant() {
           background-color: #050505;
         }
 
+        .dark-leader-section-header {
+          text-align: center;
+          padding: 100px 20px 20px;
+          position: relative;
+          z-index: 5;
+        }
+
+        .dark-leader-eyebrow {
+          display: inline-block;
+          font-family: var(--font-sans);
+          font-size: 11.5px;
+          font-weight: 600;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: #b48564;
+          margin-bottom: 8px;
+        }
+
+        .dark-leader-title {
+          font-family: var(--font-heading);
+          color: #ffffff !important;
+          margin: 0;
+        }
+
+        .dark-leader-divider-wrap {
+          width: 100%;
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 40px;
+          box-sizing: border-box;
+          position: relative;
+          z-index: 5;
+        }
+
+        .dark-leader-divider-line {
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(180, 133, 100, 0.45) 15%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(180, 133, 100, 0.45) 85%,
+            transparent 100%
+          );
+        }
+
         .dark-leader-variant-section {
           background-color: #050505;
           color: #ffffff;
           width: 100%;
-          min-height: 90vh;
+          min-height: 85vh;
           position: relative;
           overflow: hidden;
           display: flex;
           align-items: center;
-          padding: 70px 0;
+          padding: 60px 0;
           box-sizing: border-box;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .dark-leader-variant-section:last-child {
-          border-bottom: none;
         }
 
         .dark-leader-container {

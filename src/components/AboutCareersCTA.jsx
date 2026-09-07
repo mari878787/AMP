@@ -13,7 +13,7 @@ export default function AboutCareersCTA({
       <div className="container careers-cta-container">
         <ScrollReveal animation="fadeUp">
           <h2 className="section-title">{title}</h2>
-          <p className="body-text" style={{ margin: '0 auto 32px auto', maxWidth: '720px' }}>{description}</p>
+          <p className="body-text" style={{ margin: '0 auto 32px auto', maxWidth: '720px', textAlign: "center" }}>{description}</p>
           <div className="careers-btn-wrapper">
             <Button href={btnLink} theme="dark">
               {btnText}

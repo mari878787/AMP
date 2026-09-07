@@ -37,3 +37,10 @@ pinggy_out.txt
 public/images/maia.zip
 public/images/maia/
 node-env/
+
+# Large raw drone files & >100MB video assets
+*.DNG
+*.dng
+public/images/project/CMR/*.mp4
+public/images/project/CMR/*.DNG
+

@@ -1,32 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ChevronDown, Menu, X, Globe, ArrowRight } from 'lucide-react';
+import TeaserPosterModal from './TeaserPosterModal';
 
 const CATEGORIES = [
   {
     id: 'villas',
     name: 'Villas',
-    img: '/images/project/CML/master-banner.png',
+    img: '/images/project/CML/Elevation-card.png',
     projects: [
-      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/master-banner.png', url: '/crystal-moonlight-villa' },
-      { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai', img: '/images/home/project-image-2.png', url: '/crystal-moonlight-villa' }
+      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/Elevation-card.png', url: '/crystal-moonlight-villa' },
+      { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai • Upcoming', img: '/images/project/Bayvista/Bay Vista Teaser.jpeg', teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg', url: '#bay-vista' },
+      { id: 'lakeshore', name: 'Lakeshore', location: 'ECR, Chennai • Upcoming', img: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg', teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg', url: '#lakeshore' }
     ]
   },
   {
     id: 'apartments',
     name: 'Apartments',
-    img: '/images/project_crystal_1779810838661.png',
+    img: '/images/project/pasha-pinnacle/card.png',
     projects: [
-      { id: 'pasha-pinnacle', name: 'Pasha Pinnacle', location: 'Royapettah, Chennai', img: '/images/project_crystal_1779810838661.png', url: '/pasha-pinnacle' }
+      { id: 'pasha-pinnacle', name: 'Pasha Pinnacle', location: 'Royapettah, Chennai', img: '/images/project/pasha-pinnacle/card.png', url: '/pasha-pinnacle' }
     ]
   },
   {
     id: 'plotted',
     name: 'Plots',
-    img: '/images/home/project-image-1.png',
+    img: '/images/project/CMR/4.png',
     projects: [
-      { id: 'ashok-nagar', name: 'Ashok Nagar', location: 'Maduranthakam, Chennai', img: '/images/home/project-image-2.png', url: '/ashok-nagar-villa-plots-in-maduranthakam' },
-      { id: 'cmr-global', name: 'CMR Global City', location: 'Maduranthakam, Chennai', img: '/images/home/project-image-1.png', url: '/ashok-nagar-villa-plots-in-maduranthakam' },
-      { id: 'guberalakshmi', name: 'Guberalakshmi Nagar', location: 'Chennai', img: '/images/home/project-image-1.png', url: '/ashok-nagar-villa-plots-in-maduranthakam' }
+      { id: 'cmr-global', name: 'CMR Global City', location: 'Maduranthakam, Chennai', img: '/images/project/CMR/4.png', url: '/cmr-global-city' },
+      { id: 'ashok-nagar', name: 'Ashok Nagar', location: 'Maduranthakam, Chennai', img: '/images/project/ashok-nagar/cards.webp', url: '/ashok-nagar-villa-plots-in-maduranthakam' }
     ]
   }
 ];
@@ -36,6 +37,7 @@ export default function Navbar({ darkText = false }) {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
+  const [selectedTeaser, setSelectedTeaser] = useState(null);
 
   // Search State
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -212,7 +214,16 @@ export default function Navbar({ darkText = false }) {
                     className={`mega-project-item ${activeProject?.id === proj.id ? 'active' : ''}`}
                     onMouseEnter={() => setActiveProject(proj)}
                   >
-                    <a href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : `/projects?category=${activeCategory.id}`)}>
+                    <a 
+                      href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : `/projects?category=${activeCategory.id}`)}
+                      onClick={(e) => {
+                        if (proj.teaserPoster) {
+                          e.preventDefault();
+                          setSelectedTeaser({ image: proj.teaserPoster, title: proj.name });
+                          setMegaMenuOpen(false);
+                        }
+                      }}
+                    >
                       <div className="mega-project-name">{proj.name}</div>
                       {proj.location && <div className="mega-project-location">{proj.location}</div>}
                     </a>
@@ -274,7 +285,13 @@ export default function Navbar({ darkText = false }) {
                       <a
                         key={proj.id}
                         href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : `/projects?category=${cat.id}`)}
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={(e) => {
+                          if (proj.teaserPoster) {
+                            e.preventDefault();
+                            setSelectedTeaser({ image: proj.teaserPoster, title: proj.name });
+                          }
+                          setMobileMenuOpen(false);
+                        }}
                         className="mobile-project-link"
                       >
                         <div className="mobile-project-name">{proj.name}</div>
@@ -341,7 +358,13 @@ export default function Navbar({ darkText = false }) {
                 href={proj.url || '/crystal-moonlight-villa'}
                 className="search-result-item"
                 key={proj.id}
-                onClick={() => setIsSearchOpen(false)}
+                onClick={(e) => {
+                  if (proj.teaserPoster) {
+                    e.preventDefault();
+                    setSelectedTeaser({ image: proj.teaserPoster, title: proj.name });
+                  }
+                  setIsSearchOpen(false);
+                }}
                 style={{ animationDelay: `${idx * 0.05}s` }}
               >
                 <div className="search-result-img">
@@ -359,6 +382,13 @@ export default function Navbar({ darkText = false }) {
           </div>
         </div>
       </div>
+
+      <TeaserPosterModal 
+        isOpen={!!selectedTeaser} 
+        onClose={() => setSelectedTeaser(null)} 
+        posterImage={selectedTeaser?.image} 
+        projectTitle={selectedTeaser?.title} 
+      />
 
       <style>{`
         .sobha-navbar {

@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Button from './Button';
 import ScrollReveal from './ScrollReveal';
+import TeaserPosterModal from './TeaserPosterModal';
 
 const ALL_PROJECTS = [
   {
@@ -9,60 +10,62 @@ const ALL_PROJECTS = [
     category: 'Villa',
     title: 'Crystal Moonlight',
     location: 'Medavakkam, Chennai',
-    area: '2,233 - 2,287 Sq.Ft.',
-    image: '/images/project_crystal_1779810838661.png',
+    area: '2,200 - 3,300 Sq.Ft.',
+    image: '/images/project/CML/Elevation-card.png',
     link: '/crystal-moonlight-villa',
     centerInfo: '3 BHK & 4 BHK'
   },
   {
     id: 2,
-    category: 'Villa',
-    title: 'Bay Vista',
-    location: 'ECR, Chennai',
-    area: '3,000 - 4,500 Sq.Ft.',
-    image: '/images/home/project-image-2.png',
-    link: '/crystal-moonlight-villa',
-    centerInfo: 'Bespoke Villas'
-  },
-  {
-    id: 3,
     category: 'Apartment',
     title: 'Pasha Pinnacle',
     location: 'Royapettah, Chennai',
-    area: '1,500 - 2,400 Sq.Ft.',
-    image: '/images/project_crystal_1779810838661.png',
+    area: '1,335 - 1,358 Sq.Ft.',
+    image: '/images/project/pasha-pinnacle/hero.png',
     link: '/pasha-pinnacle',
-    centerInfo: 'Boutique Apartments'
+    centerInfo: '3 BHK'
+  },
+  {
+    id: 3,
+    category: 'Plots',
+    title: 'CMR Global City',
+    location: 'Maduranthakam, Chennai',
+    area: '610 - 2,694 Sq.Ft.',
+    image: '/images/project/CMR/hero.png',
+    link: '/cmr-global-city',
+    centerInfo: 'Gated Plots'
   },
   {
     id: 4,
     category: 'Plots',
     title: 'Ashok Nagar',
     location: 'Maduranthakam, Chennai',
-    area: '1,200 - 2,400 Sq.Ft.',
-    image: '/images/home/project-image-2.png',
+    area: '657 - 1,947 Sq.Ft.',
+    image: '/images/project/ashok-nagar/cards.webp',
     link: '/ashok-nagar-villa-plots-in-maduranthakam',
     centerInfo: 'Villa Plots'
   },
   {
     id: 5,
-    category: 'Plots',
-    title: 'CMR Global City',
-    location: 'Maduranthakam, Chennai',
-    area: '800 - 2,000 Sq.Ft.',
-    image: '/images/home/project-image-1.png',
-    link: '/ashok-nagar-villa-plots-in-maduranthakam',
-    centerInfo: 'Gated Plots'
+    category: 'Villa',
+    title: 'Bay Vista',
+    location: 'ECR, Chennai',
+    area: '',
+    image: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    link: '#bay-vista',
+    centerInfo: 'Upcoming Project'
   },
   {
     id: 6,
-    category: 'Plots',
-    title: 'Guberalakshmi Nagar',
-    location: 'Chennai',
-    area: '600 - 1,800 Sq.Ft.',
-    image: '/images/home/project-image-1.png',
-    link: '/ashok-nagar-villa-plots-in-maduranthakam',
-    centerInfo: 'Residential Plots'
+    category: 'Villa',
+    title: 'Lakeshore',
+    location: 'ECR, Chennai',
+    area: '',
+    image: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+    teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+    link: '#lakeshore',
+    centerInfo: 'Upcoming Project'
   }
 ];
 
@@ -80,6 +83,7 @@ const ArrowRight = () => (
 
 export default function ProjectsSection() {
   const [activeTab, setActiveTab] = useState('All');
+  const [selectedTeaser, setSelectedTeaser] = useState(null);
   
   const filtered = activeTab === 'All'
     ? ALL_PROJECTS
@@ -266,7 +270,16 @@ export default function ProjectsSection() {
                     key={`${project.id}-${i}`}
                     href={project.link || "#contact"}
                     className={`project-card ${isActive ? 'active' : ''}`}
-                    onClick={e => dragging.current && e.preventDefault()}
+                    onClick={(e) => {
+                      if (dragging.current) {
+                        e.preventDefault();
+                        return;
+                      }
+                      if (project.teaserPoster) {
+                        e.preventDefault();
+                        setSelectedTeaser({ image: project.teaserPoster, title: project.title });
+                      }
+                    }}
                   >
                     <div className="project-img-wrap">
                       <img
@@ -293,7 +306,7 @@ export default function ProjectsSection() {
       </ScrollReveal>
 
       <div className="container">
-        {/* â”€â”€ Dots + CTA row â”€â”€ */}
+        {/* ── Dots + CTA row ── */}
         <div className="slider-bottom-row">
           {/* Dot indicators */}
           <div className="slider-dots">
@@ -308,6 +321,13 @@ export default function ProjectsSection() {
           </div>
         </div>
       </div>
+
+      <TeaserPosterModal 
+        isOpen={!!selectedTeaser} 
+        onClose={() => setSelectedTeaser(null)} 
+        posterImage={selectedTeaser?.image} 
+        projectTitle={selectedTeaser?.title} 
+      />
 
       <style>{`
         /* ── Section ── */
@@ -589,7 +609,7 @@ export default function ProjectsSection() {
           }
           .project-img-wrap {
             height: calc(100dvh - 150px) !important;
-            max-height: 640px !important;
+            max-height: 840px !important;
             min-height: 300px !important;
           }
         }
@@ -617,7 +637,7 @@ export default function ProjectsSection() {
             order: 3;
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
           }
           .projects-tabs {
@@ -634,17 +654,42 @@ export default function ProjectsSection() {
             justify-content: center;
           }
 
+          .project-overlay {
+            padding: 24px 18px 20px;
+          }
+
           .project-overlay-details {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            gap: 6px !important;
+            width: 100% !important;
           }
           .overlay-title {
             max-width: 100%;
-            font-size: 16px !important;
+            font-size: clamp(24px, 6.5vw, 30px) !important;
+            font-family: var(--font-heading) !important;
+            font-weight: 400 !important;
+            line-height: 1.15 !important;
+            text-align: left !important;
+            letter-spacing: -0.01em;
+            color: #ffffff !important;
+          }
+          .overlay-center-info {
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-align: left !important;
+            color: rgba(255, 255, 255, 0.95) !important;
           }
           .overlay-location {
-            font-size: 11px !important;
+            font-size: 13px !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.02em;
+            text-align: left !important;
+            color: rgba(255, 255, 255, 0.75) !important;
           }
         }
       `}</style>

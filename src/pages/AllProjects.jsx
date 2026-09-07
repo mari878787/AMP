@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import Button from '../components/Button';
+import TeaserPosterModal from '../components/TeaserPosterModal';
 import { ArrowRight, MapPin, Home, Layers, Tag, ChevronDown, Map, Building2, Maximize, FileText } from 'lucide-react';
 
 const PROJECTS_DATA = [
@@ -13,10 +14,11 @@ const PROJECTS_DATA = [
     location: 'Medavakkam, Chennai',
     category: 'Villas',
     status: 'Ongoing',
-    siteExtent: '15 Acres',
-    totalUnits: '120 Units',
+    siteExtent: '2.25 Acres',
+    totalUnits: '47 Villas',
     bhkConfig: '3 & 4 BHK',
-    unitSize: '2,233 - 2,287 Sq.Ft.',
+    structure: 'G + 1 & G + 2',
+    unitSize: '2,200 - 3,300 Sq.Ft.',
     reraNo: 'TN/29/Building/001/2024',
     price: '₹1 Cr - ₹3 Cr',
     priceRange: '₹1 Cr - ₹3 Cr',
@@ -26,37 +28,38 @@ const PROJECTS_DATA = [
   },
   {
     id: 2,
-    title: 'Bay Vista',
-    location: 'ECR, Chennai',
-    category: 'Villas',
-    status: 'Ongoing',
-    siteExtent: '5 Acres',
-    totalUnits: '42 Units',
-    bhkConfig: 'Bespoke',
-    unitSize: '3,000 - 4,500 Sq.Ft.',
-    reraNo: 'TN/01/Building/042/2023',
-    price: 'Above ₹3 Cr',
-    priceRange: 'Above ₹3 Cr',
-    bedrooms: ['Bespoke'],
-    image: '/images/home/project-image-2.png',
-    link: '/crystal-moonlight-villa'
-  },
-  {
-    id: 3,
     title: 'Pasha Pinnacle',
     location: 'Royapettah, Chennai',
     category: 'Apartments',
     status: 'Ongoing',
     siteExtent: '2.5 Acres',
-    totalUnits: '220 Units',
-    bhkConfig: '2 & 3 BHK',
-    unitSize: '1,500 - 2,400 Sq.Ft.',
-    reraNo: 'TN/29/Building/029/2024',
+    totalUnits: '12 Units',
+    bhkConfig: '3 BHK',
+    structure: 'Stilt + 3 Floors',
+    unitSize: '1,335 - 1,358 Sq.Ft.',
+    reraNo: '',
     price: 'Under ₹1 Cr',
     priceRange: 'Under ₹1 Cr',
-    bedrooms: ['2 BHK', '3 BHK'],
-    image: '/images/project_crystal_1779810838661.png',
+    bedrooms: ['3 BHK'],
+    image: '/images/project/pasha-pinnacle/card.png',
     link: '/pasha-pinnacle'
+  },
+  {
+    id: 3,
+    title: 'CMR Global City',
+    location: 'Maduranthakam, Chennai',
+    category: 'Plots',
+    status: 'Ongoing',
+    siteExtent: '3.6 Acres',
+    totalUnits: '122 Plots',
+    bhkConfig: 'Plots',
+    structure: 'Ready-to-Build Residential Plots',
+    unitSize: '610 - 2,694 Sq.Ft.',
+    reraNo: 'TN/35/Layout/1568/2024',
+    price: '₹1 Cr - ₹3 Cr',
+    priceRange: '₹1 Cr - ₹3 Cr',
+    image: '/images/project/CMR/4.png',
+    link: '/cmr-global-city'
   },
   {
     id: 4,
@@ -64,47 +67,54 @@ const PROJECTS_DATA = [
     location: 'Maduranthakam, Chennai',
     category: 'Plots',
     status: 'Ongoing',
-    siteExtent: '20 Acres',
-    totalUnits: '450 Plots',
+    siteExtent: '2.30 Acres',
+    totalUnits: '48 Plots',
     bhkConfig: 'Villa Plots',
-    unitSize: '1,200 - 2,400 Sq.Ft.',
-    reraNo: 'TN/01/Layout/105/2022',
+    structure: 'Ready-to-Build Residential Plots',
+    unitSize: '657 - 1,947 Sq.Ft.',
+    reraNo: 'DTCP: 144/2026',
     price: 'Under ₹1 Cr',
     priceRange: 'Under ₹1 Cr',
-    image: '/images/home/project-image-2.png',
+    image: '/images/project/ashok-nagar/cards.webp',
     link: '/ashok-nagar-villa-plots-in-maduranthakam'
   },
   {
     id: 5,
-    title: 'CMR Global City',
-    location: 'Maduranthakam, Chennai',
-    category: 'Plots',
-    status: 'Ongoing',
-    siteExtent: '45 Acres',
-    totalUnits: '800 Plots',
-    bhkConfig: 'Plots',
-    unitSize: '800 - 2,000 Sq.Ft.',
-    reraNo: 'TN/01/Layout/023/2023',
-    price: '₹1 Cr - ₹3 Cr',
-    priceRange: '₹1 Cr - ₹3 Cr',
-    image: '/images/home/project-image-1.png',
-    link: '/ashok-nagar-villa-plots-in-maduranthakam'
+    title: 'Bay Vista',
+    location: 'ECR, Chennai',
+    category: 'Villas',
+    status: 'Upcoming',
+    siteExtent: '5 Acres',
+    totalUnits: '42 Units',
+    bhkConfig: 'Bespoke',
+    structure: 'G + 1 & G + 2',
+    unitSize: '3,000 - 4,500 Sq.Ft.',
+    reraNo: 'TN/01/Building/042/2023',
+    price: 'Above ₹3 Cr',
+    priceRange: 'Above ₹3 Cr',
+    bedrooms: ['Bespoke'],
+    image: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    link: '#bay-vista'
   },
   {
     id: 6,
-    title: 'Guberalakshmi Nagar',
-    location: 'Chennai',
-    category: 'Plots',
-    status: 'Ongoing',
-    siteExtent: '15 Acres',
-    totalUnits: '320 Plots',
-    bhkConfig: 'Residential Plots',
-    unitSize: '600 - 1,800 Sq.Ft.',
-    reraNo: 'TN/01/Layout/044/2024',
-    price: 'Under ₹1 Cr',
-    priceRange: 'Under ₹1 Cr',
-    image: '/images/home/project-image-1.png',
-    link: '/ashok-nagar-villa-plots-in-maduranthakam'
+    title: 'Lakeshore',
+    location: 'ECR, Chennai',
+    category: 'Villas',
+    status: 'Upcoming',
+    siteExtent: '10 Acres',
+    totalUnits: '65 Units',
+    bhkConfig: 'Bespoke Villas',
+    structure: 'Bespoke Villas',
+    unitSize: '2,800 - 4,200 Sq.Ft.',
+    reraNo: 'Upcoming',
+    price: 'Above ₹3 Cr',
+    priceRange: 'Above ₹3 Cr',
+    bedrooms: ['Bespoke'],
+    image: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+    teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+    link: '#lakeshore'
   }
 ];
 
@@ -160,12 +170,11 @@ export default function AllProjects() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeStatus, setActiveStatus] = useState('All');
   const [activeLocation, setActiveLocation] = useState('All');
-  const [activePrice, setActivePrice] = useState('All');
   const [activeBedrooms, setActiveBedrooms] = useState('All');
+  const [selectedTeaser, setSelectedTeaser] = useState(null);
 
-  // Derive unique locations from project data (only for plots)
-  const locationOptions = ['All', ...Array.from(new Set(PROJECTS_DATA.filter(p => p.category === 'Plots').map(p => p.location)))];
-  const priceOptions = ['All', 'Under ₹1 Cr', '₹1 Cr - ₹3 Cr', 'Above ₹3 Cr', 'Price on Request'];
+  // Derive unique locations from project data across all projects
+  const locationOptions = ['All', ...Array.from(new Set(PROJECTS_DATA.map(p => p.location)))];
   const bedroomOptions = ['All', '2 BHK', '3 BHK', '4 BHK', 'Bespoke'];
 
   useEffect(() => {
@@ -178,21 +187,22 @@ export default function AllProjects() {
       else if (paramLower === 'apartments') setActiveCategory('Apartments');
       else if (paramLower === 'plotted' || paramLower === 'plots') setActiveCategory('Plots');
     }
+    const statusParam = params.get('status');
+    if (statusParam) {
+      const statusLower = statusParam.toLowerCase();
+      if (statusLower === 'ongoing') setActiveStatus('Ongoing');
+      else if (statusLower === 'upcoming') setActiveStatus('Upcoming');
+      else if (statusLower === 'completed') setActiveStatus('Completed');
+    }
   }, [location]);
 
   const filteredProjects = PROJECTS_DATA.filter(project => {
     const matchCategory = activeCategory === 'All' || project.category === activeCategory;
     const matchStatus = activeStatus === 'All' || project.status === activeStatus;
-    const matchPrice = activePrice === 'All' || project.priceRange === activePrice;
+    const matchLocation = activeLocation === 'All' || project.location === activeLocation;
+    const matchBedrooms = activeCategory === 'Plots' || activeBedrooms === 'All' || (project.bedrooms && project.bedrooms.includes(activeBedrooms));
 
-    let matchDynamic = true;
-    if (activeCategory === 'Plots') {
-      matchDynamic = activeLocation === 'All' || project.location === activeLocation;
-    } else {
-      matchDynamic = activeBedrooms === 'All' || (project.bedrooms && project.bedrooms.includes(activeBedrooms));
-    }
-
-    return matchCategory && matchStatus && matchPrice && matchDynamic;
+    return matchCategory && matchStatus && matchLocation && matchBedrooms;
   });
 
   return (
@@ -238,37 +248,28 @@ export default function AllProjects() {
                 onChange={setActiveCategory}
               />
 
-              {/* Dynamic Dropdown: Bedrooms or Location */}
-              {activeCategory === 'Plots' ? (
-                <FilterDropdown
-                  label="Location"
-                  options={locationOptions}
-                  value={activeLocation}
-                  onChange={setActiveLocation}
-                />
-              ) : (
-                <FilterDropdown
-                  label="Bedrooms"
-                  options={bedroomOptions}
-                  value={activeBedrooms}
-                  onChange={setActiveBedrooms}
-                />
-              )}
+              {/* Bedrooms Dropdown */}
+              <FilterDropdown
+                label="Bedrooms"
+                options={bedroomOptions}
+                value={activeBedrooms}
+                onChange={setActiveBedrooms}
+              />
 
               {/* Status Dropdown */}
               <FilterDropdown
                 label="Project Status"
-                options={['All', 'Ongoing', 'Completed']}
+                options={['All', 'Ongoing', 'Upcoming', 'Completed']}
                 value={activeStatus}
                 onChange={setActiveStatus}
               />
 
-              {/* Price Dropdown */}
+              {/* Location Dropdown (in place of Price) */}
               <FilterDropdown
-                label="Price"
-                options={priceOptions}
-                value={activePrice}
-                onChange={setActivePrice}
+                label="Location"
+                options={locationOptions}
+                value={activeLocation}
+                onChange={setActiveLocation}
               />
 
             </div>
@@ -277,10 +278,10 @@ export default function AllProjects() {
           {/* Results Count */}
           <div className="projects-count-bar">
             <span>Showing <strong>{filteredProjects.length}</strong> {filteredProjects.length === 1 ? 'Project' : 'Projects'}</span>
-            {(activeCategory !== 'All' || activeStatus !== 'All' || activeLocation !== 'All' || activePrice !== 'All' || activeBedrooms !== 'All') && (
+            {(activeCategory !== 'All' || activeStatus !== 'All' || activeLocation !== 'All' || activeBedrooms !== 'All') && (
               <button
                 className="clear-filter-text-btn"
-                onClick={() => { setActiveCategory('All'); setActiveStatus('All'); setActiveLocation('All'); setActivePrice('All'); setActiveBedrooms('All'); }}
+                onClick={() => { setActiveCategory('All'); setActiveStatus('All'); setActiveLocation('All'); setActiveBedrooms('All'); }}
               >
                 Reset Filters
               </button>
@@ -292,7 +293,16 @@ export default function AllProjects() {
             <div className="all-projects-grid">
               {filteredProjects.map((project, index) => (
                 <ScrollReveal key={project.id} animation="fadeUp" delay={index * 0.08}>
-                  <a href={project.link} className="ap-card-link">
+                  <a 
+                    href={project.link} 
+                    className="ap-card-link"
+                    onClick={(e) => {
+                      if (project.teaserPoster) {
+                        e.preventDefault();
+                        setSelectedTeaser({ image: project.teaserPoster, title: project.title });
+                      }
+                    }}
+                  >
                     <div className="ap-card">
                       {/* Image Container */}
                       <div className="ap-img-wrapper">
@@ -309,17 +319,12 @@ export default function AllProjects() {
 
                         {/* Bottom Structured Information Overlay */}
                         <div className="ap-overlay-box">
-                          {/* Title, Sub-Location & Price with RERA */}
+                          {/* Title & Location in place of price */}
                           <div className="ap-header-row">
-                            <div className="ap-title-location-group">
-                              <h3 className="ap-project-title">{project.title}</h3>
-                              <div className="ap-location-subtext">
-                                <MapPin size={13} className="ap-pin-icon" />
-                                <span>{project.location}</span>
-                              </div>
-                            </div>
-                            <div className="ap-price-rera-group">
-                              <span className="ap-price-value">{project.priceRange || project.price}</span>
+                            <h3 className="ap-project-title">{project.title}</h3>
+                            <div className="ap-location-subtext">
+                              <MapPin size={13} className="ap-pin-icon" />
+                              <span>{project.location}</span>
                             </div>
                           </div>
 
@@ -410,17 +415,17 @@ export default function AllProjects() {
                               )}
                             </div>
 
-                            {/* Second Row: RERA Number & Explore Project Outline Button */}
+                            {/* Second Row: Structure & Explore Project Outline Button */}
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                               <div className="ap-icon-spec">
                                 <img 
-                                  src="/images/allProject/rera.png" 
-                                  alt="RERA Number" 
+                                  src={project.category === 'Plots' ? "/images/allProject/plot-Configuration.png" : "/images/allProject/Configuration.png"} 
+                                  alt="Structure" 
                                   className="spec-icon-img" 
                                 />
                                 <div className="spec-text-group">
-                                  <span className="spec-label">RERA Number</span>
-                                  <span className="spec-value">{project.reraNo}</span>
+                                  <span className="spec-label">Structure</span>
+                                  <span className="spec-value">{project.structure}</span>
                                 </div>
                               </div>
                               <div className="ap-explore-outline-cell">
@@ -450,6 +455,13 @@ export default function AllProjects() {
 
         </div>
       </main>
+
+      <TeaserPosterModal 
+        isOpen={!!selectedTeaser} 
+        onClose={() => setSelectedTeaser(null)} 
+        posterImage={selectedTeaser?.image} 
+        projectTitle={selectedTeaser?.title} 
+      />
 
       <Footer />
 

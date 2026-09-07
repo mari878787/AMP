@@ -31,7 +31,7 @@ const AboutUs = () => {
           "What began with residential apartments and thoughtfully planned land communities has evolved into a portfolio of luxury residences, premium land developments, and distinctive residential communities. While the scale and character of our projects have grown, the principles behind them have remained constant: meticulous planning, uncompromising standards, integrity, and a deep respect for craftsmanship.",
           "As we enter our next decade, our ambition remains deliberately focused: to create developments that inspire confidence today and become a source of pride and enduring value for generations to come."
         ]}
-        image="/images/about/CML ABOUT US.png"
+        image="/images/about/about-hero.png"
       />
 
       {/* 2. Editorial Quote Statement Section */}

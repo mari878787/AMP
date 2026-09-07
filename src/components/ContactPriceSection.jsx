@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import Button from './Button';
+import { submitLead } from '../services/api';
 
 export default function ContactPriceSection({
   projectName = "Crystal Moonlight",
@@ -22,13 +23,31 @@ export default function ContactPriceSection({
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!formData.agreePrivacy) {
       alert("Please agree to the privacy policy to proceed.");
       return;
     }
+
+    const fullName = `${formData.firstName || ''} ${formData.lastName || ''}`.trim();
+    const phone = `${formData.phoneCode || '+91'} ${formData.phoneNumber || ''}`.trim();
+    
     setSubmitted(true);
+    await submitLead({
+      name: fullName,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phoneCode: formData.phoneCode,
+      phoneNumber: formData.phoneNumber,
+      phone: phone,
+      email: formData.email,
+      project: projectName,
+      unitType: formData.unitType,
+      category: activeTab === 'partner' ? 'Partnership Program' : 'Price Inquiry',
+      contactMode: contactMode === 'video' ? 'Video Call' : 'Phone Call'
+    });
+
     setTimeout(() => {
       setSubmitted(false);
       setFormData({
@@ -41,7 +60,7 @@ export default function ContactPriceSection({
         agreePrivacy: false,
         agreeOffers: false
       });
-    }, 3000);
+    }, 2500);
   };
 
   const handleInputChange = (field, val) => {

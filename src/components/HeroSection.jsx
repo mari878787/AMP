@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import ScrollReveal from './ScrollReveal';
@@ -7,28 +7,113 @@ import 'swiper/css/effect-fade';
 
 const HERO_SLIDES = [
   {
-    image: '/images/home/hero.png',
+    image: '/images/project/CML/Elevation.png',
+    mobileImage: '/images/project/CML/hero-mobile.png',
     title: 'Crystal Moonlight',
-    subtitle: 'Ultra Luxury Gated Community in Medavakkam',
+    subtitle: 'Where Contemporary Design Meets Serene Community Living',
     link: '/crystal-moonlight-villa'
   },
   {
-    image: '/images/hero_placeholders/aerial-view-small-village-country-roadside.jpg',
+    image: '/images/project/pasha-pinnacle/hero.png',
+    mobileImage: '/images/project/pasha-pinnacle/mobile-hero.png',
+    title: 'Pasha Pinnacle',
+    subtitle: 'Where Contemporary Design Meets Urban Elegance',
+    link: '/pasha-pinnacle'
+  },
+  {
+    image: '/images/project/CMR/hero.png',
+    mobileImage: '/images/project/CMR/mobile-hero.png',
+    title: 'CMR Global City',
+    subtitle: 'Where Opportunity Meets Enduring Value',
+    link: '/cmr-global-city'
+  },
+  {
+    video: '/images/project/ashok-nagar/Ashok Nagar Teaser.mp4',
+    mobileVideo: '/images/project/ashok-nagar/Ashok Nagar Mobile View-1.mp4',
+    image: '/images/project/ashok-nagar/hero-image.png',
+    mobileImage: '/images/project/ashok-nagar/mobile-hero.png',
     title: 'Ashok Nagar',
-    subtitle: 'Exclusive Gated Villa Plots in Maduranthakam',
+    subtitle: 'Where Every Plot Holds the Promise of Tomorrow',
     link: '/ashok-nagar-villa-plots-in-maduranthakam'
-  },
-  {
-    image: '/images/home/project-image-1.png',
-    title: 'Bay Vista',
-    subtitle: 'Bespoke Luxury Villas on ECR',
-    link: '/crystal-moonlight-villa'
   }
 ];
 
 export default function HeroSection({ startZoom }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const swiperRef = useRef(null);
   const currentSlide = HERO_SLIDES[activeIndex] || HERO_SLIDES[0];
+
+  const handleVideoEnded = () => {
+    if (swiperRef.current) {
+      swiperRef.current.slideNext();
+      if (swiperRef.current.autoplay) {
+        swiperRef.current.autoplay.start();
+      }
+    }
+  };
+
+  const handleSlideTransition = (swiper) => {
+    const realIdx = swiper.realIndex;
+    setActiveIndex(realIdx);
+    const isVideoSlide = Boolean(HERO_SLIDES[realIdx]?.video);
+
+    const activeSlideEl = swiper.slides[swiper.activeIndex];
+    const allVideos = document.querySelectorAll('.hero-bg-video');
+    
+    allVideos.forEach(v => {
+      v.pause();
+    });
+
+    if (isVideoSlide) {
+      if (swiper.autoplay) {
+        swiper.autoplay.stop();
+      }
+      if (activeSlideEl) {
+        const activeVideos = activeSlideEl.querySelectorAll('video');
+        activeVideos.forEach(v => {
+          v.currentTime = 0;
+          const playPromise = v.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {});
+          }
+        });
+      }
+    } else {
+      if (swiper.autoplay && !swiper.autoplay.running) {
+        swiper.autoplay.start();
+      }
+    }
+  };
+
+  useEffect(() => {
+    const isVideoSlide = Boolean(HERO_SLIDES[activeIndex]?.video);
+    const activeSlideEl = document.querySelector('.hero-swiper .swiper-slide-active');
+    const allVideos = document.querySelectorAll('.hero-bg-video');
+
+    allVideos.forEach(v => {
+      v.pause();
+    });
+
+    if (isVideoSlide) {
+      if (swiperRef.current && swiperRef.current.autoplay) {
+        swiperRef.current.autoplay.stop();
+      }
+      if (activeSlideEl) {
+        const activeVideos = activeSlideEl.querySelectorAll('video');
+        activeVideos.forEach(v => {
+          v.currentTime = 0;
+          const playPromise = v.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {});
+          }
+        });
+      }
+    } else {
+      if (swiperRef.current && swiperRef.current.autoplay && !swiperRef.current.autoplay.running) {
+        swiperRef.current.autoplay.start();
+      }
+    }
+  }, [activeIndex]);
 
   return (
     <section className="hero-section" id="hero">
@@ -40,19 +125,47 @@ export default function HeroSection({ startZoom }) {
           loop={true}
           speed={2000}
           autoplay={{
-            delay: 4500,
+            delay: 10000,
             disableOnInteraction: false
           }}
+          onSwiper={(swiper) => { swiperRef.current = swiper; }}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          onSlideChangeTransitionStart={handleSlideTransition}
           className="hero-swiper"
         >
           {HERO_SLIDES.map((slide, idx) => (
             <SwiperSlide key={idx}>
-              <img
-                src={slide.image}
-                alt={slide.title}
-                className={`hero-bg-image ${startZoom ? 'animate-zoom' : ''}`}
-              />
+              {slide.video ? (
+                <div className="hero-video-wrapper">
+                  <video
+                    className="hero-bg-video desktop-only-video"
+                    src={slide.video}
+                    poster={slide.image}
+                    preload="auto"
+                    muted
+                    playsInline
+                    onEnded={handleVideoEnded}
+                  />
+                  <video
+                    className="hero-bg-video mobile-only-video"
+                    src={slide.mobileVideo || slide.video}
+                    poster={slide.mobileImage || slide.image}
+                    preload="auto"
+                    muted
+                    playsInline
+                    onEnded={handleVideoEnded}
+                  />
+                </div>
+              ) : (
+                <picture className="hero-picture">
+                  <source media="(max-width: 768px)" srcSet={slide.mobileImage || slide.image} />
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className={`hero-bg-image ${startZoom ? 'animate-zoom' : ''}`}
+                  />
+                </picture>
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
@@ -88,12 +201,14 @@ export default function HeroSection({ startZoom }) {
           z-index: 0;
           width: 100%;
           height: 100vh;
+          height: 100dvh;
+          min-height: -webkit-fill-available;
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
-          align-items: flex-start; /* Moved to left */
+          align-items: center;
           overflow: hidden;
-          padding-bottom: 30px; /* Adjusted padding */
+          padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
           background-color: var(--color-bg-navy);
           will-change: transform, opacity;
         }
@@ -110,6 +225,43 @@ export default function HeroSection({ startZoom }) {
         .hero-swiper {
           width: 100%;
           height: 100%;
+        }
+
+        .hero-picture {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+
+        .hero-video-wrapper {
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+
+        .hero-bg-video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center bottom;
+          display: block;
+        }
+
+        .desktop-only-video {
+          display: block;
+        }
+
+        .mobile-only-video {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .desktop-only-video {
+            display: none;
+          }
+          .mobile-only-video {
+            display: block;
+          }
         }
         
         .hero-bg-image {
@@ -140,8 +292,8 @@ export default function HeroSection({ startZoom }) {
             to bottom, 
             rgba(0, 0, 0, 0.75) 0%, 
             rgba(0, 0, 0, 0.0) 25%, 
-            rgba(0, 0, 0, 0.3) 70%, 
-            rgba(0, 0, 0, 0.75) 100%
+            rgba(0, 0, 0, 0) 60%, 
+            rgba(0, 0, 0, 0.85) 100%
           );
           z-index: 2;
           opacity: 0;
@@ -156,8 +308,8 @@ export default function HeroSection({ startZoom }) {
           justify-content: flex-end;
           align-items: center; 
           width: 100%;
-          padding: 0 40px; /* Padding from edge */
-          margin-bottom: 20px;
+          padding: 0 40px;
+          margin-bottom: clamp(40px, 3vh, 110px);
         }
         
         .hero-text-block {
@@ -165,11 +317,10 @@ export default function HeroSection({ startZoom }) {
           margin-bottom: 18px;
         }
 
-        
         .hero-title {
           line-height: 1.25;
           color: rgba(255, 255, 255, 0.95);
-          margin-bottom: 8px;
+          margin-bottom: 12px;
           text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
           opacity: 0;
           animation: fadeUp 1.4s var(--ease-luxury) forwards;
@@ -191,7 +342,6 @@ export default function HeroSection({ startZoom }) {
 
         .btn-discover {
           display: inline-block;
-
           font-size: 11px;
           font-weight: 400;
 
@@ -212,7 +362,22 @@ export default function HeroSection({ startZoom }) {
         .btn-discover:hover {
           background: rgba(255, 255, 255, 0.3);
           color: #fff;
-          border-color: rgba(255, 255, 255, 0.6);
+          border-color: rgba(255, 255, 255, 0.8);
+          transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+          .hero-content {
+            padding: 0 20px;
+            margin-bottom: clamp(75px, 14vh, 100px);
+          }
+          .hero-text-block {
+            margin-bottom: 22px;
+          }
+          .btn-discover {
+            padding: 12px 32px;
+            font-size: 14px;
+          }
         }
 
         @keyframes fadeIn {

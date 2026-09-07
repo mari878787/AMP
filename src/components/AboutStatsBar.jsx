@@ -63,17 +63,31 @@ const STATS_DATA = [
     icon: (
       <img 
         src="/images/about/stat_land_icon.png" 
-        alt="Land Area Developed" 
+        alt="Years of Experience" 
         className="stat-image-icon"
       />
     ),
-    targetValue: "600",
-    prefix: "~",
-    suffix: "K+",
-    label: "Square Feet of Land Area Developed"
+    targetValue: "10",
+    prefix: "",
+    suffix: "+",
+    label: "Years of Excellence"
   },
   {
     id: 2,
+    icon: (
+      <img 
+        src="/images/about/stat_completed_icon.png" 
+        alt="Projects Delivered" 
+        className="stat-image-icon"
+      />
+    ),
+    targetValue: "60",
+    prefix: "",
+    suffix: "+",
+    label: "Landmark Projects Delivered"
+  },
+  {
+    id: 3,
     icon: (
       <img 
         src="/images/about/stat_family_icon.png" 
@@ -81,24 +95,10 @@ const STATS_DATA = [
         className="stat-image-icon"
       />
     ),
-    targetValue: "500",
-    prefix: "~",
-    suffix: "+",
-    label: "Happy Families & Homeowners"
-  },
-  {
-    id: 3,
-    icon: (
-      <img 
-        src="/images/about/stat_completed_icon.png" 
-        alt="Boutique Luxury Projects Completed" 
-        className="stat-image-icon"
-      />
-    ),
-    targetValue: "15",
+    targetValue: "1600",
     prefix: "",
     suffix: "+",
-    label: "Boutique Luxury Projects Completed"
+    label: "Happy Families & Homeowners"
   }
 ];
 

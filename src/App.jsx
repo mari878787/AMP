@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import NewProject from './pages/NewProject';
 import PashaPinnacle from './pages/PashaPinnacle';
-import PlottedDevelopment from './pages/PlottedDevelopment';
+import AshokNagar from './pages/AshokNagar';
+import CMRGlobalCity from './pages/CMRGlobalCity';
 import AboutUs from './pages/AboutUs';
 import AllProjects from './pages/AllProjects';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -56,13 +57,16 @@ function App() {
         <Route path="/crystal-moonlight-villa" element={<NewProject />} />
         <Route path="/new-project" element={<NewProject />} />
         <Route path="/pasha-pinnacle" element={<PashaPinnacle />} />
-        <Route path="/ashok-nagar-villa-plots-in-maduranthakam" element={<PlottedDevelopment />} />
-        <Route path="/ashok-nagar" element={<PlottedDevelopment />} />
+        <Route path="/ashok-nagar-villa-plots-in-maduranthakam" element={<AshokNagar />} />
+        <Route path="/ashok-nagar" element={<AshokNagar />} />
+        <Route path="/cmr-global-city" element={<CMRGlobalCity />} />
+        <Route path="/cmr-global" element={<CMRGlobalCity />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/projects" element={<AllProjects />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/contact" element={<ContactUs />} />
       </Routes>
+      <StickyActionBar />
     </Router>
   );
 }

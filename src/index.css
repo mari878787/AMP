@@ -90,7 +90,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-bottom: 64px;
 }
 
 body.preloader-active {
@@ -281,7 +280,7 @@ button {
 
 @media (max-width: 768px) {
   .filter-tab-btn {
-    font-size: 13px !important;
+    font-size: 16px !important;
     padding: 0 12px !important;
   }
 }
@@ -319,7 +318,7 @@ blockquote {
   line-height: 1.5;
   color: var(--color-text-dark);
   letter-spacing: 0em;
-  /* text-align: justify; */
+  text-align: justify;
 }
 
 /* â”€â”€ Label / Micro Text â”€â”€ */
@@ -448,7 +447,7 @@ h3 span,
 /* Light Theme Button & Dark Theme Button (Both are dark glassmorphic black version now) */
 .btn-luxury-pill,
 .btn-luxury-outline {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   color: #ffffff;
   text-transform: uppercase;
@@ -508,30 +507,31 @@ h3 span,
 }
 
 .btn-discover {
-          display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.47);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 14px 40px;
+  border-radius: 100px;
+  text-decoration: none;
+  backdrop-filter: blur(38px);
+  -webkit-backdrop-filter: blur(38px);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
 
-          font-size: 11px;
-          font-weight: 400;
-
-          color: rgba(255, 255, 255, 0.85);
-          background: rgba(255, 255, 255, 0.47);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          padding: 14px 40px;
-          border-radius: 100px;
-          text-decoration: none;
-          backdrop-filter: blur(38px);
-          -webkit-backdrop-filter: blur(38px);
-          transition: all 0.4s ease;
-          opacity: 0;
-          animation: fadeUp 1.4s var(--ease-luxury) forwards;
-          animation-delay: 2.8s;
-        }
-        
-        .btn-discover:hover {
-          background: rgba(255, 255, 255, 0.3);
-          color: #fff;
-          border-color: rgba(255, 255, 255, 0.6);
-        }
+.btn-discover:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
 
 /* â”€â”€ Projects Tab Switcher (Liquid Glass) â”€â”€ */
 .projects-tabs-switcher {

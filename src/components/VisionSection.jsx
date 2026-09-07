@@ -72,7 +72,7 @@ export default function VisionSection() {
         .vision-text {
           font-family: var(--font-heading);
           font-size: clamp(22px, 3.2vw, 34px);
-          font-weight: 300;
+          font-weight: 400;
           line-height: 1.45;
           text-transform: none; /* Sentence case matching screenshot */
           letter-spacing: 0.02em;
@@ -88,7 +88,7 @@ export default function VisionSection() {
             padding: 70px 0 60px 0;
           }
           .vision-text {
-            font-size: 20px;
+            font-size: 26px;
             margin-bottom: 30px;
           }
       `}</style>

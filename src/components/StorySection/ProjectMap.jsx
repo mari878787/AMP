@@ -109,11 +109,11 @@ export default function ProjectMap({
   onInteraction,
   mapStyle = 'streets-v12'
 }) {
-  // Coordinates for Medavakkam/Santhosapuram Main Road, Chennai
-  const centerCoords = projectCoords || [12.9175, 80.1915];
+  // Coordinates for Medavakkam Crystal Moonlight, Chennai
+  const centerCoords = projectCoords || [12.9298995, 80.1954121];
   const activeLocations = activeCategory ? activeCategory.locations : [];
 
-  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
+  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiYWFkaGl0aHlhbW9oYW5wcm9wZXJ0aWVzMjAyNiIsImEiOiJjbXNyaGQ3YWIwMDk3MnlyNWZ2dnBycXViIn0.M6FmIiIlvIbPk3wl6MgvVw';
 
   // Dynamic Route Coordinates between Project and Hovered Landmark
   const [routeCoordinates, setRouteCoordinates] = useState(null);
@@ -135,18 +135,23 @@ export default function ProjectMap({
     const mapboxDirectionsUrl = `https://api.mapbox.com/directions/v5/mapbox/driving/${startLng},${startLat};${endLng},${endLat}?geometries=geojson&overview=full&access_token=${mapboxToken}`;
 
     try {
-      const res = await fetch(mapboxDirectionsUrl);
-      const data = await res.json();
-      if (data && data.routes && data.routes[0] && data.routes[0].geometry) {
-        // Mapbox returns [lng, lat]; Leaflet requires [lat, lng]
-        const roadPoints = data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
-        routeCacheRef.current[cacheKey] = roadPoints;
-        return roadPoints;
+      if (mapboxToken) {
+        const res = await fetch(mapboxDirectionsUrl);
+        const data = await res.json();
+        if (data && data.routes && data.routes[0] && data.routes[0].geometry) {
+          // Mapbox returns [lng, lat]; Leaflet requires [lat, lng]
+          const roadPoints = data.routes[0].geometry.coordinates.map(coord => [coord[1], coord[0]]);
+          routeCacheRef.current[cacheKey] = roadPoints;
+          return roadPoints;
+        }
       }
     } catch (err) {
-      console.warn("Mapbox routing fallback:", err);
+      console.warn("Routing fallback:", err);
     }
-    return null;
+    // Elegant fallback geodesic connection
+    const directPoints = [[startLat, startLng], [endLat, endLng]];
+    routeCacheRef.current[cacheKey] = directPoints;
+    return directPoints;
   };
 
   // Pre-fetch routes for all locations in the active category
@@ -196,7 +201,7 @@ export default function ProjectMap({
       >
         <TileLayer
           attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url={`https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/tiles/256/{z}/{x}/{y}?access_token=${mapboxToken || import.meta.env.VITE_MAPBOX_TOKEN}`}
+          url={`https://api.mapbox.com/styles/v1/mapbox/${mapStyle}/tiles/256/{z}/{x}/{y}?access_token=${mapboxToken}`}
           tileSize={256}
           zoomOffset={0}
           maxZoom={19}
@@ -247,6 +252,7 @@ export default function ProjectMap({
         )}
         
         {/* Project Center Marker */}
+        {/* Project Center Marker */}
         <Marker 
           position={centerCoords} 
           icon={createProjectMarker()}
@@ -254,14 +260,7 @@ export default function ProjectMap({
             mouseover: () => onPinHoverChange && onPinHoverChange(true),
             mouseout: () => onPinHoverChange && onPinHoverChange(false),
           }}
-        >
-          <Tooltip direction="top" offset={[0, -26]} permanent={true}>
-            <div className="project-marker-tooltip">
-              <span className="project-marker-name">{projectName || "Crystal Moonlight"}</span>
-              <span className="project-marker-tag">PROJECT LOCATION</span>
-            </div>
-          </Tooltip>
-        </Marker>
+        />
 
         {/* Dynamic Category Markers */}
         {activeLocations.map((loc, idx) => {

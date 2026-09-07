@@ -7,6 +7,7 @@ import { MapPin, Mail, Phone, Clock, Send, Check, ArrowRight, Video, MessageSqua
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
+import { submitLead } from '../services/api';
 
 // Fix Leaflet marker icon asset paths in React builds
 delete L.Icon.Default.prototype._getIconUrl;
@@ -74,7 +75,7 @@ const ContactUs = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.agreedPrivacy) {
       alert("Please agree to the privacy policy before submitting.");
@@ -82,72 +83,81 @@ const ContactUs = () => {
     }
     setFormState({ submitting: true, success: false, error: null });
 
-    // Mock form submission
-    setTimeout(() => {
-      setFormState({
-        submitting: false,
-        success: true,
-        error: null
-      });
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        contactMode: 'callback',
-        propertyType: '',
-        project: '',
-        unitType: '',
-        position: '',
-        companyName: '',
-        message: '',
-        agreedPrivacy: false,
-        agreedOffers: false
-      });
-    }, 1500);
+    const fullName = `${formData.firstName || ''} ${formData.lastName || ''}`.trim();
+    const departmentLabel = activeTab === 'investors' ? 'Investors & Strategic Partnerships' : activeTab === 'business' ? 'Business & Channel Partners' : 'Residential & Property Inquiries';
+    const mode = formData.contactMode === 'videocall' ? 'Video Call' : 'Phone Call';
+    
+    await submitLead({
+      name: fullName,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      category: departmentLabel,
+      contactMode: mode,
+      propertyType: formData.propertyType,
+      project: formData.project,
+      unitType: formData.unitType,
+      position: formData.position,
+      companyName: formData.companyName,
+      message: formData.message
+    });
+
+    setFormState({
+      submitting: false,
+      success: true,
+      error: null
+    });
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      contactMode: 'callback',
+      propertyType: '',
+      project: '',
+      unitType: '',
+      position: '',
+      companyName: '',
+      message: '',
+      agreedPrivacy: false,
+      agreedOffers: false
+    });
   };
 
-  // Department enquiries data (Screenshot 1)
+  // Department enquiries data
   const departmentEnquiries = [
     {
-      title: "Sales Enquiry",
-      phone: "+91 90807 06050",
-      email: "sales@aadhithyamohan.com",
+      title: "Sales & Customer Enquiry",
+      phone: "+91 95850 44440",
+      email: "balamurugan.rs@aadhithyamohanproperties.com",
     },
     {
-      title: "Customer Enquiry",
-      phone: "1800 425 9999",
-      email: "customercare@aadhithyamohan.com",
-    },
-    {
-      title: "Investor Relations",
-      email: "investors@aadhithyamohan.com",
+      title: "Job & Careers Enquiry",
+      phone: "+91 95852 91746",
+      email: "hr@aadhithyamohanproperties.com",
+      link: "/about#careers",
+      linkText: "Visit our Careers page"
     },
     {
       title: "Channel Partner Enquiry",
-      phone: "1800 425 9999",
-      email: "partners@aadhithyamohan.com",
+      phone: "+91 95851 31117",
+      email: "balamurugan.rs@aadhithyamohanproperties.com",
       link: "#register",
       linkText: "Register as Channel Partner"
-    },
-    {
-      title: "Job Enquiry",
-      phone: "+91 90807 06055",
-      link: "/about#careers",
-      linkText: "Visit our Careers page"
     }
   ];
 
   return (
     <div className="contact-page">
-      <Navbar />
+      <Navbar darkText={true} />
 
-      {/* Hero Header - aligned bottom left with black overlay */}
+      {/* Hero Header - Architectural Sketch Aesthetic */}
       <section className="contact-hero">
         <div className="contact-hero-background">
           <img
-            src="/images/home/hero.png"
-            alt="Hero Background"
+            src="/images/about/CML ABOUT US.png"
+            alt="Aadhithya Mohan Properties Architecture"
             className="contact-hero-bg-image"
           />
           <div className="contact-hero-overlay" />
@@ -157,11 +167,11 @@ const ContactUs = () => {
             <span className="contact-hero-tag">Reach Out</span>
           </ScrollReveal>
           <ScrollReveal animation="fadeUp" delay={0.25}>
-            <h1 className="contact-hero-title">CONNECT WITH US</h1>
+            <h1 className="contact-hero-title">Connect With Us</h1>
           </ScrollReveal>
           <ScrollReveal animation="fadeUp" delay={0.4}>
             <p className="contact-hero-desc">
-              Have a question or looking to explore one of our properties? Get in touch with our team today.
+              Explore our curated collection of bespoke luxury villas, residences, and plotted developments across Chennai. Get in touch with our team today.
             </p>
           </ScrollReveal>
         </div>
@@ -511,10 +521,9 @@ const ContactUs = () => {
               >
                 <TileLayer
                   attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                  url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`}
-                  tileSize={256}
-                  zoomOffset={0}
+                  url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiYWFkaGl0aHlhbW9oYW5wcm9wZXJ0aWVzMjAyNiIsImEiOiJjbXNyaGQ3YWIwMDk3MnlyNWZ2dnBycXViIn0.M6FmIiIlvIbPk3wl6MgvVw'}`}
                   maxZoom={19}
+                  tileSize={256}
                 />
                 <Marker position={officeCoords} icon={createOfficeMarker()}>
                   <Popup>
@@ -582,7 +591,13 @@ const ContactUs = () => {
         .contact-hero-overlay {
           position: absolute;
           inset: 0;
-          background: rgba(0, 0, 0, 0.72); /* Solid premium black overlay */
+          background: linear-gradient(
+            to top,
+            rgba(238, 234, 227, 0.96) 0%,
+            rgba(238, 234, 227, 0.72) 38%,
+            rgba(238, 234, 227, 0.28) 70%,
+            rgba(238, 234, 227, 0.15) 100%
+          );
           z-index: 1;
         }
 
@@ -599,7 +614,7 @@ const ContactUs = () => {
           font-size: 11px;
           font-weight: 600;
           text-transform: uppercase;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.22em;
           color: #b48564;
           display: inline-block;
           margin-bottom: 12px;
@@ -607,20 +622,21 @@ const ContactUs = () => {
 
         .contact-hero-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: clamp(36px, 6vw, 56px);
+          font-size: clamp(38px, 5.5vw, 64px);
           font-weight: 400;
-          color: #ffffff;
-          letter-spacing: 0.05em;
+          color: #111111;
+          letter-spacing: -0.01em;
           margin: 0 0 16px;
-          line-height: 1.1;
+          line-height: 1.08;
         }
 
         .contact-hero-desc {
           font-family: var(--font-sans);
-          font-size: clamp(14px, 2vw, 17px);
-          color: rgba(255, 255, 255, 0.85);
-          line-height: 1.6;
+          font-size: clamp(15px, 1.2vw, 17px);
+          color: #4a4a4a;
+          line-height: 1.65;
           margin: 0;
+          max-width: 620px;
         }
 
         /* Section 1: Department Cards (Screenshot 1 Styles) */
@@ -683,7 +699,7 @@ const ContactUs = () => {
 
         .dept-detail-item a {
           font-family: var(--font-sans);
-          font-size: 14.5px;
+          font-size: 12px;
           font-weight: 400;
           color: #555555;
           text-decoration: none;

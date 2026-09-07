@@ -16,7 +16,7 @@ export default function AboutLegacyExpand({
     "As we enter our next decade, our ambition remains deliberately focused: to create developments that inspire confidence today and become a source of pride and enduring value for generations to come."
   ],
   description,
-  image = "/images/about/CML ABOUT US.png"
+  image = "/images/about/about-hero.png"
 }) {
   const sectionRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -265,7 +265,7 @@ export default function AboutLegacyExpand({
 
         .legacy-heading {
           font-family: var(--font-heading, serif);
-          font-size: clamp(25px, 2vw, 35px);
+          font-size: clamp(25px, 2.2vw, 35px);
           font-weight: 500;
           color: #111111;
           margin: 0 0 16px 0;

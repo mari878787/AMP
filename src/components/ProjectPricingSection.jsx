@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ScrollReveal from './ScrollReveal';
+import { submitLead } from '../services/api';
 
 const COUNTRY_CODES = [
   { code: '+91', flag: '🇮🇳', label: 'India' },
@@ -37,18 +38,35 @@ export default function ProjectPricingSection({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.agreeTerms) {
       alert("Please agree to the privacy policy.");
       return;
     }
 
+    const fullName = `${form.firstName || ''} ${form.lastName || ''}`.trim();
+    const phone = `${form.phoneCode || '+91'} ${form.phoneNumber || ''}`.trim();
+    const formLabel = activeFormType === 'partner' ? 'Partnership Program' : 'Customer Price Inquiry';
+
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSuccess(true);
-    }, 1500);
+    await submitLead({
+      name: fullName,
+      firstName: form.firstName,
+      lastName: form.lastName,
+      phoneCode: form.phoneCode,
+      phoneNumber: form.phoneNumber,
+      phone: phone,
+      email: form.email,
+      project: projectName,
+      unitType: form.unitType,
+      category: formLabel,
+      contactMode: contactMode === 'videocall' ? 'Video Call' : 'Phone Call',
+      companyName: form.companyName
+    });
+
+    setIsSubmitting(false);
+    setSuccess(true);
   };
 
   return (

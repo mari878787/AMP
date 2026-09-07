@@ -4,6 +4,9 @@ import {
   GraduationCap, 
   HeartPulse, 
   ShoppingBag, 
+  Briefcase,
+  Landmark,
+  Film,
   ChevronDown, 
   ChevronUp,
   ChevronLeft,
@@ -17,19 +20,33 @@ import './NeighbourhoodStory.css';
 // Category icon mapper
 const getCategoryIcon = (id, size = 15) => {
   switch (id) {
+    case 'transport':
     case 'junctions':
       return <Compass size={size} />;
     case 'education':
+    case 'schools':
+    case 'colleges':
       return <GraduationCap size={size} />;
     case 'hospitals':
+    case 'healthcare':
       return <HeartPulse size={size} />;
+    case 'employment':
+    case 'industry':
+      return <Briefcase size={size} />;
+    case 'temples':
+    case 'heritage':
+      return <Landmark size={size} />;
+    case 'entertainment':
+    case 'leisure':
+      return <Film size={size} />;
     case 'shopping':
     default:
       return <ShoppingBag size={size} />;
   }
 };
 
-export default function NeighbourhoodStory({ onEnquire, projectCoords, projectName }) {
+export default function NeighbourhoodStory({ onEnquire, projectCoords, projectName, categories }) {
+  const activeCategories = categories || CATEGORIES;
   const [activeCatIndex, setActiveCatIndex] = useState(0);
   const [selectedLocationName, setSelectedLocationName] = useState(null);
   const [isCardHovered, setIsCardHovered] = useState(false);
@@ -37,10 +54,10 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
   const [progress, setProgress] = useState(0); // 0 to 100%
 
-  // Coordinates for Medavakkam default
-  const defaultCoords = projectCoords || [12.9175, 80.1915];
+  // Coordinates for Medavakkam Crystal Moonlight
+  const defaultCoords = projectCoords || [12.9298995, 80.1954121];
 
-  const currentCategory = CATEGORIES[activeCatIndex] || CATEGORIES[0];
+  const currentCategory = activeCategories[activeCatIndex] || activeCategories[0];
   const isTimerPaused = isCardHovered || isPinHovered;
 
   // Set default landmark on category change
@@ -61,7 +78,7 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
-          setActiveCatIndex((catIdx) => (catIdx + 1) % CATEGORIES.length);
+          setActiveCatIndex((catIdx) => (catIdx + 1) % activeCategories.length);
           return 0;
         }
         return prev + increment;
@@ -69,18 +86,18 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
     }, stepMs);
 
     return () => clearInterval(interval);
-  }, [isTimerPaused]);
+  }, [isTimerPaused, activeCategories.length]);
 
   const handlePrevCategory = (e) => {
     e.stopPropagation();
     setProgress(0);
-    setActiveCatIndex((prev) => (prev - 1 + CATEGORIES.length) % CATEGORIES.length);
+    setActiveCatIndex((prev) => (prev - 1 + activeCategories.length) % activeCategories.length);
   };
 
   const handleNextCategory = (e) => {
     e.stopPropagation();
     setProgress(0);
-    setActiveCatIndex((prev) => (prev + 1) % CATEGORIES.length);
+    setActiveCatIndex((prev) => (prev + 1) % activeCategories.length);
   };
 
   const handleHoverLocation = (name) => {
