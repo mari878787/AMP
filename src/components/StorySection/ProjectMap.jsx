@@ -11,21 +11,29 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// Custom project site marker icon (Gold home icon with pulse)
-const createProjectMarker = () => {
+// Custom project site marker icon (Floating White Image Card Pin)
+const createProjectMarker = (name, imageUrl) => {
+  const defaultImg = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80";
+  const imgSrc = imageUrl || defaultImg;
+  const title = name || "The Woods";
+
   return L.divIcon({
-    className: 'custom-map-marker project-marker',
+    className: 'custom-map-card-marker',
     html: `
-      <div class="marker-pin-wrapper">
-        <div class="marker-pin-pulse"></div>
-        <div class="marker-pin-core">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <div class="map-card-pin">
+        <div class="map-card-body">
+          <div class="map-card-image-wrap">
+            <img src="${imgSrc}" alt="${title}" class="map-card-image" />
+          </div>
+          <div class="map-card-title">${title}</div>
         </div>
+        <div class="map-card-pointer"></div>
+        <div class="map-card-anchor-pulse"></div>
       </div>
     `,
-    iconSize: [52, 52],
-    iconAnchor: [26, 26],
-    popupAnchor: [0, -26]
+    iconSize: [120, 135],
+    iconAnchor: [60, 135],
+    popupAnchor: [0, -135]
   });
 };
 
@@ -103,6 +111,7 @@ export default function ProjectMap({
   activeCategory, 
   projectCoords, 
   projectName, 
+  projectImage,
   activeLocationName, 
   onHoverLocation, 
   onPinHoverChange,
@@ -252,10 +261,9 @@ export default function ProjectMap({
         )}
         
         {/* Project Center Marker */}
-        {/* Project Center Marker */}
         <Marker 
           position={centerCoords} 
-          icon={createProjectMarker()}
+          icon={createProjectMarker(projectName, projectImage)}
           eventHandlers={{
             mouseover: () => onPinHoverChange && onPinHoverChange(true),
             mouseout: () => onPinHoverChange && onPinHoverChange(false),

@@ -731,6 +731,7 @@ export default function CMRGlobalCity({ project }) {
                 onEnquire={() => setIsQuoteOpen(true)}
                 projectCoords={[12.5085, 79.8848]}
                 projectName="CMR Global City"
+                projectImage="/images/home/project-image-2.png"
                 categories={CMR_NEIGHBOURHOOD}
               />
             </section>

@@ -961,6 +961,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                 onEnquire={() => setIsQuoteOpen(true)}
                 projectCoords={[13.0524, 80.2600]}
                 projectName="Pasha Pinnacle"
+                projectImage="/images/home/project-image-1.png"
                 categories={PASHA_NEIGHBOURHOOD}
               />
             </section>

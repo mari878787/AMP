@@ -900,6 +900,7 @@ export default function NewProject({ project }) {
                 onEnquire={() => setIsQuoteOpen(true)}
                 projectCoords={[12.9298995, 80.1954121]}
                 projectName="Crystal Moonlight"
+                projectImage="/images/project/CML/overview.jpeg"
               />
             </section>
           )}

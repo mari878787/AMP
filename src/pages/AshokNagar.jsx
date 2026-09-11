@@ -703,6 +703,7 @@ export default function AshokNagar({ project }) {
                 onEnquire={() => setIsQuoteOpen(true)}
                 projectCoords={[12.5085, 79.8848]}
                 projectName="Ashok Nagar"
+                projectImage="/images/home/project-image-1.png"
                 categories={ASHOK_NAGAR_NEIGHBOURHOOD}
               />
             </section>

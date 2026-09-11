@@ -45,7 +45,7 @@ const getCategoryIcon = (id, size = 15) => {
   }
 };
 
-export default function NeighbourhoodStory({ onEnquire, projectCoords, projectName, categories }) {
+export default function NeighbourhoodStory({ onEnquire, projectCoords, projectName, projectImage, categories }) {
   const activeCategories = categories || CATEGORIES;
   const [activeCatIndex, setActiveCatIndex] = useState(0);
   const [selectedLocationName, setSelectedLocationName] = useState(null);
@@ -128,6 +128,7 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
             activeCategory={currentCategory} 
             projectCoords={defaultCoords} 
             projectName={projectName}
+            projectImage={projectImage}
             activeLocationName={selectedLocationName}
             onHoverLocation={handleHoverLocation}
             onPinHoverChange={setIsPinHovered}

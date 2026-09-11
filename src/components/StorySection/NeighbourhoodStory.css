@@ -658,3 +658,98 @@
     right: 12px !important;
   }
 }
+
+/* ── Custom Floating Preview Image Card Pin (Matching reference screenshot) ── */
+.custom-map-card-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.map-card-pin {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.18));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.map-card-pin:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+.map-card-body {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 5px;
+  width: 115px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.map-card-image-wrap {
+  width: 100%;
+  height: 62px;
+  border-radius: 7px;
+  overflow: hidden;
+  background-color: #f3f4f6;
+}
+
+.map-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.map-card-title {
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: #111111;
+  padding: 5px 2px 2px 2px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  letter-spacing: -0.01em;
+}
+
+/* Downward pointer triangle tail */
+.map-card-pointer {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 8px solid #ffffff;
+  margin-top: -1px;
+}
+
+/* Pulsing Location Dot underneath the card pointer */
+.map-card-anchor-pulse {
+  width: 10px;
+  height: 10px;
+  background-color: #b48564;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  margin-top: 2px;
+  box-shadow: 0 0 0 3px rgba(180, 133, 100, 0.35);
+  animation: cardAnchorPulse 2s infinite ease-out;
+}
+
+@keyframes cardAnchorPulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(180, 133, 100, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(180, 133, 100, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgba(180, 133, 100, 0);
+  }
+}

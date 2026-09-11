@@ -1,327 +1,208 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Button from './Button';
-import ScrollReveal from './ScrollReveal';
+import React, { useState, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TeaserPosterModal from './TeaserPosterModal';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const ALL_PROJECTS = [
   {
     id: 1,
     category: 'Villa',
     title: 'Crystal Moonlight',
-    location: 'Medavakkam, Chennai',
+    location: 'Medavakkam - Chennai',
     area: '2,200 - 3,300 Sq.Ft.',
     image: '/images/project/CML/Elevation-card.png',
     link: '/crystal-moonlight-villa',
-    centerInfo: '3 BHK & 4 BHK'
+    centerInfo: '3 BHK & 4 BHK Luxury Villas',
+    badge: 'Ready to Move'
   },
   {
     id: 2,
     category: 'Apartment',
     title: 'Pasha Pinnacle',
-    location: 'Royapettah, Chennai',
+    location: 'Royapettah - Chennai',
     area: '1,335 - 1,358 Sq.Ft.',
     image: '/images/project/pasha-pinnacle/hero.png',
     link: '/pasha-pinnacle',
-    centerInfo: '3 BHK'
+    centerInfo: '3 BHK Apartments',
+    badge: 'Ongoing'
   },
   {
     id: 3,
     category: 'Plots',
     title: 'CMR Global City',
-    location: 'Maduranthakam, Chennai',
+    location: 'Maduranthakam - Chennai',
     area: '610 - 2,694 Sq.Ft.',
     image: '/images/project/CMR/hero.png',
     link: '/cmr-global-city',
-    centerInfo: 'Gated Plots'
+    centerInfo: 'Gated Villa Plots',
+    badge: 'Township'
   },
   {
     id: 4,
     category: 'Plots',
     title: 'Ashok Nagar',
-    location: 'Maduranthakam, Chennai',
+    location: 'Maduranthakam - Chennai',
     area: '657 - 1,947 Sq.Ft.',
     image: '/images/project/ashok-nagar/cards.webp',
     link: '/ashok-nagar-villa-plots-in-maduranthakam',
-    centerInfo: 'Villa Plots'
+    centerInfo: 'Villa Plots',
+    badge: 'Plotted'
   },
   {
     id: 5,
     category: 'Villa',
     title: 'Bay Vista',
-    location: 'ECR, Chennai',
-    area: '',
+    location: 'ECR - Chennai',
+    area: 'Luxury Beachfront',
     image: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
     teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
     link: '#bay-vista',
-    centerInfo: 'Upcoming Project'
+    centerInfo: 'Upcoming Project',
+    badge: 'Coming Soon'
   },
   {
     id: 6,
     category: 'Villa',
     title: 'Lakeshore',
-    location: 'ECR, Chennai',
-    area: '',
+    location: 'ECR - Chennai',
+    area: 'Waterfront Estate',
     image: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
     teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
     link: '#lakeshore',
-    centerInfo: 'Upcoming Project'
+    centerInfo: 'Upcoming Project',
+    badge: 'Coming Soon'
   }
 ];
 
-const ArrowLeft = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M19 12H5M12 19l-7-7 7-7" />
-  </svg>
-);
-
-const ArrowRight = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 12h14M12 5l7 7-7 7" />
-  </svg>
-);
-
 export default function ProjectsSection() {
-  const [activeTab, setActiveTab] = useState('All');
   const [selectedTeaser, setSelectedTeaser] = useState(null);
-  
-  const filtered = activeTab === 'All'
-    ? ALL_PROJECTS
-    : ALL_PROJECTS.filter(p => p.category === activeTab);
 
-  const total = filtered.length;
-  // Clone last slide at beginning, and first slide at end for seamless looping preview
-  const extended = total > 1
-    ? [filtered[total - 1], ...filtered, filtered[0]]
-    : filtered;
-
-  const [idx, setIdx] = useState(1);
-  const [anim, setAnim] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
-  const timer = useRef(null);
-  
-  // drag state
-  const dragStart = useRef(null);
-  const dragging = useRef(false);
-
-  // Reset index when active category tab changes
   useEffect(() => {
-    setIdx(total > 1 ? 1 : 0);
-    setAnim(true);
-  }, [activeTab, total]);
+    const ctx = gsap.context(() => {
+      const slides = gsap.utils.toArray('.maia-section-slide');
+      slides.forEach((slide, i) => {
+        const img = slide.querySelector('.maia-bg-img');
+        const headerContent = slide.querySelector('.maia-header-content');
+        const nextSlide = slides[i + 1];
 
-  // Real index in the original list
-  const realActiveIdx = total > 1
-    ? (idx <= 0 ? total - 1 : idx >= total + 1 ? 0 : idx - 1)
-    : 0;
+        if (img) {
+          // Continuous smooth parallax scroll scrub for every slide
+          gsap.fromTo(
+            img,
+            { yPercent: -12, scale: 1.15 },
+            {
+              yPercent: 12,
+              scale: 1.0,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: i === 0 ? '.projects-headline-intro' : slide,
+                start: i === 0 ? 'bottom bottom' : 'top bottom',
+                endTrigger: nextSlide || slide,
+                end: nextSlide ? 'top top' : 'bottom top',
+                scrub: 1.0,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+        }
 
-  // Silent snap-back logic
-  useEffect(() => {
-    if (total <= 1) return;
-    clearTimeout(timer.current);
-    if (idx === total + 1) {
-      timer.current = setTimeout(() => {
-        setAnim(false);
-        setIdx(1);
-      }, 500);
-    } else if (idx === 0) {
-      timer.current = setTimeout(() => {
-        setAnim(false);
-        setIdx(total);
-      }, 500);
-    }
-    return () => clearTimeout(timer.current);
-  }, [idx, total]);
+        // Subtly float title text up & fade as next curtain slide covers it
+        if (headerContent && nextSlide) {
+          gsap.to(headerContent, {
+            y: -50,
+            opacity: 0.3,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: nextSlide,
+              start: 'top bottom',
+              end: 'top top',
+              scrub: 1.0,
+            },
+          });
+        }
+      });
+    });
 
-  // Restore animation after silent snap
-  useEffect(() => {
-    if (!anim) {
-      const t = requestAnimationFrame(() => setAnim(true));
-      return () => cancelAnimationFrame(t);
-    }
-  }, [anim]);
-
-  const prev = useCallback(() => {
-    if (total <= 1) return;
-    setAnim(true);
-    setIdx(i => i - 1);
-  }, [total]);
-
-  const next = useCallback(() => {
-    if (total <= 1) return;
-    setAnim(true);
-    setIdx(i => i + 1);
-  }, [total]);
-
-  const goTo = useCallback((targetRealIdx) => {
-    if (total <= 1) return;
-    setAnim(true);
-    setIdx(targetRealIdx + 1);
-  }, [total]);
-
-  const handleTab = (tab) => {
-    setActiveTab(tab);
-  };
-
-  // Autoplay
-  useEffect(() => {
-    if (total <= 1 || isHovered) return;
-    const interval = setInterval(() => {
-      next();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [next, total, isHovered]);
-
-  /* â”€â”€ drag / swipe â”€â”€ */
-  const onMouseDown = (e) => { dragStart.current = e.clientX; dragging.current = false; };
-  const onMouseMove = (e) => {
-    if (dragStart.current !== null && Math.abs(e.clientX - dragStart.current) > 5) dragging.current = true;
-  };
-  const onMouseUp = (e) => {
-    if (dragStart.current === null) return;
-    const diff = dragStart.current - e.clientX;
-    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
-    dragStart.current = null;
-  };
-  const onTouchStart = (e) => { dragStart.current = e.touches[0].clientX; };
-  const onTouchEnd = (e) => {
-    if (dragStart.current === null) return;
-    const diff = dragStart.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) diff > 0 ? next() : prev();
-    dragStart.current = null;
-  };
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="projects-section" id="projects">
-      <div className="container">
-
-        {/* ── Header ── */}
-        <div className="projects-header">
-          <ScrollReveal className="projects-header-left" animation="fadeUp" delay={0.05}>
-            <h2 className="section-title">
-              Architecture beyond time
-            </h2>
-          </ScrollReveal>
-
-          <ScrollReveal className="projects-header-right" animation="fadeUp" delay={0.35}>
-            <div className="filter-tabs">
-              {['All', 'Villa', 'Apartment', 'Plots'].map(tab => (
-                <button
-                  key={tab}
-                  className={`filter-tab-btn ${activeTab === tab ? 'active' : ''}`}
-                  onClick={() => handleTab(tab)}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-          </ScrollReveal>
+    <section className="maia-portfolio-wrapper" id="projects">
+      
+      {/* ── Headline Intro Section (Matching Reference Screenshot) ── */}
+      <div className="projects-headline-intro">
+        <div className="container text-center">
+          <h2 className="projects-headline-title">Stories built on trust</h2>
+          <p className="projects-headline-subtitle">
+            Discover homes and investment opportunities tailored to you.<br />
+            With our trusted expertise and local knowledge.
+          </p>
         </div>
       </div>
 
-      {/* ── Slider viewport wrapper (Full Bleed) ── */}
-      <ScrollReveal animation="fadeUp" delay={0.05} duration={0.8} threshold={0.01} rootMargin="0px 0px 80px 0px" className="slider-viewport-reveal-wrap">
-        <div className="slider-viewport-wrapper">
-          
-          {/* Absolute Left/Right Arrow Buttons */}
-          <button
-            className="projects-slide-arrow prev"
-            onClick={prev}
-            disabled={total <= 1}
-            aria-label="Previous projects"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button
-            className="projects-slide-arrow next"
-            onClick={next}
-            disabled={total <= 1}
-            aria-label="Next projects"
-          >
-            <ChevronRight size={24} />
-          </button>
-
-          <div
-            className="slider-viewport"
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={onMouseUp}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={(e) => {
-              onMouseUp(e);
-              setIsHovered(false);
-            }}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
-            <div
-              className="slider-track"
-              style={{ 
-                transform: total > 1
-                  ? `translateX(calc(var(--card-offset) - ${idx} * (var(--card-w) + var(--gap))))` 
-                  : `translateX(var(--card-offset))`,
-                transition: anim ? 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' : 'none'
+      {/* ── Maia Full-Screen Project Sections ── */}
+      <div className="maia-sections-list">
+        {ALL_PROJECTS.map((project, index) => {
+          const isTeaser = !!project.teaserPoster;
+          return (
+            <section
+              key={project.id}
+              className="maia-section-slide"
+              style={{
+                position: 'sticky',
+                top: 0,
+                zIndex: index + 1,
               }}
             >
-              {extended.map((project, i) => {
-                const isActive = total > 1 ? (i === idx) : true;
-                return (
+              <div className="maia-outer">
+                <div className="maia-inner">
                   <a
-                    key={`${project.id}-${i}`}
-                    href={project.link || "#contact"}
-                    className={`project-card ${isActive ? 'active' : ''}`}
+                    href={project.link || '#contact'}
+                    className="maia-bg-link"
                     onClick={(e) => {
-                      if (dragging.current) {
-                        e.preventDefault();
-                        return;
-                      }
-                      if (project.teaserPoster) {
+                      if (isTeaser) {
                         e.preventDefault();
                         setSelectedTeaser({ image: project.teaserPoster, title: project.title });
                       }
                     }}
                   >
-                    <div className="project-img-wrap">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="project-img"
-                        draggable="false"
-                      />
-                      <span className="project-category-badge">{project.category}</span>
-                      <div className="project-overlay">
-                        <div className="project-overlay-details">
-                          <span className="overlay-title">{project.title}</span>
-                          <span className="overlay-center-info">{project.centerInfo}</span>
-                          <span className="overlay-location">{project.location}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </ScrollReveal>
+                    {/* Gradient Overlay */}
+                    <div className="maia-bg-overlay" />
 
-      <div className="container">
-        {/* ── Dots + CTA row ── */}
-        <div className="slider-bottom-row">
-          {/* Dot indicators */}
-          <div className="slider-dots">
-            {filtered.map((_, i) => (
-              <button
-                key={i}
-                className={`slider-dot ${i === realActiveIdx ? 'active' : ''}`}
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+                    {/* Exact Maia Header Content Block (Top Left: top: 60px/80px, left: 80px) */}
+                    <div className="maia-header-content">
+                      <h4 className="maia-title">{project.title}</h4>
+                      
+                      <p className="maia-location-p">
+                        <svg className="maia-map-icon" width="22" height="22" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M20.0625 10.1562C20.0625 14.5746 12.0625 22.1562 12.0625 22.1562C12.0625 22.1562 4.0625 14.5746 4.0625 10.1562C4.0625 5.73797 7.64422 2.15625 12.0625 2.15625C16.4808 2.15625 20.0625 5.73797 20.0625 10.1562Z" stroke="white" strokeWidth="1.5"></path>
+                          <path d="M12.0625 11.1562C12.6148 11.1562 13.0625 10.7085 13.0625 10.1562C13.0625 9.60397 12.6148 9.15625 12.0625 9.15625C11.5102 9.15625 11.0625 9.60397 11.0625 10.1562C11.0625 10.7085 11.5102 11.1562 12.0625 11.1562Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                        </svg>
+                        <span className="maia-location-span">{project.location}</span>
+                      </p>
+                    </div>
+
+                    {/* Background Image */}
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="maia-bg-img"
+                      draggable="false"
+                      loading="lazy"
+                    />
+                  </a>
+                </div>
+              </div>
+            </section>
+          );
+        })}
       </div>
 
+      {/* Teaser Poster Modal */}
       <TeaserPosterModal 
         isOpen={!!selectedTeaser} 
         onClose={() => setSelectedTeaser(null)} 
@@ -330,367 +211,163 @@ export default function ProjectsSection() {
       />
 
       <style>{`
-        /* ── Section ── */
-        .projects-section {
-          --card-active-w: 85vw;
-          --card-w: 65vw;
-          --gap: 3vw;
-          --card-offset: calc(50vw - var(--card-active-w) / 2);
-
-          background-color: var(--color-white);
-          padding: 42px 0 18px 0;
-          overflow: hidden;
-          box-sizing: border-box;
-          gap: 10px;
-          min-height: calc(100vh - 60px);
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-        }
-
-        .slider-viewport-wrapper {
-          width: 100%;
-          overflow: hidden;
-          position: relative;
-          padding: 6px 0 8px;
-          flex-grow: 1;
-          display: flex;
-          align-items: center;
-        }
-
-        .slider-viewport {
-          width: 100%;
-          overflow: visible;
-        }
-
-        .slider-track {
-          display: flex;
-          align-items: center;
-          gap: var(--gap);
-          will-change: transform;
-        }
-
-        /* ── Card ── */
-        .project-card {
-          flex: 0 0 var(--card-w);
-          min-width: 0;
-          display: block;
-          text-decoration: none;
-          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .project-card.active {
-          flex: 0 0 var(--card-active-w);
-        }
-
-        .project-img-wrap {
+        .maia-portfolio-wrapper {
           position: relative;
           width: 100%;
-          height: calc(100vh - 165px);
-          max-height: 720px;
-          min-height: 360px;
+          background-color: #0b0b0b;
           overflow: hidden;
-          border: 1px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
         }
 
-        .project-img {
+        /* ── Centered Headline Intro (Matching Reference Screenshot) ── */
+        .projects-headline-intro {
+          background-color: #f2f2f2;
+          color: #111111;
+          padding: 100px 24px 70px 24px;
+          text-align: center;
+          position: relative;
+          z-index: 10;
+        }
+
+        .projects-headline-title {
+          font-family: var(--font-heading, 'Playfair Display', serif);
+          font-size: clamp(40px, 5.8vw, 68px);
+          font-weight: 400;
+          color: #0a0a0a;
+          line-height: 1.12;
+          margin: 0 0 22px 0;
+          letter-spacing: -0.015em;
+        }
+
+        .projects-headline-subtitle {
+          font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+          font-size: clamp(15px, 1.6vw, 18px);
+          font-weight: 400;
+          color: #555555;
+          line-height: 1.65;
+          max-width: 640px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        /* ── Maia Sections List ── */
+        .maia-sections-list {
+          position: relative;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+        .maia-section-slide {
+          height: 100vh;
+          height: 100dvh;
+          color: #ffffff;
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          margin: 0;
+          padding: 0;
+        }
+
+        .maia-outer,
+        .maia-inner {
           width: 100%;
           height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          overflow: hidden;
+          position: relative;
+        }
+
+        .maia-bg-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          left: 0;
+          text-decoration: none;
+          overflow: hidden;
+        }
+
+        .maia-bg-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.35) 0%,
+            rgba(0, 0, 0, 0.05) 50%,
+            rgba(0, 0, 0, 0.4) 100%
+          );
+          z-index: 1;
           pointer-events: none;
         }
-        .project-card.active:hover .project-img { transform: scale(1.2); }
 
-        .project-overlay {
+        /* Exact Maia Header Content Block (Top Left: top: 60px, left: 80px) */
+        .maia-header-content {
           position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-          backdrop-filter: blur(4px);
-          -webkit-backdrop-filter: blur(4px);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          padding: 30px 24px 24px;
+          top: 60px;
+          left: 80px;
           z-index: 2;
-          transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .project-category-badge {
-          position: absolute;
-          top: 24px;
-          left: 24px;
-          z-index: 3;
-          font-size: 11px;
-          font-weight: 400;
-          text-transform: uppercase;
-          background: rgba(255,255,255,0.15);
-          backdrop-filter: blur(6px);
-          color: var(--color-white);
-          padding: 4px 12px;
-          border-radius: 50px;
-          border: 1px solid rgba(255,255,255,0.25);
-          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .project-overlay-details {
-          display: grid;
-          grid-template-columns: 1fr auto 1fr;
-          align-items: center;
-          width: 100%;
-          gap: 16px;
-          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .overlay-title {
-          font-family: var(--font-heading);
-          font-weight: 300;
-          font-size: 32px;
-          color: var(--color-white);
-          line-height: 1.2;
-          // text-transform: uppercase;
-          letter-spacing: -0.01em;
-          text-align: left;
-        }
-
-        .overlay-center-info {
-          color: #fff;
-          font-family: var(--font-sans);
-          font-size: 20px;
-          letter-spacing: 0m;
-          text-transform: uppercase;
-          text-align: center;
-        }
-
-        .overlay-location {
-          color: rgba(255, 255, 255, 0.85);
-          font-family: var(--font-sans);
-          font-size: 20px;
-          letter-spacing: 0em;
-          text-align: right;
-        }
-
-        /* â”€â”€ Header â”€â”€ */
-        .projects-header {
           display: flex;
           flex-direction: column;
-          align-items: center;
-          text-align: center;
-          gap: 5px;
+          align-items: flex-start;
+          max-width: 600px;
+          will-change: transform, opacity;
         }
 
-        .projects-header-left {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
-        .projects-header-right {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 20px;
-          flex-wrap: wrap;
-        }
-
-        .projects-subtitle {
-          color: var(--color-text-muted);
-          line-height: 1.6;
-          max-width: 680px;
-          margin: 16px auto 0;
-          text-align: center;
-        }
-
-        /* â”€â”€ Absolute Slider Arrow buttons â”€â”€ */
-        .projects-slide-arrow {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          background: var(--color-white);
-          border: 1px solid rgba(0,0,0,0.06);
-          color: var(--color-primary);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          z-index: 10;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-          transition: all 0.3s ease;
-        }
-
-        .projects-slide-arrow:hover:not(:disabled) {
-          background: var(--color-primary);
-          color: var(--color-white);
-          transform: translateY(-50%) scale(1.05);
-          box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-        }
-
-        .projects-slide-arrow:disabled {
-          border-color: rgba(6, 11, 29, 0.04);
-          background: rgba(255, 255, 255, 0.3);
-          color: rgba(6, 11, 29, 0.2);
-          cursor: not-allowed;
-        }
-
-        .projects-slide-arrow.prev {
-          left: 4vw;
-        }
-
-        .projects-slide-arrow.next {
-          right: 4vw;
-        }
-
-        @media (max-width: 768px) {
-          .projects-slide-arrow {
-            width: 40px;
-            height: 40px;
-          }
-          .projects-slide-arrow.prev {
-            left: 12px;
-          }
-          .projects-slide-arrow.next {
-            right: 12px;
-          }
-        }
-
-        /* Hover transitions on devices that support hover */
-        @media (hover: hover) {
-          .project-overlay {
-            opacity: 0;
-          }
-          .project-category-badge {
-            transform: translateY(-10px);
-          }
-          .project-overlay-details {
-            transform: translateY(10px);
-          }
-          .project-card.active:hover .project-overlay {
-            opacity: 1;
-          }
-          .project-card.active:hover .project-category-badge {
-            transform: translateY(0);
-          }
-          .project-card.active:hover .project-overlay-details {
-            transform: translateY(0);
-          }
-        }
-
-        /* ── Bottom row ── */
-        .slider-bottom-row {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 6px;
-          margin-bottom: 4px;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-
-        /* ── Dots ── */
-        .slider-dots {
-          display: flex;
-          gap: 8px;
-          align-items: center;
-        }
-
-        /* ── Responsive ── */
         @media (max-width: 1024px) {
-          .projects-section {
-            --card-active-w: 82vw;
-            --card-w: 64vw;
-            --gap: 3vw;
-          }
-          .project-img-wrap {
-            height: calc(100dvh - 150px) !important;
-            max-height: 840px !important;
-            min-height: 300px !important;
+          .maia-header-content {
+            top: 30px;
+            left: 24px;
           }
         }
 
-        @media (max-width: 768px) {
-          .projects-section {
-            --card-active-w: 88vw;
-            --card-w: 70vw;
-            --gap: 4vw;
-            padding: 38px 0 4px 0;
-          }
+        .maia-title {
+          font-family: var(--font-heading);
+          font-size: clamp(34px, 4.2vw, 56px);
+          font-weight: 400;
+          color: #ffffff;
+          margin: 0 0 10px 0;
+          line-height: 1.1;
+          letter-spacing: -0.01em;
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
 
-          .projects-header {
-            display: flex;
-            flex-direction: column;
-          }
-          .projects-header-left {
-            order: 1;
-          }
-          .projects-subtitle {
-            order: 2;
-            margin-bottom: 8px;
-          }
-          .projects-header-right {
-            order: 3;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-          .projects-tabs {
-            flex-wrap: wrap;
-            width: 100%;
-          }
-          
-          .slider-bottom-row {
-            flex-direction: column;
-            gap: 24px;
-            align-items: stretch;
-          }
-          .slider-dots {
-            justify-content: center;
-          }
+        .maia-location-p {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 0;
+        }
 
-          .project-overlay {
-            padding: 24px 18px 20px;
-          }
+        .maia-map-icon {
+          flex-shrink: 0;
+        }
 
-          .project-overlay-details {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            text-align: left !important;
-            gap: 6px !important;
-            width: 100% !important;
-          }
-          .overlay-title {
-            max-width: 100%;
-            font-size: clamp(24px, 6.5vw, 30px) !important;
-            font-family: var(--font-heading) !important;
-            font-weight: 400 !important;
-            line-height: 1.15 !important;
-            text-align: left !important;
-            letter-spacing: -0.01em;
-            color: #ffffff !important;
-          }
-          .overlay-center-info {
-            font-size: 13px !important;
-            font-weight: 500 !important;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            text-align: left !important;
-            color: rgba(255, 255, 255, 0.95) !important;
-          }
-          .overlay-location {
-            font-size: 13px !important;
-            font-weight: 400 !important;
-            letter-spacing: 0.02em;
-            text-align: left !important;
-            color: rgba(255, 255, 255, 0.75) !important;
-          }
+        .maia-location-span {
+          font-family: var(--font-sans);
+          font-size: 16px;
+          font-weight: 500;
+          color: #ffffff;
+          letter-spacing: 0.02em;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Background Image - Extended height & offset prevents gaps during parallax scrub */
+        .maia-bg-img {
+          position: absolute;
+          left: 0;
+          top: -15%;
+          width: 100%;
+          height: 130%;
+          object-fit: cover;
+          display: block;
+          user-select: none;
+          pointer-events: none;
+          will-change: transform;
         }
       `}</style>
     </section>
