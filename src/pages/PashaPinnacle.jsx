@@ -163,11 +163,11 @@ export default function PashaPinnacle({ project = 'pasha' }) {
 
   const layoutsData = {
     masterPlan: {
-      image: '/images/project/pasha-pinnacle/floorplan/Pasha Detailed Floor Plan - 1200x800.jpg.jpeg',
+      image: '/images/project/pasha-pinnacle/floorplan/PPP Floor Plan - 1200x800.jpg.jpeg',
       description: 'Master Floor Plan layout for Pasha Pinnacle, Royapettah.'
     },
     typicalFloorPlan: {
-      image: '/images/project/pasha-pinnacle/floorplan/pasha-detailed-floor-plan.jpeg',
+      image: '/images/project/pasha-pinnacle/floorplan/PP Floor Plan - 1200x800.jpg.jpeg',
       description: 'Typical architectural floor plan layout for Pasha Pinnacle.'
     },
     floorPlan: {
@@ -1278,7 +1278,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                         />
                       ) : (
                         <img
-                          src="/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg"
+                          src="/images/project/pasha-pinnacle/floorplan/PP Floor Plan_ Stilt + Car Park.jpg.jpeg"
                           alt="Stilt + Ground Floor"
                           onClick={() => setFloorplanLightbox({ image: '/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg', name: 'Stilt + Ground Floor' })}
                           style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '8px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
