@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TeaserPosterModal from './TeaserPosterModal';
+import ScrollReveal from './ScrollReveal';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -14,7 +15,8 @@ const ALL_PROJECTS = [
     title: 'Crystal Moonlight',
     location: 'Medavakkam - Chennai',
     area: '2,200 - 3,300 Sq.Ft.',
-    image: '/images/project/CML/Elevation-card.png',
+    image: '/images/project/CML/extirior/Views_Scene_1_4k_4.png',
+    mobileImage: '/images/project/CML/row-villa-mobile-hero.png',
     link: '/crystal-moonlight-villa',
     centerInfo: '3 BHK & 4 BHK Luxury Villas',
     badge: 'Ready to Move'
@@ -26,6 +28,7 @@ const ALL_PROJECTS = [
     location: 'Royapettah - Chennai',
     area: '1,335 - 1,358 Sq.Ft.',
     image: '/images/project/pasha-pinnacle/hero.png',
+    mobileImage: '/images/project/pasha-pinnacle/mobile-hero.png',
     link: '/pasha-pinnacle',
     centerInfo: '3 BHK Apartments',
     badge: 'Ongoing'
@@ -37,21 +40,23 @@ const ALL_PROJECTS = [
     location: 'Maduranthakam - Chennai',
     area: '610 - 2,694 Sq.Ft.',
     image: '/images/project/CMR/hero.png',
+    mobileImage: '/images/project/CMR/mobile-hero.png',
     link: '/cmr-global-city',
     centerInfo: 'Gated Villa Plots',
     badge: 'Township'
   },
-  {
-    id: 4,
-    category: 'Plots',
-    title: 'Ashok Nagar',
-    location: 'Maduranthakam - Chennai',
-    area: '657 - 1,947 Sq.Ft.',
-    image: '/images/project/ashok-nagar/cards.webp',
-    link: '/ashok-nagar-villa-plots-in-maduranthakam',
-    centerInfo: 'Villa Plots',
-    badge: 'Plotted'
-  },
+  // {
+  //   id: 4,
+  //   category: 'Plots',
+  //   title: 'Ashok Nagar',
+  //   location: 'Maduranthakam - Chennai',
+  //   area: '657 - 1,947 Sq.Ft.',
+  //   image: '/images/project/ashok-nagar/cards.webp',
+  //   mobileImage: '/images/project/ashok-nagar/mobile-hero.png',
+  //   link: '/ashok-nagar-villa-plots-in-maduranthakam',
+  //   centerInfo: 'Villa Plots',
+  //   badge: 'Plotted'
+  // },
   {
     id: 5,
     category: 'Villa',
@@ -59,6 +64,7 @@ const ALL_PROJECTS = [
     location: 'ECR - Chennai',
     area: 'Luxury Beachfront',
     image: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    mobileImage: '/images/project/Bayvista/Bay Vista Teaser - mobile.png',
     teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
     link: '#bay-vista',
     centerInfo: 'Upcoming Project',
@@ -71,6 +77,7 @@ const ALL_PROJECTS = [
     location: 'ECR - Chennai',
     area: 'Waterfront Estate',
     image: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+    mobileImage: '/images/project/lakeshore/Lakeshore Hero Banner-01-mobile.png',
     teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
     link: '#lakeshore',
     centerInfo: 'Upcoming Project',
@@ -86,7 +93,6 @@ export default function ProjectsSection() {
       const slides = gsap.utils.toArray('.maia-section-slide');
       slides.forEach((slide, i) => {
         const img = slide.querySelector('.maia-bg-img');
-        const headerContent = slide.querySelector('.maia-header-content');
         const nextSlide = slides[i + 1];
 
         if (img) {
@@ -109,21 +115,6 @@ export default function ProjectsSection() {
             }
           );
         }
-
-        // Subtly float title text up & fade as next curtain slide covers it
-        if (headerContent && nextSlide) {
-          gsap.to(headerContent, {
-            y: -50,
-            opacity: 0.3,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: nextSlide,
-              start: 'top bottom',
-              end: 'top top',
-              scrub: 1.0,
-            },
-          });
-        }
       });
     });
 
@@ -134,15 +125,21 @@ export default function ProjectsSection() {
     <section className="maia-portfolio-wrapper" id="projects">
       
       {/* ── Headline Intro Section (Matching Reference Screenshot) ── */}
-      <div className="projects-headline-intro">
+      <div className="projects-headline-intro" >
         <div className="container text-center">
-          <h2 className="projects-headline-title">Stories built on trust</h2>
-          <p className="projects-headline-subtitle">
-            Discover homes and investment opportunities tailored to you.<br />
-            With our trusted expertise and local knowledge.
+           <ScrollReveal className="projects-headline-title" animation="fadeUp" delay={0.1}>
+
+          <h2 className="section-title">Stories built on trust</h2>
+            </ScrollReveal>
+
+
+             <ScrollReveal className="projects-headline-subtitle" animation="fadeUp" delay={0.5}>
+          <p className="body-text" style={{textAlign:"center"}}>
+            Discover homes and investment opportunities tailored to you. With our trusted expertise and local knowledge.
           </p>
+            </ScrollReveal>
         </div>
-      </div>
+        </div>
 
       {/* ── Maia Full-Screen Project Sections ── */}
       <div className="maia-sections-list">
@@ -173,27 +170,34 @@ export default function ProjectsSection() {
                     {/* Gradient Overlay */}
                     <div className="maia-bg-overlay" />
 
-                    {/* Exact Maia Header Content Block (Top Left: top: 60px/80px, left: 80px) */}
+                    {/* Exact Maia Header Content Block with Individual ScrollReveal for each element */}
                     <div className="maia-header-content">
-                      <h4 className="maia-title">{project.title}</h4>
+                      <ScrollReveal animation="fadeUp" delay={0.1} once={false}>
+                        <h4 className="maia-title">{project.title}</h4>
+                      </ScrollReveal>
                       
-                      <p className="maia-location-p">
-                        <svg className="maia-map-icon" width="22" height="22" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M20.0625 10.1562C20.0625 14.5746 12.0625 22.1562 12.0625 22.1562C12.0625 22.1562 4.0625 14.5746 4.0625 10.1562C4.0625 5.73797 7.64422 2.15625 12.0625 2.15625C16.4808 2.15625 20.0625 5.73797 20.0625 10.1562Z" stroke="white" strokeWidth="1.5"></path>
-                          <path d="M12.0625 11.1562C12.6148 11.1562 13.0625 10.7085 13.0625 10.1562C13.0625 9.60397 12.6148 9.15625 12.0625 9.15625C11.5102 9.15625 11.0625 9.60397 11.0625 10.1562C11.0625 10.7085 11.5102 11.1562 12.0625 11.1562Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                        </svg>
-                        <span className="maia-location-span">{project.location}</span>
-                      </p>
+                      <ScrollReveal animation="fadeUp" delay={0.25} once={false}>
+                        <p className="maia-location-p">
+                          <svg className="maia-map-icon" width="22" height="22" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.0625 10.1562C20.0625 14.5746 12.0625 22.1562 12.0625 22.1562C12.0625 22.1562 4.0625 14.5746 4.0625 10.1562C4.0625 5.73797 7.64422 2.15625 12.0625 2.15625C16.4808 2.15625 20.0625 5.73797 20.0625 10.1562Z" stroke="white" strokeWidth="1.5"></path>
+                            <path d="M12.0625 11.1562C12.6148 11.1562 13.0625 10.7085 13.0625 9.15625C13.0625 9.60397 12.6148 9.15625 12.0625 9.15625C11.5102 9.15625 11.0625 9.60397 11.0625 10.1562C11.0625 10.7085 11.5102 11.1562 12.0625 11.1562Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                          </svg>
+                          <span className="maia-location-span">{project.location}</span>
+                        </p>
+                      </ScrollReveal>
                     </div>
 
-                    {/* Background Image */}
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="maia-bg-img"
-                      draggable="false"
-                      loading="lazy"
-                    />
+                    {/* Background Image with Responsive Picture Tag */}
+                    <picture className="maia-picture">
+                      <source media="(max-width: 768px)" srcSet={encodeURI(project.mobileImage || project.image)} />
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="maia-bg-img"
+                        draggable="false"
+                        loading="lazy"
+                      />
+                    </picture>
                   </a>
                 </div>
               </div>
@@ -214,7 +218,7 @@ export default function ProjectsSection() {
         .maia-portfolio-wrapper {
           position: relative;
           width: 100%;
-          background-color: #0b0b0b;
+          background-color: #fff;
           overflow: hidden;
         }
 
@@ -222,7 +226,7 @@ export default function ProjectsSection() {
         .projects-headline-intro {
           background-color: #f2f2f2;
           color: #111111;
-          padding: 100px 24px 70px 24px;
+          padding: 60px 24px 30px 24px;
           text-align: center;
           position: relative;
           z-index: 10;
@@ -296,19 +300,20 @@ export default function ProjectsSection() {
           width: 100%;
           height: 100%;
           background: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.35) 0%,
-            rgba(0, 0, 0, 0.05) 50%,
-            rgba(0, 0, 0, 0.4) 100%
+            to top,
+            rgba(0, 0, 0, 0.88) 0%,
+            rgba(0, 0, 0, 0.25) 45%,
+            rgba(0, 0, 0, 0.1) 100%
           );
           z-index: 1;
           pointer-events: none;
         }
 
-        /* Exact Maia Header Content Block (Top Left: top: 60px, left: 80px) */
+        /* Maia Header Content Block positioned at Bottom */
         .maia-header-content {
           position: absolute;
-          top: 60px;
+          bottom: 60px;
+          top: auto;
           left: 80px;
           z-index: 2;
           display: flex;
@@ -320,7 +325,8 @@ export default function ProjectsSection() {
 
         @media (max-width: 1024px) {
           .maia-header-content {
-            top: 30px;
+            bottom: 30px;
+            top: auto;
             left: 24px;
           }
         }
@@ -356,13 +362,22 @@ export default function ProjectsSection() {
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
         }
 
+        .maia-picture {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+
         /* Background Image - Extended height & offset prevents gaps during parallax scrub */
         .maia-bg-img {
           position: absolute;
           left: 0;
-          top: -15%;
+          top: -10%;
           width: 100%;
-          height: 130%;
+          height: 120%;
           object-fit: cover;
           display: block;
           user-select: none;

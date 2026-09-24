@@ -18,7 +18,7 @@ import ProjectPricingSection from '../components/ProjectPricingSection';
 const VIDEO_SLIDES = [
   {
     title: "Ashok Nagar Teaser",
-    thumbnail: "/images/project/ashok-nagar/overview.png",
+    thumbnail: "/images/project/ashok-nagar/hero-image.png",
     buttonLabel: "TEASER",
     url: "/images/project/ashok-nagar/Ashok Nagar Teaser.mp4"
   }
@@ -125,37 +125,37 @@ export default function AshokNagar({ project }) {
       title: "Grand Entrance",
       desc: "Impressive architectural gated entry arch creating an elegant and welcoming arrival experience for the plotted development.",
       image: "/images/project/aminities/plots/Arch Gated Community with Compound Wall.png",
-      icon: "/images/project/CML/amenities/icon/Security.png"
+      icon: "/images/project/aminities/icon/Entrance.png"
     },
     {
       title: "Blacktop Roads",
       desc: "Well-engineered, heavy-durability internal blacktop tar roadways facilitating smooth and seamless vehicle movement across all plots.",
       image: "/images/project/aminities/plots/Blacktop Roads.png",
-      icon: "/images/project/CML/amenities/icon/Solar Lighting.png"
+      icon: "/images/project/aminities/icon/Blacktop-Roads.png"
     },
     {
       title: "Avenue Trees",
       desc: "Lush avenue tree plantations aligning the internal corridors to foster a green, refreshing, and eco-conscious living environment.",
       image: "/images/project/aminities/plots/Avenue Trees.png",
-      icon: "/images/project/CML/amenities/icon/Play Area.png"
+      icon: "/images/project/aminities/icon/Avenue Trees.png"
     },
     {
       title: "Electricity Facility",
       desc: "Comprehensive electrical infrastructure with dedicated EB poles, wiring networks, and connection-ready setups for each plot.",
       image: "/images/project/aminities/plots/Electricity Facility.png",
-      icon: "/images/project/CML/amenities/icon/DTH Connection.png"
+      icon: "/images/project/aminities/icon/Electricity Facility.png"
     },
     {
       title: "Ground Water",
       desc: "Abundant, sweet natural groundwater resources ensuring consistent, independent 24/7 water availability for homeowners.",
       image: "/images/project/aminities/plots/Groundwater Facility.png",
-      icon: "/images/project/CML/amenities/icon/Rainwater Harvesting.png"
+      icon: "/images/project/aminities/icon/Rainwater Harvesting.png"
     },
     {
       title: "Street Lights",
       desc: "Evenly positioned modern street illumination fixtures lighting up every internal road for enhanced nighttime security and visibility.",
       image: "/images/project/aminities/plots/Electricity Facility.png",
-      icon: "/images/project/CML/amenities/icon/Solar Lighting.png"
+      icon: "/images/project/aminities/icon/Solar Lighting.png"
     }
   ];
   const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
@@ -214,31 +214,52 @@ export default function AshokNagar({ project }) {
       }
     };
   }, [activeTab]);
-  const [galleryAnim, setGalleryAnim] = useState({ exteriors: true, interiors: true, videos: true });
-  const galleryTimer = useRef({ exteriors: null, interiors: null, videos: null });
+
+  const galleryImages = {
+    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
+    images: [
+      { src: '/images/project/ashok-nagar/image/G1.webp', title: 'Ashok Nagar Gated Entrance Arch' },
+      { src: '/images/project/ashok-nagar/image/G2.webp', title: 'Wide Blacktop Internal Road' },
+      { src: '/images/project/ashok-nagar/image/G3.webp', title: 'Solar Powered Street Lighting' },
+      { src: '/images/project/ashok-nagar/image/G4.webp', title: 'Ready-to-Build Plotted Development' },
+      { src: '/images/project/ashok-nagar/image/G5.webp', title: 'Landscaped Boulevard' },
+      { src: '/images/project/ashok-nagar/image/G6.webp', title: 'Plot Demarcation & Walkway' },
+      { src: '/images/project/ashok-nagar/image/G7.webp', title: 'Strategic Maduranthakam Location' },
+      { src: '/images/project/ashok-nagar/image/G8.webp', title: 'Secure Gated Community Perimeter' },
+      { src: '/images/project/ashok-nagar/image/G9.webp', title: 'Lush Green Avenue Corridors' },
+      { src: '/images/project/ashok-nagar/image/G10.webp', title: 'Quality Infrastructure & Drainage' },
+      { src: '/images/project/ashok-nagar/image/G11.webp', title: 'Community Park & Open Spaces' },
+      { src: '/images/project/ashok-nagar/image/G12.webp', title: 'Residential Plots Overview' },
+      { src: '/images/project/ashok-nagar/image/G13.webp', title: 'Ashok Nagar Master Layout' }
+    ]
+  };
+
+  const [galleryAnim, setGalleryAnim] = useState({ images: true, videos: true });
+  const galleryTimer = useRef({ images: null, videos: null });
   useEffect(() => {
-    ['exteriors', 'interiors', 'videos'].forEach((section) => {
+    Object.keys(galleryImages).forEach((section) => {
       if (!galleryImages[section]) return;
       const total = galleryImages[section].length;
       if (total <= 1) return;
       const idx = galleryIndices[section];
+      if (idx === undefined) return;
 
       clearTimeout(galleryTimer.current[section]);
-      if (idx === total + 1) {
+      if (idx >= total + 1) {
         galleryTimer.current[section] = setTimeout(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: false }));
           setGalleryIndices(prev => ({ ...prev, [section]: 1 }));
         }, 500);
-      } else if (idx === 0) {
+      } else if (idx <= 0) {
         galleryTimer.current[section] = setTimeout(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: false }));
           setGalleryIndices(prev => ({ ...prev, [section]: total }));
         }, 500);
       }
     });
-  }, [galleryIndices]);
+  }, [galleryIndices, galleryImages]);
   useEffect(() => {
-    ['exteriors', 'interiors', 'videos'].forEach((section) => {
+    Object.keys(galleryImages).forEach((section) => {
       if (!galleryAnim[section]) {
         const t = requestAnimationFrame(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: true }));
@@ -246,21 +267,21 @@ export default function AshokNagar({ project }) {
         return () => cancelAnimationFrame(t);
       }
     });
-  }, [galleryAnim]);
+  }, [galleryAnim, galleryImages]);
   const prevGallerySlide = (section) => {
-    if (galleryImages[section].length <= 1) return;
+    if (!galleryImages[section] || galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
     setGalleryIndices((prev) => ({
       ...prev,
-      [section]: prev[section] - 1
+      [section]: (prev[section] || 1) - 1
     }));
   };
   const nextGallerySlide = (section) => {
-    if (galleryImages[section].length <= 1) return;
+    if (!galleryImages[section] || galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
     setGalleryIndices((prev) => ({
       ...prev,
-      [section]: prev[section] + 1
+      [section]: (prev[section] || 1) + 1
     }));
   };
   // Scroll to top on mount
@@ -295,9 +316,9 @@ export default function AshokNagar({ project }) {
       label: 'Connectivity & Highway',
       image: '/images/project/CML/loction/junctions.png',
       locations: [
-        { name: 'GST Road (NH-32)', dist: '200 Mtrs', lat: 12.5120, lng: 79.8870 },
-        { name: 'Major Transport Hubs (Bus & Rail)', dist: '5 Mins', lat: 12.5085, lng: 79.8848 },
-        { name: 'Maduranthakam Railway Station', dist: '5 Mins', lat: 12.5070, lng: 79.8820 }
+        { name: 'GST Road (NH-32)', dist: '0.2 Km', lat: 12.5015, lng: 79.8795 },
+        { name: 'Maduranthakam Bus Stand Area', dist: '1.1 Km', lat: 12.5095, lng: 79.8825 },
+        { name: 'Maduranthakam Railway Station', dist: '1.7 Km', lat: 12.5044, lng: 79.8933 }
       ]
     },
     {
@@ -305,9 +326,9 @@ export default function AshokNagar({ project }) {
       label: 'Schools & Colleges',
       image: '/images/project/CML/loction/educational .png',
       locations: [
-        { name: 'Sri Malolan College of Arts & Science', dist: '2 Mins', lat: 12.5180, lng: 79.8900 },
-        { name: 'Vivekananda Vidyalaya CBSE School', dist: '2 Mins', lat: 12.5160, lng: 79.8880 },
-        { name: 'Subham Vidhyalaya CBSE School', dist: '5 Mins', lat: 12.5120, lng: 79.8720 }
+        { name: 'Sri Malolan College of Arts & Science', dist: '2.5 Km', lat: 12.5180, lng: 79.8920 },
+        { name: 'Vivekananda Vidyalaya CBSE School', dist: '1.4 Km', lat: 12.5071, lng: 79.8895 },
+        { name: 'Subham Vidhyalaya CBSE School', dist: '1.4 Km', lat: 12.5090, lng: 79.8875 }
       ]
     },
     {
@@ -315,9 +336,9 @@ export default function AshokNagar({ project }) {
       label: 'Healthcare',
       image: '/images/project/CML/loction/hospitals.png',
       locations: [
-        { name: 'Dr Ramakrishnan Memorial Hospital', dist: '2 Mins', lat: 12.5140, lng: 79.8860 },
-        { name: 'Government Hospital Maduranthakam', dist: '5 Mins', lat: 12.5070, lng: 79.8850 },
-        { name: 'Sana Multispeciality Hospital', dist: '6 Mins', lat: 12.5090, lng: 79.8820 }
+        { name: 'Dr Ramakrishnan Memorial Hospital', dist: '1.3 Km', lat: 12.5085, lng: 79.8870 },
+        { name: 'Government Hospital Maduranthakam', dist: '1.2 Km', lat: 12.5082, lng: 79.8860 },
+        { name: 'Sana Multispeciality Hospital', dist: '1.5 Km', lat: 12.5061, lng: 79.8912 }
       ]
     },
     {
@@ -325,39 +346,22 @@ export default function AshokNagar({ project }) {
       label: 'Temples & Heritage',
       image: '/images/project/CML/loction/entertainment.png',
       locations: [
-        { name: 'Yeri Katha Ramar Kovil', dist: '2 Mins', lat: 12.5020, lng: 79.8820 },
-        { name: 'Semmagiri Arulmigu Shri Lakshmi Narasimha Temple', dist: '6 Mins', lat: 12.5190, lng: 79.8650 },
-        { name: 'OM Sakthi Temple', dist: '15 Mins', lat: 12.4380, lng: 79.8290 }
+        { name: 'Yeri Katha Ramar Kovil', dist: '2.1 Km', lat: 12.4864, lng: 79.8911 },
+        { name: 'Semmagiri Arulmigu Shri Lakshmi Narasimha Temple', dist: '2.1 Km', lat: 12.5150, lng: 79.8650 },
+        { name: 'OM Sakthi Temple (Melmaruvathur)', dist: '9.9 Km', lat: 12.4316, lng: 79.8205 }
       ]
     }
   ];
 
   const landmarks = [
-    { title: "GST Road (NH-32)", dist: "200 Mtrs" },
-    { title: "Sri Malolan College", dist: "2 Mins" },
-    { title: "Vivekananda Vidyalaya CBSE", dist: "2 Mins" },
-    { title: "Yeri Katha Ramar Kovil", dist: "2 Mins" },
-    { title: "Dr Ramakrishnan Hospital", dist: "2 Mins" },
-    { title: "Major Transport Hubs", dist: "5 Mins" }
+    { title: "GST Road (NH-32)", dist: "0.2 Km" },
+    { title: "Sri Malolan College", dist: "2.5 Km" },
+    { title: "Vivekananda Vidyalaya CBSE", dist: "1.4 Km" },
+    { title: "Yeri Katha Ramar Kovil", dist: "2.1 Km" },
+    { title: "Dr Ramakrishnan Hospital", dist: "1.3 Km" },
+    { title: "Maduranthakam Bus Stand Area", dist: "1.1 Km" }
   ];
-  const galleryImages = {
-    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
-    images: [
-      { src: '/images/project/ashok-nagar/image/G1.webp', title: 'Ashok Nagar Gated Entrance Arch' },
-      { src: '/images/project/ashok-nagar/image/G2.webp', title: 'Wide Blacktop Internal Road' },
-      { src: '/images/project/ashok-nagar/image/G3.webp', title: 'Solar Powered Street Lighting' },
-      { src: '/images/project/ashok-nagar/image/G4.webp', title: 'Ready-to-Build Plotted Development' },
-      { src: '/images/project/ashok-nagar/image/G5.webp', title: 'Landscaped Boulevard' },
-      { src: '/images/project/ashok-nagar/image/G6.webp', title: 'Plot Demarcation & Walkway' },
-      { src: '/images/project/ashok-nagar/image/G7.webp', title: 'Strategic Maduranthakam Location' },
-      { src: '/images/project/ashok-nagar/image/G8.webp', title: 'Secure Gated Community Perimeter' },
-      { src: '/images/project/ashok-nagar/image/G9.webp', title: 'Lush Green Avenue Corridors' },
-      { src: '/images/project/ashok-nagar/image/G10.webp', title: 'Quality Infrastructure & Drainage' },
-      { src: '/images/project/ashok-nagar/image/G11.webp', title: 'Community Park & Open Spaces' },
-      { src: '/images/project/ashok-nagar/image/G12.webp', title: 'Residential Plots Overview' },
-      { src: '/images/project/ashok-nagar/image/G13.webp', title: 'Ashok Nagar Master Layout' }
-    ]
-  };
+  const galleryImages_old = null;
   useEffect(() => {
     const interval = setInterval(() => {
       setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
@@ -701,9 +705,9 @@ export default function AshokNagar({ project }) {
               </div>
               <NeighbourhoodStory
                 onEnquire={() => setIsQuoteOpen(true)}
-                projectCoords={[12.5085, 79.8848]}
+                projectCoords={[12.5005886, 79.8781649]}
                 projectName="Ashok Nagar"
-                projectImage="/images/home/project-image-1.png"
+                projectImage="/images/project/ashok-nagar/hero-image.png"
                 categories={ASHOK_NAGAR_NEIGHBOURHOOD}
               />
             </section>
@@ -735,100 +739,118 @@ export default function AshokNagar({ project }) {
                 </div> {/* Close container here for full-bleed viewport */}
                 {/* Spotlight Active-Card Gallery Carousel */}
                 <ScrollReveal animation="fadeUp" delay={0.35} className="gallery-spotlight-viewport">
-                  <div
-                    className="gallery-spotlight-track"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 'var(--gallery-gap, 8vw)',
-                      width: 'max-content',
-                      transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                      transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
-                    }}
-                  >
-                    {(() => {
-                      const items = galleryImages[galleryTab];
-                      const total = items.length;
-                      const extended = total > 1
-                        ? [items[total - 1], ...items, items[0]]
-                        : items;
-                      return extended.map((img, idx) => {
-                        const isActive = idx === galleryIndices[galleryTab];
-                        const realIdx = total > 1
-                          ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
-                          : 0;
-                        return (
-                          <div
-                            key={idx}
-                            className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
-                            style={{
-                              flexShrink: 0,
-                              flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                              width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                              transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
-                              cursor: 'pointer',
-                              overflow: 'hidden',
-                              position: 'relative',
-                              height: 'calc(100vh - 165px)',
-                              maxHeight: '720px',
-                              minHeight: '320px',
-                              boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
-                            }}
-                            onClick={() => {
-                              if (isActive) {
-                                if (galleryTab === 'videos') {
-                                  setActiveVideoUrl(img.url);
-                                  setIsVideoOpen(true);
-                                } else {
-                                  handleOpenLightbox(galleryTab, realIdx);
-                                }
-                              } else {
-                                setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
-                                setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
-                              }
-                            }}
-                          >
-                            <img
-                              src={img.src}
-                              alt={img.title}
-                              className="gallery-spotlight-img"
-                            />
+                  {(() => {
+                    const items = galleryImages[galleryTab] || [];
+                    const total = items.length;
+                    if (total === 0) return null;
+                    const isSingle = total === 1;
+                    const extended = !isSingle
+                      ? [items[total - 1], ...items, items[0]]
+                      : items;
 
-                            {galleryTab === 'videos' && (
-                              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
-                                <div className="play-button-pulsing">
-                                  <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
+                    return (
+                      <>
+                        <div
+                          className="gallery-spotlight-track"
+                          style={isSingle ? {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            transform: 'none'
+                          } : {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 'var(--gallery-gap, 8vw)',
+                            width: 'max-content',
+                            transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+                            transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
+                          }}
+                        >
+                          {extended.map((img, idx) => {
+                            const isActive = isSingle ? true : idx === galleryIndices[galleryTab];
+                            const realIdx = total > 1
+                              ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
+                              : 0;
+                            return (
+                              <div
+                                key={idx}
+                                className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
+                                style={{
+                                  flexShrink: 0,
+                                  flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                  width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                  transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
+                                  cursor: 'pointer',
+                                  overflow: 'hidden',
+                                  position: 'relative',
+                                  height: 'calc(100vh - 165px)',
+                                  maxHeight: '720px',
+                                  minHeight: '320px',
+                                  boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
+                                }}
+                                onClick={() => {
+                                  if (isActive) {
+                                    if (galleryTab === 'videos') {
+                                      setActiveVideoUrl(img.url);
+                                      setIsVideoOpen(true);
+                                    } else {
+                                      handleOpenLightbox(galleryTab, realIdx);
+                                    }
+                                  } else {
+                                    setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
+                                    setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
+                                  }
+                                }}
+                              >
+                                <img
+                                  src={img.src}
+                                  alt={img.title}
+                                  className="gallery-spotlight-img"
+                                />
+
+                                {galleryTab === 'videos' && (
+                                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
+                                    <div className="play-button-pulsing">
+                                      <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
+                                    </div>
+                                  </div>
+                                )}
+                                <div className="gallery-deck-hover-overlay">
+                                  {galleryTab !== 'videos' && (
+                                    <>
+                                      <Maximize2 size={24} className="hover-overlay-zoom-icon" />
+                                      <span className="hover-overlay-title">{img.title}</span>
+                                    </>
+                                  )}
                                 </div>
                               </div>
-                            )}
-                            <div className="gallery-deck-hover-overlay">
-                              {galleryTab !== 'videos' && (
-                                <>
-                                  <Maximize2 size={24} className="hover-overlay-zoom-icon" />
-                                  <span className="hover-overlay-title">{img.title}</span>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      });
-                    })()}
-                  </div>
-                  {/* Navigation Arrows positioned on left/right previews */}
-                  <button
-                    className="gallery-spotlight-arrow prev"
-                    onClick={() => prevGallerySlide(galleryTab)}
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft size={24} />
-                  </button>
-                  <button
-                    className="gallery-spotlight-arrow next"
-                    onClick={() => nextGallerySlide(galleryTab)}
-                    aria-label="Next image"
-                  >
-                    <ChevronRight size={24} />
-                  </button>
+                            );
+                          })}
+                        </div>
+
+                        {/* Navigation Arrows positioned on left/right previews (Only when > 1 item) */}
+                        {total > 1 && (
+                          <>
+                            <button
+                              className="gallery-spotlight-arrow prev"
+                              onClick={() => prevGallerySlide(galleryTab)}
+                              aria-label="Previous image"
+                            >
+                              <ChevronLeft size={24} />
+                            </button>
+                            <button
+                              className="gallery-spotlight-arrow next"
+                              onClick={() => nextGallerySlide(galleryTab)}
+                              aria-label="Next image"
+                            >
+                              <ChevronRight size={24} />
+                            </button>
+                          </>
+                        )}
+                      </>
+                    );
+                  })()}
                 </ScrollReveal>
               </section>
             </>
@@ -985,7 +1007,7 @@ export default function AshokNagar({ project }) {
 
                 {/* Master Plan Only View */}
                 <ScrollReveal animation="fadeUp" delay={0.25} className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <div style={{ position: 'relative', maxWidth: '1100px', width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.06)', background: '#ffffff' }}>
+                  <div style={{ position: 'relative', maxWidth: '1100px', width: '100%',  overflow: 'hidden', background: '#ffffff' }}>
                     <img
                       src={layoutsData.masterPlan.image}
                       alt="Ashok Nagar Master Plan"
@@ -1282,11 +1304,6 @@ export default function AshokNagar({ project }) {
           transform-origin: center;
           display: block !important;
           pointer-events: none;
-        }
-        @media (min-width: 1248px) {
-          .overview-logo-badge {
-            left: calc((100vw - 1200px) / 2 + 24px);
-          }
         }
         @media (max-width: 768px) {
           .overview-logo-badge {
@@ -1703,7 +1720,7 @@ export default function AshokNagar({ project }) {
           color: rgba(255, 255, 255, 0.85);
           background: rgba(255, 255, 255, 0.47);
           border: 1px solid rgba(255, 255, 255, 0.3);
-          padding: 14px 40px;
+          padding: 10px 20px;
           border-radius: 100px;
           text-decoration: none;
           backdrop-filter: blur(38px);
@@ -3692,7 +3709,7 @@ export default function AshokNagar({ project }) {
             text-align: center !important;
           }
           .project-hero-cta-block .btn-discover {
-            padding: 12px 32px !important;
+            padding: 10px 22px !important;
             font-size: 14px !important;
           }
           

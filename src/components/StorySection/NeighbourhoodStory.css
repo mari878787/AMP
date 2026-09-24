@@ -462,17 +462,18 @@
   position: relative;
   width: 30px;
   height: 38px;
+  transform-origin: bottom center;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .poi-pin-light-pulse {
   position: absolute;
-  top: 9px;
+  top: 36.5px;
   left: 15px;
   transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
-  background: rgba(180, 133, 100, 0.3);
+  width: 36px;
+  height: 36px;
+  background: rgba(180, 133, 100, 0.35);
   border-radius: 50%;
   z-index: -1;
   animation: poiLightPulse 2s infinite ease-out;
@@ -480,11 +481,11 @@
 
 @keyframes poiLightPulse {
   0% {
-    transform: translate(-50%, -50%) scale(0.4);
+    transform: translate(-50%, -50%) scale(0.3);
     opacity: 1;
   }
   100% {
-    transform: translate(-50%, -50%) scale(1.5);
+    transform: translate(-50%, -50%) scale(1.4);
     opacity: 0;
   }
 }
@@ -508,7 +509,7 @@
 
 .custom-map-marker.poi-marker:hover .custom-map-pin-svg,
 .custom-map-marker.poi-marker.active-highlight .custom-map-pin-svg {
-  transform: scale(1.2) translateY(-3px);
+  transform: scale(1.22);
 }
 
 /* POI Tooltip */
@@ -670,25 +671,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  filter: drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.18));
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.22));
   cursor: pointer;
+  z-index: 1000;
 }
 
-.map-card-pin:hover {
-  transform: translateY(-6px) scale(1.05);
-}
-
+/* Card Body & Pointer initially collapsed, expands on hover */
 .map-card-body {
   background: #ffffff;
   border-radius: 10px;
   padding: 5px;
   width: 115px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.85);
+  transform-origin: bottom center;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  pointer-events: none;
 }
 
 .map-card-image-wrap {
@@ -728,18 +732,46 @@
   border-right: 7px solid transparent;
   border-top: 8px solid #ffffff;
   margin-top: -1px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
 }
 
-/* Pulsing Location Dot underneath the card pointer */
+/* Hover Reveal State */
+.custom-map-card-marker:hover .map-card-body,
+.map-card-pin:hover .map-card-body {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.custom-map-card-marker:hover .map-card-pointer,
+.map-card-pin:hover .map-card-pointer {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Pulsing Location Dot underneath the card pointer (Always Anchored Ground Pin) */
 .map-card-anchor-pulse {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background-color: #b48564;
   border: 2px solid #ffffff;
   border-radius: 50%;
   margin-top: 2px;
-  box-shadow: 0 0 0 3px rgba(180, 133, 100, 0.35);
+  box-shadow: 0 0 0 3px rgba(180, 133, 100, 0.4);
   animation: cardAnchorPulse 2s infinite ease-out;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.map-card-pin:hover .map-card-anchor-pulse {
+  transform: scale(1.3);
+  background-color: #111111;
 }
 
 @keyframes cardAnchorPulse {

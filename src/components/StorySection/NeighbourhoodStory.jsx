@@ -51,6 +51,7 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
   const [selectedLocationName, setSelectedLocationName] = useState(null);
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isPinHovered, setIsPinHovered] = useState(false);
+  const [isMapInteracted, setIsMapInteracted] = useState(false);
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
   const [progress, setProgress] = useState(0); // 0 to 100%
 
@@ -58,7 +59,7 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
   const defaultCoords = projectCoords || [12.9298995, 80.1954121];
 
   const currentCategory = activeCategories[activeCatIndex] || activeCategories[0];
-  const isTimerPaused = isCardHovered || isPinHovered;
+  const isTimerPaused = isCardHovered || isPinHovered || isMapInteracted;
 
   // Set default landmark on category change
   useEffect(() => {
@@ -69,7 +70,7 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
 
   // 10-Second Auto-Rotation Timer with Progress Bar
   useEffect(() => {
-    if (isTimerPaused) return; // Pause auto-rotation when user hovers the card or a map pin
+    if (isTimerPaused) return; // Pause auto-rotation when user hovers the card, a map pin, or zooms/pans the map
 
     const stepMs = 100;
     const totalDurationMs = 10000; // 10 seconds per category
@@ -91,12 +92,14 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
   const handlePrevCategory = (e) => {
     e.stopPropagation();
     setProgress(0);
+    setIsMapInteracted(false);
     setActiveCatIndex((prev) => (prev - 1 + activeCategories.length) % activeCategories.length);
   };
 
   const handleNextCategory = (e) => {
     e.stopPropagation();
     setProgress(0);
+    setIsMapInteracted(false);
     setActiveCatIndex((prev) => (prev + 1) % activeCategories.length);
   };
 
@@ -132,6 +135,8 @@ export default function NeighbourhoodStory({ onEnquire, projectCoords, projectNa
             activeLocationName={selectedLocationName}
             onHoverLocation={handleHoverLocation}
             onPinHoverChange={setIsPinHovered}
+            onInteraction={() => setIsMapInteracted(true)}
+            isMapInteracted={isMapInteracted}
             mapStyle="streets-v12"
           />
 

@@ -293,9 +293,18 @@ button {
   line-height: 1.3;
   color: var(--color-text-dark);
   letter-spacing: -0.01em;
-  /* text-transform: uppercase; */
   margin-bottom: 16px;
 }
+
+/* .section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 5.8vw, 68px);
+  font-weight: 400;
+  color: #0a0a0a;
+  line-height: 1.12;
+  margin: 0 0 22px 0;
+  letter-spacing: -0.015em;
+} */
 
 /* â”€â”€ Display Title — large hero heading â”€â”€ */
 .display-title {
@@ -320,6 +329,18 @@ blockquote {
   letter-spacing: 0em;
   text-align: justify;
 }
+
+/* p,
+.body-text,
+blockquote {
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 1.6vw, 18px);
+  font-weight: 400;
+  color: #555555;
+  line-height: 1.65;
+  max-width: 640px;
+  text-align: justify;
+} */
 
 /* â”€â”€ Label / Micro Text â”€â”€ */
 .label-text {
@@ -447,12 +468,12 @@ h3 span,
 /* Light Theme Button & Dark Theme Button (Both are dark glassmorphic black version now) */
 .btn-luxury-pill,
 .btn-luxury-outline {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  padding: 16px 42px;
+  padding: 10px 22px;
   background: rgba(0, 0, 0, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
@@ -731,33 +752,6 @@ html.lenis body {
    Global Card and Image Border Radius Configuration (8px)
    ────────────────────────────────────────────────── */
 
-/* Images */
-img:not(.avatar):not(.testimonial-avatar):not(.logo-img):not(.nav-logo):not(.flycatcher-icon):not(.spec-icon-img):not([src*="logo"]):not([src*="allProject"]):not([src*="icon"]):not(.icon-img),
-.project-img-wrap,
-.project-img,
-.blog-img-wrap,
-.blog-img,
-.project-image,
-.blog-image,
-.card-image,
-.hero-image,
-.floorplan-img,
-.masterplan-img,
-.gallery-img,
-.about-hero-img-wrapper,
-.about-journey-img,
-.team-member-img,
-.location-img,
-.specs-img,
-.video-thumbnail,
-.video-player-wrapper video,
-.walkthrough-video-container video,
-.walkthrough-video-container iframe,
-.media-container img,
-.media-container video,
-.project-card-image img {
-  border-radius: 8px !important;
-}
 
 /* Ensure Spec Icons have 0 border-radius */
 .spec-icon-img,
@@ -767,7 +761,7 @@ img.spec-icon-img,
 }
 
 /* Cards & Card-like Containers */
-.project-card,
+/* .project-card,
 .project-item,
 .blog-card,
 .blog-item,
@@ -798,4 +792,4 @@ img.spec-icon-img,
 .lightbox-modal-media-wrapper,
 .lightbox-modal-media-wrapper img {
   border-radius: 8px !important;
-}
+} */

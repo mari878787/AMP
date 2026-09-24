@@ -30,9 +30,9 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-col-title">PROJECTS</h4>
             <ul className="footer-links">
-              <li><a href="/projects?category=villas">Villas</a></li>
-              <li><a href="/projects?category=apartments">Apartments</a></li>
-              <li><a href="/projects?category=plots">Plot</a></li>
+              <li><a href="/projects">Villas</a></li>
+              <li><a href="/projects">Apartments</a></li>
+              <li><a href="/projects">Plots</a></li>
             </ul>
           </div>
           

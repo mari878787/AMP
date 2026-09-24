@@ -147,7 +147,7 @@ export default function StickyActionBar({ onEnquire }) {
           box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
-          z-index: 999;
+          z-index: 9999;
           transform: translateY(100%);
           opacity: 0;
           pointer-events: none;

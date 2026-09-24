@@ -1,26 +1,7 @@
 import React, { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
-
-const BLOGS = [
-  {
-    id: 1,
-    image: '/images/hero_placeholders/p1.png',
-    title: 'Looking for your dream home?',
-    excerpt: 'Discover expert tips, market insights, and practical advice to help you find the perfect place to call home.',
-  },
-  {
-    id: 2,
-    image: '/images/hero_placeholders/p4.png',
-    title: 'Investing in property made simple',
-    excerpt: 'Explore easy-to-understand guides on real estate investment, rental income, and long-term growth.',
-  },
-  {
-    id: 3,
-    image: '/images/hero_placeholders/p3.png',
-    title: 'Smart marketing tips for selling',
-    excerpt: 'Learn proven strategies to showcase your property, attract the right buyers, and close deals quicker.',
-  },
-];
+import { BLOGS } from '../data/blogsData';
 
 const VISIBLE = 3;
 const TOTAL   = BLOGS.length;
@@ -38,7 +19,7 @@ export default function BlogSection() {
     <section className="blog-section" id="blog">
       <div className="container">
 
-        {/* â”€â”€ Header row â”€â”€ */}
+        {/* ── Header row ── */}
         <div className="blog-header">
           <div className="blog-header-left">
             <ScrollReveal animation="fadeUp" delay={0.05}>
@@ -77,10 +58,10 @@ export default function BlogSection() {
           </ScrollReveal>
         </div>
 
-        {/* â”€â”€ Blog cards â”€â”€ */}
+        {/* ── Blog cards ── */}
         <div className="blog-grid">
           {visible.map((blog, idx) => {
-            const isLight = blog.id % 2 === 0;
+            const isLight = idx % 2 === 1;
             return (
               <ScrollReveal
                 key={blog.id}
@@ -90,26 +71,30 @@ export default function BlogSection() {
                 className={`blog-card ${isLight ? 'light' : 'dark'}`}
               >
                 {/* Image */}
-                <a href="#blog" className="blog-img-wrap" aria-label={blog.title}>
+                <Link to={`/blog/${blog.slug}`} className="blog-img-wrap" aria-label={blog.title}>
                   <img src={blog.image} alt={blog.title} className="blog-img" draggable="false" />
-                </a>
+                </Link>
 
                 {/* Body */}
                 <div className="blog-body">
-                  <h3 className="blog-card-title">{blog.title}</h3>
+                  <h3 className="blog-card-title">
+                    <Link to={`/blog/${blog.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                      {blog.title}
+                    </Link>
+                  </h3>
                   <p className="blog-excerpt">{blog.excerpt}</p>
                   <div className="blog-card-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '10px' }}>
-                    <a href="#blog" className="blog-read-more">
+                    <Link to={`/blog/${blog.slug}`} className="blog-read-more">
                       Read More
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                       </svg>
-                    </a>
+                    </Link>
                     <span className="blog-card-number" style={{ 
                       fontWeight: '400', 
                       color: 'rgba(255, 255, 255, 0.4)' 
                     }}>
-                      0{blog.id}
+                      0{idx + 1}
                     </span>
                   </div>
                 </div>

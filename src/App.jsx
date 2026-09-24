@@ -9,6 +9,7 @@ import AboutUs from './pages/AboutUs';
 import AllProjects from './pages/AllProjects';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ContactUs from './pages/ContactUs';
+import BlogDetails from './pages/BlogDetails';
 import StickyActionBar from './components/StickyActionBar';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -65,6 +66,8 @@ function App() {
         <Route path="/projects" element={<AllProjects />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/blog/:slug" element={<BlogDetails />} />
+        <Route path="/blogs" element={<BlogDetails />} />
       </Routes>
       <StickyActionBar />
     </Router>

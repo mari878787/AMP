@@ -31,9 +31,9 @@ const createProjectMarker = (name, imageUrl) => {
         <div class="map-card-anchor-pulse"></div>
       </div>
     `,
-    iconSize: [120, 135],
-    iconAnchor: [60, 135],
-    popupAnchor: [0, -135]
+    iconSize: [130, 118],
+    iconAnchor: [65, 114],
+    popupAnchor: [0, -114]
   });
 };
 
@@ -45,77 +45,136 @@ const createPoiMarker = (isHighlighted) => {
       <div class="custom-map-pin-svg">
         ${isHighlighted ? '<div class="poi-pin-light-pulse"></div>' : ''}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" class="poi-svg-marker">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" class="pin-path" />
-          <circle cx="12" cy="9" r="3" class="pin-dot" />
+          <path d="M12 1C6.48 1 2 5.48 2 11c0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10z" class="pin-path" />
+          <circle cx="12" cy="11" r="3.5" class="pin-dot" />
         </svg>
       </div>
     `,
-    iconSize: [34, 42],
-    iconAnchor: [17, 42],
-    popupAnchor: [0, -38]
+    iconSize: [30, 38],
+    iconAnchor: [15, 36.7],
+    popupAnchor: [0, -36]
   });
 };
 
-// Component to dynamically fit/zoom map bounds strictly focusing on local category locations
-function ChangeView({ center, activeLocations, categoryId }) {
+// Calculate straight-line geodesic distance in Km between two [lat, lng] points
+function calculateDistanceKm(lat1, lon1, lat2, lon2) {
+  if (!lat1 || !lon1 || !lat2 || !lon2) return 0;
+  const R = 6371; // Earth's radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+// Ideal maximum zoom for a category based on its maximum location distance in Km
+function getCategoryMaxZoom(maxKm) {
+  if (maxKm <= 1.0) return 15.6;
+  if (maxKm <= 2.2) return 14.8;
+  if (maxKm <= 4.5) return 14.0;
+  if (maxKm <= 8.0) return 13.0;
+  return 12.0;
+}
+
+// Component to keep ALL category locations & project center 100% visible on the map canvas
+function ChangeView({ center, activeLocations, categoryId, isMapInteracted }) {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
-    map.invalidateSize();
 
-    // Collect all points for active category: Project Center + Landmarks
-    const points = [[center[0], center[1]]];
-    if (activeLocations && activeLocations.length > 0) {
+    const applyBounds = () => {
+      if (!map || isMapInteracted) return;
+      map.invalidateSize();
+
+      if (!activeLocations || activeLocations.length === 0) {
+        map.flyTo(center, 15, { duration: 0.8 });
+        return;
+      }
+
+      const validPoints = [center];
+      let maxKm = 0;
+
       activeLocations.forEach(loc => {
         if (loc.lat && loc.lng) {
-          points.push([loc.lat, loc.lng]);
+          validPoints.push([loc.lat, loc.lng]);
+          const dist = calculateDistanceKm(center[0], center[1], loc.lat, loc.lng);
+          if (dist > maxKm) maxKm = dist;
         }
       });
-    }
 
-    if (points.length > 1) {
-      const bounds = L.latLngBounds(points);
-      // Tightly focus only on the neighborhood locations
+      const maxZoom = getCategoryMaxZoom(maxKm);
+      const isDesktop = typeof window !== 'undefined' && window.innerWidth > 992;
+
+      const bounds = L.latLngBounds(validPoints);
+
       map.fitBounds(bounds, {
-        padding: [45, 45],
-        maxZoom: 14.5,
+        paddingTopLeft: isDesktop ? [340, 50] : [30, 30],
+        paddingBottomRight: [50, 50],
+        maxZoom: maxZoom,
         animate: true,
-        duration: 1.0
+        duration: 0.8
       });
-    } else {
-      map.flyTo(center, 13.6, { duration: 1.0 });
-    }
-  }, [categoryId, activeLocations, center, map]);
+    };
+
+    // Immediate execution
+    applyBounds();
+
+    // Secondary execution after layout frames settle
+    const t1 = setTimeout(applyBounds, 60);
+    const t2 = setTimeout(applyBounds, 250);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [categoryId, activeLocations, center, map, isMapInteracted]);
 
   return null;
 }
 
-// Interaction listener helper
+// Interaction listener helper (detects only explicit user drag/scroll gestures, not programmatic flyTo/fitBounds)
 function InteractionDetector({ onInteraction }) {
   const map = useMap();
   useEffect(() => {
     if (!map || !onInteraction) return;
-    const handleInteraction = () => {
+    const handleManualUserGesture = () => {
       onInteraction();
     };
-    map.on('movestart zoomstart dragstart', handleInteraction);
+
+    // Listen only for explicit manual user drag
+    map.on('dragstart', handleManualUserGesture);
+
+    const container = map.getContainer();
+    if (container) {
+      container.addEventListener('wheel', handleManualUserGesture, { passive: true });
+      container.addEventListener('touchstart', handleManualUserGesture, { passive: true });
+    }
+
     return () => {
-      map.off('movestart zoomstart dragstart', handleInteraction);
+      map.off('dragstart', handleManualUserGesture);
+      if (container) {
+        container.removeEventListener('wheel', handleManualUserGesture);
+        container.removeEventListener('touchstart', handleManualUserGesture);
+      }
     };
   }, [map, onInteraction]);
   return null;
 }
 
-export default function ProjectMap({ 
-  activeCategory, 
-  projectCoords, 
-  projectName, 
+export default function ProjectMap({
+  activeCategory,
+  projectCoords,
+  projectName,
   projectImage,
-  activeLocationName, 
-  onHoverLocation, 
+  activeLocationName,
+  onHoverLocation,
   onPinHoverChange,
   onInteraction,
+  isMapInteracted,
   mapStyle = 'streets-v12'
 }) {
   // Coordinates for Medavakkam Crystal Moonlight, Chennai
@@ -203,8 +262,8 @@ export default function ProjectMap({
     <div className="project-map-canvas-container">
       <MapContainer
         center={centerCoords}
-        zoom={13.2}
-        minZoom={12}
+        zoom={13.6}
+        minZoom={11}
         scrollWheelZoom={false}
         className="leaflet-hero-map"
       >
@@ -259,10 +318,10 @@ export default function ProjectMap({
             />
           </>
         )}
-        
+
         {/* Project Center Marker */}
-        <Marker 
-          position={centerCoords} 
+        <Marker
+          position={centerCoords}
           icon={createProjectMarker(projectName, projectImage)}
           eventHandlers={{
             mouseover: () => onPinHoverChange && onPinHoverChange(true),
@@ -275,9 +334,9 @@ export default function ProjectMap({
           if (!loc.lat || !loc.lng) return null;
           const isHighlighted = activeLocationName === loc.name;
           return (
-            <Marker 
-              key={`${loc.name}-${isHighlighted}`} 
-              position={[loc.lat, loc.lng]} 
+            <Marker
+              key={`${loc.name}-${isHighlighted}`}
+              position={[loc.lat, loc.lng]}
               icon={createPoiMarker(isHighlighted)}
               eventHandlers={{
                 mouseover: () => {
@@ -291,9 +350,9 @@ export default function ProjectMap({
               }}
             >
               {isHighlighted && (
-                <Tooltip 
+                <Tooltip
                   permanent={true}
-                  direction="top" 
+                  direction="top"
                   offset={[0, -36]}
                 >
                   <div className="poi-marker-tooltip">
@@ -306,10 +365,11 @@ export default function ProjectMap({
           );
         })}
 
-        <ChangeView 
-          center={centerCoords} 
-          activeLocations={activeLocations} 
-          categoryId={activeCategory ? activeCategory.id : ''} 
+        <ChangeView
+          center={centerCoords}
+          activeLocations={activeLocations}
+          categoryId={activeCategory ? activeCategory.id : ''}
+          isMapInteracted={isMapInteracted}
         />
         <InteractionDetector onInteraction={onInteraction} />
       </MapContainer>

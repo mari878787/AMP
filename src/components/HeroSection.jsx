@@ -7,13 +7,15 @@ import 'swiper/css/effect-fade';
 
 const HERO_SLIDES = [
   {
-    image: '/images/project/CML/Elevation.png',
-    mobileImage: '/images/project/CML/hero-mobile.png',
+    image: '/images/project/CML/North_Row_4K_Day 1.webp',
+    mobileImage: '/images/project/CML/row-villa-mobile-hero.png',
     title: 'Crystal Moonlight',
     subtitle: 'Where Contemporary Design Meets Serene Community Living',
     link: '/crystal-moonlight-villa'
   },
   {
+    video: '/images/project/pasha-pinnacle/PP Hero Banner 3.mp4',
+    mobileVideo: '/images/project/pasha-pinnacle/PP Hero Banner 3 Verticle.mp4',
     image: '/images/project/pasha-pinnacle/hero.png',
     mobileImage: '/images/project/pasha-pinnacle/mobile-hero.png',
     title: 'Pasha Pinnacle',
@@ -21,6 +23,8 @@ const HERO_SLIDES = [
     link: '/pasha-pinnacle'
   },
   {
+    video: '/images/project/CMR/CMR Video.mp4',
+    mobileVideo: '/images/project/CMR/CMR Video Mobile.mp4',
     image: '/images/project/CMR/hero.png',
     mobileImage: '/images/project/CMR/mobile-hero.png',
     title: 'CMR Global City',
@@ -158,7 +162,7 @@ export default function HeroSection({ startZoom }) {
                 </div>
               ) : (
                 <picture className="hero-picture">
-                  <source media="(max-width: 768px)" srcSet={slide.mobileImage || slide.image} />
+                  <source media="(max-width: 768px)" srcSet={encodeURI(slide.mobileImage || slide.image)} />
                   <img
                     src={slide.image}
                     alt={slide.title}
@@ -174,21 +178,24 @@ export default function HeroSection({ startZoom }) {
 
       {/* Overlaid Content */}
       <div className="container hero-content">
-        <ScrollReveal animation="fadeUp" delay={0.1}>
-          <div className="hero-text-block" key={activeIndex} style={{ animation: 'fadeUp 0.8s ease forwards' }}>
+        <div className="hero-text-block" key={activeIndex} style={{ animation: 'fadeUp 0.8s ease forwards' }}>
+          <ScrollReveal animation="fadeUp" delay={0.1}>
             <h1 className="display-title hero-title">
               {currentSlide.title}
             </h1>
+          </ScrollReveal>
+
+          <ScrollReveal animation="fadeUp" delay={0.25}>
             <p className="hero-subtitle">
               {currentSlide.subtitle}
             </p>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
 
-        <ScrollReveal animation="fadeUp" delay={0.25}>
+        <ScrollReveal animation="fadeUp" delay={0.4}>
           <div className="hero-cta-block" key={`cta-${activeIndex}`} style={{ animation: 'fadeUp 0.8s ease forwards' }}>
             <a href={currentSlide.link} className="btn-discover">
-              DISCOVER
+              Explore
             </a>
           </div>
         </ScrollReveal>
@@ -348,7 +355,7 @@ export default function HeroSection({ startZoom }) {
           color: rgba(255, 255, 255, 0.85);
           background: rgba(255, 255, 255, 0.47);
           border: 1px solid rgba(255, 255, 255, 0.3);
-          padding: 14px 40px;
+          padding: 8px 20px;
           border-radius: 100px;
           text-decoration: none;
           backdrop-filter: blur(38px);

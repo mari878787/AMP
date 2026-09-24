@@ -62,91 +62,94 @@ export default function AboutLeaderDarkVariant() {
         </ScrollReveal>
       </div>
 
-      {DARK_LEADERS.map((leader, idx) => (
-        <React.Fragment key={leader.id}>
-          {idx > 0 && (
-            <div className="dark-leader-divider-wrap">
-              <div className="dark-leader-divider-line" />
-            </div>
-          )}
-          <section 
-            className={`dark-leader-variant-section ${idx % 2 !== 0 ? 'dark-leader-alt-row' : ''}`}
-          >
-          <div className="dark-leader-container">
-            
-            {/* Left Side: Leader Portrait with Seamless Gradient Blend */}
-            <div className="dark-leader-image-col">
-              <ScrollReveal animation="fadeRight" delay={0.1}>
-                <div 
-                  className="dark-leader-img-wrapper" 
-                  onClick={() => setSelectedLeader(leader)}
-                  title={`Click to read full bio of ${leader.name}`}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <img 
-                    src={leader.image} 
-                    alt={leader.name} 
-                    className="dark-leader-img" 
-                  />
-                  {/* Multi-directional gradient blend mask */}
-                  <div className="dark-leader-blend-overlay" />
-                </div>
-              </ScrollReveal>
-            </div>
-
-            {/* Right Side: Editorial Quote & Interactive Arrow Button */}
-            <div className="dark-leader-content-col">
-              <ScrollReveal animation="fadeLeft" delay={0.2}>
-                <div className="dark-leader-content-inner">
-                  
-                  {/* Gold Quote Mark */}
-                  <div className="dark-leader-quote-icon">
-                    <svg width="44" height="34" viewBox="0 0 48 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0 38V22.8C0 15.2 2.02667 9.24667 6.08 4.94C10.24 0.633333 16.2133 -0.633333 24 0.000001V8.36C19.7333 8.36 16.5333 9.42667 14.4 11.56C12.3733 13.6933 11.36 16.6667 11.36 20.48H24V38H0ZM24 38V22.8C24 15.2 26.0267 9.24667 30.08 4.94C34.24 0.633333 40.2133 -0.633333 48 0.000001V8.36C43.7333 8.36 40.5333 9.42667 38.4 11.56C36.3733 13.6933 35.36 16.6667 35.36 20.48H48V38H24Z" fill="#b48564"/>
-                    </svg>
-                  </div>
-
-                  {/* Big Quote Headline */}
-                  <h2 className="dark-leader-quote-headline">
-                    {leader.quote}
-                  </h2>
-
-                  {/* Description Paragraph */}
-                  <p className="dark-leader-paragraph">
-                    {leader.desc}
-                  </p>
-
-                  {/* Signature & Interactive Arrow Button for Full Bio */}
-                  <button 
-                    type="button" 
-                    className="dark-leader-interactive-row" 
-                    onClick={() => setSelectedLeader(leader)}
-                    aria-label={`Read full details for ${leader.name}`}
-                    title="Click to view full biography"
-                  >
-                    <div className="dark-leader-signature-block">
-                      <div className="dark-leader-sig-script">
-                        {leader.signatureTitle}
-                      </div>
-                      <div className="dark-leader-role-tag">
-                        {leader.role}
-                      </div>
+      {DARK_LEADERS.map((leader, idx) => {
+        const isMD = leader.id === 1;
+        return (
+          <React.Fragment key={leader.id}>
+            {idx > 0 && (
+              <div className="dark-leader-divider-wrap">
+                <div className="dark-leader-divider-line" />
+              </div>
+            )}
+            <section 
+              className={`dark-leader-variant-section ${isMD ? 'dark-leader-md-reversed' : ''}`}
+            >
+              <div className="dark-leader-container">
+                
+                {/* Image Column */}
+                <div className="dark-leader-image-col">
+                  <ScrollReveal animation={isMD ? "fadeLeft" : "fadeRight"} delay={0.1}>
+                    <div 
+                      className="dark-leader-img-wrapper" 
+                      onClick={() => setSelectedLeader(leader)}
+                      title={`Click to read full bio of ${leader.name}`}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <img 
+                        src={leader.image} 
+                        alt={leader.name} 
+                        className="dark-leader-img" 
+                      />
+                      {/* Multi-directional gradient blend mask */}
+                      <div className={`dark-leader-blend-overlay ${isMD ? 'blend-left' : ''}`} />
                     </div>
-
-                    <div className="dark-leader-arrow-badge">
-                      <span>Read Bio</span>
-                      <ArrowUpRight size={18} strokeWidth={1.6} />
-                    </div>
-                  </button>
-
+                  </ScrollReveal>
                 </div>
-              </ScrollReveal>
-            </div>
 
-          </div>
-        </section>
-        </React.Fragment>
-      ))}
+                {/* Content Column */}
+                <div className="dark-leader-content-col">
+                  <ScrollReveal animation={isMD ? "fadeRight" : "fadeLeft"} delay={0.2}>
+                    <div className="dark-leader-content-inner">
+                      
+                      {/* Gold Quote Mark */}
+                      <div className="dark-leader-quote-icon">
+                        <svg width="44" height="34" viewBox="0 0 48 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0 38V22.8C0 15.2 2.02667 9.24667 6.08 4.94C10.24 0.633333 16.2133 -0.633333 24 0.000001V8.36C19.7333 8.36 16.5333 9.42667 14.4 11.56C12.3733 13.6933 11.36 16.6667 11.36 20.48H24V38H0ZM24 38V22.8C24 15.2 26.0267 9.24667 30.08 4.94C34.24 0.633333 40.2133 -0.633333 48 0.000001V8.36C43.7333 8.36 40.5333 9.42667 38.4 11.56C36.3733 13.6933 35.36 16.6667 35.36 20.48H48V38H24Z" fill="#b48564"/>
+                        </svg>
+                      </div>
+
+                      {/* Big Quote Headline */}
+                      <h2 className="dark-leader-quote-headline">
+                        {leader.quote}
+                      </h2>
+
+                      {/* Description Paragraph */}
+                      <p className="dark-leader-paragraph">
+                        {leader.desc}
+                      </p>
+
+                      {/* Signature & Interactive Arrow Button for Full Bio */}
+                      <button 
+                        type="button" 
+                        className="dark-leader-interactive-row" 
+                        onClick={() => setSelectedLeader(leader)}
+                        aria-label={`Read full details for ${leader.name}`}
+                        title="Click to view full biography"
+                      >
+                        <div className="dark-leader-signature-block">
+                          <div className="dark-leader-sig-script">
+                            {leader.signatureTitle}
+                          </div>
+                          <div className="dark-leader-role-tag">
+                            {leader.role}
+                          </div>
+                        </div>
+
+                        <div className="dark-leader-arrow-badge">
+                          <span>READ BIO</span>
+                          <ArrowUpRight size={18} strokeWidth={1.6} />
+                        </div>
+                      </button>
+
+                    </div>
+                  </ScrollReveal>
+                </div>
+
+              </div>
+            </section>
+          </React.Fragment>
+        );
+      })}
 
       {/* ── LIGHT ARCHITECTURAL FULL BIOGRAPHY MODAL (MATCHING SCREENSHOT) ── */}
       {selectedLeader && (
@@ -262,6 +265,20 @@ export default function AboutLeaderDarkVariant() {
           z-index: 2;
         }
 
+        /* Managing Director Swap: Content Left, Image Right */
+        .dark-leader-md-reversed .dark-leader-container {
+          grid-template-columns: 6.5fr 5.5fr;
+        }
+
+        .dark-leader-md-reversed .dark-leader-content-col {
+          order: 1;
+          padding: 40px 40px 40px 80px;
+        }
+
+        .dark-leader-md-reversed .dark-leader-image-col {
+          order: 2;
+        }
+
         /* Left Column: Image with Smooth Blend Overlay */
         .dark-leader-image-col {
           position: relative;
@@ -305,6 +322,14 @@ export default function AboutLeaderDarkVariant() {
             linear-gradient(to bottom, transparent 65%, #050505 100%),
             linear-gradient(to top, transparent 85%, #050505 100%);
           pointer-events: none;
+        }
+
+        .dark-leader-blend-overlay.blend-left {
+          background: 
+            linear-gradient(to left, transparent 50%, #050505 98%),
+            linear-gradient(to right, transparent 80%, #050505 100%),
+            linear-gradient(to bottom, transparent 65%, #050505 100%),
+            linear-gradient(to top, transparent 85%, #050505 100%);
         }
 
         /* Right Column: Content */
@@ -381,9 +406,10 @@ export default function AboutLeaderDarkVariant() {
         }
 
         .dark-leader-sig-script {
-          font-family: 'Playfair Display', var(--font-serif), serif;
-          font-style: italic;
-          font-size: 30px;
+          font-family: var(--font-heading);
+          font-style: normal;
+          font-size: 28px;
+          font-weight: 400;
           color: #b48564;
           letter-spacing: 0.02em;
           transition: color 0.3s ease;
@@ -410,11 +436,16 @@ export default function AboutLeaderDarkVariant() {
           font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.05em;
+          text-transform: uppercase;
           transition: all 0.3s ease;
           flex-shrink: 0;
         }
 
-        /* Light Architectural Modal (Matching Screenshot) */
+        .dark-leader-arrow-badge span {
+          text-transform: uppercase;
+        }
+
+        /* Light Architectural Modal */
         .sobha-bio-modal-backdrop {
           position: fixed;
           inset: 0;
@@ -510,7 +541,7 @@ export default function AboutLeaderDarkVariant() {
         }
 
         .sobha-bio-modal-title {
-          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-family: var(--font-heading);
           font-size: 34px;
           color: #111111;
           margin: 0 0 6px 0;
@@ -549,7 +580,7 @@ export default function AboutLeaderDarkVariant() {
         }
 
         .sobha-bio-p:first-child::first-letter {
-          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-family: var(--font-heading);
           font-size: 32px;
           font-weight: 400;
           color: #b48564;
@@ -564,6 +595,16 @@ export default function AboutLeaderDarkVariant() {
           .dark-leader-container {
             grid-template-columns: 1fr;
             gap: 40px;
+          }
+          .dark-leader-md-reversed .dark-leader-container {
+            grid-template-columns: 1fr;
+          }
+          .dark-leader-md-reversed .dark-leader-content-col {
+            order: initial;
+            padding: 0 30px 40px;
+          }
+          .dark-leader-md-reversed .dark-leader-image-col {
+            order: initial;
           }
           .dark-leader-content-col {
             padding: 0 30px 40px;
@@ -592,6 +633,9 @@ export default function AboutLeaderDarkVariant() {
             height: 380px;
           }
           .dark-leader-content-col {
+            padding: 0 20px 20px;
+          }
+          .dark-leader-md-reversed .dark-leader-content-col {
             padding: 0 20px 20px;
           }
         }

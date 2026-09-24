@@ -160,11 +160,27 @@ export default function ProjectSpecs({
                 <div className="sp2-card-sep"></div>
 
                 <div className="sp2-card-details">
-                  {spec.details && spec.details.map((d, i) => (
-                    <p key={i} className="sp2-card-detail-text">
-                      {d}
-                    </p>
-                  ))}
+                  {spec.details && spec.details.map((d, i) => {
+                    let formatted = d;
+                    if (typeof d === 'string') {
+                      const colonIdx = d.indexOf(':');
+                      if (colonIdx > 0 && colonIdx <= 40) {
+                        const label = d.slice(0, colonIdx + 1);
+                        const rest = d.slice(colonIdx + 1);
+                        formatted = (
+                          <>
+                            <strong style={{ fontWeight: 600, color: '#111111' }}>{label}</strong>
+                            {rest}
+                          </>
+                        );
+                      }
+                    }
+                    return (
+                      <p key={i} className="sp2-card-detail-text">
+                        {formatted}
+                      </p>
+                    );
+                  })}
                 </div>
 
                 {/* Bottom Pagination Dashes Row */}

@@ -182,10 +182,7 @@ export default function TestimonialsSection() {
 
         .tcs-subtitle {
           text-align: center;
-          color: #666666;
-          font-family: var(--font-sans);
-          font-size: 15px;
-          margin-top: 10px;
+          margin: 10px auto 0;
         }
 
         /* ── Viewport ── */

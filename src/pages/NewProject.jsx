@@ -189,41 +189,60 @@ export default function NewProject({ project }) {
     floorPlan: {
       '3bhk': [
         {
-          id: 'plan3bhk_20_27',
-          name: '3 BHK Villa (Units 20–27)',
+          id: 'plan3bhk_11_18',
+          name: '3 BHK Villa (Plots 11–18 & 30–32)',
           type: '3 BHK Villa',
-          builtUp: '2,250 Sq.Ft.',
-          plot: '1,200 – 1,350 Sq.Ft.',
-          facing: 'North & East Facing',
+          plot: '1,260 Sq.Ft.',
+          saleableArea: '2,233 – 2,287 Sq.Ft.',
+          plotFacing: 'South',
+          villaFacing: 'South',
+          facing: 'Plot: South | Villa: South',
+          image: '/images/project/CML/floor-plan/CML 3BHK 11-18 & 30-32.jpg.jpeg'
+        },
+        {
+          id: 'plan3bhk_20_27',
+          name: '3 BHK Villa (Plots 20–28 & 41–44)',
+          type: '3 BHK Villa',
+          plot: '1,260 – 1,452 Sq.Ft.',
+          saleableArea: '2,233 – 2,287 Sq.Ft.',
+          plotFacing: 'North',
+          villaFacing: 'North',
+          facing: 'Plot: North | Villa: North',
           image: '/images/project/CML/floor-plan/CML 3BHK 20-27.jpg.jpeg'
         }
       ],
       '4bhk': [
         {
           id: 'plan4bhk_1_10',
-          name: '4 BHK Luxury Villa (Units 1–10)',
+          name: '4 BHK Villa (Plots 1–10)',
           type: '4 BHK Villa',
-          builtUp: '2,850 Sq.Ft.',
-          plot: '1,500 – 1,650 Sq.Ft.',
-          facing: 'North & East Facing',
+          plot: '1,467 – 1,787 Sq.Ft.',
+          saleableArea: '2,864 – 3,200 Sq.Ft.',
+          plotFacing: 'North',
+          villaFacing: 'North',
+          facing: 'Plot: North | Villa: North',
           image: '/images/project/CML/floor-plan/CML 4BHK 1-10.jpg.jpeg'
         },
         {
-          id: 'plan4bhk_20_27',
-          name: '4 BHK Grand Villa (Units 20–27)',
+          id: 'plan4bhk_37_39',
+          name: '4 BHK Villa (Plots 37–39)',
           type: '4 BHK Villa',
-          builtUp: '3,100 Sq.Ft.',
-          plot: '1,600 – 1,800 Sq.Ft.',
-          facing: 'East & North Facing',
+          plot: '1,554 – 1,642 Sq.Ft.',
+          saleableArea: '2,904 – 2,950 Sq.Ft.',
+          plotFacing: 'North',
+          villaFacing: 'North',
+          facing: 'Plot: North | Villa: North',
           image: '/images/project/CML/floor-plan/CML 4BHK 20-27.jpg.jpeg'
         },
         {
-          id: 'plan4bhk_sig',
-          name: '4 BHK Signature Villa',
+          id: 'plan4bhk_34_36',
+          name: '4 BHK Villa (Plots 34–36)',
           type: '4 BHK Villa',
-          builtUp: '3,300 Sq.Ft.',
-          plot: '1,800 – 2,000 Sq.Ft.',
-          facing: 'North Facing',
+          plot: '1,554 – 1,762 Sq.Ft.',
+          saleableArea: '2,927 – 3,200 Sq.Ft.',
+          plotFacing: 'South',
+          villaFacing: 'East',
+          facing: 'Plot: South | Villa: East',
           image: '/images/project/CML/floor-plan/CML 4BHK.jpg (1).jpeg'
         }
       ]
@@ -329,18 +348,18 @@ export default function NewProject({ project }) {
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [amenityIdx, setAmenityIdx] = useState(0);
   const amenities = [
-    { image: "/images/project/CML/amenities/18.png", icon: "/images/project/CML/amenities/icon/Security.png", title: "24*7 Security", desc: "Round-the-clock smart surveillance." },
-    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/CML/amenities/icon/Clubhouse.png", title: "Clubhouse", desc: "A massive, premium recreational space." },
-    { image: "/images/project/CML/amenities/16.png", icon: "/images/project/CML/amenities/icon/gym.png", title: "Gym", desc: "Fully equipped with modern fitness equipment." },
-    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/CML/amenities/icon/PartyHall.png", title: "Party Hall", desc: "Elegant space for events and gatherings." },
-    { image: "/images/project/CML/amenities/8.png", icon: "/images/project/CML/amenities/icon/Indoor Games.png", title: "Indoor Games", desc: "Dedicated area for indoor recreation." },
-    { image: "/images/project/aminities/villa & apartment/yoha-room.png", icon: "/images/project/CML/amenities/icon/yogaRoom.png", title: "Yoga Room", desc: "A tranquil space for wellness and meditation." },
-    { image: "/images/project/CML/amenities/4.png", icon: "/images/project/CML/amenities/icon/Play Area.png", title: "Play Area", desc: "Safe and fun play zones for children." },
-    { image: "/images/project/CML/amenities/2.png", icon: "/images/project/CML/amenities/icon/Solar Lighting.png", title: "Solar Lighting", desc: "Eco-friendly illumination." },
-    { image: "/images/project/CML/amenities/20.png", icon: "/images/project/CML/amenities/icon/DTH Connection.png", title: "DTH Connection", desc: "Ready connections for entertainment." },
-    { image: "/images/project/CML/amenities/11.png", icon: "/images/project/CML/amenities/icon/Rainwater Harvesting.png", title: "Rainwater Harvesting", desc: "As per CMWSSB Norms." },
-    { image: "/images/project/CML/amenities/12.png", icon: "/images/project/CML/amenities/icon/Coarse Paint.png", title: "Coarse Paint", desc: "Weather coarse paint on the terrace floor." },
-    { image: "/images/project/aminities/villa & apartment/Anti-Termite.png", icon: "/images/project/CML/amenities/icon/Anti-Termite.png", title: "Anti-Termite", desc: "Ensuring long-lasting protection." }
+    { image: "/images/project/CML/amenities/18.png", icon: "/images/project/aminities/icon/Security.png", title: "24*7 Security", desc: "Round-the-clock smart surveillance." },
+    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/aminities/icon/Clubhouse.png", title: "Clubhouse", desc: "A massive, premium recreational space." },
+    { image: "/images/project/CML/amenities/16.png", icon: "/images/project/aminities/icon/gym.png", title: "Gym", desc: "Fully equipped with modern fitness equipment." },
+    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/aminities/icon/PartyHall.png", title: "Party Hall", desc: "Elegant space for events and gatherings." },
+    { image: "/images/project/CML/amenities/8.png", icon: "/images/project/aminities/icon/Indoor Games.png", title: "Indoor Games", desc: "Dedicated area for indoor recreation." },
+    { image: "/images/project/aminities/villa & apartment/yoha-room.png", icon: "/images/project/aminities/icon/yogaRoom.png", title: "Yoga Room", desc: "A tranquil space for wellness and meditation." },
+    { image: "/images/project/CML/amenities/4.png", icon: "/images/project/aminities/icon/Play Area.png", title: "Play Area", desc: "Safe and fun play zones for children." },
+    { image: "/images/project/CML/amenities/2.png", icon: "/images/project/aminities/icon/Solar Lighting.png", title: "Solar Lighting", desc: "Eco-friendly illumination." },
+    { image: "/images/project/CML/amenities/20.png", icon: "/images/project/aminities/icon/DTH Connection.png", title: "DTH Connection", desc: "Ready connections for entertainment." },
+    { image: "/images/project/CML/amenities/11.png", icon: "/images/project/aminities/icon/Rainwater Harvesting.png", title: "Rainwater Harvesting", desc: "As per CMWSSB Norms." },
+    { image: "/images/project/aminities/villa & apartment/coarse-paint.png", icon: "/images/project/aminities/icon/Coarse Paint.png", title: "Coarse Paint", desc: "Weather coarse paint on the terrace floor." },
+    { image: "/images/project/aminities/villa & apartment/Anti-Termite.png", icon: "/images/project/aminities/icon/Anti-Termite.png", title: "Anti-Termite", desc: "Ensuring long-lasting protection." }
   ];
   const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
 
@@ -398,31 +417,53 @@ export default function NewProject({ project }) {
       }
     };
   }, [activeTab]);
+
+  const galleryImages = {
+    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
+    interiors: Array.from({ length: 33 }, (_, i) => ({
+      src: `/images/project/CML/Interiors/cml-interior-${String(i + 1).padStart(2, '0')}.jpg`,
+      title: `Crystal Moonlight Interior ${i + 1}`
+    })),
+    exteriors: [
+      { src: '/images/project/CML/extirior/Views_Scene_1_4k_4.png', title: 'Exterior Architectural View' },
+      { src: '/images/project/CML/extirior/Master_Plan_1_2K.png', title: 'Master Plan View' },
+      { src: '/images/project/CML/extirior/Master_Plan_2_4K.png', title: 'Master Plan 4K View' },
+      { src: '/images/project/CML/extirior/Master_Plan_2k_New.png', title: 'Master Plan 2K Perspective' },
+      { src: '/images/project/CML/extirior/Master_Plan_4_4K.png', title: 'Master Plan Elevation' },
+      { src: '/images/project/CML/extirior/Master_Plan_4k_New_1.png', title: 'Master Plan Perspective 1' },
+      { src: '/images/project/CML/extirior/Master_Plan_4k_New_2.png', title: 'Master Plan Perspective 2' },
+      { src: '/images/project/CML/extirior/Master_Plan_4k_New_4.png', title: 'Master Plan Perspective 4' },
+      { src: '/images/project/CML/extirior/Master_Plan_Areial_3_4k.png', title: 'Master Plan Aerial View 3' },
+      { src: '/images/project/CML/extirior/Master_Plan_Areial_4_4k.png', title: 'Master Plan Aerial View 4' }
+    ]
+  };
+
   const [galleryAnim, setGalleryAnim] = useState({ exteriors: true, interiors: true, videos: true });
   const galleryTimer = useRef({ exteriors: null, interiors: null, videos: null });
   useEffect(() => {
-    ['exteriors', 'interiors', 'videos'].forEach((section) => {
+    Object.keys(galleryImages).forEach((section) => {
       if (!galleryImages[section]) return;
       const total = galleryImages[section].length;
       if (total <= 1) return;
       const idx = galleryIndices[section];
+      if (idx === undefined) return;
 
       clearTimeout(galleryTimer.current[section]);
-      if (idx === total + 1) {
+      if (idx >= total + 1) {
         galleryTimer.current[section] = setTimeout(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: false }));
           setGalleryIndices(prev => ({ ...prev, [section]: 1 }));
         }, 500);
-      } else if (idx === 0) {
+      } else if (idx <= 0) {
         galleryTimer.current[section] = setTimeout(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: false }));
           setGalleryIndices(prev => ({ ...prev, [section]: total }));
         }, 500);
       }
     });
-  }, [galleryIndices]);
+  }, [galleryIndices, galleryImages]);
   useEffect(() => {
-    ['exteriors', 'interiors', 'videos'].forEach((section) => {
+    Object.keys(galleryImages).forEach((section) => {
       if (!galleryAnim[section]) {
         const t = requestAnimationFrame(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: true }));
@@ -430,21 +471,21 @@ export default function NewProject({ project }) {
         return () => cancelAnimationFrame(t);
       }
     });
-  }, [galleryAnim]);
+  }, [galleryAnim, galleryImages]);
   const prevGallerySlide = (section) => {
-    if (galleryImages[section].length <= 1) return;
+    if (!galleryImages[section] || galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
     setGalleryIndices((prev) => ({
       ...prev,
-      [section]: prev[section] - 1
+      [section]: (prev[section] || 1) - 1
     }));
   };
   const nextGallerySlide = (section) => {
-    if (galleryImages[section].length <= 1) return;
+    if (!galleryImages[section] || galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
     setGalleryIndices((prev) => ({
       ...prev,
-      [section]: prev[section] + 1
+      [section]: (prev[section] || 1) + 1
     }));
   };
   // Scroll to top on mount
@@ -482,25 +523,7 @@ export default function NewProject({ project }) {
     { title: "Chennai International Airport", dist: "25 mins" },
     { title: "Elcot SEZ OMR", dist: "12 mins" }
   ];
-  const galleryImages = {
-    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
-    interiors: Array.from({ length: 33 }, (_, i) => ({
-      src: `/images/project/CML/Interiors/cml-interior-${String(i + 1).padStart(2, '0')}.jpg`,
-      title: `Crystal Moonlight Interior ${i + 1}`
-    })),
-    exteriors: [
-      { src: '/images/project/CML/extirior/1500x850.png', title: 'Villa Architectural Perspective' },
-      { src: '/images/project/CML/extirior/North_Day_4K_Front.png', title: 'North Facing Villa Façade' },
-      { src: '/images/project/CML/extirior/North_Day_4K_Front_2.png', title: 'Contemporary Front Elevation' },
-      { src: '/images/project/CML/extirior/North_Day_4K_Left_2.png', title: 'Villa Corner Perspective' },
-      { src: '/images/project/CML/extirior/North_Day_4K_Right_2.png', title: 'Side Elevation & Landscaping' },
-      { src: '/images/project/CML/extirior/North_Day_4K_Top_2.png', title: 'Aerial Community Panorama' },
-      { src: '/images/project/CML/extirior/North_Day_4K_Top_3.png', title: 'Master Plan Aerial View' },
-      { src: '/images/project/CML/extirior/North_Day_4K_Top_5.png', title: 'Avenue Aerial Perspective' },
-      { src: '/images/project/CML/extirior/North_Row_4K_Day 2.png', title: 'Villa Row Streetscape' },
-      { src: '/images/project/CML/extirior/North_Row_8k.jpg.jpeg', title: 'Grand Community Boulevard' }
-    ]
-  };
+  const galleryImages_old = null;
   useEffect(() => {
     const interval = setInterval(() => {
       setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
@@ -569,9 +592,9 @@ export default function NewProject({ project }) {
         <section className="project-hero-section">
           <div className="project-hero-background">
             <picture className="project-hero-picture">
-              <source media="(max-width: 768px)" srcSet="/images/project/CML/hero-mobile.png" />
+              <source media="(max-width: 768px)" srcSet="/images/project/CML/row-villa-mobile-hero.png" />
               <img
-                src="/images/project/CML/Elevation.png"
+                src="/images/project/CML/North_Row_4K_Day 1.webp"
                 alt="Crystal Moonlight"
                 className="project-hero-bg-image animate-zoom"
               />
@@ -985,86 +1008,102 @@ export default function NewProject({ project }) {
                       </div>
                     </div>
                   ) : (
-                    <>
-                      <div
-                        className="gallery-spotlight-track"
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 'var(--gallery-gap, 8vw)',
-                          width: 'max-content',
-                          transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                          transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
-                        }}
-                      >
-                        {(() => {
-                          const items = galleryImages[galleryTab] || [];
-                          const total = items.length;
-                          const extended = total > 1
-                            ? [items[total - 1], ...items, items[0]]
-                            : items;
-                          return extended.map((img, idx) => {
-                            const isActive = idx === galleryIndices[galleryTab];
-                            const realIdx = total > 1
-                              ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
-                              : 0;
-                            return (
-                              <div
-                                key={idx}
-                                className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
-                                style={{
-                                  flexShrink: 0,
-                                  flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                                  width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                                  transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
-                                  cursor: 'pointer',
-                                  overflow: 'hidden',
-                                  position: 'relative',
-                                  height: 'calc(100vh - 165px)',
-                                  maxHeight: '720px',
-                                  minHeight: '320px',
-                                  boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
-                                }}
-                                onClick={() => {
-                                  if (isActive) {
-                                    handleOpenLightbox(galleryTab, realIdx);
-                                  } else {
-                                    setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
-                                    setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
-                                  }
-                                }}
-                              >
-                                <img
-                                  src={img.src}
-                                  alt={img.title}
-                                  className="gallery-spotlight-img"
-                                />
+                    (() => {
+                      const items = galleryImages[galleryTab] || [];
+                      const total = items.length;
+                      if (total === 0) return null;
+                      const isSingle = total === 1;
+                      const extended = !isSingle
+                        ? [items[total - 1], ...items, items[0]]
+                        : items;
 
-                                <div className="gallery-deck-hover-overlay">
-                                  <Maximize2 size={24} className="hover-overlay-zoom-icon" />
-                                  <span className="hover-overlay-title">{img.title}</span>
+                      return (
+                        <>
+                          <div
+                            className="gallery-spotlight-track"
+                            style={isSingle ? {
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              width: '100%',
+                              transform: 'none'
+                            } : {
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 'var(--gallery-gap, 8vw)',
+                              width: 'max-content',
+                              transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+                              transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
+                            }}
+                          >
+                            {extended.map((img, idx) => {
+                              const isActive = isSingle ? true : idx === galleryIndices[galleryTab];
+                              const realIdx = total > 1
+                                ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
+                                : 0;
+                              return (
+                                <div
+                                  key={idx}
+                                  className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
+                                  style={{
+                                    flexShrink: 0,
+                                    flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                    width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                    transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
+                                    cursor: 'pointer',
+                                    overflow: 'hidden',
+                                    position: 'relative',
+                                    height: 'calc(100vh - 165px)',
+                                    maxHeight: '720px',
+                                    minHeight: '320px',
+                                    boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
+                                  }}
+                                  onClick={() => {
+                                    if (isActive) {
+                                      handleOpenLightbox(galleryTab, realIdx);
+                                    } else {
+                                      setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
+                                      setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
+                                    }
+                                  }}
+                                >
+                                  <img
+                                    src={img.src}
+                                    alt={img.title}
+                                    className="gallery-spotlight-img"
+                                  />
+
+                                  <div className="gallery-deck-hover-overlay">
+                                    <Maximize2 size={24} className="hover-overlay-zoom-icon" />
+                                    <span className="hover-overlay-title">{img.title}</span>
+                                  </div>
                                 </div>
-                              </div>
-                            );
-                          });
-                        })()}
-                      </div>
-                      {/* Navigation Arrows positioned on left/right previews */}
-                      <button
-                        className="gallery-spotlight-arrow prev"
-                        onClick={() => prevGallerySlide(galleryTab)}
-                        aria-label="Previous image"
-                      >
-                        <ChevronLeft size={24} />
-                      </button>
-                      <button
-                        className="gallery-spotlight-arrow next"
-                        onClick={() => nextGallerySlide(galleryTab)}
-                        aria-label="Next image"
-                      >
-                        <ChevronRight size={24} />
-                      </button>
-                    </>
+                              );
+                            })}
+                          </div>
+
+                          {/* Navigation Arrows positioned on left/right previews (Only when > 1 item) */}
+                          {total > 1 && (
+                            <>
+                              <button
+                                className="gallery-spotlight-arrow prev"
+                                onClick={() => prevGallerySlide(galleryTab)}
+                                aria-label="Previous image"
+                              >
+                                <ChevronLeft size={24} />
+                              </button>
+                              <button
+                                className="gallery-spotlight-arrow next"
+                                onClick={() => nextGallerySlide(galleryTab)}
+                                aria-label="Next image"
+                              >
+                                <ChevronRight size={24} />
+                              </button>
+                            </>
+                          )}
+                        </>
+                      );
+                    })()
                   )}
                 </ScrollReveal>
               </section>
@@ -1261,7 +1300,7 @@ export default function NewProject({ project }) {
                       src={layoutsData.masterPlan.image}
                       alt="Master Plan"
                       onClick={() => setFloorplanLightbox({ image: layoutsData.masterPlan.image, name: 'Master Plan' })}
-                      style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
+                      style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', cursor: 'pointer' }}
                     />
                   </ScrollReveal>
                 )}
@@ -1472,16 +1511,20 @@ export default function NewProject({ project }) {
                             <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.type}</span>
                           </div> */}
                           <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Built-up Area</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.builtUp}</span>
-                          </div>
-                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
                             <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Plot Area</span>
                             <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.plot}</span>
                           </div>
                           <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Direction</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.facing}</span>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Saleable Area</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.saleableArea}</span>
+                          </div>
+                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Plot Facing</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.plotFacing || 'North'}</span>
+                          </div>
+                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Villa Facing</span>
+                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails.villaFacing || 'North'}</span>
                           </div>
                         </div>
                       </div>
@@ -2069,11 +2112,6 @@ export default function NewProject({ project }) {
           display: block !important;
           pointer-events: none;
         }
-        @media (min-width: 1248px) {
-          .overview-logo-badge {
-            left: calc((100vw - 1200px) / 2 + 24px);
-          }
-        }
         @media (max-width: 768px) {
           .overview-logo-badge {
             left: 14px;
@@ -2489,7 +2527,7 @@ export default function NewProject({ project }) {
           color: rgba(255, 255, 255, 0.85);
           background: rgba(255, 255, 255, 0.47);
           border: 1px solid rgba(255, 255, 255, 0.3);
-          padding: 14px 40px;
+          padding: 10px 20px;
           border-radius: 100px;
           text-decoration: none;
           backdrop-filter: blur(38px);
@@ -2849,7 +2887,8 @@ export default function NewProject({ project }) {
           flex-direction: column;
         }
         .amenities-grid-container {
-          display: flex;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
           flex-direction: column;
           gap: 8px;
           width: 100%;
@@ -3723,7 +3762,7 @@ export default function NewProject({ project }) {
         /* Left Image Panel */
         .modal-image-panel {
           flex: 1;
-          background: url('/images/project/CML/Elevation-card.png') center/cover no-repeat;
+          background: url('/images/project/CML/North_Row_4K_Day 2.webp') center/cover no-repeat;
           position: relative;
           display: flex;
           align-items: flex-end;
@@ -4478,7 +4517,7 @@ export default function NewProject({ project }) {
             text-align: center !important;
           }
           .project-hero-cta-block .btn-discover {
-            padding: 12px 32px !important;
+            padding: 10px 22px !important;
             font-size: 14px !important;
           }
           

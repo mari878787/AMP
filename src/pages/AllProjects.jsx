@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import Button from '../components/Button';
 import TeaserPosterModal from '../components/TeaserPosterModal';
+import ProjectStoryCard from '../components/ProjectStoryCard';
 import { ArrowRight, MapPin, Home, Layers, Tag, ChevronDown, Map, Building2, Maximize, FileText } from 'lucide-react';
 
 const PROJECTS_DATA = [
@@ -23,7 +24,18 @@ const PROJECTS_DATA = [
     price: '₹1 Cr - ₹3 Cr',
     priceRange: '₹1 Cr - ₹3 Cr',
     bedrooms: ['3 BHK', '4 BHK'],
-    image: '/images/project/CML/Elevation-card.png',
+    image: '/images/project/CML/North_Row_4K_Day 2.webp',
+    mobileImage: '/images/project/CML/row-villa-mobile-hero.png',
+    images: [
+      '/images/project/CML/extirior/Views_Scene_1_4k_4.png',
+      '/images/project/CML/extirior/Master_Plan_2_4K.png',
+      '/images/project/CML/extirior/Master_Plan_2k_New.png',
+      '/images/project/CML/extirior/Master_Plan_4_4K.png',
+      '/images/project/CML/extirior/Master_Plan_4k_New_1.png',
+      '/images/project/CML/extirior/Master_Plan_4k_New_4.png',
+      '/images/project/CML/extirior/Master_Plan_Areial_3_4k.png',
+    ],
+    description: 'A sanctuary of refined luxury in Medavakkam. 47 bespoke 3 & 4 BHK villas crafted with timeless architecture, private gardens, and world-class amenities.',
     link: '/crystal-moonlight-villa'
   },
   {
@@ -42,6 +54,14 @@ const PROJECTS_DATA = [
     priceRange: 'Under ₹1 Cr',
     bedrooms: ['3 BHK'],
     image: '/images/project/pasha-pinnacle/card.png',
+    mobileImage: '/images/project/pasha-pinnacle/mobile-hero.png',
+    images: [
+      '/images/project/pasha-pinnacle/hero.webp',
+      '/images/project/pasha-pinnacle/extirior/1.webp',
+      '/images/project/pasha-pinnacle/extirior/17.webp',
+      '/images/project/pasha-pinnacle/extirior/27.webp'
+    ],
+    description: 'Exclusive 3 BHK luxury residences in the heart of Royapettah. Combining classic elegance with modern comforts across 12 private units.',
     link: '/pasha-pinnacle'
   },
   {
@@ -59,6 +79,14 @@ const PROJECTS_DATA = [
     price: '₹1 Cr - ₹3 Cr',
     priceRange: '₹1 Cr - ₹3 Cr',
     image: '/images/project/CMR/4.png',
+    mobileImage: '/images/project/CMR/mobile-hero.png',
+    images: [
+      '/images/project/CMR/4.png',
+      '/images/project/CMR/hero.webp',
+      '/images/project/CMR/Upscaled/5.webp',
+      '/images/project/CMR/Upscaled/3.webp'
+    ],
+    description: 'A premium 3.6-acre gated township of 122 ready-to-build residential plots in Maduranthakam with wide paved roads and lush green parks.',
     link: '/cmr-global-city'
   },
   {
@@ -76,6 +104,14 @@ const PROJECTS_DATA = [
     price: 'Under ₹1 Cr',
     priceRange: 'Under ₹1 Cr',
     image: '/images/project/ashok-nagar/cards.webp',
+    mobileImage: '/images/project/ashok-nagar/mobile-hero.png',
+    images: [
+      '/images/project/ashok-nagar/hero-image.webp',
+      '/images/project/ashok-nagar/image/G2.webp',
+      '/images/project/ashok-nagar/image/G1.webp',
+      '/images/project/ashok-nagar/image/G7.webp'
+    ],
+    description: 'Serene 2.30-acre villa plot community in Maduranthakam with DTCP approval, offering 48 ready-to-build plots surrounded by greenery.',
     link: '/ashok-nagar-villa-plots-in-maduranthakam'
   },
   {
@@ -94,6 +130,14 @@ const PROJECTS_DATA = [
     priceRange: 'Above ₹3 Cr',
     bedrooms: ['Bespoke'],
     image: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    mobileImage: '/images/project/Bayvista/Bay Vista Teaser - mobile.png',
+    images: [
+      '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+      '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+      '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+      '/images/project/Bayvista/Bay Vista Teaser.jpeg'
+    ],
+    description: 'Bespoke luxury beachfront estate villas along East Coast Road (ECR). Designed for panoramic ocean vistas and coastal serenity.',
     teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
     link: '#bay-vista'
   },
@@ -113,6 +157,14 @@ const PROJECTS_DATA = [
     priceRange: 'Above ₹3 Cr',
     bedrooms: ['Bespoke'],
     image: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+    mobileImage: '/images/project/lakeshore/Lakeshore Hero Banner-01-mobile.png',
+    images: [
+      '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+      '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+      '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+      '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg'
+    ],
+    description: 'An expansive 10-acre waterfront sanctuary on ECR featuring 65 exclusive bespoke luxury villas overlooking tranquil waters.',
     teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
     link: '#lakeshore'
   }
@@ -226,224 +278,30 @@ export default function AllProjects() {
         </div>
 
         <div className="container">
-
           {/* Section Headline */}
-          <div style={{ marginBottom: '40px', marginTop: '20px', textAlign: 'center' }}>
+          <div style={{ marginBottom: '50px', marginTop: '20px', textAlign: 'center' }}>
             <ScrollReveal animation="fadeUp">
               <h2 className='section-title'>
                 A Legacy of Landmarks
               </h2>
             </ScrollReveal>
           </div>
+        </div>
 
-          {/* Dropdown Filter Bar */}
-          <ScrollReveal animation="fadeUp" className="projects-filter-wrapper">
-            <div className="filter-dropdowns-bar">
-
-              {/* Category Dropdown */}
-              <FilterDropdown
-                label="Property Type"
-                options={['All', 'Villas', 'Apartments', 'Plots']}
-                value={activeCategory}
-                onChange={setActiveCategory}
-              />
-
-              {/* Bedrooms Dropdown */}
-              <FilterDropdown
-                label="Bedrooms"
-                options={bedroomOptions}
-                value={activeBedrooms}
-                onChange={setActiveBedrooms}
-              />
-
-              {/* Status Dropdown */}
-              <FilterDropdown
-                label="Project Status"
-                options={['All', 'Ongoing', 'Upcoming', 'Completed']}
-                value={activeStatus}
-                onChange={setActiveStatus}
-              />
-
-              {/* Location Dropdown (in place of Price) */}
-              <FilterDropdown
-                label="Location"
-                options={locationOptions}
-                value={activeLocation}
-                onChange={setActiveLocation}
-              />
-
-            </div>
-          </ScrollReveal>
-
-          {/* Results Count */}
-          <div className="projects-count-bar">
-            <span>Showing <strong>{filteredProjects.length}</strong> {filteredProjects.length === 1 ? 'Project' : 'Projects'}</span>
-            {(activeCategory !== 'All' || activeStatus !== 'All' || activeLocation !== 'All' || activeBedrooms !== 'All') && (
-              <button
-                className="clear-filter-text-btn"
-                onClick={() => { setActiveCategory('All'); setActiveStatus('All'); setActiveLocation('All'); setActiveBedrooms('All'); }}
-              >
-                Reset Filters
-              </button>
-            )}
+        {/* 100% Full-Width Edge-to-Edge Projects List (Matching Reference Screenshots) */}
+        {filteredProjects.length > 0 ? (
+          <div className="all-projects-fullwidth-list">
+            {filteredProjects.map((project, index) => (
+              <ScrollReveal key={project.id} animation="fadeUp" delay={index * 0.08}>
+                <ProjectStoryCard 
+                  project={project} 
+                  onSelectTeaser={(teaser) => setSelectedTeaser(teaser)} 
+                />
+              </ScrollReveal>
+            ))}
           </div>
-
-          {/* Projects Grid */}
-          {filteredProjects.length > 0 ? (
-            <div className="all-projects-grid">
-              {filteredProjects.map((project, index) => (
-                <ScrollReveal key={project.id} animation="fadeUp" delay={index * 0.08}>
-                  <a 
-                    href={project.link} 
-                    className="ap-card-link"
-                    onClick={(e) => {
-                      if (project.teaserPoster) {
-                        e.preventDefault();
-                        setSelectedTeaser({ image: project.teaserPoster, title: project.title });
-                      }
-                    }}
-                  >
-                    <div className="ap-card">
-                      {/* Image Container */}
-                      <div className="ap-img-wrapper">
-                        <img src={project.image} alt={project.title} className="ap-img" />
-
-                        {/* Top Badges */}
-                        <div className="ap-top-badges">
-                          <span className="ap-badge-category">{project.category}</span>
-                          <span className={`ap-badge-status ${project.status.toLowerCase()}`}>
-                            <span className="status-dot"></span>
-                            {project.status}
-                          </span>
-                        </div>
-
-                        {/* Bottom Structured Information Overlay */}
-                        <div className="ap-overlay-box">
-                          {/* Title & Location in place of price */}
-                          <div className="ap-header-row">
-                            <h3 className="ap-project-title">{project.title}</h3>
-                            <div className="ap-location-subtext">
-                              <MapPin size={13} className="ap-pin-icon" />
-                              <span>{project.location}</span>
-                            </div>
-                          </div>
-
-                          {/* Horizontal Thin Line */}
-                          <div style={{ width: '100%', height: '.5px', backgroundColor: 'rgba(255, 255, 255, 0.15)', marginTop: '-4px', marginBottom: '2px' }}></div>
-
-                          {/* Structured Information Grid - Icon Format (3-col + 2-col) */}
-                          {/* Structured Information Grid - Icon Format (3-col + 2-col) */}
-                          <div className="ap-icon-specs-container" style={{ display: 'flex', flexDirection: 'column', gap: '22px', marginTop: '12px' }}>
-                            {/* First Row: 3 Columns (Configuration / Units / Size for Villas/Apts; Units / Extent / Size for Plots) */}
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                              {project.category === 'Plots' ? (
-                                <>
-                                  <div className="ap-icon-spec">
-                                    <img 
-                                      src="/images/allProject/plot-total-units.png" 
-                                      alt="Total Units" 
-                                      className="spec-icon-img" 
-                                    />
-                                    <div className="spec-text-group">
-                                      <span className="spec-label">Total Units</span>
-                                      <span className="spec-value">{project.totalUnits}</span>
-                                    </div>
-                                  </div>
-                                  <div className="ap-spec-divider"></div>
-                                  <div className="ap-icon-spec">
-                                    <img 
-                                      src="/images/allProject/site-extention.png" 
-                                      alt="Site Extent" 
-                                      className="spec-icon-img" 
-                                    />
-                                    <div className="spec-text-group">
-                                      <span className="spec-label">Site Extent</span>
-                                      <span className="spec-value">{project.siteExtent}</span>
-                                    </div>
-                                  </div>
-                                  <div className="ap-spec-divider"></div>
-                                  <div className="ap-icon-spec">
-                                    <img 
-                                      src="/images/allProject/unit-size.png" 
-                                      alt="Unit Size" 
-                                      className="spec-icon-img" 
-                                    />
-                                    <div className="spec-text-group">
-                                      <span className="spec-label">Unit Size</span>
-                                      <span className="spec-value">{project.unitSize}</span>
-                                    </div>
-                                  </div>
-                                </>
-                              ) : (
-                                <>
-                                  <div className="ap-icon-spec">
-                                    <img 
-                                      src="/images/allProject/Configuration.png" 
-                                      alt="Configuration" 
-                                      className="spec-icon-img" 
-                                    />
-                                    <div className="spec-text-group">
-                                      <span className="spec-label">Configuration</span>
-                                      <span className="spec-value">{project.bhkConfig}</span>
-                                    </div>
-                                  </div>
-                                  <div className="ap-spec-divider"></div>
-                                  <div className="ap-icon-spec">
-                                    <img 
-                                      src="/images/allProject/total-units.png" 
-                                      alt="Total Units" 
-                                      className="spec-icon-img" 
-                                    />
-                                    <div className="spec-text-group">
-                                      <span className="spec-label">Total Units</span>
-                                      <span className="spec-value">{project.totalUnits}</span>
-                                    </div>
-                                  </div>
-                                  <div className="ap-spec-divider"></div>
-                                  <div className="ap-icon-spec">
-                                    <img 
-                                      src="/images/allProject/unit-size.png" 
-                                      alt="Unit Size" 
-                                      className="spec-icon-img" 
-                                    />
-                                    <div className="spec-text-group">
-                                      <span className="spec-label">Unit Size</span>
-                                      <span className="spec-value">{project.unitSize}</span>
-                                    </div>
-                                  </div>
-                                </>
-                              )}
-                            </div>
-
-                            {/* Second Row: Structure & Explore Project Outline Button */}
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                              <div className="ap-icon-spec">
-                                <img 
-                                  src={project.category === 'Plots' ? "/images/allProject/plot-Configuration.png" : "/images/allProject/Configuration.png"} 
-                                  alt="Structure" 
-                                  className="spec-icon-img" 
-                                />
-                                <div className="spec-text-group">
-                                  <span className="spec-label">Structure</span>
-                                  <span className="spec-value">{project.structure}</span>
-                                </div>
-                              </div>
-                              <div className="ap-explore-outline-cell">
-                                <span className="ap-explore-outline-btn ">
-                                  EXPLORE PROJECT
-                                  <ArrowRight size={13} className="ap-arrow" />
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </ScrollReveal>
-              ))}
-            </div>
-          ) : (
+        ) : (
+          <div className="container">
             <div className="no-projects-box">
               <h3>No projects found</h3>
               <p>We don't have any {activeStatus.toLowerCase()} {activeCategory !== 'All' ? activeCategory.toLowerCase() : ''} projects matching your current filters.</p>
@@ -451,9 +309,8 @@ export default function AllProjects() {
                 Reset All Filters
               </Button>
             </div>
-          )}
-
-        </div>
+          </div>
+        )}
       </main>
 
       <TeaserPosterModal 
@@ -466,6 +323,16 @@ export default function AllProjects() {
       <Footer />
 
       <style>{`
+        /* ── 100% Full-Width Edge-to-Edge Cards List ── */
+        .all-projects-fullwidth-list {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 60px;
+          margin-top: 20px;
+          margin-bottom: 60px;
+        }
+
         /* ── Hero Banner ── */
         .all-projects-hero {
           position: relative;

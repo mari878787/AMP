@@ -34,19 +34,27 @@ export default function WhyProject({
         </ScrollReveal>
 
         {/* Right Column: Content */}
-        <ScrollReveal className="why-project-content" animation="fadeUp" delay={0.25} as="div">
+        <div className="why-project-content">
           <div className="why-project-content-wrapper">
-            <h2 className="section-title">
-              WHY {firstWord}<br />{remainingWords}
-            </h2>
-            <p className="why-project-description">
-              {description}
-            </p>
-            <Button href={brochureUrl} theme="light">
-              DOWNLOAD BROCHURE
-            </Button>
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <h2 className="section-title">
+                WHY {firstWord}<br />{remainingWords}
+              </h2>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.25}>
+              <p className="why-project-description">
+                {description}
+              </p>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.4}>
+              <Button href={brochureUrl} theme="light">
+                DOWNLOAD BROCHURE
+              </Button>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
+        </div>
 
 
       </div>

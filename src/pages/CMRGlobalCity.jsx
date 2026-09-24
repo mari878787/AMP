@@ -18,15 +18,9 @@ import ProjectPricingSection from '../components/ProjectPricingSection';
 const VIDEO_SLIDES = [
   {
     title: "CMR Global City Walkthrough",
-    thumbnail: "/images/project/CMR/overview.png",
+    thumbnail: "/images/project/CMR/hero.png",
     buttonLabel: "WALKTHROUGH",
-    url: "/images/project/CMR/CMR -.mp4"
-  },
-  {
-    title: "CMR Explainer Video",
-    thumbnail: "/images/project/CMR/why-project.png",
-    buttonLabel: "EXPLAINER",
-    url: "/images/project/CMR/CMR Explainer Video.mp4"
+    url: "/images/project/CMR/CMR RAW Clip.mp4"
   }
 ];
 
@@ -131,25 +125,25 @@ export default function CMRGlobalCity({ project }) {
       title: "33/30/24 Feet Concrete Roads with Drainage System",
       desc: "Expansive 33ft, 30ft, and 24ft heavy-duty concrete internal avenues with integrated stormwater drainage networks for superior durability.",
       image: "/images/project/aminities/plots/Concrete Roads with Drainage System.png",
-      icon: "/images/project/CML/amenities/icon/Solar Lighting.png"
+      icon: "/images/project/aminities/icon/Blacktop-Roads.png"
     },
     {
       title: "Park Facilities: 2 Nos.",
       desc: "Two dedicated, beautifully landscaped open green parks curated for children play, leisure walks, and community recreation.",
       image: "/images/project/aminities/plots/Park Facilities.png",
-      icon: "/images/project/CML/amenities/icon/Play Area.png"
+      icon: "/images/project/aminities/icon/Play Area.png"
     },
     {
       title: "Groundwater Facility",
       desc: "Abundant, sweet potable natural groundwater resources ensuring consistent, independent 24/7 water security for all plots.",
       image: "/images/project/aminities/plots/Groundwater Facility.png",
-      icon: "/images/project/CML/amenities/icon/Rainwater Harvesting.png"
+      icon: "/images/project/aminities/icon/Rainwater Harvesting.png"
     },
     {
       title: "Arch Gated Community with Compound Wall",
       desc: "Imposing architectural entrance arch flanked by secure perimeter compound walls and round-the-clock gated security.",
       image: "/images/project/aminities/plots/Arch Gated Community with Compound Wall.png",
-      icon: "/images/project/CML/amenities/icon/Security.png"
+      icon: "/images/project/aminities/icon/Entrance.png"
     }
   ];
   const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
@@ -208,31 +202,59 @@ export default function CMRGlobalCity({ project }) {
       }
     };
   }, [activeTab]);
-  const [galleryAnim, setGalleryAnim] = useState({ exteriors: true, interiors: true, videos: true });
-  const galleryTimer = useRef({ exteriors: null, interiors: null, videos: null });
+
+  const galleryImages = {
+    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
+    images: [
+      { src: '/images/project/CMR/Upscaled/hero.png', title: 'CMR Global City Community Overview' },
+      { src: '/images/project/CMR/Upscaled/1.png', title: 'Grand Gated Entrance & Security' },
+      { src: '/images/project/CMR/Upscaled/2.png', title: 'Wide Internal Blacktop Avenue' },
+      { src: '/images/project/CMR/Upscaled/3.png', title: 'Solar Powered Street Infrastructure' },
+      { src: '/images/project/CMR/Upscaled/4.png', title: 'Ready-to-Build Villa Plots' },
+      { src: '/images/project/CMR/Upscaled/5.png', title: 'Landscaped Plot Layout' },
+      { src: '/images/project/CMR/Upscaled/6.png', title: 'Planned Green Corridors' },
+      { src: '/images/project/CMR/Upscaled/7.png', title: 'Underground Utilities & Drainage' },
+      { src: '/images/project/CMR/Upscaled/8.png', title: 'Avenue Tree Plantations' },
+      { src: '/images/project/CMR/Upscaled/9.png', title: 'Internal Road Network' },
+      { src: '/images/project/CMR/Upscaled/10.png', title: 'Community Perimeter & Security' },
+      { src: '/images/project/CMR/Upscaled/11.png', title: 'Plot Demarcation & Infrastructure' },
+      { src: '/images/project/CMR/Upscaled/12.png', title: 'Panoramic Community Perspective' },
+      { src: '/images/project/CMR/Upscaled/13.png', title: 'Park & Recreation Spaces' },
+      { src: '/images/project/CMR/Upscaled/14.png', title: 'Clear Title Plot Layouts' },
+      { src: '/images/project/CMR/Upscaled/15.png', title: 'Connecting Main Road Access' },
+      { src: '/images/project/CMR/Upscaled/16.png', title: 'Residential Plots Master View' },
+      { src: '/images/project/CMR/Upscaled/17.png', title: 'Eco-Friendly Living Environment' },
+      { src: '/images/project/CMR/Upscaled/18.png', title: 'Gated Villa Plot Community' },
+      { src: '/images/project/CMR/Upscaled/19.png', title: 'CMR Global City Aerial View' }
+    ]
+  };
+
+  const [galleryAnim, setGalleryAnim] = useState({ images: true, videos: true });
+  const galleryTimer = useRef({ images: null, videos: null });
   useEffect(() => {
-    ['exteriors', 'interiors', 'videos'].forEach((section) => {
+    Object.keys(galleryImages).forEach((section) => {
       if (!galleryImages[section]) return;
       const total = galleryImages[section].length;
       if (total <= 1) return;
       const idx = galleryIndices[section];
+      if (idx === undefined) return;
 
       clearTimeout(galleryTimer.current[section]);
-      if (idx === total + 1) {
+      if (idx >= total + 1) {
         galleryTimer.current[section] = setTimeout(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: false }));
           setGalleryIndices(prev => ({ ...prev, [section]: 1 }));
         }, 500);
-      } else if (idx === 0) {
+      } else if (idx <= 0) {
         galleryTimer.current[section] = setTimeout(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: false }));
           setGalleryIndices(prev => ({ ...prev, [section]: total }));
         }, 500);
       }
     });
-  }, [galleryIndices]);
+  }, [galleryIndices, galleryImages]);
   useEffect(() => {
-    ['exteriors', 'interiors', 'videos'].forEach((section) => {
+    Object.keys(galleryImages).forEach((section) => {
       if (!galleryAnim[section]) {
         const t = requestAnimationFrame(() => {
           setGalleryAnim(prev => ({ ...prev, [section]: true }));
@@ -240,21 +262,21 @@ export default function CMRGlobalCity({ project }) {
         return () => cancelAnimationFrame(t);
       }
     });
-  }, [galleryAnim]);
+  }, [galleryAnim, galleryImages]);
   const prevGallerySlide = (section) => {
-    if (galleryImages[section].length <= 1) return;
+    if (!galleryImages[section] || galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
     setGalleryIndices((prev) => ({
       ...prev,
-      [section]: prev[section] - 1
+      [section]: (prev[section] || 1) - 1
     }));
   };
   const nextGallerySlide = (section) => {
-    if (galleryImages[section].length <= 1) return;
+    if (!galleryImages[section] || galleryImages[section].length <= 1) return;
     setGalleryAnim(prev => ({ ...prev, [section]: true }));
     setGalleryIndices((prev) => ({
       ...prev,
-      [section]: prev[section] + 1
+      [section]: (prev[section] || 1) + 1
     }));
   };
   // Scroll to top on mount
@@ -289,9 +311,9 @@ export default function CMRGlobalCity({ project }) {
       label: 'Transport & Connectivity',
       image: '/images/project/CML/loction/junctions.png',
       locations: [
-        { name: 'Piyambadi Bus Stop', dist: '200 Mtrs', lat: 12.5110, lng: 79.8860 },
-        { name: 'Maduranthakam City & Railway Station', dist: '7.6 Km', lat: 12.5085, lng: 79.8848 },
-        { name: 'Melmaruvathur Railway Station', dist: '12 Km', lat: 12.4410, lng: 79.8320 }
+        { name: 'Piyambadi / GST Road Junction', dist: '0.4 Km', lat: 12.4485, lng: 79.8930 },
+        { name: 'Melmaruvathur Railway Station', dist: '6.6 Km', lat: 12.4285, lng: 79.8328 },
+        { name: 'Maduranthakam City & Railway Station', dist: '6.6 Km', lat: 12.5044, lng: 79.8933 }
       ]
     },
     {
@@ -299,12 +321,11 @@ export default function CMRGlobalCity({ project }) {
       label: 'Schools & Colleges',
       image: '/images/project/CML/loction/educational .png',
       locations: [
-        { name: 'Sri Santhoshi College of Arts & Science', dist: '1.5 Km', lat: 12.5180, lng: 79.8920 },
-        { name: 'SSNT / School of Seamanship & Nautical Tech', dist: '2.8 Km', lat: 12.5220, lng: 79.8970 },
-        { name: 'Bharathi Matriculation Higher Secondary School', dist: '4 Km', lat: 12.5150, lng: 79.8780 },
-        { name: 'Subham Vidhyalaya CBSE School & College', dist: '4.9 Km', lat: 12.5120, lng: 79.8720 },
-        { name: 'RM Engineering College', dist: '9 Km', lat: 12.5350, lng: 79.8600 },
-        { name: 'St. Joseph Matriculation Higher Secondary School', dist: '12 Km', lat: 12.4500, lng: 79.8380 }
+        { name: 'Sri Santhoshi College of Arts & Science', dist: '2.1 Km', lat: 12.4635, lng: 79.8955 },
+        { name: 'SSNT / School of Seamanship & Nautical Tech', dist: '3.2 Km', lat: 12.4720, lng: 79.9020 },
+        { name: 'Bharathi Matriculation Higher Secondary School', dist: '6.7 Km', lat: 12.5050, lng: 79.8820 },
+        { name: 'Subham Vidhyalaya CBSE School & College', dist: '7.1 Km', lat: 12.5090, lng: 79.8875 },
+        { name: 'St. Joseph Matriculation Higher Secondary School', dist: '5.8 Km', lat: 12.4460, lng: 79.8380 }
       ]
     },
     {
@@ -312,9 +333,9 @@ export default function CMRGlobalCity({ project }) {
       label: 'Healthcare',
       image: '/images/project/CML/loction/hospitals.png',
       locations: [
-        { name: 'Sana Multispeciality Hospital', dist: '7.3 Km', lat: 12.5090, lng: 79.8820 },
-        { name: 'Maduranthakam Government Hospital', dist: '7.6 Km', lat: 12.5070, lng: 79.8850 },
-        { name: 'Shri Ramakrishna Hospital', dist: '7.6 Km', lat: 12.5060, lng: 79.8880 }
+        { name: 'Sana Multispeciality Hospital', dist: '6.8 Km', lat: 12.5061, lng: 79.8912 },
+        { name: 'Maduranthakam Government Hospital', dist: '7.1 Km', lat: 12.5082, lng: 79.8860 },
+        { name: 'Shri Ramakrishna Hospital', dist: '6.9 Km', lat: 12.5075, lng: 79.8870 }
       ]
     },
     {
@@ -322,9 +343,9 @@ export default function CMRGlobalCity({ project }) {
       label: 'Employment & Industry',
       image: '/images/project/CML/loction/junctions.png',
       locations: [
-        { name: 'Sri Santhoshi Industrial & Educational Campus', dist: '3 Km', lat: 12.5200, lng: 79.8940 },
-        { name: 'Maduranthakam Industrial Area', dist: '3.5 Km', lat: 12.5250, lng: 79.8910 },
-        { name: 'TVS India Brakes', dist: '5.5 Km', lat: 12.5300, lng: 79.8750 }
+        { name: 'Sri Santhoshi Industrial & Educational Campus', dist: '3.8 Km', lat: 12.4780, lng: 79.8990 },
+        { name: 'Maduranthakam Industrial Area', dist: '8.9 Km', lat: 12.5250, lng: 79.8910 },
+        { name: 'TVS India Brakes', dist: '8.9 Km', lat: 12.5250, lng: 79.8900 }
       ]
     },
     {
@@ -332,9 +353,9 @@ export default function CMRGlobalCity({ project }) {
       label: 'Temples & Heritage',
       image: '/images/project/CML/loction/entertainment.png',
       locations: [
-        { name: 'Semmagiri Arulmigu Shri Lakshmi Narasimha Temple', dist: '3.8 Km', lat: 12.5190, lng: 79.8650 },
-        { name: 'Maduranthakam Eri Katha Ramar Temple', dist: '8.2 Km', lat: 12.5020, lng: 79.8820 },
-        { name: 'OM Sakthi Temple (Melmaruvathur)', dist: '12.3 Km', lat: 12.4380, lng: 79.8290 }
+        { name: 'OM Sakthi Temple (Melmaruvathur)', dist: '7.8 Km', lat: 12.4316, lng: 79.8205 },
+        { name: 'Semmagiri Arulmigu Shri Lakshmi Narasimha Temple', dist: '8.3 Km', lat: 12.5150, lng: 79.8650 },
+        { name: 'Maduranthakam Eri Katha Ramar Temple', dist: '4.6 Km', lat: 12.4864, lng: 79.8911 }
       ]
     },
     {
@@ -342,50 +363,26 @@ export default function CMRGlobalCity({ project }) {
       label: 'Entertainment & Tourism',
       image: '/images/project/CML/loction/entertainment.png',
       locations: [
-        { name: 'RK Theatre - V Creations', dist: '8 Km', lat: 12.5040, lng: 79.8870 },
-        { name: 'Maduranthakam Lake View Point', dist: '10.3 Km', lat: 12.4950, lng: 79.8700 },
-        { name: 'Vedanthangal Bird Sanctuary', dist: '25 Km', lat: 12.5450, lng: 79.8550 }
+        { name: 'RK Theatre - V Creations', dist: '6.6 Km', lat: 12.5040, lng: 79.8870 },
+        { name: 'Maduranthakam Lake View Point', dist: '6.0 Km', lat: 12.4950, lng: 79.8700 },
+        { name: 'Vedanthangal Bird Sanctuary', dist: '11.8 Km', lat: 12.5450, lng: 79.8550 }
       ]
     }
   ];
 
   const landmarks = [
-    { title: "Piyambadi Bus Stop", dist: "200 mtrs" },
-    { title: "Sri Santhoshi College", dist: "1.5 Km" },
-    { title: "Maduranthakam Industrial Area", dist: "3.5 Km" },
-    { title: "Semmagiri Narasimha Temple", dist: "3.8 Km" },
-    { title: "Bharathi Mat. Hr. Sec. School", dist: "4 Km" },
-    { title: "TVS India Brakes", dist: "5.5 Km" },
-    { title: "Sana Multispeciality Hospital", dist: "7.3 Km" },
-    { title: "Maduranthakam Railway Station", dist: "7.6 Km" },
-    { title: "Eri Katha Ramar Temple", dist: "8.2 Km" },
-    { title: "Vedanthangal Bird Sanctuary", dist: "25 Km" }
+    { title: "Piyambadi Bus Stop", dist: "0.4 Km" },
+    { title: "Sri Santhoshi College", dist: "2.1 Km" },
+    { title: "Maduranthakam Industrial Area", dist: "8.9 Km" },
+    { title: "Semmagiri Narasimha Temple", dist: "8.3 Km" },
+    { title: "Bharathi Mat. Hr. Sec. School", dist: "6.7 Km" },
+    { title: "TVS India Brakes", dist: "8.9 Km" },
+    { title: "Sana Multispeciality Hospital", dist: "6.8 Km" },
+    { title: "Maduranthakam Railway Station", dist: "6.6 Km" },
+    { title: "Eri Katha Ramar Temple", dist: "4.6 Km" },
+    { title: "Vedanthangal Bird Sanctuary", dist: "11.8 Km" }
   ];
-  const galleryImages = {
-    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
-    images: [
-      { src: '/images/project/CMR/Upscaled/hero.png', title: 'CMR Global City Community Overview' },
-      { src: '/images/project/CMR/Upscaled/1.png', title: 'Grand Gated Entrance & Security' },
-      { src: '/images/project/CMR/Upscaled/2.png', title: 'Wide Internal Blacktop Avenue' },
-      { src: '/images/project/CMR/Upscaled/3.png', title: 'Solar Powered Street Infrastructure' },
-      { src: '/images/project/CMR/Upscaled/4.png', title: 'Ready-to-Build Villa Plots' },
-      { src: '/images/project/CMR/Upscaled/5.png', title: 'Landscaped Plot Layout' },
-      { src: '/images/project/CMR/Upscaled/6.png', title: 'Planned Green Corridors' },
-      { src: '/images/project/CMR/Upscaled/7.png', title: 'Underground Utilities & Drainage' },
-      { src: '/images/project/CMR/Upscaled/8.png', title: 'Avenue Tree Plantations' },
-      { src: '/images/project/CMR/Upscaled/9.png', title: 'Internal Road Network' },
-      { src: '/images/project/CMR/Upscaled/10.png', title: 'Community Perimeter & Security' },
-      { src: '/images/project/CMR/Upscaled/11.png', title: 'Plot Demarcation & Infrastructure' },
-      { src: '/images/project/CMR/Upscaled/12.png', title: 'Panoramic Community Perspective' },
-      { src: '/images/project/CMR/Upscaled/13.png', title: 'Park & Recreation Spaces' },
-      { src: '/images/project/CMR/Upscaled/14.png', title: 'Clear Title Plot Layouts' },
-      { src: '/images/project/CMR/Upscaled/15.png', title: 'Connecting Main Road Access' },
-      { src: '/images/project/CMR/Upscaled/16.png', title: 'Residential Plots Master View' },
-      { src: '/images/project/CMR/Upscaled/17.png', title: 'Eco-Friendly Living Environment' },
-      { src: '/images/project/CMR/Upscaled/18.png', title: 'Gated Villa Plot Community' },
-      { src: '/images/project/CMR/Upscaled/19.png', title: 'CMR Global City Aerial View' }
-    ]
-  };
+  const galleryImages_old = null;
   useEffect(() => {
     const interval = setInterval(() => {
       setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
@@ -729,9 +726,9 @@ export default function CMRGlobalCity({ project }) {
               </div>
               <NeighbourhoodStory
                 onEnquire={() => setIsQuoteOpen(true)}
-                projectCoords={[12.5085, 79.8848]}
+                projectCoords={[12.4448056, 79.8914722]}
                 projectName="CMR Global City"
-                projectImage="/images/home/project-image-2.png"
+                projectImage="/images/project/CMR/hero.png"
                 categories={CMR_NEIGHBOURHOOD}
               />
             </section>
@@ -763,100 +760,118 @@ export default function CMRGlobalCity({ project }) {
                 </div> {/* Close container here for full-bleed viewport */}
                 {/* Spotlight Active-Card Gallery Carousel */}
                 <ScrollReveal animation="fadeUp" delay={0.35} className="gallery-spotlight-viewport">
-                  <div
-                    className="gallery-spotlight-track"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 'var(--gallery-gap, 8vw)',
-                      width: 'max-content',
-                      transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                      transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
-                    }}
-                  >
-                    {(() => {
-                      const items = galleryImages[galleryTab];
-                      const total = items.length;
-                      const extended = total > 1
-                        ? [items[total - 1], ...items, items[0]]
-                        : items;
-                      return extended.map((img, idx) => {
-                        const isActive = idx === galleryIndices[galleryTab];
-                        const realIdx = total > 1
-                          ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
-                          : 0;
-                        return (
-                          <div
-                            key={idx}
-                            className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
-                            style={{
-                              flexShrink: 0,
-                              flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                              width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                              transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
-                              cursor: 'pointer',
-                              overflow: 'hidden',
-                              position: 'relative',
-                              height: 'calc(100vh - 165px)',
-                              maxHeight: '720px',
-                              minHeight: '320px',
-                              boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
-                            }}
-                            onClick={() => {
-                              if (isActive) {
-                                if (galleryTab === 'videos') {
-                                  setActiveVideoUrl(img.url);
-                                  setIsVideoOpen(true);
-                                } else {
-                                  handleOpenLightbox(galleryTab, realIdx);
-                                }
-                              } else {
-                                setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
-                                setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
-                              }
-                            }}
-                          >
-                            <img
-                              src={img.src}
-                              alt={img.title}
-                              className="gallery-spotlight-img"
-                            />
+                  {(() => {
+                    const items = galleryImages[galleryTab] || [];
+                    const total = items.length;
+                    if (total === 0) return null;
+                    const isSingle = total === 1;
+                    const extended = !isSingle
+                      ? [items[total - 1], ...items, items[0]]
+                      : items;
 
-                            {galleryTab === 'videos' && (
-                              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
-                                <div className="play-button-pulsing">
-                                  <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
+                    return (
+                      <>
+                        <div
+                          className="gallery-spotlight-track"
+                          style={isSingle ? {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            transform: 'none'
+                          } : {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 'var(--gallery-gap, 8vw)',
+                            width: 'max-content',
+                            transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+                            transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
+                          }}
+                        >
+                          {extended.map((img, idx) => {
+                            const isActive = isSingle ? true : idx === galleryIndices[galleryTab];
+                            const realIdx = total > 1
+                              ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
+                              : 0;
+                            return (
+                              <div
+                                key={idx}
+                                className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
+                                style={{
+                                  flexShrink: 0,
+                                  flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                  width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                  transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
+                                  cursor: 'pointer',
+                                  overflow: 'hidden',
+                                  position: 'relative',
+                                  height: 'calc(100vh - 165px)',
+                                  maxHeight: '720px',
+                                  minHeight: '320px',
+                                  boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
+                                }}
+                                onClick={() => {
+                                  if (isActive) {
+                                    if (galleryTab === 'videos') {
+                                      setActiveVideoUrl(img.url);
+                                      setIsVideoOpen(true);
+                                    } else {
+                                      handleOpenLightbox(galleryTab, realIdx);
+                                    }
+                                  } else {
+                                    setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
+                                    setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
+                                  }
+                                }}
+                              >
+                                <img
+                                  src={img.src}
+                                  alt={img.title}
+                                  className="gallery-spotlight-img"
+                                />
+
+                                {galleryTab === 'videos' && (
+                                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
+                                    <div className="play-button-pulsing">
+                                      <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
+                                    </div>
+                                  </div>
+                                )}
+                                <div className="gallery-deck-hover-overlay">
+                                  {galleryTab !== 'videos' && (
+                                    <>
+                                      <Maximize2 size={24} className="hover-overlay-zoom-icon" />
+                                      <span className="hover-overlay-title">{img.title}</span>
+                                    </>
+                                  )}
                                 </div>
                               </div>
-                            )}
-                            <div className="gallery-deck-hover-overlay">
-                              {galleryTab !== 'videos' && (
-                                <>
-                                  <Maximize2 size={24} className="hover-overlay-zoom-icon" />
-                                  <span className="hover-overlay-title">{img.title}</span>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      });
-                    })()}
-                  </div>
-                  {/* Navigation Arrows positioned on left/right previews */}
-                  <button
-                    className="gallery-spotlight-arrow prev"
-                    onClick={() => prevGallerySlide(galleryTab)}
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft size={24} />
-                  </button>
-                  <button
-                    className="gallery-spotlight-arrow next"
-                    onClick={() => nextGallerySlide(galleryTab)}
-                    aria-label="Next image"
-                  >
-                    <ChevronRight size={24} />
-                  </button>
+                            );
+                          })}
+                        </div>
+
+                        {/* Navigation Arrows positioned on left/right previews (Only when > 1 item) */}
+                        {total > 1 && (
+                          <>
+                            <button
+                              className="gallery-spotlight-arrow prev"
+                              onClick={() => prevGallerySlide(galleryTab)}
+                              aria-label="Previous image"
+                            >
+                              <ChevronLeft size={24} />
+                            </button>
+                            <button
+                              className="gallery-spotlight-arrow next"
+                              onClick={() => nextGallerySlide(galleryTab)}
+                              aria-label="Next image"
+                            >
+                              <ChevronRight size={24} />
+                            </button>
+                          </>
+                        )}
+                      </>
+                    );
+                  })()}
                 </ScrollReveal>
               </section>
             </>
@@ -1013,7 +1028,7 @@ export default function CMRGlobalCity({ project }) {
 
                 {/* Master Plan Only View */}
                 <ScrollReveal animation="fadeUp" delay={0.25} className="layout-image-container" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <div style={{ position: 'relative', maxWidth: '1100px', width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.06)', background: '#ffffff' }}>
+                  <div style={{ position: 'relative', maxWidth: '1100px', width: '100%',  overflow: 'hidden', background: '#ffffff' }}>
                     <img
                       src={layoutsData.masterPlan.image}
                       alt="CMR Global City Master Plan"
@@ -1310,11 +1325,6 @@ export default function CMRGlobalCity({ project }) {
           transform-origin: center;
           display: block !important;
           pointer-events: none;
-        }
-        @media (min-width: 1248px) {
-          .overview-logo-badge {
-            left: calc((100vw - 1200px) / 2 + 24px);
-          }
         }
         @media (max-width: 768px) {
           .overview-logo-badge {
@@ -1731,7 +1741,7 @@ export default function CMRGlobalCity({ project }) {
           color: rgba(255, 255, 255, 0.85);
           background: rgba(255, 255, 255, 0.47);
           border: 1px solid rgba(255, 255, 255, 0.3);
-          padding: 14px 40px;
+          padding: 10px 20px;
           border-radius: 100px;
           text-decoration: none;
           backdrop-filter: blur(38px);
@@ -3720,7 +3730,7 @@ export default function CMRGlobalCity({ project }) {
             text-align: center !important;
           }
           .project-hero-cta-block .btn-discover {
-            padding: 12px 32px !important;
+            padding: 10px 22px !important;
             font-size: 14px !important;
           }
           

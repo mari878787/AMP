@@ -19,7 +19,7 @@ import ProjectPricingSection from '../components/ProjectPricingSection';
 const VIDEO_SLIDES = [
   {
     title: "Pasha Pinnacle Walkthrough",
-    thumbnail: "/images/project/pasha-pinnacle/overview.png",
+    thumbnail: "/images/project/pasha-pinnacle/hero.png",
     buttonLabel: "WALKTHROUGH",
     url: "/images/project/pasha-pinnacle/pasha-pinnacle walkthrough.mp4"
   }
@@ -180,7 +180,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: '925 Sq.Ft.',
           uds: '421 Sq.Ft.',
           facing: 'Front Facing',
-          image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-a-front.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/PP Individual Plan with Highlight_Block A - Front.jpg.jpeg'
         },
         {
           id: 'blockA-rear',
@@ -190,7 +190,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: '935 Sq.Ft.',
           uds: '408 Sq.Ft.',
           facing: 'Rear Facing',
-          image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-a-rear.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/PP Individual Plan with Highlight_Block A - Rear.jpg.jpeg'
         }
       ],
       'blockB': [
@@ -202,7 +202,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: '925 Sq.Ft.',
           uds: '421 Sq.Ft.',
           facing: 'Front Facing',
-          image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-b-front.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/PP Individual Plan with Highlight_Block B - Front.jpg.jpeg'
         },
         {
           id: 'blockB-rear',
@@ -212,7 +212,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           reraCarpetArea: '945 Sq.Ft.',
           uds: '408 Sq.Ft.',
           facing: 'Rear Facing',
-          image: '/images/project/pasha-pinnacle/floorplan/floor-plan-block-b-rear.jpeg'
+          image: '/images/project/pasha-pinnacle/floorplan/PP Individual Plan with Highlight_Block B - Rear.jpg.jpeg'
         }
       ]
     },
@@ -307,58 +307,52 @@ export default function PashaPinnacle({ project = 'pasha' }) {
   const [amenityIdx, setAmenityIdx] = useState(0);
   const amenities = [
     {
-      title: "Dedicated Stilt Floor Car Parking",
+      title: "Stilt Car Parking",
       desc: "Reserved, sheltered parking spaces located at the stilt level for effortless vehicle access and security.",
       image: "/images/project/aminities/villa & apartment/Dedicated Stilt Floor Car Parking.png",
-      icon: "/images/project/CML/amenities/icon/Security.png"
+      icon: "/images/project/aminities/icon/car-parking.png"
     },
     {
-      title: "Automatic Passenger Lift",
+      title: "Passenger Lift",
       desc: "Modern, high-efficiency automatic passenger elevator ensuring seamless vertical connectivity across all floors.",
       image: "/images/project/aminities/villa & apartment/Automatic Passenger Lift.png",
-      icon: "/images/project/CML/amenities/icon/Clubhouse.png"
+      icon: "/images/project/aminities/icon/noun_lift_8277947_@700.png"
     },
     {
-      title: "Power Backup / DG Generator",
+      title: "Power Backup",
       desc: "Uninterrupted power backup infrastructure for common areas, elevators, and essential residential utilities.",
       image: "/images/project/aminities/villa & apartment/Power Backup  DG Generator .png",
-      icon: "/images/project/CML/amenities/icon/Solar Lighting.png"
+      icon: "/images/project/aminities/icon/power-backup.png"
     },
     {
-      title: "Underground Sump & Dedicated Bore Well",
+      title: "Sump & Bore Well",
       desc: "Robust dual-source water supply system with dedicated underground storage sump and bore well facilities.",
       image: "/images/project/aminities/villa & apartment/Underground Sump & Dedicated Bore Well.png",
-      icon: "/images/project/CML/amenities/icon/Rainwater Harvesting.png"
+      icon: "/images/project/aminities/icon/Rainwater Harvesting.png"
     },
     {
-      title: "Private Balconies in Every Unit",
+      title: "Private Balconies",
       desc: "Generously sized private balconies attached to every residence, offering open street views and natural ventilation.",
-      image: "/images/project/aminities/villa & apartment/Private Balconies in Every Unit.png",
-      icon: "/images/project/CML/amenities/icon/Coarse Paint.png"
+      image: "/images/project/pasha-pinnacle/extirior/34.png",
+      icon: "/images/project/aminities/icon/Balconies.png"
     },
     {
-      title: "Landscaped Common Entrance & Green Touches",
+      title: "Landscaped Entrance",
       desc: "Elegantly detailed arrival foyer and common spaces featuring curated landscaping and greenery.",
       image: "/images/project/aminities/villa & apartment/Landscaped Common Entrance & Green Touches.png",
-      icon: "/images/project/CML/amenities/icon/Play Area.png"
+      icon: "/images/project/aminities/icon/Entrance.png"
     },
     {
-      title: "Gated, Secure Entry",
-      desc: "Controlled-access gated entrance with dedicated security arrangements ensuring family privacy and peace of mind.",
-      image: "/images/project/aminities/plots/Arch Gated Community with Compound Wall.png",
-      icon: "/images/project/CML/amenities/icon/Security.png"
-    },
-    {
-      title: "Dedicated Service/Utility Yard in Every Kitchen",
+      title: "Kitchen Utility Yard",
       desc: "Separate, private utility and wash yard attached to every kitchen for seamless everyday domestic convenience.",
       image: "/images/project/aminities/villa & apartment/Dedicated ServiceUtility Yard in Every Kitchen.png",
-      icon: "/images/project/CML/amenities/icon/DTH Connection.png"
+      icon: "/images/project/aminities/icon/Utility-Yard.png"
     },
     {
-      title: "East–West Cross Ventilated Layouts",
+      title: "Cross Ventilated Layouts",
       desc: "Architecturally engineered dual-orientation layouts maximizing fresh airflow, natural daylight, and thermal comfort.",
       image: "/images/project/aminities/villa & apartment/East–West Cross Ventilated Layouts.png",
-      icon: "/images/project/CML/amenities/icon/yogaRoom.png"
+      icon: "/images/project/aminities/icon/Ventilate.png"
     }
   ];
   const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
@@ -417,6 +411,28 @@ export default function PashaPinnacle({ project = 'pasha' }) {
       }
     };
   }, [activeTab]);
+
+  const galleryImages = {
+    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
+    interiors: [],
+    exteriors: [
+      { src: '/images/project/pasha-pinnacle/extirior/1.png', title: 'Pasha Pinnacle Architectural Façade' },
+      { src: '/images/project/pasha-pinnacle/extirior/4.png', title: 'Front Elevation & Entrance' },
+      { src: '/images/project/pasha-pinnacle/extirior/8.png', title: 'Contemporary Street View' },
+      { src: '/images/project/pasha-pinnacle/extirior/10.png', title: 'Building Perspective' },
+      { src: '/images/project/pasha-pinnacle/extirior/12.png', title: 'Balcony & Exterior Detailing' },
+      { src: '/images/project/pasha-pinnacle/extirior/13.png', title: 'Upper Level Architecture' },
+      { src: '/images/project/pasha-pinnacle/extirior/17.png', title: 'Exterior Elevation View' },
+      { src: '/images/project/pasha-pinnacle/extirior/22.png', title: 'Side Profile & Clean Lines' },
+      { src: '/images/project/pasha-pinnacle/extirior/24.png', title: 'Architectural Lighting & Form' },
+      { src: '/images/project/pasha-pinnacle/extirior/27.png', title: 'Gated Residence Portico' },
+      { src: '/images/project/pasha-pinnacle/extirior/29.png', title: 'Boutique Residence Perspective' },
+      { src: '/images/project/pasha-pinnacle/extirior/30.png', title: 'Contemporary Residence Elevation' },
+      { src: '/images/project/pasha-pinnacle/extirior/33.png', title: 'Stilt Parking & Arrival Bay' },
+      { src: '/images/project/pasha-pinnacle/extirior/34.png', title: 'Pasha Pinnacle Overview' }
+    ]
+  };
+
   const [galleryAnim, setGalleryAnim] = useState({ exteriors: true, interiors: true, videos: true });
   const galleryTimer = useRef({ exteriors: null, interiors: null, videos: null });
   useEffect(() => {
@@ -548,26 +564,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
     { title: "Government Royapettah Hospital", dist: "3 mins" },
     { title: "Marina Beach", dist: "8 mins" }
   ];
-  const galleryImages = {
-    videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
-    interiors: [],
-    exteriors: [
-      { src: '/images/project/pasha-pinnacle/extirior/1.png', title: 'Pasha Pinnacle Architectural Façade' },
-      { src: '/images/project/pasha-pinnacle/extirior/4.png', title: 'Front Elevation & Entrance' },
-      { src: '/images/project/pasha-pinnacle/extirior/8.png', title: 'Contemporary Street View' },
-      { src: '/images/project/pasha-pinnacle/extirior/10.png', title: 'Building Perspective' },
-      { src: '/images/project/pasha-pinnacle/extirior/12.png', title: 'Balcony & Exterior Detailing' },
-      { src: '/images/project/pasha-pinnacle/extirior/13.png', title: 'Upper Level Architecture' },
-      { src: '/images/project/pasha-pinnacle/extirior/17.png', title: 'Exterior Elevation View' },
-      { src: '/images/project/pasha-pinnacle/extirior/22.png', title: 'Side Profile & Clean Lines' },
-      { src: '/images/project/pasha-pinnacle/extirior/24.png', title: 'Architectural Lighting & Form' },
-      { src: '/images/project/pasha-pinnacle/extirior/27.png', title: 'Gated Residence Portico' },
-      { src: '/images/project/pasha-pinnacle/extirior/29.png', title: 'Boutique Residence Perspective' },
-      { src: '/images/project/pasha-pinnacle/extirior/30.png', title: 'Contemporary Residence Elevation' },
-      { src: '/images/project/pasha-pinnacle/extirior/33.png', title: 'Stilt Parking & Arrival Bay' },
-      { src: '/images/project/pasha-pinnacle/extirior/34.png', title: 'Pasha Pinnacle Overview' }
-    ]
-  };
+  const galleryImages_old = null;
   useEffect(() => {
     const interval = setInterval(() => {
       setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
@@ -961,7 +958,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                 onEnquire={() => setIsQuoteOpen(true)}
                 projectCoords={[13.0524, 80.2600]}
                 projectName="Pasha Pinnacle"
-                projectImage="/images/home/project-image-1.png"
+                projectImage="/images/project/pasha-pinnacle/card.png"
                 categories={PASHA_NEIGHBOURHOOD}
               />
             </section>
@@ -1047,103 +1044,118 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                       </div>
                     </div>
                   ) : (
-                    <>
-                      <div
-                        className="gallery-spotlight-track"
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 'var(--gallery-gap, 8vw)',
-                          width: 'max-content',
-                          transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                          transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
-                        }}
-                      >
-                        {(() => {
-                          const items = galleryImages[galleryTab] || [];
-                          const total = items.length;
-                          if (total === 0) return null;
-                          const extended = total > 1
-                            ? [items[total - 1], ...items, items[0]]
-                            : items;
-                          return extended.map((img, idx) => {
-                            const isActive = idx === galleryIndices[galleryTab];
-                            const realIdx = total > 1
-                              ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
-                              : 0;
-                            return (
-                              <div
-                                key={idx}
-                                className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
-                                style={{
-                                  flexShrink: 0,
-                                  flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                                  width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                                  transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
-                                  cursor: 'pointer',
-                                  overflow: 'hidden',
-                                  position: 'relative',
-                                  height: 'calc(100vh - 165px)',
-                                  maxHeight: '720px',
-                                  minHeight: '320px',
-                                  boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
-                                }}
-                                onClick={() => {
-                                  if (isActive) {
-                                    if (galleryTab === 'videos') {
-                                      setActiveVideoUrl(img.url);
-                                      setIsVideoOpen(true);
-                                    } else {
-                                      handleOpenLightbox(galleryTab, realIdx);
-                                    }
-                                  } else {
-                                    setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
-                                    setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
-                                  }
-                                }}
-                              >
-                                <img
-                                  src={img.src}
-                                  alt={img.title}
-                                  className="gallery-spotlight-img"
-                                />
+                    (() => {
+                      const items = galleryImages[galleryTab] || [];
+                      const total = items.length;
+                      if (total === 0) return null;
+                      const isSingle = total === 1;
+                      const extended = !isSingle
+                        ? [items[total - 1], ...items, items[0]]
+                        : items;
 
-                                {galleryTab === 'videos' && (
-                                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
-                                    <div className="play-button-pulsing">
-                                      <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
+                      return (
+                        <>
+                          <div
+                            className="gallery-spotlight-track"
+                            style={isSingle ? {
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              width: '100%',
+                              transform: 'none'
+                            } : {
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 'var(--gallery-gap, 8vw)',
+                              width: 'max-content',
+                              transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+                              transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
+                            }}
+                          >
+                            {extended.map((img, idx) => {
+                              const isActive = isSingle ? true : idx === galleryIndices[galleryTab];
+                              const realIdx = total > 1
+                                ? (idx === 0 ? total - 1 : idx === total + 1 ? 0 : idx - 1)
+                                : 0;
+                              return (
+                                <div
+                                  key={idx}
+                                  className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
+                                  style={{
+                                    flexShrink: 0,
+                                    flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                    width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
+                                    transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
+                                    cursor: 'pointer',
+                                    overflow: 'hidden',
+                                    position: 'relative',
+                                    height: 'calc(100vh - 165px)',
+                                    maxHeight: '720px',
+                                    minHeight: '320px',
+                                    boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
+                                  }}
+                                  onClick={() => {
+                                    if (isActive) {
+                                      if (galleryTab === 'videos') {
+                                        setActiveVideoUrl(img.url);
+                                        setIsVideoOpen(true);
+                                      } else {
+                                        handleOpenLightbox(galleryTab, realIdx);
+                                      }
+                                    } else {
+                                      setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
+                                      setGalleryIndices(prev => ({ ...prev, [galleryTab]: idx }));
+                                    }
+                                  }}
+                                >
+                                  <img
+                                    src={img.src}
+                                    alt={img.title}
+                                    className="gallery-spotlight-img"
+                                  />
+
+                                  {galleryTab === 'videos' && (
+                                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
+                                      <div className="play-button-pulsing">
+                                        <Play size={30} fill="currentColor" style={{ marginLeft: '4px' }} />
+                                      </div>
                                     </div>
-                                  </div>
-                                )}
-                                <div className="gallery-deck-hover-overlay">
-                                  {galleryTab !== 'videos' && (
-                                    <>
-                                      <Maximize2 size={24} className="hover-overlay-zoom-icon" />
-                                      <span className="hover-overlay-title">{img.title}</span>
-                                    </>
                                   )}
+                                  <div className="gallery-deck-hover-overlay">
+                                    {galleryTab !== 'videos' && (
+                                      <>
+                                        <Maximize2 size={24} className="hover-overlay-zoom-icon" />
+                                        <span className="hover-overlay-title">{img.title}</span>
+                                      </>
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                            );
-                          });
-                        })()}
-                      </div>
-                      {/* Navigation Arrows positioned on left/right previews */}
-                      <button
-                        className="gallery-spotlight-arrow prev"
-                        onClick={() => prevGallerySlide(galleryTab)}
-                        aria-label="Previous image"
-                      >
-                        <ChevronLeft size={24} />
-                      </button>
-                      <button
-                        className="gallery-spotlight-arrow next"
-                        onClick={() => nextGallerySlide(galleryTab)}
-                        aria-label="Next image"
-                      >
-                        <ChevronRight size={24} />
-                      </button>
-                    </>
+                              );
+                            })}
+                          </div>
+
+                          {/* Navigation Arrows positioned on left/right previews (Only when > 1 item) */}
+                          {total > 1 && (
+                            <>
+                              <button
+                                className="gallery-spotlight-arrow prev"
+                                onClick={() => prevGallerySlide(galleryTab)}
+                                aria-label="Previous image"
+                              >
+                                <ChevronLeft size={24} />
+                              </button>
+                              <button
+                                className="gallery-spotlight-arrow next"
+                                onClick={() => nextGallerySlide(galleryTab)}
+                                aria-label="Next image"
+                              >
+                                <ChevronRight size={24} />
+                              </button>
+                            </>
+                          )}
+                        </>
+                      );
+                    })()
                   )}
                 </ScrollReveal>
               </section>
@@ -1262,14 +1274,14 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                           src={layoutsData.typicalFloorPlan.image}
                           alt="Typical Floor Plan"
                           onClick={() => setFloorplanLightbox({ image: layoutsData.typicalFloorPlan.image, name: 'Typical Floor Plan' })}
-                          style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
+                          style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '8px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
                         />
                       ) : (
                         <img
                           src="/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg"
                           alt="Stilt + Ground Floor"
                           onClick={() => setFloorplanLightbox({ image: '/images/project/pasha-pinnacle/floorplan/stilt-ground-floor.jpeg', name: 'Stilt + Ground Floor' })}
-                          style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '16px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
+                          style={{ maxWidth: '100%', maxHeight: '700px', objectFit: 'contain', borderRadius: '8px', boxShadow: '0 20px 60px rgba(0,0,0,0.05)', cursor: 'pointer' }}
                         />
                       )}
                     </div>
@@ -1434,6 +1446,36 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                         })}
                       </div>
                     </div>
+
+                    {/* Variant Pills for Configurations with Multiple Plans */}
+                    {currentConfigPlans.length > 1 && (
+                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '28px', marginTop: '-20px' }}>
+                        {currentConfigPlans.map(plan => {
+                          const isSelected = activePlanId === plan.id;
+                          return (
+                            <button
+                              key={plan.id}
+                              onClick={() => setActivePlanId(plan.id)}
+                              style={{
+                                padding: '8px 18px',
+                                borderRadius: '24px',
+                                fontSize: '13px',
+                                fontWeight: isSelected ? '500' : '400',
+                                border: isSelected ? '1px solid var(--color-highlight)' : '1px solid rgba(0,0,0,0.1)',
+                                background: isSelected ? 'rgba(180, 133, 100, 0.12)' : '#f9f9f9',
+                                color: isSelected ? 'var(--color-highlight)' : '#333',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                outline: 'none'
+                              }}
+                            >
+                              {plan.name}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
                     {/* Main Slide Layout */}
                     <div className="floorplan-slide-content-grid" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 7fr', gap: '30px', alignItems: 'center' }}>
 
@@ -2051,11 +2093,6 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           display: block !important;
           pointer-events: none;
         }
-        @media (min-width: 1248px) {
-          .overview-logo-badge {
-            left: calc((100vw - 1200px) / 2 + 24px);
-          }
-        }
         @media (max-width: 768px) {
           .overview-logo-badge {
             left: 14px;
@@ -2471,7 +2508,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           color: rgba(255, 255, 255, 0.85);
           background: rgba(255, 255, 255, 0.47);
           border: 1px solid rgba(255, 255, 255, 0.3);
-          padding: 14px 40px;
+          padding: 10px 20px;
           border-radius: 100px;
           text-decoration: none;
           backdrop-filter: blur(38px);
@@ -2831,8 +2868,8 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           flex-direction: column;
         }
         .amenities-grid-container {
-          display: flex;
-          flex-direction: column;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
           gap: 8px;
           width: 100%;
         }
@@ -4458,7 +4495,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
             text-align: center !important;
           }
           .project-hero-cta-block .btn-discover {
-            padding: 12px 32px !important;
+            padding: 10px 22px !important;
             font-size: 14px !important;
           }
           

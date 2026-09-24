@@ -6,9 +6,9 @@ const CATEGORIES = [
   {
     id: 'villas',
     name: 'Villas',
-    img: '/images/project/CML/Elevation-card.png',
+    img: '/images/project/CML/extirior/Views_Scene_1_4k_4.png',
     projects: [
-      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/Elevation-card.png', url: '/crystal-moonlight-villa' },
+      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/extirior/Views_Scene_1_4k_4.png', url: '/crystal-moonlight-villa' },
       { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai • Upcoming', img: '/images/project/Bayvista/Bay Vista Teaser.jpeg', teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg', url: '#bay-vista' },
       { id: 'lakeshore', name: 'Lakeshore', location: 'ECR, Chennai • Upcoming', img: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg', teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg', url: '#lakeshore' }
     ]
@@ -83,7 +83,13 @@ export default function Navbar({ darkText = false }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const heroEl = document.querySelector('.project-hero-section') || 
+                     document.querySelector('.hero-section') || 
+                     document.querySelector('.hero') || 
+                     document.querySelector('.hero-container') ||
+                     document.querySelector('section:first-of-type');
+      const heroHeight = heroEl ? heroEl.offsetHeight : (window.innerHeight - 60);
+      setScrolled(window.scrollY >= (heroHeight - 80));
     };
 
     const handleClickOutside = (e) => {
@@ -190,7 +196,7 @@ export default function Navbar({ darkText = false }) {
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <a href={`/projects?category=${cat.id}`}>{cat.name}</a>
+                <a href="/projects">{cat.name}</a>
               </div>
             ))}
           </div>
@@ -215,7 +221,7 @@ export default function Navbar({ darkText = false }) {
                     onMouseEnter={() => setActiveProject(proj)}
                   >
                     <a 
-                      href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : `/projects?category=${activeCategory.id}`)}
+                      href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : '/projects')}
                       onClick={(e) => {
                         if (proj.teaserPoster) {
                           e.preventDefault();
@@ -284,7 +290,7 @@ export default function Navbar({ darkText = false }) {
                     {cat.projects.map(proj => (
                       <a
                         key={proj.id}
-                        href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : `/projects?category=${cat.id}`)}
+                        href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : '/projects')}
                         onClick={(e) => {
                           if (proj.teaserPoster) {
                             e.preventDefault();
@@ -398,7 +404,7 @@ export default function Navbar({ darkText = false }) {
           width: 100%;
           height: 60px;
           z-index: 99999;
-          background: linear-gradient(180deg, rgba(10, 10, 10, 0.65) 0%, rgba(20, 20, 20, 0.3) 60%, transparent 100%);
+          background: transparent;
           transition: all 0.4s ease;
         }
 
@@ -583,8 +589,9 @@ export default function Navbar({ darkText = false }) {
           background: url("/images/nav-villa.png") left center / cover no-repeat;
           opacity: 0;
           visibility: hidden;
-          transform: translate(-50%, -10px);
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          transform: translate(-50%, -40px);
+          clip-path: inset(0 0 100% 0);
+          transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, visibility 0.45s;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
           border-top: none;
           cursor: default;
@@ -609,31 +616,38 @@ export default function Navbar({ darkText = false }) {
           opacity: 1;
           visibility: visible;
           transform: translate(-50%, 0);
+          clip-path: inset(0 0 0% 0);
         }
 
         .mega-menu-content {
           width: 100%;
-          padding: 24px 40px;
+          padding: 0;
           display: grid;
-          grid-template-columns: 250px 300px 1fr; /* Categories, Projects, Image */
-          gap: 30px;
-          min-height: 280px;
+          grid-template-columns: 260px 320px 1fr; /* Categories, Projects, Image */
+          gap: 0;
+          height: 440px;
           box-sizing: border-box;
           position: relative;
           z-index: 2;
         }
 
-        .mega-categories, .mega-projects {
+        .mega-categories {
           display: flex;
           flex-direction: column;
-          padding-top: 10px;
-          padding-right: 30px;
-          border-right: 1px solid rgba(0, 0, 0, 0.2);
+          padding: 28px 24px 28px 40px;
+          border-right: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .mega-projects {
+          display: flex;
+          flex-direction: column;
+          padding: 28px 30px 28px 30px;
+          border-right: 1px solid rgba(0, 0, 0, 0.15);
         }
 
         .mega-column-title {
           font-family: var(--font-heading);
-          font-size: 18px;
+          font-size: 20px;
           font-weight: 500;
           color: #000000ff;
           text-transform: uppercase;
@@ -681,7 +695,7 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mega-project-name {
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 400;
           color: inherit;
           text-transform: uppercase;
@@ -703,21 +717,25 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mega-project-item.active .mega-project-location, .mega-project-item:hover .mega-project-location {
-          // color: #b48564;
+          /* color: #b48564; */
           opacity: 0.85;
         }
 
         .mega-image-container {
           width: 100%;
-          height: 450px;
+          height: 100%;
+          min-height: 100%;
           overflow: hidden;
           background: #f5f5f5;
+          margin: 0;
+          padding: 0;
         }
 
         .mega-image {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          display: block;
         }
 
         .fade-in-image {
@@ -1012,14 +1030,18 @@ export default function Navbar({ darkText = false }) {
           display: flex;
           flex-direction: column;
           opacity: 0;
+          visibility: hidden;
           pointer-events: none;
-          transition: opacity 0.4s ease;
+          transform: translateY(-100%);
+          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, visibility 0.45s;
           overflow-y: auto;
         }
 
         .search-overlay.visible {
           opacity: 1;
+          visibility: visible;
           pointer-events: auto;
+          transform: translateY(0);
         }
 
         .search-overlay-close {
