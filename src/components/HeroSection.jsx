@@ -137,41 +137,48 @@ export default function HeroSection({ startZoom }) {
           onSlideChangeTransitionStart={handleSlideTransition}
           className="hero-swiper"
         >
-          {HERO_SLIDES.map((slide, idx) => (
-            <SwiperSlide key={idx}>
-              {slide.video ? (
-                <div className="hero-video-wrapper">
-                  <video
-                    className="hero-bg-video desktop-only-video"
-                    src={slide.video}
-                    poster={slide.image}
-                    preload="auto"
-                    muted
-                    playsInline
-                    onEnded={handleVideoEnded}
-                  />
-                  <video
-                    className="hero-bg-video mobile-only-video"
-                    src={slide.mobileVideo || slide.video}
-                    poster={slide.mobileImage || slide.image}
-                    preload="auto"
-                    muted
-                    playsInline
-                    onEnded={handleVideoEnded}
-                  />
-                </div>
-              ) : (
-                <picture className="hero-picture">
-                  <source media="(max-width: 768px)" srcSet={encodeURI(slide.mobileImage || slide.image)} />
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className={`hero-bg-image ${startZoom ? 'animate-zoom' : ''}`}
-                  />
-                </picture>
-              )}
-            </SwiperSlide>
-          ))}
+          {HERO_SLIDES.map((slide, idx) => {
+            const isCurrentOrAdjacent = 
+              idx === activeIndex || 
+              idx === (activeIndex + 1) % HERO_SLIDES.length || 
+              idx === (activeIndex - 1 + HERO_SLIDES.length) % HERO_SLIDES.length;
+
+            return (
+              <SwiperSlide key={idx}>
+                {slide.video ? (
+                  <div className="hero-video-wrapper">
+                    <video
+                      className="hero-bg-video desktop-only-video"
+                      src={isCurrentOrAdjacent ? slide.video : undefined}
+                      poster={slide.image}
+                      preload={idx === activeIndex ? "auto" : "metadata"}
+                      muted
+                      playsInline
+                      onEnded={handleVideoEnded}
+                    />
+                    <video
+                      className="hero-bg-video mobile-only-video"
+                      src={isCurrentOrAdjacent ? (slide.mobileVideo || slide.video) : undefined}
+                      poster={slide.mobileImage || slide.image}
+                      preload={idx === activeIndex ? "auto" : "metadata"}
+                      muted
+                      playsInline
+                      onEnded={handleVideoEnded}
+                    />
+                  </div>
+                ) : (
+                  <picture className="hero-picture">
+                    <source media="(max-width: 768px)" srcSet={encodeURI(slide.mobileImage || slide.image)} />
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      className={`hero-bg-image ${startZoom ? 'animate-zoom' : ''}`}
+                    />
+                  </picture>
+                )}
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
         <div className="hero-overlay"></div>
       </div>
