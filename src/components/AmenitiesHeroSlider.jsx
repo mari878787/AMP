@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 export default function AmenitiesHeroSlider({
   amenities = [],
@@ -90,67 +91,77 @@ export default function AmenitiesHeroSlider({
 
         {/* Top-Left Editorial Header */}
         <div className="amp-amenities-header">
-          <h2 className="amp-amenities-title">{title}</h2>
-          <p className="amp-amenities-subtitle">{subtitle}</p>
+          <ScrollReveal animation="fadeUp" delay={0.1} once={false}>
+            <h2 className="amp-amenities-title">{title}</h2>
+          </ScrollReveal>
+          <ScrollReveal animation="fadeUp" delay={0.25} once={false}>
+            <p className="amp-amenities-subtitle">{subtitle}</p>
+          </ScrollReveal>
         </div>
 
         {/* Bottom Floating Cards Carousel */}
         <div className="amp-amenities-carousel-track-wrapper">
-          <div
-            className="amp-amenities-carousel-track"
-            style={{
-              transform: `translateX(-${activeIndex * 360}px)`
-            }}
-          >
-            {amenities.map((item, idx) => {
-              const isActive = activeIndex === idx;
-              const isPast = idx < activeIndex;
-              return (
-                <div
-                  key={idx}
-                  onClick={() => handleCardClick(idx)}
-                  className={`amp-amenity-card ${
-                    isActive ? 'card-active' : isPast ? 'card-past' : 'card-inactive'
-                  }`}
-                >
-                  <h3 className="amp-card-title">{item.title}</h3>
-                  <p className="amp-card-desc">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
+          <ScrollReveal animation="fadeUp" delay={0.35} once={false} style={{ width: 'max-content' }}>
+            <div
+              className="amp-amenities-carousel-track"
+              style={{
+                transform: `translateX(-${activeIndex * 360}px)`
+              }}
+            >
+              {amenities.map((item, idx) => {
+                const isActive = activeIndex === idx;
+                const isPast = idx < activeIndex;
+                return (
+                  <div
+                    key={idx}
+                    onClick={() => handleCardClick(idx)}
+                    className={`amp-amenity-card ${
+                      isActive ? 'card-active' : isPast ? 'card-past' : 'card-inactive'
+                    }`}
+                  >
+                    <h3 className="amp-card-title">{item.title}</h3>
+                    <p className="amp-card-desc">{item.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </ScrollReveal>
         </div>
 
         {/* Bottom Navigation Controls Bar */}
         <div className="amp-amenities-controls">
-          <div className="amp-amenities-nav-btns">
-            <button
-              onClick={handlePrev}
-              className="amp-nav-btn btn-prev"
-              aria-label="Previous Amenity"
-            >
-              <ChevronLeft size={22} strokeWidth={2} />
-            </button>
-            <button
-              onClick={handleNext}
-              className="amp-nav-btn btn-next"
-              aria-label="Next Amenity"
-            >
-              <ChevronRight size={22} strokeWidth={2} />
-            </button>
-          </div>
+          <ScrollReveal animation="fadeUp" delay={0.45} once={false}>
+            <div className="amp-amenities-controls-inner">
+              <div className="amp-amenities-nav-btns">
+                <button
+                  onClick={handlePrev}
+                  className="amp-nav-btn btn-prev"
+                  aria-label="Previous Amenity"
+                >
+                  <ChevronLeft size={22} strokeWidth={2} />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="amp-nav-btn btn-next"
+                  aria-label="Next Amenity"
+                >
+                  <ChevronRight size={22} strokeWidth={2} />
+                </button>
+              </div>
 
-          {/* Dots Indicator */}
-          <div className="amp-amenities-dots">
-            {amenities.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleCardClick(idx)}
-                className={`amp-dot ${activeIndex === idx ? 'active' : ''}`}
-                aria-label={`Go to amenity ${idx + 1}`}
-              />
-            ))}
-          </div>
+              {/* Dots Indicator */}
+              <div className="amp-amenities-dots">
+                {amenities.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleCardClick(idx)}
+                    className={`amp-dot ${activeIndex === idx ? 'active' : ''}`}
+                    aria-label={`Go to amenity ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
 
@@ -193,8 +204,12 @@ export default function AmenitiesHeroSlider({
 
         {/* Bottom Info Panel */}
         <div className="amp-mobile-info-card">
-          <h3 className="amp-mobile-card-title">{currentItem.title}</h3>
-          <p className="amp-mobile-card-desc">{currentItem.desc}</p>
+          <ScrollReveal animation="fadeUp" delay={0.1} once={false}>
+            <h3 className="amp-mobile-card-title">{currentItem.title}</h3>
+          </ScrollReveal>
+          <ScrollReveal animation="fadeUp" delay={0.2} once={false}>
+            <p className="amp-mobile-card-desc">{currentItem.desc}</p>
+          </ScrollReveal>
 
           {/* Mobile Dots */}
           <div className="amp-mobile-dots">
@@ -410,6 +425,12 @@ export default function AmenitiesHeroSlider({
           left: 50%;
           transform: translateX(-50%);
           z-index: 15;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .amp-amenities-controls-inner {
           display: flex;
           align-items: center;
           gap: 22px;
