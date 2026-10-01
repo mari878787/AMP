@@ -714,7 +714,7 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* ── Native Brand Logo Cursor ── */
+/* â”€â”€ Native Brand Logo Cursor â”€â”€ */
 @media (hover: hover) {
 
   html,
@@ -730,8 +730,18 @@ html.lenis body {
   textarea,
   .slider-arrow,
   .filter-tab-btn,
-  [role="button"],
-  .pillar-header {
+  [role="button"] {
+    cursor: pointer !important;
+  }
+
+  a *,
+  button *,
+  select *,
+  input *,
+  textarea *,
+  .slider-arrow *,
+  .filter-tab-btn *,
+  [role="button"] *, .pillar-header * {
     cursor: pointer !important;
   }
 

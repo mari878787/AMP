@@ -82,7 +82,8 @@ export default function Navbar({ darkText = false }) {
   const [expandedCategory, setExpandedCategory] = useState(null); // 'villas' or 'apartments' or 'plotted'
 
   useEffect(() => {
-    let heroHeight = window.innerHeight - 60;
+    let cachedHeroHeight = window.innerHeight - 60;
+
     const measureHero = () => {
       const heroEl = document.querySelector('.project-hero-section') || 
                      document.querySelector('.hero-section') || 
@@ -90,19 +91,24 @@ export default function Navbar({ darkText = false }) {
                      document.querySelector('.hero-container') ||
                      document.querySelector('section:first-of-type');
       if (heroEl) {
-        heroHeight = heroEl.offsetHeight;
-      } else {
-        heroHeight = window.innerHeight - 60;
+        cachedHeroHeight = heroEl.offsetHeight;
       }
     };
+
     measureHero();
+    const timer = setTimeout(measureHero, 400);
 
     let ticking = false;
+    let lastScrolled = false;
+
     const handleScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const isPast = window.scrollY >= (heroHeight - 80);
-          setScrolled(prev => (prev !== isPast ? isPast : prev));
+        requestAnimationFrame(() => {
+          const isPast = window.scrollY >= (cachedHeroHeight - 80);
+          if (isPast !== lastScrolled) {
+            lastScrolled = isPast;
+            setScrolled(isPast);
+          }
           ticking = false;
         });
         ticking = true;
@@ -115,14 +121,15 @@ export default function Navbar({ darkText = false }) {
       }
     };
 
-    window.addEventListener('resize', measureHero, { passive: true });
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', measureHero, { passive: true });
     document.addEventListener('click', handleClickOutside);
     handleScroll();
 
     return () => {
-      window.removeEventListener('resize', measureHero);
+      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', measureHero);
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);

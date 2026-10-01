@@ -199,6 +199,7 @@ export default function ProjectsSection() {
                         className="maia-bg-img"
                         draggable="false"
                         loading="lazy"
+                        decoding="async"
                       />
                     </picture>
                   </a>

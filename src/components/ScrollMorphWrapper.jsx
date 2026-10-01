@@ -37,7 +37,6 @@ export default function ScrollMorphWrapper({ children }) {
         gsap.set(hero, { transformOrigin: 'center top' });
         tl.to(hero, {
           scale: 0.93,
-          filter: 'blur(12px)',
           opacity: 0.4,
           ease: 'none'
         }, 0);

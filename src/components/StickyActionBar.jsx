@@ -23,25 +23,28 @@ export default function StickyActionBar({ onEnquire }) {
   ].includes(location.pathname);
 
   useEffect(() => {
+    let ticking = false;
+    let lastVisible = false;
+
     const handleScroll = () => {
-      const scrollY = window.lenis?.scroll ?? window.scrollY;
-      if (scrollY > 150) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.lenis?.scroll ?? window.scrollY;
+          const shouldShow = scrollY > 150;
+          if (shouldShow !== lastVisible) {
+            lastVisible = shouldShow;
+            setIsVisible(shouldShow);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    if (window.lenis) {
-      window.lenis.on('scroll', handleScroll);
-    }
-    handleScroll(); // Check initial state on mount
+    handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (window.lenis) {
-        window.lenis.off('scroll', handleScroll);
-      }
     };
   }, [location.pathname]);
 

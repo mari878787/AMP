@@ -92,30 +92,38 @@ export default function AshokNagar({ project }) {
   }, []);
 
   useEffect(() => {
-    let threshold = window.innerHeight - 60;
+    let cachedThreshold = window.innerHeight - 60;
     const measure = () => {
       const heroEl = document.querySelector('.project-hero-section');
-      if (heroEl) threshold = heroEl.offsetHeight - 60;
+      if (heroEl) cachedThreshold = heroEl.offsetHeight - 60;
     };
     measure();
+    const t = setTimeout(measure, 400);
 
     let ticking = false;
+    let lastHidden = false;
+
     const handleScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const shouldHide = window.scrollY >= threshold;
-          setHideMainHeader(prev => (prev !== shouldHide ? shouldHide : prev));
+        requestAnimationFrame(() => {
+          const shouldHide = window.scrollY >= cachedThreshold;
+          if (shouldHide !== lastHidden) {
+            lastHidden = shouldHide;
+            setHideMainHeader(shouldHide);
+          }
           ticking = false;
         });
         ticking = true;
       }
     };
-    window.addEventListener('resize', measure, { passive: true });
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', measure, { passive: true });
     handleScroll();
     return () => {
-      window.removeEventListener('resize', measure);
+      clearTimeout(t);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', measure);
     };
   }, []);
 
