@@ -297,26 +297,14 @@ export default function ProjectsSection() {
         }
 
         .maia-bg-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.88) 0%,
-            rgba(0, 0, 0, 0.25) 45%,
-            rgba(0, 0, 0, 0.1) 100%
-          );
-          z-index: 1;
-          pointer-events: none;
+          display: none;
         }
 
-        /* Maia Header Content Block positioned at Bottom */
+        /* Maia Header Content Block positioned at Top */
         .maia-header-content {
           position: absolute;
-          bottom: 60px;
-          top: auto;
+          top: 60px;
+          bottom: auto;
           left: 80px;
           z-index: 2;
           display: flex;
@@ -328,8 +316,8 @@ export default function ProjectsSection() {
 
         @media (max-width: 1024px) {
           .maia-header-content {
-            bottom: 30px;
-            top: auto;
+            top: 30px;
+            bottom: auto;
             left: 24px;
           }
         }
@@ -342,7 +330,7 @@ export default function ProjectsSection() {
           margin: 0 0 10px 0;
           line-height: 1.1;
           letter-spacing: -0.01em;
-          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+          text-shadow: none;
         }
 
         .maia-meta-row {
@@ -371,7 +359,7 @@ export default function ProjectsSection() {
           font-weight: 500;
           color: #ffffff;
           letter-spacing: 0.02em;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+          text-shadow: none;
         }
 
         .maia-meta-separator {
