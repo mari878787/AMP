@@ -785,10 +785,10 @@ export default function CMRGlobalCity({ project }) {
                           } : {
                             display: 'flex',
                             alignItems: 'center',
-                            gap: 'var(--gallery-gap, 8vw)',
+                            gap: '0px',
                             width: 'max-content',
                             transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-                            transform: `translateX(calc(var(--gallery-card-offset, 12.5vw) - ${galleryIndices[galleryTab]} * (var(--gallery-card-w, 55vw) + var(--gallery-gap, 8vw))))`
+                            transform: `translateX(-${galleryIndices[galleryTab] * 100}vw)`
                           }}
                         >
                           {extended.map((img, idx) => {
@@ -802,16 +802,17 @@ export default function CMRGlobalCity({ project }) {
                                 className={`gallery-spotlight-card ${isActive ? 'active' : ''}`}
                                 style={{
                                   flexShrink: 0,
-                                  flexBasis: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                                  width: isActive ? 'var(--gallery-card-active-w, 75vw)' : 'var(--gallery-card-w, 55vw)',
-                                  transition: 'flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease',
+                                  flexBasis: '100vw',
+                                  width: '100vw',
+                                  borderRadius: '0px',
+                                  transition: 'opacity 0.6s ease',
                                   cursor: 'pointer',
                                   overflow: 'hidden',
                                   position: 'relative',
                                   height: 'calc(100vh - 165px)',
-                                  maxHeight: '720px',
-                                  minHeight: '320px',
-                                  boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
+                                  maxHeight: '750px',
+                                  minHeight: '360px',
+                                  boxShadow: 'none'
                                 }}
                                 onClick={() => {
                                   if (isActive) {
@@ -3426,15 +3427,18 @@ export default function CMRGlobalCity({ project }) {
           box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         }
         .gallery-spotlight-arrow.prev {
-          left: calc(var(--gallery-card-offset) / 2);
+          left: clamp(16px, 3vw, 40px);
+          transform: translateY(-50%);
+        }
+        .gallery-spotlight-arrow.prev:hover {
+          transform: translateY(-50%) scale(1.08);
         }
         .gallery-spotlight-arrow.next {
-          right: calc(var(--gallery-card-offset) / 2);
-          transform: translate(50%, -50%);
+          right: clamp(16px, 3vw, 40px);
+          transform: translateY(-50%);
         }
-        
         .gallery-spotlight-arrow.next:hover {
-          transform: translate(50%, -50%) scale(1.08);
+          transform: translateY(-50%) scale(1.08);
         }
         
         /* Modal Split Layout Styles */
