@@ -40,7 +40,7 @@ const ContactUs = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const officeCoords = [13.0601, 80.2520]; // Anna Salai, Chennai
+  const officeCoords = [13.0701342, 80.205387]; // Aadhithya Mohan Properties LLP, Chennai
 
   // Tabs for the main inquiry form
   const [activeFormTab, setActiveFormTab] = useState('buy'); // 'buy', 'job', 'partner'
@@ -150,13 +150,13 @@ const ContactUs = () => {
 
   return (
     <div className="contact-page">
-      <Navbar darkText={true} />
+      <Navbar/>
 
       {/* Hero Header - Architectural Sketch Aesthetic */}
       <section className="contact-hero">
         <div className="contact-hero-background">
           <img
-            src="/images/about/CML ABOUT US.png"
+            src="/images/Minimalist Lakeside Architecture at Sunset-Pipng.png"
             alt="Aadhithya Mohan Properties Architecture"
             className="contact-hero-bg-image"
           />
@@ -507,36 +507,84 @@ const ContactUs = () => {
       {/* Section 3: Interactive Location Map (Chennai Anna Salai Office) */}
       <section className="contact-map-section">
         <div className="container">
-          <div className="section-title-wrap">
-            <span className="map-section-tag">Find Us</span>
-            <h2 className="map-section-title">Office Location</h2>
-          </div>
-          <ScrollReveal animation="fadeUp" delay={0.1}>
-            <div className="contact-map-container">
-              <MapContainer
-                center={officeCoords}
-                zoom={15}
-                scrollWheelZoom={false}
-                style={{ width: '100%', height: '100%' }}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                  url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiYWFkaGl0aHlhbW9oYW5wcm9wZXJ0aWVzMjAyNiIsImEiOiJjbXNyaGQ3YWIwMDk3MnlyNWZ2dnBycXViIn0.M6FmIiIlvIbPk3wl6MgvVw'}`}
-                  maxZoom={19}
-                  tileSize={256}
-                />
-                <Marker position={officeCoords} icon={createOfficeMarker()}>
-                  <Popup>
-                    <div style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', textAlign: 'center' }}>
-                      <strong style={{ display: 'block', marginBottom: '4px' }}>Aadhithya Mohan Properties</strong>
-                      No. 123, Anna Salai, Chennai
-                    </div>
-                  </Popup>
-                </Marker>
-              </MapContainer>
+          <div className="section-title-wrap" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
+            <div>
+              <span className="map-section-tag">Find Us</span>
+              <h2 className="map-section-title" style={{ margin: 0 }}>Office Location</h2>
             </div>
-          </ScrollReveal>
+            <a
+              href="https://www.google.com/maps/place/Aadhithya+Mohan+Properties+LLP/@13.0701342,80.205387,17z/data=!4m6!3m5!1s0x3cd4533a14d0a15:0x4c02f9b06a7bc8e1!8m2!3d13.0701342!4d80.205387!16s%2Fg%2F11wpzvr8tj"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="map-directions-btn"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '12px',
+                fontWeight: '600',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#111111',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 20px',
+                border: '1px solid rgba(0, 0, 0, 0.2)',
+                borderRadius: '4px',
+                background: '#ffffff',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              Get Directions &rarr;
+            </a>
+          </div>
         </div>
+
+        {/* Full-Width Map Container - Edge to Edge */}
+        <ScrollReveal animation="fadeUp" delay={0.1}>
+          <div className="contact-map-container">
+            <MapContainer
+              center={officeCoords}
+              zoom={16}
+              scrollWheelZoom={false}
+              style={{ width: '100%', height: '100%' }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiYWFkaGl0aHlhbW9oYW5wcm9wZXJ0aWVzMjAyNiIsImEiOiJjbXNyaGQ3YWIwMDk3MnlyNWZ2dnBycXViIn0.M6FmIiIlvIbPk3wl6MgvVw'}`}
+                maxZoom={19}
+                tileSize={256}
+              />
+              <Marker position={officeCoords} icon={createOfficeMarker()}>
+                <Popup>
+                  <div style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', textAlign: 'center', padding: '4px' }}>
+                    <strong style={{ display: 'block', marginBottom: '4px', fontSize: '13px', color: '#111111' }}>
+                      Aadhithya Mohan Properties LLP
+                    </strong>
+                    <p style={{ margin: '0 0 8px', color: '#666666', fontSize: '11px' }}>
+                      Head Office, Chennai
+                    </p>
+                    <a
+                      href="https://www.google.com/maps/place/Aadhithya+Mohan+Properties+LLP/@13.0701342,80.205387,17z/data=!4m6!3m5!1s0x3cd4533a14d0a15:0x4c02f9b06a7bc8e1!8m2!3d13.0701342!4d80.205387!16s%2Fg%2F11wpzvr8tj"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: '#b48564',
+                        fontWeight: '600',
+                        textDecoration: 'none',
+                        fontSize: '11px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em'
+                      }}
+                    >
+                      Open in Google Maps &rarr;
+                    </a>
+                  </div>
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
+        </ScrollReveal>
       </section>
 
       <Footer />
@@ -588,15 +636,22 @@ const ContactUs = () => {
           to { transform: scale(1.1); }
         }
 
+        /* Ensure navbar in contact page has white text when not scrolled */
+        .contact-page .sobha-navbar:not(.is-scrolled):not(.mega-open) .nav-link,
+        .contact-page .sobha-navbar:not(.is-scrolled):not(.mega-open) .text-logo-wrapper,
+        .contact-page .sobha-navbar:not(.is-scrolled):not(.mega-open) .icon-button {
+          color: #ffffff !important;
+        }
+
         .contact-hero-overlay {
           position: absolute;
           inset: 0;
           background: linear-gradient(
-            to top,
-            rgba(238, 234, 227, 0.96) 0%,
-            rgba(238, 234, 227, 0.72) 38%,
-            rgba(238, 234, 227, 0.28) 70%,
-            rgba(238, 234, 227, 0.15) 100%
+            to bottom,
+            rgba(0, 0, 0, 0.55) 0%,
+            rgba(0, 0, 0, 0.1) 25%,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 0.65) 100%
           );
           z-index: 1;
         }
@@ -614,29 +669,33 @@ const ContactUs = () => {
           font-size: 11px;
           font-weight: 600;
           text-transform: uppercase;
-          letter-spacing: 0.22em;
-          color: #b48564;
+          letter-spacing: 0.25em;
+          color: #ffffff;
           display: inline-block;
           margin-bottom: 12px;
+          opacity: 0.92;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .contact-hero-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: clamp(38px, 5.5vw, 64px);
           font-weight: 400;
-          color: #111111;
+          color: #ffffff;
           letter-spacing: -0.01em;
           margin: 0 0 16px;
           line-height: 1.08;
+          text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
         }
 
         .contact-hero-desc {
           font-family: var(--font-sans);
           font-size: clamp(15px, 1.2vw, 17px);
-          color: #4a4a4a;
+          color: rgba(255, 255, 255, 0.92);
           line-height: 1.65;
           margin: 0;
           max-width: 620px;
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
         }
 
         /* Section 1: Department Cards (Screenshot 1 Styles) */
@@ -1110,9 +1169,11 @@ const ContactUs = () => {
           margin: 0;
         }
 
-        /* Map Section Details */
+        /* Map Section Details - Full Width Edge-to-Edge */
         .contact-map-section {
-          padding: 40px 0 100px;
+          padding: 60px 0 0;
+          width: 100%;
+          overflow: hidden;
         }
 
         .section-title-wrap {
@@ -1139,12 +1200,13 @@ const ContactUs = () => {
         }
 
         .contact-map-container {
-          height: 480px;
+          height: 520px;
           width: 100%;
-          border-radius: 8px; /* 8px border-radius! */
+          border-radius: 0;
           overflow: hidden;
-          box-shadow: 0 20px 50px rgba(0,0,0,0.03);
-          border: 1px solid rgba(0, 0, 0, 0.05);
+          box-shadow: none;
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         /* Leaflet custom styling */
@@ -1222,10 +1284,11 @@ const ContactUs = () => {
             padding: 40px 0 60px;
           }
           .contact-map-section {
-            padding: 20px 0 60px;
+            padding: 30px 0 0;
           }
           .contact-map-container {
-            height: 380px;
+            height: 420px;
+            border-radius: 0;
           }
         }
 
