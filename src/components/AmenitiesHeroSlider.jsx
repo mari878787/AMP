@@ -211,7 +211,7 @@ export default function AmenitiesHeroSlider({
         .amp-amenities-slider {
           position: relative;
           width: 100%;
-          background: var(--color-bg-navy, #000000);
+          background: var(--color-bg-light, #f7f7f7);
           overflow: hidden;
           user-select: none;
         }
@@ -251,8 +251,8 @@ export default function AmenitiesHeroSlider({
           top: 0;
           left: 0;
           right: 0;
-          height: 55%;
-          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 55%, transparent 100%);
+          height: 50%;
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
           pointer-events: none;
         }
 
@@ -261,8 +261,8 @@ export default function AmenitiesHeroSlider({
           bottom: 0;
           left: 0;
           right: 0;
-          height: 65%;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+          height: 60%;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0.12) 50%, transparent 100%);
           pointer-events: none;
         }
 
@@ -284,17 +284,17 @@ export default function AmenitiesHeroSlider({
           letter-spacing: 0.02em;
           margin: 0 0 14px 0;
           line-height: 1.15;
-          text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+          text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
         }
 
         .amp-amenities-subtitle {
           font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
           font-size: clamp(14px, 1.15vw, 15.5px);
           font-weight: 300;
-          color: rgba(255, 255, 255, 0.85);
+          color: rgba(255, 255, 255, 0.9);
           line-height: 1.68;
           margin: 0;
-          text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+          text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
         }
 
         /* Bottom Floating Cards Row */
@@ -327,10 +327,11 @@ export default function AmenitiesHeroSlider({
           transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Active Card: Clean Luxury White */
+        /* Active Card: Clean Luxury White with Gold Accent */
         .amp-amenity-card.card-active {
-          background: var(--color-white, #ffffff);
-          box-shadow: 0 16px 38px rgba(0, 0, 0, 0.35);
+          background: #ffffff;
+          border: 1.5px solid var(--color-highlight, #b48564);
+          box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
           cursor: default;
           transform: translateY(0);
         }
@@ -347,32 +348,33 @@ export default function AmenitiesHeroSlider({
 
         .amp-amenity-card.card-active .amp-card-desc {
           font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
-          color: var(--color-text-muted, #333333);
+          color: #333333;
           font-size: 13.5px;
           line-height: 1.55;
           margin: 0;
           font-weight: 400;
         }
 
-        /* Inactive Cards: Refined Dark Glassmorphism */
+        /* Inactive Cards: Light Luxury Frosted Glass */
         .amp-amenity-card.card-inactive {
-          background: rgba(18, 18, 18, 0.78);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+          background: rgba(255, 255, 255, 0.86);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.95);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
           cursor: pointer;
         }
 
         .amp-amenity-card.card-inactive:hover {
-          background: rgba(28, 28, 28, 0.88);
+          background: #ffffff;
           border-color: var(--color-highlight, #b48564);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
           transform: translateY(-4px);
         }
 
         .amp-amenity-card.card-inactive .amp-card-title {
           font-family: var(--font-heading, 'Playfair Display', serif);
-          color: var(--color-white, #ffffff);
+          color: var(--color-text-dark, #000000);
           font-size: 22px;
           font-weight: 500;
           margin: 0 0 8px 0;
@@ -382,7 +384,7 @@ export default function AmenitiesHeroSlider({
 
         .amp-amenity-card.card-inactive .amp-card-desc {
           font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
-          color: rgba(255, 255, 255, 0.75);
+          color: #555555;
           font-size: 13.5px;
           line-height: 1.55;
           margin: 0;
@@ -400,41 +402,35 @@ export default function AmenitiesHeroSlider({
           gap: 22px;
         }
 
+        /* Signature Website Arrow Style: Circular & Light */
         .amp-amenities-nav-btns {
           display: flex;
           align-items: center;
+          gap: 12px;
         }
 
         .amp-nav-btn {
           width: 48px;
           height: 48px;
-          border: none;
-          color: #ffffff;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.95);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          color: var(--color-primary, #000000);
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          transition: background 0.3s ease, transform 0.2s ease;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           outline: none;
         }
 
-        .amp-nav-btn.btn-prev {
-          background: var(--color-highlight, #b48564);
-        }
-
-        .amp-nav-btn.btn-prev:hover {
-          background: #9d7253;
-          transform: scale(1.04);
-        }
-
-        .amp-nav-btn.btn-next {
-          background: var(--color-primary, #000000);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .amp-nav-btn.btn-next:hover {
-          background: #222222;
-          transform: scale(1.04);
+        .amp-nav-btn:hover {
+          background: #ffffff;
+          color: var(--color-highlight, #b48564);
+          border-color: var(--color-highlight, #b48564);
+          transform: scale(1.08);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
         }
 
         /* Dots Container */
@@ -448,23 +444,25 @@ export default function AmenitiesHeroSlider({
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.35);
-          border: none;
+          background: rgba(255, 255, 255, 0.7);
+          border: 1px solid rgba(0, 0, 0, 0.1);
           padding: 0;
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
         }
 
         .amp-dot:hover:not(.active) {
-          background: rgba(255, 255, 255, 0.65);
+          background: #ffffff;
+          transform: scale(1.15);
         }
 
         .amp-dot.active {
-          width: 13px;
-          height: 13px;
+          width: 12px;
+          height: 12px;
           background: var(--color-highlight, #b48564);
+          border-color: var(--color-highlight, #b48564);
           box-shadow: 0 0 0 3px rgba(180, 133, 100, 0.35);
-          transform: scale(1.1);
         }
 
         /* ── MOBILE VIEW ── */
@@ -488,7 +486,7 @@ export default function AmenitiesHeroSlider({
             width: 100%;
             height: clamp(280px, 46vh, 360px);
             overflow: hidden;
-            background: #000000;
+            background: #f7f7f7;
           }
 
           .amp-mobile-photo {
@@ -508,39 +506,42 @@ export default function AmenitiesHeroSlider({
 
           .amp-mobile-corner-btns {
             position: absolute;
-            bottom: 0;
-            right: 0;
+            bottom: 14px;
+            right: 14px;
             z-index: 10;
             display: flex;
+            align-items: center;
+            gap: 8px;
           }
 
           .amp-mobile-btn {
-            width: 48px;
-            height: 48px;
-            border: none;
-            color: #ffffff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            color: var(--color-primary, #000000);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
             outline: none;
+            transition: all 0.25s ease;
           }
 
-          .amp-mobile-btn.btn-prev {
-            background: var(--color-highlight, #b48564);
+          .amp-mobile-btn:active {
+            transform: scale(0.94);
+            color: var(--color-highlight, #b48564);
           }
 
-          .amp-mobile-btn.btn-next {
-            background: var(--color-primary, #000000);
-            border-left: 1px solid rgba(255, 255, 255, 0.12);
-          }
-
-          /* Bottom Solid Luxury Dark Panel */
+          /* Light Luxury Info Card for Mobile */
           .amp-mobile-info-card {
-            background: #111111;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: #ffffff;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.04);
             padding: 24px 20px 28px;
-            color: #ffffff;
+            color: var(--color-text-dark, #000000);
             text-align: left;
           }
 
@@ -548,18 +549,18 @@ export default function AmenitiesHeroSlider({
             font-family: var(--font-heading, 'Playfair Display', serif);
             font-size: 23px;
             font-weight: 500;
-            color: var(--color-white, #ffffff);
+            color: var(--color-text-dark, #000000);
             margin: 0 0 8px 0;
             letter-spacing: 0.02em;
           }
 
           .amp-mobile-card-desc {
             font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
-            font-size: 13.5px;
+            font-size: 14px;
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
+            color: #444444;
             margin: 0;
-            font-weight: 300;
+            font-weight: 400;
           }
 
           .amp-mobile-dots {
@@ -574,7 +575,7 @@ export default function AmenitiesHeroSlider({
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: all 0.3s ease;
           }
@@ -583,7 +584,7 @@ export default function AmenitiesHeroSlider({
             width: 10px;
             height: 10px;
             background: var(--color-highlight, #b48564);
-            box-shadow: 0 0 0 2px rgba(180, 133, 100, 0.35);
+            box-shadow: 0 0 0 2px rgba(180, 133, 100, 0.25);
           }
         }
       `}</style>
