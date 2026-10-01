@@ -4167,7 +4167,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .gallery-spotlight-card:hover .gallery-spotlight-img {
-          transform: scale(1.2);
+          transform: none;
         }
         .gallery-spotlight-arrow {
           position: absolute;
