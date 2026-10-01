@@ -170,13 +170,23 @@ export default function ProjectsSection() {
                       </ScrollReveal>
                       
                       <ScrollReveal animation="fadeUp" delay={0.25} once={false}>
-                        <p className="maia-location-p">
-                          <svg className="maia-map-icon" width="22" height="22" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20.0625 10.1562C20.0625 14.5746 12.0625 22.1562 12.0625 22.1562C12.0625 22.1562 4.0625 14.5746 4.0625 10.1562C4.0625 5.73797 7.64422 2.15625 12.0625 2.15625C16.4808 2.15625 20.0625 5.73797 20.0625 10.1562Z" stroke="white" strokeWidth="1.5"></path>
-                            <path d="M12.0625 11.1562C12.6148 11.1562 13.0625 10.7085 13.0625 9.15625C13.0625 9.60397 12.6148 9.15625 12.0625 9.15625C11.5102 9.15625 11.0625 9.60397 11.0625 10.1562C11.0625 10.7085 11.5102 11.1562 12.0625 11.1562Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                          </svg>
-                          <span className="maia-location-span">{project.location}</span>
-                        </p>
+                        <div className="maia-meta-row">
+                          <p className="maia-location-p">
+                            <svg className="maia-map-icon" width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M20.0625 10.1562C20.0625 14.5746 12.0625 22.1562 12.0625 22.1562C12.0625 22.1562 4.0625 14.5746 4.0625 10.1562C4.0625 5.73797 7.64422 2.15625 12.0625 2.15625C16.4808 2.15625 20.0625 5.73797 20.0625 10.1562Z" stroke="white" strokeWidth="1.5"></path>
+                              <path d="M12.0625 11.1562C12.6148 11.1562 13.0625 10.7085 13.0625 9.15625C13.0625 9.60397 12.6148 9.15625 12.0625 9.15625C11.5102 9.15625 11.0625 9.60397 11.0625 10.1562C11.0625 10.7085 11.5102 11.1562 12.0625 11.1562Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                            </svg>
+                            <span className="maia-location-span">{project.location}</span>
+                          </p>
+                          {(project.bhkConfig || project.centerInfo) && (
+                            <>
+                              <span className="maia-meta-separator">•</span>
+                              <p className="maia-config-p">
+                                <span className="maia-config-span">{project.bhkConfig || project.centerInfo}</span>
+                              </p>
+                            </>
+                          )}
+                        </div>
                       </ScrollReveal>
                     </div>
 
@@ -335,7 +345,15 @@ export default function ProjectsSection() {
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
-        .maia-location-p {
+        .maia-meta-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .maia-location-p,
+        .maia-config-p {
           display: flex;
           align-items: center;
           gap: 8px;
@@ -346,13 +364,19 @@ export default function ProjectsSection() {
           flex-shrink: 0;
         }
 
-        .maia-location-span {
+        .maia-location-span,
+        .maia-config-span {
           font-family: var(--font-sans);
           font-size: 16px;
           font-weight: 500;
           color: #ffffff;
           letter-spacing: 0.02em;
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .maia-meta-separator {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 14px;
         }
 
         .maia-picture {
