@@ -9,8 +9,8 @@ const CATEGORIES = [
     img: '/images/project/CML/extirior/Views_Scene_1_4k_4.png',
     projects: [
       { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/extirior/Views_Scene_1_4k_4.png', url: '/crystal-moonlight-villa' },
-      { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai • Upcoming', img: '/images/project/Bayvista/Bay Vista Teaser.jpeg', teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg', url: '#bay-vista' },
-      { id: 'lakeshore', name: 'Lakeshore', location: 'ECR, Chennai • Upcoming', img: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg', teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg', url: '#lakeshore' }
+      { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai • Upcoming', img: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png', teaserPoster: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png', url: '#bay-vista' },
+      { id: 'lakeshore', name: 'Lakeshore', location: 'ECR, Chennai • Upcoming', img: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png', teaserPoster: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png', url: '#lakeshore' }
     ]
   },
   {

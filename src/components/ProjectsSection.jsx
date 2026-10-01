@@ -54,9 +54,9 @@ const ALL_PROJECTS = [
     title: 'Bay Vista',
     location: 'ECR - Chennai',
     area: 'Luxury Beachfront',
-    image: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    image: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png',
     mobileImage: '/images/project/Bayvista/Bay Vista Teaser - mobile.png',
-    teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    teaserPoster: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png',
     link: '#bay-vista',
     centerInfo: 'Upcoming Project',
     badge: 'Coming Soon',
@@ -68,13 +68,13 @@ const ALL_PROJECTS = [
     title: 'Lakeshore',
     location: 'ECR - Chennai',
     area: 'Waterfront Estate',
-    image: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
-    mobileImage: '/images/project/lakeshore/Lakeshore Hero Banner-01-mobile.png',
-    teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+    image: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png',
+    mobileImage: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png',
+    teaserPoster: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png',
     link: '#lakeshore',
     centerInfo: 'Upcoming Project',
     badge: 'Coming Soon',
-    bhkConfig: 'Waterfront Estates'
+    bhkConfig: 'Coming Soon'
   }
 ];
 

@@ -129,16 +129,13 @@ const PROJECTS_DATA = [
     price: 'Above ₹3 Cr',
     priceRange: 'Above ₹3 Cr',
     bedrooms: ['Bespoke'],
-    image: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    image: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png',
     mobileImage: '/images/project/Bayvista/Bay Vista Teaser - mobile.png',
     images: [
-      '/images/project/Bayvista/Bay Vista Teaser.jpeg',
-      '/images/project/Bayvista/Bay Vista Teaser.jpeg',
-      '/images/project/Bayvista/Bay Vista Teaser.jpeg',
-      '/images/project/Bayvista/Bay Vista Teaser.jpeg'
+      '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png'
     ],
     description: 'Bespoke luxury beachfront estate villas along East Coast Road (ECR). Designed for panoramic ocean vistas and coastal serenity.',
-    teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
+    teaserPoster: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png',
     link: '#bay-vista'
   },
   {
@@ -156,16 +153,13 @@ const PROJECTS_DATA = [
     price: 'Above ₹3 Cr',
     priceRange: 'Above ₹3 Cr',
     bedrooms: ['Bespoke'],
-    image: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
-    mobileImage: '/images/project/lakeshore/Lakeshore Hero Banner-01-mobile.png',
+    image: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png',
+    mobileImage: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png',
     images: [
-      '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
-      '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
-      '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
-      '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg'
+      '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png'
     ],
     description: 'An expansive 10-acre waterfront sanctuary on ECR featuring 65 exclusive bespoke luxury villas overlooking tranquil waters.',
-    teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
+    teaserPoster: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png',
     link: '#lakeshore'
   }
 ];
