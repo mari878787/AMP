@@ -1,0 +1,553 @@
+# Unused Files Archive
+
+Archived on: 2026-10-01T11:01:28.699Z
+
+## Summary
+- **Total source files archived:** 10
+- **Total public assets archived:** 531
+- **Total archived size:** 295.77 MB
+
+## Archived Source Files
+- `src/assets/vite.svg`
+- `src/components/ClipPathProjects.jsx`
+- `src/components/ContactPriceSection.jsx`
+- `src/components/CursorTracker.jsx`
+- `src/components/LaunchCountdownWidget.css`
+- `src/components/LaunchCountdownWidget.jsx`
+- `src/components/LuxuryStatGrid.jsx`
+- `src/components/Preloader.jsx`
+- `src/components/ProjectsDirectory.jsx`
+- `src/components/SignatureProject.jsx`
+
+## Archived Public Assets
+- `public/assets/3d/bar.glb`
+- `public/assets/3d/cube.glb`
+- `public/assets/3d/lens.glb`
+- `public/fonts/arfison/arfison-italic.otf`
+- `public/fonts/arfison/arfison-regular.otf`
+- `public/fonts/arfison/iFonts-License.txt`
+- `public/fonts/beddia-font/beddia-Regular-BF697b26b079ec2.ttf`
+- `public/fonts/beddia-font/Befonts-License.txt`
+- `public/fonts/Boska/Fonts/OTF/Boska-Black.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-BlackItalic.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-Bold.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-BoldItalic.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-Extralight.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-ExtralightItalic.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-Italic.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-Light.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-LightItalic.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-Medium.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-MediumItalic.otf`
+- `public/fonts/Boska/Fonts/OTF/Boska-Regular.otf`
+- `public/fonts/Boska/Fonts/TTF/Boska-Variable.ttf`
+- `public/fonts/Boska/Fonts/TTF/Boska-VariableItalic.ttf`
+- `public/fonts/Boska/Fonts/WEB/css/boska.css`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Black.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Black.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Black.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Black.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-BlackItalic.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-BlackItalic.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-BlackItalic.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-BlackItalic.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Bold.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Bold.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Bold.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Bold.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-BoldItalic.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-BoldItalic.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-BoldItalic.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-BoldItalic.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Extralight.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Extralight.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Extralight.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Extralight.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-ExtralightItalic.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-ExtralightItalic.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-ExtralightItalic.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-ExtralightItalic.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Italic.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Italic.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Italic.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Italic.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Light.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Light.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Light.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Light.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-LightItalic.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-LightItalic.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-LightItalic.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-LightItalic.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Medium.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Medium.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Medium.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Medium.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-MediumItalic.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-MediumItalic.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-MediumItalic.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-MediumItalic.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Regular.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Regular.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Regular.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Regular.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Variable.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Variable.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Variable.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-Variable.woff2`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-VariableItalic.eot`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-VariableItalic.ttf`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-VariableItalic.woff`
+- `public/fonts/Boska/Fonts/WEB/fonts/Boska-VariableItalic.woff2`
+- `public/fonts/Boska/Fonts/WEB/README.md`
+- `public/fonts/Boska/License/FFL.txt`
+- `public/fonts/canela_bold.woff`
+- `public/fonts/canela_light.woff`
+- `public/fonts/canela_roman.woff`
+- `public/fonts/example.html`
+- `public/fonts/helvetica-neue-5/HelveticaNeueBlack.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueBlackItalic.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueBold.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueBoldItalic.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueHeavy.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueHeavyItalic.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueItalic.ttf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueLight.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueLightItalic.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueMedium.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueMediumItalic.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueRoman.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueThin.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueThinItalic.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueUltraLight.otf`
+- `public/fonts/helvetica-neue-5/HelveticaNeueUltraLightItalic.otf`
+- `public/fonts/Melodrama/Fonts/OTF/Melodrama-Bold.otf`
+- `public/fonts/Melodrama/Fonts/OTF/Melodrama-Light.otf`
+- `public/fonts/Melodrama/Fonts/OTF/Melodrama-Medium.otf`
+- `public/fonts/Melodrama/Fonts/OTF/Melodrama-Regular.otf`
+- `public/fonts/Melodrama/Fonts/OTF/Melodrama-Semibold.otf`
+- `public/fonts/Melodrama/Fonts/TTF/Melodrama-Variable.ttf`
+- `public/fonts/Melodrama/Fonts/WEB/css/melodrama.css`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Bold.eot`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Bold.ttf`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Bold.woff`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Bold.woff2`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Light.eot`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Light.ttf`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Light.woff`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Light.woff2`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Medium.eot`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Medium.ttf`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Medium.woff`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Medium.woff2`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Regular.eot`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Regular.ttf`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Regular.woff`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Regular.woff2`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Semibold.eot`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Semibold.ttf`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Semibold.woff`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Semibold.woff2`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Variable.eot`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Variable.ttf`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Variable.woff`
+- `public/fonts/Melodrama/Fonts/WEB/fonts/Melodrama-Variable.woff2`
+- `public/fonts/Melodrama/Fonts/WEB/README.md`
+- `public/fonts/Melodrama/License/FFL.txt`
+- `public/fonts/Melodrama.zip`
+- `public/fonts/ProximaNovaRegular/font.css`
+- `public/fonts/ProximaNovaRegular/index.html`
+- `public/fonts/ProximaNovaRegular/ProximaNovaRegular-bg.png`
+- `public/fonts/ProximaNovaRegular/ProximaNovaRegular-thumb.png`
+- `public/fonts/ProximaNovaRegular/ProximaNovaRegular.png`
+- `public/fonts/ProximaNovaRegular/ProximaNovaRegular.woff`
+- `public/fonts/ProximaNovaRegular/readme.txt`
+- `public/fonts/soria_regular_macroman/soria-font-demo.html`
+- `public/fonts/soria_regular_macroman/soria-font-webfont.woff`
+- `public/fonts/soria_regular_macroman/specimen_files/grid_12-825-55-15.css`
+- `public/fonts/soria_regular_macroman/specimen_files/specimen_stylesheet.css`
+- `public/fonts/soria_regular_macroman/stylesheet.css`
+- `public/fonts/style.css`
+- `public/icons.svg`
+- `public/images/about/about-hero.webp`
+- `public/images/about/CML ABOUT US.webp`
+- `public/images/about/craftsmanship.webp`
+- `public/images/about/journey_2016-1.png`
+- `public/images/about/journey_2016-1.webp`
+- `public/images/about/journey_2016.jpg`
+- `public/images/about/journey_2016.webp`
+- `public/images/about/journey_2018.jpg`
+- `public/images/about/journey_2018.webp`
+- `public/images/about/journey_2021.jpg`
+- `public/images/about/journey_2021.webp`
+- `public/images/about/journey_2024.jpg`
+- `public/images/about/journey_2024.webp`
+- `public/images/about/journey_2026.jpg`
+- `public/images/about/journey_2026.webp`
+- `public/images/about/leadership_hero_bg.webp`
+- `public/images/about/placeholder.png`
+- `public/images/about/placeholder.webp`
+- `public/images/about/signature_quality.webp`
+- `public/images/about/team/Mohan_MD1.webp`
+- `public/images/about/team/murali-1.png`
+- `public/images/about/team/murali-1.webp`
+- `public/images/about/team/murali-2.png`
+- `public/images/about/team/murali-2.webp`
+- `public/images/about/team/murali.webp`
+- `public/images/about/team/sai-mohan-md.png`
+- `public/images/about/team/sai-mohan-md.webp`
+- `public/images/about/thoughtful_design.webp`
+- `public/images/allProject/rera.png`
+- `public/images/backround-img-2.png`
+- `public/images/backround-img-2.webp`
+- `public/images/backround-img.png`
+- `public/images/backround-img.webp`
+- `public/images/bg/BL-1-1.png`
+- `public/images/bg/BL-1-1.webp`
+- `public/images/bg/BL-1.png`
+- `public/images/bg/BL-1.webp`
+- `public/images/bg/BL.png`
+- `public/images/bg/BL.webp`
+- `public/images/bg/BR-1-1.png`
+- `public/images/bg/BR-1-1.webp`
+- `public/images/bg/BR-1.png`
+- `public/images/bg/BR-1.webp`
+- `public/images/bg/BR.png`
+- `public/images/bg/BR.webp`
+- `public/images/bg/TC.png`
+- `public/images/bg/TC.webp`
+- `public/images/bg/TL-1-1.png`
+- `public/images/bg/TL-1-1.webp`
+- `public/images/bg/TL-1.png`
+- `public/images/bg/TL-1.webp`
+- `public/images/bg/TL.png`
+- `public/images/bg/TL.webp`
+- `public/images/bg/TR-1-1.png`
+- `public/images/bg/TR-1-1.webp`
+- `public/images/bg/TR-1.webp`
+- `public/images/bg/TR.png`
+- `public/images/bg/TR.webp`
+- `public/images/blog_apartment_chennai.png`
+- `public/images/blog_apartment_chennai.webp`
+- `public/images/blog_dream_home.webp`
+- `public/images/blog_invest_property.webp`
+- `public/images/blog_luxury_villa.png`
+- `public/images/blog_luxury_villa.webp`
+- `public/images/blog_plots_development.png`
+- `public/images/blog_plots_development.webp`
+- `public/images/blog_smart_marketing.png`
+- `public/images/blog_smart_marketing.webp`
+- `public/images/custom-map-bg.png`
+- `public/images/custom-map-bg.webp`
+- `public/images/flycatcher_corner_bottomright.png`
+- `public/images/flycatcher_corner_bottomright.webp`
+- `public/images/flycatcher_corner_topleft.png`
+- `public/images/flycatcher_corner_topright.png`
+- `public/images/flycatcher_corner_topright.webp`
+- `public/images/flycatcher_pose2.png`
+- `public/images/flycatcher_pose2.webp`
+- `public/images/flycatcher_pose3.png`
+- `public/images/flycatcher_pose3.webp`
+- `public/images/footer-tran.webp`
+- `public/images/golden_oriole.png`
+- `public/images/golden_oriole.webp`
+- `public/images/hero_luxury_interior_1779810816441.png`
+- `public/images/hero_luxury_interior_1779810816441.webp`
+- `public/images/hero_placeholders/aerial-view-small-village-country-roadside.jpg`
+- `public/images/hero_placeholders/aerial-view-small-village-country-roadside.webp`
+- `public/images/hero_placeholders/ap-1.jpg`
+- `public/images/hero_placeholders/ap-1.webp`
+- `public/images/hero_placeholders/ap-2.webp`
+- `public/images/hero_placeholders/bird-view-shanghai-china.jpg`
+- `public/images/hero_placeholders/bird-view-shanghai-china.webp`
+- `public/images/hero_placeholders/chinese-city.jpg`
+- `public/images/hero_placeholders/chinese-city.webp`
+- `public/images/hero_placeholders/p1.png`
+- `public/images/hero_placeholders/p1.webp`
+- `public/images/hero_placeholders/p2.png`
+- `public/images/hero_placeholders/p2.webp`
+- `public/images/hero_placeholders/p3.png`
+- `public/images/hero_placeholders/p3.webp`
+- `public/images/hero_placeholders/p4.png`
+- `public/images/hero_placeholders/p4.webp`
+- `public/images/home/about.jpg`
+- `public/images/home/about.webp`
+- `public/images/home/background.webp`
+- `public/images/home/build-stand.webp`
+- `public/images/home/chennai.png`
+- `public/images/home/chennai.webp`
+- `public/images/home/project-image-1.webp`
+- `public/images/home/project-image-2.webp`
+- `public/images/Minimalist Lakeside Architecture at Sunset-Pipng.png`
+- `public/images/nav-villa.webp`
+- `public/images/paradise_flycatcher.png`
+- `public/images/paradise_flycatcher.webp`
+- `public/images/project/aminities/icon/Secure.png`
+- `public/images/project/aminities/plots/Arch Gated Community with Compound Wall.webp`
+- `public/images/project/aminities/plots/Avenue Trees.webp`
+- `public/images/project/aminities/plots/Blacktop Roads.webp`
+- `public/images/project/aminities/plots/Concrete Roads with Drainage System.webp`
+- `public/images/project/aminities/plots/Electricity Facility.webp`
+- `public/images/project/aminities/plots/Groundwater Facility.webp`
+- `public/images/project/aminities/plots/Park Facilities.webp`
+- `public/images/project/aminities/villa & apartment/Anti-Termite.webp`
+- `public/images/project/aminities/villa & apartment/Automatic Passenger Lift.webp`
+- `public/images/project/aminities/villa & apartment/Dedicated ServiceUtility Yard in Every Kitchen.webp`
+- `public/images/project/aminities/villa & apartment/Dedicated Stilt Floor Car Parking.webp`
+- `public/images/project/aminities/villa & apartment/East–West Cross Ventilated Layouts.webp`
+- `public/images/project/aminities/villa & apartment/Landscaped Common Entrance & Green Touches.webp`
+- `public/images/project/aminities/villa & apartment/Power Backup  DG Generator .webp`
+- `public/images/project/aminities/villa & apartment/Private Balconies in Every Unit.png`
+- `public/images/project/aminities/villa & apartment/Private Balconies in Every Unit.webp`
+- `public/images/project/aminities/villa & apartment/Underground Sump & Dedicated Bore Well.webp`
+- `public/images/project/aminities/villa & apartment/yoha-room.webp`
+- `public/images/project/ashok-nagar/CTA-mobile.webp`
+- `public/images/project/ashok-nagar/CTA.webp`
+- `public/images/project/ashok-nagar/hero.jpeg`
+- `public/images/project/ashok-nagar/mobile-hero.webp`
+- `public/images/project/ashok-nagar/overview.webp`
+- `public/images/project/ashok-nagar/unit-plan/AN Master Plan-01.jpg.webp`
+- `public/images/project/ashok-nagar/Web banner AN - 1.jpg (1).webp`
+- `public/images/project/ashok-nagar/Web banner AN - 1.jpg.jpeg`
+- `public/images/project/ashok-nagar/Web banner AN - 1.jpg.webp`
+- `public/images/project/ashok-nagar/Web banner AN - 2.jpg (1).webp`
+- `public/images/project/ashok-nagar/Web banner AN - 2.jpg.jpeg`
+- `public/images/project/ashok-nagar/Web banner AN - 2.jpg.webp`
+- `public/images/project/ashok-nagar/Web banner AN - 3.jpg.jpeg`
+- `public/images/project/ashok-nagar/why-project.webp`
+- `public/images/project/Bayvista/Bay Vista Teaser.jpeg`
+- `public/images/project/Bayvista/Bay Vista Teaser.webp`
+- `public/images/project/Bayvista/IMG_4625_enhanced_800x600.webp`
+- `public/images/project/Bayvista/IMG_4630_800x600.webp`
+- `public/images/project/Bayvista/IMG_4632_800x600.webp`
+- `public/images/project/Bayvista/IMG_4634_800x600.webp`
+- `public/images/project/Bayvista/IMG_4641_800x600.webp`
+- `public/images/project/Bayvista/IMG_4645_enhanced_800x600.webp`
+- `public/images/project/Bayvista/IMG_4652_enhanced_800x600.webp`
+- `public/images/project/Bayvista/IMG_4656_800x600.webp`
+- `public/images/project/CML/amenities/15.webp`
+- `public/images/project/CML/amenities/16.webp`
+- `public/images/project/CML/amenities/18.webp`
+- `public/images/project/CML/amenities/19.webp`
+- `public/images/project/CML/brouchures/CML Brochure.pdf`
+- `public/images/project/CML/CTA-mobile.webp`
+- `public/images/project/CML/CTA.webp`
+- `public/images/project/CML/Elevation-card.png`
+- `public/images/project/CML/Elevation-card.webp`
+- `public/images/project/CML/Elevation-Squre.png`
+- `public/images/project/CML/Elevation-Squre.webp`
+- `public/images/project/CML/Elevation.png`
+- `public/images/project/CML/Elevation.webp`
+- `public/images/project/CML/Elevation1.png`
+- `public/images/project/CML/Elevation1.webp`
+- `public/images/project/CML/extirior/1500x850.png`
+- `public/images/project/CML/extirior/1500x850.webp`
+- `public/images/project/CML/extirior/Master_Plan_Areial_3.1_4k.png`
+- `public/images/project/CML/extirior/new/Views_Scene_3_4k_2.png`
+- `public/images/project/CML/extirior/new/Views_Scene_3_4k_3.png`
+- `public/images/project/CML/extirior/new/Views_Scene_3_4k_4.png`
+- `public/images/project/CML/extirior/new/Views_Scene_3_4k_5.png`
+- `public/images/project/CML/extirior/new/Views_Scene_3_4k_6.png`
+- `public/images/project/CML/extirior/new/Views_Scene_3_4k_7.png`
+- `public/images/project/CML/extirior/new/Views_Scene_3_4k_8.png`
+- `public/images/project/CML/extirior/North_Day_4K_Front.png`
+- `public/images/project/CML/extirior/North_Day_4K_Front.webp`
+- `public/images/project/CML/extirior/North_Day_4K_Front_2.png`
+- `public/images/project/CML/extirior/North_Day_4K_Front_2.webp`
+- `public/images/project/CML/extirior/North_Day_4K_Left_2.png`
+- `public/images/project/CML/extirior/North_Day_4K_Left_2.webp`
+- `public/images/project/CML/extirior/North_Day_4K_Right_2.png`
+- `public/images/project/CML/extirior/North_Day_4K_Right_2.webp`
+- `public/images/project/CML/extirior/North_Day_4K_Single_1.png`
+- `public/images/project/CML/extirior/North_Day_4K_Single_2.png`
+- `public/images/project/CML/extirior/North_Day_4K_Single_3.png`
+- `public/images/project/CML/extirior/North_Day_4K_Top_2.png`
+- `public/images/project/CML/extirior/North_Day_4K_Top_2.webp`
+- `public/images/project/CML/extirior/North_Day_4K_Top_3.png`
+- `public/images/project/CML/extirior/North_Day_4K_Top_3.webp`
+- `public/images/project/CML/extirior/North_Day_4K_Top_5.png`
+- `public/images/project/CML/extirior/North_Day_4K_Top_5.webp`
+- `public/images/project/CML/extirior/North_Row_4K_Day 2.png`
+- `public/images/project/CML/extirior/North_Row_4K_New_1.png`
+- `public/images/project/CML/extirior/North_Row_4K_New_2.png`
+- `public/images/project/CML/extirior/North_Row_4K_New_3.png`
+- `public/images/project/CML/extirior/North_Row_8k.jpg.jpeg`
+- `public/images/project/CML/extirior/North_Row_8k.jpg.webp`
+- `public/images/project/CML/extirior/Views_Scene_1_4k_8.png`
+- `public/images/project/CML/floor-plan/CML 3BHK 20-27.jpg.webp`
+- `public/images/project/CML/floor-plan/CML 4BHK 1-10.jpg.webp`
+- `public/images/project/CML/floor-plan/CML 4BHK 20-27.jpg.webp`
+- `public/images/project/CML/floor-plan/CML 4BHK.jpg (1).webp`
+- `public/images/project/CML/floor-plan/master-plan.webp`
+- `public/images/project/CML/hero-mobile.png`
+- `public/images/project/CML/hero-mobile.webp`
+- `public/images/project/CML/loction/educational .webp`
+- `public/images/project/CML/loction/entertainment.webp`
+- `public/images/project/CML/loction/hospitals.webp`
+- `public/images/project/CML/master-banner.png`
+- `public/images/project/CML/master-banner.webp`
+- `public/images/project/CML/master-plan.webp`
+- `public/images/project/CML/North_Row_4K_Day 1.2.webp`
+- `public/images/project/CML/overview.webp`
+- `public/images/project/CML/overview1.jpeg`
+- `public/images/project/CML/overview2.jpeg`
+- `public/images/project/CML/overview2.webp`
+- `public/images/project/CML/why-project.webp`
+- `public/images/project/CMR/CTA-mobile.webp`
+- `public/images/project/CMR/CTA.webp`
+- `public/images/project/CMR/DJI_20260217093920_0018_D.JPG`
+- `public/images/project/CMR/DJI_20260217094534_0035_D.JPG`
+- `public/images/project/CMR/DJI_20260217094534_0035_D.webp`
+- `public/images/project/CMR/IMG_0246.JPG`
+- `public/images/project/CMR/IMG_0246.webp`
+- `public/images/project/CMR/IMG_0248.JPG`
+- `public/images/project/CMR/IMG_0248.webp`
+- `public/images/project/CMR/IMG_0272.JPG`
+- `public/images/project/CMR/IMG_0272.webp`
+- `public/images/project/CMR/IMG_0294.JPG`
+- `public/images/project/CMR/IMG_0294.webp`
+- `public/images/project/CMR/IMG_0578.JPG`
+- `public/images/project/CMR/IMG_0578.webp`
+- `public/images/project/CMR/IMG_3657.jpg`
+- `public/images/project/CMR/IMG_3657.webp`
+- `public/images/project/CMR/IMG_3658.jpg`
+- `public/images/project/CMR/IMG_3658.webp`
+- `public/images/project/CMR/IMG_3659.jpg`
+- `public/images/project/CMR/IMG_3659.webp`
+- `public/images/project/CMR/IMG_3660.jpg`
+- `public/images/project/CMR/IMG_3660.webp`
+- `public/images/project/CMR/IMG_3661.jpg`
+- `public/images/project/CMR/IMG_3661.webp`
+- `public/images/project/CMR/IMG_3662.jpg`
+- `public/images/project/CMR/IMG_3662.webp`
+- `public/images/project/CMR/IMG_3663.jpg`
+- `public/images/project/CMR/IMG_3663.webp`
+- `public/images/project/CMR/IMG_3664.jpg`
+- `public/images/project/CMR/IMG_3664.webp`
+- `public/images/project/CMR/IMG_3665.jpg`
+- `public/images/project/CMR/IMG_3665.webp`
+- `public/images/project/CMR/IMG_3666.jpg`
+- `public/images/project/CMR/IMG_3666.webp`
+- `public/images/project/CMR/IMG_3667.jpg`
+- `public/images/project/CMR/IMG_3667.webp`
+- `public/images/project/CMR/IMG_3668.jpg`
+- `public/images/project/CMR/IMG_3668.webp`
+- `public/images/project/CMR/IMG_3671.jpg`
+- `public/images/project/CMR/IMG_3671.webp`
+- `public/images/project/CMR/IMG_3672.jpg`
+- `public/images/project/CMR/IMG_3672.webp`
+- `public/images/project/CMR/IMG_3673.jpg`
+- `public/images/project/CMR/IMG_3673.webp`
+- `public/images/project/CMR/IMG_3675.jpg`
+- `public/images/project/CMR/IMG_3675.webp`
+- `public/images/project/CMR/IMG_3676.jpg`
+- `public/images/project/CMR/IMG_3676.webp`
+- `public/images/project/CMR/IMG_3677.jpg`
+- `public/images/project/CMR/IMG_3677.webp`
+- `public/images/project/CMR/mobile-hero.webp`
+- `public/images/project/CMR/overview.webp`
+- `public/images/project/CMR/unit-plan/CMR Master Layout-01.jpg.webp`
+- `public/images/project/CMR/Upscaled/14.webp`
+- `public/images/project/CMR/Upscaled/15.webp`
+- `public/images/project/CMR/Upscaled/16.webp`
+- `public/images/project/CMR/Upscaled/18.webp`
+- `public/images/project/CMR/Upscaled/19.webp`
+- `public/images/project/CMR/why-project.webp`
+- `public/images/project/Crystal moonlight down section.png`
+- `public/images/project/Crystal moonlight down section.webp`
+- `public/images/project/lakeshore/Lakeshore Hero Banner-01-mobile.png`
+- `public/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg`
+- `public/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.webp`
+- `public/images/project/pasha-pinnacle/10.1jpg.jpeg`
+- `public/images/project/pasha-pinnacle/10.3jpg.jpeg`
+- `public/images/project/pasha-pinnacle/card.webp`
+- `public/images/project/pasha-pinnacle/CTA-mobile.webp`
+- `public/images/project/pasha-pinnacle/CTA.webp`
+- `public/images/project/pasha-pinnacle/extirior/22.webp`
+- `public/images/project/pasha-pinnacle/extirior/24.webp`
+- `public/images/project/pasha-pinnacle/extirior/29.webp`
+- `public/images/project/pasha-pinnacle/extirior/30.webp`
+- `public/images/project/pasha-pinnacle/extirior/33.webp`
+- `public/images/project/pasha-pinnacle/extirior/34.webp`
+- `public/images/project/pasha-pinnacle/floorplan/Floor Plan_Block A - Front.jpg.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/Floor Plan_Block A - Front.jpg.webp`
+- `public/images/project/pasha-pinnacle/floorplan/Floor Plan_Block A - Rear.jpg.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/Floor Plan_Block A - Rear.jpg.webp`
+- `public/images/project/pasha-pinnacle/floorplan/Floor Plan_Block B - Front.jpg.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/Floor Plan_Block B - Front.jpg.webp`
+- `public/images/project/pasha-pinnacle/floorplan/Floor Plan_Block B - Rear.jpg.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/Floor Plan_Block B - Rear.jpg.webp`
+- `public/images/project/pasha-pinnacle/floorplan/floor-plan-block-a-front.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/floor-plan-block-a-rear.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/floor-plan-block-b-front.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/floor-plan-block-b-rear.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/Pasha Detailed Floor Plan - 1200x800.jpg.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/Pasha Detailed Floor Plan - 1200x800.jpg.webp`
+- `public/images/project/pasha-pinnacle/floorplan/pasha-detailed-floor-plan.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.jpeg`
+- `public/images/project/pasha-pinnacle/floorplan/Stilt + Ground Floor.jpg.webp`
+- `public/images/project/pasha-pinnacle/hero1.png`
+- `public/images/project/pasha-pinnacle/hero1.webp`
+- `public/images/project/pasha-pinnacle/mobile-hero.webp`
+- `public/images/project/pasha-pinnacle/overview.webp`
+- `public/images/project/pasha-pinnacle/why-project.webp`
+- `public/images/project/PP/floorplan/Block A.jpg.jpeg`
+- `public/images/project/PP/floorplan/Block A.jpg.webp`
+- `public/images/project/PP/floorplan/Block B.jpg.jpeg`
+- `public/images/project/PP/floorplan/Block B.jpg.webp`
+- `public/images/project/PP/floorplan/Pasha Detailed Floor Plan - 1200x800.jpg.jpeg`
+- `public/images/project/PP/floorplan/Pasha Detailed Floor Plan - 1200x800.jpg.webp`
+- `public/images/project/PP/floorplan/Stilt + Ground Floor.jpg.jpeg`
+- `public/images/project/PP/floorplan/Stilt + Ground Floor.jpg.webp`
+- `public/images/project/project-logos/Project Logos_Bay Vista.png`
+- `public/images/project/project-logos/Project Logos_CML-tags.png`
+- `public/images/project/project-logos/Project Logos_Lakeshore.png`
+- `public/images/project/project-logos/Project Logos_Pasha Pinnacle-1.png`
+- `public/images/project/project-logos/Project Logos_Tulip Garden.png`
+- `public/images/project/spec-structure.png`
+- `public/images/project/spec-structure.webp`
+- `public/images/project/specs/Architechture.jpeg`
+- `public/images/project/specs/Architechture.webp`
+- `public/images/project/specs/Balcony.jpeg`
+- `public/images/project/specs/Balcony.webp`
+- `public/images/project/specs/Bedroom.jpeg`
+- `public/images/project/specs/Bedroom.webp`
+- `public/images/project/specs/common.webp`
+- `public/images/project/specs/Doors.webp`
+- `public/images/project/specs/Electrical.webp`
+- `public/images/project/specs/Flooring.jpeg`
+- `public/images/project/specs/Flooring.webp`
+- `public/images/project/specs/Kitchen.webp`
+- `public/images/project/specs/Living Area.webp`
+- `public/images/project/specs/Painting.jpeg`
+- `public/images/project/specs/Painting.webp`
+- `public/images/project/specs/PLUMBING .webp`
+- `public/images/project/specs/spec_flooring.webp`
+- `public/images/project/specs/spec_structure.jpg`
+- `public/images/project/specs/spec_structure.webp`
+- `public/images/project/specs/spec_wall_tiles.webp`
+- `public/images/project/specs/stracture.webp`
+- `public/images/project/specs/WINDOWS.webp`
+- `public/images/project/why-cmv - Copy.png`
+- `public/images/project/why-cmv - Copy.webp`
+- `public/images/project/why-cmv.webp`
+- `public/images/project_crystal_1779810838661.webp`
+- `public/images/sunbird_branch.png`
+- `public/images/sunbird_branch.webp`
+- `public/images/team/afroz.jpg`
+- `public/images/team/afroz.webp`
+- `public/images/team/bala.png`
+- `public/images/team/bala.webp`
+- `public/images/team/karthik.jpg`
+- `public/images/team/karthik.webp`
+- `public/images/team/murali.webp`
+- `public/images/team/priya.png`
+- `public/images/team/priya.webp`
+- `public/images/team/sai-mohan.png`
+- `public/images/team/sai-mohan.webp`
+- `public/images/testimonial_man.webp`
+- `public/images/testimonial_woman.webp`
+- `public/images/villa_exterior_1779810861723.webp`
+- `public/image_specifications.html`
+- `public/image_specifications.md`
+- `public/image_specifications.txt`
