@@ -16,6 +16,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import NeighbourhoodStory from '../components/StorySection/NeighbourhoodStory';
 import ProjectDetailsGrid from '../components/ProjectDetailsGrid';
 import ProjectPricingSection from '../components/ProjectPricingSection';
+import AmenitiesHeroSlider from '../components/AmenitiesHeroSlider';
 const VIDEO_SLIDES = [
   {
     title: "Pasha Pinnacle Walkthrough",
@@ -1557,140 +1558,12 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           )}
           {/* Premium Amenities Section */}
           {activeTab === 'amenities' && (
-            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', backgroundColor: '#ffffff', minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center' }}>
-              <div className="container" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
-                <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '60px' }}>
-                  <h2 className="section-title">
-                    Boutique Residence <span style={{ color: 'var(--color-highlight)' }}>Amenities</span>
-                  </h2>
-                </ScrollReveal>
-
-                <div className="amenities-split-layout">
-
-                  {/* Left Column: Directory */}
-                  <ScrollReveal animation="fadeRight" delay={0.25} className="amenities-directory">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid rgba(143, 143, 143, 0.23)' }}>
-                      <span style={{ textTransform: 'uppercase', color: '#000000ff', fontSize: '13px' }}>Directory</span>
-                      <span style={{ color: '#000000ff', fontSize: '14px' }}>{amenities.length} Amenities</span>
-                    </div>
-
-                    <div
-                      ref={amenitiesListRef}
-                      className="amenities-grid-container"
-                    >
-                      {amenities.map((item, idx) => {
-                        const isActive = amenityIdx === idx;
-                        return (
-                          <div key={idx} className="amenity-item-wrapper" style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-                            <button
-                              onClick={() => {
-                                setAmenityIdx(idx);
-                                setIsAmenityAutoPlay(false);
-                              }}
-                              className={`amenity-item-btn ${isActive ? 'active' : ''}`}
-                              style={{
-                                display: 'flex', alignItems: 'center', gap: '14px', padding: '14px 18px',
-                                background: isActive ? 'var(--color-bg-light)' : 'transparent',
-                                borderRadius: '8px',
-                                border: 'none',
-                                borderBottom: isActive ? '1px solid transparent' : '1px solid rgba(0,0,0,0.06)',
-                                cursor: 'pointer', transition: 'all 0.3s ease',
-                                textAlign: 'left', outline: 'none',
-                                width: '100%', minWidth: 0
-                              }}
-                            >
-                              <div style={{
-                                width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                background: isActive ? 'rgba(180, 133, 100, 0.14)' : 'rgba(0,0,0,0.03)',
-                                border: isActive ? '1px solid #b48564' : '1px solid rgba(0,0,0,0.08)',
-                                transition: 'all 0.3s ease',
-                                flexShrink: 0,
-                                padding: '7px'
-                              }}>
-                                {typeof item.icon === 'string' ? (
-                                  <img
-                                    src={item.icon}
-                                    alt={item.title}
-                                    style={{
-                                      width: '18px',
-                                      height: '18px',
-                                      objectFit: 'contain',
-                                      filter: isActive ? 'none' : 'grayscale(100%) opacity(0.7)'
-                                    }}
-                                  />
-                                ) : (
-                                  item.icon
-                                )}
-                              </div>
-                              <span style={{ flex: 1, fontWeight: isActive ? '500' : '400', fontSize: '15px', color: isActive ? 'var(--color-highlight)' : '#1a1a1a', lineHeight: '1.4', whiteSpace: 'normal', wordBreak: 'break-word' }}>{item.title}</span>
-                            </button>
-
-                            {/* Mobile Inline Image Card under the active amenity item */}
-                            {isActive && (
-                              <div className="amenity-mobile-inline-card">
-                                <img
-                                  src={encodeURI(item.image)}
-                                  alt={item.title}
-                                  className="amenity-mobile-card-img"
-                                />
-                                <div className="amenity-mobile-card-overlay">
-                                  <h4 className="amenity-mobile-card-title">{item.title}</h4>
-                                  <p className="amenity-mobile-card-desc">{item.desc}</p>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </ScrollReveal>
-
-                  {/* Right Column: Desktop Visualizer */}
-                  <ScrollReveal animation="fadeLeft" delay={0.35} className="amenities-visualizer">
-                    {amenities.map((item, idx) => (
-                      <div
-                        key={idx}
-                        style={{
-                          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-                          opacity: amenityIdx === idx ? 1 : 0,
-                          transform: amenityIdx === idx ? 'scale(1)' : 'scale(1.04)',
-                          transition: 'opacity 0.6s ease, transform 0.8s ease',
-                          pointerEvents: amenityIdx === idx ? 'auto' : 'none'
-                        }}
-                      >
-                        <img
-                          src={encodeURI(item.image)}
-                          alt={item.title}
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                            display: 'block'
-                          }}
-                        />
-
-                        {/* Elegant bottom overlay */}
-                        <div style={{
-                          position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%',
-                          background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 60%, transparent 100%)',
-                          display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-                          padding: '36px',
-                          zIndex: 2
-                        }}>
-                          <div>
-                            <h3 style={{ color: '#ffffff', marginBottom: '8px', fontWeight: '500', fontSize: '22px', fontFamily: 'var(--font-heading)' }}>{item.title}</h3>
-                            <p style={{ color: 'rgba(255,255,255,0.85)', margin: 0, fontSize: '14px', fontWeight: '300', lineHeight: '1.6' }}>{item.desc}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </ScrollReveal>
-                </div>
-              </div>
+            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: 0, backgroundColor: '#081226' }}>
+              <AmenitiesHeroSlider
+                amenities={amenities}
+                title="Boutique Residence Amenities"
+                subtitle="Designed with meticulous attention to detail, offering exceptional features and everyday conveniences that elevate your boutique living experience."
+              />
             </section>
           )}
 
