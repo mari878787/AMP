@@ -15,7 +15,7 @@ const ALL_PROJECTS = [
     title: 'Crystal Moonlight',
     location: 'Medavakkam - Chennai',
     area: '2,200 - 3,300 Sq.Ft.',
-    image: '/images/project/CML/extirior/Views_Scene_1_4k_4.png',
+    image: '/images/project/CML/Master-New_4K_1.jpeg',
     mobileImage: '/images/project/CML/row-villa-mobile-hero.png',
     link: '/crystal-moonlight-villa',
     centerInfo: '3 BHK & 4 BHK Luxury Villas',
