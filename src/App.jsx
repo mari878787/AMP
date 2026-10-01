@@ -16,6 +16,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import ComingSoonPage from './pages/ComingSoonPage';
+import ScrollToTop from './components/ScrollToTop';
 
 import './App.css';
 
@@ -52,6 +53,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<ComingSoonPage />} />
         <Route path="/home" element={<Home />} />

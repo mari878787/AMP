@@ -500,15 +500,18 @@ export default function NewProject({ project }) {
       const container = document.querySelector('.project-sections-container');
       const subNav = document.querySelector('.project-sub-nav');
       if (container && subNav) {
-        const rect = container.getBoundingClientRect();
-        const subNavHeight = subNav.getBoundingClientRect().height;
-        const scrollTop = window.pageYOffset + rect.top - subNavHeight;
-        window.scrollTo({
-          top: scrollTop,
-          behavior: 'smooth'
-        });
+        const subNavHeight = subNav.getBoundingClientRect().height || 55;
+        const targetTop = container.getBoundingClientRect().top + window.pageYOffset - subNavHeight;
+        if (window.lenis) {
+          window.lenis.scrollTo(targetTop, { duration: 0.8 });
+        } else {
+          window.scrollTo({
+            top: targetTop,
+            behavior: 'smooth'
+          });
+        }
       }
-    }, 10);
+    }, 20);
   };
   const handleSubSectionNavigate = (subSectionId) => {
     setActiveSubSection(subSectionId);
