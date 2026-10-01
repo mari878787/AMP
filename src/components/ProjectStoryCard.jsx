@@ -194,14 +194,14 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
                       <strong>Site Extent:</strong> {project.siteExtent}
                     </span>
                   )}
-                  {project.bhkConfig && (
+                  {(project.bhkConfig || project.centerInfo) && (
                     <span className="maia-story-spec-pill">
                       <img 
                         src={project.category === 'Plots' ? "/images/allProject/plot-Configuration.png" : "/images/allProject/Configuration.png"} 
                         alt="Config" 
                         className="maia-story-spec-icon"
                       />
-                      <strong>Config:</strong> {project.bhkConfig}
+                      <strong>Config:</strong> {project.bhkConfig || project.centerInfo}
                     </span>
                   )}
                   {project.totalUnits && (
