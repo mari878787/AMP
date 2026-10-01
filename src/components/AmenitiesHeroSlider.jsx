@@ -351,7 +351,7 @@ export default function AmenitiesHeroSlider({
           background: #ffffff;
           box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
           cursor: default;
-          transform: scale(0.92);
+          transform: scale(1);
         }
 
         .amp-amenity-card.card-active .amp-card-title {

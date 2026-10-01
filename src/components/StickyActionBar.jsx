@@ -6,11 +6,6 @@ export default function StickyActionBar({ onEnquire }) {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
 
-  // If on coming soon page, hide
-  if (location.pathname === '/') {
-    return null;
-  }
-
   // Check if current page is one of the project detail pages
   const isProjectPage = [
     '/crystal-moonlight-villa',
@@ -88,6 +83,10 @@ export default function StickyActionBar({ onEnquire }) {
       }
     }, 100);
   };
+
+  if (location.pathname === '/') {
+    return null;
+  }
 
   return (
     <>

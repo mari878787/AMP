@@ -173,7 +173,7 @@ export default function HeroSection({ startZoom }) {
                       src={slide.image}
                       alt={slide.title}
                       loading="eager"
-                      fetchpriority="high"
+                      fetchPriority="high"
                       decoding="async"
                       className={`hero-bg-image ${startZoom ? 'animate-zoom' : ''}`}
                     />
