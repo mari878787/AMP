@@ -714,13 +714,12 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* â”€â”€ Native Brand Logo Cursor â”€â”€ */
+/* ── Native Brand Logo Cursor ── */
 @media (hover: hover) {
 
   html,
-  body,
-  * {
-    cursor: url('/images/logo-curser-v4.png') 10 5, auto !important;
+  body {
+    cursor: url('/images/logo-curser-v4.png') 10 5, auto;
   }
 
   a,
@@ -731,18 +730,8 @@ html.lenis body {
   textarea,
   .slider-arrow,
   .filter-tab-btn,
-  [role="button"] {
-    cursor: pointer !important;
-  }
-
-  a *,
-  button *,
-  select *,
-  input *,
-  textarea *,
-  .slider-arrow *,
-  .filter-tab-btn *,
-  [role="button"] *, .pillar-header * {
+  [role="button"],
+  .pillar-header {
     cursor: pointer !important;
   }
 

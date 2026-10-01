@@ -25,24 +25,27 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.12,             // Snaps to scroll target quicker for higher responsiveness
-      duration: 1.2,          // Slightly shorter duration for snappier feedback
+      duration: 2.0,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Natural exponential curve: instant response + smooth glide
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.4,   // Higher value increases distance per scroll tick
-      touchMultiplier: 2.0,   // More sensitive mobile/trackpad swipe scrolling
+      wheelMultiplier: 1.0,   // 1:1 natural scroll distance without overshooting lag
+      touchMultiplier: 1.0,
+      syncTouch: false,       // Keeps hardware-accelerated 120Hz touch scrolling on mobile
     });
 
     window.lenis = lenis;
 
     // Synchronize ScrollTrigger with Lenis updates
-    lenis.on('scroll', () => ScrollTrigger.update());
+    lenis.on('scroll', ScrollTrigger.update);
 
     // Synchronize GSAP ticker frame updates with Lenis
     const updateRaf = (time) => {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(updateRaf);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33); // Gracefully handles frame drops to prevent visual stutters
 
     return () => {
       gsap.ticker.remove(updateRaf);

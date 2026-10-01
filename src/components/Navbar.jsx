@@ -82,14 +82,31 @@ export default function Navbar({ darkText = false }) {
   const [expandedCategory, setExpandedCategory] = useState(null); // 'villas' or 'apartments' or 'plotted'
 
   useEffect(() => {
-    const handleScroll = () => {
+    let heroHeight = window.innerHeight - 60;
+    const measureHero = () => {
       const heroEl = document.querySelector('.project-hero-section') || 
                      document.querySelector('.hero-section') || 
                      document.querySelector('.hero') || 
                      document.querySelector('.hero-container') ||
                      document.querySelector('section:first-of-type');
-      const heroHeight = heroEl ? heroEl.offsetHeight : (window.innerHeight - 60);
-      setScrolled(window.scrollY >= (heroHeight - 80));
+      if (heroEl) {
+        heroHeight = heroEl.offsetHeight;
+      } else {
+        heroHeight = window.innerHeight - 60;
+      }
+    };
+    measureHero();
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const isPast = window.scrollY >= (heroHeight - 80);
+          setScrolled(prev => (prev !== isPast ? isPast : prev));
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     const handleClickOutside = (e) => {
@@ -98,11 +115,13 @@ export default function Navbar({ darkText = false }) {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', measureHero, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     document.addEventListener('click', handleClickOutside);
     handleScroll();
 
     return () => {
+      window.removeEventListener('resize', measureHero);
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('click', handleClickOutside);
     };

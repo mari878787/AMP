@@ -92,14 +92,31 @@ export default function CMRGlobalCity({ project }) {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let threshold = window.innerHeight - 60;
+    const measure = () => {
       const heroEl = document.querySelector('.project-hero-section');
-      const threshold = heroEl ? heroEl.offsetHeight - 60 : window.innerHeight - 60;
-      setHideMainHeader(window.scrollY >= threshold);
+      if (heroEl) threshold = heroEl.offsetHeight - 60;
     };
+    measure();
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const shouldHide = window.scrollY >= threshold;
+          setHideMainHeader(prev => (prev !== shouldHide ? shouldHide : prev));
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('resize', measure, { passive: true });
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('resize', measure);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const [quoteForm, setQuoteForm] = useState({

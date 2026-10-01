@@ -17,11 +17,11 @@ import React, { useRef, useEffect, useState } from 'react';
 export default function ScrollReveal({
   children,
   animation = 'fadeUp',
-  delay = 0.5,
-  duration = 1.6,
-  threshold = 0.1,
-  rootMargin = '0px',
-  once = false,
+  delay = 0.3,
+  duration = 1.0,
+  threshold = 0.08,
+  rootMargin = '40px 0px',
+  once = true,
   className = '',
   style = {},
   as: Tag = 'div',
@@ -33,27 +33,6 @@ export default function ScrollReveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
-    let isMounted = true;
-
-    // Helper to check if element is inside or near viewport
-    const checkViewportVisibility = () => {
-      if (!el || !isMounted) return false;
-      const rect = el.getBoundingClientRect();
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      if (rect.top < windowHeight + 150 && rect.bottom > -150) {
-        setVisible(true);
-        return true;
-      }
-      return false;
-    };
-
-    // Immediate check on mount
-    checkViewportVisibility();
-
-    // Secondary checks to handle tab transitions and layout recalculations
-    const timer1 = setTimeout(checkViewportVisibility, 50);
-    const timer2 = setTimeout(checkViewportVisibility, 200);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -70,22 +49,19 @@ export default function ScrollReveal({
     observer.observe(el);
 
     return () => {
-      isMounted = false;
-      clearTimeout(timer1);
-      clearTimeout(timer2);
       observer.disconnect();
     };
   }, [threshold, rootMargin, once]);
 
-  // Slow down the transition for an elegant, cinematic luxury reveal
-  const effectiveDuration = Math.max(duration * 1.5, 1.6);
+  const effectiveDuration = Math.max(duration, 0.8);
 
   const animStyle = {
     opacity: visible ? 1 : 0,
     transform: visible ? 'none' : getInitialTransform(animation),
     transition: visible
       ? `opacity ${effectiveDuration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform ${effectiveDuration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`
-      : `opacity 0.4s ease 0s, transform 0.4s ease 0s`,
+      : `opacity 0.3s ease 0s, transform 0.3s ease 0s`,
+    willChange: visible ? 'auto' : 'opacity, transform',
     ...style,
   };
 
