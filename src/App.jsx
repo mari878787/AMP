@@ -25,7 +25,7 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,          // Fast, responsive luxury glide without sluggish trailing lag
+      duration: 1.5,          // Fast, responsive luxury glide without sluggish trailing lag
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-grade exponential ease out
       orientation: 'vertical',
       gestureOrientation: 'vertical',

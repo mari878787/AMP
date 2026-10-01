@@ -17,8 +17,8 @@ import React, { useRef, useEffect, useState } from 'react';
 export default function ScrollReveal({
   children,
   animation = 'fadeUp',
-  delay = 0.5,
-  duration = 1.6,
+  delay = 0.3,
+  duration = 2.4,
   threshold = 0.1,
   rootMargin = '0px',
   once = false,
@@ -77,15 +77,15 @@ export default function ScrollReveal({
     };
   }, [threshold, rootMargin, once]);
 
-  // Slow down the transition for an elegant, cinematic luxury reveal
-  const effectiveDuration = Math.max(duration * 1.5, 1.6);
+  // Slower, graceful, cinematic luxury reveal
+  const effectiveDuration = Math.max(duration * 1.5, 2.4);
 
   const animStyle = {
     opacity: visible ? 1 : 0,
     transform: visible ? 'none' : getInitialTransform(animation),
     transition: visible
-      ? `opacity ${effectiveDuration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform ${effectiveDuration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`
-      : `opacity 0.4s ease 0s, transform 0.4s ease 0s`,
+      ? `opacity ${effectiveDuration}s cubic-bezier(0.2, 1, 0.3, 1) ${delay}s, transform ${effectiveDuration}s cubic-bezier(0.2, 1, 0.3, 1) ${delay}s`
+      : `opacity 0.5s ease 0s, transform 0.5s ease 0s`,
     ...style,
   };
 
