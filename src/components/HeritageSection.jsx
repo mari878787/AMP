@@ -22,6 +22,8 @@ export default function HeritageSection() {
       <img
         src="/images/home/background.png"
         alt=""
+        loading="lazy"
+        decoding="async"
         className="standards-bg-img"
         aria-hidden="true"
       />
