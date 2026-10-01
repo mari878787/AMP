@@ -19,7 +19,8 @@ const ALL_PROJECTS = [
     mobileImage: '/images/project/CML/row-villa-mobile-hero.png',
     link: '/crystal-moonlight-villa',
     centerInfo: '3 BHK & 4 BHK Luxury Villas',
-    badge: 'Ready to Move'
+    badge: 'Ready to Move',
+    bhkConfig: '3 & 4 BHK Luxury Villas'
   },
   {
     id: 2,
@@ -31,7 +32,8 @@ const ALL_PROJECTS = [
     mobileImage: '/images/project/pasha-pinnacle/mobile-hero.png',
     link: '/pasha-pinnacle',
     centerInfo: '3 BHK Apartments',
-    badge: 'Ongoing'
+    badge: 'Ongoing',
+    bhkConfig: '3 BHK Luxury Apartments'
   },
   {
     id: 3,
@@ -43,20 +45,9 @@ const ALL_PROJECTS = [
     mobileImage: '/images/project/CMR/mobile-hero.png',
     link: '/cmr-global-city',
     centerInfo: 'Gated Villa Plots',
-    badge: 'Township'
+    badge: 'Township',
+    bhkConfig: 'Gated Villa Plots'
   },
-  // {
-  //   id: 4,
-  //   category: 'Plots',
-  //   title: 'Ashok Nagar',
-  //   location: 'Maduranthakam - Chennai',
-  //   area: '657 - 1,947 Sq.Ft.',
-  //   image: '/images/project/ashok-nagar/cards.webp',
-  //   mobileImage: '/images/project/ashok-nagar/mobile-hero.png',
-  //   link: '/ashok-nagar-villa-plots-in-maduranthakam',
-  //   centerInfo: 'Villa Plots',
-  //   badge: 'Plotted'
-  // },
   {
     id: 5,
     category: 'Villa',
@@ -68,7 +59,8 @@ const ALL_PROJECTS = [
     teaserPoster: '/images/project/Bayvista/Bay Vista Teaser.jpeg',
     link: '#bay-vista',
     centerInfo: 'Upcoming Project',
-    badge: 'Coming Soon'
+    badge: 'Coming Soon',
+    bhkConfig: 'Beachfront Villas'
   },
   {
     id: 6,
@@ -81,7 +73,8 @@ const ALL_PROJECTS = [
     teaserPoster: '/images/project/lakeshore/Lakeshore Hero Banner-01.jpg.jpeg',
     link: '#lakeshore',
     centerInfo: 'Upcoming Project',
-    badge: 'Coming Soon'
+    badge: 'Coming Soon',
+    bhkConfig: 'Waterfront Estates'
   }
 ];
 
