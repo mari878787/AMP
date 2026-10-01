@@ -99,7 +99,7 @@ export default function AmenitiesHeroSlider({
           <div
             className="amp-amenities-carousel-track"
             style={{
-              transform: `translateX(-${activeIndex * 360}px)`
+              transform: `translateX(calc(-170px - ${activeIndex * 360}px))`
             }}
           >
             {amenities.map((item, idx) => {
@@ -297,12 +297,11 @@ export default function AmenitiesHeroSlider({
           text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
         }
 
-        /* Bottom Floating Cards Row */
+        /* Bottom Floating Cards Row — Centered Spotlight */
         .amp-amenities-carousel-track-wrapper {
           position: absolute;
           bottom: 96px;
-          left: clamp(28px, 5.5vw, 80px);
-          right: 0;
+          left: 50%;
           z-index: 10;
           overflow: visible;
         }
@@ -391,11 +390,12 @@ export default function AmenitiesHeroSlider({
           font-weight: 300;
         }
 
-        /* Bottom Controls Bar */
+        /* Bottom Controls Bar — Centered below active card */
         .amp-amenities-controls {
           position: absolute;
           bottom: 28px;
-          left: clamp(28px, 5.5vw, 80px);
+          left: 50%;
+          transform: translateX(-50%);
           z-index: 15;
           display: flex;
           align-items: center;
