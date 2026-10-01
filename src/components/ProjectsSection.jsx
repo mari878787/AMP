@@ -28,7 +28,7 @@ const ALL_PROJECTS = [
     title: 'Pasha Pinnacle',
     location: 'Royapettah - Chennai',
     area: '1,335 - 1,358 Sq.Ft.',
-    image: '/images/project/pasha-pinnacle/hero.png',
+    image: '/images/project/pasha-pinnacle/10.jpeg',
     mobileImage: '/images/project/pasha-pinnacle/mobile-hero.png',
     link: '/pasha-pinnacle',
     centerInfo: '3 BHK Apartments',
