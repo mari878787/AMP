@@ -3301,7 +3301,7 @@ Category: ${o}
             padding: 28px 20px;
           }
         }
-      `})]})}function mm({amenities:t=[],title:e="World Class Amenities",subtitle:i="Step into a world of grace where peacefulness and elegance unite, offering exceptional features that enrich each moment and bring endless joy to everyday living."}){const[a,o]=N.useState(0),[d,u]=N.useState(!0),h=N.useRef(0),m=N.useRef(0),g=t.length;N.useEffect(()=>{if(!d||g<=1)return;const C=setInterval(()=>{o(A=>(A+1)%g)},5500);return()=>clearInterval(C)},[g,d]);const x=()=>{u(!1),o(C=>(C-1+g)%g)},y=()=>{u(!1),o(C=>(C+1)%g)},_=C=>{u(!1),o(C)},S=C=>{h.current=C.targetTouches[0].clientX},T=C=>{m.current=C.targetTouches[0].clientX},k=()=>{const C=h.current-m.current;Math.abs(C)>40&&(C>0?y():x())};if(!t||t.length===0)return null;const M=t[a]||t[0];return l.jsxs("div",{className:"amp-amenities-slider",onMouseEnter:()=>u(!1),onMouseLeave:()=>u(!0),children:[l.jsxs("div",{className:"amp-amenities-desktop",children:[l.jsxs("div",{className:"amp-amenities-bg-track",children:[t.map((C,A)=>{const P=a===A;return l.jsx("div",{className:`amp-amenities-bg-slide ${P?"active":""}`,style:{backgroundImage:`url('${encodeURI(C.image)}')`}},A)}),l.jsx("div",{className:"amp-amenities-overlay-top"}),l.jsx("div",{className:"amp-amenities-overlay-bottom"})]}),l.jsxs("div",{className:"amp-amenities-header",children:[l.jsx("h2",{className:"amp-amenities-title",children:e}),l.jsx("p",{className:"amp-amenities-subtitle",children:i})]}),l.jsx("div",{className:"amp-amenities-carousel-track-wrapper",children:l.jsx("div",{className:"amp-amenities-carousel-track",style:{transform:`translateX(calc(-170px - ${a*360}px))`},children:t.map((C,A)=>{const P=a===A;return l.jsxs("div",{onClick:()=>_(A),className:`amp-amenity-card ${P?"card-active":"card-inactive"}`,children:[l.jsx("h3",{className:"amp-card-title",children:C.title}),l.jsx("p",{className:"amp-card-desc",children:C.desc})]},A)})})}),l.jsxs("div",{className:"amp-amenities-controls",children:[l.jsxs("div",{className:"amp-amenities-nav-btns",children:[l.jsx("button",{onClick:x,className:"amp-nav-btn btn-prev","aria-label":"Previous Amenity",children:l.jsx(fn,{size:22,strokeWidth:2})}),l.jsx("button",{onClick:y,className:"amp-nav-btn btn-next","aria-label":"Next Amenity",children:l.jsx(hn,{size:22,strokeWidth:2})})]}),l.jsx("div",{className:"amp-amenities-dots",children:t.map((C,A)=>l.jsx("button",{onClick:()=>_(A),className:`amp-dot ${a===A?"active":""}`,"aria-label":`Go to amenity ${A+1}`},A))})]})]}),l.jsxs("div",{className:"amp-amenities-mobile",onTouchStart:S,onTouchMove:T,onTouchEnd:k,children:[l.jsxs("div",{className:"amp-mobile-photo-container",children:[t.map((C,A)=>l.jsx("img",{src:encodeURI(C.image),alt:C.title,className:`amp-mobile-photo ${a===A?"active":""}`},A)),l.jsxs("div",{className:"amp-mobile-corner-btns",children:[l.jsx("button",{onClick:x,className:"amp-mobile-btn btn-prev","aria-label":"Previous Amenity",children:l.jsx(fn,{size:20,strokeWidth:2.2})}),l.jsx("button",{onClick:y,className:"amp-mobile-btn btn-next","aria-label":"Next Amenity",children:l.jsx(hn,{size:20,strokeWidth:2.2})})]})]}),l.jsxs("div",{className:"amp-mobile-info-card",children:[l.jsx("h3",{className:"amp-mobile-card-title",children:M.title}),l.jsx("p",{className:"amp-mobile-card-desc",children:M.desc}),l.jsx("div",{className:"amp-mobile-dots",children:t.map((C,A)=>l.jsx("span",{onClick:()=>_(A),className:`amp-mobile-dot ${a===A?"active":""}`},A))})]})]}),l.jsx("style",{children:`
+      `})]})}function mm({amenities:t=[],title:e="World Class Amenities",subtitle:i="Step into a world of grace where peacefulness and elegance unite, offering exceptional features that enrich each moment and bring endless joy to everyday living."}){const[a,o]=N.useState(0),[d,u]=N.useState(!0),h=N.useRef(0),m=N.useRef(0),g=t.length;N.useEffect(()=>{if(!d||g<=1)return;const C=setInterval(()=>{o(A=>(A+1)%g)},5500);return()=>clearInterval(C)},[g,d]);const x=()=>{u(!1),o(C=>(C-1+g)%g)},y=()=>{u(!1),o(C=>(C+1)%g)},_=C=>{u(!1),o(C)},S=C=>{h.current=C.targetTouches[0].clientX},T=C=>{m.current=C.targetTouches[0].clientX},k=()=>{const C=h.current-m.current;Math.abs(C)>40&&(C>0?y():x())};if(!t||t.length===0)return null;const M=t[a]||t[0];return l.jsxs("div",{className:"amp-amenities-slider",onMouseEnter:()=>u(!1),onMouseLeave:()=>u(!0),children:[l.jsxs("div",{className:"amp-amenities-desktop",children:[l.jsxs("div",{className:"amp-amenities-bg-track",children:[t.map((C,A)=>{const P=a===A;return l.jsx("div",{className:`amp-amenities-bg-slide ${P?"active":""}`,style:{backgroundImage:`url('${encodeURI(C.image)}')`}},A)}),l.jsx("div",{className:"amp-amenities-overlay-top"}),l.jsx("div",{className:"amp-amenities-overlay-bottom"})]}),l.jsxs("div",{className:"amp-amenities-header",children:[l.jsx("h2",{className:"amp-amenities-title",children:e}),l.jsx("p",{className:"amp-amenities-subtitle",children:i})]}),l.jsx("div",{className:"amp-amenities-carousel-track-wrapper",children:l.jsx("div",{className:"amp-amenities-carousel-track",style:{transform:`translateX(-${a*360}px)`},children:t.map((C,A)=>{const P=a===A,O=A<a;return l.jsxs("div",{onClick:()=>_(A),className:`amp-amenity-card ${P?"card-active":O?"card-past":"card-inactive"}`,children:[l.jsx("h3",{className:"amp-card-title",children:C.title}),l.jsx("p",{className:"amp-card-desc",children:C.desc})]},A)})})}),l.jsxs("div",{className:"amp-amenities-controls",children:[l.jsxs("div",{className:"amp-amenities-nav-btns",children:[l.jsx("button",{onClick:x,className:"amp-nav-btn btn-prev","aria-label":"Previous Amenity",children:l.jsx(fn,{size:22,strokeWidth:2})}),l.jsx("button",{onClick:y,className:"amp-nav-btn btn-next","aria-label":"Next Amenity",children:l.jsx(hn,{size:22,strokeWidth:2})})]}),l.jsx("div",{className:"amp-amenities-dots",children:t.map((C,A)=>l.jsx("button",{onClick:()=>_(A),className:`amp-dot ${a===A?"active":""}`,"aria-label":`Go to amenity ${A+1}`},A))})]})]}),l.jsxs("div",{className:"amp-amenities-mobile",onTouchStart:S,onTouchMove:T,onTouchEnd:k,children:[l.jsxs("div",{className:"amp-mobile-photo-container",children:[t.map((C,A)=>l.jsx("img",{src:encodeURI(C.image),alt:C.title,className:`amp-mobile-photo ${a===A?"active":""}`},A)),l.jsxs("div",{className:"amp-mobile-corner-btns",children:[l.jsx("button",{onClick:x,className:"amp-mobile-btn btn-prev","aria-label":"Previous Amenity",children:l.jsx(fn,{size:20,strokeWidth:2.2})}),l.jsx("button",{onClick:y,className:"amp-mobile-btn btn-next","aria-label":"Next Amenity",children:l.jsx(hn,{size:20,strokeWidth:2.2})})]})]}),l.jsxs("div",{className:"amp-mobile-info-card",children:[l.jsx("h3",{className:"amp-mobile-card-title",children:M.title}),l.jsx("p",{className:"amp-mobile-card-desc",children:M.desc}),l.jsx("div",{className:"amp-mobile-dots",children:t.map((C,A)=>l.jsx("span",{onClick:()=>_(A),className:`amp-mobile-dot ${a===A?"active":""}`},A))})]})]}),l.jsx("style",{children:`
         /* ── AMP AMENITIES SLIDER ── */
         .amp-amenities-slider {
           position: relative;
@@ -3392,13 +3392,15 @@ Category: ${o}
           text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
         }
 
-        /* Bottom Floating Cards Row — Centered Spotlight */
+        /* Bottom Floating Cards Row — Centered Active Card (Left Cards Hidden) */
         .amp-amenities-carousel-track-wrapper {
           position: absolute;
           bottom: 96px;
-          left: 50%;
+          left: calc(50% - 170px);
+          right: 0;
           z-index: 10;
           overflow: visible;
+          clip-path: inset(-60px 0px -60px 0px);
         }
 
         .amp-amenities-carousel-track {
@@ -3424,10 +3426,9 @@ Category: ${o}
         /* Active Card: Clean Luxury White with Gold Accent */
         .amp-amenity-card.card-active {
           background: #ffffff;
-          border: 1.5px solid var(--color-highlight, #b48564);
           box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
           cursor: default;
-          transform: translateY(0);
+          transform: scale(0.92);
         }
 
         .amp-amenity-card.card-active .amp-card-title {
@@ -3483,6 +3484,15 @@ Category: ${o}
           line-height: 1.55;
           margin: 0;
           font-weight: 300;
+        }
+
+        /* Past Cards (to the left of active card) — Hidden */
+        .amp-amenity-card.card-past {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transform: scale(0.92);
+          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         /* Bottom Controls Bar — Centered below active card */

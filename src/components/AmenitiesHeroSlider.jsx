@@ -99,16 +99,19 @@ export default function AmenitiesHeroSlider({
           <div
             className="amp-amenities-carousel-track"
             style={{
-              transform: `translateX(calc(-170px - ${activeIndex * 360}px))`
+              transform: `translateX(-${activeIndex * 360}px)`
             }}
           >
             {amenities.map((item, idx) => {
               const isActive = activeIndex === idx;
+              const isPast = idx < activeIndex;
               return (
                 <div
                   key={idx}
                   onClick={() => handleCardClick(idx)}
-                  className={`amp-amenity-card ${isActive ? 'card-active' : 'card-inactive'}`}
+                  className={`amp-amenity-card ${
+                    isActive ? 'card-active' : isPast ? 'card-past' : 'card-inactive'
+                  }`}
                 >
                   <h3 className="amp-card-title">{item.title}</h3>
                   <p className="amp-card-desc">{item.desc}</p>
@@ -297,13 +300,15 @@ export default function AmenitiesHeroSlider({
           text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
         }
 
-        /* Bottom Floating Cards Row — Centered Spotlight */
+        /* Bottom Floating Cards Row — Centered Active Card (Left Cards Hidden) */
         .amp-amenities-carousel-track-wrapper {
           position: absolute;
           bottom: 96px;
-          left: 50%;
+          left: calc(50% - 170px);
+          right: 0;
           z-index: 10;
           overflow: visible;
+          clip-path: inset(-60px 0px -60px 0px);
         }
 
         .amp-amenities-carousel-track {
@@ -329,10 +334,9 @@ export default function AmenitiesHeroSlider({
         /* Active Card: Clean Luxury White with Gold Accent */
         .amp-amenity-card.card-active {
           background: #ffffff;
-          border: 1.5px solid var(--color-highlight, #b48564);
           box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
           cursor: default;
-          transform: translateY(0);
+          transform: scale(0.92);
         }
 
         .amp-amenity-card.card-active .amp-card-title {
@@ -388,6 +392,15 @@ export default function AmenitiesHeroSlider({
           line-height: 1.55;
           margin: 0;
           font-weight: 300;
+        }
+
+        /* Past Cards (to the left of active card) — Hidden */
+        .amp-amenity-card.card-past {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transform: scale(0.92);
+          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         /* Bottom Controls Bar — Centered below active card */
