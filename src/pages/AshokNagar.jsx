@@ -683,19 +683,32 @@ export default function AshokNagar({ project }) {
                                 <div className="pillar-header">
                                   <span className="pillar-number">{pillar.index}</span>
                                   <h4 className="pillar-title">{pillar.title}</h4>
-                                  <span className="pillar-toggle-icon">{isOpen ? '−' : '+'}</span>
+                                  <span className="pillar-toggle-icon" style={{ position: 'relative', width: '18px', height: '18px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <span style={{ position: 'absolute', transition: 'opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)', opacity: isOpen ? 0 : 1, transform: isOpen ? 'rotate(90deg) scale(0.7)' : 'rotate(0deg) scale(1)' }}>+</span>
+                                    <span style={{ position: 'absolute', transition: 'opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)', opacity: isOpen ? 1 : 0, transform: isOpen ? 'rotate(0deg) scale(1)' : 'rotate(-90deg) scale(0.7)' }}>−</span>
+                                  </span>
                                 </div>
                                 <div
                                   className="pillar-body"
                                   style={{
-                                    maxHeight: isOpen ? '450px' : '0px',
-                                    opacity: isOpen ? 1 : 0,
-                                    overflow: 'hidden',
-                                    transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
-                                    paddingBottom: isOpen ? '16px' : '0px'
+                                    display: 'grid',
+                                    gridTemplateRows: isOpen ? '1fr' : '0fr',
+                                    transition: 'grid-template-rows 0.45s cubic-bezier(0.25, 1, 0.5, 1)',
+                                    overflow: 'hidden'
                                   }}
                                 >
-                                  <p className="pillar-desc" style={{ margin: '0', lineHeight: '1.68' }}>{pillar.desc}</p>
+                                  <div style={{ minHeight: 0, overflow: 'hidden' }}>
+                                    <div
+                                      style={{
+                                        padding: '10px 15px 18px',
+                                        opacity: isOpen ? 1 : 0,
+                                        transform: isOpen ? 'translateY(0)' : 'translateY(-6px)',
+                                        transition: 'opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)'
+                                      }}
+                                    >
+                                      <p className="pillar-desc" style={{ margin: '0', padding: 0, lineHeight: '1.68' }}>{pillar.desc}</p>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             );
@@ -1754,6 +1767,17 @@ export default function AshokNagar({ project }) {
         /* â”€â”€ SECTION WRAPPER & SUBSECTIONS â”€â”€ */
         .project-section-wrapper {
           background-color: var(--color-bg-light);
+          animation: sectionTabFadeIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) both;
+        }
+        @keyframes sectionTabFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
         .section-header {
           margin-bottom: 0px;
@@ -1843,15 +1867,18 @@ export default function AshokNagar({ project }) {
           border-radius: 8px;
           overflow: hidden;
           width: 100%;
+          height: 100%;
+          min-height: 420px;
+          max-height: 520px;
           display: flex;
           align-items: center;
           justify-content: center;
+          background: #fdfdfd;
         }
         .overview-image-wrapper img {
           width: 100%;
-          height: auto;
-          max-height: 650px;
-          object-fit: contain;
+          height: 100%;
+          max-height: 520px;
           display: block;
         }
         .overview-right-text {
@@ -3217,7 +3244,7 @@ export default function AshokNagar({ project }) {
         .pillar-item {
           border-bottom: 1px solid rgba(29, 53, 87, 0.08);
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .pillar-item:hover .pillar-title {
           color: var(--color-primary);
@@ -3225,10 +3252,14 @@ export default function AshokNagar({ project }) {
         .pillar-header {
           display: flex;
           align-items: center;
-          padding: 10px 15px;
+          padding: 12px 15px;
           gap: 16px;
           user-select: none;
           background-color: var(--color-bg-light);
+          transition: background-color 0.3s ease;
+        }
+        .pillar-item:hover .pillar-header {
+          background-color: rgba(0, 0, 0, 0.03);
         }
         .pillar-number {
           font-family: var(--font-sans);
@@ -3236,7 +3267,7 @@ export default function AshokNagar({ project }) {
           font-weight: 400;
           color: var(--color-primary);
           opacity: 0.5;
-          transition: opacity 0.3s ease;
+          transition: opacity 0.3s ease, color 0.3s ease;
         }
         .pillar-item.active .pillar-number {
           opacity: 1;
@@ -3245,7 +3276,7 @@ export default function AshokNagar({ project }) {
         .pillar-title {
           font-family: var(--font-heading);
           color: var(--color-text-dark);
-          font-weight:500;
+          font-weight: 500;
           font-size: 18px;
           margin: 0;
           flex-grow: 1;
@@ -3258,16 +3289,17 @@ export default function AshokNagar({ project }) {
         .pillar-toggle-icon {
           font-size: 18px;
           color: var(--color-primary);
-          opacity: 0.6;
-          transition: transform 0.3s ease;
+          opacity: 0.7;
+          transition: color 0.3s ease, opacity 0.3s ease;
         }
         .pillar-item.active .pillar-toggle-icon {
-          transform: rotate(0deg);
+          color: var(--color-highlight);
+          opacity: 1;
         }
         .pillar-body {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
+          display: grid;
+          gap: 0;
+          overflow: hidden;
         }
         .pillar-tagline {
           font-family: var(--font-sans);
