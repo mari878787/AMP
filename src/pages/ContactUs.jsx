@@ -510,7 +510,7 @@ const ContactUs = () => {
           <div className="section-title-wrap" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
             <div>
               <span className="map-section-tag">Find Us</span>
-              <h2 className="map-section-title" style={{ margin: 0 }}>Office Location</h2>
+              <h2 className="section-title" style={{ margin: 0 }}>Office Location</h2>
             </div>
             <a
               href="https://www.google.com/maps/place/Aadhithya+Mohan+Properties+LLP/@13.0701342,80.205387,17z/data=!4m6!3m5!1s0x3cd4533a14d0a15:0x4c02f9b06a7bc8e1!8m2!3d13.0701342!4d80.205387!16s%2Fg%2F11wpzvr8tj"
@@ -591,10 +591,6 @@ const ContactUs = () => {
 
       {/* Styled Embed block - Luxury Design Overrides */}
       <style dangerouslySetInnerHTML={{ __html: `
-        .contact-page {
-          background-color: var(--color-bg-light);
-        }
-
         /* Hero Section - Aligned Bottom Left with Dark Overlay */
         .contact-hero {
           position: relative;
@@ -667,7 +663,7 @@ const ContactUs = () => {
         .contact-hero-tag {
           font-family: var(--font-sans);
           font-size: 11px;
-          font-weight: 600;
+          font-weight: 400;
           text-transform: uppercase;
           letter-spacing: 0.25em;
           color: #ffffff;
@@ -714,7 +710,7 @@ const ContactUs = () => {
           background: #ffffff;
           border: 1px solid #e2e8f0;
           border-radius: 8px; /* 8px border-radius! */
-          padding: 40px;
+          padding: 40px 20px;
           box-shadow: none;
           transition: all 0.3s ease;
           min-height: 200px;
@@ -815,7 +811,7 @@ const ContactUs = () => {
         .form-intro-subtitle {
           font-family: var(--font-sans);
           font-size: 12px;
-          font-weight: 600;
+          font-weight: 400;
           text-transform: uppercase;
           letter-spacing: 0.25em;
           color: var(--color-text-dark);
@@ -851,7 +847,7 @@ const ContactUs = () => {
           padding: 12px 0;
           font-family: var(--font-sans);
           font-size: 12.5px;
-          font-weight: 600;
+          font-weight: 400;
           color: #666;
           opacity: 0.8;
           cursor: pointer;
@@ -869,6 +865,7 @@ const ContactUs = () => {
         .form-tab-header-btn.active {
           color: #000;
           opacity: 1;
+          font-weight: 600;
         }
 
         .form-tab-header-btn::after {
@@ -904,7 +901,7 @@ const ContactUs = () => {
         .mode-selection-label {
           font-family: var(--font-sans);
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 400;
           color: var(--color-text-dark);
         }
 
@@ -964,7 +961,7 @@ const ContactUs = () => {
         .mode-text {
           font-family: var(--font-sans);
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 400;
           color: var(--color-text-dark);
         }
 
@@ -1183,10 +1180,10 @@ const ContactUs = () => {
         .map-section-tag {
           font-family: var(--font-sans);
           font-size: 11px;
-          font-weight: 600;
+          font-weight: 400;
           text-transform: uppercase;
           letter-spacing: 0.2em;
-          color: #b48564;
+          color: #000;
           display: block;
           margin-bottom: 8px;
         }

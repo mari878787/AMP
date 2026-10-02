@@ -225,6 +225,21 @@ export default function Navbar({ darkText = false }) {
                 <a href="/projects">{cat.name}</a>
               </div>
             ))}
+            <div
+              className={`mega-category-item ${activeCategory && activeCategory.id === 'all' ? 'active' : ''}`}
+              onMouseEnter={() => {
+                setActiveCategory({
+                  id: 'all',
+                  name: 'All Projects',
+                  img: '/images/project/CML/extirior/Views_Scene_1_4k_4.png',
+                  projects: CATEGORIES.flatMap(c => c.projects)
+                });
+                setActiveProject(CATEGORIES[0].projects[0]);
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <a href="/projects">All Projects</a>
+            </div>
           </div>
 
           {/* Column 2: Projects */}
@@ -669,6 +684,9 @@ export default function Navbar({ darkText = false }) {
           flex-direction: column;
           padding: 28px 30px 28px 30px;
           border-right: 1px solid rgba(0, 0, 0, 0.15);
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
         }
 
         .mega-column-title {
