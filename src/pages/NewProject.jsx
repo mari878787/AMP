@@ -785,7 +785,7 @@ export default function NewProject({ project }) {
         <div className="project-sections-container">
           {/* Overview Section - Minimalist Editorial Design */}
           {activeTab === 'overview' && (
-            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', /*minHeight: 'calc(100vh - 140px)',*/ display: 'flex', alignItems: 'center' }}>
+            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', minHeight: 'calc(100vh - 55px)', display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
               {/* Project Logo Badge (Overview Section only) */}
               <div 
                 className="overview-logo-badge" 
@@ -874,7 +874,7 @@ export default function NewProject({ project }) {
 
           {/* Project Overview Section */}
           {activeTab === 'why-project' && (
-            <section id="why-project" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0 0', minHeight: 'calc(100vh - 140px)', background: '#fff' }}>
+            <section id="why-project" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0 0', minHeight: 'calc(100vh - 55px)', background: '#fff', boxSizing: 'border-box' }}>
               <div className="container" style={{ padding: '0 0 60px' }}>
                 {/* ── Left-Aligned Header ── */}
                 <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -972,7 +972,7 @@ export default function NewProject({ project }) {
           {/* Master Gallery Section */}
           {activeTab === 'gallery' && (
             <>
-              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '36px', paddingBottom: '36px', minHeight: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: '16px', background: '#fff' }}>
+              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '24px', paddingBottom: '36px', minHeight: 'calc(100vh - 55px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '16px', background: '#fff', boxSizing: 'border-box' }}>
                 <div className="container">
                   <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '4px' }}>
                     <h2 className="section-title">
@@ -1163,7 +1163,7 @@ export default function NewProject({ project }) {
           )}
           {/* Premium Amenities Section */}
           {activeTab === 'amenities' && (
-            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: 0, backgroundColor: '#081226' }}>
+            <section id="amenities" className="project-amenities-section scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: 0, minHeight: 'calc(100vh - 55px)', backgroundColor: '#081226', boxSizing: 'border-box' }}>
               <AmenitiesHeroSlider
                 amenities={amenities}
                 title="World Class Amenities"
@@ -1173,7 +1173,7 @@ export default function NewProject({ project }) {
           )}
           {/* Master Floor Plans Section */}
           {activeTab === 'floorplans' && (
-            <section id="floorplans" className="project-floorplans-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', display: 'flex', alignItems: 'center', padding: '40px 0', background: '#fff' }}>
+            <section id="floorplans" className="project-floorplans-section scroll-section" style={{ minHeight: 'calc(100vh - 55px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 0 80px', background: '#fff', boxSizing: 'border-box' }}>
               <div className="container" style={{ width: '100%' }}>
                 <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   {/* <span className="section-tag">Floor Plans</span> */}
@@ -1501,7 +1501,7 @@ export default function NewProject({ project }) {
                 setStatusMonthIdx(prev => (prev === projectStatusData.length - 1 ? 0 : prev + 1));
               };
               return (
-                <section id="status" className="project-status-section scroll-section" style={{ minHeight: 'calc(100vh - 140px)', background: '#fff' }}>
+                <section id="status" className="project-status-section scroll-section" style={{ minHeight: 'calc(100vh - 55px)', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '60px 0 90px', boxSizing: 'border-box' }}>
                   <div className="container">
                     <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ textAlign: 'center', alignItems: 'center', marginBottom: '50px' }}>
                       <h2 className="section-title">Project <span>Status</span></h2>

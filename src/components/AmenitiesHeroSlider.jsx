@@ -239,7 +239,8 @@ export default function AmenitiesHeroSlider({
           display: block;
           position: relative;
           width: 100%;
-          height: clamp(620px, 82vh, 760px);
+          height: calc(100vh - 55px);
+          min-height: 650px;
           overflow: hidden;
         }
 

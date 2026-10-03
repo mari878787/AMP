@@ -244,7 +244,11 @@ export default function ProjectSpecs({
         .sp2-section {
           position: relative;
           z-index: 10;
-          padding: 80px 0;
+          padding: 60px 0 90px;
+          min-height: calc(100vh - 55px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
           overflow: hidden;
           background: #ffffff;
           width: 100%;

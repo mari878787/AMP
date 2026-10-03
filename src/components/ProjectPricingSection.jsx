@@ -70,7 +70,7 @@ export default function ProjectPricingSection({
   };
 
   return (
-    <section className="pricing-section-container" id="pricing" style={{ minHeight: 'calc(100vh - 140px)' }}>
+    <section className="pricing-section-container" id="pricing" style={{ minHeight: 'calc(100vh - 55px)' }}>
       <div className="pricing-wrapper">
 
         {/* Left Column: Title & Information Details */}
@@ -396,7 +396,9 @@ export default function ProjectPricingSection({
 
       <style>{`
         .pricing-section-container {
-          padding: 80px 5%;
+          padding: 60px 5% 90px;
+          min-height: calc(100vh - 55px);
+          box-sizing: border-box;
           background: var(--color-white);
           display: flex;
           align-items: center;
