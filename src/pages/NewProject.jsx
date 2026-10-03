@@ -306,6 +306,7 @@ export default function NewProject({ project }) {
   const [statusMonthIdx, setStatusMonthIdx] = useState(0);
   const [activeVideoUrl, setActiveVideoUrl] = useState('https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1');
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [isBrochureOpen, setIsBrochureOpen] = useState(false);
   const [hideMainHeader, setHideMainHeader] = useState(false);
 
   useEffect(() => {
@@ -313,8 +314,16 @@ export default function NewProject({ project }) {
       e.preventDefault();
       setIsQuoteOpen(true);
     };
+    const handleOpenBrochure = (e) => {
+      e.preventDefault();
+      setIsBrochureOpen(true);
+    };
     window.addEventListener('open-inquiry-modal', handleOpenInquiry);
-    return () => window.removeEventListener('open-inquiry-modal', handleOpenInquiry);
+    window.addEventListener('open-brochure-modal', handleOpenBrochure);
+    return () => {
+      window.removeEventListener('open-inquiry-modal', handleOpenInquiry);
+      window.removeEventListener('open-brochure-modal', handleOpenBrochure);
+    };
   }, []);
 
   useEffect(() => {
@@ -365,6 +374,16 @@ export default function NewProject({ project }) {
     updates: false
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [brochureForm, setBrochureForm] = useState({
+    firstName: '',
+    lastName: '',
+    phoneCode: '+91',
+    phone: '',
+    email: '',
+    config: '3 BHK Villa',
+    privacy: false
+  });
+  const [brochureSubmitted, setBrochureSubmitted] = useState(false);
   const [activeLandmarkIdx, setActiveLandmarkIdx] = useState(0);
   const [galleryIndices, setGalleryIndices] = useState({ exteriors: 1, interiors: 1, videos: 1 });
   const [galleryTab, setGalleryTab] = useState('exteriors');
@@ -607,9 +626,44 @@ export default function NewProject({ project }) {
         lastName: '',
         phoneCode: '+91',
         phoneNumber: '',
+        phone: '',
         email: '',
-        agreedPrivacy: false,
-        agreedOffers: false
+        config: '3 BHK Villa',
+        privacy: false,
+        updates: false
+      });
+    }, 2500);
+  };
+
+  const handleBrochureSubmit = (e) => {
+    e.preventDefault();
+    const fullName = `${brochureForm.firstName || ''} ${brochureForm.lastName || ''}`.trim();
+    const phone = `${brochureForm.phoneCode || '+91'} ${brochureForm.phone || ''}`.trim();
+    
+    const subject = encodeURIComponent(`Brochure Download Request - Crystal Moonlight (${fullName || 'Lead'})`);
+    const body = encodeURIComponent(
+      `Project: Crystal Moonlight\n` +
+      `Name: ${fullName}\n` +
+      `Phone: ${phone}\n` +
+      `Email: ${brochureForm.email || 'N/A'}\n` +
+      `Configuration: ${brochureForm.config}\n` +
+      `Request: Download Official Project E-Brochure\n`
+    );
+
+    window.location.href = `mailto:info@aadhithyamohanproperties.com?subject=${subject}&body=${body}`;
+
+    setBrochureSubmitted(true);
+    setTimeout(() => {
+      setBrochureSubmitted(false);
+      setIsBrochureOpen(false);
+      setBrochureForm({
+        firstName: '',
+        lastName: '',
+        phoneCode: '+91',
+        phone: '',
+        email: '',
+        config: '3 BHK Villa',
+        privacy: false
       });
     }, 2500);
   };
@@ -646,7 +700,7 @@ export default function NewProject({ project }) {
               <div className="project-hero-cta-block">
                 <button
                   type="button"
-                  onClick={() => setIsQuoteOpen(true)}
+                  onClick={() => setIsBrochureOpen(true)}
                   className="btn-discover"
                 >
                   DOWNLOAD BROCHURE
@@ -972,74 +1026,39 @@ export default function NewProject({ project }) {
           {/* Master Gallery Section */}
           {activeTab === 'gallery' && (
             <>
-              <section id="gallery" className="project-gallery-section scroll-section" style={{
-                position: 'relative',
-                overflow: 'hidden',
-                backgroundColor: '#000000',
-                padding: 0,
-                margin: 0,
-                height: 'calc(100vh - 55px)',
-                minHeight: 'calc(100vh - 55px)',
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxSizing: 'border-box'
-              }}>
-                {/* Floating Glassmorphic Filter Tabs on top of the image */}
-                <div className="gallery-floating-header" style={{
-                  position: 'absolute',
-                  top: '20px',
-                  left: 0,
-                  right: 0,
-                  zIndex: 30,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  pointerEvents: 'none'
-                }}>
-                  <div className="filter-tabs" style={{
-                    pointerEvents: 'auto',
-                    background: 'rgba(255, 255, 255, 0.92)',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
-                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.15)',
-                    borderRadius: '30px',
-                    padding: '4px',
-                    border: '1px solid rgba(255, 255, 255, 0.8)'
-                  }}>
-                    {['exteriors', 'interiors', 'videos'].map(tab => (
-                      <button
-                        key={tab}
-                        className={`filter-tab-btn ${galleryTab === tab ? 'active' : ''}`}
-                        onClick={() => setGalleryTab(tab)}
-                        style={{ borderRadius: '24px', padding: '8px 22px' }}
-                      >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
+              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '20px', paddingBottom: '20px', minHeight: 'calc(100vh - 55px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '12px', background: '#fff', boxSizing: 'border-box' }}>
+                <div className="container">
+                  <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '4px' }}>
+                    <h2 className="section-title">
+                      Visual <span>Spotlight</span>
+                    </h2>
+                  </ScrollReveal>
+                  {/* Gallery Navigation Tabs */}
+                  <ScrollReveal animation="fadeUp" delay={0.25} className="nested-tabs-container" style={{ marginBottom: '4px', display: 'flex', justifyContent: 'center' }}>
+                    <div className="filter-tabs">
+                      {['exteriors', 'interiors', 'videos'].map(tab => (
+                        <button
+                          key={tab}
+                          className={`filter-tab-btn ${galleryTab === tab ? 'active' : ''}`}
+                          onClick={() => setGalleryTab(tab)}
+                        >
+                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+                  </ScrollReveal>
+                </div> {/* Close container here for full-bleed viewport */}
                 {/* Spotlight Active-Card Gallery Carousel / Coming Soon */}
-                <div className="gallery-spotlight-viewport" style={{
-                  position: 'relative',
-                  width: '100vw',
-                  height: 'calc(100vh - 55px)',
-                  overflow: 'hidden',
-                  padding: 0,
-                  margin: 0
-                }}>
+                <ScrollReveal animation="fadeUp" delay={0.35} className="gallery-spotlight-viewport">
                   {galleryTab === 'videos' ? (
                     <div style={{
                       width: '100%',
-                      height: 'calc(100vh - 55px)',
+                      minHeight: '420px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       padding: '40px 20px',
-                      boxSizing: 'border-box',
-                      background: '#fff'
+                      boxSizing: 'border-box'
                     }}>
                       <div style={{
                         maxWidth: '560px',
@@ -1103,14 +1122,12 @@ export default function NewProject({ project }) {
                               alignItems: 'center',
                               justifyContent: 'center',
                               width: '100%',
-                              height: '100%',
                               transform: 'none'
                             } : {
                               display: 'flex',
                               alignItems: 'center',
                               gap: '0px',
                               width: 'max-content',
-                              height: '100%',
                               transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
                               transform: `translateX(-${galleryIndices[galleryTab] * 100}vw)`
                             }}
@@ -1133,9 +1150,9 @@ export default function NewProject({ project }) {
                                     cursor: 'pointer',
                                     overflow: 'hidden',
                                     position: 'relative',
-                                    height: 'calc(100vh - 55px)',
+                                    height: 'calc(100vh - 180px)',
+                                    minHeight: '620px',
                                     maxHeight: 'none',
-                                    minHeight: '100%',
                                     boxShadow: 'none'
                                   }}
                                   onClick={() => {
@@ -1153,22 +1170,9 @@ export default function NewProject({ project }) {
                                     className="gallery-spotlight-img"
                                   />
 
-                                  <div className="gallery-deck-hover-overlay" style={{
-                                    position: 'absolute',
-                                    bottom: '84px',
-                                    left: '0',
-                                    right: '0',
-                                    top: 'auto',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    gap: '12px',
-                                    background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)',
-                                    padding: '30px 20px 10px',
-                                    pointerEvents: 'none'
-                                  }}>
-                                    <Maximize2 size={20} className="hover-overlay-zoom-icon" style={{ color: '#fff' }} />
-                                    <span className="hover-overlay-title" style={{ color: '#fff', fontSize: '15px', fontWeight: '500', letterSpacing: '0.04em' }}>{img.title}</span>
+                                  <div className="gallery-deck-hover-overlay">
+                                    <Maximize2 size={24} className="hover-overlay-zoom-icon" />
+                                    <span className="hover-overlay-title">{img.title}</span>
                                   </div>
                                 </div>
                               );
@@ -1180,20 +1184,14 @@ export default function NewProject({ project }) {
                             <>
                               <button
                                 className="gallery-spotlight-arrow prev"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  prevGallerySlide(galleryTab);
-                                }}
+                                onClick={() => prevGallerySlide(galleryTab)}
                                 aria-label="Previous image"
                               >
                                 <ChevronLeft size={24} />
                               </button>
                               <button
                                 className="gallery-spotlight-arrow next"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  nextGallerySlide(galleryTab);
-                                }}
+                                onClick={() => nextGallerySlide(galleryTab)}
                                 aria-label="Next image"
                               >
                                 <ChevronRight size={24} />
@@ -1204,7 +1202,7 @@ export default function NewProject({ project }) {
                       );
                     })()
                   )}
-                </div>
+                </ScrollReveal>
               </section>
             </>
           )}
@@ -1893,25 +1891,115 @@ export default function NewProject({ project }) {
           </div>
         </div>
       )}
+      {/* Brochure Download Modal */}
+      {isBrochureOpen && (
+        <div className="modal-overlay" onClick={() => setIsBrochureOpen(false)}>
+          <div className="modal-content-card split-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-image-panel brochure-panel">
+              <div className="modal-image-overlay">
+                <span className="modal-image-badge">E-BROCHURE & SPECS</span>
+                <h3>Crystal Moonlight</h3>
+                <p>Bespoke Luxury Living in Medavakkam</p>
+              </div>
+            </div>
+
+            <div className="modal-form-panel">
+              <button className="modal-close-btn" onClick={() => setIsBrochureOpen(false)} aria-label="Close modal">
+                <X size={18} />
+              </button>
+
+              <div className="modal-header-block-light">
+                <h3 className="modal-heading-light">DOWNLOAD BROCHURE</h3>
+                <p className="modal-subheading-light">Get instant access to complete floor plans, project specifications & pricing details.</p>
+              </div>
+
+              <div className="modal-body-light">
+                {brochureSubmitted ? (
+                  <div className="form-success-message">
+                    <CheckCircle2 size={48} className="success-icon-gold" />
+                    <h4>Brochure Request Submitted</h4>
+                    <p>We've dispatched the official e-brochure to your email and WhatsApp.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleBrochureSubmit} className="modal-inquiry-form-new">
+                    {/* Name Row */}
+                    <div className="form-row-2">
+                      <div className="form-group-outline">
+                        <input type="text" placeholder="First Name *" required value={brochureForm.firstName} onChange={e => setBrochureForm({ ...brochureForm, firstName: e.target.value })} />
+                      </div>
+                      <div className="form-group-outline">
+                        <input type="text" placeholder="Last Name *" required value={brochureForm.lastName} onChange={e => setBrochureForm({ ...brochureForm, lastName: e.target.value })} />
+                      </div>
+                    </div>
+
+                    {/* Phone Row */}
+                    <div className="form-row-phone">
+                      <div className="form-group-outline phone-code">
+                        <select value={brochureForm.phoneCode} onChange={e => setBrochureForm({ ...brochureForm, phoneCode: e.target.value })}>
+                          <option value="+91">IN +91</option>
+                          <option value="+1">US +1</option>
+                          <option value="+44">UK +44</option>
+                          <option value="+971">AE +971</option>
+                        </select>
+                      </div>
+                      <div className="form-group-outline phone-number">
+                        <input type="tel" placeholder="Phone Number *" required value={brochureForm.phone} onChange={e => setBrochureForm({ ...brochureForm, phone: e.target.value })} />
+                      </div>
+                    </div>
+
+                    {/* Email & Config Row */}
+                    <div className="form-row-2">
+                      <div className="form-group-outline">
+                        <input type="email" placeholder="Email Address *" required value={brochureForm.email} onChange={e => setBrochureForm({ ...brochureForm, email: e.target.value })} />
+                      </div>
+                      <div className="form-group-outline">
+                        <select value={brochureForm.config} onChange={e => setBrochureForm({ ...brochureForm, config: e.target.value })}>
+                          <option value="3 BHK Villa">3 BHK Villa</option>
+                          <option value="4 BHK Villa">4 BHK Villa</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Checkboxes */}
+                    <div className="form-checkbox-group">
+                      <label className="checkbox-label">
+                        <input type="checkbox" required checked={brochureForm.privacy} onChange={e => setBrochureForm({ ...brochureForm, privacy: e.target.checked })} />
+                        <span className="checkbox-custom"></span>
+                        <span>I've read and agree to the <a href="#privacy" style={{ color: '#b48564', textDecoration: 'underline' }}>privacy policy. *</a></span>
+                      </label>
+                    </div>
+
+                    <Button type="submit" theme="dark" style={{ width: '100%', marginTop: '8px', padding: '16px' }}>
+                      DOWNLOAD E-BROCHURE
+                    </Button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Quote / Schedule Booking Modal */}
       {isQuoteOpen && (
         <div className="modal-overlay" onClick={() => setIsQuoteOpen(false)}>
           <div className="modal-content-card split-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-image-panel">
               <div className="modal-image-overlay">
+                <span className="modal-image-badge">SCHEDULE VISIT</span>
                 <h3>Crystal Moonlight</h3>
-                <p>Bespoke Luxury Living</p>
+                <p>Bespoke Luxury Living in Medavakkam</p>
               </div>
             </div>
 
             <div className="modal-form-panel">
-              <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)}>
+              <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)} aria-label="Close modal">
                 <X size={18} />
               </button>
 
               <div className="modal-header-block-light">
-                <h3 className="modal-heading-light">SCHEDULE A VISIT</h3>
-                <p className="modal-subheading-light">Experience premium luxury in person.</p>
+                <h3 className="modal-heading-light">SCHEDULE A VISIT & ENQUIRE</h3>
+                <p className="modal-subheading-light">Experience premium luxury in person or connect with our dedicated property specialists.</p>
               </div>
 
               <div className="modal-body-light">
@@ -2005,7 +2093,7 @@ export default function NewProject({ project }) {
                     </div>
 
                     <Button type="submit" theme="dark" style={{ width: '100%', marginTop: '8px', padding: '16px' }}>
-                      REQUEST PRICING DETAILS
+                      REQUEST PRICING & SITE VISIT
                     </Button>
                   </form>
                 )}
@@ -2634,7 +2722,6 @@ export default function NewProject({ project }) {
           background: #fdfdfd;
         }
         .overview-image-wrapper img {
-          width: 100%;
           height: 100%;
           max-height: 520px;
           display: block;
@@ -3715,26 +3802,27 @@ export default function NewProject({ project }) {
         .modal-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.75);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          z-index: 1000;
+          background: rgba(0, 0, 0, 0.78);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          z-index: 99999 !important;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 20px;
+          padding: 24px;
         }
         .modal-content-card {
           background: var(--color-white);
-          border-radius: 8px;
-          width: 90%;
-          max-width: 1040px; /* Wider for split layout */
+          border-radius: 12px;
+          width: 96vw;
+          max-width: 1360px; /* Full width luxury popup */
           position: relative;
-          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 35px 80px rgba(0, 0, 0, 0.45);
           animation: modalEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           overflow: hidden;
           padding: 0;
           display: flex;
+          min-height: 560px;
         }
         @keyframes modalEntrance {
           from { opacity: 0; transform: translateY(20px) scale(0.96); }
@@ -3743,18 +3831,21 @@ export default function NewProject({ project }) {
         
         /* Left Image Panel */
         .modal-image-panel {
-          flex: 1;
+          flex: 1.05;
           background: url('/images/project/CML/North_Row_4K_Day 2.webp') center/cover no-repeat;
           position: relative;
           display: flex;
           align-items: flex-end;
-          padding: 40px 32px;
+          padding: 48px 40px;
+        }
+        .modal-image-panel.brochure-panel {
+          background: url('/images/project_crystal_1779810838661.png') center/cover no-repeat;
         }
         .modal-image-panel::after {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
+          background: linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.2) 60%, transparent 100%);
         }
         .modal-image-overlay {
           position: relative;
@@ -3763,29 +3854,43 @@ export default function NewProject({ project }) {
         }
         .modal-image-overlay h3 {
           font-family: var(--font-heading);
-          font-size: 28px;
+          font-size: clamp(26px, 2.5vw, 36px);
           font-weight: 400;
-          margin: 0 0 4px 0;
-
-        color: #fff;
+          margin: 0 0 6px 0;
+          color: #fff;
+          letter-spacing: 0.02em;
         }
         .modal-image-overlay p {
           font-family: var(--font-sans);
-          font-size: 13.5px;
-          opacity: 0.8;
+          font-size: 14px;
+          opacity: 0.9;
           margin: 0;
           letter-spacing: 0.05em;
           text-transform: uppercase;
           color: #fff;
         }
+        .modal-image-badge {
+          display: inline-block;
+          padding: 5px 12px;
+          background: rgba(180, 133, 100, 0.92);
+          color: #fff;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          border-radius: 4px;
+          margin-bottom: 12px;
+        }
         
         /* Right Form Panel */
         .modal-form-panel {
-          flex: 1.1;
+          flex: 1.35;
           display: flex;
           flex-direction: column;
           background: #ffffff;
           position: relative;
+          max-height: 88vh;
+          overflow-y: auto;
         }
 
         /* Light Header */
@@ -4137,7 +4242,7 @@ export default function NewProject({ project }) {
         .gallery-spotlight-viewport {
           position: relative;
           width: 100vw;
-          height: calc(100vh - 55px);
+          height: calc(100vh - 100px);
           overflow: hidden;
           padding: 0;
           margin: 0;
@@ -4214,26 +4319,28 @@ export default function NewProject({ project }) {
         @media (max-width: 768px) {
           .modal-content-card.split-modal {
             flex-direction: column;
-            max-width: 440px;
+            max-width: 480px;
             width: 95%;
-            margin: 20px;
-            max-height: 90vh;
+            margin: 16px;
+            max-height: 92vh;
             overflow-y: auto;
           }
           .modal-image-panel {
-            height: 200px;
+            height: 180px;
             flex: none;
             padding: 24px;
           }
           .modal-form-panel {
             flex: none;
+            padding: 24px 20px;
           }
         }
 
         /* ── RESPONSIVE MEDIA CONTROLS ── */
         @media (max-width: 1024px) {
           .gallery-spotlight-viewport {
-            height: calc(100vh - 55px);
+            height: calc(100vh - 180px);
+            min-height: 520px;
             padding: 0;
           }
           .gallery-spotlight-card {

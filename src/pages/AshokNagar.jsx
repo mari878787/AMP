@@ -80,6 +80,7 @@ export default function AshokNagar({ project }) {
 
   const [activeVideoUrl, setActiveVideoUrl] = useState('https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1');
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [isBrochureOpen, setIsBrochureOpen] = useState(false);
   const [hideMainHeader, setHideMainHeader] = useState(false);
 
   useEffect(() => {
@@ -87,8 +88,16 @@ export default function AshokNagar({ project }) {
       e.preventDefault();
       setIsQuoteOpen(true);
     };
+    const handleOpenBrochure = (e) => {
+      e.preventDefault();
+      setIsBrochureOpen(true);
+    };
     window.addEventListener('open-inquiry-modal', handleOpenInquiry);
-    return () => window.removeEventListener('open-inquiry-modal', handleOpenInquiry);
+    window.addEventListener('open-brochure-modal', handleOpenBrochure);
+    return () => {
+      window.removeEventListener('open-inquiry-modal', handleOpenInquiry);
+      window.removeEventListener('open-brochure-modal', handleOpenBrochure);
+    };
   }, []);
 
   useEffect(() => {
@@ -139,6 +148,16 @@ export default function AshokNagar({ project }) {
     updates: false
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [brochureForm, setBrochureForm] = useState({
+    firstName: '',
+    lastName: '',
+    phoneCode: '+91',
+    phone: '',
+    email: '',
+    config: 'Villa Plots',
+    privacy: false
+  });
+  const [brochureSubmitted, setBrochureSubmitted] = useState(false);
   const [galleryIndices, setGalleryIndices] = useState({ images: 1, videos: 1 });
   const [galleryTab, setGalleryTab] = useState('images');
   const [isMobile, setIsMobile] = useState(false);
@@ -445,9 +464,44 @@ export default function AshokNagar({ project }) {
         lastName: '',
         phoneCode: '+91',
         phoneNumber: '',
+        phone: '',
         email: '',
-        agreedPrivacy: false,
-        agreedOffers: false
+        config: 'Villa Plots',
+        privacy: false,
+        updates: false
+      });
+    }, 2500);
+  };
+
+  const handleBrochureSubmit = (e) => {
+    e.preventDefault();
+    const fullName = `${brochureForm.firstName || ''} ${brochureForm.lastName || ''}`.trim();
+    const phone = `${brochureForm.phoneCode || '+91'} ${brochureForm.phone || ''}`.trim();
+    
+    const subject = encodeURIComponent(`Brochure Download Request - Ashok Nagar (${fullName || 'Lead'})`);
+    const body = encodeURIComponent(
+      `Project: Ashok Nagar Villa Plots\n` +
+      `Name: ${fullName}\n` +
+      `Phone: ${phone}\n` +
+      `Email: ${brochureForm.email || 'N/A'}\n` +
+      `Configuration: ${brochureForm.config}\n` +
+      `Request: Download Official Project E-Brochure\n`
+    );
+
+    window.location.href = `mailto:info@aadhithyamohanproperties.com?subject=${subject}&body=${body}`;
+
+    setBrochureSubmitted(true);
+    setTimeout(() => {
+      setBrochureSubmitted(false);
+      setIsBrochureOpen(false);
+      setBrochureForm({
+        firstName: '',
+        lastName: '',
+        phoneCode: '+91',
+        phone: '',
+        email: '',
+        config: 'Villa Plots',
+        privacy: false
       });
     }, 2500);
   };
@@ -484,7 +538,7 @@ export default function AshokNagar({ project }) {
               <div className="project-hero-cta-block">
                 <button
                   type="button"
-                  onClick={() => setIsQuoteOpen(true)}
+                  onClick={() => setIsBrochureOpen(true)}
                   className="btn-discover"
                 >
                   DOWNLOAD BROCHURE
@@ -1030,25 +1084,115 @@ export default function AshokNagar({ project }) {
           </div>
         </div>
       )}
-      {/* Quote / Schedule Booking Modal */}
-      {isQuoteOpen && (
-        <div className="modal-overlay" onClick={() => setIsQuoteOpen(false)}>
+      {/* Brochure Download Modal */}
+      {isBrochureOpen && (
+        <div className="modal-overlay" onClick={() => setIsBrochureOpen(false)}>
           <div className="modal-content-card split-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-image-panel">
+            <div className="modal-image-panel brochure-panel">
               <div className="modal-image-overlay">
+                <span className="modal-image-badge">E-BROCHURE & MASTER PLAN</span>
                 <h3>Ashok Nagar</h3>
                 <p>Premium Villa Plots in Maduranthakam</p>
               </div>
             </div>
 
             <div className="modal-form-panel">
-              <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)}>
+              <button className="modal-close-btn" onClick={() => setIsBrochureOpen(false)} aria-label="Close modal">
                 <X size={18} />
               </button>
 
               <div className="modal-header-block-light">
-                <h3 className="modal-heading-light">SCHEDULE A VISIT</h3>
-                <p className="modal-subheading-light">Experience premium luxury in person.</p>
+                <h3 className="modal-heading-light">DOWNLOAD BROCHURE</h3>
+                <p className="modal-subheading-light">Get instant access to complete master plan, plot configurations & pricing details.</p>
+              </div>
+
+              <div className="modal-body-light">
+                {brochureSubmitted ? (
+                  <div className="form-success-message">
+                    <CheckCircle2 size={48} className="success-icon-gold" />
+                    <h4>Brochure Request Submitted</h4>
+                    <p>We've dispatched the official e-brochure to your email and WhatsApp.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleBrochureSubmit} className="modal-inquiry-form-new">
+                    {/* Name Row */}
+                    <div className="form-row-2">
+                      <div className="form-group-outline">
+                        <input type="text" placeholder="First Name *" required value={brochureForm.firstName} onChange={e => setBrochureForm({ ...brochureForm, firstName: e.target.value })} />
+                      </div>
+                      <div className="form-group-outline">
+                        <input type="text" placeholder="Last Name *" required value={brochureForm.lastName} onChange={e => setBrochureForm({ ...brochureForm, lastName: e.target.value })} />
+                      </div>
+                    </div>
+
+                    {/* Phone Row */}
+                    <div className="form-row-phone">
+                      <div className="form-group-outline phone-code">
+                        <select value={brochureForm.phoneCode} onChange={e => setBrochureForm({ ...brochureForm, phoneCode: e.target.value })}>
+                          <option value="+91">IN +91</option>
+                          <option value="+1">US +1</option>
+                          <option value="+44">UK +44</option>
+                          <option value="+971">AE +971</option>
+                        </select>
+                      </div>
+                      <div className="form-group-outline phone-number">
+                        <input type="tel" placeholder="Phone Number *" required value={brochureForm.phone} onChange={e => setBrochureForm({ ...brochureForm, phone: e.target.value })} />
+                      </div>
+                    </div>
+
+                    {/* Email & Config Row */}
+                    <div className="form-row-2">
+                      <div className="form-group-outline">
+                        <input type="email" placeholder="Email Address *" required value={brochureForm.email} onChange={e => setBrochureForm({ ...brochureForm, email: e.target.value })} />
+                      </div>
+                      <div className="form-group-outline">
+                        <select value={brochureForm.config} onChange={e => setBrochureForm({ ...brochureForm, config: e.target.value })}>
+                          <option value="Villa Plots">Villa Plots</option>
+                          <option value="Commercial Plots">Commercial Plots</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Checkboxes */}
+                    <div className="form-checkbox-group">
+                      <label className="checkbox-label">
+                        <input type="checkbox" required checked={brochureForm.privacy} onChange={e => setBrochureForm({ ...brochureForm, privacy: e.target.checked })} />
+                        <span className="checkbox-custom"></span>
+                        <span>I've read and agree to the <a href="#privacy" style={{ color: '#b48564', textDecoration: 'underline' }}>privacy policy. *</a></span>
+                      </label>
+                    </div>
+
+                    <Button type="submit" theme="dark" style={{ width: '100%', marginTop: '8px', padding: '16px' }}>
+                      DOWNLOAD E-BROCHURE
+                    </Button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Quote / Schedule Booking Modal */}
+      {isQuoteOpen && (
+        <div className="modal-overlay" onClick={() => setIsQuoteOpen(false)}>
+          <div className="modal-content-card split-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-image-panel">
+              <div className="modal-image-overlay">
+                <span className="modal-image-badge">SCHEDULE VISIT</span>
+                <h3>Ashok Nagar</h3>
+                <p>Premium Villa Plots in Maduranthakam</p>
+              </div>
+            </div>
+
+            <div className="modal-form-panel">
+              <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)} aria-label="Close modal">
+                <X size={18} />
+              </button>
+
+              <div className="modal-header-block-light">
+                <h3 className="modal-heading-light">SCHEDULE A VISIT & ENQUIRE</h3>
+                <p className="modal-subheading-light">Experience premium luxury in person or connect with our dedicated property specialists.</p>
               </div>
 
               <div className="modal-body-light">
@@ -1121,8 +1265,8 @@ export default function AshokNagar({ project }) {
                       </div>
                       <div className="form-group-outline">
                         <select value={quoteForm.config} onChange={e => setQuoteForm({ ...quoteForm, config: e.target.value })}>
-                          <option value="3 BHK Villa">3 BHK Villa</option>
-                          <option value="4 BHK Villa">4 BHK Villa</option>
+                          <option value="Villa Plots">Villa Plots</option>
+                          <option value="Commercial Plots">Commercial Plots</option>
                         </select>
                       </div>
                     </div>
@@ -1142,7 +1286,7 @@ export default function AshokNagar({ project }) {
                     </div>
 
                     <Button type="submit" theme="dark" style={{ width: '100%', marginTop: '8px', padding: '16px' }}>
-                      REQUEST PRICING DETAILS
+                      REQUEST PRICING & SITE VISIT
                     </Button>
                   </form>
                 )}
@@ -1771,7 +1915,6 @@ export default function AshokNagar({ project }) {
           background: #fdfdfd;
         }
         .overview-image-wrapper img {
-          width: 100%;
           height: 100%;
           max-height: 520px;
           display: block;
@@ -2851,26 +2994,27 @@ export default function AshokNagar({ project }) {
         .modal-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.75);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          z-index: 1000;
+          background: rgba(0, 0, 0, 0.78);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          z-index: 99999 !important;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 20px;
+          padding: 24px;
         }
         .modal-content-card {
           background: var(--color-white);
-          border-radius: 8px;
-          width: 90%;
-          max-width: 1040px; /* Wider for split layout */
+          border-radius: 12px;
+          width: 96vw;
+          max-width: 1360px; /* Full width luxury popup */
           position: relative;
-          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 35px 80px rgba(0, 0, 0, 0.45);
           animation: modalEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           overflow: hidden;
           padding: 0;
           display: flex;
+          min-height: 560px;
         }
         @keyframes modalEntrance {
           from { opacity: 0; transform: translateY(20px) scale(0.96); }
@@ -2879,18 +3023,21 @@ export default function AshokNagar({ project }) {
         
         /* Left Image Panel */
         .modal-image-panel {
-          flex: 1;
+          flex: 1.05;
           background: url('/images/project/ashok-nagar/hero-image.png') center/cover no-repeat;
           position: relative;
           display: flex;
           align-items: flex-end;
-          padding: 40px 32px;
+          padding: 48px 40px;
+        }
+        .modal-image-panel.brochure-panel {
+          background: url('/images/project/ashok-nagar/image/G1.webp') center/cover no-repeat;
         }
         .modal-image-panel::after {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
+          background: linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.2) 60%, transparent 100%);
         }
         .modal-image-overlay {
           position: relative;
@@ -2899,29 +3046,43 @@ export default function AshokNagar({ project }) {
         }
         .modal-image-overlay h3 {
           font-family: var(--font-heading);
-          font-size: 28px;
+          font-size: clamp(26px, 2.5vw, 36px);
           font-weight: 400;
-          margin: 0 0 4px 0;
-
-        color: #fff;
+          margin: 0 0 6px 0;
+          color: #fff;
+          letter-spacing: 0.02em;
         }
         .modal-image-overlay p {
           font-family: var(--font-sans);
-          font-size: 13.5px;
-          opacity: 0.8;
+          font-size: 14px;
+          opacity: 0.9;
           margin: 0;
           letter-spacing: 0.05em;
           text-transform: uppercase;
           color: #fff;
         }
+        .modal-image-badge {
+          display: inline-block;
+          padding: 5px 12px;
+          background: rgba(180, 133, 100, 0.92);
+          color: #fff;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          border-radius: 4px;
+          margin-bottom: 12px;
+        }
         
         /* Right Form Panel */
         .modal-form-panel {
-          flex: 1.1;
+          flex: 1.35;
           display: flex;
           flex-direction: column;
           background: #ffffff;
           position: relative;
+          max-height: 88vh;
+          overflow-y: auto;
         }
 
         /* Light Header */
@@ -3272,26 +3433,24 @@ export default function AshokNagar({ project }) {
         .gallery-spotlight-viewport {
           position: relative;
           width: 100vw;
+          height: calc(100vh - 100px);
           overflow: hidden;
-          padding: 20px 0;
-          margin-left: calc(-50vw + 50%);
+          padding: 0;
+          margin: 0;
           left: 0;
-          --gallery-card-active-w: 85vw;
-          --gallery-card-w: 65vw;
-          --gallery-gap: 4vw;
-          --gallery-card-offset: calc(50vw - var(--gallery-card-active-w) / 2);
         }
         .gallery-spotlight-track {
           display: flex;
           gap: var(--gallery-gap);
           width: max-content;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          height: 100%;
         }
         .gallery-spotlight-card {
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
-          height: calc(100vh - 165px);
+          height: 100% !important;
           max-height: 720px;
           min-height: 320px;
           border-radius: 8px;
@@ -3351,19 +3510,20 @@ export default function AshokNagar({ project }) {
         @media (max-width: 768px) {
           .modal-content-card.split-modal {
             flex-direction: column;
-            max-width: 440px;
+            max-width: 480px;
             width: 95%;
-            margin: 20px;
-            max-height: 90vh;
+            margin: 16px;
+            max-height: 92vh;
             overflow-y: auto;
           }
           .modal-image-panel {
-            height: 200px;
+            height: 180px;
             flex: none;
             padding: 24px;
           }
           .modal-form-panel {
             flex: none;
+            padding: 24px 20px;
           }
         }
 

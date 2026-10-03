@@ -43,6 +43,11 @@ export default function StickyActionBar({ onEnquire }) {
     };
   }, [location.pathname]);
 
+  const handleBrochureClick = (e) => {
+    const event = new CustomEvent('open-brochure-modal', { cancelable: true });
+    window.dispatchEvent(event);
+  };
+
   const handleEnquireClick = (e) => {
     if (onEnquire) {
       onEnquire(e);
@@ -102,7 +107,7 @@ export default function StickyActionBar({ onEnquire }) {
               <Phone size={18} className="mobile-sticky-icon" />
               <span className="mobile-sticky-label">Call</span>
             </a>
-            <button className="mobile-sticky-item" onClick={handleEnquireClick}>
+            <button className="mobile-sticky-item" onClick={handleBrochureClick}>
               <FileText size={18} className="mobile-sticky-icon" />
               <span className="mobile-sticky-label">Brochure</span>
             </button>
