@@ -972,39 +972,74 @@ export default function NewProject({ project }) {
           {/* Master Gallery Section */}
           {activeTab === 'gallery' && (
             <>
-              <section id="gallery" className="project-gallery-section scroll-section" style={{ position: 'relative', overflow: 'hidden', backgroundColor: 'var(--color-white)', paddingTop: '24px', paddingBottom: '36px', minHeight: 'calc(100vh - 55px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '16px', background: '#fff', boxSizing: 'border-box' }}>
-                <div className="container">
-                  <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '4px' }}>
-                    <h2 className="section-title">
-                      Visual <span>Spotlight</span>
-                    </h2>
-                  </ScrollReveal>
-                  {/* Gallery Navigation Tabs */}
-                  <ScrollReveal animation="fadeUp" delay={0.25} className="nested-tabs-container" style={{ marginBottom: '4px', display: 'flex', justifyContent: 'center' }}>
-                    <div className="filter-tabs">
-                      {['exteriors', 'interiors', 'videos'].map(tab => (
-                        <button
-                          key={tab}
-                          className={`filter-tab-btn ${galleryTab === tab ? 'active' : ''}`}
-                          onClick={() => setGalleryTab(tab)}
-                        >
-                          {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                        </button>
-                      ))}
-                    </div>
-                  </ScrollReveal>
-                </div> {/* Close container here for full-bleed viewport */}
+              <section id="gallery" className="project-gallery-section scroll-section" style={{
+                position: 'relative',
+                overflow: 'hidden',
+                backgroundColor: '#000000',
+                padding: 0,
+                margin: 0,
+                height: 'calc(100vh - 55px)',
+                minHeight: 'calc(100vh - 55px)',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxSizing: 'border-box'
+              }}>
+                {/* Floating Glassmorphic Filter Tabs on top of the image */}
+                <div className="gallery-floating-header" style={{
+                  position: 'absolute',
+                  top: '20px',
+                  left: 0,
+                  right: 0,
+                  zIndex: 30,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  pointerEvents: 'none'
+                }}>
+                  <div className="filter-tabs" style={{
+                    pointerEvents: 'auto',
+                    background: 'rgba(255, 255, 255, 0.92)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
+                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.15)',
+                    borderRadius: '30px',
+                    padding: '4px',
+                    border: '1px solid rgba(255, 255, 255, 0.8)'
+                  }}>
+                    {['exteriors', 'interiors', 'videos'].map(tab => (
+                      <button
+                        key={tab}
+                        className={`filter-tab-btn ${galleryTab === tab ? 'active' : ''}`}
+                        onClick={() => setGalleryTab(tab)}
+                        style={{ borderRadius: '24px', padding: '8px 22px' }}
+                      >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Spotlight Active-Card Gallery Carousel / Coming Soon */}
-                <ScrollReveal animation="fadeUp" delay={0.35} className="gallery-spotlight-viewport">
+                <div className="gallery-spotlight-viewport" style={{
+                  position: 'relative',
+                  width: '100vw',
+                  height: 'calc(100vh - 55px)',
+                  overflow: 'hidden',
+                  padding: 0,
+                  margin: 0
+                }}>
                   {galleryTab === 'videos' ? (
                     <div style={{
                       width: '100%',
-                      minHeight: '420px',
+                      height: 'calc(100vh - 55px)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       padding: '40px 20px',
-                      boxSizing: 'border-box'
+                      boxSizing: 'border-box',
+                      background: '#fff'
                     }}>
                       <div style={{
                         maxWidth: '560px',
@@ -1068,12 +1103,14 @@ export default function NewProject({ project }) {
                               alignItems: 'center',
                               justifyContent: 'center',
                               width: '100%',
+                              height: '100%',
                               transform: 'none'
                             } : {
                               display: 'flex',
                               alignItems: 'center',
                               gap: '0px',
                               width: 'max-content',
+                              height: '100%',
                               transition: galleryAnim[galleryTab] ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
                               transform: `translateX(-${galleryIndices[galleryTab] * 100}vw)`
                             }}
@@ -1096,9 +1133,9 @@ export default function NewProject({ project }) {
                                     cursor: 'pointer',
                                     overflow: 'hidden',
                                     position: 'relative',
-                                    height: 'calc(100vh - 165px)',
-                                    maxHeight: '750px',
-                                    minHeight: '360px',
+                                    height: 'calc(100vh - 55px)',
+                                    maxHeight: 'none',
+                                    minHeight: '100%',
                                     boxShadow: 'none'
                                   }}
                                   onClick={() => {
@@ -1116,9 +1153,22 @@ export default function NewProject({ project }) {
                                     className="gallery-spotlight-img"
                                   />
 
-                                  <div className="gallery-deck-hover-overlay">
-                                    <Maximize2 size={24} className="hover-overlay-zoom-icon" />
-                                    <span className="hover-overlay-title">{img.title}</span>
+                                  <div className="gallery-deck-hover-overlay" style={{
+                                    position: 'absolute',
+                                    bottom: '84px',
+                                    left: '0',
+                                    right: '0',
+                                    top: 'auto',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '12px',
+                                    background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)',
+                                    padding: '30px 20px 10px',
+                                    pointerEvents: 'none'
+                                  }}>
+                                    <Maximize2 size={20} className="hover-overlay-zoom-icon" style={{ color: '#fff' }} />
+                                    <span className="hover-overlay-title" style={{ color: '#fff', fontSize: '15px', fontWeight: '500', letterSpacing: '0.04em' }}>{img.title}</span>
                                   </div>
                                 </div>
                               );
@@ -1130,14 +1180,20 @@ export default function NewProject({ project }) {
                             <>
                               <button
                                 className="gallery-spotlight-arrow prev"
-                                onClick={() => prevGallerySlide(galleryTab)}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  prevGallerySlide(galleryTab);
+                                }}
                                 aria-label="Previous image"
                               >
                                 <ChevronLeft size={24} />
                               </button>
                               <button
                                 className="gallery-spotlight-arrow next"
-                                onClick={() => nextGallerySlide(galleryTab)}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  nextGallerySlide(galleryTab);
+                                }}
                                 aria-label="Next image"
                               >
                                 <ChevronRight size={24} />
@@ -1148,7 +1204,7 @@ export default function NewProject({ project }) {
                       );
                     })()
                   )}
-                </ScrollReveal>
+                </div>
               </section>
             </>
           )}
@@ -4077,34 +4133,33 @@ export default function NewProject({ project }) {
           }
         }
         /* â”€â”€ Gallery Spotlight Styles â”€â”€ */
+        /* ── Gallery Spotlight Styles ── */
         .gallery-spotlight-viewport {
           position: relative;
           width: 100vw;
+          height: calc(100vh - 55px);
           overflow: hidden;
-          padding: 20px 0;
-          margin-left: calc(-50vw + 50%);
+          padding: 0;
+          margin: 0;
           left: 0;
-          --gallery-card-active-w: 85vw;
-          --gallery-card-w: 65vw;
-          --gallery-gap: 4vw;
-          --gallery-card-offset: calc(50vw - var(--gallery-card-active-w) / 2);
         }
         .gallery-spotlight-track {
           display: flex;
-          gap: var(--gallery-gap);
+          height: 100%;
           width: max-content;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .gallery-spotlight-card {
           flex-shrink: 0;
+          flex-basis: 100vw;
+          width: 100vw;
+          height: calc(100vh - 55px) !important;
+          max-height: none !important;
+          min-height: 100% !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
           position: relative;
           overflow: hidden;
-          height: calc(100vh - 165px);
-          max-height: 720px;
-          min-height: 320px;
-          border-radius: 8px;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-          transition: flex-basis 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
         .gallery-spotlight-img {
           width: 100%;
@@ -4178,14 +4233,14 @@ export default function NewProject({ project }) {
         /* ── RESPONSIVE MEDIA CONTROLS ── */
         @media (max-width: 1024px) {
           .gallery-spotlight-viewport {
-            --gallery-card-active-w: 80vw;
-            --gallery-card-w: 60vw;
-            --gallery-gap: 5vw;
+            height: calc(100vh - 55px);
+            padding: 0;
           }
           .gallery-spotlight-card {
-            height: clamp(480px, 60vh, 680px) !important;
+            height: calc(100vh - 55px) !important;
             max-height: none !important;
-            aspect-ratio: auto !important;
+            width: 100vw !important;
+            flex-basis: 100vw !important;
           }
           .amenities-grid-box {
             grid-template-columns: repeat(2, 1fr);
@@ -4341,16 +4396,15 @@ export default function NewProject({ project }) {
             font-size: 14px !important;
           }
           .gallery-spotlight-viewport {
-            --gallery-card-active-w: 88vw !important;
-            --gallery-card-w: 72vw !important;
-            --gallery-gap: 3vw !important;
+            height: calc(100vh - 55px);
             padding: 0 !important;
-            margin-top: 0 !important;
+            margin: 0 !important;
           }
           .gallery-spotlight-card {
-            height: clamp(520px, 72vh, 660px) !important;
+            height: calc(100vh - 55px) !important;
             max-height: none !important;
-            aspect-ratio: auto !important;
+            width: 100vw !important;
+            flex-basis: 100vw !important;
           }
           .project-floorplans-section {
             padding: 24px 0 !important;
