@@ -37,10 +37,4 @@ public/images/maia.zip
 public/images/maia/
 node-env/
 
-# Large raw drone/camera source files (>100MB GitHub limit)
-*.DNG
-*.dng
-*RAW*.mp4
-*raw*.mp4
-
 
