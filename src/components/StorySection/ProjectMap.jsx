@@ -265,6 +265,10 @@ export default function ProjectMap({
         zoom={13.6}
         minZoom={11}
         scrollWheelZoom={false}
+        touchZoom={false}
+        doubleClickZoom={false}
+        boxZoom={false}
+        dragging={true}
         className="leaflet-hero-map"
       >
         <TileLayer

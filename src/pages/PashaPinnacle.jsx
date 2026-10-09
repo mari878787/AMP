@@ -1435,7 +1435,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                 {layoutCategory === 'typicalFloorPlan' && (
                   <ScrollReveal animation="fadeUp" delay={0.3} style={{ width: '100%' }}>
                     {/* Sub-tabs row: Typical Floor Plan | Stilt + Ground Floor */}
-                    <div style={{ display: 'flex', marginBottom: '35px', borderBottom: '.1px solid rgba(0,0,0,0.08)', width: '100%', justifyContent: 'flex-start' }}>
+                    <div style={{ display: 'flex', marginTop: '20px', marginBottom: '38px', borderBottom: '.1px solid rgba(0,0,0,0.08)', width: '100%', justifyContent: 'flex-start' }}>
                       <div className="filter-tabs" style={{ display: 'flex', gap: '0' }}>
                         {[
                           { id: 'typical', label: 'Typical Floor Plan', image: layoutsData.typicalFloorPlan.image },

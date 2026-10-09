@@ -82,7 +82,9 @@ export default function ProjectsSection() {
   const [selectedTeaser, setSelectedTeaser] = useState(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 769px)", () => {
       const slides = gsap.utils.toArray('.maia-section-slide');
       slides.forEach((slide, i) => {
         const img = slide.querySelector('.maia-bg-img');
@@ -116,7 +118,7 @@ export default function ProjectsSection() {
       });
     });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
@@ -341,11 +343,43 @@ export default function ProjectsSection() {
           will-change: transform, opacity;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
+          .maia-section-slide {
+            height: 72vh !important;
+            min-height: 460px !important;
+            margin-bottom: 16px !important;
+            clip-path: none !important;
+            -webkit-clip-path: none !important;
+            border-radius: 16px !important;
+            overflow: hidden !important;
+            width: calc(100% - 28px) !important;
+            margin-left: 14px !important;
+            margin-right: 14px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+          }
+          .maia-fixed-frame {
+            position: absolute !important;
+            height: 100% !important;
+            width: 100% !important;
+            top: 0 !important;
+            left: 0 !important;
+          }
+          .maia-bg-img {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            transform: none !important;
+            object-fit: cover !important;
+          }
           .maia-header-content {
-            top: 36px;
-            bottom: auto;
-            left: 24px;
+            top: auto !important;
+            bottom: 24px !important;
+            left: 18px !important;
+            right: 18px !important;
+            max-width: 100% !important;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8) !important;
           }
         }
 

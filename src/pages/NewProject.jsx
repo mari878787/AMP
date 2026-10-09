@@ -1332,7 +1332,7 @@ export default function NewProject({ project }) {
                   <h2 className="section-title">Architectural <span>Layouts</span></h2>
                 </ScrollReveal>
                 {/* Top-Level Category Switcher */}
-                <ScrollReveal animation="fadeUp" delay={0.2} style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                <ScrollReveal animation="fadeUp" delay={0.2} style={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
                   <div className="filter-tabs">
                     {(isPashaPinnacle
                       ? [
