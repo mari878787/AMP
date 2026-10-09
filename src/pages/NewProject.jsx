@@ -1840,9 +1840,9 @@ export default function NewProject({ project }) {
           {/* Fixed Viewport Background Frame */}
           <div className="project-cta-fixed-bg">
             <picture className="project-cta-picture">
-              <source media="(max-width: 768px)" srcSet="/images/project/CML/North_Row_4K_Day 1.webp" />
+              <source media="(max-width: 768px)" srcSet="/images/project/CML/Gallery/Look_1.png" />
               <img
-                src="/images/project/CML/North_Row_4K_Day 1.webp"
+                src="/images/project/CML/Gallery/Look_1.png"
                 alt="Crystal Moonlight - Experience True Luxury in Medavakkam"
                 className="project-cta-bg-img"
               />
