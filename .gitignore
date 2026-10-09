@@ -37,14 +37,10 @@ public/images/maia.zip
 public/images/maia/
 node-env/
 
-# Large raw drone files & >50MB video assets
+# Large raw drone/camera source files (>100MB GitHub limit)
 *.DNG
 *.dng
-public/images/project/CMR/*.mp4
-public/images/project/CMR/*.DNG
-dist/images/project/CMR/*.mp4
-dist/images/project/CMR/*.DNG
-public/images/project/ashok-nagar/AN Explainer Final.mp4
-dist/images/project/ashok-nagar/AN Explainer Final.mp4
+*RAW*.mp4
+*raw*.mp4
 
 
