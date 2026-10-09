@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import PhilosophySection from '../components/PhilosophySection';
@@ -18,6 +19,11 @@ export default function Home() {
 
   return (
     <div className="home-page">
+      <SEO
+        title="Aadhithya Mohan Properties LLP"
+        description="Aadhithya Mohan Properties LLP offers premium apartments, plots, and villas in Chennai with a focus on quality, transparency, legal compliance, and customer trust."
+        canonicalUrl="https://aadhithyamohanproperties.com/"
+      />
       <Navbar />
       <main style={{ backgroundColor: 'var(--color-bg-navy)' }}>
         <HeroSection startZoom={true} />

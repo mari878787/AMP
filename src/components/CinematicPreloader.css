@@ -1,0 +1,309 @@
+/* =========================================================
+   CINEMATIC PRELOADER — FULLSCREEN SHINE & DARK OVERLAY
+   Tighter Spacing • Full-Viewport Top-Left to Bottom-Right Shine
+   ========================================================= */
+
+.cinematic-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999999;
+  background-color: #030407;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: all;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1),
+              opacity 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+/* Slow Bottom-to-Top Curtain Lift Reveal */
+.cinematic-preloader.preloader-exit-curtain-up {
+  transform: translateY(-100%);
+  opacity: 0.98;
+  pointer-events: none;
+}
+
+/* ── 1. ARCHITECTURAL CORRIDOR BACKDROP & DARK OVERLAY ── */
+.preloader-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.preloader-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: brightness(0.65) contrast(1.15) saturate(1.05);
+  opacity: 0;
+  transform: scale(1.0);
+  animation: preloaderBgZoom 5.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes preloaderBgZoom {
+  0% {
+    opacity: 0;
+    transform: scale(1.0);
+    filter: brightness(0.2) contrast(1.2) blur(6px);
+  }
+  25% {
+    opacity: 0.95;
+    filter: brightness(0.65) contrast(1.15) blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.06);
+    filter: brightness(0.7) contrast(1.15) blur(0px);
+  }
+}
+
+/* Background Image Dark Overlay */
+.preloader-dark-tint-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 4, 7, 0.52);
+  pointer-events: none;
+}
+
+/* Atmospheric Vignette Frame */
+.preloader-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(3, 4, 7, 0.2) 0%,
+    rgba(3, 4, 7, 0.7) 55%,
+    #030407 100%
+  ),
+  linear-gradient(
+    to bottom,
+    rgba(3, 4, 7, 0.85) 0%,
+    transparent 20%,
+    transparent 70%,
+    rgba(3, 4, 7, 0.95) 100%
+  );
+  pointer-events: none;
+}
+
+/* Warm Golden Atmospheric Radiance */
+.preloader-warm-light-pass {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 60% 45%,
+    rgba(212, 175, 122, 0.16) 0%,
+    rgba(145, 102, 56, 0.05) 50%,
+    transparent 75%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: warmGlowFade 4.8s ease-out 0.3s forwards;
+  pointer-events: none;
+}
+
+@keyframes warmGlowFade {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+
+/* ── 2. CENTER STAGE (TIGHT GAP & MATCHED SIZING) ── */
+.preloader-stage-wrap {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  padding: 24px 20px;
+  overflow: visible;
+}
+
+/* 2A. Authentic Reveal for logo.png */
+.preloader-emblem-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-bottom: 8px; /* Tighter gap */
+  opacity: 0;
+  transform: scale(0.9) translateY(6px);
+  animation: emblemUniqueReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+@keyframes emblemUniqueReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.84) translateY(10px);
+    filter: blur(10px) brightness(0.6);
+  }
+  50% {
+    filter: blur(0px) brightness(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.0) translateY(0);
+    filter: blur(0px) brightness(1.0);
+  }
+}
+
+.preloader-emblem-image {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.7));
+}
+
+/* 2B. Brand Logotype (white-logo.png) — Sized to Proportionally Match Emblem */
+.preloader-wordmark-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 260px; /* Matched to emblem width */
+  width: 100%;
+  margin-bottom: 12px; /* Tighter gap */
+  opacity: 0;
+  transform: translateY(8px);
+  animation: wordmarkReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+}
+
+@keyframes wordmarkReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.preloader-wordmark-image {
+  width: 100%;
+  height: auto;
+  max-height: 38px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.8));
+}
+
+/* 2C. Bottom Luxury Slogan (Tightly Positioned Beneath Brand Text) */
+.preloader-slogan-wrap {
+  opacity: 0;
+  transform: translateY(4px);
+  animation: sloganReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+}
+
+@keyframes sloganReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.preloader-slogan-wrap span {
+  font-family: 'Montserrat', var(--font-sans, sans-serif);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  color: #dfba85;
+  text-transform: uppercase;
+  display: inline-block;
+  text-shadow: 0 0 10px rgba(223, 186, 133, 0.35);
+}
+
+/* ── 3. FULL-SCREEN DIAGONAL SHINE SWEEP (TOP-LEFT TO BOTTOM-RIGHT ACROSS ENTIRE VIEWPORT) ── */
+.preloader-fullscreen-shine {
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 47.5%,
+    rgba(255, 255, 255, 0.0) 48.5%,
+    rgba(255, 255, 255, 0.32) 50%,
+    rgba(223, 186, 133, 0.26) 51%,
+    rgba(255, 255, 255, 0.0) 52.5%,
+    transparent 53.5%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 25;
+  opacity: 0;
+  mix-blend-mode: screen;
+  transform: translate3d(-60%, -60%, 0);
+  animation: fullScreenDiagonalShine 4.5s cubic-bezier(0.2, 0.8, 0.2, 1) 2.6s forwards;
+}
+
+@keyframes fullScreenDiagonalShine {
+  0% {
+    transform: translate3d(-60%, -60%, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(60%, 60%, 0);
+    opacity: 0;
+  }
+}
+
+/* ── 4. RESPONSIVE BREAKPOINTS ── */
+@media (max-width: 768px) {
+  .preloader-stage-wrap {
+    max-width: 280px;
+    width: 86vw;
+    padding: 16px;
+  }
+
+  .preloader-emblem-wrap {
+    margin-bottom: 6px;
+  }
+
+  .preloader-emblem-image {
+    max-height: 62px;
+  }
+
+  .preloader-wordmark-wrap {
+    max-width: 210px;
+    margin-bottom: 8px;
+  }
+
+  .preloader-wordmark-image {
+    max-height: 30px;
+  }
+
+  .preloader-slogan-wrap span {
+    font-size: 7.5px;
+    letter-spacing: 0.3em;
+  }
+}

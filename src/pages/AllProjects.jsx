@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
@@ -35,8 +36,8 @@ const PROJECTS_DATA = [
       '/images/project/CML/extirior/Master_Plan_4k_New_4.png',
       '/images/project/CML/extirior/Master_Plan_Areial_3_4k.png',
     ],
-    description: 'A sanctuary of refined luxury in Medavakkam. 47 bespoke 3 & 4 BHK villas crafted with timeless architecture, private gardens, and world-class amenities.',
-    link: '/crystal-moonlight-villa'
+    description: 'A sanctuary of refined luxury in Medavakkam. 47 bespoke 3 & 4 BHK villas across 2.25 acres, crafted with timeless architecture, private gardens, and world-class amenities.',
+    link: '/projects/villas/crystal-moonlight-villa-in-medavakkam'
   },
   {
     id: 2,
@@ -53,16 +54,16 @@ const PROJECTS_DATA = [
     price: 'Under ₹1 Cr',
     priceRange: 'Under ₹1 Cr',
     bedrooms: ['3 BHK'],
-    image: '/images/project/pasha-pinnacle/card.png',
-    mobileImage: '/images/project/pasha-pinnacle/mobile-hero.png',
+    image: '/images/project/pasha-pinnacle/extirior/1 Resized PP 16x9.jpg',
+    mobileImage: '/images/project/pasha-pinnacle/extirior/1 Resized PP 16x9.jpg',
     images: [
-      '/images/project/pasha-pinnacle/hero.webp',
-      '/images/project/pasha-pinnacle/extirior/1.webp',
-      '/images/project/pasha-pinnacle/extirior/17.webp',
-      '/images/project/pasha-pinnacle/extirior/27.webp'
+      '/images/project/pasha-pinnacle/extirior/1 Resized PP 16x9.jpg',
+      '/images/project/pasha-pinnacle/extirior/3 Resized PP 16x9.jpg',
+      '/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg',
+      '/images/project/pasha-pinnacle/extirior/5 Resized PP 16x9.jpg'
     ],
-    description: 'Exclusive 3 BHK luxury residences in the heart of Royapettah. Combining classic elegance with modern comforts across 12 private units.',
-    link: '/pasha-pinnacle'
+    description: 'Exclusive 3 BHK luxury residences in the heart of Royapettah. Combining classic elegance with modern comforts across 12 private units on a 2.5-acre site.',
+    link: '/projects/apartments/pasha-pinnacle-luxury-apartment-in-royapettah'
   },
   {
     id: 3,
@@ -87,7 +88,7 @@ const PROJECTS_DATA = [
       '/images/project/CMR/Upscaled/3.webp'
     ],
     description: 'A premium 3.6-acre gated township of 122 ready-to-build residential plots in Maduranthakam with wide paved roads and lush green parks.',
-    link: '/cmr-global-city'
+    link: '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam'
   },
   {
     id: 4,
@@ -112,7 +113,7 @@ const PROJECTS_DATA = [
       '/images/project/ashok-nagar/image/G7.webp'
     ],
     description: 'Serene 2.30-acre villa plot community in Maduranthakam with DTCP approval, offering 48 ready-to-build plots surrounded by greenery.',
-    link: '/ashok-nagar-villa-plots-in-maduranthakam'
+    link: '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam'
   },
   {
     id: 5,
@@ -121,7 +122,7 @@ const PROJECTS_DATA = [
     category: 'Villas',
     status: 'Upcoming',
     siteExtent: '5 Acres',
-    totalUnits: '42 Units',
+    totalUnits: '8 Units',
     bhkConfig: 'Bespoke',
     structure: 'G + 1 & G + 2',
     unitSize: '3,000 - 4,500 Sq.Ft.',
@@ -134,7 +135,7 @@ const PROJECTS_DATA = [
     images: [
       '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png'
     ],
-    description: 'Bespoke luxury beachfront estate villas along East Coast Road (ECR). Designed for panoramic ocean vistas and coastal serenity.',
+    description: 'Bespoke luxury beachfront villas along East Coast Road (ECR). 8 exclusive estate villas across 5 acres, designed for panoramic ocean vistas and coastal serenity.',
     teaserPoster: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png',
     link: '#bay-vista'
   },
@@ -253,6 +254,11 @@ export default function AllProjects() {
 
   return (
     <div className="all-projects-page" style={{ backgroundColor: 'var(--color-white)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <SEO
+        title="Explore Premium Plots, Villas & Apartments in Chennai"
+        description="Find your ideal property with Aadhithya Mohan Properties. Explore premium plots, villas, and residential projects across sought-after locations in Chennai."
+        canonicalUrl="https://aadhithyamohanproperties.com/projects"
+      />
       <Navbar theme="dark" />
 
       <main style={{ flexGrow: 1, paddingBottom: '100px' }}>
@@ -262,7 +268,7 @@ export default function AllProjects() {
 
           <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
             <ScrollReveal animation="fadeUp">
-              <span className="hero-tag-light">PORTFOLIO</span>
+              {/* <span className="hero-tag-light">PORTFOLIO</span> */}
               <h1 className="hero-page-title display-title">Our Projects</h1>
               <p className="hero-page-sub">
                 Explore our curated collection of bespoke luxury villas, residences, and plotted developments across Chennai.
@@ -322,7 +328,7 @@ export default function AllProjects() {
           width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 60px;
+          gap: 20px;
           margin-top: 20px;
           margin-bottom: 60px;
         }

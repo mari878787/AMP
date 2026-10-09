@@ -9,6 +9,7 @@ import {
   FileText, MessageCircle, RotateCcw
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 import WhyProject from '../components/WhyProject';
 import ProjectSpecs from '../components/ProjectSpecs';
@@ -175,44 +176,44 @@ export default function PashaPinnacle({ project = 'pasha' }) {
       'blockA': [
         {
           id: 'blockA-front',
-          name: 'Block A - Front Facing',
+          name: 'Block A - Road Side',
           type: '3 BHK',
           saleableArea: '1,335 Sq.Ft.',
           reraCarpetArea: '925 Sq.Ft.',
           uds: '421 Sq.Ft.',
-          facing: 'Front Facing',
+          facing: 'Road Side',
           image: '/images/project/pasha-pinnacle/floorplan/PP Individual Plan with Highlight_Block A - Front.jpg.jpeg'
         },
         {
           id: 'blockA-rear',
-          name: 'Block A - Rear Facing',
+          name: 'Block A - Rear Side',
           type: '3 BHK',
           saleableArea: '1,342 Sq.Ft.',
           reraCarpetArea: '935 Sq.Ft.',
           uds: '408 Sq.Ft.',
-          facing: 'Rear Facing',
+          facing: 'Rear Side',
           image: '/images/project/pasha-pinnacle/floorplan/PP Individual Plan with Highlight_Block A - Rear.jpg.jpeg'
         }
       ],
       'blockB': [
         {
           id: 'blockB-front',
-          name: 'Block B - Front Facing',
+          name: 'Block B - Road Side',
           type: '3 BHK',
           saleableArea: '1,335 Sq.Ft.',
           reraCarpetArea: '925 Sq.Ft.',
           uds: '421 Sq.Ft.',
-          facing: 'Front Facing',
+          facing: 'Road Side',
           image: '/images/project/pasha-pinnacle/floorplan/PP Individual Plan with Highlight_Block B - Front.jpg.jpeg'
         },
         {
           id: 'blockB-rear',
-          name: 'Block B - Rear Facing',
+          name: 'Block B - Rear Side',
           type: '3 BHK',
           saleableArea: '1,358 Sq.Ft.',
           reraCarpetArea: '945 Sq.Ft.',
           uds: '408 Sq.Ft.',
-          facing: 'Rear Facing',
+          facing: 'Rear Side',
           image: '/images/project/pasha-pinnacle/floorplan/PP Individual Plan with Highlight_Block B - Rear.jpg.jpeg'
         }
       ]
@@ -226,13 +227,13 @@ export default function PashaPinnacle({ project = 'pasha' }) {
   const activePlanDetails = currentConfigPlans.find(p => p.id === activePlanId) || currentConfigPlans[0];
   const handlePrevPlan = () => {
     if (currentConfigPlans.length <= 1) return;
-    const currIdx = currentConfigPlans.findIndex(p => p.id === activePlanId);
+    const currIdx = Math.max(0, currentConfigPlans.findIndex(p => p.id === activePlanDetails?.id));
     const prevIdx = (currIdx - 1 + currentConfigPlans.length) % currentConfigPlans.length;
     setActivePlanId(currentConfigPlans[prevIdx].id);
   };
   const handleNextPlan = () => {
     if (currentConfigPlans.length <= 1) return;
-    const currIdx = currentConfigPlans.findIndex(p => p.id === activePlanId);
+    const currIdx = Math.max(0, currentConfigPlans.findIndex(p => p.id === activePlanDetails?.id));
     const nextIdx = (currIdx + 1) % currentConfigPlans.length;
     setActivePlanId(currentConfigPlans[nextIdx].id);
   };
@@ -244,21 +245,29 @@ export default function PashaPinnacle({ project = 'pasha' }) {
   const pillars = [
     {
       index: "01",
-      title: "Boutique by Design",
-      desc: "With only a limited collection of residences, Pasha Pinnacle offers a quieter and more intimate living experience. Thoughtfully planned spaces and a close-knit residential environment create the warmth, privacy, and comfort that define boutique living.",
-      image: "/images/project/why-cmv.png"
+      title: "Salient Features",
+      points: [
+        "False ceiling thoughtfully designed throughout every residence.",
+        "11-ft. ceiling height for a more expansive sense of space",
+        "8-ft. premium doors with false ceiling throughout",
+        "Vastu-compliant homes with spacious, well-planned interiors",
+        "Rooftop gym designed for everyday wellness"
+      ]
     },
     {
       index: "02",
-      title: "Designed for Better Living",
-      desc: "Every residence has been carefully planned to maximise space, natural light, and cross ventilation while ensuring effortless functionality. Contemporary layouts and refined interiors create homes that are elegant, inviting, and perfectly suited to modern city living.",
-      image: "/images/project/CML/Interiors/cml-interior-01.jpg"
+      title: "Boutique by Design",
+      desc: "With only a limited collection of residences, Pasha Pinnacle offers a quieter and more intimate living experience. Thoughtfully planned spaces and a close-knit residential environment create the warmth, privacy, and comfort that define boutique living."
     },
     {
       index: "03",
+      title: "Designed for Better Living",
+      desc: "Every residence has been carefully planned to maximise space, natural light, and cross ventilation while ensuring effortless functionality. Contemporary layouts and refined interiors create homes that are elegant, inviting, and perfectly suited to modern city living."
+    },
+    {
+      index: "04",
       title: "An Address That Endures",
-      desc: "Exceptional homes derive their value from both their location and the life they offer. Combining a distinguished central address with enduring quality and thoughtful planning, Pasha Pinnacle is a home that continues to reward its owners for years to come.",
-      image: "/images/project/pasha-pinnacle/card.png"
+      desc: "Exceptional homes derive their value from both their location and the life they offer. Combining a distinguished central address with enduring quality and thoughtful planning, Pasha Pinnacle is a home that continues to reward its owners for years to come."
     }
   ];
   const [statusMonthIdx, setStatusMonthIdx] = useState(0);
@@ -269,20 +278,111 @@ export default function PashaPinnacle({ project = 'pasha' }) {
 
   useEffect(() => {
     const handleOpenInquiry = (e) => {
-      e.preventDefault();
+      e?.preventDefault?.();
       setIsQuoteOpen(true);
     };
     const handleOpenBrochure = (e) => {
-      e.preventDefault();
+      e?.preventDefault?.();
       setIsBrochureOpen(true);
+    };
+    const handleOpenWalkthrough = (e) => {
+      e?.preventDefault?.();
+      if (VIDEO_SLIDES && VIDEO_SLIDES.length > 0) {
+        setActiveVideoUrl(VIDEO_SLIDES[0].url);
+      }
+      setIsVideoOpen(true);
     };
     window.addEventListener('open-inquiry-modal', handleOpenInquiry);
     window.addEventListener('open-brochure-modal', handleOpenBrochure);
+    window.addEventListener('open-walkthrough-video', handleOpenWalkthrough);
     return () => {
       window.removeEventListener('open-inquiry-modal', handleOpenInquiry);
       window.removeEventListener('open-brochure-modal', handleOpenBrochure);
+      window.removeEventListener('open-walkthrough-video', handleOpenWalkthrough);
     };
   }, []);
+
+  // Lock background scroll when ANY modal/lightbox/video/gallery is open
+  useEffect(() => {
+    const isAnyModalOpen = Boolean(
+      isBrochureOpen ||
+      isQuoteOpen ||
+      lightboxImage ||
+      floorplanLightbox ||
+      isVideoOpen
+    );
+
+    if (isAnyModalOpen) {
+      window.lenis?.stop();
+      const preventScroll = (e) => {
+        const scrollable = e.target.closest('.fs-popup-form-half, .fs-form-inner, [data-allow-scroll]');
+        if (!scrollable) {
+          e.preventDefault();
+        }
+      };
+      window.addEventListener('wheel', preventScroll, { passive: false });
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+
+      return () => {
+        window.removeEventListener('wheel', preventScroll);
+        window.removeEventListener('touchmove', preventScroll);
+        window.lenis?.start();
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        document.body.style.paddingRight = '';
+      };
+    } else {
+      window.lenis?.start();
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+
+    return () => {
+      window.lenis?.start();
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [isBrochureOpen, isQuoteOpen, lightboxImage, floorplanLightbox, isVideoOpen]);
+
+  // Keyboard controls: Esc closes, Left/Right navigate gallery & floor plan lightboxes
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (floorplanLightbox) setFloorplanLightbox(null);
+        else if (lightboxImage) setLightboxImage(null);
+        else if (isVideoOpen) setIsVideoOpen(false);
+        else if (isQuoteOpen) setIsQuoteOpen(false);
+        else if (isBrochureOpen) setIsBrochureOpen(false);
+        return;
+      }
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const dir = e.key === 'ArrowRight' ? 1 : -1;
+      if (floorplanLightbox) {
+        if (currentConfigPlans.length <= 1) return;
+        e.preventDefault();
+        const currIdx = currentConfigPlans.findIndex(p => p.id === floorplanLightbox.id);
+        const plan = currentConfigPlans[(currIdx + dir + currentConfigPlans.length) % currentConfigPlans.length];
+        setActivePlanId(plan.id);
+        setFloorplanLightbox(plan);
+      } else if (lightboxImage) {
+        const list = galleryImages[lightboxSection] || [];
+        if (list.length <= 1 || !list.some(i => i.src === lightboxImage.src)) return;
+        e.preventDefault();
+        if (dir > 0) handleLightboxNext(); else handleLightboxPrev();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  });
 
   useEffect(() => {
     let cachedThreshold = window.innerHeight - 60;
@@ -322,30 +422,45 @@ export default function PashaPinnacle({ project = 'pasha' }) {
 
   const [quoteForm, setQuoteForm] = useState({
     contactMode: 'callback',
+    visitTimeline: 'this-week',
+    name: '',
     firstName: '',
     lastName: '',
     phoneCode: '+91',
     phone: '',
     email: '',
-    config: '3 BHK Villa',
+    config: '3 BHK',
     privacy: false,
     updates: false
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [brochureForm, setBrochureForm] = useState({
+    name: '',
     firstName: '',
     lastName: '',
     phoneCode: '+91',
     phone: '',
     email: '',
-    config: '3 BHK Villa',
+    config: '3 BHK',
     privacy: false
   });
   const [brochureSubmitted, setBrochureSubmitted] = useState(false);
   const [activeLandmarkIdx, setActiveLandmarkIdx] = useState(0);
   const [galleryIndices, setGalleryIndices] = useState({ exteriors: 1, interiors: 1, videos: 1 });
   const [galleryTab, setGalleryTab] = useState('exteriors');
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
+  const heroVideoRef = useRef(null);
+  useEffect(() => {
+    const vid = heroVideoRef.current;
+    if (vid) {
+      vid.defaultMuted = true;
+      vid.muted = true;
+      const p = vid.play();
+      if (p !== undefined) {
+        p.catch(() => {});
+      }
+    }
+  }, [isMobile]);
   const navContainerRef = useRef(null);
   const amenitiesListRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
@@ -378,7 +493,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
     {
       title: "Private Balconies",
       desc: "Generously sized private balconies attached to every residence, offering open street views and natural ventilation.",
-      image: "/images/project/pasha-pinnacle/extirior/34.png",
+      image: "/images/project/pasha-pinnacle/extirior/3 Resized PP 16x9.jpg",
       icon: "/images/project/aminities/icon/Balconies.png"
     },
     {
@@ -461,20 +576,11 @@ export default function PashaPinnacle({ project = 'pasha' }) {
     videos: VIDEO_SLIDES.map(v => ({ src: v.thumbnail, title: v.title, url: v.url })),
     interiors: [],
     exteriors: [
-      { src: '/images/project/pasha-pinnacle/extirior/1.png', title: 'Pasha Pinnacle Architectural Façade' },
-      { src: '/images/project/pasha-pinnacle/extirior/4.png', title: 'Front Elevation & Entrance' },
-      { src: '/images/project/pasha-pinnacle/extirior/8.png', title: 'Contemporary Street View' },
-      { src: '/images/project/pasha-pinnacle/extirior/10.png', title: 'Building Perspective' },
-      { src: '/images/project/pasha-pinnacle/extirior/12.png', title: 'Balcony & Exterior Detailing' },
-      { src: '/images/project/pasha-pinnacle/extirior/13.png', title: 'Upper Level Architecture' },
-      { src: '/images/project/pasha-pinnacle/extirior/17.png', title: 'Exterior Elevation View' },
-      { src: '/images/project/pasha-pinnacle/extirior/22.png', title: 'Side Profile & Clean Lines' },
-      { src: '/images/project/pasha-pinnacle/extirior/24.png', title: 'Architectural Lighting & Form' },
-      { src: '/images/project/pasha-pinnacle/extirior/27.png', title: 'Gated Residence Portico' },
-      { src: '/images/project/pasha-pinnacle/extirior/29.png', title: 'Boutique Residence Perspective' },
-      { src: '/images/project/pasha-pinnacle/extirior/30.png', title: 'Contemporary Residence Elevation' },
-      { src: '/images/project/pasha-pinnacle/extirior/33.png', title: 'Stilt Parking & Arrival Bay' },
-      { src: '/images/project/pasha-pinnacle/extirior/34.png', title: 'Pasha Pinnacle Overview' }
+      { src: '/images/project/pasha-pinnacle/extirior/1 Resized PP 16x9.jpg', title: 'Pasha Pinnacle Architectural Façade' },
+      { src: '/images/project/pasha-pinnacle/extirior/2 Resized PP 16x9.jpg', title: 'Grand Arrival & Modern Elevation' },
+      { src: '/images/project/pasha-pinnacle/extirior/3 Resized PP 16x9.jpg', title: 'Contemporary Balcony & Clean Lines' },
+      { src: '/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg', title: 'Building Perspective & Streetscape' },
+      { src: '/images/project/pasha-pinnacle/extirior/5 Resized PP 16x9.jpg', title: 'Exclusive Boutique Residence View' }
     ]
   };
 
@@ -642,17 +748,20 @@ export default function PashaPinnacle({ project = 'pasha' }) {
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const fullName = `${quoteForm.firstName || ''} ${quoteForm.lastName || ''}`.trim();
-    const phone = `${quoteForm.phoneCode || '+91'} ${quoteForm.phoneNumber || ''}`.trim();
+    const fullName = (quoteForm.name || `${quoteForm.firstName || ''} ${quoteForm.lastName || ''}`).trim();
+    const phone = `${quoteForm.phoneCode || '+91'} ${quoteForm.phone || quoteForm.phoneNumber || ''}`.trim();
     const mode = quoteForm.contactMode === 'videocall' ? 'Schedule a Video Call' : 'Request a Callback';
-    
+    const visitWhen = quoteForm.visitTimeline === 'this-month' ? 'This Month' : 'This Week';
+
     const subject = encodeURIComponent(`Schedule Visit / Inquiry - Pasha Pinnacle (${fullName || 'Lead'})`);
     const body = encodeURIComponent(
       `Project: Pasha Pinnacle\n` +
       `Name: ${fullName}\n` +
       `Phone: ${phone}\n` +
       `Email: ${quoteForm.email || 'N/A'}\n` +
-      `Preferred Contact Mode: ${mode}\n`
+      `Preferred Configuration: ${quoteForm.config || '3 BHK'}\n` +
+      `Preferred Contact Mode: ${mode}\n` +
+      `Planning to Visit Site: ${visitWhen}\n`
     );
 
     window.location.href = `mailto:info@aadhithyamohanproperties.com?subject=${subject}&body=${body}`;
@@ -663,13 +772,15 @@ export default function PashaPinnacle({ project = 'pasha' }) {
       setIsQuoteOpen(false);
       setQuoteForm({
         contactMode: 'callback',
+        visitTimeline: 'this-week',
+        name: '',
         firstName: '',
         lastName: '',
         phoneCode: '+91',
         phoneNumber: '',
         phone: '',
         email: '',
-        config: '3 BHK Villa',
+        config: '3 BHK Luxury Residence',
         privacy: false,
         updates: false
       });
@@ -678,16 +789,16 @@ export default function PashaPinnacle({ project = 'pasha' }) {
 
   const handleBrochureSubmit = (e) => {
     e.preventDefault();
-    const fullName = `${brochureForm.firstName || ''} ${brochureForm.lastName || ''}`.trim();
+    const fullName = (brochureForm.name || `${brochureForm.firstName || ''} ${brochureForm.lastName || ''}`).trim();
     const phone = `${brochureForm.phoneCode || '+91'} ${brochureForm.phone || ''}`.trim();
-    
+
     const subject = encodeURIComponent(`Brochure Download Request - Pasha Pinnacle (${fullName || 'Lead'})`);
     const body = encodeURIComponent(
       `Project: Pasha Pinnacle\n` +
       `Name: ${fullName}\n` +
       `Phone: ${phone}\n` +
       `Email: ${brochureForm.email || 'N/A'}\n` +
-      `Configuration: ${brochureForm.config}\n` +
+      `Configuration: 3 BHK Luxury Residence\n` +
       `Request: Download Official Project E-Brochure\n`
     );
 
@@ -698,31 +809,47 @@ export default function PashaPinnacle({ project = 'pasha' }) {
       setBrochureSubmitted(false);
       setIsBrochureOpen(false);
       setBrochureForm({
+        name: '',
         firstName: '',
         lastName: '',
         phoneCode: '+91',
         phone: '',
         email: '',
-        config: '3 BHK Villa',
+        config: '3 BHK Luxury Residence',
         privacy: false
       });
     }, 2500);
   };
   return (
     <div className={`project-detail-page ${hideMainHeader ? 'hide-main-header' : ''}`}>
+      <SEO
+        title="Pasha Pinnacle - Luxury 3 BHK Apartments in Royapettah, Chennai | Aadhithya Mohan Properties"
+        description="Discover Pasha Pinnacle by Aadhithya Mohan Properties — exclusive 3 BHK luxury residences in Royapettah, Chennai featuring boutique living, 11-ft ceilings, and premium amenities."
+        canonicalUrl="https://aadhithyamohanproperties.com/projects/apartments/pasha-pinnacle-luxury-apartment-in-royapettah"
+      />
       <Navbar projectTitle="Pasha Pinnacle" />
       <main>
         {/* Project Hero Section */}
         <section className="project-hero-section">
           <div className="project-hero-background">
-            <picture className="project-hero-picture">
-              <source media="(max-width: 768px)" srcSet="/images/project/pasha-pinnacle/mobile-hero.png" />
-              <img
-                src="/images/project/pasha-pinnacle/hero.png"
-                alt="Pasha Pinnacle - Where Contemporary Design Meets Urban Elegance"
-                className="project-hero-bg-image animate-zoom"
+            <div className="hero-video-wrapper">
+              <video
+                ref={heroVideoRef}
+                key={isMobile ? 'mobile' : 'desktop'}
+                className="hero-bg-video"
+                src={isMobile ? "/images/project/pasha-pinnacle/PP Hero Banner 3 Verticle.mp4" : "/images/project/pasha-pinnacle/PP Hero Banner 3.mp4"}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                onCanPlay={(e) => {
+                  e.target.defaultMuted = true;
+                  e.target.muted = true;
+                  e.target.play().catch(() => {});
+                }}
               />
-            </picture>
+            </div>
             <div className="project-hero-overlay"></div>
           </div>
           <div className="container project-hero-content">
@@ -774,7 +901,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                 onClick={() => handleScrollToSection('why-project')}
                 className={`sub-nav-link ${activeTab === 'why-project' ? 'active' : ''}`}
               >
-                <span className="sub-nav-text">Why Project</span>
+                <span className="sub-nav-text">Why PP</span>
               </button>
               <button
                 onClick={() => handleScrollToSection('gallery')}
@@ -882,8 +1009,8 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           {activeTab === 'overview' && (
             <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', minHeight: 'calc(100vh - 55px)', display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
               {/* Project Logo Badge (Overview Section only) */}
-              <div 
-                className="overview-logo-badge" 
+              <div
+                className="overview-logo-badge"
                 title="Pasha Pinnacle"
               >
                 <img
@@ -938,7 +1065,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           {/* Project Details Section - Inspired by Luxury Data Grid */}
           {activeTab === 'overview' && (
             <section id="project-details" className="project-section-wrapper scroll-section" style={{ position: 'relative', padding: '0' }}>
-              <ProjectDetailsGrid 
+              <ProjectDetailsGrid
                 stat1Tag="STRUCTURE"
                 stat1Val="G + 3"
                 stat1Desc="FLOORS"
@@ -1030,7 +1157,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                           {pillar.points.map((pt, pIdx) => (
                                             <li key={pIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '18px', lineHeight: '1.5', margin: 0, padding: 0 }}>
                                               <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#000000ff', marginTop: '10px' }} />
-                                              <span style={{ margin: 0, padding: 0 }}>{pt}</span>
+                                              <span className='pillar-desc' style={{ margin: 0, padding: 0, letterSpacing: 0 }}>{pt}</span>
                                             </li>
                                           ))}
                                         </ul>
@@ -1054,7 +1181,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                 onEnquire={() => setIsQuoteOpen(true)}
                 projectCoords={[13.0524, 80.2600]}
                 projectName="Pasha Pinnacle"
-                projectImage="/images/project/pasha-pinnacle/card.png"
+                projectImage="/images/project/pasha-pinnacle/extirior/1.png"
                 categories={PASHA_NEIGHBOURHOOD}
               />
             </section>
@@ -1183,7 +1310,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                     width: '100vw',
                                     borderRadius: '0px',
                                     transition: 'opacity 0.6s ease',
-                                    cursor: 'pointer',
+                                    cursor: galleryTab === 'videos' ? 'pointer' : 'default',
                                     overflow: 'hidden',
                                     position: 'relative',
                                     height: 'calc(100vh - 180px)',
@@ -1196,8 +1323,6 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                       if (galleryTab === 'videos') {
                                         setActiveVideoUrl(img.url);
                                         setIsVideoOpen(true);
-                                      } else {
-                                        handleOpenLightbox(galleryTab, realIdx);
                                       }
                                     } else {
                                       setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
@@ -1218,14 +1343,6 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                       </div>
                                     </div>
                                   )}
-                                  <div className="gallery-deck-hover-overlay">
-                                    {galleryTab !== 'videos' && (
-                                      <>
-                                        <Maximize2 size={24} className="hover-overlay-zoom-icon" />
-                                        <span className="hover-overlay-title">{img.title}</span>
-                                      </>
-                                    )}
-                                  </div>
                                 </div>
                               );
                             })}
@@ -1239,14 +1356,14 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                 onClick={() => prevGallerySlide(galleryTab)}
                                 aria-label="Previous image"
                               >
-                                <ChevronLeft size={24} />
+                                <ChevronLeft size={48} strokeWidth={1} />
                               </button>
                               <button
                                 className="gallery-spotlight-arrow next"
                                 onClick={() => nextGallerySlide(galleryTab)}
                                 aria-label="Next image"
                               >
-                                <ChevronRight size={24} />
+                                <ChevronRight size={48} strokeWidth={1} />
                               </button>
                             </>
                           )}
@@ -1574,60 +1691,68 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                     )}
 
                     {/* Main Slide Layout */}
-                    <div className="floorplan-slide-content-grid" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 7fr', gap: '30px', alignItems: 'center' }}>
+                    <div className="floorplan-slide-track-viewport" style={{ overflow: 'hidden', width: '100%' }}>
+                      <div className="floorplan-slide-track" style={{ display: 'flex', transition: 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)', transform: `translateX(-${Math.max(0, currentConfigPlans.findIndex(p => p.id === activePlanDetails?.id)) * 100}%)` }}>
+                        {currentConfigPlans.map(plan => (
+                          <div key={plan.id} style={{ flex: '0 0 100%', minWidth: 0, boxSizing: 'border-box' }}>
+                            <div className="floorplan-slide-content-grid" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 7fr', gap: '30px', alignItems: 'center' }}>
 
-                      {/* Left Column: Details */}
-                      <div className="floorplan-slide-details-col" style={{ textAlign: 'left', order: isMobile ? 2 : 1 }}>
-                        <h3 className="floorplan-slide-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '32px', fontWeight: '400', color: 'var(--color-highlight)', marginBottom: '32px' }}>
-                          {activePlanDetails?.name}
-                        </h3>
-                        <div className="floorplan-slide-specs-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '40px' }}>
-                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Saleable Area</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails?.saleableArea || activePlanDetails?.builtUp}</span>
-                          </div>
-                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Rera Carpet Area</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails?.reraCarpetArea || activePlanDetails?.builtUp}</span>
-                          </div>
-                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>UDS</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails?.uds || activePlanDetails?.plot}</span>
-                          </div>
-                          <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
-                            <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Facing</span>
-                            <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{activePlanDetails?.facing}</span>
-                          </div>
-                        </div>
-                      </div>
-                      {/* Right Column: Visualizer */}
-                      <div className="floorplan-slide-visual-col" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', order: isMobile ? 1 : 2 }}>
-                        {activePlanDetails?.image ? (
-                          <div className="floorplan-slide-img-wrap" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <img
-                              src={activePlanDetails.image}
-                              alt={activePlanDetails.name}
-                              onClick={() => setFloorplanLightbox(activePlanDetails)}
-                              style={{
-                                maxWidth: '100%',
-                                maxHeight: '550px',
-                                objectFit: 'contain',
-                                cursor: 'pointer',
-                                transition: 'transform 0.3s ease'
-                              }}
-                              className="floorplan-image-zoomable"
-                            />
-                          </div>
-                        ) : (
-                          <div className="blueprint-canvas" style={{ width: '100%', minHeight: '400px', backgroundColor: 'var(--color-bg-navy)', borderRadius: '16px' }}>
-                            <div className="blueprint-grid-mesh"></div>
-                            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'var(--color-text-muted-light)' }}>
-                              <LayoutGrid size={48} style={{ marginBottom: '24px', opacity: 0.8 }} />
-                              <span style={{ color: 'var(--color-bg-light)' }}>{activePlanDetails?.name}</span>
-                              <span style={{ textTransform: 'uppercase', marginTop: '16px', color: 'var(--color-gold)' }}>Interactive Blueprint Layout</span>
+                              {/* Left Column: Details */}
+                              <div className="floorplan-slide-details-col" style={{ textAlign: 'left', order: isMobile ? 2 : 1 }}>
+                                <h3 className="floorplan-slide-title" style={{ fontFamily: 'var(--font-heading)', fontSize: '32px', fontWeight: '400', color: 'var(--color-highlight)', marginBottom: '32px' }}>
+                                  {plan.name}
+                                </h3>
+                                <div className="floorplan-slide-specs-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '40px' }}>
+                                  <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                                    <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Saleable Area</span>
+                                    <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{plan.saleableArea || plan.builtUp}</span>
+                                  </div>
+                                  <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                                    <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Rera Carpet Area</span>
+                                    <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{plan.reraCarpetArea || plan.builtUp}</span>
+                                  </div>
+                                  <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                                    <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>UDS</span>
+                                    <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{plan.uds || plan.plot}</span>
+                                  </div>
+                                  <div className="floorplan-slide-spec-item" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: '12px' }}>
+                                    <span className="spec-label" style={{ display: 'block', fontSize: '11px', fontWeight: '400', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '4px', letterSpacing: '0.08em' }}>Facing</span>
+                                    <span className="spec-val" style={{ fontSize: '18px', color: 'var(--color-primary)' }}>{plan.facing}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              {/* Right Column: Visualizer */}
+                              <div className="floorplan-slide-visual-col" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', order: isMobile ? 1 : 2 }}>
+                                {plan.image ? (
+                                  <div className="floorplan-slide-img-wrap" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <img
+                                      src={plan.image}
+                                      alt={plan.name}
+                                      onClick={() => setFloorplanLightbox(plan)}
+                                      style={{
+                                        maxWidth: '100%',
+                                        maxHeight: '550px',
+                                        objectFit: 'contain',
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.3s ease'
+                                      }}
+                                      className="floorplan-image-zoomable"
+                                    />
+                                  </div>
+                                ) : (
+                                  <div className="blueprint-canvas" style={{ width: '100%', minHeight: '400px', backgroundColor: 'var(--color-bg-navy)', borderRadius: '16px' }}>
+                                    <div className="blueprint-grid-mesh"></div>
+                                    <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', color: 'var(--color-text-muted-light)' }}>
+                                      <LayoutGrid size={48} style={{ marginBottom: '24px', opacity: 0.8 }} />
+                                      <span style={{ color: 'var(--color-bg-light)' }}>{plan.name}</span>
+                                      <span style={{ textTransform: 'uppercase', marginTop: '16px', color: 'var(--color-gold)' }}>Interactive Blueprint Layout</span>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </div>
-                        )}
+                        ))}
                       </div>
                     </div>
                   </ScrollReveal>
@@ -1649,7 +1774,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           {activeTab === 'pricing' && (
             <ProjectPricingSection
               projectName="Pasha Pinnacle"
-              unitTypes={['2 BHK Apartment', '3 BHK Apartment']}
+              unitTypes={['3 BHK']}
             />
           )}
           {/* Project Status Section */}
@@ -1713,37 +1838,72 @@ export default function PashaPinnacle({ project = 'pasha' }) {
             </section>
           )}
         </div>
-        {/* --- PROJECT CTA BANNER SECTION --- */}
-        <section
-          className="project-cta-banner-section"
-          style={{
-            position: 'relative',
-            width: '100%',
-            overflow: 'hidden',
-            cursor: 'pointer',
-            lineHeight: 0
-          }}
-          onClick={() => setIsQuoteOpen(true)}
-        >
-          <picture style={{ display: 'block', width: '100%' }}>
-            <source media="(max-width: 768px)" srcSet="/images/project/pasha-pinnacle/CTA-mobile.png" />
-            <img
-              src="/images/project/pasha-pinnacle/CTA.png"
-              alt="Pasha Pinnacle - Where Contemporary Design Meets Urban Elegance"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-                objectFit: 'cover'
-              }}
-            />
-          </picture>
+        {/* --- PROJECT LUXURY CTA BANNER SECTION (Fixed Background + Dark Overlay + Centered Content & Button) --- */}
+        <section className="project-cta-banner-section">
+          {/* Fixed Viewport Background Frame */}
+          <div className="project-cta-fixed-bg">
+            <picture className="project-cta-picture">
+              <source media="(max-width: 768px)" srcSet="/images/project/pasha-pinnacle/extirior/1 Resized PP 16x9.jpg" />
+              <img
+                src="/images/project/pasha-pinnacle/extirior/1 Resized PP 16x9.jpg"
+                alt="Pasha Pinnacle - Experience True Luxury in Royapettah"
+                className="project-cta-bg-img"
+              />
+            </picture>
+            <div className="project-cta-dark-overlay" />
+          </div>
+
+          {/* Centered Content Block & Action Button */}
+          <div className="container project-cta-content-wrap">
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+              <div className="project-cta-eyebrow">
+                <span>MOVE IN SOON • ROYAPETTAH, CHENNAI</span>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.2}>
+              <h2 className="project-cta-title">
+                Experience True Luxury.
+              </h2>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.3}>
+              <p className="project-cta-subtitle">
+                Experience the pinnacle of luxury living in the heart of Royapettah. Secure your legacy today.
+              </p>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.4}>
+              <div className="project-cta-btn-wrap">
+                <button
+                  type="button"
+                  onClick={() => setIsQuoteOpen(true)}
+                  className="btn-cta-enquire"
+                >
+                  ENQUIRE NOW
+                </button>
+              </div>
+            </ScrollReveal>
+          </div>
         </section>
       </main>
 
       {/* Floor Plan Lightbox Modal */}
       {floorplanLightbox && (
-        <div className="lightbox-overlay" onClick={() => setFloorplanLightbox(null)} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '40px', boxSizing: 'border-box' }}>
+        <div
+          className="lightbox-overlay"
+          data-lenis-prevent
+          onClick={() => setFloorplanLightbox(null)}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '24px 32px 20px',
+            boxSizing: 'border-box',
+            overflow: 'hidden'
+          }}
+        >
           <button className="lightbox-close-btn" onClick={() => setFloorplanLightbox(null)}>
             <X size={24} />
           </button>
@@ -1779,76 +1939,80 @@ export default function PashaPinnacle({ project = 'pasha' }) {
             </>
           )}
 
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-            <img
-              src={floorplanLightbox.image}
-              alt={floorplanLightbox.name}
-              style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain', borderRadius: '8px' }}
-            />
-          </div>
-
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
+              flex: '1 1 0',
+              minHeight: 0,
               width: '100%',
-              maxWidth: '900px',
-              margin: '20px auto',
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              borderRadius: '16px',
-              padding: '14px 20px',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
-              color: '#ffffff',
-              boxSizing: 'border-box'
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden'
             }}
           >
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: '400', color: '#b48564', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 16px 0' }}>
-              {floorplanLightbox.name}
-            </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
-              <div>
-                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Saleable Area</span>
-                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.saleableArea || floorplanLightbox.builtUp}</span>
-              </div>
-              <div>
-                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Rera Carpet Area</span>
-                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.reraCarpetArea || floorplanLightbox.builtUp}</span>
-              </div>
-              <div>
-                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>UDS</span>
-                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.uds || floorplanLightbox.plot}</span>
-              </div>
-              <div>
-                <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Facing</span>
-                <span style={{ fontSize: '16px', fontWeight: '500' }}>{floorplanLightbox.facing}</span>
+            <img
+              src={floorplanLightbox.image}
+              alt={floorplanLightbox.name || ''}
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain',
+                borderRadius: '8px'
+              }}
+            />
+          </div>
+
+          {(floorplanLightbox.saleableArea || floorplanLightbox.builtUp || floorplanLightbox.reraCarpetArea) && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                width: '100%',
+                maxWidth: '900px',
+                flexShrink: 0,
+                marginTop: '12px',
+                marginBottom: '0',
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                borderRadius: '16px',
+                padding: '12px 20px',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+                color: '#ffffff',
+                boxSizing: 'border-box'
+              }}
+            >
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '20px', fontWeight: '400', color: '#b48564', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 10px 0' }}>
+                {floorplanLightbox.name}
+              </h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+                <div>
+                  <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '2px' }}>Saleable Area</span>
+                  <span style={{ fontSize: '15px', fontWeight: '500' }}>{floorplanLightbox.saleableArea || floorplanLightbox.builtUp}</span>
+                </div>
+                <div>
+                  <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '2px' }}>Rera Carpet Area</span>
+                  <span style={{ fontSize: '15px', fontWeight: '500' }}>{floorplanLightbox.reraCarpetArea || floorplanLightbox.builtUp}</span>
+                </div>
+                <div>
+                  <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '2px' }}>UDS</span>
+                  <span style={{ fontSize: '15px', fontWeight: '500' }}>{floorplanLightbox.uds || floorplanLightbox.plot}</span>
+                </div>
+                <div>
+                  <span style={{ display: 'block', fontSize: '10px', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '2px' }}>Facing</span>
+                  <span style={{ fontSize: '15px', fontWeight: '500' }}>{floorplanLightbox.facing}</span>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
-      {/* Lightbox Modal */}
-      {lightboxImage && (
-        <div className="lightbox-overlay" onClick={() => setLightboxImage(null)}>
-          <button className="lightbox-close-btn" onClick={() => setLightboxImage(null)}>
-            <X size={24} />
-          </button>
-          <button className="lightbox-arrow-btn prev" onClick={(e) => { e.stopPropagation(); handleLightboxPrev(); }}>
-            <ChevronLeft size={24} />
-          </button>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <img src={lightboxImage.src} alt={lightboxImage.title} className="lightbox-img" />
-            <span className="lightbox-title">{lightboxImage.title}</span>
-          </div>
-          <button className="lightbox-arrow-btn next" onClick={(e) => { e.stopPropagation(); handleLightboxNext(); }}>
-            <ChevronRight size={24} />
-          </button>
+          )}
         </div>
       )}
       {/* Video Modal */}
       {isVideoOpen && (
-        <div className="lightbox-overlay" onClick={() => setIsVideoOpen(false)}>
+        <div className="lightbox-overlay" data-lenis-prevent onClick={() => setIsVideoOpen(false)}>
           <button className="lightbox-close-btn" onClick={() => setIsVideoOpen(false)}>
             <X size={24} />
           </button>
@@ -1875,87 +2039,114 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           </div>
         </div>
       )}
-      {/* Brochure Download Modal */}
+      {/* Full-Screen Luxury Brochure Modal */}
       {isBrochureOpen && (
-        <div className="modal-overlay" onClick={() => setIsBrochureOpen(false)}>
-          <div className="modal-content-card split-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-image-panel brochure-panel">
-              <div className="modal-image-overlay">
-                <span className="modal-image-badge">E-BROCHURE & SPECS</span>
-                <h3>Pasha Pinnacle</h3>
-                <p>Ultra-Luxury Residences in Royapettah</p>
+        <div className="fs-popup-overlay" data-lenis-prevent onClick={() => setIsBrochureOpen(false)}>
+          {/* Top Bar with Logo & Close */}
+          <div className="fs-popup-topbar">
+            <img
+              src="/images/white-logo.png"
+              alt="Aadhithya Mohan Properties"
+              className="fs-popup-logo"
+            />
+            <button
+              className="fs-popup-close-btn"
+              onClick={() => setIsBrochureOpen(false)}
+              aria-label="Close modal"
+            >
+              <X size={20} strokeWidth={2.2} />
+            </button>
+          </div>
+
+          <div className="fs-popup-split" onClick={(e) => e.stopPropagation()}>
+            {/* Left 50%: Full-Height Edge-to-Edge Project Image */}
+            <div className="fs-popup-image-half">
+              <img
+                src="/images/project/pasha-pinnacle/hero.webp"
+                alt="Pasha Pinnacle"
+                className="fs-popup-bg-img"
+              />
+              <div className="fs-popup-img-overlay">
+                <span className="fs-popup-kicker">OFFICIAL E-BROCHURE</span>
+                <h2 className="fs-popup-project-title">Pasha Pinnacle</h2>
+                <p className="fs-popup-project-sub">Ultra-Luxury Residences • Royapettah, Chennai</p>
+                <div className="fs-popup-chips">
+                  <span className="fs-popup-chip">3 BHK Residences</span>
+                  <span className="fs-popup-chip">G + 3 Floors</span>
+                  <span className="fs-popup-chip">12 Exclusive Units</span>
+                  <span className="fs-popup-chip">1,335 – 1,358 Sq.Ft.</span>
+                </div>
               </div>
             </div>
 
-            <div className="modal-form-panel">
-              <button className="modal-close-btn" onClick={() => setIsBrochureOpen(false)} aria-label="Close modal">
-                <X size={18} />
-              </button>
+            {/* Right 50%: Full-Height Luxury Form Panel */}
+            <div className="fs-popup-form-half">
+              <div className="fs-form-inner">
+                <span className="fs-form-badge">INSTANT ACCESS</span>
+                <h3 className="fs-form-title">DOWNLOAD E-BROCHURE</h3>
+                <p className="fs-form-subtitle">Enter your contact details to receive the official e-brochure immediately.</p>
 
-              <div className="modal-header-block-light">
-                <h3 className="modal-heading-light">DOWNLOAD BROCHURE</h3>
-                <p className="modal-subheading-light">Get instant access to complete floor plans, project specifications & pricing details.</p>
-              </div>
-
-              <div className="modal-body-light">
                 {brochureSubmitted ? (
-                  <div className="form-success-message">
-                    <CheckCircle2 size={48} className="success-icon-gold" />
-                    <h4>Brochure Request Submitted</h4>
-                    <p>We've dispatched the official e-brochure to your email and WhatsApp.</p>
+                  <div className="fw-success-box">
+                    <CheckCircle2 size={54} className="fw-success-gold" />
+                    <h4>Brochure Dispatched!</h4>
+                    <p>The comprehensive e-brochure and floor plans have been dispatched to your email and WhatsApp.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleBrochureSubmit} className="modal-inquiry-form-new">
-                    {/* Name Row */}
-                    <div className="form-row-2">
-                      <div className="form-group-outline">
-                        <input type="text" placeholder="First Name *" required value={brochureForm.firstName} onChange={e => setBrochureForm({ ...brochureForm, firstName: e.target.value })} />
-                      </div>
-                      <div className="form-group-outline">
-                        <input type="text" placeholder="Last Name *" required value={brochureForm.lastName} onChange={e => setBrochureForm({ ...brochureForm, lastName: e.target.value })} />
-                      </div>
+                  <form onSubmit={handleBrochureSubmit} className="fs-form-fields">
+                    <input
+                      type="text"
+                      placeholder="Your Name *"
+                      required
+                      className="fs-input-box"
+                      value={brochureForm.name || brochureForm.firstName || ''}
+                      onChange={e => setBrochureForm({ ...brochureForm, name: e.target.value, firstName: e.target.value })}
+                    />
+
+                    <div className="fs-phone-group">
+                      <select
+                        value={brochureForm.phoneCode}
+                        onChange={e => setBrochureForm({ ...brochureForm, phoneCode: e.target.value })}
+                        className="fs-phone-code"
+                      >
+                        <option value="+91">IN +91</option>
+                        <option value="+1">US +1</option>
+                        <option value="+44">UK +44</option>
+                        <option value="+971">AE +971</option>
+                        <option value="+65">SG +65</option>
+                      </select>
+                      <input
+                        type="tel"
+                        placeholder="Phone Number *"
+                        required
+                        className="fs-input-box fs-phone-input"
+                        value={brochureForm.phone}
+                        onChange={e => setBrochureForm({ ...brochureForm, phone: e.target.value })}
+                      />
                     </div>
 
-                    {/* Phone Row */}
-                    <div className="form-row-phone">
-                      <div className="form-group-outline phone-code">
-                        <select value={brochureForm.phoneCode} onChange={e => setBrochureForm({ ...brochureForm, phoneCode: e.target.value })}>
-                          <option value="+91">IN +91</option>
-                          <option value="+1">US +1</option>
-                          <option value="+44">UK +44</option>
-                          <option value="+971">AE +971</option>
-                        </select>
-                      </div>
-                      <div className="form-group-outline phone-number">
-                        <input type="tel" placeholder="Phone Number *" required value={brochureForm.phone} onChange={e => setBrochureForm({ ...brochureForm, phone: e.target.value })} />
-                      </div>
-                    </div>
+                    <input
+                      type="email"
+                      placeholder="Email Address *"
+                      required
+                      className="fs-input-box"
+                      value={brochureForm.email}
+                      onChange={e => setBrochureForm({ ...brochureForm, email: e.target.value })}
+                    />
 
-                    {/* Email & Config Row */}
-                    <div className="form-row-2">
-                      <div className="form-group-outline">
-                        <input type="email" placeholder="Email Address *" required value={brochureForm.email} onChange={e => setBrochureForm({ ...brochureForm, email: e.target.value })} />
-                      </div>
-                      <div className="form-group-outline">
-                        <select value={brochureForm.config} onChange={e => setBrochureForm({ ...brochureForm, config: e.target.value })}>
-                          <option value="3 BHK Villa">3 BHK Villa</option>
-                          <option value="4 BHK Villa">4 BHK Villa</option>
-                        </select>
-                      </div>
-                    </div>
+                    <label className="fs-checkbox-row">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={brochureForm.privacy}
+                        onChange={e => setBrochureForm({ ...brochureForm, privacy: e.target.checked })}
+                      />
+                      <span>I agree to the <a href="#privacy" style={{ color: '#d8b28a', textDecoration: 'underline' }}>privacy policy</a> & authorize developer communication. *</span>
+                    </label>
 
-                    {/* Checkboxes */}
-                    <div className="form-checkbox-group">
-                      <label className="checkbox-label">
-                        <input type="checkbox" required checked={brochureForm.privacy} onChange={e => setBrochureForm({ ...brochureForm, privacy: e.target.checked })} />
-                        <span className="checkbox-custom"></span>
-                        <span>I've read and agree to the <a href="#privacy" style={{ color: '#b48564', textDecoration: 'underline' }}>privacy policy. *</a></span>
-                      </label>
-                    </div>
-
-                    <Button type="submit" theme="dark" style={{ width: '100%', marginTop: '8px', padding: '16px' }}>
+                    <button type="submit" className="fs-gold-button">
                       DOWNLOAD E-BROCHURE
-                    </Button>
+                    </button>
                   </form>
                 )}
               </div>
@@ -1964,121 +2155,172 @@ export default function PashaPinnacle({ project = 'pasha' }) {
         </div>
       )}
 
-      {/* Quote / Schedule Booking Modal */}
+      {/* Full-Screen Luxury Quote / Schedule Booking Modal */}
       {isQuoteOpen && (
-        <div className="modal-overlay" onClick={() => setIsQuoteOpen(false)}>
-          <div className="modal-content-card split-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-image-panel">
-              <div className="modal-image-overlay">
-                <span className="modal-image-badge">SCHEDULE VISIT</span>
-                <h3>Pasha Pinnacle</h3>
-                <p>Ultra-Luxury Residences in Royapettah</p>
+        <div className="fs-popup-overlay" data-lenis-prevent onClick={() => setIsQuoteOpen(false)}>
+          {/* Top Bar with Logo & Close */}
+          <div className="fs-popup-topbar">
+            <img
+              src="/images/white-logo.png"
+              alt="Aadhithya Mohan Properties"
+              className="fs-popup-logo"
+            />
+            <button
+              className="fs-popup-close-btn"
+              onClick={() => setIsQuoteOpen(false)}
+              aria-label="Close modal"
+            >
+              <X size={20} strokeWidth={2.2} />
+            </button>
+          </div>
+
+          <div className="fs-popup-split" onClick={(e) => e.stopPropagation()}>
+            {/* Left 50%: Full-Height Edge-to-Edge Project Image */}
+            <div className="fs-popup-image-half">
+              <img
+                src="/images/project/pasha-pinnacle/hero.png"
+                alt="Pasha Pinnacle Overview"
+                className="fs-popup-bg-img"
+              />
+              <div className="fs-popup-img-overlay">
+                <span className="fs-popup-kicker">SCHEDULE A PRIVATE VISIT</span>
+                <h2 className="fs-popup-project-title">Pasha Pinnacle</h2>
+                <p className="fs-popup-project-sub">Ultra-Luxury Residences • Royapettah, Chennai</p>
+                <div className="fs-popup-chips">
+                  <span className="fs-popup-chip">3 BHK Residences</span>
+                  <span className="fs-popup-chip">G + 3 Floors</span>
+                  <span className="fs-popup-chip">12 Exclusive Units</span>
+                  <span className="fs-popup-chip">1,335 – 1,358 Sq.Ft.</span>
+                </div>
               </div>
             </div>
 
-            <div className="modal-form-panel">
-              <button className="modal-close-btn" onClick={() => setIsQuoteOpen(false)} aria-label="Close modal">
-                <X size={18} />
-              </button>
+            {/* Right 50%: Full-Height Luxury Form Panel */}
+            <div className="fs-popup-form-half">
+              <div className="fs-form-inner">
+                <span className="fs-form-badge">PRIVATE APPOINTMENT</span>
+                <h3 className="fs-form-title">SCHEDULE A VISIT</h3>
+                <p className="fs-form-subtitle">Choose your consultation preference and contact mode.</p>
 
-              <div className="modal-header-block-light">
-                <h3 className="modal-heading-light">SCHEDULE A VISIT & ENQUIRE</h3>
-                <p className="modal-subheading-light">Experience premium luxury in person or connect with our dedicated property specialists.</p>
-              </div>
-
-              <div className="modal-body-light">
                 {formSubmitted ? (
-                  <div className="form-success-message">
-                    <CheckCircle2 size={48} className="success-icon-gold" />
-                    <h4>Inquiry Received Successfully</h4>
-                    <p>One of our client service executives will contact you shortly.</p>
+                  <div className="fw-success-box">
+                    <CheckCircle2 size={54} className="fw-success-gold" />
+                    <h4>Inquiry Received!</h4>
+                    <p>One of our senior client advisors will reach out shortly to confirm your scheduled appointment.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleFormSubmit} className="modal-inquiry-form-new">
-                    {/* Preferred Mode of Contact */}
-                    <div className="form-radio-group">
-                      <label className="form-label-top">Preferred Mode of Contact *</label>
-                      <div className="radio-options">
-                        <label className="radio-label">
-                          <input
-                            type="radio"
-                            name="contactMode"
-                            value="callback"
-                            checked={quoteForm.contactMode === 'callback'}
-                            onChange={(e) => setQuoteForm({ ...quoteForm, contactMode: e.target.value })}
-                          />
-                          <span className="radio-custom"></span>
-                          Request a call back
-                        </label>
-                        <label className="radio-label">
-                          <input
-                            type="radio"
-                            name="contactMode"
-                            value="videocall"
-                            checked={quoteForm.contactMode === 'videocall'}
-                            onChange={(e) => setQuoteForm({ ...quoteForm, contactMode: e.target.value })}
-                          />
-                          <span className="radio-custom"></span>
-                          Schedule a video call
-                        </label>
-                      </div>
-                    </div>
-
-                    {/* Name Row */}
-                    <div className="form-row-2">
-                      <div className="form-group-outline">
-                        <input type="text" placeholder="First Name *" required value={quoteForm.firstName} onChange={e => setQuoteForm({ ...quoteForm, firstName: e.target.value })} />
-                      </div>
-                      <div className="form-group-outline">
-                        <input type="text" placeholder="Last Name *" required value={quoteForm.lastName} onChange={e => setQuoteForm({ ...quoteForm, lastName: e.target.value })} />
-                      </div>
-                    </div>
-
-                    {/* Phone Row */}
-                    <div className="form-row-phone">
-                      <div className="form-group-outline phone-code">
-                        <select value={quoteForm.phoneCode} onChange={e => setQuoteForm({ ...quoteForm, phoneCode: e.target.value })}>
-                          <option value="+91">IN +91</option>
-                          <option value="+1">US +1</option>
-                          <option value="+44">UK +44</option>
-                          <option value="+971">AE +971</option>
-                        </select>
-                      </div>
-                      <div className="form-group-outline phone-number">
-                        <input type="tel" placeholder="Phone Number *" required value={quoteForm.phone} onChange={e => setQuoteForm({ ...quoteForm, phone: e.target.value })} />
-                      </div>
-                    </div>
-
-                    {/* Email & Config Row */}
-                    <div className="form-row-2">
-                      <div className="form-group-outline">
-                        <input type="email" placeholder="Email Address *" required value={quoteForm.email} onChange={e => setQuoteForm({ ...quoteForm, email: e.target.value })} />
-                      </div>
-                      <div className="form-group-outline">
-                        <select value={quoteForm.config} onChange={e => setQuoteForm({ ...quoteForm, config: e.target.value })}>
-                          <option value="3 BHK Villa">3 BHK Villa</option>
-                          <option value="4 BHK Villa">4 BHK Villa</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* Checkboxes */}
-                    <div className="form-checkbox-group">
-                      <label className="checkbox-label">
-                        <input type="checkbox" required checked={quoteForm.privacy} onChange={e => setQuoteForm({ ...quoteForm, privacy: e.target.checked })} />
-                        <span className="checkbox-custom"></span>
-                        <span>I've read and agree to the <a href="#privacy" style={{ color: '#b48564', textDecoration: 'underline' }}>privacy policy. *</a></span>
+                  <form onSubmit={handleFormSubmit} className="fs-form-fields">
+                    <div className="fs-radio-row">
+                      <label className="fs-radio-label">
+                        <input
+                          type="radio"
+                          name="contactMode"
+                          value="callback"
+                          checked={quoteForm.contactMode === 'callback'}
+                          onChange={(e) => setQuoteForm({ ...quoteForm, contactMode: e.target.value })}
+                        />
+                        Request a call back
                       </label>
-                      <label className="checkbox-label">
-                        <input type="checkbox" checked={quoteForm.updates} onChange={e => setQuoteForm({ ...quoteForm, updates: e.target.checked })} />
-                        <span className="checkbox-custom"></span>
-                        <span>I'd like to receive priority project updates and offers.</span>
+                      <label className="fs-radio-label">
+                        <input
+                          type="radio"
+                          name="contactMode"
+                          value="videocall"
+                          checked={quoteForm.contactMode === 'videocall'}
+                          onChange={(e) => setQuoteForm({ ...quoteForm, contactMode: e.target.value })}
+                        />
+                        Schedule a video call
                       </label>
                     </div>
 
-                    <Button type="submit" theme="dark" style={{ width: '100%', marginTop: '8px', padding: '16px' }}>
-                      REQUEST PRICING & SITE VISIT
-                    </Button>
+                    {/* When are you planning to visit site */}
+                    <div className="fs-field-group">
+                      <label className="fs-field-label">When are you coming to visit the site? *</label>
+                      <div className="fs-config-pill-grid">
+                        <button
+                          type="button"
+                          className={`fs-config-pill ${quoteForm.visitTimeline !== 'this-month' ? 'active' : ''}`}
+                          onClick={() => setQuoteForm({ ...quoteForm, visitTimeline: 'this-week' })}
+                        >
+                          <span className="fs-config-pill-main">This Week</span>
+                        </button>
+                        <button
+                          type="button"
+                          className={`fs-config-pill ${quoteForm.visitTimeline === 'this-month' ? 'active' : ''}`}
+                          onClick={() => setQuoteForm({ ...quoteForm, visitTimeline: 'this-month' })}
+                        >
+                          <span className="fs-config-pill-main">This Month</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Configuration */}
+                    <div className="fs-field-group">
+                      <label className="fs-field-label">Configuration *</label>
+                      <div className="fs-config-pill-grid single-pill">
+                        <button
+                          type="button"
+                          className="fs-config-pill active"
+                          onClick={() => setQuoteForm({ ...quoteForm, config: '3 BHK' })}
+                        >
+                          <span className="fs-config-pill-main">3 BHK</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <input
+                      type="text"
+                      placeholder="Your Name *"
+                      required
+                      className="fs-input-box"
+                      value={quoteForm.name || quoteForm.firstName || ''}
+                      onChange={e => setQuoteForm({ ...quoteForm, name: e.target.value, firstName: e.target.value })}
+                    />
+
+                    <div className="fs-phone-group">
+                      <select
+                        value={quoteForm.phoneCode}
+                        onChange={e => setQuoteForm({ ...quoteForm, phoneCode: e.target.value })}
+                        className="fs-phone-code"
+                      >
+                        <option value="+91">IN +91</option>
+                        <option value="+1">US +1</option>
+                        <option value="+44">UK +44</option>
+                        <option value="+971">AE +971</option>
+                        <option value="+65">SG +65</option>
+                      </select>
+                      <input
+                        type="tel"
+                        placeholder="Phone Number *"
+                        required
+                        className="fs-input-box fs-phone-input"
+                        value={quoteForm.phone || quoteForm.phoneNumber || ''}
+                        onChange={e => setQuoteForm({ ...quoteForm, phone: e.target.value, phoneNumber: e.target.value })}
+                      />
+                    </div>
+
+                    <input
+                      type="email"
+                      placeholder="Email Address *"
+                      required
+                      className="fs-input-box"
+                      value={quoteForm.email}
+                      onChange={e => setQuoteForm({ ...quoteForm, email: e.target.value })}
+                    />
+
+                    <label className="fs-checkbox-row">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={quoteForm.privacy}
+                        onChange={e => setQuoteForm({ ...quoteForm, privacy: e.target.checked })}
+                      />
+                      <span>I've read and agree to the <a href="#privacy" style={{ color: '#d8b28a', textDecoration: 'underline' }}>privacy policy. *</a></span>
+                    </label>
+
+                    <button type="submit" className="fs-gold-button">
+                      CONFIRM VISIT REQUEST
+                    </button>
                   </form>
                 )}
               </div>
@@ -2487,6 +2729,46 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           width: 100%;
           height: 100%;
           z-index: 1;
+        }
+
+        .hero-video-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+
+        .hero-bg-video {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          min-width: 100%;
+          min-height: 100%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center bottom;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+        }
+
+        .desktop-only-video {
+          display: block;
+        }
+
+        .mobile-only-video {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .desktop-only-video {
+            display: none !important;
+          }
+          .mobile-only-video {
+            display: block !important;
+          }
         }
 
         .project-hero-picture {
@@ -3703,33 +3985,45 @@ export default function PashaPinnacle({ project = 'pasha' }) {
         .lightbox-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(6, 11, 29, 0.95);
-          z-index: 1000;
+          background: rgba(3, 7, 16, 0.96);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          z-index: 99999 !important;
           display: flex;
           align-items: center;
           justify-content: center;
+          overscroll-behavior: contain;
+          touch-action: none;
         }
         .lightbox-close-btn {
           position: absolute;
-          top: 30px;
-          right: 30px;
-          color: var(--color-white);
-          background: transparent;
-          border: none;
+          top: 24px;
+          right: 28px;
+          color: #ffffff;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
-          transition: color 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           z-index: 1010;
         }
         .lightbox-close-btn:hover {
-          color: var(--color-primary);
+          background: #b48564;
+          border-color: #b48564;
+          transform: rotate(90deg) scale(1.08);
         }
         .lightbox-arrow-btn {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
           color: var(--color-white);
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           width: 50px;
           height: 50px;
           border-radius: 50%;
@@ -3741,341 +4035,453 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           z-index: 1010;
         }
         .lightbox-arrow-btn:hover {
-          background: var(--color-primary);
-          border-color: var(--color-primary);
+          background: #b48564;
+          border-color: #b48564;
         }
-        .lightbox-arrow-btn.prev { left: 40px; }
-        .lightbox-arrow-btn.next { right: 40px; }
+        .lightbox-arrow-btn.prev { left: 32px; }
+        .lightbox-arrow-btn.next { right: 32px; }
         .lightbox-content {
-          max-width: 80%;
-          max-height: 80%;
+          max-width: 90vw;
+          max-height: 90vh;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 15px;
+          justify-content: center;
           position: relative;
         }
         .lightbox-img {
-          max-width: 100%;
-          max-height: 70vh;
+          max-width: 90vw;
+          max-height: 88vh;
           object-fit: contain;
-          border-radius: 6px;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-        .lightbox-title {
-          font-size: 18px;
-          color: var(--color-white);
-          text-align: center;
+          border-radius: 8px;
+          box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
         }
         /* Video Iframe container inside overlay */
         .video-modal-content {
-          width: 80%;
-          max-width: 800px;
+          width: 85%;
           aspect-ratio: 16/9;
-          border-radius: 12px;
           overflow: hidden;
-          background: var(--color-bg-navy);
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+          background: #02050b;
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
         }
         .video-iframe {
           width: 100%;
           height: 100%;
         }
-        /* Inquiry booking Form Modal styling */
-        .modal-overlay {
+
+        /* ── FULL SCREEN LUXURY POPUP TAKEOVER ── */
+        .fs-popup-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.78);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          z-index: 99999 !important;
+          width: 100vw;
+          height: 100vh;
+          z-index: 999999 !important;
+          background: #050a14;
           display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px;
-        }
-        .modal-content-card {
-          background: var(--color-white);
-          border-radius: 12px;
-          width: 96vw;
-          max-width: 1360px; /* Full width luxury popup */
-          position: relative;
-          box-shadow: 0 35px 80px rgba(0, 0, 0, 0.45);
-          animation: modalEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           overflow: hidden;
-          padding: 0;
-          display: flex;
-          min-height: 560px;
+          animation: fsFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        @keyframes modalEntrance {
-          from { opacity: 0; transform: translateY(20px) scale(0.96); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        /* Left Image Panel */
-        .modal-image-panel {
-          flex: 1.05;
-          background: url('/images/project/pasha-pinnacle/hero.png') center/cover no-repeat;
-          position: relative;
-          display: flex;
-          align-items: flex-end;
-          padding: 48px 40px;
-        }
-        .modal-image-panel.brochure-panel {
-          background: url('/images/project/pasha-pinnacle/card.png') center/cover no-repeat;
-        }
-        .modal-image-panel::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.2) 60%, transparent 100%);
-        }
-        .modal-image-overlay {
-          position: relative;
-          z-index: 2;
-          color: #ffffff;
-        }
-        .modal-image-overlay h3 {
-          font-family: var(--font-heading);
-          font-size: clamp(26px, 2.5vw, 36px);
-          font-weight: 400;
-          margin: 0 0 6px 0;
-          color: #fff;
-          letter-spacing: 0.02em;
-        }
-        .modal-image-overlay p {
-          font-family: var(--font-sans);
-          font-size: 14px;
-          opacity: 0.9;
-          margin: 0;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          color: #fff;
-        }
-        .modal-image-badge {
-          display: inline-block;
-          padding: 5px 12px;
-          background: rgba(180, 133, 100, 0.92);
-          color: #fff;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          border-radius: 4px;
-          margin-bottom: 12px;
-        }
-        
-        /* Right Form Panel */
-        .modal-form-panel {
-          flex: 1.35;
-          display: flex;
-          flex-direction: column;
-          background: #ffffff;
-          position: relative;
-          max-height: 88vh;
-          overflow-y: auto;
+        @keyframes fsFadeIn {
+          from { opacity: 0; transform: scale(0.99); }
+          to { opacity: 1; transform: scale(1); }
         }
 
-        /* Light Header */
-        .modal-header-block-light {
-          padding: 40px 40px 24px;
-          text-align: left;
-        }
-        .modal-heading-light {
-          font-family: var(--font-heading);
-          font-size: 26px;
-          font-weight: 400;
-          color: #111111;
-          margin-bottom: 8px;
-          letter-spacing: 0.02em;
-        }
-        .modal-subheading-light {
-          font-family: var(--font-sans);
-          font-size: 14px;
-          color: rgba(0, 0, 0, 0.6);
-          margin: 0;
-        }
-        .modal-close-btn {
+        .fs-popup-topbar {
           position: absolute;
-          top: 16px;
-          right: 16px;
-          background: transparent;
-          border: none;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 40px;
+          z-index: 30;
+          pointer-events: none;
+        }
+        .fs-popup-logo {
+          height: 38px;
+          width: auto;
+          object-fit: contain;
+          pointer-events: auto;
+        }
+        .fs-popup-close-btn {
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
-          width: 34px;
-          height: 34px;
+          background: rgba(10, 16, 28, 0.65);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgba(0,0,0,0.4);
           cursor: pointer;
-          z-index: 10;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          pointer-events: auto;
+          transition: all 0.3s ease;
         }
-        .modal-close-btn:hover {
-          color: #111111;
-          transform: rotate(90deg);
+        .fs-popup-close-btn:hover {
+          background: #b48564;
+          border-color: #b48564;
+          transform: rotate(90deg) scale(1.05);
         }
-        
-        .modal-body-light {
-          padding: 0 40px 40px;
+
+        .fs-popup-split {
+          display: flex;
+          width: 100%;
+          height: 100%;
         }
-        
-        /* New Form Styles */
-        .modal-inquiry-form-new {
+
+        /* Left Half: Full-Bleed 100vh Image */
+        .fs-popup-image-half {
+          flex: 1 1 52%;
+          position: relative;
+          height: 100%;
+          overflow: hidden;
+          background: #030712;
+        }
+        .fs-popup-bg-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fs-popup-image-half:hover .fs-popup-bg-img {
+          transform: scale(1.03);
+        }
+        .fs-popup-img-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg, 
+            rgba(5, 10, 20, 0.75) 0%, 
+            rgba(5, 10, 20, 0.1) 40%, 
+            rgba(5, 10, 20, 0.85) 80%, 
+            rgba(5, 10, 20, 0.98) 100%
+          );
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          justify-content: flex-end;
+          padding: 60px clamp(30px, 5vw, 60px);
+          z-index: 2;
+          box-sizing: border-box;
         }
-        .form-radio-group {
+        .fs-popup-kicker {
+          display: inline-block;
+          font-family: var(--font-sans);
+          font-size: 11px;
+          letter-spacing: 0.22em;
+          color: #d8b28a;
+          font-weight: 600;
+          text-transform: uppercase;
+          background: rgba(180, 133, 100, 0.2);
+          border: 1px solid rgba(180, 133, 100, 0.4);
+          padding: 5px 14px;
+          border-radius: 100px;
+          backdrop-filter: blur(8px);
+          margin-bottom: 16px;
+          align-self: flex-start;
+        }
+        .fs-popup-project-title {
+          font-family: var(--font-heading);
+          font-size: clamp(32px, 3.2vw, 48px);
+          color: #ffffff;
+          margin: 0 0 8px 0;
+          font-weight: 400;
+          letter-spacing: 0.02em;
+          line-height: 1.1;
+        }
+        .fs-popup-project-sub {
+          font-family: var(--font-sans);
+          font-size: 14.5px;
+          color: rgba(255, 255, 255, 0.8);
+          margin: 0 0 16px 0;
+          letter-spacing: 0.02em;
+        }
+        .fs-popup-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .fs-popup-chip {
+          font-family: var(--font-sans);
+          font-size: 11.5px;
+          color: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          backdrop-filter: blur(8px);
+          padding: 4px 12px;
+          border-radius: 6px;
+        }
+
+        /* Right Half: Full-Bleed 100vh Form Panel */
+        .fs-popup-form-half {
+          flex: 1 1 48%;
+          position: relative;
+          height: 100%;
+          background: radial-gradient(circle at 100% 0%, rgba(180, 133, 100, 0.12) 0%, transparent 60%), #070d18;
+          border-left: 1px solid rgba(180, 133, 100, 0.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 80px clamp(30px, 6vw, 70px) 40px;
+          box-sizing: border-box;
+          overflow-y: auto;
+        }
+        .fs-form-inner {
+          width: 100%;
+          max-width: 480px;
+        }
+        .fs-form-badge {
+          display: inline-block;
+          padding: 4px 11px;
+          background: rgba(180, 133, 100, 0.18);
+          border: 1px solid rgba(180, 133, 100, 0.35);
+          border-radius: 4px;
+          font-size: 10.5px;
+          letter-spacing: 0.16em;
+          color: #d8b28a;
+          font-weight: 600;
+          text-transform: uppercase;
+          margin-bottom: 12px;
+        }
+        .fs-form-title {
+          font-family: var(--font-heading);
+          font-size: clamp(26px, 2.2vw, 34px);
+          color: #ffffff;
+          font-weight: 400;
+          margin: 0 0 8px 0;
+          letter-spacing: 0.02em;
+        }
+        .fs-form-subtitle {
+          font-family: var(--font-sans);
+          font-size: 13.5px;
+          color: rgba(255, 255, 255, 0.65);
+          margin: 0 0 24px 0;
+          line-height: 1.45;
+        }
+        .fs-form-fields {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 16px;
         }
-        .form-label-top {
+        .fs-field-group {
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+        }
+        .fs-field-label {
+          font-family: var(--font-sans);
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: rgba(255, 255, 255, 0.7);
+        }
+        .fs-config-pill-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .fs-config-pill-grid.single-pill {
+          grid-template-columns: 1fr;
+        }
+        .fs-config-pill {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 3px;
+          padding: 10px 14px;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          border-radius: 8px;
+          cursor: pointer;
+          text-align: left;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fs-config-pill:hover {
+          border-color: rgba(216, 178, 138, 0.5);
+          background: rgba(255, 255, 255, 0.07);
+        }
+        .fs-config-pill.active {
+          border-color: #b48564;
+          background: linear-gradient(135deg, rgba(180, 133, 100, 0.2) 0%, rgba(216, 178, 138, 0.08) 100%);
+          box-shadow: 0 0 16px rgba(180, 133, 100, 0.25);
+        }
+        .fs-config-pill-main {
           font-family: var(--font-sans);
           font-size: 13px;
           font-weight: 600;
-          color: rgba(0,0,0,0.6);
+          color: #ffffff;
+          letter-spacing: 0.02em;
         }
-        .radio-options {
+        .fs-config-pill.active .fs-config-pill-main {
+          color: #d8b28a;
+        }
+        .fs-config-pill-sub {
+          font-family: var(--font-sans);
+          font-size: 11px;
+          color: rgba(255, 255, 255, 0.55);
+        }
+        .fs-config-pill.active .fs-config-pill-sub {
+          color: rgba(255, 255, 255, 0.85);
+        }
+        .fs-input-box {
+          width: 100%;
+          padding: 14px 16px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          border-radius: 8px;
+          font-family: var(--font-sans);
+          font-size: 14px;
+          color: #ffffff;
+          outline: none;
+          transition: all 0.25s ease;
+          box-sizing: border-box;
+        }
+        .fs-input-box:focus {
+          border-color: #b48564;
+          background: rgba(255, 255, 255, 0.09);
+          box-shadow: 0 0 16px rgba(180, 133, 100, 0.3);
+        }
+        .fs-phone-group {
+          display: flex;
+          gap: 12px;
+        }
+        .fs-phone-code {
+          flex: 0 0 100px;
+          padding: 14px 12px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          border-radius: 8px;
+          font-family: var(--font-sans);
+          font-size: 14px;
+          color: #ffffff;
+          outline: none;
+          cursor: pointer;
+          color-scheme: dark;
+          box-sizing: border-box;
+        }
+        .fs-phone-code option {
+          background: #080f1d;
+          color: #ffffff;
+        }
+        .fs-phone-input {
+          flex: 1;
+        }
+        .fs-radio-row {
           display: flex;
           gap: 24px;
+          margin-bottom: 2px;
         }
-        .radio-label {
+        .fs-radio-label {
           display: flex;
           align-items: center;
           gap: 8px;
-          font-size: 14px;
-          color: #111111;
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.85);
           cursor: pointer;
         }
-        .radio-label input[type="radio"] {
-          display: none;
+        .fs-radio-label input {
+          accent-color: #b48564;
+          cursor: pointer;
         }
-        .radio-custom {
-          width: 16px;
-          height: 16px;
-          border: 1px solid rgba(0,0,0,0.3);
-          border-radius: 50%;
-          position: relative;
-          display: inline-block;
-          transition: all 0.2s ease;
-        }
-        .radio-label input[type="radio"]:checked + .radio-custom {
-          border-color: #b48564;
-        }
-        .radio-label input[type="radio"]:checked + .radio-custom::after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 8px;
-          height: 8px;
-          background: #b48564;
-          border-radius: 50%;
-        }
-        .form-row-2 {
-          display: flex;
-          gap: 16px;
-        }
-        .form-row-phone {
-          display: flex;
-          gap: 16px;
-        }
-        .phone-code {
-          flex: 0 0 100px;
-        }
-        .phone-number {
-          flex: 1;
-        }
-        .form-group-outline {
-          flex: 1;
-        }
-        .form-group-outline input, .form-group-outline select {
-          width: 100%;
-          padding: 12px 14px;
-          border: 1px solid rgba(0,0,0,0.15);
-          border-radius: 4px;
-          font-family: var(--font-sans);
-          font-size: 14px;
-          color: #111111;
-          outline: none;
-          background: #ffffff;
-          transition: border-color 0.3s ease;
-          box-sizing: border-box;
-        }
-        .form-group-outline input::placeholder {
-          color: rgba(0,0,0,0.5);
-        }
-        .form-group-outline input:focus, .form-group-outline select:focus {
-          border-color: #b48564;
-        }
-        .form-checkbox-group {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          margin-top: 4px;
-        }
-        .checkbox-label {
+        .fs-checkbox-row {
           display: flex;
           align-items: flex-start;
-          gap: 12px;
-          font-size: 13px;
-          color: rgba(0,0,0,0.7);
+          gap: 10px;
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.65);
+          cursor: pointer;
+          line-height: 1.45;
+          margin-top: 4px;
+        }
+        .fs-checkbox-row input {
+          accent-color: #b48564;
+          margin-top: 2px;
           cursor: pointer;
         }
-        .checkbox-label input[type="checkbox"] {
-          display: none;
+        .fs-gold-button {
+          width: 100%;
+          padding: 16px;
+          border: none;
+          border-radius: 8px;
+          background: linear-gradient(135deg, #d8b28a 0%, #b48564 60%, #956645 100%);
+          color: #ffffff;
+          font-family: var(--font-sans);
+          font-size: 13.5px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          cursor: pointer;
+          box-shadow: 0 10px 28px rgba(180, 133, 100, 0.4);
+          transition: all 0.3s ease;
+          margin-top: 6px;
         }
-        .checkbox-custom {
-          width: 16px;
-          height: 16px;
-          border: 1px solid rgba(0,0,0,0.2);
-          border-radius: 3px;
-          position: relative;
-          display: inline-block;
-          flex-shrink: 0;
-          margin-top: 2px;
-          transition: all 0.2s ease;
+        .fs-gold-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 14px 34px rgba(180, 133, 100, 0.55);
+          filter: brightness(1.08);
         }
-        .checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
-          background: #b48564;
-          border-color: #b48564;
-        }
-        .checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after {
-          content: '';
-          position: absolute;
-          left: 4px;
-          top: 1px;
-          width: 4px;
-          height: 8px;
-          border: solid white;
-          border-width: 0 2px 2px 0;
-          transform: rotate(45deg);
-        }
-        
-        /* Success Message */
-        .form-success-message {
+        .fw-success-box {
           text-align: center;
-          padding: 20px 0;
-          animation: fadeUpProject 0.5s ease forwards;
+          padding: 30px 10px;
+          animation: fsFadeIn 0.4s ease;
         }
-        .success-icon-gold {
-          color: #b48564;
-          margin-bottom: 16px;
+        .fw-success-gold {
+          color: #d8b28a;
+          margin-bottom: 14px;
         }
-        .form-success-message h4 {
+        .fw-success-box h4 {
           font-family: var(--font-heading);
-          font-size: 22px;
-          font-weight: 400;
-          color: #111111;
-          margin-bottom: 8px;
+          font-size: 24px;
+          color: #ffffff;
+          margin: 0 0 10px 0;
         }
-        .form-success-message p {
+        .fw-success-box p {
           font-size: 14px;
-          color: rgba(0, 0, 0, 0.6);
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.6;
+        }
+
+        /* Mobile responsive full-screen takeover */
+        @media (max-width: 900px) {
+          .fs-popup-split {
+            flex-direction: column;
+            overflow-y: auto;
+          }
+          .fs-popup-image-half {
+            flex: 0 0 240px;
+            height: 240px;
+          }
+          .fs-popup-img-overlay {
+            padding: 24px;
+          }
+          .fs-popup-project-title {
+            font-size: 26px;
+          }
+          .fs-popup-form-half {
+            flex: 1;
+            height: auto;
+            padding: 30px 20px 40px;
+            border-left: none;
+            border-top: 1px solid rgba(180, 133, 100, 0.2);
+          }
+          .fs-popup-topbar {
+            height: 60px;
+            padding: 0 20px;
+          }
+          .fs-popup-logo {
+            height: 30px;
+          }
+          .fs-popup-close-btn {
+            width: 38px;
+            height: 38px;
+          }
         }
         /* â”€â”€ Pillars Accordion Styling â”€â”€ */
         .pillars-container {
@@ -4162,6 +4568,8 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           font-size: 18px;
           padding: 15px;
           margin: 0;
+          letter-spacing: 0;
+          font-weight: 350;
         }
         .vision-dynamic-img-wrapper {
           position: relative;
@@ -4261,40 +4669,37 @@ export default function PashaPinnacle({ project = 'pasha' }) {
         .gallery-spotlight-arrow {
           position: absolute;
           top: 50%;
-          transform: translate(-50%, -50%);
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.9);
-          border: 1px solid rgba(0, 0, 0, 0.05);
-          color: var(--color-primary);
+          background: transparent;
+          border: none;
+          color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           z-index: 20;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          box-shadow: none;
+          padding: 0;
+          filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.7));
           transition: all 0.3s ease;
         }
         .gallery-spotlight-arrow:hover {
-          background: var(--color-white);
-          color: var(--color-primary);
-          transform: translate(-50%, -50%) scale(1.08);
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+          background: transparent;
+          box-shadow: none;
+          filter: drop-shadow(0 3px 14px rgba(0, 0, 0, 0.9));
         }
         .gallery-spotlight-arrow.prev {
           left: clamp(16px, 3vw, 40px);
           transform: translateY(-50%);
         }
         .gallery-spotlight-arrow.prev:hover {
-          transform: translateY(-50%) scale(1.08);
+          transform: translateY(-50%) scale(1.12);
         }
         .gallery-spotlight-arrow.next {
           right: clamp(16px, 3vw, 40px);
           transform: translateY(-50%);
         }
         .gallery-spotlight-arrow.next:hover {
-          transform: translateY(-50%) scale(1.08);
+          transform: translateY(-50%) scale(1.12);
         }
         
         /* Modal Split Layout Styles */
@@ -4785,6 +5190,149 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
           70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
           100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        /* ── LUXURY CTA BANNER SECTION (100vh Full Screen Fit + Fixed Background Reveal) ── */
+        .project-cta-banner-section {
+          position: relative;
+          width: 100%;
+          height: calc(100vh - 100px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          clip-path: inset(0 0 0 0);
+          -webkit-clip-path: inset(0 0 0 0);
+          background-color: #030712;
+          padding: 40px 24px;
+          box-sizing: border-box;
+        }
+        .project-cta-fixed-bg {
+          position: fixed;
+          inset: 0;
+          width: 100vw;
+          height: 100vh;
+          pointer-events: none;
+          z-index: 1;
+          will-change: transform;
+        }
+        .project-cta-picture {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        .project-cta-bg-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          transform: scale(1.02);
+        }
+        .project-cta-dark-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at center, rgb(0 0 0 / 50%) 0%, rgb(16 16 16 / 85%) 100%), linear-gradient(180deg, rgb(0 0 0 / 40%) 0%, rgb(0 0 0 / 75%) 100%);
+          backdrop-filter: blur(1px);
+          -webkit-backdrop-filter: blur(1px);
+        }
+        .project-cta-content-wrap {
+          position: relative;
+          z-index: 5;
+          max-width: 860px;
+          margin: auto;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        .project-cta-eyebrow {
+          display: inline-block;
+          margin-bottom: 22px;
+        }
+        .project-cta-eyebrow span {
+          font-family: var(--font-sans);
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.22em;
+          color: #d8b28a;
+          text-transform: uppercase;
+          background: rgba(180, 133, 100, 0.15);
+          border: 1px solid rgba(180, 133, 100, 0.35);
+          padding: 6px 18px;
+          border-radius: 100px;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+        }
+        .project-cta-title {
+          font-family: var(--font-heading);
+          font-size: clamp(36px, 4.5vw, 40px);
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.98);
+          line-height: 1.15;
+          margin: 0 0 18px 0;
+          letter-spacing: 0.02em;
+          text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+          text-align: center;
+        }
+        .project-cta-subtitle {
+          font-family: var(--font-sans);
+          font-size: clamp(15px, 1.35vw, 19px);
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.85);
+          line-height: 1.7;
+          max-width: 650px;
+          margin: 0 0 36px 0;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+          text-align: center;
+        }
+        .project-cta-btn-wrap {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .btn-cta-enquire {
+          display: inline-block;
+          font-family: var(--font-sans);
+          font-size: 11.5px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.95);
+          background: rgba(255, 255, 255, 0.45);
+          border: 1px solid rgba(255, 255, 255, 0.35);
+          padding: 12px 28px;
+          border-radius: 100px;
+          text-decoration: none;
+          backdrop-filter: blur(38px);
+          -webkit-backdrop-filter: blur(38px);
+          transition: all 0.4s ease;
+          cursor: pointer;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+        .btn-cta-enquire:hover {
+          background: rgba(255, 255, 255, 0.6);
+          color: #ffffff;
+          border-color: rgba(255, 255, 255, 0.85);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+        }
+        .btn-cta-enquire:active {
+          transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+          .project-cta-banner-section {
+            height: 100vh;
+            height: 100dvh;
+            padding: 40px 20px;
+          }
+          .project-cta-subtitle {
+            margin-bottom: 28px;
+          }
+          .btn-cta-enquire {
+            padding: 11px 24px;
+            font-size: 11px;
+          }
         }
       `}</style>
     </div>

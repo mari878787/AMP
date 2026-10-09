@@ -10,7 +10,7 @@
   /* ── Colour Palette ── */
   --color-white: #FFFFFF;
   --color-bg-navy: #000000;
-  --color-bg-light: #efefef;
+  --color-bg-light: #F9F9F9;
   --color-bg-cream: #ffffff;
   --color-highlight: #b48564;
 
@@ -792,3 +792,9 @@ img.spec-icon-img,
 .lightbox-modal-media-wrapper img {
   border-radius: 8px !important;
 } */
+
+/* Floor plan slide transition (arrow navigation) */
+@keyframes planSlideInNext { from { opacity: 0; transform: translateX(70px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes planSlideInPrev { from { opacity: 0; transform: translateX(-70px); } to { opacity: 1; transform: translateX(0); } }
+.plan-slide-in-next { animation: planSlideInNext 1.8s cubic-bezier(0.25, 0.8, 0.25, 1) both; }
+.plan-slide-in-prev { animation: planSlideInPrev 1.8s cubic-bezier(0.25, 0.8, 0.25, 1) both; }

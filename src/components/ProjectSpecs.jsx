@@ -68,7 +68,7 @@ export default function ProjectSpecs({
       if (!fading) {
         switchSpec((activeIdx + 1) % specs.length);
       }
-    }, 5500);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [activeIdx, fading, isHovering, specs.length, switchSpec]);
@@ -399,6 +399,7 @@ export default function ProjectSpecs({
           justify-content: space-between;
           height: 100%;
           padding: 40px 24px 32px 40px;
+          min-width: 0;
           box-sizing: border-box;
           z-index: 2;
           position: relative;
@@ -521,18 +522,17 @@ export default function ProjectSpecs({
           justify-content: flex-end;
           height: 100%;
           width: 100%;
-          overflow: visible;
+          overflow: hidden;
           background: transparent;
+          min-width: 0;
         }
 
         .sp2-card-img {
           width: 100%;
           height: 100%;
+          object-fit: contain;
           object-position: right center;
-          transform: scale(1.15);
-          transform-origin: right center;
           pointer-events: none;
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         

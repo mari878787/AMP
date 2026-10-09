@@ -91,12 +91,8 @@ export default function AmenitiesHeroSlider({
 
         {/* Top-Left Editorial Header */}
         <div className="amp-amenities-header">
-          <ScrollReveal animation="fadeUp" delay={0.1} once={false}>
-            <h2 className="amp-amenities-title">{title}</h2>
-          </ScrollReveal>
-          <ScrollReveal animation="fadeUp" delay={0.25} once={false}>
-            <p className="amp-amenities-subtitle">{subtitle}</p>
-          </ScrollReveal>
+          <h2 className="amp-amenities-title amp-amenities-fade" key={`t-${activeIndex}`}>{currentItem.title}</h2>
+          <p className="amp-amenities-subtitle amp-amenities-fade" key={`d-${activeIndex}`}>{currentItem.desc}</p>
         </div>
 
         {/* Bottom Floating Cards Carousel */}
@@ -119,8 +115,14 @@ export default function AmenitiesHeroSlider({
                       isActive ? 'card-active' : isPast ? 'card-past' : 'card-inactive'
                     }`}
                   >
-                    <h3 className="amp-card-title">{item.title}</h3>
-                    <p className="amp-card-desc">{item.desc}</p>
+                    <div className="amp-amenity-card-inner">
+                      {item.icon && (
+                        <div className="amp-card-icon-wrap">
+                          <img src={encodeURI(item.icon)} alt="" className="amp-card-icon" />
+                        </div>
+                      )}
+                      <h3 className="amp-card-title">{item.shortTitle || item.title}</h3>
+                    </div>
                   </div>
                 );
               })}
@@ -205,7 +207,14 @@ export default function AmenitiesHeroSlider({
         {/* Bottom Info Panel */}
         <div className="amp-mobile-info-card">
           <ScrollReveal animation="fadeUp" delay={0.1} once={false}>
-            <h3 className="amp-mobile-card-title">{currentItem.title}</h3>
+            <div className="amp-mobile-card-header">
+              {currentItem.icon && (
+                <div className="amp-mobile-icon-wrap">
+                  <img src={encodeURI(currentItem.icon)} alt="" className="amp-mobile-icon" />
+                </div>
+              )}
+              <h3 className="amp-mobile-card-title">{currentItem.title}</h3>
+            </div>
           </ScrollReveal>
           <ScrollReveal animation="fadeUp" delay={0.2} once={false}>
             <p className="amp-mobile-card-desc">{currentItem.desc}</p>
@@ -285,6 +294,15 @@ export default function AmenitiesHeroSlider({
           pointer-events: none;
         }
 
+        .amp-amenities-fade {
+          animation: ampAmenitiesFade 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+        }
+
+        @keyframes ampAmenitiesFade {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Editorial Header */
         .amp-amenities-header {
           position: absolute;
@@ -319,7 +337,7 @@ export default function AmenitiesHeroSlider({
         /* Bottom Floating Cards Row — Centered Active Card (Left Cards Hidden) */
         .amp-amenities-carousel-track-wrapper {
           position: absolute;
-          bottom: 96px;
+          bottom: 126px;
           left: calc(50% - 170px);
           right: 0;
           z-index: 10;
@@ -336,15 +354,39 @@ export default function AmenitiesHeroSlider({
 
         .amp-amenity-card {
           width: 340px;
-          min-height: 145px;
-          padding: 24px 26px;
-          border-radius: 4px;
+          padding: 12px 22px;
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
           justify-content: center;
           text-align: left;
           transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .amp-amenity-card-inner {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          width: 100%;
+        }
+
+        .amp-card-icon-wrap {
+          width: 32px;
+          height: 32px;
+          min-width: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .amp-card-icon {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          filter: brightness(0);
+          opacity: 0.85;
+          transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         /* Active Card: Clean Luxury White with Gold Accent */
@@ -355,14 +397,21 @@ export default function AmenitiesHeroSlider({
           transform: scale(1);
         }
 
+        .amp-amenity-card.card-active .amp-card-icon {
+          opacity: 1;
+        }
+
         .amp-amenity-card.card-active .amp-card-title {
           font-family: var(--font-heading, 'Playfair Display', serif);
           color: var(--color-text-dark, #000000);
           font-size: 24px;
           font-weight: 500;
-          margin: 0 0 8px 0;
           line-height: 1.2;
           letter-spacing: 0.02em;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .amp-amenity-card.card-active .amp-card-desc {
@@ -391,14 +440,22 @@ export default function AmenitiesHeroSlider({
           transform: translateY(-4px);
         }
 
+        .amp-amenity-card.card-inactive:hover .amp-card-icon {
+          opacity: 1;
+          transform: scale(1.08);
+        }
+
         .amp-amenity-card.card-inactive .amp-card-title {
           font-family: var(--font-heading, 'Playfair Display', serif);
           color: var(--color-text-dark, #000000);
           font-size: 22px;
           font-weight: 500;
-          margin: 0 0 8px 0;
           line-height: 1.2;
           letter-spacing: 0.02em;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .amp-amenity-card.card-inactive .amp-card-desc {
@@ -422,7 +479,7 @@ export default function AmenitiesHeroSlider({
         /* Bottom Controls Bar — Centered below active card */
         .amp-amenities-controls {
           position: absolute;
-          bottom: 28px;
+          bottom: 58px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 15;
@@ -580,12 +637,36 @@ export default function AmenitiesHeroSlider({
             text-align: left;
           }
 
+          .amp-mobile-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+          }
+
+          .amp-mobile-icon-wrap {
+            width: 26px;
+            height: 26px;
+            min-width: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+          }
+
+          .amp-mobile-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0);
+          }
+
           .amp-mobile-card-title {
             font-family: var(--font-heading, 'Playfair Display', serif);
             font-size: 23px;
             font-weight: 500;
             color: var(--color-text-dark, #000000);
-            margin: 0 0 8px 0;
+            margin: 0;
             letter-spacing: 0.02em;
           }
 

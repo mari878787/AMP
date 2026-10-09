@@ -19,14 +19,10 @@ export default function ProjectPricingSection({
   prices = [],
   unitTypes = ['3 BHK Villa', '4 BHK Villa']
 }) {
-  const [activeFormType, setActiveFormType] = useState('buy'); // 'buy', 'partner'
   const [contactMode, setContactMode] = useState('callback'); // 'callback', 'videocall'
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
-    companyName: '',
-    reraNumber: '',
-    city: '',
     phoneCode: '+91',
     phoneNumber: '',
     email: '',
@@ -47,7 +43,7 @@ export default function ProjectPricingSection({
 
     const fullName = `${form.firstName || ''} ${form.lastName || ''}`.trim();
     const phone = `${form.phoneCode || '+91'} ${form.phoneNumber || ''}`.trim();
-    const formLabel = activeFormType === 'partner' ? 'Partnership Program' : 'Customer Price Inquiry';
+    const formLabel = 'Customer Price Inquiry';
 
     setIsSubmitting(true);
     await submitLead({
@@ -61,8 +57,7 @@ export default function ProjectPricingSection({
       project: projectName,
       unitType: form.unitType,
       category: formLabel,
-      contactMode: contactMode === 'videocall' ? 'Video Call' : 'Phone Call',
-      companyName: form.companyName
+      contactMode: contactMode === 'videocall' ? 'Video Call' : 'Phone Call'
     });
 
     setIsSubmitting(false);
@@ -76,50 +71,15 @@ export default function ProjectPricingSection({
         {/* Left Column: Title & Information Details */}
         <ScrollReveal className="pricing-info-col" animation="fadeUp" delay={0.15}>
           <span className="starting-prices-tag">
-            {activeFormType === 'partner' ? 'PARTNERSHIP PROGRAM' : tag}
+            {tag}
           </span>
 
           <h2 className="section-title">
-            {activeFormType === 'partner' ? (
-              <>
-                Grow With Our <br />
-                <span>Partner Network</span>
-              </>
-            ) : (
-              <>
-                We'd Love To <br />
-                <span>Hear From You</span>
-              </>
-            )}
+            We'd Love To <br />
+            <span>Hear From You</span>
           </h2>
 
-          {activeFormType === 'partner' ? (
-            /* Channel Partner Details Box */
-            <div className="partner-details-box">
-              <h4 className="partner-box-title">CHANNEL PARTNER PROGRAM</h4>
-              <p className="partner-box-desc">
-                Partner with Aadhithya Mohan Properties to present benchmark luxury developments to your discerning clientele.
-              </p>
-              <ul className="partner-perks-list">
-                <li>
-                  <span className="perk-bullet">✦</span>
-                  <span>Attractive commission tiers & timely payout schedules</span>
-                </li>
-                <li>
-                  <span className="perk-bullet">✦</span>
-                  <span>Dedicated relationship manager & real-time CRM portal</span>
-                </li>
-                <li>
-                  <span className="perk-bullet">✦</span>
-                  <span>Priority inventory access & marketing collateral support</span>
-                </li>
-              </ul>
-              <div className="partner-contact-info">
-                <span className="partner-contact-label">Partner Desk Helpline:</span>
-                <span className="partner-contact-email">partners@aadhithyamohan.com</span>
-              </div>
-            </div>
-          ) : showPricing && prices && prices.length > 0 ? (
+          {showPricing && prices && prices.length > 0 ? (
             /* Optional Price Breakdown if explicitly enabled */
             <div className="pricing-display-group">
               <div className="prices-grid">
@@ -155,7 +115,7 @@ export default function ProjectPricingSection({
             </div>
           )}
 
-          {showPricing && activeFormType !== 'partner' && (
+          {showPricing && (
             <p className="pricing-disclaimer">
               *Prices mentioned are indicative starting prices, subject to applicable taxes, government charges, and inventory availability.
             </p>
@@ -178,9 +138,6 @@ export default function ProjectPricingSection({
                 setForm({
                   firstName: '',
                   lastName: '',
-                  companyName: '',
-                  reraNumber: '',
-                  city: '',
                   phoneCode: '+91',
                   phoneNumber: '',
                   email: '',
@@ -194,24 +151,6 @@ export default function ProjectPricingSection({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="pricing-form">
-              {/* Form Type Tabs */}
-              <div className="form-type-tabs">
-                <button
-                  type="button"
-                  className={`form-type-btn ${activeFormType === 'buy' ? 'active' : ''}`}
-                  onClick={() => setActiveFormType('buy')}
-                >
-                  BUY PROPERTY
-                </button>
-                <button
-                  type="button"
-                  className={`form-type-btn ${activeFormType === 'partner' ? 'active' : ''}`}
-                  onClick={() => setActiveFormType('partner')}
-                >
-                  CHANNEL PARTNER
-                </button>
-              </div>
-
               {/* Preferred Mode of Contact */}
               <div className="contact-mode-group">
                 <span className="input-field-label">Preferred Mode of Contact *</span>
@@ -240,32 +179,6 @@ export default function ProjectPricingSection({
                   </label>
                 </div>
               </div>
-
-              {/* Channel Partner Specific Fields */}
-              {activeFormType === 'partner' && (
-                <div className="form-row-2">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      required
-                      placeholder="Agency / Company Name *"
-                      className="form-input"
-                      value={form.companyName}
-                      onChange={(e) => setForm({ ...form, companyName: e.target.value })}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      required
-                      placeholder="RERA Registration No. *"
-                      className="form-input"
-                      value={form.reraNumber}
-                      onChange={(e) => setForm({ ...form, reraNumber: e.target.value })}
-                    />
-                  </div>
-                </div>
-              )}
 
               {/* Name Row */}
               <div className="form-row-2">
@@ -316,7 +229,7 @@ export default function ProjectPricingSection({
                 />
               </div>
 
-              {/* Email & City Row */}
+              {/* Email & Unit Type Row */}
               <div className="form-row-2">
                 <div className="form-group">
                   <input
@@ -328,32 +241,19 @@ export default function ProjectPricingSection({
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                   />
                 </div>
-                {activeFormType === 'partner' ? (
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      required
-                      placeholder="Operating City *"
-                      className="form-input"
-                      value={form.city}
-                      onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    />
-                  </div>
-                ) : (
-                  <div className="form-group">
-                    <select
-                      className="form-select"
-                      value={form.unitType}
-                      onChange={(e) => setForm({ ...form, unitType: e.target.value })}
-                    >
-                      {unitTypes.map((u) => (
-                        <option key={u} value={u}>
-                          {u}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
+                <div className="form-group">
+                  <select
+                    className="form-select"
+                    value={form.unitType}
+                    onChange={(e) => setForm({ ...form, unitType: e.target.value })}
+                  >
+                    {unitTypes.map((u) => (
+                      <option key={u} value={u}>
+                        {u}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               {/* Checkboxes */}
@@ -381,11 +281,7 @@ export default function ProjectPricingSection({
               {/* Submit Button */}
               <div className="form-submit-container">
                 <button type="submit" className="form-submit-btn" disabled={isSubmitting}>
-                  {isSubmitting
-                    ? 'SUBMITTING...'
-                    : activeFormType === 'partner'
-                    ? 'REGISTER AS PARTNER'
-                    : 'REQUEST PRICING DETAILS'}
+                  {isSubmitting ? 'SUBMITTING...' : 'REQUEST PRICING DETAILS'}
                 </button>
               </div>
             </form>

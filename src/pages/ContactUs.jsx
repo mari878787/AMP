@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, Mail, Phone, Clock, Send, Check, ArrowRight, Video, MessageSquare } from 'lucide-react';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
@@ -46,15 +47,12 @@ const ContactUs = () => {
   const [activeFormTab, setActiveFormTab] = useState('buy'); // 'buy', 'job', 'partner'
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     phone: '',
     contactMode: 'callback', // 'callback', 'video'
+    visitTimeline: 'this-week',
     propertyType: '',
-    project: '',
-    unitType: '',
-    position: '',
     companyName: '',
     message: '',
     agreedPrivacy: false,
@@ -83,22 +81,18 @@ const ContactUs = () => {
     }
     setFormState({ submitting: true, success: false, error: null });
 
-    const fullName = `${formData.firstName || ''} ${formData.lastName || ''}`.trim();
-    const departmentLabel = activeTab === 'investors' ? 'Investors & Strategic Partnerships' : activeTab === 'business' ? 'Business & Channel Partners' : 'Residential & Property Inquiries';
-    const mode = formData.contactMode === 'videocall' ? 'Video Call' : 'Phone Call';
+    const fullName = (formData.name || '').trim();
+    const departmentLabel = activeFormTab === 'partner' ? 'Business & Channel Partners' : 'Residential & Property Inquiries';
+    const mode = formData.contactMode === 'video' || formData.contactMode === 'videocall' ? 'Video Call' : 'Phone Call';
     
     await submitLead({
       name: fullName,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
       category: departmentLabel,
       contactMode: mode,
+      visitTimeline: formData.visitTimeline === 'this-month' ? 'This Month' : 'This Week',
       propertyType: formData.propertyType,
-      project: formData.project,
-      unitType: formData.unitType,
-      position: formData.position,
       companyName: formData.companyName,
       message: formData.message
     });
@@ -109,15 +103,11 @@ const ContactUs = () => {
       error: null
     });
     setFormData({
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
       phone: '',
       contactMode: 'callback',
       propertyType: '',
-      project: '',
-      unitType: '',
-      position: '',
       companyName: '',
       message: '',
       agreedPrivacy: false,
@@ -136,7 +126,7 @@ const ContactUs = () => {
       title: "Job & Careers Enquiry",
       phone: "+91 95852 91746",
       email: "hr@aadhithyamohanproperties.com",
-      link: "/about#careers",
+      link: "/careers",
       linkText: "Visit our Careers page"
     },
     {
@@ -150,6 +140,11 @@ const ContactUs = () => {
 
   return (
     <div className="contact-page">
+      <SEO
+        title="Connect With Us. Let’s Build Tomorrow"
+        description="Have questions about our projects or looking for the right property investment? Get in touch with Aadhithya Mohan Properties. Our team is here to understand your requirements, provide the right guidance, and help you take the next step towards your real estate goals"
+        canonicalUrl="https://aadhithyamohanproperties.com/contact-us"
+      />
       <Navbar/>
 
       {/* Hero Header - Architectural Sketch Aesthetic */}
@@ -238,12 +233,6 @@ const ContactUs = () => {
                     BUY PROPERTY
                   </button>
                   <button 
-                    className={`form-tab-header-btn ${activeFormTab === 'job' ? 'active' : ''}`}
-                    onClick={() => { setActiveFormTab('job'); setFormState(prev => ({ ...prev, success: false })); }}
-                  >
-                    SEEK JOB
-                  </button>
-                  <button 
                     className={`form-tab-header-btn ${activeFormTab === 'partner' ? 'active' : ''}`}
                     onClick={() => { setActiveFormTab('partner'); setFormState(prev => ({ ...prev, success: false })); }}
                   >
@@ -299,28 +288,51 @@ const ContactUs = () => {
                         </div>
                       )}
 
-                      {/* Common Name Fields */}
-                      <div className="form-row-two">
-                        <div className="form-group-item">
-                          <input 
-                            type="text" 
-                            name="firstName" 
-                            value={formData.firstName}
-                            onChange={handleChange}
-                            required 
-                            placeholder="First Name *"
-                          />
+                      {/* When are you planning to visit the site? */}
+                      {activeFormTab === 'buy' && (
+                        <div className="form-contact-mode-group">
+                          <label className="mode-selection-label">When are you coming to visit the site? *</label>
+                          <div className="mode-options-grid">
+                            <label className={`mode-option-card ${formData.visitTimeline !== 'this-month' ? 'selected' : ''}`}>
+                              <input 
+                                type="radio" 
+                                name="visitTimeline" 
+                                value="this-week"
+                                checked={formData.visitTimeline !== 'this-month'}
+                                onChange={handleChange}
+                              />
+                              <div className="mode-option-content">
+                                <span className="mode-bullet"></span>
+                                <span className="mode-text">This Week</span>
+                              </div>
+                            </label>
+                            <label className={`mode-option-card ${formData.visitTimeline === 'this-month' ? 'selected' : ''}`}>
+                              <input 
+                                type="radio" 
+                                name="visitTimeline" 
+                                value="this-month"
+                                checked={formData.visitTimeline === 'this-month'}
+                                onChange={handleChange}
+                              />
+                              <div className="mode-option-content">
+                                <span className="mode-bullet"></span>
+                                <span className="mode-text">This Month</span>
+                              </div>
+                            </label>
+                          </div>
                         </div>
-                        <div className="form-group-item">
-                          <input 
-                            type="text" 
-                            name="lastName" 
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            required 
-                            placeholder="Last Name *"
-                          />
-                        </div>
+                      )}
+
+                      {/* Name Field */}
+                      <div className="form-group-item">
+                        <input 
+                          type="text" 
+                          name="name" 
+                          value={formData.name}
+                          onChange={handleChange}
+                          required 
+                          placeholder="Name *"
+                        />
                       </div>
 
                       {/* Phone with static visual prefix & Email */}
@@ -354,80 +366,19 @@ const ContactUs = () => {
 
                       {/* Conditionally rendered form fields based on active tabs */}
                       {activeFormTab === 'buy' && (
-                        <>
-                          {/* Property Type Dropdown */}
-                          <div className="form-group-item select-wrapper">
-                            <select 
-                              name="propertyType" 
-                              value={formData.propertyType}
-                              onChange={handleChange}
-                              required
-                            >
-                              <option value="">Property Type *</option>
-                              <option value="Villa">Luxury Villa</option>
-                              <option value="Plot">Villa Plot</option>
-                              <option value="Apartment">Luxury Apartment</option>
-                            </select>
-                          </div>
-
-                          {/* Project + Unit Type Dropdowns */}
-                          <div className="form-row-two">
-                            <div className="form-group-item select-wrapper">
-                              <select 
-                                name="project" 
-                                value={formData.project}
-                                onChange={handleChange}
-                                required
-                              >
-                                <option value="">Project *</option>
-                                <option value="Crystal Moonlight">Crystal Moonlight Villas</option>
-                                <option value="Ashok Nagar">Ashok Nagar Plots</option>
-                                <option value="Bay Vista">Bay Vista ECR</option>
-                              </select>
-                            </div>
-                            <div className="form-group-item select-wrapper">
-                              <select 
-                                name="unitType" 
-                                value={formData.unitType}
-                                onChange={handleChange}
-                                required
-                              >
-                                <option value="">Unit Type *</option>
-                                <option value="3BHK">3 BHK</option>
-                                <option value="4BHK">4 BHK</option>
-                                <option value="Plot Range A">Range A (1200-1500 sq.ft)</option>
-                                <option value="Plot Range B">Range B (1800-2400 sq.ft)</option>
-                              </select>
-                            </div>
-                          </div>
-                        </>
-                      )}
-
-                      {activeFormTab === 'job' && (
-                        <div className="form-row-two">
-                          <div className="form-group-item select-wrapper">
-                            <select 
-                              name="position" 
-                              value={formData.position}
-                              onChange={handleChange}
-                              required
-                            >
-                              <option value="">Position Interested In *</option>
-                              <option value="Sales Consultant">Sales Consultant</option>
-                              <option value="Site Engineer">Site Engineer</option>
-                              <option value="Marketing Specialist">Marketing Manager</option>
-                              <option value="Customer Relations">Customer Relations Associate</option>
-                            </select>
-                          </div>
-                          <div className="form-group-item">
-                            <input 
-                              type="text" 
-                              name="message" 
-                              value={formData.message}
-                              onChange={handleChange}
-                              placeholder="LinkedIn Profile URL"
-                            />
-                          </div>
+                        /* Property Type Dropdown */
+                        <div className="form-group-item select-wrapper">
+                          <select 
+                            name="propertyType" 
+                            value={formData.propertyType}
+                            onChange={handleChange}
+                            required
+                          >
+                            <option value="">Property Type *</option>
+                            <option value="Villa">Luxury Villa</option>
+                            <option value="Plot">Villa Plot</option>
+                            <option value="Apartment">Luxury Apartment</option>
+                          </select>
                         </div>
                       )}
 
@@ -439,7 +390,7 @@ const ContactUs = () => {
                               name="companyName" 
                               value={formData.companyName}
                               onChange={handleChange}
-                              required
+                              required 
                               placeholder="Agency / Company Name *"
                             />
                           </div>
@@ -594,7 +545,7 @@ const ContactUs = () => {
         /* Hero Section - Aligned Bottom Left with Dark Overlay */
         .contact-hero {
           position: relative;
-          height: 100vh;
+          height: 50vh;
           width: 100%;
           display: flex;
           flex-direction: column;
@@ -675,7 +626,7 @@ const ContactUs = () => {
 
         .contact-hero-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: clamp(38px, 5.5vw, 64px);
+          font-size: clamp(38px, 5.5vw, 44px);
           font-weight: 400;
           color: #ffffff;
           letter-spacing: -0.01em;

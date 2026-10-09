@@ -1,5 +1,6 @@
 // About Us Page
 import React, { useEffect } from 'react';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
@@ -19,6 +20,11 @@ const AboutUs = () => {
 
   return (
     <div className="about-us-page">
+      <SEO
+        title="Contact us for Apartments, Plots, Villas in Chennai"
+        description="Contact Aadhithya Mohan Properties for premium apartments, residential plots, and villas in Chennai. Explore trusted properties and find your ideal investment today."
+        canonicalUrl="https://aadhithyamohanproperties.com/about-us"
+      />
       <Navbar />
       {/* 1. Hero Section: GSAP Scroll-Driven Image Expansion */}
       <AboutLegacyExpand 

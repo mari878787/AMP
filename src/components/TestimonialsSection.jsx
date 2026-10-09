@@ -206,7 +206,6 @@ export default function TestimonialsSection() {
         .tcs-card {
           flex: 0 0 var(--card-w);
           background: #ffffff;
-          border: 1px solid rgba(180, 133, 100, 0.15);
           border-radius: 8px;
           display: flex;
           flex-direction: column;
@@ -224,7 +223,6 @@ export default function TestimonialsSection() {
           transform: scale(1);
           background: #ffffff;
           cursor: default;
-          border: 1px solid rgba(180, 133, 100, 0.35);
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
         }
 

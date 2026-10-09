@@ -7,11 +7,11 @@ import 'swiper/css/effect-fade';
 
 const HERO_SLIDES = [
   {
-    image: '/images/project/CML/North_Row_4K_Day 1.webp',
-    mobileImage: '/images/project/CML/row-villa-mobile-hero.png',
+    image: '/images/project/CML/hero.png',
+    mobileImage: '/images/project/CML/hero.png',
     title: 'Crystal Moonlight',
     subtitle: 'Where Contemporary Design Meets Serene Community Living',
-    link: '/crystal-moonlight-villa'
+    link: '/projects/villas/crystal-moonlight-villa-in-medavakkam'
   },
   {
     video: '/images/project/pasha-pinnacle/PP Hero Banner 3.mp4',
@@ -20,16 +20,16 @@ const HERO_SLIDES = [
     mobileImage: '/images/project/pasha-pinnacle/mobile-hero.png',
     title: 'Pasha Pinnacle',
     subtitle: 'Where Contemporary Design Meets Urban Elegance',
-    link: '/pasha-pinnacle'
+    link: '/projects/apartments/pasha-pinnacle-luxury-apartment-in-royapettah'
   },
   {
-    video: '/images/project/CMR/CMR Video.mp4',
+    video: '/images/project/CMR/CMR Desktop View Final.mp4',
     mobileVideo: '/images/project/CMR/CMR Video Mobile.mp4',
     image: '/images/project/CMR/hero.png',
     mobileImage: '/images/project/CMR/mobile-hero.png',
     title: 'CMR Global City',
     subtitle: 'Where Opportunity Meets Enduring Value',
-    link: '/cmr-global-city'
+    link: '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam'
   },
   {
     video: '/images/project/ashok-nagar/Ashok Nagar Teaser.mp4',
@@ -38,7 +38,7 @@ const HERO_SLIDES = [
     mobileImage: '/images/project/ashok-nagar/mobile-hero.png',
     title: 'Ashok Nagar',
     subtitle: 'Where Every Plot Holds the Promise of Tomorrow',
-    link: '/ashok-nagar-villa-plots-in-maduranthakam'
+    link: '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam'
   }
 ];
 

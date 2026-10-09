@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { FileText, Phone, Play, HelpCircle } from 'lucide-react';
+import { FileText, Phone, Play, HelpCircle, MessageSquare } from 'lucide-react';
 
 export default function StickyActionBar({ onEnquire }) {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
 
   // Check if current page is one of the project detail pages
+  const normalizedPath = location.pathname.toLowerCase().replace(/\/$/, '') || '/';
   const isProjectPage = [
     '/crystal-moonlight-villa',
+    '/projects/villas/crystal-moonlight-villa-in-medavakkam',
     '/new-project',
     '/pasha-pinnacle',
+    '/projects/apartments/pasha-pinnacle-luxury-apartment-in-royapettah',
     '/ashok-nagar-villa-plots-in-maduranthakam',
+    '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam',
     '/ashok-nagar',
     '/cmr-global-city',
+    '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam',
     '/cmr-global'
-  ].includes(location.pathname);
+  ].includes(normalizedPath) || (normalizedPath.startsWith('/projects/') && normalizedPath !== '/projects');
 
   useEffect(() => {
     let ticking = false;
@@ -67,8 +72,12 @@ export default function StickyActionBar({ onEnquire }) {
     }
   };
 
-  const handleWalkthroughClick = () => {
-    // Scroll to the gallery section
+  const handleWalkthroughClick = (e) => {
+    // 1. Dispatch custom event so the project page can directly pop open the video modal
+    const event = new CustomEvent('open-walkthrough-video', { cancelable: true });
+    window.dispatchEvent(event);
+
+    // 2. Also scroll smoothly to the gallery section
     const gallerySec = document.getElementById('gallery');
     if (gallerySec) {
       gallerySec.scrollIntoView({ behavior: 'smooth' });
@@ -98,18 +107,18 @@ export default function StickyActionBar({ onEnquire }) {
       <div className={`mobile-sticky-bar ${isVisible ? 'visible' : ''}`}>
         {isProjectPage ? (
           <>
-            {/* Project Page: Walkthrough, Call, Brochure */}
+            {/* Project Page: Walk Through, Brochure, Enquire Now */}
             <button className="mobile-sticky-item" onClick={handleWalkthroughClick}>
               <Play size={18} className="mobile-sticky-icon" />
-              <span className="mobile-sticky-label">Walkthrough</span>
+              <span className="mobile-sticky-label">Walk Through</span>
             </button>
-            <a href="tel:+919585044440" className="mobile-sticky-item">
-              <Phone size={18} className="mobile-sticky-icon" />
-              <span className="mobile-sticky-label">Call</span>
-            </a>
             <button className="mobile-sticky-item" onClick={handleBrochureClick}>
               <FileText size={18} className="mobile-sticky-icon" />
               <span className="mobile-sticky-label">Brochure</span>
+            </button>
+            <button className="mobile-sticky-item" onClick={handleEnquireClick}>
+              <MessageSquare size={18} className="mobile-sticky-icon" />
+              <span className="mobile-sticky-label">Enquire Now</span>
             </button>
           </>
         ) : (

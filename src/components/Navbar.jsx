@@ -6,9 +6,9 @@ const CATEGORIES = [
   {
     id: 'villas',
     name: 'Villas',
-    img: '/images/project/CML/extirior/Views_Scene_1_4k_4.png',
+    img: '/images/project/CML/navbar.png',
     projects: [
-      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/extirior/Views_Scene_1_4k_4.png', url: '/crystal-moonlight-villa' },
+      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/navbar.png', url: '/projects/villas/crystal-moonlight-villa-in-medavakkam' },
       { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai • Upcoming', img: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png', teaserPoster: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png', url: '#bay-vista' },
       { id: 'lakeshore', name: 'Lakeshore', location: 'ECR, Chennai • Upcoming', img: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png', teaserPoster: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png', url: '#lakeshore' }
     ]
@@ -16,9 +16,9 @@ const CATEGORIES = [
   {
     id: 'apartments',
     name: 'Apartments',
-    img: '/images/project/pasha-pinnacle/card.png',
+    img: '/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg',
     projects: [
-      { id: 'pasha-pinnacle', name: 'Pasha Pinnacle', location: 'Royapettah, Chennai', img: '/images/project/pasha-pinnacle/card.png', url: '/pasha-pinnacle' }
+      { id: 'pasha-pinnacle', name: 'Pasha Pinnacle', location: 'Royapettah, Chennai', img: '/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg', url: '/projects/apartments/pasha-pinnacle-luxury-apartment-in-royapettah' }
     ]
   },
   {
@@ -26,8 +26,8 @@ const CATEGORIES = [
     name: 'Plots',
     img: '/images/project/CMR/4.png',
     projects: [
-      { id: 'cmr-global', name: 'CMR Global City', location: 'Maduranthakam, Chennai', img: '/images/project/CMR/4.png', url: '/cmr-global-city' },
-      { id: 'ashok-nagar', name: 'Ashok Nagar', location: 'Maduranthakam, Chennai', img: '/images/project/ashok-nagar/cards.webp', url: '/ashok-nagar-villa-plots-in-maduranthakam' }
+      { id: 'cmr-global', name: 'CMR Global City', location: 'Maduranthakam, Chennai', img: '/images/project/CMR/4.png', url: '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam' },
+      { id: 'ashok-nagar', name: 'Ashok Nagar', location: 'Maduranthakam, Chennai', img: '/images/project/ashok-nagar/cards.webp', url: '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam' }
     ]
   }
 ];
@@ -145,7 +145,7 @@ export default function Navbar({ darkText = false }) {
 
           {/* Left Navigation (Desktop) */}
           <nav className="nav-left desktop-only">
-            <a href="/about" className="nav-link">ABOUT US</a>
+            <a href="/about-us" className="nav-link">ABOUT US</a>
             <div
               className="nav-link mega-trigger"
               onClick={(e) => {
@@ -178,8 +178,8 @@ export default function Navbar({ darkText = false }) {
 
           {/* Right Navigation (Desktop) */}
           <nav className="nav-right desktop-only">
-            <a href="/careers" className="nav-link">CAREERS</a>
-            <a href="/contact" className="nav-link">CONTACT US</a>
+            <a href="/career" className="nav-link">CAREERS</a>
+            <a href="/contact-us" className="nav-link">CONTACT US</a>
             <button className="icon-button" onClick={() => setIsSearchOpen(true)} aria-label="Open Search">
               <Search size={18} strokeWidth={2} />
             </button>
@@ -249,7 +249,7 @@ export default function Navbar({ darkText = false }) {
               opacity: activeCategory ? 1 : 0,
               visibility: activeCategory ? 'visible' : 'hidden',
               transform: activeCategory ? 'translateX(0)' : 'translateX(-10px)',
-              transition: 'opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s'
+              transition: 'opacity 0.45s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s'
             }}
           >
             {activeCategory && (
@@ -262,7 +262,7 @@ export default function Navbar({ darkText = false }) {
                     onMouseEnter={() => setActiveProject(proj)}
                   >
                     <a 
-                      href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : '/projects')}
+                      href={proj.url || '/projects'}
                       onClick={(e) => {
                         if (proj.teaserPoster) {
                           e.preventDefault();
@@ -299,7 +299,7 @@ export default function Navbar({ darkText = false }) {
 
           {/* Link: ABOUT US */}
           <div className="mobile-nav-item-wrapper">
-            <a href="/about" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-main-link simple-link">ABOUT US</a>
+            <a href="/about-us" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-main-link simple-link">ABOUT US</a>
           </div>
 
           {/* Accordion Item: PROJECTS */}
@@ -331,7 +331,7 @@ export default function Navbar({ darkText = false }) {
                     {cat.projects.map(proj => (
                       <a
                         key={proj.id}
-                        href={proj.url || (proj.id === 'r2' ? '/crystal-moonlight-villa' : '/projects')}
+                        href={proj.url || '/projects'}
                         onClick={(e) => {
                           if (proj.teaserPoster) {
                             e.preventDefault();
@@ -360,19 +360,19 @@ export default function Navbar({ darkText = false }) {
 
           {/* Link: CAREERS */}
           <div className="mobile-nav-item-wrapper">
-            <a href="/careers" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-main-link simple-link">CAREERS</a>
+            <a href="/career" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-main-link simple-link">CAREERS</a>
           </div>
 
           {/* Link: CONTACT US */}
           <div className="mobile-nav-item-wrapper">
-            <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-main-link simple-link">CONTACT US</a>
+            <a href="/contact-us" onClick={() => setMobileMenuOpen(false)} className="mobile-nav-main-link simple-link">CONTACT US</a>
           </div>
 
           {/* Social links with underlines (Text only, no icons) */}
           <div className="mobile-social-links">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="mobile-social-link">Instagram</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="mobile-social-link">LinkedIn</a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="mobile-social-link">YouTube</a>
+            <a href="https://www.instagram.com/aadhithyamohanproperties/?hl=en" target="_blank" rel="noopener noreferrer" className="mobile-social-link">Instagram</a>
+            <a href="https://in.linkedin.com/in/aadhithya-mohan-properties-0aa242391" target="_blank" rel="noopener noreferrer" className="mobile-social-link">LinkedIn</a>
+            <a href="https://www.youtube.com/channel/UC_On0n-j-NRU_Nplc28ELZg" target="_blank" rel="noopener noreferrer" className="mobile-social-link">YouTube</a>
           </div>
 
         </nav>
@@ -402,7 +402,7 @@ export default function Navbar({ darkText = false }) {
             )}
             {searchResults.map((proj, idx) => (
               <a
-                href={proj.url || '/crystal-moonlight-villa'}
+                href={proj.url || '/projects'}
                 className="search-result-item"
                 key={proj.id}
                 onClick={(e) => {
@@ -467,7 +467,7 @@ export default function Navbar({ darkText = false }) {
           background: 
             linear-gradient(180deg, rgb(39 39 39 / 86%) 0%, rgb(0 0 0 / 41%) 38%, rgb(0 0 0 / 49%) 50%, rgb(0 0 0 / 82%) 100%), linear-gradient(115deg, rgb(11 11 11) 0%, rgb(14 14 14 / 80%) 35%, rgb(0 0 0 / 92%) 50%, rgb(8 8 8 / 80%) 65%, rgb(33 34 35 / 73%) 100%) !important;
           -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(108%) !important;
-          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 12px 35px rgba(0, 0, 0, 0.35) !important;
+          // box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.5), 0 12px 35px rgba(0, 0, 0, 0.35) !important;
         }
 
         .sobha-navbar.dark-text:not(.is-scrolled):not(.mega-open) .nav-link,
@@ -514,7 +514,7 @@ export default function Navbar({ darkText = false }) {
         .nav-link {
           font-family: var(--font-sans);
           font-size: 13px;
-          font-weight: 400;
+          font-weight: 500;
           color: #ffffffff;
           text-decoration: none;
           text-transform: uppercase;
@@ -630,14 +630,19 @@ export default function Navbar({ darkText = false }) {
           background: url("/images/nav-villa.png") left center / cover no-repeat;
           opacity: 0;
           visibility: hidden;
-          transform: translate(-50%, -40px);
+          transform: translate(-50%, -24px);
           clip-path: inset(0 0 100% 0);
-          transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, visibility 0.45s;
+          transition: 
+            transform 2.25s cubic-bezier(0.16, 1, 0.3, 1), 
+            clip-path 2.75s cubic-bezier(0.16, 1, 0.3, 1), 
+            opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), 
+            visibility 1.25s;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
           border-top: none;
           cursor: default;
           z-index: 9999;
           overflow: hidden;
+          will-change: transform, clip-path, opacity;
         }
 
         .mega-menu::before {
@@ -670,6 +675,16 @@ export default function Navbar({ darkText = false }) {
           box-sizing: border-box;
           position: relative;
           z-index: 2;
+          transform: translateY(12px);
+          opacity: 0;
+          transition: 
+            transform 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, 
+            opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.12s;
+        }
+
+        .mega-menu.visible .mega-menu-content {
+          transform: translateY(0);
+          opacity: 1;
         }
 
         .mega-categories {

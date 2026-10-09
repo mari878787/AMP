@@ -40,10 +40,10 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="footer-col-title">COMPANY</h4>
             <ul className="footer-links">
-              <li><a href="/about">About Us</a></li>
+              <li><a href="/about-us">About Us</a></li>
               <li><a href="/projects">Our Projects</a></li>
-              <li><a href="/about#careers">Careers</a></li>
-              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/career">Careers</a></li>
+              <li><a href="/contact-us">Contact Us</a></li>
             </ul>
           </div>
           
@@ -52,8 +52,8 @@ export default function Footer() {
             <h4 className="footer-col-title">SUPPORT</h4>
             <ul className="footer-links">
               <li><a href="/privacy-policy">Privacy Policy</a></li>
-              <li><a href="/contact">Customer Support</a></li>
-              <li><a href="/contact">Enquiries</a></li>
+              <li><a href="/contact-us">Customer Support</a></li>
+              <li><a href="/contact-us">Enquiries</a></li>
             </ul>
           </div>
           
@@ -74,20 +74,18 @@ export default function Footer() {
             
             {/* Social Icons row */}
             <div className="footer-socials">
-              <a href="#" className="social-icon-btn" aria-label="Facebook">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              <a href="https://www.instagram.com/aadhithyamohanproperties/?hl=en" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               </a>
-              <a href="#" className="social-icon-btn" aria-label="Instagram">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              <a href="https://www.facebook.com/AADHITHYAMOHANPROPERTIES/" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="Facebook">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.688 5H18V0h-3.886C10.18 0 9 1.434 9 4.355V8z"/></svg>
               </a>
-              <a href="#" className="social-icon-btn" aria-label="LinkedIn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              
+              <a href="https://in.linkedin.com/in/aadhithya-mohan-properties-0aa242391" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
               </a>
-              <a href="#" className="social-icon-btn" aria-label="YouTube">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
-              </a>
-              <a href="#" className="social-icon-btn" aria-label="X (formerly Twitter)">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <a href="https://youtube.com/@aadhithyamohanpropertiesllp?si=AsuEvq17-lxOs2Hr" target="_blank" rel="noopener noreferrer" className="social-icon-btn" aria-label="YouTube">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
             </div>
             
@@ -107,11 +105,33 @@ export default function Footer() {
           <div className="footer-contact-info">
             <div className="contact-col-touch">
               <h4 className="footer-col-title">GET IN TOUCH</h4>
-              <a href="tel:+919585044440" className="contact-value" style={{ textDecoration: 'none' }}>+91 9585044440</a>
-              <a href="mailto:info@aadhithyamohanproperties.com" className="contact-value font-email" style={{ textDecoration: 'none' }}>info@aadhithyamohanproperties.com</a>
-              <p className="address-value">
-                2nd Floor, VNCT Building, No 5, Mahalingapuram Main Rd, Mahalingapuram, Nugambakkam, Chennai, Tamil Nadu 600034
-              </p>
+              <a href="tel:+919585044440" className="contact-value" style={{ textDecoration: 'none' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="contact-icon"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>
+                <span>+91 9585044440</span>
+              </a>
+              <a href="mailto:info@aadhithyamohanproperties.com" className="contact-value font-email" style={{ textDecoration: 'none' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="contact-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <span>info@aadhithyamohanproperties.com</span>
+              </a>
+              <div className="address-value-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="contact-icon address-icon"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+                <p className="address-value">
+                  2nd Floor, No: 48/52, Jawaharlal Nehru Salai, opposite to CMBT Flyover, Jai Nagar, Koyambedu, Chennai, Tamil Nadu 600107
+                </p>
+              </div>
+              <a
+                href="https://www.google.com/maps/place/Aadhithya+Mohan+Properties+LLP/@13.0701342,80.205387,17z/data=!4m6!3m5!1s0x3cd4533a14d0a15:0x4c02f9b06a7bc8e1!8m2!3d13.0701342!4d80.205387!16s%2Fg%2F11wpzvr8tj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-google-review"
+                aria-label="Google Reviews"
+              >
+                <img
+                  src="/images/google-review.png"
+                  alt="Google Reviews"
+                  className="google-review-img"
+                />
+              </a>
             </div>
           </div>
           
@@ -148,7 +168,7 @@ export default function Footer() {
         .footer-col-brand {
           display: flex;
           flex-direction: column;
-          gap: var(--space-3);
+          gap: var(--space-2);
         }
 
         .footer-logo-wrap {
@@ -185,7 +205,8 @@ export default function Footer() {
 
 
         .footer-desc {
-          font-size: 16px;
+          font-size: 15px;
+          font-weight: 350px;
           line-height: 1.6;
           color: var(--color-text-dark);
         }
@@ -193,16 +214,19 @@ export default function Footer() {
         .footer-col {
           display: flex;
           flex-direction: column;
-          gap: var(--space-3);
+          gap: var(--space-1);
         }
 
         .footer-col-title {
-
-          font-size: 22px;
+          font-size: 18px;
           font-weight: 400;
-
           color: var(--color-text-dark);
-          margin-bottom: 4px;
+          margin-bottom: 8px;
+          padding-bottom: 4px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+          width: fit-content;
+          display: inline-block;
+          letter-spacing: 0.04em;
         }
 
         .footer-links {
@@ -215,7 +239,8 @@ export default function Footer() {
         }
 
         .footer-links a {
-          font-size: 16px;
+          font-size: 15px;
+          font-weight: 350;
           color: var(--color-text-muted);
           transition: color 0.25s ease, padding-left 0.25s ease;
           letter-spacing: 0;
@@ -229,11 +254,12 @@ export default function Footer() {
         .footer-col-subscribe {
           display: flex;
           flex-direction: column;
-          gap: var(--space-2);
+          gap: var(--space-1);
         }
 
         .subscribe-desc {
-          font-size: 16px;
+          font-size: 15px;
+          font-weight: 350px;
           line-height: 1.5;
           color: var(--color-text-muted);
         }
@@ -267,31 +293,28 @@ export default function Footer() {
 
         .footer-socials {
           display: flex;
-          gap: 10px;
-          margin-top: var(--space-1);
+          gap: 16px;
+          margin-top: var(--space-2, 8px);
           align-items: center;
         }
 
         .social-icon-btn {
-          width: 34px;
-          height: 34px;
-          border-radius: 50%;
-          border: 0.8px solid var(--color-border-light);
-          display: flex;
+          width: auto;
+          height: auto;
+          border: none;
+          background: transparent;
+          display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: var(--color-text-muted);
-          background: var(--color-bg-light);
-          transition: all 0.3s var(--ease-luxury);
+          color: #000000;
+          padding: 2px;
+          border-radius: 0;
+          box-shadow: none;
+          transition: color 0.25s ease, transform 0.25s ease;
+          text-decoration: none;
         }
 
-        .social-icon-btn:hover {
-          color: var(--color-white);
-          background: var(--color-gold-accent);
-          border-color: var(--color-gold-accent);
-          transform: translateY(-2px) scale(1.05);
-          box-shadow: 0 4px 12px rgba(29, 53, 87, 0.2);
-        }
+        
 
         .follow-us-label {
 
@@ -308,6 +331,7 @@ export default function Footer() {
           display: grid;
           grid-template-columns: 1.2fr 1fr;
           align-items: flex-end;
+          margin-top: 48px;
         }
 
         .footer-blueprint-container {
@@ -334,35 +358,69 @@ export default function Footer() {
         .contact-col-touch {
           display: flex;
           flex-direction: column;
-          gap: var(--space-2);
+          gap: 10px;
         }
 
         .contact-value {
-
-          font-size: 16px;
-          font-weight: 400;
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          font-size: 15px;
+          font-weight: 350;
           color: var(--color-text-muted);
-          line-height: 1.2;
+          line-height: 1.4;
           transition: color 0.25s ease;
         }
+
         .contact-value:hover {
           color: var(--color-gold-accent);
         }
 
-        .font-email {
-          color: var(--color-text-muted);
+        .contact-icon {
+          flex-shrink: 0;
+          color: var(--color-text-dark, #111111);
+          opacity: 0.85;
+          transition: color 0.25s ease, opacity 0.25s ease;
         }
 
-        .contact-col-address {
+        .contact-value:hover .contact-icon {
+          color: var(--color-gold-accent, #b48564);
+          opacity: 1;
+        }
+
+        .address-value-wrap {
           display: flex;
-          align-items: flex-end;
-          padding-bottom: 4px;
+          align-items: flex-start;
+          gap: 9px;
+          margin-top: 2px;
+        }
+
+        .address-icon {
+          margin-top: 4px;
         }
 
         .address-value {
-          font-size: 15px;
-          line-height: 1.7;
+          font-size: 14.5px;
+          line-height: 1.65;
           color: var(--color-text-muted);
+          margin: 0;
+        }
+
+        .footer-google-review {
+          display: inline-flex;
+          align-items: center;
+          margin-top: 8px;
+          text-decoration: none;
+          width: fit-content;
+          transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+
+        .google-review-img {
+          height: 84px;
+          width: auto;
+          object-fit: contain;
+          display: block;
         }
 
         /* â”€â”€ Responsive â”€â”€ */
@@ -420,9 +478,9 @@ export default function Footer() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          border-top: 0.8px solid var(--color-bg-light);
-          padding: var(--space-3) 0;
-          margin-top: var(--space-5);
+          border-top: 1px solid rgba(0, 0, 0, 0.12);
+          padding: 20px 0;
+          margin-top: 28px;
         }
         .copyright-text, .copyright-design {
           font-size: 12.5px;

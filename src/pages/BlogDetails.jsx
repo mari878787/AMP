@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
@@ -16,8 +17,22 @@ export default function BlogDetails() {
   // Find blog by slug or default to first blog (10 years)
   const blog = BLOGS.find(b => b.slug === slug || b.id === slug) || BLOGS[0];
 
+  const pageTitle = slug && blog 
+    ? `${blog.title} | Aadhithya Mohan Properties`
+    : 'Real Estate Blog & Property Insights | Aadhithya Mohan Properties';
+
+  const pageDescription = slug && blog && blog.subtitle
+    ? blog.subtitle
+    : 'Explore real estate insights, property investment tips, market trends, project updates, and expert guidance from Aadhithya Mohan Properties.';
+
   return (
     <>
+      <SEO
+        title={pageTitle}
+        description={pageDescription}
+        canonicalUrl={slug ? `https://aadhithyamohanproperties.com/blog/${slug}` : 'https://aadhithyamohanproperties.com/blog'}
+        ogType={slug ? 'article' : 'website'}
+      />
       <Navbar darkText={false} />
 
       <main className="blog-details-page">

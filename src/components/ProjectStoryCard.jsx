@@ -47,17 +47,26 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
   }, [isInView, currentIndex, images.length]);
 
   const handleNext = (e) => {
-    e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
   const handlePrev = (e) => {
-    e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
   const handleSegmentClick = (e, idx) => {
-    e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setCurrentIndex(idx);
   };
 
@@ -134,104 +143,54 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
           {images.length > 1 && (
             <>
               <div className="maia-story-tap-zone left" onClick={handlePrev} title="Previous Photo">
-                <button className="maia-story-nav-arrow" aria-label="Previous image">
+                <button type="button" className="maia-story-nav-arrow" aria-label="Previous image" onClick={handlePrev}>
                   <ChevronLeft size={20} />
                 </button>
               </div>
               <div className="maia-story-tap-zone right" onClick={handleNext} title="Next Photo">
-                <button className="maia-story-nav-arrow" aria-label="Next image">
+                <button type="button" className="maia-story-nav-arrow" aria-label="Next image" onClick={handleNext}>
                   <ChevronRight size={20} />
                 </button>
               </div>
             </>
           )}
 
-          {/* ── BOTTOM CONTENT OVERLAY (STATUS BADGE, TITLE, LOCATION, DESCRIPTION, SPECS) ── */}
+          {/* ── BOTTOM CONTENT OVERLAY (STATUS BADGE, TITLE, LOCATION, DESCRIPTION & GLASS EXPLORE BUTTON) ── */}
           <div className="maia-story-content-box">
-            
-            {/* Status Pill Badge */}
-            <ScrollReveal animation="fadeUp" delay={0.05} once={false}>
-              <div className="maia-story-status-badge">
-                {statusLabel}
-              </div>
-            </ScrollReveal>
-
-            {/* Project Title */}
-            <ScrollReveal animation="fadeUp" delay={0.15} once={false}>
-              <h3 className="maia-story-title">
-                {project.title}
-              </h3>
-            </ScrollReveal>
-
-            {/* Location Subtitle */}
-            <ScrollReveal animation="fadeUp" delay={0.25} once={false}>
-              <div className="maia-story-location-row">
-                <MapPin size={16} className="maia-story-pin-icon" />
-                <span>{project.location}</span>
-              </div>
-            </ScrollReveal>
-
-            {/* 2-Liner Project Description */}
-            {project.description && (
-              <ScrollReveal animation="fadeUp" delay={0.35} once={false}>
-                <p className="maia-story-description">
-                  {project.description}
-                </p>
-              </ScrollReveal>
-            )}
-
-            {/* Specifications Summary Line including Site Extent with Custom Icons */}
-            <ScrollReveal animation="fadeUp" delay={0.45} once={false} style={{ width: '100%' }}>
-              <div className="maia-story-specs-row">
-                <div className="maia-story-specs-list">
-                  {project.siteExtent && (
-                    <span className="maia-story-spec-pill">
-                      <img 
-                        src="/images/allProject/site-extention.png" 
-                        alt="Site Extent" 
-                        className="maia-story-spec-icon"
-                      />
-                      <strong>Site Extent:</strong> {project.siteExtent}
-                    </span>
-                  )}
-                  {(project.bhkConfig || project.centerInfo) && (
-                    <span className="maia-story-spec-pill">
-                      <img 
-                        src={project.category === 'Plots' ? "/images/allProject/plot-Configuration.png" : "/images/allProject/Configuration.png"} 
-                        alt="Config" 
-                        className="maia-story-spec-icon"
-                      />
-                      <strong>Config:</strong> {project.bhkConfig || project.centerInfo}
-                    </span>
-                  )}
-                  {project.totalUnits && (
-                    <span className="maia-story-spec-pill">
-                      <img 
-                        src={project.category === 'Plots' ? "/images/allProject/plot-total-units.png" : "/images/allProject/total-units.png"} 
-                        alt="Units" 
-                        className="maia-story-spec-icon"
-                      />
-                      <strong>Units:</strong> {project.totalUnits}
-                    </span>
-                  )}
-                  {project.unitSize && (
-                    <span className="maia-story-spec-pill">
-                      <img 
-                        src="/images/allProject/unit-size.png" 
-                        alt="Size" 
-                        className="maia-story-spec-icon"
-                      />
-                      <strong>Size:</strong> {project.unitSize}
-                    </span>
-                  )}
+            <div className="maia-story-bottom-layout">
+              <div className="maia-story-info-col">
+                {/* Status Pill Badge */}
+                <div className="maia-story-status-badge">
+                  {statusLabel}
                 </div>
+
+                {/* Project Title */}
+                <h3 className="maia-story-title">
+                  {project.title}
+                </h3>
+
+                {/* Location Subtitle */}
+                <div className="maia-story-location-row">
+                  <MapPin size={16} className="maia-story-pin-icon" />
+                  <span>{project.location}</span>
+                </div>
+
+                {/* 2-Liner Project Description */}
+                {project.description && (
+                  <p className="maia-story-description">
+                    {project.description}
+                  </p>
+                )}
+              </div>
+
+              {/* Ultra-Clear Glass Effect Explore Button */}
+              <div className="maia-story-action-col">
                 <div className="maia-story-explore-btn">
                   <span>EXPLORE</span>
                   <ArrowRight size={14} className="maia-story-arrow" />
                 </div>
               </div>
-            </ScrollReveal>
-
+            </div>
           </div>
         </div>
       </a>
@@ -258,7 +217,7 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
         .maia-story-img-wrapper {
           position: relative;
           width: 100%;
-          height: clamp(550px, 82vh, 780px);
+          height: clamp(550px, 85vh, 780px);
           overflow: hidden;
           background-color: #0b0b0b;
         }
@@ -489,7 +448,7 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
           font-size: 14px;
           line-height: 1.6;
           color: rgba(255, 255, 255, 0.88);
-          margin: 0 0 16px 0;
+          margin: 0;
           max-width: 680px;
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -498,77 +457,66 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
           text-overflow: ellipsis;
         }
 
-        /* Bottom Specs Row */
-        .maia-story-specs-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 20px;
-          flex-wrap: wrap;
+        /* ── BOTTOM OVERLAY LAYOUT (2-COLUMN RESPONSIVE) ── */
+        .maia-story-bottom-layout {
           width: 100%;
-          padding-top: 14px;
-          border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .maia-story-specs-list {
           display: flex;
-          align-items: center;
+          align-items: flex-end;
+          justify-content: space-between;
           gap: 24px;
-          flex-wrap: wrap;
         }
 
-        .maia-story-spec-pill {
-          font-family: var(--font-sans);
-          font-size: 15px;
-          color: rgba(255, 255, 255, 0.88);
-          background: transparent;
-          border: none;
-          padding: 0;
-          border-radius: 0;
-          backdrop-filter: none;
-          letter-spacing: 0.01em;
+        .maia-story-info-col {
+          flex: 1;
+          max-width: 760px;
           display: flex;
-          align-items: center;
-          gap: 7px;
+          flex-direction: column;
+          align-items: flex-start;
         }
 
-        .maia-story-spec-icon {
-          width: 20px;
-          height: 20px;
-          object-fit: contain;
-          filter: brightness(0) invert(1);
+        .maia-story-action-col {
           flex-shrink: 0;
+          display: flex;
+          align-items: flex-end;
+          padding-bottom: 2px;
         }
 
-        .maia-story-spec-pill strong {
-          color: #ffffff;
-          font-weight: 600;
-          margin-right: 3px;
+        @media (max-width: 768px) {
+          .maia-story-bottom-layout {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+          }
+          .maia-story-action-col {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 4px;
+          }
         }
 
         /* ── ULTRA-CLEAR OPTICAL GLASS BUTTON ── */
         .maia-story-explore-btn {
-          margin-left: auto;
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: 9px;
+          gap: 10px;
           font-family: var(--font-sans);
-          font-size: 12px;
+          font-size: 12.5px;
           font-weight: 600;
           letter-spacing: 0.14em;
           color: #ffffff;
           text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
           background: linear-gradient(
             135deg, 
-            rgba(255, 255, 255, 0.28) 0%, 
-            rgba(255, 255, 255, 0.06) 45%,
-            rgba(255, 255, 255, 0.18) 100%
+            rgba(255, 255, 255, 0.30) 0%, 
+            rgba(255, 255, 255, 0.08) 45%,
+            rgba(255, 255, 255, 0.22) 100%
           );
           backdrop-filter: blur(24px) saturate(210%) brightness(115%);
           -webkit-backdrop-filter: blur(24px) saturate(210%) brightness(115%);
-          padding: 11px 24px;
+          padding: 12px 28px;
           border-radius: 40px;
-          border: 1px solid rgba(255, 255, 255, 0.5);
+          border: 1px solid rgba(255, 255, 255, 0.55);
           box-shadow: 
             inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.85),
             inset 0 -1.5px 1.5px 0 rgba(255, 255, 255, 0.25),
@@ -577,6 +525,7 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           position: relative;
           overflow: hidden;
+          cursor: pointer;
           user-select: none;
         }
 
@@ -590,7 +539,7 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
           background: linear-gradient(
             90deg, 
             transparent 0%, 
-            rgba(255, 255, 255, 0.6) 50%, 
+            rgba(255, 255, 255, 0.7) 50%, 
             transparent 100%
           );
           transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -600,17 +549,17 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
         .maia-story-explore-btn:hover {
           background: linear-gradient(
             135deg, 
-            rgba(255, 255, 255, 0.42) 0%, 
-            rgba(255, 255, 255, 0.14) 50%,
-            rgba(255, 255, 255, 0.32) 100%
+            rgba(255, 255, 255, 0.45) 0%, 
+            rgba(255, 255, 255, 0.16) 50%,
+            rgba(255, 255, 255, 0.35) 100%
           );
-          border-color: rgba(255, 255, 255, 0.85);
+          border-color: rgba(255, 255, 255, 0.9);
           box-shadow: 
             inset 0 2px 2px 0 rgba(255, 255, 255, 0.95),
             inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.4),
             inset 0 0 20px 0 rgba(255, 255, 255, 0.25),
             0 14px 40px rgba(0, 0, 0, 0.45);
-          transform: translateY(-2px) scale(1.05);
+          transform: translateY(-2px);
         }
 
         .maia-story-card:hover .maia-story-explore-btn::before {
