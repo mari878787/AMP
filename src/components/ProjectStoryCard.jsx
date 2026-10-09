@@ -261,7 +261,7 @@ export default function ProjectStoryCard({ project, onSelectTeaser }) {
           left: 0;
           right: 0;
           height: 110px;
-          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+          // background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
           z-index: 3;
           pointer-events: none;
         }

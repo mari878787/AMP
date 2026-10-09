@@ -25,16 +25,13 @@ const PROJECTS_DATA = [
     price: '₹1 Cr - ₹3 Cr',
     priceRange: '₹1 Cr - ₹3 Cr',
     bedrooms: ['3 BHK', '4 BHK'],
-    image: '/images/project/CML/North_Row_4K_Day 2.webp',
-    mobileImage: '/images/project/CML/row-villa-mobile-hero.png',
+    image: '/images/project/CML/Cover/Look_1.png',
+    mobileImage: '/images/project/CML/Cover/Look_1.png',
     images: [
-      '/images/project/CML/extirior/Views_Scene_1_4k_4.png',
-      '/images/project/CML/extirior/Master_Plan_2_4K.png',
-      '/images/project/CML/extirior/Master_Plan_2k_New.png',
-      '/images/project/CML/extirior/Master_Plan_4_4K.png',
-      '/images/project/CML/extirior/Master_Plan_4k_New_1.png',
-      '/images/project/CML/extirior/Master_Plan_4k_New_4.png',
-      '/images/project/CML/extirior/Master_Plan_Areial_3_4k.png',
+      '/images/project/CML/Cover/Look_1.png',
+      '/images/project/CML/Cover/Look_2.png',
+      '/images/project/CML/Cover/Look_3.png',
+      '/images/project/CML/Cover/Look_4.png'
     ],
     description: 'A sanctuary of refined luxury in Medavakkam. 47 bespoke 3 & 4 BHK villas across 2.25 acres, crafted with timeless architecture, private gardens, and world-class amenities.',
     link: '/projects/villas/crystal-moonlight-villa-in-medavakkam'

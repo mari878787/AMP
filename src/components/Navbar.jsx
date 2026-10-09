@@ -6,9 +6,9 @@ const CATEGORIES = [
   {
     id: 'villas',
     name: 'Villas',
-    img: '/images/project/CML/navbar.png',
+    img: '/images/project/CML/Gallery/Look_1.png',
     projects: [
-      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/navbar.png', url: '/projects/villas/crystal-moonlight-villa-in-medavakkam' },
+      { id: 'crystal-moonlight', name: 'Crystal Moonlight', location: 'Medavakkam, Chennai', img: '/images/project/CML/Gallery/Look_1.png', url: '/projects/villas/crystal-moonlight-villa-in-medavakkam' },
       { id: 'bay-vista', name: 'Bay Vista', location: 'ECR, Chennai • Upcoming', img: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png', teaserPoster: '/images/project/Bayvista/Luxury Infinity Pool at Sunset.png', url: '#bay-vista' },
       { id: 'lakeshore', name: 'Lakeshore', location: 'ECR, Chennai • Upcoming', img: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png', teaserPoster: '/images/project/lakeshore/Lakeside Pavilion Under the Stars.png', url: '#lakeshore' }
     ]

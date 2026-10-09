@@ -7,8 +7,8 @@ import 'swiper/css/effect-fade';
 
 const HERO_SLIDES = [
   {
-    image: '/images/project/CML/hero.png',
-    mobileImage: '/images/project/CML/hero.png',
+    image: '/images/project/CML/Gallery/Look_1.png',
+    mobileImage: '/images/project/CML/Gallery/Look_1.png',
     title: 'Crystal Moonlight',
     subtitle: 'Where Contemporary Design Meets Serene Community Living',
     link: '/projects/villas/crystal-moonlight-villa-in-medavakkam'

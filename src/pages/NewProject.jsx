@@ -564,16 +564,17 @@ export default function NewProject({ project }) {
       title: `Crystal Moonlight Interior ${i + 1}`
     })),
     exteriors: [
-      { src: '/images/project/CML/extirior/Views_Scene_1_4k_4.png', title: 'Exterior Architectural View' },
-      { src: '/images/project/CML/extirior/Master_Plan_1_2K.png', title: 'Master Plan View' },
-      { src: '/images/project/CML/extirior/Master_Plan_2_4K.png', title: 'Master Plan 4K View' },
-      { src: '/images/project/CML/extirior/Master_Plan_2k_New.png', title: 'Master Plan 2K Perspective' },
-      { src: '/images/project/CML/extirior/Master_Plan_4_4K.png', title: 'Master Plan Elevation' },
-      { src: '/images/project/CML/extirior/Master_Plan_4k_New_1.png', title: 'Master Plan Perspective 1' },
-      { src: '/images/project/CML/extirior/Master_Plan_4k_New_2.png', title: 'Master Plan Perspective 2' },
-      { src: '/images/project/CML/extirior/Master_Plan_4k_New_4.png', title: 'Master Plan Perspective 4' },
-      { src: '/images/project/CML/extirior/Master_Plan_Areial_3_4k.png', title: 'Master Plan Aerial View 3' },
-      { src: '/images/project/CML/extirior/Master_Plan_Areial_4_4k.png', title: 'Master Plan Aerial View 4' }
+      { src: '/images/project/CML/Gallery/Look_1.png', title: 'Grand Entrance & Architectural Façade' },
+      { src: '/images/project/CML/Gallery/Look_1.1.png', title: 'Bespoke Villa Perspective' },
+      { src: '/images/project/CML/Gallery/Look_2.png', title: 'Contemporary Villa Elevation' },
+      { src: '/images/project/CML/Gallery/Look_3.png', title: 'Lush Landscaped Avenue & Row Villas' },
+      { src: '/images/project/CML/Gallery/Look_4.png', title: 'Private Terrace & Modern Balcony' },
+      { src: '/images/project/CML/Gallery/Look_5.png', title: 'Gated Community Master View' },
+      { src: '/images/project/CML/Gallery/Look_6.png', title: 'Architectural Villa Craftsmanship' },
+      { src: '/images/project/CML/Gallery/Look_7.png', title: 'Serene Evening Villa Ambience' },
+      { src: '/images/project/CML/Gallery/Look_8.png', title: 'Sunlit Villa Garden & Deck' },
+      { src: '/images/project/CML/Gallery/Look_8.1.png', title: 'Villa Streetscape & Greenery' },
+      { src: '/images/project/CML/Gallery/Look_9.png', title: 'Aerial Master Community Perspective' }
     ]
   };
 
@@ -779,9 +780,9 @@ export default function NewProject({ project }) {
         <section className="project-hero-section">
           <div className="project-hero-background">
             <picture className="project-hero-picture">
-              <source media="(max-width: 768px)" srcSet="/images/project/CML/hero.png" />
+              <source media="(max-width: 768px)" srcSet="/images/project/CML/Gallery/Look_1.png" />
               <img
-                src="/images/project/CML/hero.png"
+                src="/images/project/CML/Gallery/Look_1.png"
                 alt="Crystal Moonlight"
                 className="project-hero-bg-image animate-zoom"
               />
@@ -2145,7 +2146,7 @@ export default function NewProject({ project }) {
             {/* Left 50%: Full-Height Edge-to-Edge Project Image */}
             <div className="fs-popup-image-half">
               <img
-                src="/images/project/CML/popup.png"
+                src="/images/project/CML/Gallery/Look_2.png"
                 alt="Crystal Moonlight"
                 className="fs-popup-bg-img"
               />
@@ -2261,7 +2262,7 @@ export default function NewProject({ project }) {
             {/* Left 50%: Full-Height Edge-to-Edge Project Image */}
             <div className="fs-popup-image-half">
               <img
-                src="/images/project/CML/popup.png"
+                src="/images/project/CML/Gallery/Look_2.png"
                 alt="Crystal Moonlight Overview"
                 className="fs-popup-bg-img"
               />
