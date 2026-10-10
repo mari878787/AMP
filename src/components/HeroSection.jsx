@@ -204,7 +204,7 @@ export default function HeroSection({ startZoom }) {
 
         <ScrollReveal animation="fadeUp" delay={0.4}>
           <div className="hero-cta-block" key={`cta-${activeIndex}`} style={{ animation: 'fadeUp 0.8s ease forwards' }}>
-            <a href={currentSlide.link} className="btn-discover">
+            <a href="/projects" className="btn-discover">
               Explore
             </a>
           </div>

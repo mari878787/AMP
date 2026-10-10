@@ -42,7 +42,7 @@ const PROJECTS_DATA = [
     location: 'Royapettah, Chennai',
     category: 'Apartments',
     status: 'Ongoing',
-    siteExtent: '2.5 Acres',
+    siteExtent: '',
     totalUnits: '12 Units',
     bhkConfig: '3 BHK',
     structure: 'Stilt + 3 Floors',
@@ -59,7 +59,7 @@ const PROJECTS_DATA = [
       '/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg',
       '/images/project/pasha-pinnacle/extirior/5 Resized PP 16x9.jpg'
     ],
-    description: 'Exclusive 3 BHK luxury residences in the heart of Royapettah. Combining classic elegance with modern comforts across 12 private units on a 2.5-acre site.',
+    description: 'Exclusive 3 BHK luxury residences in the heart of Royapettah. Combining classic elegance with modern comforts across 12 private units.',
     link: '/projects/apartments/pasha-pinnacle-luxury-apartment-in-royapettah'
   },
   {
@@ -84,7 +84,7 @@ const PROJECTS_DATA = [
       '/images/project/CMR/Upscaled/5.webp',
       '/images/project/CMR/Upscaled/3.webp'
     ],
-    description: 'A premium 3.6-acre gated township of 122 ready-to-build residential plots in Maduranthakam with wide paved roads and lush green parks.',
+    description: 'A premium 3.6-acre DTCP and RERA approved gated township of 122 ready-to-build residential plots in Maduranthakam with wide paved roads and lush green parks.',
     link: '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam'
   },
   {
@@ -109,7 +109,7 @@ const PROJECTS_DATA = [
       '/images/project/ashok-nagar/image/G1.webp',
       '/images/project/ashok-nagar/image/G7.webp'
     ],
-    description: 'Serene 2.30-acre villa plot community in Maduranthakam with DTCP approval, offering 48 ready-to-build plots surrounded by greenery.',
+    description: 'Serene 2.30-acre DTCP and RERA approved villa plot community in Maduranthakam, offering 48 ready-to-build plots surrounded by greenery.',
     link: '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam'
   },
   {

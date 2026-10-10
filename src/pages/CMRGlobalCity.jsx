@@ -807,7 +807,7 @@ export default function CMRGlobalCity({ project }) {
         <div className="project-sections-container">
           {/* Overview Section - Minimalist Editorial Design */}
           {activeTab === 'overview' && (
-            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 0', minHeight: 'calc(100vh - 55px)', display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '48px 0 24px', minHeight: 'auto', display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
               {/* Project Logo Badge (Overview Section only) */}
               <div 
                 className="overview-logo-badge" 

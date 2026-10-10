@@ -45,7 +45,7 @@ export default function ProjectDetailsGrid({
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
-        start: 'top 85%',
+        start: 'top 92%',
         toggleActions: 'play none none reverse',
       }
     });
@@ -53,24 +53,24 @@ export default function ProjectDetailsGrid({
     // 1. Animate the top border line
     tl.fromTo('.grid-top-border', 
       { scaleX: 0, transformOrigin: 'left center' },
-      { scaleX: 1, duration: 1.2, ease: 'power2.inOut' }
+      { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }
     );
 
     // 2. Animate vertical dividers (draw down)
     if (dividers.length > 0) {
       tl.fromTo(dividers,
         { scaleY: 0, transformOrigin: 'top center' },
-        { scaleY: 1, duration: 1, ease: 'power2.inOut', stagger: 0.15 },
-        '-=0.8'
+        { scaleY: 1, duration: 0.45, ease: 'power2.inOut', stagger: 0.08 },
+        '-=0.35'
       );
     }
 
     // 3. Stagger reveal for the stat blocks
     if (stats.length > 0) {
       tl.fromTo(stats,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', stagger: 0.1 },
-        '-=0.6'
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, ease: 'power3.out', stagger: 0.06 },
+        '-=0.3'
       );
     }
 
@@ -85,18 +85,18 @@ export default function ProjectDetailsGrid({
       tl.to(chars, {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        ease: 'back.out(1.7)',
-        stagger: 0.03
-      }, '-=0.5');
+        duration: 0.45,
+        ease: 'power2.out',
+        stagger: 0.02
+      }, '-=0.25');
     }
 
     // 5. Stagger other center group texts
     if (centerTexts.length > 0) {
       tl.fromTo(centerTexts,
-        { y: 15, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out', stagger: 0.1 },
-        '-=0.4'
+        { y: 10, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out', stagger: 0.06 },
+        '-=0.2'
       );
     }
 
@@ -107,12 +107,12 @@ export default function ProjectDetailsGrid({
       const obj1 = { val: 0 };
       tl.to(obj1, {
         val: stat1Count,
-        duration: 1.5,
+        duration: 0.8,
         ease: 'power2.out',
         onUpdate: () => {
           setCount1(decimals > 0 ? obj1.val.toFixed(decimals) : Math.floor(obj1.val));
         }
-      }, '-=1');
+      }, '-=0.5');
     }
 
     // 7. Number Count Up for Stat 2 (e.g. Total Units)
@@ -122,7 +122,7 @@ export default function ProjectDetailsGrid({
       const obj2 = { val: 0 };
       tl.to(obj2, {
         val: stat2Count,
-        duration: 1.5,
+        duration: 0.8,
         ease: 'power2.out',
         onUpdate: () => {
           setCount2(decimals > 0 ? obj2.val.toFixed(decimals) : Math.floor(obj2.val));

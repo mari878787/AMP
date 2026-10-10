@@ -26,11 +26,21 @@ export default function TeaserPosterModal({ isOpen, onClose, posterImage, projec
         </button>
         
         <div className="teaser-poster-wrapper">
+          <div className="teaser-coming-soon-badge">
+            <span className="teaser-badge-dot"></span>
+            COMING SOON
+          </div>
           <img 
             src={posterImage} 
             alt={projectTitle ? `${projectTitle} Teaser` : 'Upcoming Project Teaser'} 
             className="teaser-poster-img" 
           />
+          {projectTitle && (
+            <div className="teaser-caption-overlay">
+              <span className="teaser-project-tag">UPCOMING LUXURY PROJECT</span>
+              <h3 className="teaser-project-title">{projectTitle}</h3>
+            </div>
+          )}
         </div>
       </div>
 
@@ -87,6 +97,7 @@ export default function TeaserPosterModal({ isOpen, onClose, posterImage, projec
         }
 
         .teaser-poster-wrapper {
+          position: relative;
           width: 100%;
           max-height: 85vh;
           border-radius: 12px;
@@ -96,6 +107,74 @@ export default function TeaserPosterModal({ isOpen, onClose, posterImage, projec
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        .teaser-coming-soon-badge {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          background: rgba(180, 133, 100, 0.9);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          color: #ffffff;
+          padding: 8px 18px;
+          border-radius: 100px;
+          font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+          z-index: 5;
+        }
+
+        .teaser-badge-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #ffffff;
+          box-shadow: 0 0 8px #ffffff;
+          animation: pulseDot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .teaser-caption-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 40px 24px 20px 24px;
+          background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          z-index: 4;
+        }
+
+        .teaser-project-tag {
+          font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+          font-size: 10px;
+          letter-spacing: 0.18em;
+          color: #b48564;
+          text-transform: uppercase;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+
+        .teaser-project-title {
+          font-family: var(--font-heading, 'Playfair Display', serif);
+          font-size: clamp(22px, 3vw, 34px);
+          color: #ffffff;
+          margin: 0;
+          font-weight: 400;
+          letter-spacing: -0.01em;
         }
 
         .teaser-poster-img {
