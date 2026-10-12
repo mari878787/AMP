@@ -91,6 +91,10 @@ export default function PhilosophySection() {
           justify-content: center;
         }
 
+        .detail-title {
+          margin-bottom: 36px;
+        }
+
 
 
         .image-column {

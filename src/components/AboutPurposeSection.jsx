@@ -111,6 +111,13 @@ export default function AboutPurposeSection({
           margin-bottom: 20px;
         }
 
+        .purpose-header .section-tag {
+          font-size: 13.5px;
+          font-weight: 600;
+          letter-spacing: 0.22em;
+          color: #b48564;
+        }
+
         /* ── 3-COLUMN EDITORIAL GRID ── */
         .purpose-editorial-grid {
           display: grid;

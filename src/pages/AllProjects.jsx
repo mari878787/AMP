@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
@@ -211,11 +211,20 @@ function FilterDropdown({ label, options, value, onChange }) {
 
 export default function AllProjects() {
   const location = useLocation();
+  const heroVideoRef = useRef(null);
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeStatus, setActiveStatus] = useState('All');
   const [activeLocation, setActiveLocation] = useState('All');
   const [activeBedrooms, setActiveBedrooms] = useState('All');
   const [selectedTeaser, setSelectedTeaser] = useState(null);
+
+  useEffect(() => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.defaultMuted = true;
+      heroVideoRef.current.muted = true;
+      heroVideoRef.current.play().catch(() => {});
+    }
+  }, []);
 
   // Derive unique locations from project data across all projects
   const locationOptions = ['All', ...Array.from(new Set(PROJECTS_DATA.map(p => p.location)))];
@@ -256,22 +265,37 @@ export default function AllProjects() {
         description="Find your ideal property with Aadhithya Mohan Properties. Explore premium plots, villas, and residential projects across sought-after locations in Chennai."
         canonicalUrl="https://aadhithyamohanproperties.com/projects"
       />
-      <Navbar theme="dark" />
+      <Navbar darkText={true} />
 
       <main style={{ flexGrow: 1, paddingBottom: '100px' }}>
         {/* Hero Banner */}
         <div className="all-projects-hero">
+          <video
+            ref={heroVideoRef}
+            className="all-projects-hero-video"
+            src="/images/allProject/Architecture for a bespoke life.mp4"
+            poster="/images/allProject/hero-poster.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            onCanPlay={(e) => {
+              e.target.defaultMuted = true;
+              e.target.muted = true;
+              e.target.play().catch(() => {});
+            }}
+          />
           <div className="all-projects-hero-overlay"></div>
 
-          <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
+          {/* <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
             <ScrollReveal animation="fadeUp">
-              {/* <span className="hero-tag-light">PORTFOLIO</span> */}
               <h1 className="hero-page-title display-title">Our Projects</h1>
               <p className="hero-page-sub">
                 Explore our curated collection of bespoke luxury villas, residences, and plotted developments across Chennai.
               </p>
             </ScrollReveal>
-          </div>
+          </div> */}
         </div>
 
         <div className="container">
@@ -338,13 +362,32 @@ export default function AllProjects() {
           align-items: flex-end;
           padding: 0 0 50px 0;
           margin-bottom: 60px;
-          background: url("/images/about/CML ABOUT US.png") center/cover no-repeat;
+          overflow: hidden;
+          background-color: #faf8f5;
+        }
+
+        .all-projects-hero-video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          z-index: 1;
         }
 
         .all-projects-hero-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.23) 100%);
+          z-index: 1;
+          background: linear-gradient(
+            to top,
+            rgba(250, 248, 245, 0.88) 0%,
+            rgba(250, 248, 245, 0.25) 35%,
+            rgba(0, 0, 0, 0) 65%,
+            rgba(0, 0, 0, 0.05) 100%
+          );
+          pointer-events: none;
         }
 
         .hero-tag-light {

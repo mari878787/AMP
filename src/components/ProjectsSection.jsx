@@ -60,7 +60,7 @@ const ALL_PROJECTS = [
     link: '#bay-vista',
     centerInfo: 'Upcoming Project',
     badge: 'Coming Soon',
-    bhkConfig: 'Beachfront Villas'
+    bhkConfig: 'Coming Soon'
   },
   {
     id: 6,
@@ -124,16 +124,16 @@ export default function ProjectsSection() {
   return (
     <section className="maia-portfolio-wrapper" id="projects">
       
-      {/* ── Headline Intro Section (Matching Reference Screenshot) ── */}
+      {/* ── Headline Intro Section ── */}
       <div className="projects-headline-intro">
         <div className="container text-center">
           <ScrollReveal className="projects-headline-title" animation="fadeUp" delay={0.1}>
-            <h2 className="section-title">Stories built on trust</h2>
+            <h2 className="section-title">Signature Developments</h2>
           </ScrollReveal>
 
           <ScrollReveal className="projects-headline-subtitle" animation="fadeUp" delay={0.3}>
             <p className="body-text" style={{ textAlign: "center" }}>
-              Discover homes and investment opportunities tailored to you. With our trusted expertise and local knowledge.
+              Explore our curated portfolio of luxury residences, bespoke villas, and plotted communities crafted to endure.
             </p>
           </ScrollReveal>
         </div>

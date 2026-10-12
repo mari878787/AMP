@@ -807,7 +807,7 @@ export default function CMRGlobalCity({ project }) {
         <div className="project-sections-container">
           {/* Overview Section - Minimalist Editorial Design */}
           {activeTab === 'overview' && (
-            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '48px 0 24px', minHeight: 'auto', display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
+            <section id="overview" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '78px 0 24px', minHeight: 'auto', display: 'flex', alignItems: 'center', boxSizing: 'border-box' }}>
               {/* Project Logo Badge (Overview Section only) */}
               <div 
                 className="overview-logo-badge" 
@@ -884,7 +884,7 @@ export default function CMRGlobalCity({ project }) {
 
           {/* Why CMR Global City Section */}
           {activeTab === 'why-project' && (
-            <section id="why-project" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '60px 0 0', minHeight: 'calc(100vh - 140px)', background: '#fff' }}>
+            <section id="why-project" className="project-section-wrapper scroll-section" style={{ position: 'relative', overflow: 'hidden', padding: '40px 0 0', minHeight: 'calc(100vh - 140px)', background: '#fff' }}>
               <div className="container" style={{ padding: '0 0 60px' }}>
                 <ScrollReveal className="section-header" animation="fadeUp" delay={0.1} style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <h2 className="section-title">

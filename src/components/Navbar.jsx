@@ -204,13 +204,10 @@ export default function Navbar({ darkText = false }) {
         className={`mega-menu ${megaMenuOpen ? 'visible' : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mega-menu-content">
+        <div className={`mega-menu-content ${activeCategory ? 'has-active-category' : ''}`}>
 
           {/* Column 1: Categories */}
-          <div
-            className="mega-categories"
-            style={{ borderRight: activeCategory ? '1px solid rgba(0,0,0,0.2)' : 'none' }}
-          >
+          <div className="mega-categories">
             <div className="mega-column-title">CATEGORIES</div>
             {CATEGORIES.map(cat => (
               <div
@@ -244,40 +241,36 @@ export default function Navbar({ darkText = false }) {
 
           {/* Column 2: Projects */}
           <div
-            className="mega-projects"
-            style={{
-              opacity: activeCategory ? 1 : 0,
-              visibility: activeCategory ? 'visible' : 'hidden',
-              transform: activeCategory ? 'translateX(0)' : 'translateX(-10px)',
-              transition: 'opacity 0.45s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s'
-            }}
+            className={`mega-projects ${activeCategory ? 'is-active' : 'is-collapsed'}`}
           >
-            {activeCategory && (
-              <>
-                <div className="mega-column-title">{activeCategory.name}</div>
-                {activeCategory.projects.map(proj => (
-                  <div
-                    key={proj.id}
-                    className={`mega-project-item ${activeProject?.id === proj.id ? 'active' : ''}`}
-                    onMouseEnter={() => setActiveProject(proj)}
-                  >
-                    <a 
-                      href={proj.url || '/projects'}
-                      onClick={(e) => {
-                        if (proj.teaserPoster) {
-                          e.preventDefault();
-                          setSelectedTeaser({ image: proj.teaserPoster, title: proj.name });
-                          setMegaMenuOpen(false);
-                        }
-                      }}
+            <div className="mega-projects-inner">
+              {activeCategory && (
+                <>
+                  <div className="mega-column-title">{activeCategory.name}</div>
+                  {activeCategory.projects.map(proj => (
+                    <div
+                      key={proj.id}
+                      className={`mega-project-item ${activeProject?.id === proj.id ? 'active' : ''}`}
+                      onMouseEnter={() => setActiveProject(proj)}
                     >
-                      <div className="mega-project-name">{proj.name}</div>
-                      {proj.location && <div className="mega-project-location">{proj.location}</div>}
-                    </a>
-                  </div>
-                ))}
-              </>
-            )}
+                      <a 
+                        href={proj.url || '/projects'}
+                        onClick={(e) => {
+                          if (proj.teaserPoster) {
+                            e.preventDefault();
+                            setSelectedTeaser({ image: proj.teaserPoster, title: proj.name });
+                            setMegaMenuOpen(false);
+                          }
+                        }}
+                      >
+                        <div className="mega-project-name">{proj.name}</div>
+                        {proj.location && <div className="mega-project-location">{proj.location}</div>}
+                      </a>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
           </div>
 
           {/* Column 3: Image Display */}
@@ -668,9 +661,9 @@ export default function Navbar({ darkText = false }) {
         .mega-menu-content {
           width: 100%;
           padding: 0;
-          display: grid;
-          grid-template-columns: 260px 320px 1fr; /* Categories, Projects, Image */
-          gap: 0;
+          display: flex;
+          flex-direction: row;
+          align-items: stretch;
           height: 440px;
           box-sizing: border-box;
           position: relative;
@@ -688,20 +681,60 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mega-categories {
+          flex: 0 0 260px;
+          width: 260px;
           display: flex;
           flex-direction: column;
           padding: 28px 24px 28px 40px;
           border-right: 1px solid rgba(0, 0, 0, 0.15);
+          background: transparent;
+          z-index: 3;
+          box-sizing: border-box;
+          flex-shrink: 0;
         }
 
         .mega-projects {
-          display: flex;
-          flex-direction: column;
-          padding: 28px 30px 28px 30px;
+          flex: 0 0 0px;
+          width: 0px;
+          max-width: 0px;
+          padding: 0;
+          border-right: 1px solid transparent;
+          overflow: hidden;
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          box-sizing: border-box;
+          transition: 
+            flex-basis 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            max-width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.4s ease,
+            opacity 0.4s ease,
+            visibility 0.4s ease;
+          will-change: flex-basis, max-width, width, opacity;
+        }
+
+        .mega-projects.is-active {
+          flex: 0 0 320px;
+          width: 320px;
+          max-width: 320px;
+          padding: 28px 30px;
           border-right: 1px solid rgba(0, 0, 0, 0.15);
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
           overflow-y: auto;
           scrollbar-width: thin;
           scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+        }
+
+        .mega-projects-inner {
+          width: 260px;
+          min-width: 260px;
+          display: flex;
+          flex-direction: column;
+          box-sizing: border-box;
         }
 
         .mega-column-title {
@@ -781,13 +814,16 @@ export default function Navbar({ darkText = false }) {
         }
 
         .mega-image-container {
-          width: 100%;
+          flex: 1 1 0%;
+          width: 0;
+          min-width: 0;
           height: 100%;
           min-height: 100%;
           overflow: hidden;
           background: #f5f5f5;
           margin: 0;
           padding: 0;
+          position: relative;
         }
 
         .mega-image {

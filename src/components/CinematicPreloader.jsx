@@ -11,12 +11,15 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
     setIsDone(false);
 
     // Sequence timing:
-    // 0.0s - 4.2s: Emblem reveal -> white-logo.png & slogan -> top-left to bottom-right shine sweep
-    // 4.2s: Entire preloader lifts slowly from bottom to top (translateY -100%)
-    // 5.6s: Transition complete or loop reset
+    // 0.2s - 1.2s: Icon entrance (fade in + scale up with fluid ease-out damping)
+    // 1.2s - 2.0s: Diagonal white glossy shimmer sweeps left-to-right across emblem
+    // 1.85s: Primary brand name slides upward into position
+    // 2.2s: Subtitle locks into crisp alignment
+    // 3.8s: Entire preloader lifts smoothly (translateY -100%)
+    // 4.9s: Complete
     const exitTimer = setTimeout(() => {
       setIsExiting(true);
-    }, 4200);
+    }, 3800);
 
     const doneTimer = setTimeout(() => {
       if (loop) {
@@ -26,7 +29,7 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
         setIsDone(true);
         if (onComplete) onComplete();
       }
-    }, 5600);
+    }, 4900);
 
     return () => {
       clearTimeout(exitTimer);
@@ -40,54 +43,46 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
     <aside 
       key={cycle}
       className={`cinematic-preloader ${isExiting ? 'preloader-exit-curtain-up' : ''}`}
-      aria-label="Welcome to Aadhithya Mohan Properties"
+      aria-label="Aadhithya Mohan Properties"
       role="status"
     >
-      {/* ── 1. CINEMATIC ARCHITECTURAL CANYON ── */}
-      <div className="preloader-backdrop">
-        <img 
-          src="/images/preloader_corridor-2.jpg" 
-          alt=""
-          aria-hidden="true" 
-          className="preloader-bg-image"
-        />
-        {/* Background Dark Tint Overlay */}
-        <div className="preloader-dark-tint-overlay" />
-        <div className="preloader-vignette-overlay" />
-        <div className="preloader-warm-light-pass" />
-      </div>
+      {/* ── 1. CLEAN, ISOLATED CORPORATE BACKGROUND ── */}
+      <div className="preloader-isolated-bg" />
 
       {/* ── 2. CENTER STAGE ── */}
       <div className="preloader-stage-wrap">
         
-        {/* Unique Reveal Emblem (logo.png) */}
-        <div className="preloader-emblem-wrap">
-          <div className="preloader-emblem-light-bloom" />
+        {/* Central Emblem with Masked Light Sweep */}
+        <div className="preloader-emblem-container">
           <img 
             src="/images/logo.png" 
             alt="Aadhithya Mohan Emblem" 
-            className="preloader-emblem-image"
+            className="preloader-emblem-base"
           />
+          {/* Subtle diagonal white glossy light shimmer sweep */}
+          <div className="preloader-emblem-shimmer-sweep" />
         </div>
 
-        {/* Brand Logotype Image (white-logo.png) */}
-        <div className="preloader-wordmark-wrap">
+        {/* Primary Brand Name */}
+        <div className="preloader-primary-name-wrap">
           <img 
-            src="/images/white-logo.png" 
-            alt="Aadhithya Mohan Properties" 
-            className="preloader-wordmark-image"
+            src="/images/brand-title-white.png" 
+            alt="Aadhithya Mohan" 
+            className="preloader-primary-name-img"
           />
         </div>
 
-        {/* Bottom Luxury Slogan */}
-        <div className="preloader-slogan-wrap">
-          <span>CURATING TIMELESS LANDMARKS</span>
+        {/* Subtitle */}
+        <div className="preloader-subtitle-wrap">
+          <img 
+            src="/images/brand-subtitle-white.png" 
+            alt="Properties" 
+            className="preloader-subtitle-img"
+          />
         </div>
 
       </div>
 
-      {/* ── 3. FULL-SCREEN DIAGONAL SHINE SWEEP (TOP-LEFT TO BOTTOM-RIGHT) ── */}
-      <div className="preloader-fullscreen-shine" />
     </aside>
   );
 }

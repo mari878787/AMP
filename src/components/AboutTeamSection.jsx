@@ -26,7 +26,7 @@ const MD_LEADER = {
 
 const CEO_LEADER = {
   id: 2,
-  name: "Muralidharan",
+  name: "Muralidharan Devaraj",
   role: "Chief Executive Officer",
   signatureTitle: "Muralidharan",
   signatureSub: "Chief Executive Officer",
@@ -34,9 +34,10 @@ const CEO_LEADER = {
   image: "/images/team/murali-cutout.png",
   modalImage: "/images/team/murali.png",
   bio: [
-    "Muralidharan brings over 11 years of professional experience, including more than six years in the real estate industry. His journey began in investor relations, where he worked closely with investors as an independent consultant, gaining valuable insight into market dynamics, customer expectations, and long-term value creation. His strategic vision and leadership ultimately led him to assume the role of Chief Executive Officer at Aadhithya Mohan Properties.",
-    "Prior to his leadership in real estate, he served as a Marketing Consultant for digital campaigns at Condé Nast India Pvt. Ltd., where he worked on performance-driven marketing initiatives for leading brands. This experience cultivated a strategic approach to brand building, customer engagement, and business growth, which continues to influence his leadership today.",
-    "As Chief Executive Officer of Aadhithya Mohan Properties, Muralidharan leads the company's overall operations, strategic planning, business growth, and expansion. His perspective on real estate is founded on two enduring principles: trust and lasting value. He believes every development should inspire confidence through uncompromising integrity while creating enduring value for homeowners and investors alike. Guided by this philosophy, he is committed to delivering thoughtfully planned communities that reflect exceptional quality, timeless design, and a legacy that extends well beyond the homes themselves."
+    "Muralidharan brings over a decade of professional experience, including more than six years in the real estate industry. His journey with Aadhithya Mohan Properties began in investor relations, where he worked closely with investors as an independent consultant, developing a strong understanding of market dynamics, investor expectations, and long-term value creation.",
+    "Prior to his leadership role in real estate, he also served as a Marketing Consultant for digital campaigns at Condé Nast India Pvt. Ltd., contributing to performance-driven marketing initiatives for leading brands. This experience shaped his approach to brand positioning, customer engagement, and sustainable business growth.",
+    "As Chief Executive Officer of Aadhithya Mohan Properties, Muralidharan leads the company's strategic direction, operations, business development, and expansion. He believes sustainable business growth is built on strong teams, a supportive work environment, and empowering people to contribute meaningfully to the organisation's success. Drawing on his experience across investor relations, marketing, and real estate, he brings a long-term perspective to business growth and market opportunities.",
+    "His leadership is guided by two enduring principles: trust and lasting value. He believes that real estate extends beyond creating physical spaces; it is about building confidence, enriching lives, and creating value that endures across generations."
   ]
 };
 
@@ -63,6 +64,17 @@ const MANAGEMENT_LEADERS = [
       "Known for his leadership, analytical thinking, and proactive approach, Balamurugan plays a key role in strengthening sales performance, developing channel partnerships, and driving sustainable growth for Aadhithya Mohan Properties."
     ],
     image: "/images/about/team/bala.jpeg"
+  },
+  {
+    id: 5,
+    name: "Monisha",
+    role: "Director of Operations",
+    bio: [
+      "Monisha brings close to a decade professional experience in the IT industry, with exposure to diverse business domains, including real estate and banking, alongside leadership responsibilities. Her professional journey has equipped her with a structured, people-centric approach to operations, team coordination, and organisational excellence. Drawing on this experience, she transitioned into a leadership role as Director of Operations at Aadhithya Mohan Properties, where she plays a key role in strengthening the company's operational framework.",
+      "As Director of Operations, Monisha oversees day-to-day office operations, employee welfare, and workplace coordination, fostering an environment built on efficiency, accountability, and collaboration. She believes that a strong organisation begins with empowered people, clear processes, and a culture that values professionalism and mutual respect.",
+      "Her philosophy towards real estate is rooted in the belief that professionalism and trust are the cornerstones of a better customer experience. She believes that delivering a transparent, reliable, and professional experience at every stage of the customer journey is an essential step towards elevating the real estate industry. Guided by this conviction, Monisha is committed to building an organisation where operational excellence and a people-first culture translate into lasting customer confidence and meaningful relationships."
+    ],
+    image: "/images/about/team/Monisha.jpg"
   }
 ];
 
@@ -666,11 +678,18 @@ export default function AboutTeamSection({ showExecutives = true }) {
 
         .sobha-team-cards-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+          grid-template-columns: repeat(3, 1fr);
           justify-content: center;
           gap: 32px;
-          max-width: 820px;
+          max-width: 1200px;
           margin: 0 auto;
+        }
+
+        @media (max-width: 1100px) {
+          .sobha-team-cards-grid {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 780px;
+          }
         }
 
         .sobha-team-card-col {
@@ -898,7 +917,7 @@ export default function AboutTeamSection({ showExecutives = true }) {
         }
 
         .sobha-bio-modal-inner {
-          padding: 56px 48px 48px;
+          padding: 40px 44px 36px;
         }
 
         .sobha-bio-modal-tag {
@@ -909,60 +928,50 @@ export default function AboutTeamSection({ showExecutives = true }) {
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: #b48564;
-          margin-bottom: 14px;
-          padding: 5px 14px;
+          margin-bottom: 10px;
+          padding: 4px 12px;
           background: rgba(180, 133, 100, 0.08);
           border-radius: 4px;
         }
 
         .sobha-bio-modal-title {
           font-family: var(--font-heading);
-          font-size: 34px;
+          font-size: 32px;
           color: #111111;
-          margin: 0 0 6px 0;
-          line-height: 1.12;
-          letter-spacing: -0.02em;
+          margin: 0 0 4px 0;
+          line-height: 1.15;
+          letter-spacing: -0.01em;
         }
 
         .sobha-bio-modal-sub {
           font-family: var(--font-sans);
-          font-size: 15px;
-          color: #888888;
-          margin: 0 0 24px 0;
+          font-size: 14px;
+          color: #777777;
+          margin: 0 0 16px 0;
           font-weight: 400;
+          letter-spacing: 0.02em;
         }
 
         .sobha-bio-modal-divider {
-          width: 48px;
+          width: 44px;
           height: 2px;
           background: linear-gradient(90deg, #b48564, #d4a574);
-          margin-bottom: 28px;
+          margin-bottom: 20px;
           border-radius: 2px;
         }
 
         .sobha-bio-modal-paragraphs {
           display: flex;
           flex-direction: column;
-          gap: 18px;
+          gap: 15px;
         }
 
         .sobha-bio-p {
           font-family: var(--font-sans);
-          font-size: 15px;
-          line-height: 1.8;
-          color: #444444;
+          font-size: 14.5px;
+          line-height: 1.72;
+          color: #3a3a3a;
           margin: 0;
-        }
-
-        .sobha-bio-p:first-child::first-letter {
-          font-family: var(--font-heading);
-          font-size: 32px;
-          font-weight: 400;
-          color: #b48564;
-          float: left;
-          line-height: 1;
-          margin-right: 6px;
-          margin-top: 4px;
         }
 
         @keyframes modalFadeIn {

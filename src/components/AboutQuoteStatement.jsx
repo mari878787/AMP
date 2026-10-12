@@ -102,11 +102,11 @@ export default function AboutQuoteStatement() {
 
         .quote-pipe-btn {
           font-family: var(--font-sans);
-          font-size: 12px;
-          font-weight: 500;
+          font-size: 14.5px;
+          font-weight: 600;
           color: #999999;
           text-transform: uppercase;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.18em;
           background: transparent;
           border: none;
           padding: 4px 0;
@@ -124,7 +124,7 @@ export default function AboutQuoteStatement() {
 
         .quote-pipe-divider {
           color: rgba(0, 0, 0, 0.25);
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 300;
           user-select: none;
         }

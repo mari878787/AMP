@@ -517,7 +517,7 @@ export default function AboutLeaderDarkVariant() {
         }
 
         .sobha-bio-modal-info-col {
-          padding: 50px 44px;
+          padding: 40px 44px 36px;
           overflow-y: auto;
           display: flex;
           flex-direction: column;
@@ -533,8 +533,8 @@ export default function AboutLeaderDarkVariant() {
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: #b48564;
-          margin-bottom: 14px;
-          padding: 5px 14px;
+          margin-bottom: 10px;
+          padding: 4px 12px;
           background: rgba(180, 133, 100, 0.08);
           border-radius: 4px;
           align-self: flex-start;
@@ -542,52 +542,42 @@ export default function AboutLeaderDarkVariant() {
 
         .sobha-bio-modal-title {
           font-family: var(--font-heading);
-          font-size: 34px;
+          font-size: 32px;
           color: #111111;
-          margin: 0 0 6px 0;
-          line-height: 1.12;
-          letter-spacing: -0.02em;
+          margin: 0 0 4px 0;
+          line-height: 1.15;
+          letter-spacing: -0.01em;
         }
 
         .sobha-bio-modal-sub {
           font-family: var(--font-sans);
-          font-size: 15px;
-          color: #888888;
-          margin: 0 0 24px 0;
+          font-size: 14px;
+          color: #777777;
+          margin: 0 0 16px 0;
           font-weight: 400;
+          letter-spacing: 0.02em;
         }
 
         .sobha-bio-modal-divider {
-          width: 48px;
+          width: 44px;
           height: 2px;
           background: linear-gradient(90deg, #b48564, #d4a574);
-          margin-bottom: 28px;
+          margin-bottom: 20px;
           border-radius: 2px;
         }
 
         .sobha-bio-modal-paragraphs {
           display: flex;
           flex-direction: column;
-          gap: 18px;
+          gap: 15px;
         }
 
         .sobha-bio-p {
           font-family: var(--font-sans);
-          font-size: 15px;
-          line-height: 1.8;
-          color: #444444;
+          font-size: 14.5px;
+          line-height: 1.72;
+          color: #3a3a3a;
           margin: 0;
-        }
-
-        .sobha-bio-p:first-child::first-letter {
-          font-family: var(--font-heading);
-          font-size: 32px;
-          font-weight: 400;
-          color: #b48564;
-          float: left;
-          line-height: 1;
-          margin-right: 6px;
-          margin-top: 4px;
         }
 
         /* Responsive */

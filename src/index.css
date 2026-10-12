@@ -361,11 +361,11 @@ blockquote {
 .section-tag {
   display: inline-block;
   font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 600;
   color: #b48564;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   margin-bottom: 16px;
 }
 
