@@ -15,11 +15,12 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
     // 1.2s - 2.0s: Diagonal white glossy shimmer sweeps left-to-right across emblem
     // 1.85s: Primary brand name slides upward into position
     // 2.2s: Subtitle locks into crisp alignment
-    // 3.8s: Entire preloader lifts smoothly (translateY -100%)
-    // 4.9s: Complete
+    // 2.45s: Luxury slogan slides upward in gold
+    // 4.1s: Entire preloader lifts smoothly (translateY -100%)
+    // 5.2s: Complete
     const exitTimer = setTimeout(() => {
       setIsExiting(true);
-    }, 3800);
+    }, 4100);
 
     const doneTimer = setTimeout(() => {
       if (loop) {
@@ -29,7 +30,7 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
         setIsDone(true);
         if (onComplete) onComplete();
       }
-    }, 4900);
+    }, 5200);
 
     return () => {
       clearTimeout(exitTimer);
@@ -79,6 +80,11 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
             alt="Properties" 
             className="preloader-subtitle-img"
           />
+        </div>
+
+        {/* Luxury Brand Slogan */}
+        <div className="preloader-slogan-wrap">
+          <span className="preloader-slogan-text">Curating Timeless Spaces</span>
         </div>
 
       </div>

@@ -86,7 +86,7 @@
 }
 
 .preloader-emblem-base {
-  height: 82px;
+  height: 142px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -221,6 +221,39 @@
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
 }
 
+/* ── 2D. LUXURY BRAND SLOGAN ── */
+.preloader-slogan-wrap {
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: sloganReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) 2.45s forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes sloganReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+    letter-spacing: 0.32em;
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateY(0);
+    letter-spacing: 0.44em;
+  }
+}
+
+.preloader-slogan-text {
+  font-family: 'Montserrat', var(--font-sans, sans-serif);
+  font-size: 10px;
+  font-weight: 500;
+  color: #dfba85;
+  text-transform: uppercase;
+  display: inline-block;
+  letter-spacing: inherit;
+  text-shadow: 0 0 12px rgba(223, 186, 133, 0.35);
+}
+
 /* ── 3. RESPONSIVE BREAKPOINTS ── */
 @media (max-width: 768px) {
   .preloader-stage-wrap {
@@ -230,7 +263,7 @@
   }
 
   .preloader-emblem-base {
-    height: 66px;
+    height: 90px;
   }
 
   .preloader-emblem-container {
@@ -252,5 +285,14 @@
 
   .preloader-subtitle-img {
     max-height: 8px;
+  }
+
+  .preloader-slogan-wrap {
+    margin-top: 14px;
+  }
+
+  .preloader-slogan-text {
+    font-size: 7.5px;
+    letter-spacing: 0.28em;
   }
 }
