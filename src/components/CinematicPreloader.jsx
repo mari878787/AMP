@@ -47,8 +47,17 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
       aria-label="Aadhithya Mohan Properties"
       role="status"
     >
-      {/* ── 1. CLEAN, ISOLATED CORPORATE BACKGROUND ── */}
-      <div className="preloader-isolated-bg" />
+      {/* ── 1. ARCHITECTURAL CORRIDOR BACKGROUND ── */}
+      <div className="preloader-backdrop">
+        <img 
+          src="/images/preloader_corridor-2.jpg" 
+          alt="" 
+          aria-hidden="true" 
+          className="preloader-bg-image"
+        />
+        <div className="preloader-dark-tint-overlay" />
+        <div className="preloader-vignette-overlay" />
+      </div>
 
       {/* ── 2. CENTER STAGE ── */}
       <div className="preloader-stage-wrap">
