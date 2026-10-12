@@ -1,4 +1,4 @@
-import{u as F,r as s}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index-Bj2JLI6h.js";import{X as S,e as z,r as R,s as D,l as Y}from"./vendor-icons-K0xaSwY_.js";function H({title:c,description:d,canonicalUrl:g,ogType:l="website"}){const p=F();return s.useEffect(()=>{if(c&&(document.title=c),d){let r=document.querySelector('meta[name="description"]');r||(r=document.createElement("meta"),r.setAttribute("name","description"),document.head.appendChild(r)),r.setAttribute("content",d);let i=document.querySelector('meta[property="og:description"]');i||(i=document.createElement("meta"),i.setAttribute("property","og:description"),document.head.appendChild(i)),i.setAttribute("content",d)}if(c){let r=document.querySelector('meta[property="og:title"]');r||(r=document.createElement("meta"),r.setAttribute("property","og:title"),document.head.appendChild(r)),r.setAttribute("content",c)}let o=document.querySelector('meta[property="og:type"]');o||(o=document.createElement("meta"),o.setAttribute("property","og:type"),document.head.appendChild(o)),o.setAttribute("content",l);const h="https://aadhithyamohanproperties.com";let n=g;if(n?n.startsWith("http")||(n=`${h}${n.startsWith("/")?"":"/"}${n}`):n=`${h}${p.pathname==="/"?"":p.pathname}`,n){let r=document.querySelector('link[rel="canonical"]');r||(r=document.createElement("link"),r.setAttribute("rel","canonical"),document.head.appendChild(r)),r.setAttribute("href",n);let i=document.querySelector('meta[property="og:url"]');i||(i=document.createElement("meta"),i.setAttribute("property","og:url"),document.head.appendChild(i)),i.setAttribute("content",n)}},[c,d,g,l,p.pathname]),null}function I({isOpen:c,onClose:d,posterImage:g,projectTitle:l}){return s.useEffect(()=>{if(!c)return;const p=o=>{o.key==="Escape"&&d()};return document.addEventListener("keydown",p),document.body.style.overflow="hidden",()=>{document.removeEventListener("keydown",p),document.body.style.overflow=""}},[c,d]),!c||!g?null:e.jsxs("div",{className:"teaser-modal-backdrop",onClick:d,children:[e.jsxs("div",{className:"teaser-modal-dialog",onClick:p=>p.stopPropagation(),children:[e.jsx("button",{className:"teaser-modal-close-btn",onClick:d,"aria-label":"Close poster",children:e.jsx(S,{size:22,strokeWidth:1.8})}),e.jsx("div",{className:"teaser-poster-wrapper",children:e.jsx("img",{src:g,alt:l?`${l} Teaser`:"Upcoming Project Teaser",className:"teaser-poster-img"})})]}),e.jsx("style",{children:`
+import{u as D,r as l}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index-CDFreQ3g.js";import{X as S,e as C,r as O,s as F,l as I}from"./vendor-icons-K0xaSwY_.js";function H({title:c,description:d,canonicalUrl:g,ogType:s="website"}){const p=D();return l.useEffect(()=>{if(c&&(document.title=c),d){let o=document.querySelector('meta[name="description"]');o||(o=document.createElement("meta"),o.setAttribute("name","description"),document.head.appendChild(o)),o.setAttribute("content",d);let i=document.querySelector('meta[property="og:description"]');i||(i=document.createElement("meta"),i.setAttribute("property","og:description"),document.head.appendChild(i)),i.setAttribute("content",d)}if(c){let o=document.querySelector('meta[property="og:title"]');o||(o=document.createElement("meta"),o.setAttribute("property","og:title"),document.head.appendChild(o)),o.setAttribute("content",c)}let r=document.querySelector('meta[property="og:type"]');r||(r=document.createElement("meta"),r.setAttribute("property","og:type"),document.head.appendChild(r)),r.setAttribute("content",s);const h="https://aadhithyamohanproperties.com";let n=g;if(n?n.startsWith("http")||(n=`${h}${n.startsWith("/")?"":"/"}${n}`):n=`${h}${p.pathname==="/"?"":p.pathname}`,n){let o=document.querySelector('link[rel="canonical"]');o||(o=document.createElement("link"),o.setAttribute("rel","canonical"),document.head.appendChild(o)),o.setAttribute("href",n);let i=document.querySelector('meta[property="og:url"]');i||(i=document.createElement("meta"),i.setAttribute("property","og:url"),document.head.appendChild(i)),i.setAttribute("content",n)}},[c,d,g,s,p.pathname]),null}function Y({isOpen:c,onClose:d,posterImage:g,projectTitle:s}){return l.useEffect(()=>{if(!c)return;const p=r=>{r.key==="Escape"&&d()};return document.addEventListener("keydown",p),document.body.style.overflow="hidden",()=>{document.removeEventListener("keydown",p),document.body.style.overflow=""}},[c,d]),!c||!g?null:e.jsxs("div",{className:"teaser-modal-backdrop",onClick:d,children:[e.jsxs("div",{className:"teaser-modal-dialog",onClick:p=>p.stopPropagation(),children:[e.jsx("button",{className:"teaser-modal-close-btn",onClick:d,"aria-label":"Close poster",children:e.jsx(S,{size:22,strokeWidth:1.8})}),e.jsxs("div",{className:"teaser-poster-wrapper",children:[e.jsxs("div",{className:"teaser-coming-soon-badge",children:[e.jsx("span",{className:"teaser-badge-dot"}),"COMING SOON"]}),e.jsx("img",{src:g,alt:s?`${s} Teaser`:"Upcoming Project Teaser",className:"teaser-poster-img"}),s&&e.jsxs("div",{className:"teaser-caption-overlay",children:[e.jsx("span",{className:"teaser-project-tag",children:"UPCOMING LUXURY PROJECT"}),e.jsx("h3",{className:"teaser-project-title",children:s})]})]})]}),e.jsx("style",{children:`
         .teaser-modal-backdrop {
           position: fixed;
           inset: 0;
@@ -51,6 +51,7 @@ import{u as F,r as s}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index
         }
 
         .teaser-poster-wrapper {
+          position: relative;
           width: 100%;
           max-height: 85vh;
           border-radius: 12px;
@@ -60,6 +61,74 @@ import{u as F,r as s}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        .teaser-coming-soon-badge {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          background: rgba(180, 133, 100, 0.9);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          color: #ffffff;
+          padding: 8px 18px;
+          border-radius: 100px;
+          font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+          z-index: 5;
+        }
+
+        .teaser-badge-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #ffffff;
+          box-shadow: 0 0 8px #ffffff;
+          animation: pulseDot 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .teaser-caption-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 40px 24px 20px 24px;
+          background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          z-index: 4;
+        }
+
+        .teaser-project-tag {
+          font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+          font-size: 10px;
+          letter-spacing: 0.18em;
+          color: #b48564;
+          text-transform: uppercase;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+
+        .teaser-project-title {
+          font-family: var(--font-heading, 'Playfair Display', serif);
+          font-size: clamp(22px, 3vw, 34px);
+          color: #ffffff;
+          margin: 0;
+          font-weight: 400;
+          letter-spacing: -0.01em;
         }
 
         .teaser-poster-img {
@@ -91,7 +160,7 @@ import{u as F,r as s}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index
             height: 34px;
           }
         }
-      `})]})}const b=[{id:"villas",name:"Villas",img:"/images/project/CML/Gallery/Look_1.png",projects:[{id:"crystal-moonlight",name:"Crystal Moonlight",location:"Medavakkam, Chennai",img:"/images/project/CML/Gallery/Look_1.png",url:"/projects/villas/crystal-moonlight-villa-in-medavakkam"},{id:"bay-vista",name:"Bay Vista",location:"ECR, Chennai • Upcoming",img:"/images/project/Bayvista/Luxury Infinity Pool at Sunset.png",teaserPoster:"/images/project/Bayvista/Luxury Infinity Pool at Sunset.png",url:"#bay-vista"},{id:"lakeshore",name:"Lakeshore",location:"ECR, Chennai • Upcoming",img:"/images/project/lakeshore/Lakeside Pavilion Under the Stars.png",teaserPoster:"/images/project/lakeshore/Lakeside Pavilion Under the Stars.png",url:"#lakeshore"}]},{id:"apartments",name:"Apartments",img:"/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg",projects:[{id:"pasha-pinnacle",name:"Pasha Pinnacle",location:"Royapettah, Chennai",img:"/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg",url:"/projects/apartments/pasha-pinnacle-luxury-apartment-in-royapettah"}]},{id:"plotted",name:"Plots",img:"/images/project/CMR/4.png",projects:[{id:"cmr-global",name:"CMR Global City",location:"Maduranthakam, Chennai",img:"/images/project/CMR/4.png",url:"/projects/plots/cmr-global-city-villa-plots-in-maduranthakam"},{id:"ashok-nagar",name:"Ashok Nagar",location:"Maduranthakam, Chennai",img:"/images/project/ashok-nagar/cards.webp",url:"/projects/plots/ashok-nagar-premium-plots-in-maduranthakam"}]}];function V({darkText:c=!1}){const[d,g]=s.useState(!1),[l,p]=s.useState(!1),[o,h]=s.useState(null),[n,r]=s.useState(null),[i,y]=s.useState(null),[u,j]=s.useState(!1),[x,E]=s.useState(""),T=b.flatMap(t=>t.projects),P=x.trim()===""?[]:T.filter(t=>t.name.toLowerCase().includes(x.toLowerCase())||t.location&&t.location.toLowerCase().includes(x.toLowerCase()));s.useEffect(()=>{l||(h(null),r(null))},[l]),s.useEffect(()=>{const t=a=>{a.key==="Escape"&&j(!1)};return u?(document.addEventListener("keydown",t),document.body.style.overflow="hidden"):(document.removeEventListener("keydown",t),document.body.style.overflow="",setTimeout(()=>E(""),300)),()=>{document.removeEventListener("keydown",t),document.body.style.overflow=""}},[u]);const[w,f]=s.useState(!1),[M,O]=s.useState(null),[k,U]=s.useState(null);s.useEffect(()=>{let t=window.innerHeight-60;const a=()=>{const m=document.querySelector(".project-hero-section")||document.querySelector(".hero-section")||document.querySelector(".hero")||document.querySelector(".hero-container")||document.querySelector("section:first-of-type");m&&(t=m.offsetHeight)};a();const v=setTimeout(a,400);let N=!1,A=!1;const C=()=>{N||(requestAnimationFrame(()=>{const m=window.scrollY>=t-80;m!==A&&(A=m,g(m)),N=!1}),N=!0)},L=m=>{!m.target.closest(".mega-trigger")&&!m.target.closest(".mega-menu")&&p(!1)};return window.addEventListener("scroll",C,{passive:!0}),window.addEventListener("resize",a,{passive:!0}),document.addEventListener("click",L),C(),()=>{clearTimeout(v),window.removeEventListener("scroll",C),window.removeEventListener("resize",a),document.removeEventListener("click",L)}},[]);const $=t=>{O(a=>a===t?null:t)};return e.jsxs(e.Fragment,{children:[e.jsx("header",{className:`sobha-navbar ${d?"is-scrolled":""} ${l?"mega-open":""} ${w?"mobile-open":""} ${c?"dark-text":""}`,children:e.jsxs("div",{className:"navbar-container",children:[e.jsxs("nav",{className:"nav-left desktop-only",children:[e.jsx("a",{href:"/about-us",className:"nav-link",children:"ABOUT US"}),e.jsxs("div",{className:"nav-link mega-trigger",onClick:t=>{t.stopPropagation(),p(!l)},children:["PROJECTS",e.jsx(z,{size:14,style:{marginLeft:"6px",marginTop:"1px",transition:"transform 0.3s ease",transform:l?"rotate(180deg)":"rotate(0deg)"}})]})]}),e.jsx("a",{href:"/",className:"nav-logo-container",style:{textDecoration:"none"},children:e.jsx("img",{src:u||c&&!d&&!l?"/images/black-logo.png":"/images/white-logo.png",alt:"Aadhithya Mohan Properties",className:"nav-logo-img",style:{height:"44px",width:"auto",objectFit:"contain",transition:"all 0.3s ease"}})}),e.jsxs("nav",{className:"nav-right desktop-only",children:[e.jsx("a",{href:"/career",className:"nav-link",children:"CAREERS"}),e.jsx("a",{href:"/contact-us",className:"nav-link",children:"CONTACT US"}),e.jsx("button",{className:"icon-button",onClick:()=>j(!0),"aria-label":"Open Search",children:e.jsx(R,{size:18,strokeWidth:2})})]}),e.jsx("div",{className:"mobile-menu-trigger-container",children:e.jsx("button",{className:"icon-button mobile-menu-btn",onClick:()=>f(!w),"aria-label":"Toggle navigation menu",children:w?e.jsx(S,{size:24}):e.jsx(D,{size:24})})})]})}),e.jsx("div",{className:`mega-menu ${l?"visible":""}`,onClick:t=>t.stopPropagation(),children:e.jsxs("div",{className:"mega-menu-content",children:[e.jsxs("div",{className:"mega-categories",style:{borderRight:o?"1px solid rgba(0,0,0,0.2)":"none"},children:[e.jsx("div",{className:"mega-column-title",children:"CATEGORIES"}),b.map(t=>e.jsx("div",{className:`mega-category-item ${o&&o.id===t.id?"active":""}`,onMouseEnter:()=>{h(t),r(t.projects[0])},onClick:a=>a.stopPropagation(),children:e.jsx("a",{href:"/projects",children:t.name})},t.id)),e.jsx("div",{className:`mega-category-item ${o&&o.id==="all"?"active":""}`,onMouseEnter:()=>{h({id:"all",name:"All Projects",img:"/images/project/CML/extirior/Views_Scene_1_4k_4.png",projects:b.flatMap(t=>t.projects)}),r(b[0].projects[0])},onClick:t=>t.stopPropagation(),children:e.jsx("a",{href:"/projects",children:"All Projects"})})]}),e.jsx("div",{className:"mega-projects",style:{opacity:o?1:0,visibility:o?"visible":"hidden",transform:o?"translateX(0)":"translateX(-10px)",transition:"opacity 0.45s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s"},children:o&&e.jsxs(e.Fragment,{children:[e.jsx("div",{className:"mega-column-title",children:o.name}),o.projects.map(t=>e.jsx("div",{className:`mega-project-item ${(n==null?void 0:n.id)===t.id?"active":""}`,onMouseEnter:()=>r(t),children:e.jsxs("a",{href:t.url||"/projects",onClick:a=>{t.teaserPoster&&(a.preventDefault(),y({image:t.teaserPoster,title:t.name}),p(!1))},children:[e.jsx("div",{className:"mega-project-name",children:t.name}),t.location&&e.jsx("div",{className:"mega-project-location",children:t.location})]})},t.id))]})}),e.jsx("div",{className:"mega-image-container",children:e.jsx("img",{src:n?n.img:o?o.img:b[0].img,alt:"Category Preview",className:"mega-image fade-in-image"},n?n.id:o?o.id:"default")})]})}),e.jsx("div",{className:`mobile-nav-drawer ${w?"is-open":""}`,children:e.jsxs("nav",{className:"mobile-nav-menu",children:[e.jsx("div",{className:"mobile-nav-item-wrapper",children:e.jsx("a",{href:"/about-us",onClick:()=>f(!1),className:"mobile-nav-main-link simple-link",children:"ABOUT US"})}),e.jsxs("div",{className:"mobile-nav-item-wrapper",children:[e.jsxs("div",{className:"mobile-nav-header-row",onClick:()=>$("projects"),children:[e.jsx("span",{className:"mobile-nav-main-link",children:"PROJECTS"}),e.jsx(z,{size:18,className:`mobile-chevron ${M==="projects"?"is-rotated":""}`})]}),e.jsxs("div",{className:`mobile-sub-menu ${M==="projects"?"is-expanded":""}`,children:[b.map(t=>e.jsxs("div",{className:"mobile-category-group",children:[e.jsxs("div",{className:"mobile-category-header",onClick:()=>U(a=>a===t.id?null:t.id),children:[e.jsx("span",{className:`mobile-category-title ${k===t.id?"active":""}`,children:t.name}),e.jsx(z,{size:14,className:`mobile-category-arrow ${k===t.id?"is-rotated":""}`})]}),e.jsx("div",{className:`mobile-project-list ${k===t.id?"is-expanded":""}`,children:t.projects.map(a=>e.jsxs("a",{href:a.url||"/projects",onClick:v=>{a.teaserPoster&&(v.preventDefault(),y({image:a.teaserPoster,title:a.name})),f(!1)},className:"mobile-project-link",children:[e.jsx("div",{className:"mobile-project-name",children:a.name}),a.location&&e.jsx("div",{className:"mobile-project-location",children:a.location})]},a.id))})]},t.id)),e.jsx("a",{href:"/projects",onClick:()=>f(!1),className:"mobile-sub-link mobile-all-projects-link",children:"All Projects"})]})]}),e.jsx("div",{className:"mobile-nav-item-wrapper",children:e.jsx("a",{href:"/career",onClick:()=>f(!1),className:"mobile-nav-main-link simple-link",children:"CAREERS"})}),e.jsx("div",{className:"mobile-nav-item-wrapper",children:e.jsx("a",{href:"/contact-us",onClick:()=>f(!1),className:"mobile-nav-main-link simple-link",children:"CONTACT US"})}),e.jsxs("div",{className:"mobile-social-links",children:[e.jsx("a",{href:"https://www.instagram.com/aadhithyamohanproperties/?hl=en",target:"_blank",rel:"noopener noreferrer",className:"mobile-social-link",children:"Instagram"}),e.jsx("a",{href:"https://in.linkedin.com/in/aadhithya-mohan-properties-0aa242391",target:"_blank",rel:"noopener noreferrer",className:"mobile-social-link",children:"LinkedIn"}),e.jsx("a",{href:"https://www.youtube.com/channel/UC_On0n-j-NRU_Nplc28ELZg",target:"_blank",rel:"noopener noreferrer",className:"mobile-social-link",children:"YouTube"})]})]})}),e.jsxs("div",{className:`search-overlay ${u?"visible":""}`,children:[e.jsx("button",{className:"search-overlay-close",onClick:()=>j(!1),"aria-label":"Close Search",children:e.jsx(S,{size:36,strokeWidth:1.5})}),e.jsxs("div",{className:"search-container",children:[e.jsxs("div",{className:"search-input-wrapper",children:[e.jsx(R,{size:32,className:"search-input-icon"}),e.jsx("input",{type:"text",className:"search-input",placeholder:"Search projects, locations...",value:x,onChange:t=>E(t.target.value),autoFocus:u})]}),e.jsxs("div",{className:"search-results",children:[x.trim()!==""&&P.length===0&&e.jsxs("div",{className:"search-no-results",children:['No projects found for "',x,'"']}),P.map((t,a)=>e.jsxs("a",{href:t.url||"/projects",className:"search-result-item",onClick:v=>{t.teaserPoster&&(v.preventDefault(),y({image:t.teaserPoster,title:t.name})),j(!1)},style:{animationDelay:`${a*.05}s`},children:[e.jsx("div",{className:"search-result-img",children:e.jsx("img",{src:t.img,alt:t.name})}),e.jsxs("div",{className:"search-result-info",children:[e.jsx("h4",{className:"search-result-title",children:t.name}),t.location&&e.jsx("p",{className:"search-result-loc",children:t.location})]}),e.jsx("div",{className:"search-result-action",children:e.jsx(Y,{size:22,className:"search-result-arrow"})})]},t.id))]})]})]}),e.jsx(I,{isOpen:!!i,onClose:()=>y(null),posterImage:i==null?void 0:i.image,projectTitle:i==null?void 0:i.title}),e.jsx("style",{children:`
+      `})]})}const b=[{id:"villas",name:"Villas",img:"/images/project/CML/Gallery/Look_1.png",projects:[{id:"crystal-moonlight",name:"Crystal Moonlight",location:"Medavakkam, Chennai",img:"/images/project/CML/Gallery/Look_1.png",url:"/projects/villas/crystal-moonlight-villa-in-medavakkam"},{id:"bay-vista",name:"Bay Vista",location:"ECR, Chennai • Upcoming",img:"/images/project/Bayvista/Luxury Infinity Pool at Sunset.png",teaserPoster:"/images/project/Bayvista/Luxury Infinity Pool at Sunset.png",url:"#bay-vista"},{id:"lakeshore",name:"Lakeshore",location:"ECR, Chennai • Upcoming",img:"/images/project/lakeshore/Lakeside Pavilion Under the Stars.png",teaserPoster:"/images/project/lakeshore/Lakeside Pavilion Under the Stars.png",url:"#lakeshore"}]},{id:"apartments",name:"Apartments",img:"/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg",projects:[{id:"pasha-pinnacle",name:"Pasha Pinnacle",location:"Royapettah, Chennai",img:"/images/project/pasha-pinnacle/extirior/4 Resized PP 16x9.jpg",url:"/projects/apartments/pasha-pinnacle-luxury-apartment-in-royapettah"}]},{id:"plotted",name:"Plots",img:"/images/project/CMR/4.png",projects:[{id:"cmr-global",name:"CMR Global City",location:"Maduranthakam, Chennai",img:"/images/project/CMR/4.png",url:"/projects/plots/cmr-global-city-villa-plots-in-maduranthakam"},{id:"ashok-nagar",name:"Ashok Nagar",location:"Maduranthakam, Chennai",img:"/images/project/ashok-nagar/cards.webp",url:"/projects/plots/ashok-nagar-premium-plots-in-maduranthakam"}]}];function V({darkText:c=!1}){const[d,g]=l.useState(!1),[s,p]=l.useState(!1),[r,h]=l.useState(null),[n,o]=l.useState(null),[i,y]=l.useState(null),[u,j]=l.useState(!1),[x,E]=l.useState(""),R=b.flatMap(t=>t.projects),P=x.trim()===""?[]:R.filter(t=>t.name.toLowerCase().includes(x.toLowerCase())||t.location&&t.location.toLowerCase().includes(x.toLowerCase()));l.useEffect(()=>{s||(h(null),o(null))},[s]),l.useEffect(()=>{const t=a=>{a.key==="Escape"&&j(!1)};return u?(document.addEventListener("keydown",t),document.body.style.overflow="hidden"):(document.removeEventListener("keydown",t),document.body.style.overflow="",setTimeout(()=>E(""),300)),()=>{document.removeEventListener("keydown",t),document.body.style.overflow=""}},[u]);const[w,f]=l.useState(!1),[M,T]=l.useState(null),[k,U]=l.useState(null);l.useEffect(()=>{let t=window.innerHeight-60;const a=()=>{const m=document.querySelector(".project-hero-section")||document.querySelector(".hero-section")||document.querySelector(".hero")||document.querySelector(".hero-container")||document.querySelector("section:first-of-type");m&&(t=m.offsetHeight)};a();const v=setTimeout(a,400);let N=!1,A=!1;const z=()=>{N||(requestAnimationFrame(()=>{const m=window.scrollY>=t-80;m!==A&&(A=m,g(m)),N=!1}),N=!0)},L=m=>{!m.target.closest(".mega-trigger")&&!m.target.closest(".mega-menu")&&p(!1)};return window.addEventListener("scroll",z,{passive:!0}),window.addEventListener("resize",a,{passive:!0}),document.addEventListener("click",L),z(),()=>{clearTimeout(v),window.removeEventListener("scroll",z),window.removeEventListener("resize",a),document.removeEventListener("click",L)}},[]);const $=t=>{T(a=>a===t?null:t)};return e.jsxs(e.Fragment,{children:[e.jsx("header",{className:`sobha-navbar ${d?"is-scrolled":""} ${s?"mega-open":""} ${w?"mobile-open":""} ${c?"dark-text":""}`,children:e.jsxs("div",{className:"navbar-container",children:[e.jsxs("nav",{className:"nav-left desktop-only",children:[e.jsx("a",{href:"/about-us",className:"nav-link",children:"ABOUT US"}),e.jsxs("div",{className:"nav-link mega-trigger",onClick:t=>{t.stopPropagation(),p(!s)},children:["PROJECTS",e.jsx(C,{size:14,style:{marginLeft:"6px",marginTop:"1px",transition:"transform 0.3s ease",transform:s?"rotate(180deg)":"rotate(0deg)"}})]})]}),e.jsx("a",{href:"/",className:"nav-logo-container",style:{textDecoration:"none"},children:e.jsx("img",{src:u||c&&!d&&!s?"/images/black-logo.png":"/images/white-logo.png",alt:"Aadhithya Mohan Properties",className:"nav-logo-img",style:{height:"44px",width:"auto",objectFit:"contain",transition:"all 0.3s ease"}})}),e.jsxs("nav",{className:"nav-right desktop-only",children:[e.jsx("a",{href:"/career",className:"nav-link",children:"CAREERS"}),e.jsx("a",{href:"/contact-us",className:"nav-link",children:"CONTACT US"}),e.jsx("button",{className:"icon-button",onClick:()=>j(!0),"aria-label":"Open Search",children:e.jsx(O,{size:18,strokeWidth:2})})]}),e.jsx("div",{className:"mobile-menu-trigger-container",children:e.jsx("button",{className:"icon-button mobile-menu-btn",onClick:()=>f(!w),"aria-label":"Toggle navigation menu",children:w?e.jsx(S,{size:24}):e.jsx(F,{size:24})})})]})}),e.jsx("div",{className:`mega-menu ${s?"visible":""}`,onClick:t=>t.stopPropagation(),children:e.jsxs("div",{className:`mega-menu-content ${r?"has-active-category":""}`,children:[e.jsxs("div",{className:"mega-categories",children:[e.jsx("div",{className:"mega-column-title",children:"CATEGORIES"}),b.map(t=>e.jsx("div",{className:`mega-category-item ${r&&r.id===t.id?"active":""}`,onMouseEnter:()=>{h(t),o(t.projects[0])},onClick:a=>a.stopPropagation(),children:e.jsx("a",{href:"/projects",children:t.name})},t.id)),e.jsx("div",{className:`mega-category-item ${r&&r.id==="all"?"active":""}`,onMouseEnter:()=>{h({id:"all",name:"All Projects",img:"/images/project/CML/extirior/Views_Scene_1_4k_4.png",projects:b.flatMap(t=>t.projects)}),o(b[0].projects[0])},onClick:t=>t.stopPropagation(),children:e.jsx("a",{href:"/projects",children:"All Projects"})})]}),e.jsx("div",{className:`mega-projects ${r?"is-active":"is-collapsed"}`,children:e.jsx("div",{className:"mega-projects-inner",children:r&&e.jsxs(e.Fragment,{children:[e.jsx("div",{className:"mega-column-title",children:r.name}),r.projects.map(t=>e.jsx("div",{className:`mega-project-item ${(n==null?void 0:n.id)===t.id?"active":""}`,onMouseEnter:()=>o(t),children:e.jsxs("a",{href:t.url||"/projects",onClick:a=>{t.teaserPoster&&(a.preventDefault(),y({image:t.teaserPoster,title:t.name}),p(!1))},children:[e.jsx("div",{className:"mega-project-name",children:t.name}),t.location&&e.jsx("div",{className:"mega-project-location",children:t.location})]})},t.id))]})})}),e.jsx("div",{className:"mega-image-container",children:e.jsx("img",{src:n?n.img:r?r.img:b[0].img,alt:"Category Preview",className:"mega-image fade-in-image"},n?n.id:r?r.id:"default")})]})}),e.jsx("div",{className:`mobile-nav-drawer ${w?"is-open":""}`,children:e.jsxs("nav",{className:"mobile-nav-menu",children:[e.jsx("div",{className:"mobile-nav-item-wrapper",children:e.jsx("a",{href:"/about-us",onClick:()=>f(!1),className:"mobile-nav-main-link simple-link",children:"ABOUT US"})}),e.jsxs("div",{className:"mobile-nav-item-wrapper",children:[e.jsxs("div",{className:"mobile-nav-header-row",onClick:()=>$("projects"),children:[e.jsx("span",{className:"mobile-nav-main-link",children:"PROJECTS"}),e.jsx(C,{size:18,className:`mobile-chevron ${M==="projects"?"is-rotated":""}`})]}),e.jsxs("div",{className:`mobile-sub-menu ${M==="projects"?"is-expanded":""}`,children:[b.map(t=>e.jsxs("div",{className:"mobile-category-group",children:[e.jsxs("div",{className:"mobile-category-header",onClick:()=>U(a=>a===t.id?null:t.id),children:[e.jsx("span",{className:`mobile-category-title ${k===t.id?"active":""}`,children:t.name}),e.jsx(C,{size:14,className:`mobile-category-arrow ${k===t.id?"is-rotated":""}`})]}),e.jsx("div",{className:`mobile-project-list ${k===t.id?"is-expanded":""}`,children:t.projects.map(a=>e.jsxs("a",{href:a.url||"/projects",onClick:v=>{a.teaserPoster&&(v.preventDefault(),y({image:a.teaserPoster,title:a.name})),f(!1)},className:"mobile-project-link",children:[e.jsx("div",{className:"mobile-project-name",children:a.name}),a.location&&e.jsx("div",{className:"mobile-project-location",children:a.location})]},a.id))})]},t.id)),e.jsx("a",{href:"/projects",onClick:()=>f(!1),className:"mobile-sub-link mobile-all-projects-link",children:"All Projects"})]})]}),e.jsx("div",{className:"mobile-nav-item-wrapper",children:e.jsx("a",{href:"/career",onClick:()=>f(!1),className:"mobile-nav-main-link simple-link",children:"CAREERS"})}),e.jsx("div",{className:"mobile-nav-item-wrapper",children:e.jsx("a",{href:"/contact-us",onClick:()=>f(!1),className:"mobile-nav-main-link simple-link",children:"CONTACT US"})}),e.jsxs("div",{className:"mobile-social-links",children:[e.jsx("a",{href:"https://www.instagram.com/aadhithyamohanproperties/?hl=en",target:"_blank",rel:"noopener noreferrer",className:"mobile-social-link",children:"Instagram"}),e.jsx("a",{href:"https://in.linkedin.com/in/aadhithya-mohan-properties-0aa242391",target:"_blank",rel:"noopener noreferrer",className:"mobile-social-link",children:"LinkedIn"}),e.jsx("a",{href:"https://www.youtube.com/channel/UC_On0n-j-NRU_Nplc28ELZg",target:"_blank",rel:"noopener noreferrer",className:"mobile-social-link",children:"YouTube"})]})]})}),e.jsxs("div",{className:`search-overlay ${u?"visible":""}`,children:[e.jsx("button",{className:"search-overlay-close",onClick:()=>j(!1),"aria-label":"Close Search",children:e.jsx(S,{size:36,strokeWidth:1.5})}),e.jsxs("div",{className:"search-container",children:[e.jsxs("div",{className:"search-input-wrapper",children:[e.jsx(O,{size:32,className:"search-input-icon"}),e.jsx("input",{type:"text",className:"search-input",placeholder:"Search projects, locations...",value:x,onChange:t=>E(t.target.value),autoFocus:u})]}),e.jsxs("div",{className:"search-results",children:[x.trim()!==""&&P.length===0&&e.jsxs("div",{className:"search-no-results",children:['No projects found for "',x,'"']}),P.map((t,a)=>e.jsxs("a",{href:t.url||"/projects",className:"search-result-item",onClick:v=>{t.teaserPoster&&(v.preventDefault(),y({image:t.teaserPoster,title:t.name})),j(!1)},style:{animationDelay:`${a*.05}s`},children:[e.jsx("div",{className:"search-result-img",children:e.jsx("img",{src:t.img,alt:t.name})}),e.jsxs("div",{className:"search-result-info",children:[e.jsx("h4",{className:"search-result-title",children:t.name}),t.location&&e.jsx("p",{className:"search-result-loc",children:t.location})]}),e.jsx("div",{className:"search-result-action",children:e.jsx(I,{size:22,className:"search-result-arrow"})})]},t.id))]})]})]}),e.jsx(Y,{isOpen:!!i,onClose:()=>y(null),posterImage:i==null?void 0:i.image,projectTitle:i==null?void 0:i.title}),e.jsx("style",{children:`
         .sobha-navbar {
           position: fixed;
           top: 0;
@@ -322,9 +391,9 @@ import{u as F,r as s}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index
         .mega-menu-content {
           width: 100%;
           padding: 0;
-          display: grid;
-          grid-template-columns: 260px 320px 1fr; /* Categories, Projects, Image */
-          gap: 0;
+          display: flex;
+          flex-direction: row;
+          align-items: stretch;
           height: 440px;
           box-sizing: border-box;
           position: relative;
@@ -342,20 +411,60 @@ import{u as F,r as s}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index
         }
 
         .mega-categories {
+          flex: 0 0 260px;
+          width: 260px;
           display: flex;
           flex-direction: column;
           padding: 28px 24px 28px 40px;
           border-right: 1px solid rgba(0, 0, 0, 0.15);
+          background: transparent;
+          z-index: 3;
+          box-sizing: border-box;
+          flex-shrink: 0;
         }
 
         .mega-projects {
-          display: flex;
-          flex-direction: column;
-          padding: 28px 30px 28px 30px;
+          flex: 0 0 0px;
+          width: 0px;
+          max-width: 0px;
+          padding: 0;
+          border-right: 1px solid transparent;
+          overflow: hidden;
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          box-sizing: border-box;
+          transition: 
+            flex-basis 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            max-width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            padding 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+            border-color 0.4s ease,
+            opacity 0.4s ease,
+            visibility 0.4s ease;
+          will-change: flex-basis, max-width, width, opacity;
+        }
+
+        .mega-projects.is-active {
+          flex: 0 0 320px;
+          width: 320px;
+          max-width: 320px;
+          padding: 28px 30px;
           border-right: 1px solid rgba(0, 0, 0, 0.15);
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
           overflow-y: auto;
           scrollbar-width: thin;
           scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+        }
+
+        .mega-projects-inner {
+          width: 260px;
+          min-width: 260px;
+          display: flex;
+          flex-direction: column;
+          box-sizing: border-box;
         }
 
         .mega-column-title {
@@ -435,13 +544,16 @@ import{u as F,r as s}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index
         }
 
         .mega-image-container {
-          width: 100%;
+          flex: 1 1 0%;
+          width: 0;
+          min-width: 0;
           height: 100%;
           min-height: 100%;
           overflow: hidden;
           background: #f5f5f5;
           margin: 0;
           padding: 0;
+          position: relative;
         }
 
         .mega-image {
@@ -1291,4 +1403,4 @@ import{u as F,r as s}from"./vendor-react-CdZYeNEq.js";import{j as e}from"./index
             margin-top: var(--space-3);
           }
         }
-      `})]})}export{G as F,V as N,H as S,I as T};
+      `})]})}export{G as F,V as N,H as S,Y as T};
