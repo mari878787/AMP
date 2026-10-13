@@ -84,7 +84,7 @@ export default function ProjectsSection() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 769px)", () => {
+    mm.add("all", () => {
       const slides = gsap.utils.toArray('.maia-section-slide');
       slides.forEach((slide, i) => {
         const img = slide.querySelector('.maia-bg-img');
@@ -261,7 +261,7 @@ export default function ProjectsSection() {
 
         .maia-section-slide {
           height: 100vh;
-          height: calc(100vh - 50px);
+          height: 100dvh;
           color: #ffffff;
           position: relative;
           width: 100%;
@@ -344,42 +344,30 @@ export default function ProjectsSection() {
         }
 
         @media (max-width: 768px) {
-          .maia-section-slide {
-            height: 72vh !important;
-            min-height: 460px !important;
-            margin-bottom: 16px !important;
-            clip-path: none !important;
-            -webkit-clip-path: none !important;
-            border-radius: 16px !important;
-            overflow: hidden !important;
-            width: calc(100% - 28px) !important;
-            margin-left: 14px !important;
-            margin-right: 14px !important;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+          .projects-headline-intro {
+            padding: 48px 20px 24px 20px;
           }
-          .maia-fixed-frame {
-            position: absolute !important;
-            height: 100% !important;
-            width: 100% !important;
-            top: 0 !important;
-            left: 0 !important;
-          }
-          .maia-bg-img {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            transform: none !important;
-            object-fit: cover !important;
+          .projects-headline-title {
+            margin-bottom: 14px;
           }
           .maia-header-content {
-            top: auto !important;
-            bottom: 24px !important;
-            left: 18px !important;
-            right: 18px !important;
-            max-width: 100% !important;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8) !important;
+            top: 36px;
+            bottom: auto;
+            left: 20px;
+            right: 20px;
+            max-width: calc(100% - 40px);
+          }
+          .maia-title {
+            font-size: clamp(28px, 7.5vw, 42px);
+            margin: 0 0 8px 0;
+          }
+          .maia-location-span,
+          .maia-config-span {
+            font-size: 13.5px;
+          }
+          .maia-map-icon {
+            width: 16px;
+            height: 16px;
           }
         }
 
