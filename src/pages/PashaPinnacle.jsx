@@ -1310,7 +1310,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                     width: '100vw',
                                     borderRadius: '0px',
                                     transition: 'opacity 0.6s ease',
-                                    cursor: galleryTab === 'videos' ? 'pointer' : 'default',
+                                    cursor: 'pointer',
                                     overflow: 'hidden',
                                     position: 'relative',
                                     height: 'calc(100vh - 180px)',
@@ -1323,6 +1323,8 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                       if (galleryTab === 'videos') {
                                         setActiveVideoUrl(img.url);
                                         setIsVideoOpen(true);
+                                      } else {
+                                        handleOpenLightbox(galleryTab, realIdx);
                                       }
                                     } else {
                                       setGalleryAnim(prev => ({ ...prev, [galleryTab]: true }));
@@ -1335,6 +1337,34 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                     alt={img.title}
                                     className="gallery-spotlight-img"
                                   />
+
+                                  {isActive && galleryTab !== 'videos' && (
+                                    <div
+                                      className="gallery-expand-badge"
+                                      style={{
+                                        position: 'absolute',
+                                        bottom: isMobile ? '16px' : '24px',
+                                        right: isMobile ? '16px' : '24px',
+                                        background: 'rgba(6, 7, 10, 0.72)',
+                                        backdropFilter: 'blur(8px)',
+                                        border: '1px solid rgba(255, 255, 255, 0.25)',
+                                        color: '#ffffff',
+                                        padding: '7px 14px',
+                                        borderRadius: '30px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '7px',
+                                        fontSize: '12px',
+                                        fontFamily: 'var(--font-sans)',
+                                        letterSpacing: '0.04em',
+                                        pointerEvents: 'none',
+                                        zIndex: 5
+                                      }}
+                                    >
+                                      <Maximize2 size={13} />
+                                      <span>Tap to expand</span>
+                                    </div>
+                                  )}
 
                                   {galleryTab === 'videos' && (
                                     <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 3 }}>
@@ -2010,6 +2040,141 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           )}
         </div>
       )}
+
+      {/* Gallery Image Lightbox Modal */}
+      {lightboxImage && (
+        <div
+          className="lightbox-overlay"
+          data-lenis-prevent
+          onClick={() => setLightboxImage(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999999,
+            backgroundColor: 'rgba(5, 7, 10, 0.95)',
+            backdropFilter: 'blur(12px)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: isMobile ? '16px' : '28px',
+            boxSizing: 'border-box'
+          }}
+        >
+          {/* Close button */}
+          <button
+            className="lightbox-close-btn"
+            onClick={() => setLightboxImage(null)}
+            aria-label="Close"
+            style={{
+              position: 'absolute',
+              top: isMobile ? '16px' : '24px',
+              right: isMobile ? '16px' : '24px',
+              background: 'rgba(255, 255, 255, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              color: '#ffffff',
+              width: '42px',
+              height: '42px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 10
+            }}
+          >
+            <X size={22} />
+          </button>
+
+          {/* Navigation Arrows */}
+          {galleryImages[lightboxSection] && galleryImages[lightboxSection].length > 1 && (
+            <>
+              <button
+                className="lightbox-arrow prev"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleLightboxPrev();
+                }}
+                aria-label="Previous image"
+                style={{
+                  position: 'absolute',
+                  left: isMobile ? '10px' : '24px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(0, 0, 0, 0.55)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  color: '#ffffff',
+                  width: isMobile ? '40px' : '48px',
+                  height: isMobile ? '40px' : '48px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 10
+                }}
+              >
+                <ChevronLeft size={isMobile ? 22 : 28} />
+              </button>
+              <button
+                className="lightbox-arrow next"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleLightboxNext();
+                }}
+                aria-label="Next image"
+                style={{
+                  position: 'absolute',
+                  right: isMobile ? '10px' : '24px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(0, 0, 0, 0.55)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  color: '#ffffff',
+                  width: isMobile ? '40px' : '48px',
+                  height: isMobile ? '40px' : '48px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 10
+                }}
+              >
+                <ChevronRight size={isMobile ? 22 : 28} />
+              </button>
+            </>
+          )}
+
+          {/* Modal Image Display */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: '96vw',
+              maxHeight: '90vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              userSelect: 'none'
+            }}
+          >
+            <img
+              src={lightboxImage.src}
+              alt=""
+              style={{
+                maxWidth: isMobile ? '94vw' : '90vw',
+                maxHeight: isMobile ? '82vh' : '88vh',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain',
+                borderRadius: '0px',
+                boxShadow: '0 24px 60px rgba(0, 0, 0, 0.8)'
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Video Modal */}
       {isVideoOpen && (
         <div className="lightbox-overlay" data-lenis-prevent onClick={() => setIsVideoOpen(false)}>
