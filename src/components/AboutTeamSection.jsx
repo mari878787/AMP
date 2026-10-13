@@ -67,7 +67,7 @@ const MANAGEMENT_LEADERS = [
   },
   {
     id: 5,
-    name: "Monisha",
+    name: "V.Monisha",
     role: "Director of Operations",
     bio: [
       "Monisha brings close to a decade professional experience in the IT industry, with exposure to diverse business domains, including real estate and banking, alongside leadership responsibilities. Her professional journey has equipped her with a structured, people-centric approach to operations, team coordination, and organisational excellence. Drawing on this experience, she transitioned into a leadership role as Director of Operations at Aadhithya Mohan Properties, where she plays a key role in strengthening the company's operational framework.",
