@@ -620,7 +620,8 @@ export default function Navbar({ darkText = false }) {
           left: 50%;
           width: calc(100% - 80px);
           max-width: 1320px;
-          background: url("/images/nav-villa.png") left center / cover no-repeat;
+          /* background: url("/images/nav-villa.png") left center / cover no-repeat; */
+          background: #fff;
           opacity: 0;
           visibility: hidden;
           transform: translate(-50%, -24px);

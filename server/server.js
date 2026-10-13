@@ -379,9 +379,9 @@ app.post('/api/leads', async (req, res) => {
 
 // SPA Routing Fallback: Send index.html for all frontend routes (e.g. /home, /about, /contact)
 if (fs.existsSync(DIST_DIR)) {
-  app.get('*', (req, res, next) => {
-    // Exclude API routes
-    if (req.path.startsWith('/api/')) {
+  app.use((req, res, next) => {
+    // Exclude non-GET requests and API routes
+    if (req.method !== 'GET' || req.path.startsWith('/api/')) {
       return next();
     }
     // If request has a file extension (like missing .js or .css), return 404 instead of index.html
