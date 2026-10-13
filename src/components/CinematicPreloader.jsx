@@ -10,17 +10,18 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
     setIsExiting(false);
     setIsDone(false);
 
-    // Sequence timing:
-    // 0.2s - 1.2s: Icon entrance (fade in + scale up with fluid ease-out damping)
-    // 1.2s - 2.0s: Diagonal white glossy shimmer sweeps left-to-right across emblem
-    // 1.85s: Primary brand name slides upward into position
-    // 2.2s: Subtitle locks into crisp alignment
-    // 2.45s: Luxury slogan slides upward in gold
-    // 4.1s: Entire preloader lifts smoothly (translateY -100%)
-    // 5.2s: Complete
+    // Sequence timing (Calm, unhurried luxury pacing):
+    // 0.45s - 2.05s: Icon entrance (gentle fade-in + majestic scale-up with silky damping)
+    // 1.95s - 3.25s: Diagonal white glossy shimmer sweeps smoothly across emblem
+    // 2.50s - 3.55s: Primary brand name glides upward into position with soft opacity
+    // 3.10s - 4.05s: Subtitle ("PROPERTIES") locks into crisp alignment
+    // 3.70s - 4.80s: Luxury slogan slides upward in gold with graceful letter-spacing
+    // 4.80s - 5.80s: Grand appreciation pause (complete lockup resting majestically)
+    // 5.80s - 7.05s: Smooth curtain lift (translateY -100%)
+    // 7.10s: Complete
     const exitTimer = setTimeout(() => {
       setIsExiting(true);
-    }, 4100);
+    }, 5800);
 
     const doneTimer = setTimeout(() => {
       if (loop) {
@@ -30,7 +31,7 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
         setIsDone(true);
         if (onComplete) onComplete();
       }
-    }, 5200);
+    }, 7100);
 
     return () => {
       clearTimeout(exitTimer);
