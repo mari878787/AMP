@@ -47,7 +47,7 @@ function AppContent() {
           onComplete={() => setShowPreloader(false)} 
         />
       )}
-      <Suspense fallback={<div style={{ minHeight: '100vh', background: '#081226' }} />}>
+      <Suspense fallback={<div style={{ minHeight: '100vh', background: '#ffffff' }} />}>
         <Routes>
           <Route path="/" element={<ComingSoonPage />} />
           <Route path="/home" element={<Home />} />
