@@ -43,6 +43,17 @@ const CEO_LEADER = {
 
 const MANAGEMENT_LEADERS = [
   {
+    id: 5,
+    name: "V.Monisha",
+    role: "Director of Operations",
+    bio: [
+      "Monisha brings close to a decade professional experience in the IT industry, with exposure to diverse business domains, including real estate and banking, alongside leadership responsibilities. Her professional journey has equipped her with a structured, people-centric approach to operations, team coordination, and organisational excellence. Drawing on this experience, she transitioned into a leadership role as Director of Operations at Aadhithya Mohan Properties, where she plays a key role in strengthening the company's operational framework.",
+      "As Director of Operations, Monisha oversees day-to-day office operations, employee welfare, and workplace coordination, fostering an environment built on efficiency, accountability, and collaboration. She believes that a strong organisation begins with empowered people, clear processes, and a culture that values professionalism and mutual respect.",
+      "Her philosophy towards real estate is rooted in the belief that professionalism and trust are the cornerstones of a better customer experience. She believes that delivering a transparent, reliable, and professional experience at every stage of the customer journey is an essential step towards elevating the real estate industry. Guided by this conviction, Monisha is committed to building an organisation where operational excellence and a people-first culture translate into lasting customer confidence and meaningful relationships."
+    ],
+    image: "/images/about/team/Monisha.jpg"
+  },
+  {
     id: 3,
     name: "M. A. Afroz",
     role: "Sales & Strategic Development",
@@ -64,18 +75,8 @@ const MANAGEMENT_LEADERS = [
       "Known for his leadership, analytical thinking, and proactive approach, Balamurugan plays a key role in strengthening sales performance, developing channel partnerships, and driving sustainable growth for Aadhithya Mohan Properties."
     ],
     image: "/images/about/team/bala.jpeg"
-  },
-  {
-    id: 5,
-    name: "V.Monisha",
-    role: "Director of Operations",
-    bio: [
-      "Monisha brings close to a decade professional experience in the IT industry, with exposure to diverse business domains, including real estate and banking, alongside leadership responsibilities. Her professional journey has equipped her with a structured, people-centric approach to operations, team coordination, and organisational excellence. Drawing on this experience, she transitioned into a leadership role as Director of Operations at Aadhithya Mohan Properties, where she plays a key role in strengthening the company's operational framework.",
-      "As Director of Operations, Monisha oversees day-to-day office operations, employee welfare, and workplace coordination, fostering an environment built on efficiency, accountability, and collaboration. She believes that a strong organisation begins with empowered people, clear processes, and a culture that values professionalism and mutual respect.",
-      "Her philosophy towards real estate is rooted in the belief that professionalism and trust are the cornerstones of a better customer experience. She believes that delivering a transparent, reliable, and professional experience at every stage of the customer journey is an essential step towards elevating the real estate industry. Guided by this conviction, Monisha is committed to building an organisation where operational excellence and a people-first culture translate into lasting customer confidence and meaningful relationships."
-    ],
-    image: "/images/about/team/Monisha.jpg"
   }
+  
 ];
 
 export default function AboutTeamSection({ showExecutives = true }) {

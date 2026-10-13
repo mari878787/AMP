@@ -21,15 +21,16 @@ const DARK_LEADERS = [
   },
   {
     id: 2,
-    name: "Muralidharan",
+    name: "Muralidharan Devaraj",
     role: "CHIEF EXECUTIVE OFFICER",
-    signatureTitle: "Muralidharan",
+    signatureTitle: "Muralidharan Devaraj",
     quote: "The function of leadership is to produce more leaders, not more followers.",
     desc: "At Aadhithya Mohan Properties, our mission is clear: bridge the gap between aspirational living and enduring real estate value. We're dedicated to maximizing long-term appreciation by providing tailored guidance, exceptional craftsmanship, and in-depth market insights.",
     bio: [
-      "Muralidharan brings over 11 years of professional experience, including more than six years in the real estate industry. His journey began in investor relations, where he worked closely with investors as an independent consultant, gaining valuable insight into market dynamics, customer expectations, and long-term value creation. His strategic vision and leadership ultimately led him to assume the role of Chief Executive Officer at Aadhithya Mohan Properties.",
-      "Prior to his leadership in real estate, he served as a Marketing Consultant for digital campaigns at Condé Nast India Pvt. Ltd., where he worked on performance-driven marketing initiatives for leading brands. This experience cultivated a strategic approach to brand building, customer engagement, and business growth, which continues to influence his leadership today.",
-      "As Chief Executive Officer of Aadhithya Mohan Properties, Muralidharan leads the company's overall operations, strategic planning, business growth, and expansion. His perspective on real estate is founded on two enduring principles: trust and lasting value. He believes every development should inspire confidence through uncompromising integrity while creating enduring value for homeowners and investors alike."
+      "Muralidharan brings over a decade of professional experience, including more than six years in the real estate industry. His journey with Aadhithya Mohan Properties began in investor relations, where he worked closely with investors as an independent consultant, developing a strong understanding of market dynamics, investor expectations, and long-term value creation.",
+      "Prior to his leadership role in real estate, he also served as a Marketing Consultant for digital campaigns at Condé Nast India Pvt. Ltd., contributing to performance-driven marketing initiatives for leading brands. This experience shaped his approach to brand positioning, customer engagement, and sustainable business growth.",
+      "As Chief Executive Officer of Aadhithya Mohan Properties, Muralidharan leads the company's strategic direction, operations, business development, and expansion. He believes sustainable business growth is built on strong teams, a supportive work environment, and empowering people to contribute meaningfully to the organisation's success. Drawing on his experience across investor relations, marketing, and real estate, he brings a long-term perspective to business growth and market opportunities.",
+      "His leadership is guided by two enduring principles: trust and lasting value. He believes that real estate extends beyond creating physical spaces; it is about building confidence, enriching lives, and creating value that endures across generations."
     ],
     image: "/images/about/team/murali.png"
   }

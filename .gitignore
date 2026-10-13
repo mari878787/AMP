@@ -22,8 +22,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# PDFs
-*.pdf
 
 
 .vercel
@@ -37,5 +35,6 @@ public/images/maia.zip
 public/images/maia/
 node-env/
 scratch/
+_archive/
 
 

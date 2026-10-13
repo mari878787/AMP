@@ -20,15 +20,21 @@ export async function submitLead(leadData) {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      return { success: true, data };
+      try {
+        const data = await response.json();
+        return { success: true, data };
+      } catch (parseErr) {
+        return { success: true };
+      }
     }
   } catch (err) {
     console.warn('Backend API unreachable or failed, fallback to mailto dispatch:', err);
   }
 
-  // Graceful fallback to mailto if backend server is not running
-  triggerMailtoFallback(leadData);
+  // Graceful fallback to mailto if backend server is not running (skip for brochure downloads so file download isn't blocked)
+  if (leadData.skipMailtoFallback !== true && leadData.category !== 'Brochure Download') {
+    triggerMailtoFallback(leadData);
+  }
   return { success: true, fallback: true };
 }
 

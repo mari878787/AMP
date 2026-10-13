@@ -17,6 +17,7 @@ import NeighbourhoodStory from '../components/StorySection/NeighbourhoodStory';
 import ProjectDetailsGrid from '../components/ProjectDetailsGrid';
 import ProjectPricingSection from '../components/ProjectPricingSection';
 import AmenitiesHeroSlider from '../components/AmenitiesHeroSlider';
+import { submitLead } from '../services/api';
 const VIDEO_SLIDES = [
   {
     title: "CMR Global City Video",
@@ -570,25 +571,23 @@ export default function CMRGlobalCity({ project }) {
     setLightboxIdx(nextIdx);
     setLightboxImage(list[nextIdx]);
   };
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const fullName = `${quoteForm.name || quoteForm.firstName || ''} ${quoteForm.lastName || ''}`.trim();
     const phone = `${quoteForm.phoneCode || '+91'} ${quoteForm.phone || quoteForm.phoneNumber || ''}`.trim();
     const mode = quoteForm.contactMode === 'videocall' ? 'Schedule a Video Call' : 'Request a Callback';
     const visitWhen = quoteForm.visitTimeline === 'this-month' ? 'This Month' : 'This Week';
     
-    const subject = encodeURIComponent(`Schedule Visit / Inquiry - CMR Global City (${fullName || 'Lead'})`);
-    const body = encodeURIComponent(
-      `Project: CMR Global City\n` +
-      `Name: ${fullName}\n` +
-      `Phone: ${phone}\n` +
-      `Email: ${quoteForm.email || 'N/A'}\n` +
-      `Preferred Configuration: ${quoteForm.config || 'Township Plots'}\n` +
-      `Preferred Contact Mode: ${mode}\n` +
-      `Planning to Visit Site: ${visitWhen}\n`
-    );
-
-    window.location.href = `mailto:info@aadhithyamohanproperties.com?subject=${subject}&body=${body}`;
+    await submitLead({
+      name: fullName,
+      phone: phone,
+      email: quoteForm.email || '',
+      project: 'CMR Global City',
+      category: 'Schedule Visit / Inquiry',
+      unitType: quoteForm.config || 'Township Plots',
+      contactMode: mode,
+      visitTimeline: visitWhen
+    });
 
     setFormSubmitted(true);
     setTimeout(() => {
@@ -611,22 +610,28 @@ export default function CMRGlobalCity({ project }) {
     }, 2500);
   };
 
-  const handleBrochureSubmit = (e) => {
+  const handleBrochureSubmit = async (e) => {
     e.preventDefault();
     const fullName = `${brochureForm.name || brochureForm.firstName || ''} ${brochureForm.lastName || ''}`.trim();
     const phone = `${brochureForm.phoneCode || '+91'} ${brochureForm.phone || ''}`.trim();
     
-    const subject = encodeURIComponent(`Brochure Download Request - CMR Global City (${fullName || 'Lead'})`);
-    const body = encodeURIComponent(
-      `Project: CMR Global City\n` +
-      `Name: ${fullName}\n` +
-      `Phone: ${phone}\n` +
-      `Email: ${brochureForm.email || 'N/A'}\n` +
-      `Configuration: ${brochureForm.config || 'Villa Plots'}\n` +
-      `Request: Download Official Project E-Brochure\n`
-    );
+    await submitLead({
+      name: fullName,
+      phone: phone,
+      email: brochureForm.email || '',
+      project: 'CMR Global City',
+      category: 'Brochure Download',
+      unitType: brochureForm.config || 'Villa Plots'
+    });
 
-    window.location.href = `mailto:info@aadhithyamohanproperties.com?subject=${subject}&body=${body}`;
+    // Auto-trigger direct PDF download
+    const link = document.createElement('a');
+    link.href = encodeURI('/images/project/Brochure/CMR Global City Brochure.pdf');
+    link.download = 'CMR Global City - Brochure.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
     setBrochureSubmitted(true);
     setTimeout(() => {

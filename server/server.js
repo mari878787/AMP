@@ -94,11 +94,112 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
-// View all saved leads (admin/testing)
-app.get('/api/leads', (req, res) => {
+// Function to render HTML dashboard for leads
+const renderLeadsDashboard = (leads) => {
+  const brochureCount = leads.filter(l => (l.category || '').toLowerCase().includes('brochure')).length;
+  const inquiryCount = leads.length - brochureCount;
+
+  const rows = leads.map((lead, idx) => {
+    const isBrochure = (lead.category || '').toLowerCase().includes('brochure');
+    const badgeClass = isBrochure ? 'badge-brochure' : 'badge-quote';
+    return `
+      <tr>
+        <td style="color: #8b949e; font-size: 12px;">#${leads.length - idx}</td>
+        <td><strong>${lead.name || 'Anonymous'}</strong></td>
+        <td><a href="tel:${lead.phone}" style="color: #79c0ff; font-weight: 500;">${lead.phone || 'N/A'}</a></td>
+        <td><a href="mailto:${lead.email}" style="color: #c9d1d9;">${lead.email || 'N/A'}</a></td>
+        <td><span style="color: #f0883e; font-weight: 600;">${lead.project || 'General'}</span></td>
+        <td><span class="badge ${badgeClass}">${lead.category || 'Inquiry'}</span></td>
+        <td style="font-size: 13px; color: #8b949e;">${lead.unitType || 'N/A'}</td>
+        <td style="font-size: 12px; color: #8b949e; white-space: nowrap;">${lead.submittedAtIST || lead.timestamp || 'N/A'}</td>
+      </tr>
+      ${lead.message ? `<tr><td colspan="8" style="background: #11141a; font-size: 13px; color: #a5d6ff; padding: 8px 14px 10px 36px; border-top: none;">💬 Message: ${lead.message}</td></tr>` : ''}
+    `;
+  }).join('');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aadhithya Mohan Properties - Leads Portal</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0d1117; color: #c9d1d9; margin: 0; padding: 24px; }
+    .container { max-width: 1300px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #21262d; padding-bottom: 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    h1 { margin: 0; font-size: 22px; color: #d4af37; font-weight: 600; letter-spacing: 0.04em; }
+    .stats { display: flex; gap: 12px; }
+    .stat-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 8px 16px; font-size: 13px; }
+    .stat-num { font-size: 20px; font-weight: 700; color: #ffffff; }
+    table { width: 100%; border-collapse: collapse; background: #161b22; border-radius: 8px; overflow: hidden; border: 1px solid #30363d; margin-top: 12px; }
+    th { background: #21262d; color: #d4af37; text-align: left; padding: 12px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    td { padding: 12px 14px; border-top: 1px solid #21262d; font-size: 14px; vertical-align: middle; }
+    tr:hover td { background: #1c2128; }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+    .badge-brochure { background: #132e1b; color: #56d364; border: 1px solid #238636; }
+    .badge-quote { background: #382405; color: #e3b341; border: 1px solid #9e6a03; }
+    .empty { text-align: center; padding: 50px 20px; color: #8b949e; }
+    .actions { display: flex; gap: 10px; margin-top: 16px; }
+    .btn { display: inline-block; padding: 8px 14px; background: #21262d; color: #c9d1d9; border: 1px solid #30363d; border-radius: 6px; text-decoration: none; font-size: 13px; }
+    .btn:hover { background: #30363d; color: #ffffff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>Aadhithya Mohan Properties &bull; Customer Leads</h1>
+        <p style="margin: 4px 0 0; font-size: 13px; color: #8b949e;">Real-time database of customer inquiries & brochure downloads</p>
+      </div>
+      <div class="stats">
+        <div class="stat-card">Total Leads: <div class="stat-num">${leads.length}</div></div>
+        <div class="stat-card">Brochures: <div class="stat-num" style="color: #56d364;">${brochureCount}</div></div>
+        <div class="stat-card">Inquiries: <div class="stat-num" style="color: #e3b341;">${inquiryCount}</div></div>
+      </div>
+    </div>
+
+    ${leads.length === 0 ? '<div class="empty">No leads recorded yet. Submissions from the website will appear here in real time.</div>' : `
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Lead Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Project</th>
+          <th>Inquiry Type</th>
+          <th>Unit / Pref</th>
+          <th>Received (IST)</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+    `}
+
+    <div class="actions">
+      <a href="/api/leads" class="btn">View Raw JSON</a>
+      <a href="/api/health" class="btn">System Health</a>
+    </div>
+  </div>
+</body>
+</html>`;
+};
+
+// View all saved leads (supports both JSON API and HTML Dashboard)
+app.get(['/api/leads', '/admin/leads'], (req, res) => {
   try {
     const fileContent = fs.readFileSync(LEADS_FILE, 'utf-8');
     const leads = JSON.parse(fileContent || '[]');
+    
+    if (req.query.view === 'html' || req.path === '/admin/leads') {
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.send(renderLeadsDashboard(leads));
+    }
+    
     res.json({ success: true, count: leads.length, leads });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Could not read leads file' });
