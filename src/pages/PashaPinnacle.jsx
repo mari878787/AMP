@@ -468,52 +468,22 @@ export default function PashaPinnacle({ project = 'pasha' }) {
   const [amenityIdx, setAmenityIdx] = useState(0);
   const amenities = [
     {
-      title: "Stilt Car Parking",
-      desc: "Reserved, sheltered parking spaces located at the stilt level for effortless vehicle access and security.",
-      image: "/images/project/aminities/villa & apartment/Dedicated Stilt Floor Car Parking.png",
-      icon: "/images/project/aminities/icon/car-parking.png"
+      title: "Gym",
+      desc: "Stay fit and energized with modern cardiovascular and strength-training equipment in a dedicated fitness space.",
+      image: "/images/project/aminities/villa & apartment/gym.png",
+      icon: "/images/project/aminities/icon/gym.png"
     },
     {
-      title: "Passenger Lift",
-      desc: "Modern, high-efficiency automatic passenger elevator ensuring seamless vertical connectivity across all floors.",
-      image: "/images/project/aminities/villa & apartment/Automatic Passenger Lift.png",
-      icon: "/images/project/aminities/icon/noun_lift_8277947_@700.png"
-    },
-    {
-      title: "Power Backup",
+      title: "Power Back up",
       desc: "Uninterrupted power backup infrastructure for common areas, elevators, and essential residential utilities.",
       image: "/images/project/aminities/villa & apartment/Power Backup  DG Generator .png",
       icon: "/images/project/aminities/icon/power-backup.png"
     },
     {
-      title: "Sump & Bore Well",
-      desc: "Robust dual-source water supply system with dedicated underground storage sump and bore well facilities.",
-      image: "/images/project/aminities/villa & apartment/Underground Sump & Dedicated Bore Well.png",
-      icon: "/images/project/aminities/icon/Rainwater Harvesting.png"
-    },
-    {
-      title: "Private Balconies",
-      desc: "Generously sized private balconies attached to every residence, offering open street views and natural ventilation.",
-      image: "/images/project/pasha-pinnacle/extirior/3 Resized PP 16x9.jpg",
-      icon: "/images/project/aminities/icon/Balconies.png"
-    },
-    {
-      title: "Landscaped Entrance",
-      desc: "Elegantly detailed arrival foyer and common spaces featuring curated landscaping and greenery.",
-      image: "/images/project/aminities/villa & apartment/Landscaped Common Entrance & Green Touches.png",
-      icon: "/images/project/aminities/icon/Entrance.png"
-    },
-    {
-      title: "Kitchen Utility Yard",
-      desc: "Separate, private utility and wash yard attached to every kitchen for seamless everyday domestic convenience.",
-      image: "/images/project/aminities/villa & apartment/Dedicated ServiceUtility Yard in Every Kitchen.png",
-      icon: "/images/project/aminities/icon/Utility-Yard.png"
-    },
-    {
-      title: "Cross Ventilated Layouts",
-      desc: "Architecturally engineered dual-orientation layouts maximizing fresh airflow, natural daylight, and thermal comfort.",
-      image: "/images/project/aminities/villa & apartment/East–West Cross Ventilated Layouts.png",
-      icon: "/images/project/aminities/icon/Ventilate.png"
+      title: "Stilt Car Parking",
+      desc: "Reserved, sheltered parking spaces located at the stilt level for effortless vehicle access and security.",
+      image: "/images/project/aminities/villa & apartment/Dedicated Stilt Floor Car Parking.png",
+      icon: "/images/project/aminities/icon/car-parking.png"
     }
   ];
   const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);

@@ -488,18 +488,60 @@ export default function NewProject({ project }) {
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [amenityIdx, setAmenityIdx] = useState(0);
   const amenities = [
-    { image: "/images/project/CML/amenities/16.png", icon: "/images/project/aminities/icon/gym.png", title: "Gym", desc: "Stay fit and healthy with state-of-the-art fitness equipment." },
-    { image: "/images/project/CML/amenities/8.png", icon: "/images/project/aminities/icon/Indoor Games.png", title: "Indoor Games Room", desc: "A dedicated space for fun-filled indoor sports and activities." },
-    { image: "/images/project/aminities/villa & apartment/yoha-room.png", icon: "/images/project/aminities/icon/yogaRoom.png", title: "Meditation & Yoga Room", desc: "A tranquil space for wellness, mindfulness, and meditation." },
-    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/aminities/icon/Clubhouse.png", title: "Clubhouse", desc: "A massive, premium recreational space designed for community living." },
-    { image: "/images/project/CML/amenities/7.png", icon: "/images/project/aminities/icon/PartyHall.png", title: "Party Hall", desc: "Elegant and expansive space for celebrations and gatherings." },
-    { image: "/images/project/CML/amenities/4.png", icon: "/images/project/aminities/icon/Play Area.png", title: "Children's Play Area", desc: "Safe, vibrant, and fun play zones for kids." },
-    { image: "/images/project/CML/amenities/18.png", icon: "/images/project/aminities/icon/Security.png", title: "24*7 Security & CCTV", desc: "Round-the-clock smart surveillance and secure gated perimeter." },
-    { image: "/images/project/CML/amenities/2.png", icon: "/images/project/aminities/icon/Solar Lighting.png", title: "Solar Lighting", desc: "Eco-friendly illumination throughout the community avenues." },
-    { image: "/images/project/CML/amenities/20.png", icon: "/images/project/aminities/icon/DTH Connection.png", title: "DTH Connection", desc: "Pre-wired modern infrastructure for entertainment." },
-    { image: "/images/project/CML/amenities/11.png", icon: "/images/project/aminities/icon/Rainwater Harvesting.png", title: "Rainwater Harvesting", desc: "Eco-friendly water conservation designed as per CMWSSB norms." },
-    { image: "/images/project/aminities/villa & apartment/coarse-paint.png", icon: "/images/project/aminities/icon/Coarse Paint.png", title: "Weather Coarse Paint", desc: "Durable weather coarse coating on terrace floors for heat reduction." },
-    { image: "/images/project/aminities/villa & apartment/Anti-Termite.png", icon: "/images/project/aminities/icon/Anti-Termite.png", title: "Anti-Termite Treatment", desc: "Ensuring deep soil and foundation long-lasting pest protection." }
+    {
+      title: "Gym",
+      desc: "Stay fit and energized with a state-of-the-art fitness center and modern equipment.",
+      image: "/images/project/aminities/villa & apartment/gym.png",
+      icon: "/images/project/aminities/icon/gym.png"
+    },
+    {
+      title: "Party Hall",
+      desc: "Elegant and expansive space for celebrations, family events, and social gatherings.",
+      image: "/images/project/aminities/villa & apartment/party-hall.png",
+      icon: "/images/project/aminities/icon/PartyHall.png"
+    },
+    {
+      title: "Indoor Games Room",
+      desc: "A dedicated recreation space for table tennis, carrom, chess, and fun-filled indoor games.",
+      image: "/images/project/aminities/villa & apartment/in-door-game.png",
+      icon: "/images/project/aminities/icon/Indoor Games.png"
+    },
+    {
+      title: "Meditation & Yoga Room",
+      desc: "A tranquil sanctuary designed for mindfulness, daily yoga sessions, and holistic wellness.",
+      image: "/images/project/aminities/villa & apartment/yoha-room.png",
+      icon: "/images/project/aminities/icon/yogaRoom.png"
+    },
+    {
+      title: "Super Market",
+      desc: "Convenient on-premise daily grocery and convenience shopping for all residents.",
+      image: "/images/project/aminities/villa & apartment/supermarket.png",
+      icon: "/images/project/aminities/icon/supermarket.svg"
+    },
+    {
+      title: "Clinic",
+      desc: "In-house primary healthcare and consultation facility for prompt medical care.",
+      image: "/images/project/aminities/villa & apartment/clinic.png",
+      icon: "/images/project/aminities/icon/clinic.svg"
+    },
+    {
+      title: "Cafe",
+      desc: "Vibrant community cafe lounge to unwind, socialize, and savor freshly brewed coffee.",
+      image: "/images/project/aminities/villa & apartment/cafe.png",
+      icon: "/images/project/aminities/icon/cafe.svg"
+    },
+    {
+      title: "24*7 Security & CCTV",
+      desc: "Round-the-clock smart surveillance and secure gated community perimeter.",
+      image: "/images/project/aminities/villa & apartment/CCTV.png",
+      icon: "/images/project/aminities/icon/Security.png"
+    },
+    {
+      title: "Solar Lighting",
+      desc: "Eco-friendly solar powered street lighting illuminating avenues and walkways.",
+      image: "/images/project/aminities/villa & apartment/solar.png",
+      icon: "/images/project/aminities/icon/Solar Lighting.png"
+    }
   ];
   const [isAmenityAutoPlay, setIsAmenityAutoPlay] = useState(true);
 
