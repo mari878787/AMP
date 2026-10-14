@@ -81,16 +81,14 @@ export default function CinematicPreloader({ onComplete, loop = false }) {
             alt="Aadhithya Mohan" 
             className="preloader-primary-name-img"
           />
-        </div>
-
-        {/* Subtitle */}
-        <div className="preloader-subtitle-wrap">
           <img 
             src="/images/brand-subtitle-white.png" 
             alt="Properties" 
             className="preloader-subtitle-img"
           />
         </div>
+
+       
 
         {/* Luxury Brand Slogan */}
         <div className="preloader-slogan-wrap">
