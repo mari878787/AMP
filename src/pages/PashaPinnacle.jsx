@@ -731,6 +731,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
     return () => clearInterval(interval);
   }, [galleryTab, galleryImages]);
   const handleOpenLightbox = (section, idx) => {
+    if (!isMobile) return;
     setLightboxIdx(idx);
     setLightboxSection(section);
     setLightboxImage(galleryImages[section][idx]);
@@ -1315,7 +1316,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
                                     width: '100vw',
                                     borderRadius: '0px',
                                     transition: 'opacity 0.6s ease',
-                                    cursor: 'pointer',
+                                    cursor: isActive ? (isMobile ? 'pointer' : 'default') : 'pointer',
                                     overflow: 'hidden',
                                     position: 'relative',
                                     height: 'calc(100vh - 180px)',
@@ -2047,7 +2048,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
       )}
 
       {/* Gallery Image Lightbox Modal */}
-      {lightboxImage && (
+      {lightboxImage && isMobile && (
         <div
           className="lightbox-overlay"
           data-lenis-prevent
