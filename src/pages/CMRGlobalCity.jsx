@@ -321,6 +321,16 @@ export default function CMRGlobalCity({ project }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  // Auto-scroll the active tab into view on mobile screens when activeTab changes
+  useEffect(() => {
+    if (window.innerWidth < 900 && navContainerRef.current) {
+      const activeLink = navContainerRef.current.querySelector('.sub-nav-link.active');
+      if (activeLink && typeof activeLink.scrollIntoView === 'function') {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, [activeTab]);
+
   // Sliding indicator for sub-nav
   useEffect(() => {
     const updateIndicator = () => {
@@ -339,10 +349,6 @@ export default function CMRGlobalCity({ project }) {
         width: activeRect.width,
         opacity: 1,
       });
-      // Auto-scroll the active tab into view on mobile screens
-      if (window.innerWidth < 900) {
-        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }
     };
     // Small delay to let DOM update
     const timer = setTimeout(updateIndicator, 50);
@@ -350,7 +356,7 @@ export default function CMRGlobalCity({ project }) {
     // Also update on scroll of the sub-nav itself (for mobile horizontal scroll)
     const container = navContainerRef.current;
     if (container) {
-      container.addEventListener('scroll', updateIndicator);
+      container.addEventListener('scroll', updateIndicator, { passive: true });
     }
     return () => {
       clearTimeout(timer);
@@ -711,7 +717,7 @@ export default function CMRGlobalCity({ project }) {
         <nav className="project-sub-nav">
           <div className="container sub-nav-container">
             {/* Scrollable area containing all section links */}
-            <div className="sub-nav-scroll-wrapper" ref={navContainerRef}>
+            <div className="sub-nav-scroll-wrapper" ref={navContainerRef} data-lenis-prevent>
               {/* Sliding gold indicator */}
               {/* <div
                 className="sub-nav-indicator"
@@ -1809,6 +1815,7 @@ export default function CMRGlobalCity({ project }) {
           align-items: stretch;
           gap: 0;
           flex: 1;
+          min-width: 0;
           position: relative;
         }
         /* â”€â”€ REFINED CONCEPT 3 STYLES â”€â”€ */
@@ -4142,8 +4149,13 @@ export default function CMRGlobalCity({ project }) {
           .sub-nav-scroll-wrapper {
             justify-content: flex-start;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            min-width: 0;
+            flex: 1 1 0%;
+            touch-action: pan-x pan-y;
+            overscroll-behavior-x: contain;
           }
           .sub-nav-scroll-wrapper::-webkit-scrollbar {
             display: none;

@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const RECEIVER_EMAIL = process.env.LEADS_RECEIVER_EMAIL || 'info@aadhithyamohanproperties.com';
 
 // Ensure data directory exists for persistent local backup
@@ -181,6 +181,7 @@ const renderLeadsDashboard = (leads) => {
     `}
 
     <div class="actions">
+      <a href="/admin/leads/export" class="btn" style="background: #238636; color: #ffffff; font-weight: 500; border-color: #2ea043;">📥 Export to Excel / CSV</a>
       <a href="/api/leads" class="btn">View Raw JSON</a>
       <a href="/api/health" class="btn">System Health</a>
     </div>
@@ -188,6 +189,39 @@ const renderLeadsDashboard = (leads) => {
 </body>
 </html>`;
 };
+
+// Export all saved leads as CSV for Excel
+app.get(['/api/leads/export', '/admin/leads/export'], (req, res) => {
+  try {
+    const fileContent = fs.readFileSync(LEADS_FILE, 'utf-8');
+    const leads = JSON.parse(fileContent || '[]');
+    
+    const headers = ['ID', 'Name', 'Phone', 'Email', 'Project', 'Inquiry Type', 'Unit Preference', 'Message', 'Source URL', 'Received Time (IST)'];
+    const csvRows = [headers.join(',')];
+
+    leads.forEach(l => {
+      const escape = (val) => `"${String(val || '').replace(/"/g, '""')}"`;
+      csvRows.push([
+        escape(l.id),
+        escape(l.name),
+        escape(l.phone),
+        escape(l.email),
+        escape(l.project),
+        escape(l.category),
+        escape(l.unitType),
+        escape(l.message),
+        escape(l.sourceUrl),
+        escape(l.submittedAtIST || l.timestamp)
+      ].join(','));
+    });
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="amp-leads-${new Date().toISOString().slice(0, 10)}.csv"`);
+    res.send(csvRows.join('\r\n'));
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Could not export leads' });
+  }
+});
 
 // View all saved leads (supports both JSON API and HTML Dashboard)
 app.get(['/api/leads', '/admin/leads'], (req, res) => {

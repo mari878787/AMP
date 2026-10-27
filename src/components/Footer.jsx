@@ -26,16 +26,6 @@ export default function Footer() {
             </p>
           </div>
           
-          {/* Offerings Column */}
-          <div className="footer-col">
-            <h4 className="footer-col-title">PROJECTS</h4>
-            <ul className="footer-links">
-              <li><a href="/projects">Villas</a></li>
-              <li><a href="/projects">Apartments</a></li>
-              <li><a href="/projects">Plots</a></li>
-            </ul>
-          </div>
-          
           {/* Company Column */}
           <div className="footer-col">
             <h4 className="footer-col-title">COMPANY</h4>
@@ -161,7 +151,7 @@ export default function Footer() {
 
         .footer-upper {
           display: grid;
-          grid-template-columns: 2.2fr 1fr 1fr 1fr 2fr;
+          grid-template-columns: 2fr 1fr 1fr 1.8fr;
           gap: var(--space-6);
         }
 
