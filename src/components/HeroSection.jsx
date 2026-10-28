@@ -44,8 +44,17 @@ const HERO_SLIDES = [
 
 export default function HeroSection({ startZoom }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   const swiperRef = useRef(null);
   const currentSlide = HERO_SLIDES[activeIndex] || HERO_SLIDES[0];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleVideoEnded = () => {
     if (swiperRef.current) {
@@ -61,9 +70,7 @@ export default function HeroSection({ startZoom }) {
     setActiveIndex(realIdx);
     const isVideoSlide = Boolean(HERO_SLIDES[realIdx]?.video);
 
-    const activeSlideEl = swiper.slides[swiper.activeIndex];
     const allVideos = document.querySelectorAll('.hero-bg-video');
-    
     allVideos.forEach(v => {
       v.pause();
     });
@@ -72,15 +79,18 @@ export default function HeroSection({ startZoom }) {
       if (swiper.autoplay) {
         swiper.autoplay.stop();
       }
+      const activeSlideEl = swiper.slides[swiper.activeIndex];
       if (activeSlideEl) {
-        const activeVideos = activeSlideEl.querySelectorAll('video');
-        activeVideos.forEach(v => {
-          v.currentTime = 0;
-          const playPromise = v.play();
+        const activeVideo = activeSlideEl.querySelector('video');
+        if (activeVideo) {
+          activeVideo.defaultMuted = true;
+          activeVideo.muted = true;
+          activeVideo.currentTime = 0;
+          const playPromise = activeVideo.play();
           if (playPromise !== undefined) {
             playPromise.catch(() => {});
           }
-        });
+        }
       }
     } else {
       if (swiper.autoplay && !swiper.autoplay.running) {
@@ -103,14 +113,16 @@ export default function HeroSection({ startZoom }) {
         swiperRef.current.autoplay.stop();
       }
       if (activeSlideEl) {
-        const activeVideos = activeSlideEl.querySelectorAll('video');
-        activeVideos.forEach(v => {
-          v.currentTime = 0;
-          const playPromise = v.play();
+        const activeVideo = activeSlideEl.querySelector('video');
+        if (activeVideo) {
+          activeVideo.defaultMuted = true;
+          activeVideo.muted = true;
+          activeVideo.currentTime = 0;
+          const playPromise = activeVideo.play();
           if (playPromise !== undefined) {
             playPromise.catch(() => {});
           }
-        });
+        }
       }
     } else {
       if (swiperRef.current && swiperRef.current.autoplay && !swiperRef.current.autoplay.running) {
@@ -148,22 +160,22 @@ export default function HeroSection({ startZoom }) {
                 {slide.video ? (
                   <div className="hero-video-wrapper">
                     <video
-                      className="hero-bg-video desktop-only-video"
-                      src={isCurrentOrAdjacent ? slide.video : undefined}
-                      poster={slide.image}
+                      key={isMobile ? `mob-${idx}` : `desk-${idx}`}
+                      className="hero-bg-video"
+                      src={isCurrentOrAdjacent ? (isMobile ? (slide.mobileVideo || slide.video) : slide.video) : undefined}
+                      poster={isMobile ? (slide.mobileImage || slide.image) : slide.image}
                       preload={idx === activeIndex ? "auto" : "metadata"}
+                      autoPlay={idx === activeIndex}
                       muted
                       playsInline
                       onEnded={handleVideoEnded}
-                    />
-                    <video
-                      className="hero-bg-video mobile-only-video"
-                      src={isCurrentOrAdjacent ? (slide.mobileVideo || slide.video) : undefined}
-                      poster={slide.mobileImage || slide.image}
-                      preload={idx === activeIndex ? "auto" : "metadata"}
-                      muted
-                      playsInline
-                      onEnded={handleVideoEnded}
+                      onCanPlay={(e) => {
+                        e.target.defaultMuted = true;
+                        e.target.muted = true;
+                        if (idx === activeIndex) {
+                          e.target.play().catch(() => {});
+                        }
+                      }}
                     />
                   </div>
                 ) : (
