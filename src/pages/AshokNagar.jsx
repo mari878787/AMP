@@ -32,6 +32,8 @@ export default function AshokNagar({ project }) {
   const isPashaPinnacle = project === 'pasha' || location.pathname.includes('pasha') || location.search.includes('pasha');
 
   const [activeTab, setActiveTab] = useState('overview');
+  const [isSectionDirectoryOpen, setIsSectionDirectoryOpen] = useState(false);
+  const directoryRef = useRef(null);
   const [activeSubSection, setActiveSubSection] = useState('highlights');
   const [showAllInteriors, setShowAllInteriors] = useState(false);
   const [showAllExteriors, setShowAllExteriors] = useState(false);
@@ -174,11 +176,33 @@ export default function AshokNagar({ project }) {
     };
   }, [isBrochureOpen, isQuoteOpen, lightboxImage, floorplanLightbox, isVideoOpen]);
 
+  // Close Section Directory dropdown on click outside or on scroll
+  useEffect(() => {
+    if (!isSectionDirectoryOpen) return;
+    const handleClickOutside = (e) => {
+      if (directoryRef.current && !directoryRef.current.contains(e.target)) {
+        setIsSectionDirectoryOpen(false);
+      }
+    };
+    const handleScrollClose = () => {
+      setIsSectionDirectoryOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside, { passive: true });
+    window.addEventListener('scroll', handleScrollClose, { passive: true });
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+      window.removeEventListener('scroll', handleScrollClose);
+    };
+  }, [isSectionDirectoryOpen]);
+
   // Keyboard controls: Esc closes, Left/Right navigate gallery lightbox
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key === 'Escape') {
-        if (floorplanLightbox) setFloorplanLightbox(null);
+        if (isSectionDirectoryOpen) setIsSectionDirectoryOpen(false);
+        else if (floorplanLightbox) setFloorplanLightbox(null);
         else if (lightboxImage) setLightboxImage(null);
         else if (isVideoOpen) setIsVideoOpen(false);
         else if (isQuoteOpen) setIsQuoteOpen(false);
@@ -740,49 +764,91 @@ export default function AshokNagar({ project }) {
               </button>
             </div>
             {/* Fixed Right Directory Trigger for Mobile */}
-            <div className="sub-nav-dropdown-wrapper sub-nav-mobile-trigger-wrapper show-only-on-mobile">
+            <div 
+              ref={directoryRef}
+              className="sub-nav-dropdown-wrapper sub-nav-mobile-trigger-wrapper show-only-on-mobile"
+            >
               <button
-                className="sub-nav-link mobile-grid-trigger-btn"
+                type="button"
+                className={`sub-nav-link mobile-grid-trigger-btn ${isSectionDirectoryOpen ? 'active' : ''}`}
                 aria-label="Section directory"
-                style={{ padding: '20px 18px 18px' }}
+                aria-expanded={isSectionDirectoryOpen}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsSectionDirectoryOpen((prev) => !prev);
+                }}
+                style={{ padding: '16px 18px', cursor: 'pointer' }}
               >
-                <LayoutGrid size={15} style={{ margin: 0, transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)' }} className="more-trigger-icon" />
+                <LayoutGrid 
+                  size={15} 
+                  style={{ 
+                    margin: 0, 
+                    transform: isSectionDirectoryOpen ? 'rotate(90deg) scale(1.1)' : 'rotate(0deg) scale(1)',
+                    color: isSectionDirectoryOpen ? '#B48564' : '#ffffff',
+                    transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease' 
+                  }} 
+                  className="more-trigger-icon" 
+                />
               </button>
-              <div className="sub-nav-dropdown-menu mobile-directory-menu" style={{ right: 0, left: 'auto', transform: 'translateX(-15%) translateY(6px)' }}>
+              <div className={`sub-nav-dropdown-menu mobile-directory-menu ${isSectionDirectoryOpen ? 'is-open' : ''}`}>
                 <div className="mobile-directory-header">SECTION DIRECTORY</div>
                 <button
+                  type="button"
                   className={`dropdown-item ${activeTab === 'overview' ? 'active' : ''}`}
-                  onClick={() => handleScrollToSection('overview')}
+                  onClick={() => {
+                    handleScrollToSection('overview');
+                    setIsSectionDirectoryOpen(false);
+                  }}
                 >
                   Overview
                 </button>
                 <button
+                  type="button"
                   className={`dropdown-item ${activeTab === 'why-project' ? 'active' : ''}`}
-                  onClick={() => handleScrollToSection('why-project')}
+                  onClick={() => {
+                    handleScrollToSection('why-project');
+                    setIsSectionDirectoryOpen(false);
+                  }}
                 >
                   Why Project
                 </button>
                 <button
+                  type="button"
                   className={`dropdown-item ${activeTab === 'unit-plan' ? 'active' : ''}`}
-                  onClick={() => handleScrollToSection('unit-plan')}
+                  onClick={() => {
+                    handleScrollToSection('unit-plan');
+                    setIsSectionDirectoryOpen(false);
+                  }}
                 >
                   Unit Plan
                 </button>
                 <button
+                  type="button"
                   className={`dropdown-item ${activeTab === 'gallery' ? 'active' : ''}`}
-                  onClick={() => handleScrollToSection('gallery')}
+                  onClick={() => {
+                    handleScrollToSection('gallery');
+                    setIsSectionDirectoryOpen(false);
+                  }}
                 >
                   Gallery
                 </button>
                 <button
+                  type="button"
                   className={`dropdown-item ${activeTab === 'amenities' ? 'active' : ''}`}
-                  onClick={() => handleScrollToSection('amenities')}
+                  onClick={() => {
+                    handleScrollToSection('amenities');
+                    setIsSectionDirectoryOpen(false);
+                  }}
                 >
                   Amenities
                 </button>
                 <button
+                  type="button"
                   className={`dropdown-item ${activeTab === 'pricing' ? 'active' : ''}`}
-                  onClick={() => handleScrollToSection('pricing')}
+                  onClick={() => {
+                    handleScrollToSection('pricing');
+                    setIsSectionDirectoryOpen(false);
+                  }}
                 >
                   Price
                 </button>
@@ -2001,7 +2067,7 @@ export default function AshokNagar({ project }) {
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           z-index: 99;
         }
-        .sub-nav-dropdown-wrapper:hover .sub-nav-dropdown-menu {
+        .sub-nav-dropdown-wrapper:not(.sub-nav-mobile-trigger-wrapper):hover .sub-nav-dropdown-menu {
           opacity: 1;
           visibility: visible;
           transform: translateX(-50%) translateY(0);
@@ -4165,16 +4231,34 @@ export default function AshokNagar({ project }) {
             display: inline-flex !important;
           }
           .mobile-directory-menu {
-            min-width: 220px;
-            padding: 8px;
-            background: rgba(30, 30, 30, 0.95) !important;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            border-radius: 8px !important;
+            position: absolute !important;
+            top: calc(100% + 6px) !important;
+            right: 0 !important;
+            left: auto !important;
+            min-width: 220px !important;
+            max-width: calc(100vw - 24px) !important;
+            padding: 8px !important;
+            background: rgba(22, 22, 22, 0.96) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(243, 200, 146, 0.25) !important;
+            border-radius: 12px !important;
             box-shadow: 
-              0 12px 40px rgba(0, 0, 0, 0.5),
-              0 2px 8px rgba(0, 0, 0, 0.2) !important;
+              0 16px 40px rgba(0, 0, 0, 0.65),
+              0 2px 10px rgba(0, 0, 0, 0.3) !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transform: translateY(6px) scale(0.96) !important;
+            transform-origin: top right !important;
+            transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s !important;
+            z-index: 99999 !important;
+          }
+          .mobile-directory-menu.is-open {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: translateY(0) scale(1) !important;
           }
           .mobile-directory-header {
             font-size: 8.5px;
