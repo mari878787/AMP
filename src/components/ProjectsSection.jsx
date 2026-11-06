@@ -16,7 +16,7 @@ const ALL_PROJECTS = [
     location: 'Medavakkam - Chennai',
     area: '2,200 - 3,300 Sq.Ft.',
     image: '/images/project/CML/Gallery/Look_1.1.png',
-    mobileImage: '/images/project/CML/Gallery/Look_1.1.png',
+    mobileImage: '/images/project/CML/Gallery/Look_1.1-mobile.jpg',
     link: '/projects/villas/crystal-moonlight-villa-in-medavakkam',
     centerInfo: '3 BHK & 4 BHK Luxury Villas',
     badge: 'Ready to Move',
@@ -84,8 +84,7 @@ export default function ProjectsSection() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    // GSAP parallax scrub strictly for Desktop screens (min-width: 769px)
-    // On mobile screens, native CSS position: sticky provides a 120Hz/60Hz butter-smooth curtain reveal without lag
+    // Desktop: Keep existing perfect parallax scrub with position: fixed
     mm.add("(min-width: 769px)", () => {
       const slides = gsap.utils.toArray('.maia-section-slide');
       slides.forEach((slide, i) => {
@@ -93,7 +92,6 @@ export default function ProjectsSection() {
         const nextSlide = slides[i + 1];
 
         if (img) {
-          // Dynamic hardware-accelerated translate3d on Y-axis with lockstep 1:1 sync
           gsap.fromTo(
             img,
             { 
@@ -114,6 +112,37 @@ export default function ProjectsSection() {
                 scrub: true,
                 invalidateOnRefresh: true,
               },
+            }
+          );
+        }
+      });
+    });
+
+    // Mobile: Hardware-accelerated parallax counter-motion with position: absolute (eliminates sticking & stacking)
+    mm.add("(max-width: 768px)", () => {
+      const slides = gsap.utils.toArray('.maia-section-slide');
+      slides.forEach((slide, i) => {
+        const img = slide.querySelector('.maia-bg-img');
+        if (img) {
+          gsap.fromTo(
+            img,
+            {
+              yPercent: -15,
+              scale: 1.08,
+              force3D: true
+            },
+            {
+              yPercent: 15,
+              scale: 1.0,
+              ease: 'none',
+              force3D: true,
+              scrollTrigger: {
+                trigger: i === 0 ? '.projects-headline-intro' : slide,
+                start: i === 0 ? 'bottom bottom' : 'top bottom',
+                end: 'bottom top',
+                scrub: 0.5,
+                invalidateOnRefresh: true,
+              }
             }
           );
         }
@@ -149,7 +178,6 @@ export default function ProjectsSection() {
             <section
               key={project.id}
               className="maia-section-slide"
-              style={{ zIndex: idx + 1 }}
             >
               <div className="maia-outer">
                 <div className="maia-inner">
@@ -163,7 +191,7 @@ export default function ProjectsSection() {
                       }
                     }}
                   >
-                    {/* Fixed Viewport Background Frame (Clipped by Slide Container) */}
+                    {/* Viewport Background Frame */}
                     <div className="maia-fixed-frame">
                       <picture className="maia-picture">
                         <source media="(max-width: 768px)" srcSet={encodeURI(project.mobileImage || project.image)} />
@@ -348,7 +376,8 @@ export default function ProjectsSection() {
 
         @media (max-width: 768px) {
           .maia-portfolio-wrapper {
-            overflow: visible;
+            overflow: hidden;
+            position: relative;
           }
           .projects-headline-intro {
             padding: 48px 20px 24px 20px;
@@ -357,15 +386,16 @@ export default function ProjectsSection() {
             margin-bottom: 14px;
           }
           .maia-section-slide {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
+            position: relative;
+            width: 100%;
             height: 100vh;
             height: 100dvh;
-            clip-path: none;
-            -webkit-clip-path: none;
             overflow: hidden;
+            clip-path: inset(0 0 0 0);
+            -webkit-clip-path: inset(0 0 0 0);
             background-color: #030406;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
           }
           .maia-fixed-frame {
             position: absolute;
@@ -373,20 +403,22 @@ export default function ProjectsSection() {
             left: 0;
             width: 100%;
             height: 100%;
-            transform: none;
-            backface-visibility: visible;
-            -webkit-backface-visibility: visible;
+            pointer-events: none;
+            overflow: hidden;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
           }
           .maia-bg-img {
             position: absolute;
-            top: 0;
+            top: -15%;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 130%;
             object-fit: cover;
             object-position: center center;
-            transform: none !important;
-            will-change: auto;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
           }
           .maia-header-content {
             top: 36px;
