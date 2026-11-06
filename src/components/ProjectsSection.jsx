@@ -127,20 +127,18 @@ export default function ProjectsSection() {
           gsap.fromTo(
             img,
             {
-              yPercent: -15,
-              scale: 1.08,
+              yPercent: -10,
               force3D: true
             },
             {
-              yPercent: 15,
-              scale: 1.0,
+              yPercent: 10,
               ease: 'none',
               force3D: true,
               scrollTrigger: {
                 trigger: i === 0 ? '.projects-headline-intro' : slide,
                 start: i === 0 ? 'bottom bottom' : 'top bottom',
                 end: 'bottom top',
-                scrub: 0.5,
+                scrub: true,
                 invalidateOnRefresh: true,
               }
             }
@@ -378,6 +376,7 @@ export default function ProjectsSection() {
           .maia-portfolio-wrapper {
             overflow: hidden;
             position: relative;
+            contain: layout paint;
           }
           .projects-headline-intro {
             padding: 48px 20px 24px 20px;
@@ -391,9 +390,8 @@ export default function ProjectsSection() {
             height: 100vh;
             height: 100dvh;
             overflow: hidden;
-            clip-path: inset(0 0 0 0);
-            -webkit-clip-path: inset(0 0 0 0);
             background-color: #030406;
+            contain: paint;
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
           }
@@ -417,8 +415,10 @@ export default function ProjectsSection() {
             object-fit: cover;
             object-position: center center;
             will-change: transform;
-            transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0) scale(1.04);
+            -webkit-transform: translate3d(0, 0, 0) scale(1.04);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
           }
           .maia-header-content {
             top: 36px;

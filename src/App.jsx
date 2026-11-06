@@ -88,9 +88,11 @@ function App() {
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
+      syncTouch: true,
+      syncTouchLerp: 0.08,
+      touchInertiaExponent: 1.6,
       wheelMultiplier: 1.0,
       touchMultiplier: 1.0,
-      smoothTouch: false,
       infinite: false,
     });
 
