@@ -84,7 +84,9 @@ export default function ProjectsSection() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add("all", () => {
+    // GSAP parallax scrub strictly for Desktop screens (min-width: 769px)
+    // On mobile screens, native CSS position: sticky provides a 120Hz/60Hz butter-smooth curtain reveal without lag
+    mm.add("(min-width: 769px)", () => {
       const slides = gsap.utils.toArray('.maia-section-slide');
       slides.forEach((slide, i) => {
         const img = slide.querySelector('.maia-bg-img');
@@ -141,12 +143,13 @@ export default function ProjectsSection() {
 
       {/* ── Maia Full-Screen Project Sections (Fixed-Image Curtain Reveal) ── */}
       <div className="maia-sections-list">
-        {ALL_PROJECTS.map((project) => {
+        {ALL_PROJECTS.map((project, idx) => {
           const isTeaser = !!project.teaserPoster;
           return (
             <section
               key={project.id}
               className="maia-section-slide"
+              style={{ zIndex: idx + 1 }}
             >
               <div className="maia-outer">
                 <div className="maia-inner">
@@ -169,7 +172,7 @@ export default function ProjectsSection() {
                           alt={project.title}
                           className="maia-bg-img"
                           draggable="false"
-                          loading="lazy"
+                          loading={idx < 2 ? "eager" : "lazy"}
                           decoding="async"
                         />
                       </picture>
@@ -344,11 +347,46 @@ export default function ProjectsSection() {
         }
 
         @media (max-width: 768px) {
+          .maia-portfolio-wrapper {
+            overflow: visible;
+          }
           .projects-headline-intro {
             padding: 48px 20px 24px 20px;
           }
           .projects-headline-title {
             margin-bottom: 14px;
+          }
+          .maia-section-slide {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            height: 100dvh;
+            clip-path: none;
+            -webkit-clip-path: none;
+            overflow: hidden;
+            background-color: #030406;
+          }
+          .maia-fixed-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: none;
+            backface-visibility: visible;
+            -webkit-backface-visibility: visible;
+          }
+          .maia-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            transform: none !important;
+            will-change: auto;
           }
           .maia-header-content {
             top: 36px;
