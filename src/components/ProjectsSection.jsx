@@ -376,7 +376,6 @@ export default function ProjectsSection() {
           .maia-portfolio-wrapper {
             overflow: hidden;
             position: relative;
-            contain: layout paint;
           }
           .projects-headline-intro {
             padding: 48px 20px 24px 20px;
@@ -391,7 +390,6 @@ export default function ProjectsSection() {
             height: 100dvh;
             overflow: hidden;
             background-color: #030406;
-            contain: paint;
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
           }
