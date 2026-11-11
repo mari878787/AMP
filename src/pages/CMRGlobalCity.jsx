@@ -2453,6 +2453,7 @@ export default function CMRGlobalCity({ project }) {
           background: #fdfdfd;
         }
         .overview-image-wrapper img {
+        width: 100%;
           height: 100%;
           max-height: 520px;
           display: block;

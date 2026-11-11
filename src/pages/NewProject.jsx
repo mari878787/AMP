@@ -3333,6 +3333,7 @@ export default function NewProject({ project }) {
           background: #fdfdfd;
         }
         .overview-image-wrapper img {
+        width: 100%;
           height: 100%;
           max-height: 520px;
           display: block;

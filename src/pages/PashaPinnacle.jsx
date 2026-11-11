@@ -3210,6 +3210,7 @@ export default function PashaPinnacle({ project = 'pasha' }) {
           background: #fdfdfd;
         }
         .overview-image-wrapper img {
+          width: 100%;
           height: 100%;
           max-height: 520px;
           display: block;
