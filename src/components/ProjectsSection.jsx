@@ -95,11 +95,13 @@ export default function ProjectsSection() {
           gsap.fromTo(
             img,
             { 
+              top: '-15%',
               yPercent: 50,
               scale: 1.05,
               force3D: true
             },
             {
+              top: '0%',
               yPercent: -50,
               scale: 1.0,
               ease: 'none',
@@ -127,10 +129,12 @@ export default function ProjectsSection() {
           gsap.fromTo(
             img,
             {
+              top: '-15%',
               yPercent: -10,
               force3D: true
             },
             {
+              top: '0%',
               yPercent: 10,
               ease: 'none',
               force3D: true,
@@ -346,13 +350,13 @@ export default function ProjectsSection() {
           left: 0;
           top: -15%;
           width: 100%;
-          height: 130%;
+          height: 120%;
           object-fit: cover;
           object-position: center center;
           display: block;
           user-select: none;
           pointer-events: none;
-          will-change: transform;
+          will-change: top, transform;
           transform: translateZ(0);
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
