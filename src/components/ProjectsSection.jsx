@@ -130,13 +130,13 @@ export default function ProjectsSection() {
             img,
             {
               top: '-15%',
-              yPercent: -20,
+              yPercent: -5,
               scale: 1.05,
               force3D: true
             },
             {
               top: '0%',
-              yPercent: 20,
+              yPercent: 5,
               scale: 1.0,
               ease: 'none',
               force3D: true,
