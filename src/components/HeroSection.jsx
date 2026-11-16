@@ -30,8 +30,8 @@ const HERO_SLIDES = [
     title: 'CMR Global City',
     subtitle: 'Where Opportunity Meets Enduring Value',
     link: '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam'
-  },
-  {
+  }
+  /* {
     video: '/images/project/ashok-nagar/Ashok Nagar Teaser.mp4',
     mobileVideo: '/images/project/ashok-nagar/Ashok Nagar Mobile View-1.mp4',
     image: '/images/project/ashok-nagar/hero-image.png',
@@ -39,7 +39,7 @@ const HERO_SLIDES = [
     title: 'Ashok Nagar',
     subtitle: 'Where Every Plot Holds the Promise of Tomorrow',
     link: '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam'
-  }
+  } */
 ];
 
 export default function HeroSection({ startZoom }) {

@@ -26,8 +26,8 @@ const CATEGORIES = [
     name: 'Plots',
     img: '/images/project/CMR/4.png',
     projects: [
-      { id: 'cmr-global', name: 'CMR Global City', location: 'Maduranthakam, Chennai', img: '/images/project/CMR/4.png', url: '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam' },
-      { id: 'ashok-nagar', name: 'Ashok Nagar', location: 'Maduranthakam, Chennai', img: '/images/project/ashok-nagar/cards.webp', url: '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam' }
+      { id: 'cmr-global', name: 'CMR Global City', location: 'Maduranthakam, Chennai', img: '/images/project/CMR/4.png', url: '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam' }
+      // { id: 'ashok-nagar', name: 'Ashok Nagar', location: 'Maduranthakam, Chennai', img: '/images/project/ashok-nagar/cards.webp', url: '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam' }
     ]
   }
 ];

@@ -87,7 +87,7 @@ const PROJECTS_DATA = [
     description: 'A premium 3.6-acre DTCP and RERA approved gated township of 122 ready-to-build residential plots in Maduranthakam with wide paved roads and lush green parks.',
     link: '/projects/plots/cmr-global-city-villa-plots-in-maduranthakam'
   },
-  {
+  /* {
     id: 4,
     title: 'Ashok Nagar',
     location: 'Maduranthakam, Chennai',
@@ -111,7 +111,7 @@ const PROJECTS_DATA = [
     ],
     description: 'Serene 2.30-acre DTCP and RERA approved villa plot community in Maduranthakam, offering 48 ready-to-build plots surrounded by greenery.',
     link: '/projects/plots/ashok-nagar-premium-plots-in-maduranthakam'
-  },
+  }, */
   {
     id: 5,
     title: 'Bay Vista',
