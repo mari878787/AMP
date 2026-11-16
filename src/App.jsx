@@ -99,6 +99,11 @@ function App() {
     // Direct synchronous lockstep between Lenis and GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
+    // Prevent mobile address bar show/hide resize events from jumping scroll position
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+    });
+
     // Synchronize GSAP ticker frame updates with Lenis
     const updateRaf = (time) => {
       lenis.raf(time * 1000);

@@ -129,13 +129,11 @@ export default function ProjectsSection() {
           gsap.fromTo(
             img,
             {
-              top: '-15%',
               yPercent: -10,
               scale: 1.05,
               force3D: true
             },
             {
-              top: '0%',
               yPercent: 10,
               scale: 1.0,
               ease: 'none',
@@ -145,7 +143,6 @@ export default function ProjectsSection() {
                 start: 'top bottom',
                 end: 'bottom top',
                 scrub: true,
-                invalidateOnRefresh: true,
               }
             }
           );
@@ -393,7 +390,7 @@ export default function ProjectsSection() {
             position: relative;
             width: 100%;
             height: 100vh;
-            height: 100dvh;
+            height: 100svh;
             overflow: hidden;
             background-color: #030406;
             transform: translateZ(0);
