@@ -129,12 +129,14 @@ export default function ProjectsSection() {
           gsap.fromTo(
             img,
             {
-              yPercent: -10,
+              top: '-15%',
+              yPercent: -20,
               scale: 1.05,
               force3D: true
             },
             {
-              yPercent: 10,
+              top: '0%',
+              yPercent: 20,
               scale: 1.0,
               ease: 'none',
               force3D: true,
@@ -415,7 +417,7 @@ export default function ProjectsSection() {
             height: 130%;
             object-fit: cover;
             object-position: center center;
-            will-change: transform;
+            will-change: transform, top;
             transform: translate3d(0, 0, 0) scale(1.04);
             -webkit-transform: translate3d(0, 0, 0) scale(1.04);
             -webkit-backface-visibility: hidden;
