@@ -131,11 +131,13 @@ export default function ProjectsSection() {
             {
               top: '-15%',
               yPercent: -10,
+              scale: 1.05,
               force3D: true
             },
             {
               top: '0%',
               yPercent: 10,
+              scale: 1.0,
               ease: 'none',
               force3D: true,
               scrollTrigger: {
