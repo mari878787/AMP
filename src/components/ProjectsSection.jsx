@@ -123,9 +123,8 @@ export default function ProjectsSection() {
     // Mobile: Hardware-accelerated parallax counter-motion with position: absolute (eliminates sticking & stacking)
     mm.add("(max-width: 768px)", () => {
       const slides = gsap.utils.toArray('.maia-section-slide');
-      slides.forEach((slide, i) => {
+      slides.forEach((slide) => {
         const img = slide.querySelector('.maia-bg-img');
-        const nextSlide = slides[i + 1];
         if (img) {
           gsap.fromTo(
             img,
@@ -142,10 +141,9 @@ export default function ProjectsSection() {
               ease: 'none',
               force3D: true,
               scrollTrigger: {
-                trigger: i === 0 ? '.projects-headline-intro' : slide,
-                start: i === 0 ? 'bottom bottom' : 'top bottom',
-                endTrigger: nextSlide || slide,
-                end: nextSlide ? 'top top' : 'bottom top',
+                trigger: slide,
+                start: 'top bottom',
+                end: 'bottom top',
                 scrub: true,
                 invalidateOnRefresh: true,
               }
